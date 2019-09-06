@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/jumpBox">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/goodImg"
+            android:layout_width="match_parent"
+            android:layout_height="122dp"
+            app:riv_corner_radius="6dp"
+            android:background="@color/color_EEEEEE"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/a_test2"/>
+
+        <TextView
+            android:id="@+id/goodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_FF333333"
+            android:textSize="@dimen/sp_14"
+            android:layout_marginTop="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Adidas运动鞋"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="6dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/priceMark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_FF333333"
+                android:text="¥"/>
+            <TextView
+                android:id="@+id/goodPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_EF5B48"
+                android:textSize="@dimen/sp_16"/>
+            <TextView
+                android:id="@+id/addMark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_FF333333"
+                android:text=" + "/>
+            <TextView
+                android:id="@+id/goodPoint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_EF5B48"
+                android:textSize="@dimen/sp_16"/>
+            <TextView
+                android:id="@+id/pointText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_FF333333"
+                android:text="积分"/>
+        </LinearLayout>
+    </LinearLayout>
+

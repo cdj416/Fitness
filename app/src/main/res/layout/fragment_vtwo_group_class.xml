@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_F5F6FB">
+    <com.hongyuan.fitness.custom_view.filter_view.DropDownMenu
+        android:id="@+id/dropDownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@id/mFilterContentView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.hongyuan.fitness.custom_view.CustomRecyclerView
+                android:id="@+id/timeRec"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"/>
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_FFF5F6FB">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/mRecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="13dp"
+                        android:paddingRight="13dp"/>
+
+                    <RelativeLayout
+                        android:id="@+id/load_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:layout_centerInParent="true">
+
+                        <TextView
+                            android:id="@+id/isEmpty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@mipmap/promt_empty_img"
+                            android:drawablePadding="10dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="visible"
+                            android:gravity="center"
+                            android:text="暂无数据！"
+                            android:textSize="12sp"
+                            android:textColor="@color/color_FF999999" />
+
+                        <TextView
+                            android:id="@+id/isErr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@mipmap/view_erro"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:layout_centerInParent="true"
+                            android:text="出错啦，请下拉刷新！"
+                            android:visibility="gone"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:textColor="@color/color_FF999999" />
+                    </RelativeLayout>
+                </FrameLayout>
+
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </LinearLayout>
+        
+
+    </com.hongyuan.fitness.custom_view.filter_view.DropDownMenu>
+</LinearLayout>

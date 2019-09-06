@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/selectBox"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_height="44dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textColor="@color/color_777777"
+        android:textSize="12sp"
+        android:text="预约首次上课时间:"/>
+    <TextView
+        android:id="@+id/showTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:textColor="@color/color_FF333333"
+        android:textSize="@dimen/sp_14"
+        android:layout_alignParentRight="true"
+        android:text="暂不选择"/>
+</RelativeLayout>

@@ -1,0 +1,1 @@
+include ':app', ':ImagePreview', ':MPChartLib', ':lib-jlogger', ':base-lib-notification', ':lib-todaystepcounter', ':rxffmpeg'

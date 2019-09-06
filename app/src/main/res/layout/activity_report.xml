@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.hongyuan.fitness.ui.find.circle.report.ReportViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/color_FFFFFF">
+        <RadioGroup
+            android:id="@+id/rg_Orientation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp">
+
+            <RadioButton
+                android:id="@+id/rbOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="色情低俗" />
+
+            <RadioButton
+                android:id="@+id/rbTwo"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="广告" />
+            <RadioButton
+                android:id="@+id/rbThird"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="政治宗教" />
+
+            <RadioButton
+                android:id="@+id/rbThour"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="虚假欺骗" />
+            <RadioButton
+                android:id="@+id/rbFive"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="侵权" />
+
+            <RadioButton
+                android:id="@+id/rbSix"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="违禁内容" />
+            <RadioButton
+                android:id="@+id/rbSeven"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他" />
+        </RadioGroup>
+        
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@drawable/shape_radius6_00000000_stroke_ef5b48"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:hint="请输入类容......"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/color_FF333333"
+            android:padding="10dp"
+            android:gravity="top"/>
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_gradient_v_radiu5_login"
+            android:text="举报"
+            android:textColor="@color/color_FFFFFF"/>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.hongyuan.fitness.ui.person.edit_information.modify_name.ModifyUserNameViewModel"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_F5F6FB">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@color/color_FFFFFF">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_FFFFFF"
+                    android:textSize="14sp"
+                    android:hint="请输入名字"/>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/shape_gradient_v_radiu5_login"
+            android:layout_gravity="bottom"
+            android:text="确认修改"
+            android:textColor="@color/color_FFFFFF"/>
+    </FrameLayout>
+</layout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/shape_radius_top12_ffffff">
+        <EditText
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/shape_radius6_00000000_stroke_ef5b48"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:gravity="top"
+            android:hint="请输入个性签名"/>
+
+        <Button
+            android:id="@+id/userSignSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/shape_gradient_v_radiu5_login"
+            android:layout_alignParentBottom="true"
+            android:text="确认修改"
+            android:textColor="@color/color_FFFFFF"/>
+    </RelativeLayout>
+</LinearLayout>

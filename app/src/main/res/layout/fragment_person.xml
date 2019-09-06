@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/color_F5F6FB">
+            <com.hongyuan.fitness.ui.main.main_person.PersonHeaderView
+                android:id="@+id/headView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.hongyuan.fitness.ui.main.main_person.PersonNumberView
+                android:id="@+id/numberView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="6dp"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="3dp">
+                <com.hongyuan.fitness.ui.main.main_person.PersonContentView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:person_show_type="0"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="6dp"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="3dp">
+                <com.hongyuan.fitness.ui.main.main_person.PersonContentView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:person_show_type="1"/>
+            </androidx.cardview.widget.CardView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.hongyuan.fitness.custom_view.StatusBarHeightView
+            android:id="@+id/barHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"/>
+        <com.hongyuan.fitness.custom_view.TitleView
+            android:id="@+id/myTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:text_color="@color/color_FFFFFF"
+            app:right_text="每日打卡"
+            app:center_text="我的"/>
+    </LinearLayout>
+</FrameLayout>

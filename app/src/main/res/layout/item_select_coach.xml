@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="108dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:id="@+id/selectBox">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/headImg"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            app:riv_corner_radius="100dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/a_test2"/>
+        <View
+            android:id="@+id/mengCheng"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@color/color_FFFFFF"
+            android:alpha="0.5"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/coachName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_FF999999"
+        android:textSize="@dimen/sp_14"
+        android:layout_marginTop="11dp"
+        android:text="李梦雪"/>
+</LinearLayout>

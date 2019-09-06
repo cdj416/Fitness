@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hongyuan.fitness">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!--用于申请获取蓝牙信息进行室内定位-->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <!-- 以下是定位需要的权限 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- 用于提高GPS定位速度 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <!-- 更改设置 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <!--如果设置了target >= 28 如果需要启动后台定位则必须声明这个权限-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+    <application
+        android:name=".base.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="375"/>
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="825"/>
+
+        <!-- 设置高德地图key -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="161cc9e676884967e57d14312db3e9f0"/>
+        <!-- 定位需要的服务 -->
+        <service android:name="com.amap.api.location.APSService"/>
+
+
+        <!--更新app需要的配置-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths_public" />
+        </provider>
+
+        <!--极光需要配置的服务-->
+        <receiver
+            android:name=".service.MyReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!--Required  用户注册SDK的intent-->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!--Required  用户接收SDK消息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!--Required  用户接收SDK通知栏信息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!--Required  用户打开自定义通知栏的intent-->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" /> <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.hongyuan.fitness" /><!-- name为当前项目的包名 -->
+            </intent-filter>
+        </receiver>
+
+        <!--步数计算的服务-->
+        <receiver
+            android:name=".service.MyStempReceiver"
+            android:enabled="true"
+            android:exported="true"/>
+
+        <activity android:name=".ui.startup_page.StartupPageActivity"
+            android:theme="@style/SplashStyle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--微信支付需要的activity-->
+        <activity android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
+        <activity android:name=".ui.main.MainActivity" android:launchMode="singleTask"/>
+        <activity android:name=".ui.out_door.RunActivity"/>
+        <activity android:name=".ui.store.more_store.MoreStoreActivity"/>
+        <activity android:name=".ui.encyclopedia.EncyclopediaActivity"/>
+        <activity android:name=".ui.encyclopedia.encyclopedia_detail.EncyclopediaDetailActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity android:name=".ui.person.about_us.AboutUsActivity"/>
+        <activity android:name=".ui.about_class.privite_class.course_list.CourseListActivity"/>
+        <activity android:name=".ui.about_class.coach.coach_homepage.CoachHomePageActivity"/>
+        <activity android:name=".ui.about_class.coach.coach_profile.CoachProfileActivity"/>
+        <activity android:name=".ui.about_class.privite_class.course_details.CourseDetailsActivity"/>
+        <activity android:name=".ui.about_class.privite_class.pay_order_detail.PayOrderDetailActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:name=".ui.about_class.check_payment_method.CheckPayMethodActivity"/>
+        <activity android:name=".ui.about_class.privite_class.my_privite_course.MyPriviteCourseActivity"/>
+        <activity android:name=".ui.video.MyPlayActivity"/>
+        <activity android:name=".ui.find.circle.edit_post.EditPostActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.find.circle.choose_circlet.ChooseCircletActivity"/>
+        <activity android:name=".ui.find.circle.get_nearby_location.GetNearyLocationActivity"/>
+        <activity android:name=".ui.find.circle.circle_detail.CircleDetailsActivity"/>
+        <activity android:name=".ui.find.circle.post_details.PostDetailsActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.find.circle.comment_details.CommentDetailsActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.membership_card.MembershipCardActivity"/>
+        <activity android:name=".ui.out_door.gaodei_map.SportActivity" />
+        <activity android:name=".ui.encyclopedia.encyclopedia_comment_detail.EncyclopediaCommentDetailsActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.person.waiting_for_class.WaitingForClassActivity"/>
+        <activity android:name=".ui.heat.HeatActivity"/>
+        <activity android:name=".ui.heat.add_food.AddFoodActivity"/>
+        <activity android:name=".ui.heat.heat_detail.HeatDetailActivity"/>
+        <activity android:name=".ui.store.StoreDetailActivity"/>
+        <activity android:name=".ui.store.store_list.StoreListActivity" />
+        <activity android:name=".ui.membership_card.card_detail.CardDetailsActivity"/>
+        <activity android:name=".ui.about_class.group_class.group_details.MissionDetailActivity"/>
+        <activity android:name=".ui.about_class.registration_group.RegistrationGroupActivity"/>
+        <activity android:name=".ui.about_class.class_success.SuccessClassActivity"/>
+        <activity android:name=".ui.about_class.class_failure.FailureActivity"/>
+        <activity android:name=".ui.about_class.group_class.group_list.MyGroupClassActivity"/>
+        <activity android:name=".ui.mall.GoodActivity"/>
+        <activity android:name=".ui.mall.good_details.GoodDetailsActivity"/>
+        <activity android:name=".ui.mall.good_order_details.GoodOrderDetailsActivity"/>
+        <activity android:name=".ui.mall.mine.MallMineActivity"/>
+        <activity android:name=".ui.mall.mine.point_bill.PointBillActivity"/>
+        <activity android:name=".ui.mall.mine.mine_order.MineOrderActivity"/>
+        <activity android:name=".ui.mall.good_pay.GoodsPayActivity"/>
+        <activity android:name=".ui.mall.mine.mine_order.order_details.MineOrderDetailsActivity"/>
+        <activity android:name=".ui.person.waiting_evaluation.WaitingEvaluationActivity"/>
+        <activity android:name=".ui.person.waiting_evaluation.evaluation_order_details.EvalutationDetailsActivity"/>
+        <activity android:name=".ui.person.waiting_evaluation.editorial_evaluation.EditorialEvaluationActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.person.setting.SettingActivity"/>
+        <activity android:name=".ui.person.mine_message.MineMessageActivity"/>
+        <activity android:name=".ui.person.mine_point.MinePointActivity"/>
+        <activity android:name=".ui.person.mine_point.point_rules.RulesActivity"/>
+        <activity android:name=".ui.person.daily_punch.DailyPunchActivity"/>
+        <activity android:name=".ui.membership_card.my_card_detail.MyCardDetailsActivity"/>
+        <activity android:name=".ui.carousel.CarouselActivity"/>
+        <activity android:name=".ui.encyclopedia.edit_encyclopedia.EditEncyclopediaActivity"/>
+        <activity android:name=".ui.encyclopedia.select_encyclopedia_type.EncyclopediaTypeActivity"/>
+        <activity android:name=".ui.store.punch.PunchActivity"/>
+        <activity android:name=".ui.scan.ScanActivity"/>
+        <activity android:name=".ui.person.setting.agreement.AgreementActivity"/>
+        <activity android:name=".ui.out_door.about_you.AboutYouActivity"/>
+        <activity android:name=".ui.find.friends.FriendsActivity"/>
+        <activity android:name=".ui.out_door.gaodei_map.MyMapActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.about_class.coach.show_select_time.ShowSelectTimeActivity"/>
+        <activity android:name=".ui.about_class.coach.cocah_img.CoachImgActivity"/>
+        <activity android:name=".ui.about_class.privite_class.preservation_course.ReservationDetailsActivity"/>
+        <activity android:name=".ui.person.mine_message.child_message.MineChildMessageActivity" />
+        <activity android:name=".ui.store.store_page_list.StoreActivity"/>
+        <activity android:name=".ui.membership_card.renewal_card.RenewalCardActivity"/>
+        <activity android:name=".ui.about_class.coach.coach_list.CoachListActivity"/>
+        <activity android:name=".ui.person.person_message.PersonMessageActivity"/>
+        <activity android:name=".ui.person.edit_information.EditInformationActivity"/>
+        <activity android:name=".ui.person.edit_information.modify_name.ModifyUserNameActivity"/>
+
+        <!--*******************************************第二版添加的activity***********************************************-->
+        <activity android:name=".ui.login.vtwo_login.VtwoLoginActivity"/>
+        <activity android:name=".ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity"/>
+        <activity android:name=".ui.login.vtwo_login.vtwo_registerd.VtwoRegisterdActivity"/>
+        <activity android:name=".ui.login.vtwo_login.vtwo_modify.VtwoModifyPasswordActivity"/>
+        <activity android:name=".ui.person.setting.privacy_policy.MyWebViewActivity"/>
+        <activity android:name=".ui.find.circle.report.ReportActivity"/>
+        <activity android:name=".ui.person.waiting_for_class.about_privite_class.privite_checkin_details.PriviteCourseCheckDetails"/>
+        <activity android:name=".ui.person.waiting_for_class.about_group_course.group_checkin_details.GroupCourseCheckDetailsActivity"/>
+        <activity android:name=".ui.person.my_fan.MyFansActivity"/>
+    </application>
+
+</manifest>

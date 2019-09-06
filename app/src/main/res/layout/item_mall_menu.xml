@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:id="@+id/jumpBox">
+    <ImageView
+        android:id="@+id/menuImg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/about_class_select"/>
+    <TextView
+        android:id="@+id/menuText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/color_FF333333"
+        android:layout_marginTop="10dp"
+        android:text="年少烦恼"/>
+</LinearLayout>

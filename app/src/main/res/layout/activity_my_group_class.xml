@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.hongyuan.fitness.ui.about_class.group_class.group_list.MyGroupClassViewModel"/>
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_FFFFFF"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"/>
+</layout>

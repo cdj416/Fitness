@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="200dp"
+    android:layout_height="98dp"
+    android:id="@+id/jumpBox">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent" />
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/bgImg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            app:riv_corner_radius="6dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/a_test2"/>
+    </LinearLayout>
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/home_meng_ban"
+        android:scaleType="centerCrop"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp">
+        <TextView
+            android:id="@+id/mainName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="16sp"
+            android:text="急速减脂1V1训练"/>
+        <TextView
+            android:id="@+id/coachName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginTop="12dp"
+            android:text="Kevin"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_FFFFFF"
+                android:text="¥ "/>
+            <TextView
+                android:id="@+id/coursePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_FFFFFF"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                android:text="400"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_FFFFFF"
+                android:text="/节"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

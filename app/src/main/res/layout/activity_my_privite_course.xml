@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.hongyuan.fitness.ui.about_class.privite_class.my_privite_course.MyPriviteCourseViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/color_F5F6FB">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@color/white">
+            <TextView
+                android:id="@+id/selectCoach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_FF333333"
+                android:layout_centerVertical="true"
+                android:drawablePadding="6dp"
+                android:textSize="@dimen/sp_14"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="选择教练"/>
+
+            <ImageView
+                android:id="@+id/downImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/selectCoach"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dp"
+                android:src="@mipmap/down_huise_img"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@mipmap/calendar_baise_img"
+                android:drawablePadding="6dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:textSize="@dimen/sp_12"
+                android:visibility="gone"
+                android:background="@drawable/shape_radius16_ef5b48"
+                android:text="课程日历"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/coachRec"
+                android:layout_width="match_parent"
+                android:layout_height="108dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/coachBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="108dp"
+                    android:visibility="gone"
+                    android:orientation="vertical"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_height="1px"
+                    android:background="@color/color_E8E8F4"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="13dp"
+                    android:paddingLeft="13dp"
+                    android:background="@color/color_F5F6FB"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

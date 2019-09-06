@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/cityBox"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shape_radius_top12_ffffff">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/province"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@color/color_F5F6FB"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/city"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@color/white"/>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/userSexSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/shape_gradient_v_radiu5_login"
+            android:layout_alignParentBottom="true"
+            android:text="确认修改"
+            android:textColor="@color/color_FFFFFF"/>
+    </RelativeLayout>
+</LinearLayout>
