@@ -62,11 +62,4 @@ public class EncyclopediaViewPagerAdapter extends FragmentPagerAdapter {
 
         notifyDataSetChanged();
     }
-
-    public View getTabView(int position) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_menu_private_lessons, null);
-        TextView textView=view.findViewById(R.id.name);
-        textView.setText(beans.get(position).getBaike_category_name());
-        return view;
-    }
 }

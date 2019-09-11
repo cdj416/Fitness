@@ -2,6 +2,8 @@ package com.hongyuan.fitness.ui.startup_page;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.view.View;
 
 import com.hongyuan.fitness.R;
@@ -23,6 +25,7 @@ import com.hongyuan.fitness.util.SharedPreferencesUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.today.step.lib.TodayStepManager;
 
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class StartupPageVeiwModel extends CustomViewModel implements CustomDialog.DialogClick {
 
     //登录所存储的数据

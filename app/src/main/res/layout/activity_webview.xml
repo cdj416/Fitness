@@ -5,16 +5,14 @@
     <data>
         <variable
             name="ViewModel"
-            type="com.hongyuan.fitness.ui.person.setting.privacy_policy.MyWebViewModelView"/>
+            type="com.hongyuan.fitness.ui.webview.WebViewModelView"/>
     </data>
 
     <LinearLayout
+        android:id="@+id/mLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <com.hongyuan.fitness.custom_view.web_view.MyBaseWebView
-            android:id="@+id/webView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+
     </LinearLayout>
 </layout>

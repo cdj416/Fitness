@@ -48,7 +48,7 @@ public class VtwoMyCardListBeans extends BaseBean {
                 if(commonBeansList == null){
                     commonBeansList = new ArrayList<>();
                 }
-
+                commonBeansList.clear();
                 if(cardlist_os != null && cardlist_os.size() > 0){
                     for(CardlistOsBean osBean : cardlist_os){
                         VtwoMycardCommonBeans commonBeans = new VtwoMycardCommonBeans();

@@ -171,6 +171,7 @@ public class GoodsPayViewModel extends CustomViewModel {
         }
         if(data instanceof WecathPayBean){
             WecathPayBean wecathPayBean = (WecathPayBean)data;
+            mActivity.showLoading();
             //去掉起微信支付
             PayUtil.WechatPay(mActivity,wecathPayBean.getData());
         }

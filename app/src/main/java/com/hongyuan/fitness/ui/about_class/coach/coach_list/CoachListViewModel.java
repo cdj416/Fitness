@@ -1,11 +1,14 @@
 package com.hongyuan.fitness.ui.about_class.coach.coach_list;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
@@ -13,6 +16,7 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivityCoachListBinding;
 import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomePageActivity;
+import com.hongyuan.fitness.ui.about_class.coach.coach_search.CoachSearchActivity;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vtwo_home.VtwoStarCoachBean;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.scwang.smartrefresh.header.MaterialHeader;
@@ -45,6 +49,13 @@ public class CoachListViewModel extends CustomViewModel implements CoachDropMenu
 
     @Override
     protected void initView() {
+        ImageView imageView = new ImageView(mActivity);
+        imageView.setImageResource(R.mipmap.search_back_mark);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        imageView.setLayoutParams(params);
+        mActivity.getMainTitle().addRightContentView(imageView);
+
         setOnRefresh();
         String[] titleList = new String[] { "湖州全城", "筛选私教" };
         binding.dropDownMenu.setMenuAdapter(new CoachDropMenuAdapter(mActivity, titleList, this,this));
@@ -62,6 +73,10 @@ public class CoachListViewModel extends CustomViewModel implements CoachDropMenu
                 bundle.putString("coach_mid",String.valueOf(starCoachBean.getData().getList().get(position).getM_id()));
                 startActivity(CoachHomePageActivity.class,bundle);
             }
+        });
+
+        mActivity.getMainTitle().getRightView().setOnClickListener(v -> {
+            startActivity(CoachSearchActivity.class,null);
         });
     }
 
@@ -129,6 +144,7 @@ public class CoachListViewModel extends CustomViewModel implements CoachDropMenu
     * 查询私教列表
     * */
     private void getCoachList(){
+        mActivity.showLoading();
         //首页--读取首页教练
         clearParams().setParams("city_name","湖州市");
         if(BaseUtil.isValue(sex)){
@@ -173,6 +189,7 @@ public class CoachListViewModel extends CustomViewModel implements CoachDropMenu
                 binding.mRecycler.setVisibility(View.GONE);
             }
         }
+        mActivity.closeLoading();
     }
 
     @Override

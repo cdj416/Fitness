@@ -1,11 +1,6 @@
 package com.hongyuan.fitness.ui.encyclopedia.select_encyclopedia_type;
-
-import android.view.View;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.base.BaseDataSingle;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;

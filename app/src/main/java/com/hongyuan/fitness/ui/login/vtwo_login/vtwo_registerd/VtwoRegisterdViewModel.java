@@ -1,5 +1,6 @@
 package com.hongyuan.fitness.ui.login.vtwo_login.vtwo_registerd;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.hongyuan.fitness.R;
@@ -14,7 +15,7 @@ import com.hongyuan.fitness.databinding.ActivityVtwoRegisteredBinding;
 import com.hongyuan.fitness.ui.login.MessageCodeBean;
 import com.hongyuan.fitness.ui.login.PhoneMessageBean;
 import com.hongyuan.fitness.ui.person.setting.agreement.AgreementActivity;
-import com.hongyuan.fitness.ui.person.setting.privacy_policy.MyWebViewActivity;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.ViewChangeUtil;
 
@@ -50,7 +51,9 @@ public class VtwoRegisterdViewModel extends CustomViewModel implements InputFiel
         });
         //隐私政策
         binding.privacyPolicy.setOnClickListener(v -> {
-            startActivity(MyWebViewActivity.class,null);
+            Bundle bundle = new Bundle();
+            bundle.putString("url","http://www.hongyuangood.com/xy/xy.html");
+            startActivity(WebViewActivity.class,bundle);
         });
         //去登录
         binding.goLogin.setOnClickListener(v -> {

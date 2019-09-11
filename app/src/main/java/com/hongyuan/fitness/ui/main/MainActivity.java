@@ -16,7 +16,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 public class MainActivity extends CustomActivity {
-    private ActivityMainBinding binding;
+    public ActivityMainBinding binding;
     private MainViewModel viewModel;
 
     @Override

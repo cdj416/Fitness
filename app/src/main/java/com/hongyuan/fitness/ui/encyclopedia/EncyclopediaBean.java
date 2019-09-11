@@ -6,12 +6,11 @@ import java.util.List;
 
 public class EncyclopediaBean extends BaseBean {
 
-
     /**
      * hasmore : false
      * curpage : 1
      * page_total : 1
-     * data : {"list":[{"baike_id":52,"m_id":7,"baike_categoryid":1,"baike_name":"百科视频","baike_content":"小鸡的东西我自己都没了。我说过去的事情就这样一直一直陪伴着你回来我的心里永远不会发生这种问题","baike_type":2,"baike_state":1,"add_time":1562122922,"update_admin":1,"update_time":1562137963,"praise_num":1,"review_num":2,"lat":"","lng":"","os_id":0,"ft_id":7,"is_tj":1,"baike_img":"http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190703/c9e0d0ff1cc8cd3c8c27be38f42428e522b601ed_828x1472.jpg","m_mobile":"15220219931","mi_head":"","ft_name":"康复","bi":[{"bi_id":16,"file_src":"http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/video/20190703/7133c226705877104e42c15dbf883ada933c22aa.mp4","baike_id":52,"baike_type":2}],"add_date":"2019-07-03 11:02:02"}]}
+     * data : {"list":[{"article_id":10,"article_title":"9.5富文本测试标题1","article_brief":"9.5富文本测试简介19.5富文本测试简介19.5富文本测试简介1","article_img":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190905/ef4c04bb17a56fae1e42c1ba252b2f09deedbcdf_960x1707.jpg","article_video":"","type":1,"state":1,"review_num":0,"praise_num":0,"fx_num":0,"add_time":1567665909,"m_id":1,"article_content":"<p><span style=\"font-size: x-small; color: rgb(157, 157, 157);\">9.5富文本测试详情19.5富文本测试详情1<\/span><\/p><p><span style=\"font-size: x-small; color: rgb(157, 157, 157);\"><br><\/span><\/p><p><img src=\"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190905/e5c9e02cf1dd55e5cfea3bc0a60925303a60ed6b_960x1506.jpg\" style=\"max-width:100%;\"><span style=\"font-size: x-small; color: rgb(157, 157, 157);\"><br><\/span><\/p><p>9.5富文本测试详情1&nbsp;<span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">9.5富文<\/span><span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">本测试详情1<\/span><span style=\"font-size: 14px;\">9.5富文本测试详情1<\/span><span style=\"font-size: 14px;\">&nbsp;<\/span><\/p><p><span style=\"font-size: 14px;\"><br><\/span><\/p><p><span style=\"font-size: 14px;\"><br><\/span><\/p>","baike_categoryid":3,"m_mobile":"18621854159","mi_head":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190820/99960903c5df39754e5e150f10467bc39fe09364_2436x2436.jpg","baike_category_name":"减肥","add_date":"2019-09-05 14:45:09","is_praise":0}]}
      */
 
     private boolean hasmore;
@@ -64,141 +63,110 @@ public class EncyclopediaBean extends BaseBean {
 
         public static class ListBean {
             /**
-             * baike_id : 52
-             * m_id : 7
-             * baike_categoryid : 1
-             * baike_name : 百科视频
-             * baike_content : 小鸡的东西我自己都没了。我说过去的事情就这样一直一直陪伴着你回来我的心里永远不会发生这种问题
-             * baike_type : 2
-             * baike_state : 1
-             * add_time : 1562122922
-             * update_admin : 1
-             * update_time : 1562137963
-             * praise_num : 1
-             * review_num : 2
-             * lat :
-             * lng :
-             * os_id : 0
-             * ft_id : 7
-             * is_tj : 1
-             * baike_img : http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190703/c9e0d0ff1cc8cd3c8c27be38f42428e522b601ed_828x1472.jpg
-             * m_mobile : 15220219931
-             * mi_head :
-             * ft_name : 康复
-             * bi : [{"bi_id":16,"file_src":"http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/video/20190703/7133c226705877104e42c15dbf883ada933c22aa.mp4","baike_id":52,"baike_type":2}]
-             * add_date : 2019-07-03 11:02:02
+             * article_id : 10
+             * article_title : 9.5富文本测试标题1
+             * article_brief : 9.5富文本测试简介19.5富文本测试简介19.5富文本测试简介1
+             * article_img : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190905/ef4c04bb17a56fae1e42c1ba252b2f09deedbcdf_960x1707.jpg
+             * article_video :
+             * type : 1
+             * state : 1
+             * review_num : 0
+             * praise_num : 0
+             * fx_num : 0
+             * add_time : 1567665909
+             * m_id : 1
+             * article_content : <p><span style="font-size: x-small; color: rgb(157, 157, 157);">9.5富文本测试详情19.5富文本测试详情1</span></p><p><span style="font-size: x-small; color: rgb(157, 157, 157);"><br></span></p><p><img src="http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190905/e5c9e02cf1dd55e5cfea3bc0a60925303a60ed6b_960x1506.jpg" style="max-width:100%;"><span style="font-size: x-small; color: rgb(157, 157, 157);"><br></span></p><p>9.5富文本测试详情1&nbsp;<span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">9.5富文</span><span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">本测试详情1</span><span style="font-size: 14px;">9.5富文本测试详情1</span><span style="font-size: 14px;">&nbsp;</span></p><p><span style="font-size: 14px;"><br></span></p><p><span style="font-size: 14px;"><br></span></p>
+             * baike_categoryid : 3
+             * m_mobile : 18621854159
+             * mi_head : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190820/99960903c5df39754e5e150f10467bc39fe09364_2436x2436.jpg
+             * baike_category_name : 减肥
+             * add_date : 2019-09-05 14:45:09
+             * is_praise : 0
              */
 
-            private int baike_id;
-            private int m_id;
-            private int baike_categoryid;
-            private String baike_name;
-            private String baike_content;
-            private int baike_type;
-            private int baike_state;
-            private int add_time;
-            private int update_admin;
-            private int update_time;
-            private int praise_num;
+            private int article_id;
+            private String article_title;
+            private String article_brief;
+            private String article_img;
+            private String article_video;
+            private int type;
+            private int state;
             private int review_num;
-            private String lat;
-            private String lng;
-            private int os_id;
-            private int ft_id;
-            private int is_tj;
-            private String baike_img;
+            private int praise_num;
+            private int fx_num;
+            private int add_time;
+            private int m_id;
+            private String article_content;
+            private int baike_categoryid;
             private String m_mobile;
             private String mi_head;
-            private String ft_name;
+            private String baike_category_name;
             private String add_date;
-            private List<BiBean> bi;
+            private int is_praise;
+            private int numMark;
 
-            public int getBaike_id() {
-                return baike_id;
+            public int getNumMark() {
+                return numMark;
             }
 
-            public void setBaike_id(int baike_id) {
-                this.baike_id = baike_id;
+            public void setNumMark(int numMark) {
+                this.numMark = numMark;
             }
 
-            public int getM_id() {
-                return m_id;
+            public int getArticle_id() {
+                return article_id;
             }
 
-            public void setM_id(int m_id) {
-                this.m_id = m_id;
+            public void setArticle_id(int article_id) {
+                this.article_id = article_id;
             }
 
-            public int getBaike_categoryid() {
-                return baike_categoryid;
+            public String getArticle_title() {
+                return article_title;
             }
 
-            public void setBaike_categoryid(int baike_categoryid) {
-                this.baike_categoryid = baike_categoryid;
+            public void setArticle_title(String article_title) {
+                this.article_title = article_title;
             }
 
-            public String getBaike_name() {
-                return baike_name;
+            public String getArticle_brief() {
+                return article_brief;
             }
 
-            public void setBaike_name(String baike_name) {
-                this.baike_name = baike_name;
+            public void setArticle_brief(String article_brief) {
+                this.article_brief = article_brief;
             }
 
-            public String getBaike_content() {
-                return baike_content;
+            public String getArticle_img() {
+                return article_img;
             }
 
-            public void setBaike_content(String baike_content) {
-                this.baike_content = baike_content;
+            public void setArticle_img(String article_img) {
+                this.article_img = article_img;
             }
 
-            public int getBaike_type() {
-                return baike_type;
+            public String getArticle_video() {
+                return article_video;
             }
 
-            public void setBaike_type(int baike_type) {
-                this.baike_type = baike_type;
+            public void setArticle_video(String article_video) {
+                this.article_video = article_video;
             }
 
-            public int getBaike_state() {
-                return baike_state;
+            public int getType() {
+                return type;
             }
 
-            public void setBaike_state(int baike_state) {
-                this.baike_state = baike_state;
+            public void setType(int type) {
+                this.type = type;
             }
 
-            public int getAdd_time() {
-                return add_time;
+            public int getState() {
+                return state;
             }
 
-            public void setAdd_time(int add_time) {
-                this.add_time = add_time;
-            }
-
-            public int getUpdate_admin() {
-                return update_admin;
-            }
-
-            public void setUpdate_admin(int update_admin) {
-                this.update_admin = update_admin;
-            }
-
-            public int getUpdate_time() {
-                return update_time;
-            }
-
-            public void setUpdate_time(int update_time) {
-                this.update_time = update_time;
-            }
-
-            public int getPraise_num() {
-                return praise_num;
-            }
-
-            public void setPraise_num(int praise_num) {
-                this.praise_num = praise_num;
+            public void setState(int state) {
+                this.state = state;
             }
 
             public int getReview_num() {
@@ -209,52 +177,52 @@ public class EncyclopediaBean extends BaseBean {
                 this.review_num = review_num;
             }
 
-            public String getLat() {
-                return lat;
+            public int getPraise_num() {
+                return praise_num;
             }
 
-            public void setLat(String lat) {
-                this.lat = lat;
+            public void setPraise_num(int praise_num) {
+                this.praise_num = praise_num;
             }
 
-            public String getLng() {
-                return lng;
+            public int getFx_num() {
+                return fx_num;
             }
 
-            public void setLng(String lng) {
-                this.lng = lng;
+            public void setFx_num(int fx_num) {
+                this.fx_num = fx_num;
             }
 
-            public int getOs_id() {
-                return os_id;
+            public int getAdd_time() {
+                return add_time;
             }
 
-            public void setOs_id(int os_id) {
-                this.os_id = os_id;
+            public void setAdd_time(int add_time) {
+                this.add_time = add_time;
             }
 
-            public int getFt_id() {
-                return ft_id;
+            public int getM_id() {
+                return m_id;
             }
 
-            public void setFt_id(int ft_id) {
-                this.ft_id = ft_id;
+            public void setM_id(int m_id) {
+                this.m_id = m_id;
             }
 
-            public int getIs_tj() {
-                return is_tj;
+            public String getArticle_content() {
+                return article_content;
             }
 
-            public void setIs_tj(int is_tj) {
-                this.is_tj = is_tj;
+            public void setArticle_content(String article_content) {
+                this.article_content = article_content;
             }
 
-            public String getBaike_img() {
-                return baike_img;
+            public int getBaike_categoryid() {
+                return baike_categoryid;
             }
 
-            public void setBaike_img(String baike_img) {
-                this.baike_img = baike_img;
+            public void setBaike_categoryid(int baike_categoryid) {
+                this.baike_categoryid = baike_categoryid;
             }
 
             public String getM_mobile() {
@@ -273,12 +241,12 @@ public class EncyclopediaBean extends BaseBean {
                 this.mi_head = mi_head;
             }
 
-            public String getFt_name() {
-                return ft_name;
+            public String getBaike_category_name() {
+                return baike_category_name;
             }
 
-            public void setFt_name(String ft_name) {
-                this.ft_name = ft_name;
+            public void setBaike_category_name(String baike_category_name) {
+                this.baike_category_name = baike_category_name;
             }
 
             public String getAdd_date() {
@@ -289,58 +257,12 @@ public class EncyclopediaBean extends BaseBean {
                 this.add_date = add_date;
             }
 
-            public List<BiBean> getBi() {
-                return bi;
+            public int getIs_praise() {
+                return is_praise;
             }
 
-            public void setBi(List<BiBean> bi) {
-                this.bi = bi;
-            }
-
-            public static class BiBean {
-                /**
-                 * bi_id : 16
-                 * file_src : http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/video/20190703/7133c226705877104e42c15dbf883ada933c22aa.mp4
-                 * baike_id : 52
-                 * baike_type : 2
-                 */
-
-                private int bi_id;
-                private String file_src;
-                private int baike_id;
-                private int baike_type;
-
-                public int getBi_id() {
-                    return bi_id;
-                }
-
-                public void setBi_id(int bi_id) {
-                    this.bi_id = bi_id;
-                }
-
-                public String getFile_src() {
-                    return file_src;
-                }
-
-                public void setFile_src(String file_src) {
-                    this.file_src = file_src;
-                }
-
-                public int getBaike_id() {
-                    return baike_id;
-                }
-
-                public void setBaike_id(int baike_id) {
-                    this.baike_id = baike_id;
-                }
-
-                public int getBaike_type() {
-                    return baike_type;
-                }
-
-                public void setBaike_type(int baike_type) {
-                    this.baike_type = baike_type;
-                }
+            public void setIs_praise(int is_praise) {
+                this.is_praise = is_praise;
             }
         }
     }

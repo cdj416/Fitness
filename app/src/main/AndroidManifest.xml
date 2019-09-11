@@ -33,6 +33,7 @@
     <!--如果设置了target >= 28 如果需要启动后台定位则必须声明这个权限-->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
+
     <application
         android:name=".base.MyApplication"
         android:allowBackup="true"
@@ -56,6 +57,8 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="161cc9e676884967e57d14312db3e9f0"/>
+
+
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService"/>
 
@@ -106,6 +109,15 @@
         <activity android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"/>
+
+        <!--友盟分享需要实现的-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
 
         <activity android:name=".ui.main.MainActivity" android:launchMode="singleTask"/>
         <activity android:name=".ui.out_door.RunActivity"/>
@@ -188,11 +200,16 @@
         <activity android:name=".ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity"/>
         <activity android:name=".ui.login.vtwo_login.vtwo_registerd.VtwoRegisterdActivity"/>
         <activity android:name=".ui.login.vtwo_login.vtwo_modify.VtwoModifyPasswordActivity"/>
-        <activity android:name=".ui.person.setting.privacy_policy.MyWebViewActivity"/>
         <activity android:name=".ui.find.circle.report.ReportActivity"/>
         <activity android:name=".ui.person.waiting_for_class.about_privite_class.privite_checkin_details.PriviteCourseCheckDetails"/>
         <activity android:name=".ui.person.waiting_for_class.about_group_course.group_checkin_details.GroupCourseCheckDetailsActivity"/>
         <activity android:name=".ui.person.my_fan.MyFansActivity"/>
+
+        <!--*******************************************第三版添加的activity***********************************************-->
+        <activity android:name=".ui.about_class.coach.coach_search.CoachSearchActivity"/>
+        <activity android:name=".ui.webview.WebViewActivity"
+            android:hardwareAccelerated="true"
+            android:configChanges="orientation|screenSize"/>
     </application>
 
 </manifest>

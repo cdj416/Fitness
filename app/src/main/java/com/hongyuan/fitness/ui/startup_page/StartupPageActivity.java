@@ -13,8 +13,7 @@ public class StartupPageActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        hideTitle(true);
-        setImmersive();
+        setTitleBar(TYPE_BAR6,R.drawable.shape_soid_ffffff,"");
         ActivityStartupPageBinding binding = ActivityStartupPageBinding.bind(mView);
         StartupPageVeiwModel veiwModel = new StartupPageVeiwModel(this,binding);
         binding.setViewModel(veiwModel);

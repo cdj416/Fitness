@@ -14,6 +14,7 @@ import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.MyRulerView;
 import com.hongyuan.fitness.databinding.ActivityAboutYouBinding;
 import com.hongyuan.fitness.ui.heat.HeatActivity;
+import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.main.main_home.recommend.StarCoachBean;
 import com.hongyuan.fitness.ui.out_door.RunActivity;
 import com.hongyuan.fitness.util.BaseUtil;
@@ -104,6 +105,9 @@ public class AboutYouViewModel extends CustomViewModel implements MyRulerView.Se
             }
             if("heat".equals(getBundle().getString("pagType"))){
                 startActivity(HeatActivity.class,null);
+            }
+            if("main".equals(getBundle().getString("pagType"))){
+                startActivity(MainActivity.class,null);
             }
         }
     }

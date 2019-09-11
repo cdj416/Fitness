@@ -1,5 +1,6 @@
 package com.hongyuan.fitness.ui.membership_card;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;

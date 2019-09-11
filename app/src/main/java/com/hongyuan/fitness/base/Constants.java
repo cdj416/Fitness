@@ -3,7 +3,7 @@ package com.hongyuan.fitness.base;
 public class Constants {
 
     //测试地址
-    //public static final String ADRESS = "http://192.168.0.104";
+    //public static final String ADRESS = "http://192.168.0.102";
     //正式地址
     public static final String ADRESS = "http://www.hongyuangood.com";
 
@@ -244,7 +244,7 @@ public class Constants {
     //支付-APP 支付宝支付
     public static final String UNIFIEDORDER = ADRESS + "/api/alipay/unifiedorder";
     //支付-安卓 APP微信支付
-    public static final String GETPREPAYORDER = ADRESS + "/api/pay/getPrePayOrder";
+    public static final String GETPREPAYORDER = ADRESS + "/api/payandroid/getPrePayOrder";
     //用户端--纯积分支付
     public static final String POINT_PAY = ADRESS + "/api/pointmember/point_pay";
 
@@ -297,5 +297,10 @@ public class Constants {
     //关注我的用户
     public static final String GET_GZ_MY = ADRESS + "/api/member/get_gz_my";
 
+    /**************************************三期版本********************************************************/
+    //新百科--文章分类
+    public static final String V3_GET_BAIKE_CATEGORY_LIST = ADRESS + "/api/articlehome/get_baike_category_list";
+    //新百科--用户端文章列表
+    public static final String V3_GET_ARTICLE_LIST = ADRESS + "/api/articlehome/get_article_list";
 
 }

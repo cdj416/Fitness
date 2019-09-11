@@ -130,7 +130,7 @@
                                 android:padding="5dp"
                                 android:layout_gravity="center_vertical"/>
 
-                            <com.hongyuan.fitness.custom_view.ShareView
+                            <com.hongyuan.fitness.custom_view.share_view.ShareView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"

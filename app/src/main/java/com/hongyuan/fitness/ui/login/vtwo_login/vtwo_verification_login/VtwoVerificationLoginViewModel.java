@@ -1,9 +1,11 @@
 package com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
@@ -17,13 +19,16 @@ import com.hongyuan.fitness.ui.login.PhoneMessageBean;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_modify.VtwoModifyPasswordActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_registerd.VtwoRegisterdActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
+import com.hongyuan.fitness.ui.out_door.about_you.AboutYouActivity;
 import com.hongyuan.fitness.ui.person.setting.agreement.AgreementActivity;
-import com.hongyuan.fitness.ui.person.setting.privacy_policy.MyWebViewActivity;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
 import com.hongyuan.fitness.util.ViewChangeUtil;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONObject;
 
 public class VtwoVerificationLoginViewModel extends CustomViewModel implements InputFieldView.CodeClick{
 
@@ -65,7 +70,9 @@ public class VtwoVerificationLoginViewModel extends CustomViewModel implements I
         });
         //隐私政策
         binding.privacyPolicy.setOnClickListener(v -> {
-            startActivity(MyWebViewActivity.class,null);
+            Bundle bundle = new Bundle();
+            bundle.putString("url","http://www.hongyuangood.com/xy/xy.html");
+            startActivity(WebViewActivity.class,bundle);
         });
         //去注册
         binding.goRegister.setOnClickListener(v -> {
@@ -100,7 +107,7 @@ public class VtwoVerificationLoginViewModel extends CustomViewModel implements I
             CustomDialog.showMessage(mActivity,"请阅读并同意相关协议!");
             return;
         }
-
+        mActivity.showLoading();
         clearParams().setParams("m_mobile", binding.phoneNum.getText()).setParams("dxm",binding.phoneCode.getText());
         Controller.myRequest(Constants.MEMBERLOGIN_DXM,Controller.TYPE_POST,getParams(), LoginBean.class,this);
     }
@@ -128,6 +135,14 @@ public class VtwoVerificationLoginViewModel extends CustomViewModel implements I
         Controller.myRequest(Constants.GET_MESSAGE_TOKEN,Controller.TYPE_POST,getParams(), PhoneMessageBean.class,this);
     }
 
+    /*
+     * 检测是否有记录身体指数
+     * */
+    private void getCheckBody(){
+        clearParams();
+        Controller.myRequest(ConstantsCode.CHECK_MEMBER_BOBY_INDEX,Constants.CHECK_MEMBER_BOBY_INDEX,Controller.TYPE_POST,getParams(),this);
+    }
+
     @Override
     public void onSuccess(Object data) {
         if(data instanceof PhoneMessageBean && isSuccess(data)){
@@ -149,7 +164,32 @@ public class VtwoVerificationLoginViewModel extends CustomViewModel implements I
             userToken.setRole_id(String.valueOf(login.getRole_id()));
             //通过EventBus去通知MainActivity去更新数据
             EventBus.getDefault().postSticky(new MessageEvent(null));
-            mActivity.showSuccess("登录成功", MainActivity.class,null);
+            //mActivity.showSuccess("登录成功", MainActivity.class,null);
+
+            //检测是否录入身体指数
+            getCheckBody();
+        }
+    }
+
+    @Override
+    public void onSuccess(int code, Object data) {
+        mActivity.closeLoading();
+        if(code == ConstantsCode.CHECK_MEMBER_BOBY_INDEX){
+            if(code == ConstantsCode.CHECK_MEMBER_BOBY_INDEX){
+                try {
+                    JSONObject object = new JSONObject(data.toString());
+                    JSONObject jsonObject = (JSONObject) object.get("data");
+                    if(BaseUtil.isJsonValue(jsonObject.get("info"))){
+                        mActivity.showSuccess("登录成功", MainActivity.class,null);
+                    }else{
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pagType","main");
+                        startActivity(AboutYouActivity.class,bundle);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

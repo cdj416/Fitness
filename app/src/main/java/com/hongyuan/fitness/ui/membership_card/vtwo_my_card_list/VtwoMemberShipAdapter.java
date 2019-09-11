@@ -35,7 +35,7 @@ public class VtwoMemberShipAdapter extends BaseQuickAdapter<VtwoMycardCommonBean
         }
 
         if(!BaseUtil.isValue(item.getLast_date())){
-            helper.setText(R.id.cardUseTime,"未开通");
+            helper.setText(R.id.cardUseTime,"未开卡("+item.getMy_card_days()+")");
         }
 
 

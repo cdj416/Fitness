@@ -3,7 +3,6 @@ package com.hongyuan.fitness.custom_view;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,10 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
-import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomActivity;
-import com.hongyuan.fitness.base.MessageEvent;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomePageActivity;
 import com.hongyuan.fitness.ui.about_class.coach.coach_list.CoachListActivity;
@@ -27,19 +24,14 @@ import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.PrivateLess
 import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons.VtwoPrivateLessonsBeans;
 import com.hongyuan.fitness.ui.main.main_home.recommend.HomeBoutiqueGroupAdapter;
 import com.hongyuan.fitness.ui.main.main_home.recommend.BoutiqueGroupBean;
-import com.hongyuan.fitness.ui.main.main_home.recommend.HomeBoutiqueGroupBean;
 import com.hongyuan.fitness.ui.main.main_home.recommend.HomePriviteCourseAdapter;
 import com.hongyuan.fitness.ui.main.main_home.recommend.HomeStarCoachAdapter;
-import com.hongyuan.fitness.ui.main.main_home.recommend.HomeStoreAdapter;
-import com.hongyuan.fitness.ui.main.main_home.recommend.StarCoachBean;
+import com.hongyuan.fitness.ui.main.main_home.recommend.vthird_home.V3HomeStoreAdapter;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vtwo_home.VtwoStarCoachBean;
-import com.hongyuan.fitness.ui.membership_card.card_detail.CardDetailsActivity;
 import com.hongyuan.fitness.ui.membership_card.renewal_card.RenewalCardActivity;
 import com.hongyuan.fitness.ui.store.StoreBoutiqueGroupAdapter;
-import com.hongyuan.fitness.ui.store.CardItemBean;
 import com.hongyuan.fitness.ui.store.StoreDetailActivity;
 import com.hongyuan.fitness.ui.store.StoreDetailBean;
-import com.hongyuan.fitness.ui.store.StoreMembershipCardAdapter;
 import com.hongyuan.fitness.ui.store.StoreStarCoachAdapter;
 import com.hongyuan.fitness.ui.store.more_store.StoreBean;
 import com.hongyuan.fitness.ui.store.store_list.StoreListActivity;
@@ -93,7 +85,7 @@ public class HomeRecyclerItemView extends LinearLayout {
     * */
     public void setHomeStore(List<StoreBean.DataBean.ListBean> mList){
         name.setText("附近门店");
-        HomeStoreAdapter adapter = new HomeStoreAdapter();
+        V3HomeStoreAdapter adapter = new V3HomeStoreAdapter();
         mRecycler.setAdapter(adapter);
         adapter.setNewData(mList);
 

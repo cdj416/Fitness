@@ -30,7 +30,7 @@
                 android:textColor="@color/color_FF333333"
                 android:layout_marginTop="15dp"
                 android:textSize="18sp"
-                android:text="预约成功"/>
+                android:text="支付成功"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,6 +61,7 @@
                 android:textSize="16sp"
                 android:layout_marginLeft="12dp"
                 android:textColor="@color/color_FFFFFF"
+                android:visibility="gone"
                 android:text="继续约课"/>
         </LinearLayout>
 

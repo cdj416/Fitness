@@ -84,7 +84,12 @@ public class MyCardDetailsViewModel extends CustomViewModel {
         if(detailsBean.getMy_card_type() == 1){
             binding.cardBg.setImageResource(R.mipmap.store_dan_card);
             binding.cardTypeText.setText(detailsBean.getOs_name());
-            binding.cardUseTime.setText(TimeUtil.formatDate(detailsBean.getLast_date(),TimeUtil.dateFormatYMDHMS,TimeUtil.dateFormatDotYMD)+"到期");
+            if(BaseUtil.isValue(detailsBean.getLast_date())){
+                binding.cardUseTime.setText(TimeUtil.formatDate(detailsBean.getLast_date(),TimeUtil.dateFormatYMDHMS,TimeUtil.dateFormatDotYMD)+"到期");
+            }else{
+                binding.cardUseTime.setText("未开卡("+detailsBean.getMy_card_days()+"天)");
+            }
+
         }else{
             if(detailsBean.getOsl_id() == 1){
                 binding.cardBg.setImageResource(R.mipmap.commont_card);
@@ -99,7 +104,7 @@ public class MyCardDetailsViewModel extends CustomViewModel {
             if(BaseUtil.isValue(detailsBean.getLast_date())){
                 binding.cardUseTime.setText(TimeUtil.formatDate(detailsBean.getLast_date(),TimeUtil.dateFormatYMDHMS,TimeUtil.dateFormatDotYMD)+"到期");
             }else{
-                binding.cardUseTime.setText("未开通");
+                binding.cardUseTime.setText("未开卡("+detailsBean.getMy_card_days()+"天)");
             }
         }
     }

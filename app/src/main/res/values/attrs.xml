@@ -227,4 +227,16 @@
         <attr name="ddmenuUnselectedIcon" format="reference"/>
         <attr name="ddmenuMenuHeightPercent" format="float"/>
     </declare-styleable>
+
+    <!--自定义首页item项-->
+    <declare-styleable name="homeItem">
+        <attr name="vthird_type">
+            <enum name="startCoach" value="0"/>
+            <enum name="priviteCourse" value="1"/>
+            <enum name="goupCourse" value="2"/>
+            <enum name="mall" value="3"/>
+            <enum name="find" value="4"/>
+            <enum name="store" value="5"/>
+        </attr>
+    </declare-styleable>
 </resources>

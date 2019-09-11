@@ -328,6 +328,7 @@ public abstract class CustomViewModel implements RetrofitListener {
      * */
     @Override
     public void onError(int err_code,String description) {
+        mActivity.closeLoading();
         if(err_code == ISLOGIN && description.contains("先登录")){
             startActivity(VtwoLoginActivity.class,null);
         }else{

@@ -28,18 +28,8 @@ android {
                 JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "d1f1693406a13f70e85373f3", //JPush上注册的包名对应的appkey（*换成你的*）
                 JPUSH_CHANNEL: "HYapp", //暂时填写默认值即可.
+                qqappid:"101738721"
         ]
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            //是否进行混淆
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 
     dataBinding {
@@ -51,6 +41,34 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    signingConfigs {
+        debug{
+            keyAlias 'hongyuan'
+            keyPassword '123456'
+            storeFile file('F:/workProduct/项目重要文件/签名文件/fitness.jks')
+            storePassword '123456'
+        }
+        release {
+            keyAlias 'hongyuan'
+            keyPassword '123456'
+            storeFile file('F:/workProduct/项目重要文件/签名文件/fitness.jks')
+            storePassword '123456'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            //是否进行混淆
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
 
 //    splits {
 //        abi {
@@ -144,12 +162,12 @@ dependencies {
     implementation 'cn.jiguang.sdk:jcore:1.2.3'
 
     //分享功能
-    implementation('com.xyzlf.share:sharesdk:0.0.11') {
-        exclude group: 'com.android.support', module: 'appcompat-v7'
-    }
+//    implementation('com.xyzlf.share:sharesdk:0.0.11') {
+//        exclude group: 'com.android.support', module: 'appcompat-v7'
+//    }
 
     //微信支付
-    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    //implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 
     //支付宝支付
     implementation(name: 'alipaySdk-15.6.5-20190718211159-noUtdid', ext: 'aar')
@@ -162,4 +180,19 @@ dependencies {
 
     //H5优化
     implementation 'ren.yale.android:cachewebviewlib:2.0.1'
+
+    //友盟数据统计及其分享
+    implementation  'com.umeng.umsdk:analytics:8.0.0'
+    implementation  'com.umeng.sdk:common:1.5.1'
+
+    implementation 'com.umeng.sdk:share-core:6.9.1'
+    implementation 'com.umeng.sdk:share-qq:6.9.1.1'
+    implementation 'com.umeng.sdk:share-wechat:6.9.1'
+    implementation 'com.umeng.sdk:share-sina:6.9.1'
+    //分享面板
+    implementation 'com.umeng.sdk:shareboard-widget:6.9.1'
+    //webView优化库
+    implementation 'com.just.agentweb:agentweb:4.1.2'
+    implementation 'com.just.agentweb:filechooser:4.1.2'// (可选)
+    implementation 'com.download.library:Downloader:4.1.2'// (可选)
 }

@@ -2,6 +2,7 @@ package com.hongyuan.fitness.ui.person.about_us;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.view.View;
 
 import com.hongyuan.fitness.base.CustomActivity;
@@ -9,7 +10,7 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivityAboutUsBinding;
 import com.hongyuan.fitness.ui.person.setting.agreement.AgreementActivity;
-import com.hongyuan.fitness.ui.person.setting.privacy_policy.MyWebViewActivity;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.CustomDialog;
 
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
@@ -51,7 +52,10 @@ public class AboutUsViewModel extends CustomViewModel {
 
     //查看用户协议
     public BindingCommand goAgreement = new BindingCommand(() -> startActivity(AgreementActivity.class,null));
-    public BindingCommand goYinSi = new BindingCommand(() -> startActivity(MyWebViewActivity.class,null));
+    public BindingCommand goYinSi = new BindingCommand(() -> {
+        Bundle bundle = new Bundle();
+        bundle.putString("url","http://www.hongyuangood.com/xy/xy.html");
+        startActivity(WebViewActivity.class,bundle);});
 
     @Override
     public void onSuccess(Object data) {

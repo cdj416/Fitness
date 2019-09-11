@@ -8,12 +8,11 @@ import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.util.ImageLoaderUtil;
 import com.previewlibrary.ZoomMediaLoader;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.PlatformConfig;
 
 import org.greenrobot.eventbus.EventBus;
 import org.xutils.x;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
 import me.goldze.mvvmhabit.base.BaseApplication;
@@ -88,6 +87,15 @@ public class MyApplication extends BaseApplication {
 
             }
         });
+
+        //初始化友盟统计
+        UMConfigure.init(this,"5d722d1d570df3f6b90004f0","Android", UMConfigure.DEVICE_TYPE_PHONE, null);
+        // 打开统计SDK调试模式
+        UMConfigure.setLogEnabled(false);
+
+        PlatformConfig.setQQZone("101738721", "vzjh2aiPZSwuRLlp");
+        PlatformConfig.setWeixin("wx96322a2480850d96", "11aa73b9eefe234cb1409347e295b64a");
+        //PlatformConfig.setSinaWeibo("你的微博APPID", "你的微博APPSecret","微博的后台配置回调地址");
     }
 
     /**

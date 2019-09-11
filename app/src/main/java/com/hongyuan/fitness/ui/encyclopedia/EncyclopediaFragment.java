@@ -16,6 +16,7 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.ui.encyclopedia.encyclopedia_detail.EncyclopediaDetailActivity;
+import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -26,14 +27,7 @@ import java.util.List;
 public class EncyclopediaFragment extends CustomFragment {
     private RecyclerView mRecycler;
     private EncyclopediaAdapter adapter;
-    private CardView cardView;
-    private Banner banner;
-    private TextView bannerTitle;
     private EncyclopediaBean listBean;
-    private EncyclopediaBannerBean bannerBean;
-
-    //图片的集合
-    private List<String> imgUrls = new ArrayList<>();
 
     @Override
     public int getLayoutId() {
@@ -49,13 +43,12 @@ public class EncyclopediaFragment extends CustomFragment {
         setEnableLoadMore(true);
 
         mRecycler = mView.findViewById(R.id.mRecycler);
-        banner = mView.findViewById(R.id.banner);
-        bannerTitle = mView.findViewById(R.id.bannerTitle);
-        cardView = mView.findViewById(R.id.cardView);
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycler.setLayoutManager(manager);
+        mRecycler.addItemDecoration(new DividerItemDecoration(
+                getContext(), DividerItemDecoration.HORIZONTAL_LIST,1,mActivity.getResources().getColor(R.color.color_EEEEEE)));
         adapter = new EncyclopediaAdapter();
         mRecycler.setAdapter(adapter);
 
@@ -63,17 +56,15 @@ public class EncyclopediaFragment extends CustomFragment {
             @SingleClick (2000)
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                Bundle bundle = new Bundle();
+                /*Bundle bundle = new Bundle();
                 bundle.putString("baike_id",String.valueOf(listBean.getData().getList().get(position).getBaike_id()));
-                startActivity(EncyclopediaDetailActivity.class,bundle);
+                startActivity(EncyclopediaDetailActivity.class,bundle);*/
             }
         });
     }
 
     @Override
     protected void lazyLoad() {
-        //获取轮播
-        getBanner();
         getList();
     }
 
@@ -86,35 +77,17 @@ public class EncyclopediaFragment extends CustomFragment {
     }
 
     //刷新数据
-    @Override
+    /*@Override
     public void refreshData() {
         lazyLoad();
-    }
-
-    /*
-     * 轮播图的设定
-     * */
-    private void setBanner(List<String> imgUrls){
-        banner.setImages(imgUrls)
-                .setImageLoader(new UseGlideImageLoader())
-                .setDelayTime(3000)
-                .isAutoPlay(true)
-                .setBannerStyle(BannerConfig.CIRCLE_INDICATOR )
-                .setIndicatorGravity(BannerConfig.CENTER).start();
-    }
-
-    private void getBanner(){
-        clearParams().setParams("ft_id", getFragType())
-                .setParams("page","10").setParams("curpage","1");
-        Controller.myRequest(Constants.GET_BAIKE_LIST_TJ,Controller.TYPE_POST,getParams(), EncyclopediaBannerBean.class,this);
-    }
+    }*/
 
     /*
     * 获取百科列表
     * */
     private void getList(){
-        clearParams().setParams("ft_id", getFragType());
-        Controller.myRequest(Constants.GET_BAIKE_LIST,Controller.TYPE_POST,getParams(), EncyclopediaBean.class,this);
+        clearParams().setParams("baike_categoryid", getFragType());
+        Controller.myRequest(Constants.V3_GET_ARTICLE_LIST,Controller.TYPE_POST,getParams(), EncyclopediaBean.class,this);
     }
 
     @Override
@@ -134,27 +107,27 @@ public class EncyclopediaFragment extends CustomFragment {
             if(listBean != null && listBean.getData() != null &&
                     listBean.getData().getList() != null &&
                     listBean.getData().getList().size() > 0){
+                if("0".equals(getFragType())){
+                    if(listBean.getData().getList().size() >= 3){
+                        listBean.getData().getList().get(0).setNumMark(R.mipmap.no1_mark);
+                        listBean.getData().getList().get(1).setNumMark(R.mipmap.no2_mark);
+                        listBean.getData().getList().get(2).setNumMark(R.mipmap.no3_mark);
+                    }
+                    if(listBean.getData().getList().size() == 2){
+                        listBean.getData().getList().get(0).setNumMark(R.mipmap.no1_mark);
+                        listBean.getData().getList().get(1).setNumMark(R.mipmap.no2_mark);
+                    }
+                    if(listBean.getData().getList().size() == 1){
+                        listBean.getData().getList().get(0).setNumMark(R.mipmap.no1_mark);
+                    }
+                }
+
                 adapter.setNewData(listBean.getData().getList());
                 setPromtView(SHOW_DATA);
             }else{
                 setPromtView(SHOW_EMPTY);
             }
 
-        }
-        if(data instanceof EncyclopediaBannerBean && isSuccess(data)){
-            bannerBean = (EncyclopediaBannerBean)data;
-            imgUrls.clear();
-            for(EncyclopediaBannerBean.DataBean.ListBean bean : bannerBean.getData().getList()){
-                imgUrls.add(bean.getBaike_img());
-            }
-            if(imgUrls.size() > 0){
-                bannerTitle.setVisibility(View.VISIBLE);
-                cardView.setVisibility(View.VISIBLE);
-                setBanner(imgUrls);
-            }else{
-                bannerTitle.setVisibility(View.GONE);
-                cardView.setVisibility(View.GONE);
-            }
         }
     }
 }
