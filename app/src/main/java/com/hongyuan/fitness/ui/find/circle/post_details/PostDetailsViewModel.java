@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
@@ -26,6 +25,8 @@ import com.hongyuan.fitness.databinding.ActivityPostDetailsBinding;
 import com.hongyuan.fitness.ui.find.circle.comment_details.CommentDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.comment_details.CommentDetailsLikeBean;
 import com.hongyuan.fitness.ui.find.circle.report.ReportActivity;
+import com.hongyuan.fitness.ui.person.person_message.PersonAttentionBeans;
+import com.hongyuan.fitness.ui.person.person_message.PersonMessageActivity;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.JumpUtils;
 import com.hongyuan.fitness.util.DividerItemDecoration;
@@ -98,7 +99,16 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
         binding.moreOperate.setOnClickListener(v -> {
             CustomDialog.attentionMore(mActivity, topBean.getData().getIs_friend(), v1 -> {
                 if(v1.getId() == R.id.goDetails){
-                    mActivity.finish();
+                    PersonAttentionBeans attentionBeans = new PersonAttentionBeans();
+                    attentionBeans.setIs_friend(topBean.getData().getIs_friend());
+                    attentionBeans.setM_id(topBean.getData().getM_id());
+                    attentionBeans.setM_mobile(topBean.getData().getM_mobile());
+                    attentionBeans.setM_name(topBean.getData().getM_name());
+                    attentionBeans.setMi_head(topBean.getData().getMi_head());
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("otherPerson",attentionBeans);
+                    startActivity(PersonMessageActivity.class,bundle);
                 }
 
                 if(v1.getId() == R.id.attention){
@@ -327,7 +337,7 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
     private void setData(PostDetailsTopBean data){
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img);
         Glide.with(mActivity).load(data.getData().getMi_head()).apply(options).into(binding.headImg);
-        binding.fName.setText(data.getData().getCircle_name());
+        binding.fName.setText(data.getData().getM_name());
         //binding.label.setText(data.getData().getCircle_name());目前标签内容还没有
         binding.timeAfter.setText(TimeUtil.friendly_time(data.getData().getAdd_date()));
         binding.postContent.setText(data.getData().getCircle_content());
@@ -372,7 +382,7 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
         @Override
         protected void onDisplayImage(Context context, ImageView imageView, PostDetailsTopBean.DataBean.CiBean s) {
             if(s.getCircle_type() == 1){
-                RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_testbaner3).error(R.mipmap.a_testbaner3).centerCrop();
+                RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
                 Glide.with(mActivity).load(s.getFile_src()).apply(options).into(imageView);
             }
         }

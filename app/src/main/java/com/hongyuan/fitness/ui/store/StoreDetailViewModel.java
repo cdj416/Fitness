@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.view.View;
 
-import com.hongyuan.fitness.base.BaseBean;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
@@ -44,6 +46,8 @@ public class StoreDetailViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
+        setEnableOverScrollDrag(true);
+
         os_id = getBundle().getString("os_id");
         //门店设施标签
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
@@ -83,6 +87,8 @@ public class StoreDetailViewModel extends CustomViewModel {
         //设置门店设施
         mtAdapter.setNewData(detailBean.getData().getOsf());
 
+        //设置标签
+        Glide.with(mActivity).load(detailBean.getData().getOsl_img()).into(binding.storeMark);
         binding.storeName.setText(detailBean.getData().getOs_name());
         binding.storeAddress.setText(detailBean.getData().getOs_address());
         binding.businessHours.setText("周一至周日 "+ TimeUtil.formatDate(detailBean.getData().getOs_start_time(),TimeUtil.dateFormatHMS,TimeUtil.dateFormatHM)+
@@ -120,7 +126,7 @@ public class StoreDetailViewModel extends CustomViewModel {
 
     @Override
     protected void lazyLoad() {
-
+        mActivity.showLoading();
         //读取门店详情
         clearParams().setParams("os_id",os_id);
         Controller.myRequest(Constants.GET_OFFLINE_STORE_INFO,Controller.TYPE_POST,getParams(), StoreDetailBean.class,this);
@@ -192,6 +198,7 @@ public class StoreDetailViewModel extends CustomViewModel {
         }
 
         if(data instanceof VtwoPrivateLessonsBeans){
+            mActivity.closeLoading();
             VtwoPrivateLessonsBeans priviteCourse = (VtwoPrivateLessonsBeans)data;
             if(priviteCourse.getData() == null ||
                     priviteCourse.getData().getList() == null ||

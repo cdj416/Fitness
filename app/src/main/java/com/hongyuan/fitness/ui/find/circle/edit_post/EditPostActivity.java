@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.find.circle.edit_post;
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
@@ -10,6 +11,7 @@ import com.hongyuan.fitness.databinding.ActivityEditPostBinding;
 
 public class EditPostActivity extends CustomActivity {
     private ActivityEditPostBinding binding;
+    private EditPostViewModel viewModel;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_edit_post;
@@ -20,7 +22,7 @@ public class EditPostActivity extends CustomActivity {
         setTitle("我的");
         setsetImmersive(0x55000000);
         binding = ActivityEditPostBinding.bind(mView);
-        EditPostViewModel viewModel = new EditPostViewModel(this,binding);
+        viewModel = new EditPostViewModel(this,binding);
         binding.setViewModel(viewModel);
     }
 
@@ -28,6 +30,11 @@ public class EditPostActivity extends CustomActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        binding.imgOrVideo.onActivityResult(requestCode,resultCode,data);
+        binding.imgVideo.onActivityResult(requestCode,resultCode,data);
+    }
+
+    @Override
+    protected void forResult(Bundle bundle) {
+        viewModel.forResult(bundle);
     }
 }

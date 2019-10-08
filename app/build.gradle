@@ -6,8 +6,8 @@ android {
         applicationId "com.hongyuan.fitness"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 2
-        versionName "1.1.1"
+        versionCode 5
+        versionName "1.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -124,7 +124,6 @@ dependencies {
     implementation 'me.majiajie:pager-bottom-tab-strip:2.3.0X'
 
     //eventbus(使用改进了的eventbus)
-
     //implementation 'org.greenrobot:eventbus:3.1.1'
 
     //防重复点击处理库
@@ -161,14 +160,6 @@ dependencies {
     implementation 'cn.jiguang.sdk:jpush:3.1.5'
     implementation 'cn.jiguang.sdk:jcore:1.2.3'
 
-    //分享功能
-//    implementation('com.xyzlf.share:sharesdk:0.0.11') {
-//        exclude group: 'com.android.support', module: 'appcompat-v7'
-//    }
-
-    //微信支付
-    //implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
-
     //支付宝支付
     implementation(name: 'alipaySdk-15.6.5-20190718211159-noUtdid', ext: 'aar')
 
@@ -177,9 +168,6 @@ dependencies {
         exclude 'com.alipay'
     }
     implementation files('libs/AMap3DMap_6.4.1_AMapNavi_6.3.0_AMapSearch_6.1.0_AMapLocation_4.2.0_20180906.jar')
-
-    //H5优化
-    implementation 'ren.yale.android:cachewebviewlib:2.0.1'
 
     //友盟数据统计及其分享
     implementation  'com.umeng.umsdk:analytics:8.0.0'
@@ -195,4 +183,7 @@ dependencies {
     implementation 'com.just.agentweb:agentweb:4.1.2'
     implementation 'com.just.agentweb:filechooser:4.1.2'// (可选)
     implementation 'com.download.library:Downloader:4.1.2'// (可选)
+
+    //网络爬虫技术sdk(用于适配h5标签)
+    implementation 'org.jsoup:jsoup:1.12.1'
 }

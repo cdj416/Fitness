@@ -72,6 +72,7 @@ public class VtwoVerificationLoginViewModel extends CustomViewModel implements I
         binding.privacyPolicy.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString("url","http://www.hongyuangood.com/xy/xy.html");
+            bundle.putString("title","隐私政策");
             startActivity(WebViewActivity.class,bundle);
         });
         //去注册

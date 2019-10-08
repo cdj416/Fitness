@@ -18,7 +18,7 @@ public class V2FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.
     @Override
     protected void convert(final BaseViewHolder helper, FeatureBean.DataBean.ListBean item) {
 
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
         Glide.with(mContext).load(item.getMi_head()).apply(options).into((RoundedImageView)helper.getView(R.id.headImg));
 
 

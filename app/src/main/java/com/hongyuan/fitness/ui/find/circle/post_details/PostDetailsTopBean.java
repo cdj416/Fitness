@@ -73,7 +73,16 @@ public class PostDetailsTopBean extends BaseBean implements Serializable{
         private String add_date;
         private int is_praise;
         private int is_friend;
+        private String m_name;
         private List<CiBean> ci;
+
+        public String getM_name() {
+            return m_name;
+        }
+
+        public void setM_name(String m_name) {
+            this.m_name = m_name;
+        }
 
         public int getCircle_id() {
             return circle_id;

@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
-import com.hongyuan.fitness.databinding.ActivityEncyclopediaDetailBinding;
 import com.hongyuan.fitness.databinding.ActivityEncyclopediaTestDetailBinding;
 
 public class EncyclopediaDetailActivity extends CustomActivity {

@@ -49,11 +49,11 @@ public class MainActivity extends CustomActivity {
     }
 
     /*
-     * 控制跳转到课程页面
+     * 控制跳转到指定页面
      * */
     @Subscribe(id = ConstantsCode.EB_START_COURSE)
     public void starCourse(String message) {
-        binding.viewPager.setCurrentItem(2);
+        binding.viewPager.setCurrentItem(Integer.valueOf(message));
     }
 
     @Override

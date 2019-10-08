@@ -71,7 +71,25 @@ public class CourseDetailsBean extends BaseBean implements Serializable {
         private String coach_head;
         private int have_num;
         private int bnum;
+        private String cp_anli_imgs;
+        private int is_collection;
         private List<PriceListBean> price_list;
+
+        public int getIs_collection() {
+            return is_collection;
+        }
+
+        public void setIs_collection(int is_collection) {
+            this.is_collection = is_collection;
+        }
+
+        public String getCp_anli_imgs() {
+            return cp_anli_imgs;
+        }
+
+        public void setCp_anli_imgs(String cp_anli_imgs) {
+            this.cp_anli_imgs = cp_anli_imgs;
+        }
 
         public int getCp_id() {
             return cp_id;

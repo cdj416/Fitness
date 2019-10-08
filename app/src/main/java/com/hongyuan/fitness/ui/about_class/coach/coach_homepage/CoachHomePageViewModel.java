@@ -10,10 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
+import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.StickyScrollView;
 import com.hongyuan.fitness.custom_view.comm_title.CommentTitleView;
 import com.hongyuan.fitness.databinding.ActivityCoachHomepageBinding;
@@ -95,10 +98,26 @@ public class CoachHomePageViewModel extends CustomViewModel implements CommentTi
         });
 
         //拨打电话
-        binding.myTitle.getRightView().setOnClickListener(v -> {
+        binding.callTel.setOnClickListener(v -> {
             CustomDialog.callTel(mActivity, coachHomeBean.getData().getInfo().getM_mobile(), v1 -> {
                 callTel(coachHomeBean.getData().getInfo().getM_mobile());
             });
+        });
+
+        binding.myTitle.getRightView().setOnClickListener(new View.OnClickListener() {
+            @SingleClick
+            @Override
+            public void onClick(View v) {
+                if(coachHomeBean.getData().getIs_collection() == 1){
+                    CustomDialog.promptDialog(mActivity, "确定要取消收藏？", "确定取消", "暂不取消", true, v12 -> {
+                        if(v12.getId() == R.id.isOk){
+                            setCollect();
+                        }
+                    });
+                }else{
+                    setCollect();
+                }
+            }
         });
 
         //初始化评论筛选回调函数
@@ -246,6 +265,21 @@ public class CoachHomePageViewModel extends CustomViewModel implements CommentTi
         Controller.myRequest(Constants.GET_COACH_REVIEW_IMG_LIST,Controller.TYPE_POST,getParams(), CommentBeans.class,this);
     }
 
+    /*
+     * 添加/取消 收藏
+     * */
+    private void setCollect(){
+        mActivity.closeLoading();
+        if(coachHomeBean.getData().getIs_collection() == 1){
+            clearParams().setParams("out_id",coach_mid).setParams("collection_code","coach");
+            Controller.myRequest(ConstantsCode.DEL_COLLECTION,Constants.DEL_COLLECTION,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+        }else{
+            clearParams().setParams("id",coach_mid).setParams("collection_code","coach");
+            Controller.myRequest(ConstantsCode.ADD_COLLECTION,Constants.ADD_COLLECTION,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+        }
+
+    }
+
     @Override
     protected void setData() {
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img).centerCrop();
@@ -263,6 +297,12 @@ public class CoachHomePageViewModel extends CustomViewModel implements CommentTi
             ViewChangeUtil.changeRightDrawable(mActivity,binding.coachName,R.mipmap.person_boby_mark_img);
         }else{
             ViewChangeUtil.changeRightDrawable(mActivity,binding.coachName,R.mipmap.person_girl_mark_img);
+        }
+
+        if(coachHomeBean.getData().getIs_collection() == 1){
+            binding.myTitle.setRightImage(R.mipmap.orange_collection_mark);
+        }else{
+            binding.myTitle.setRightImage(R.mipmap.white_collection_mark);
         }
 
         setPhoto(coachHomeBean);
@@ -317,6 +357,18 @@ public class CoachHomePageViewModel extends CustomViewModel implements CommentTi
                 binding.commentRecycler.setVisibility(View.GONE);
                 binding.loadBox.setVisibility(View.VISIBLE);
             }
+        }
+    }
+
+    @Override
+    public void onSuccess(int code, Object data) {
+        if(code == ConstantsCode.DEL_COLLECTION){
+            coachHomeBean.getData().setIs_collection(0);
+            binding.myTitle.setRightImage(R.mipmap.white_collection_mark);
+        }
+        if(code == ConstantsCode.ADD_COLLECTION){
+            coachHomeBean.getData().setIs_collection(1);
+            binding.myTitle.setRightImage(R.mipmap.orange_collection_mark);
         }
     }
 

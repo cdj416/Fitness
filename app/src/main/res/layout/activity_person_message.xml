@@ -171,8 +171,8 @@
                     <RelativeLayout
                         android:id="@+id/loadBox"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="gone"
+                        android:layout_height="300dp"
+                        android:visibility="visible"
                         android:layout_centerInParent="true">
 
                         <TextView

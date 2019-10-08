@@ -109,7 +109,7 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         Controller.myRequest(Constants.GET_OFFLINE_STORE_LIST_JULI,Controller.TYPE_POST,getParams(), StoreBean.class,this);
 
         //首页--读取首页教练
-        clearParams().setParams("city_name","湖州市")
+        clearParams().setParams("city_name",LocationBean.getInstance().getCityName())
                 .setParams("page","3").setParams("curpage","1");
         Controller.myRequest(Constants.GET_COACH_LIST,Controller.TYPE_POST,getParams(), VtwoStarCoachBean.class,this);
 
@@ -118,7 +118,7 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         Controller.myRequest(Constants.GET_COURSE_PRIVITE_LIST,Controller.TYPE_POST,getParams(), VtwoPrivateLessonsBeans.class,this);
 
         //获取门店的团课
-        clearParams().setParams("city_name","湖州市")
+        clearParams().setParams("city_name",LocationBean.getInstance().getCityName())
                 .setParams("lat", LocationBean.getInstance().getLat())
                 .setParams("lng",LocationBean.getInstance().getLng())
                 .setParams("page","3").setParams("curpage","1");
@@ -130,7 +130,7 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         Controller.myRequest(Constants.GET_GOODS_LIST,Controller.TYPE_POST,getParams(), MallBeans.class,this);
 
         //获取发现数据
-        clearParams().setParams("circle_state","1").setParams("circle_type","").setParams("city_name","湖州市")
+        clearParams().setParams("circle_state","1").setParams("circle_type","").setParams("city_name",LocationBean.getInstance().getCityName())
                 .setParams("page","4").setParams("curpage","1");
         Controller.myRequest(Constants.GET_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
     }

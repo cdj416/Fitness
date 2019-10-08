@@ -61,9 +61,36 @@
             </RelativeLayout>
         </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mRecycler"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:visibility="gone"
+                android:paddingBottom="10dp"/>
+            <RelativeLayout
+                android:id="@+id/loadBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+
+                <TextView
+                    android:id="@+id/isEmpty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@mipmap/promt_empty_img"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="暂无数据！"
+                    android:textSize="12sp"
+                    android:textColor="@color/color_FF999999" />
+            </RelativeLayout>
+        </FrameLayout>
+
     </LinearLayout>
 </layout>

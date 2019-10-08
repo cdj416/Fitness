@@ -13,7 +13,7 @@ public class CircleDetailsActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitle("圈子详情");
+        setTitle("话题详情");
         setsetImmersive(0x55000000);
         ActivityCircleDetailsBinding binding = ActivityCircleDetailsBinding.bind(mView);
         CircleDetailsViewModel viewModel = new CircleDetailsViewModel(this,binding);

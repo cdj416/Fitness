@@ -6,6 +6,8 @@ import com.hongyuan.fitness.databinding.ActivityDailyPunchBinding;
 import com.hongyuan.fitness.ui.person.mine_point.point_rules.RulesActivity;
 
 public class DailyPunchActivity extends CustomActivity {
+    private DailyPunchViewModel viewModel;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_daily_punch;
@@ -20,7 +22,13 @@ public class DailyPunchActivity extends CustomActivity {
         });
 
         ActivityDailyPunchBinding binding = ActivityDailyPunchBinding.bind(mView);
-        DailyPunchViewModel viewModel = new DailyPunchViewModel(this,binding);
+        viewModel = new DailyPunchViewModel(this,binding);
         binding.setViewModel(viewModel);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.refreshData();
     }
 }

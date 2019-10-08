@@ -15,6 +15,7 @@ public class WebViewActivity extends CustomActivity {
 
     @Override
     protected void initView() {
+        setTitleBar(TYPE_BAR3,0,"");
         ActivityWebviewBinding binding = ActivityWebviewBinding.bind(mView);
         modelView = new WebViewModelView(this,binding);
         binding.setViewModel(modelView);
@@ -22,7 +23,7 @@ public class WebViewActivity extends CustomActivity {
 
     @Override
     public void onResume() {
-        //modelView.mAgentWeb.getWebLifeCycle().onResume();//恢复
+        modelView.mAgentWeb.getWebLifeCycle().onResume();//恢复
         super.onResume();
     }
 

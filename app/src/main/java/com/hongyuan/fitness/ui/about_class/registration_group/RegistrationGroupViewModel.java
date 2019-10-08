@@ -16,8 +16,13 @@ import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivityRegistrationGroupBinding;
 import com.hongyuan.fitness.ui.about_class.class_success.SuccessClassActivity;
 import com.hongyuan.fitness.ui.about_class.group_class.group_details.MissionDetailBean;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.TimeUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 
@@ -80,11 +85,34 @@ public class RegistrationGroupViewModel extends CustomViewModel {
     @Override
     public void onSuccess(Object data) {
         if(isSuccess(data)){
+            V3SuccessBeans beans = new V3SuccessBeans();
+            beans.setTitleText("团课报名");
+            beans.setShowText("预约成功");
+            beans.setBtn1Text("取消报名");
+            beans.setBtn2Text("完成");
+            List<V3SuccessBeans.ItemConten> list = new ArrayList<>();
+
+            V3SuccessBeans.ItemConten itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent(detailBean.getCs_name());
+            itemConten.setItemTitle("课程名：");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent(detailBean.getOs_name());
+            itemConten.setItemTitle("上课场地:");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent(detailBean.getCs_start_date());
+            itemConten.setItemTitle("上课开始时间:");
+            list.add(itemConten);
+
+            beans.setItemContens(list);
+
             Bundle bundle = new Bundle();
-            bundle.putString("titleName","团课报名");
-            bundle.putString("successText","预约成功");
-            bundle.putString("buttonText","完成");
-            startActivity(SuccessClassActivity.class,bundle);
+            bundle.putSerializable("successBeans",beans);
+            startActivity(V3SuccessActivity.class,bundle);
+            mActivity.finish();
         }
     }
 }

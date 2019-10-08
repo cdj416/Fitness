@@ -272,6 +272,23 @@
                     android:layout_marginTop="8dp"
                     android:textSize="@dimen/sp_12"
                     android:text="专业教练通过分析不同学员的体脂/体型及健康状况，通过不同的方式针对身体的肌肉强化训练，使肌肉线条美化。"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_FF333333"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="24dp"
+                    android:textSize="16sp"
+                    android:text="成功案例"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/successCaseImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -298,7 +315,6 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
-                    android:visibility="gone"
                     android:text="运动建议"/>
                 <TextView
                     android:id="@+id/courseSuggest"
@@ -309,8 +325,60 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     android:textSize="@dimen/sp_12"
-                    android:visibility="gone"
                     android:text="1. 根据教练安排，坚持合理运动频率 \n2. 补充足够热量/碳水化合物/蛋白质等，帮助肌肉生长，在教练 指导下完成力量训练，不要过度承重。"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="23dp"
+                    android:background="@color/color_EEEEEE"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginBottom="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FF333333"
+                        android:layout_centerVertical="true"
+                        android:textSize="16sp"
+                        android:text="约课流程"/>
+                    <TextView
+                        android:id="@+id/desDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F06243"
+                        android:textSize="14sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="规则详情"/>
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/privit_course_process_img"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:scaleType="fitXY"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="23dp"
+                    android:background="@color/color_EEEEEE"/>
 
                 <com.hongyuan.fitness.custom_view.comm_title.CommentTitleView
                     android:id="@+id/commentTitle"
@@ -373,7 +441,8 @@
                 app:text_color="@color/color_FFFFFF"
                 app:left_image="@mipmap/white_common"
                 app:line_show="false"
-                app:center_text="课程详情"/>
+                app:center_text="课程详情"
+                app:right_image="@mipmap/white_collection_mark"/>
         </LinearLayout>
 
         <LinearLayout

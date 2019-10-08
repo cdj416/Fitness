@@ -20,7 +20,7 @@
                 android:layout_height="156dp"
                 app:riv_corner_radius_top_right="6dp"
                 app:riv_corner_radius_top_left="6dp"
-                android:src="@mipmap/a_test2"
+                android:src="@mipmap/zhengfangxing_default_img"
                 android:scaleType="centerCrop"/>
             <TextView
                 android:layout_width="wrap_content"

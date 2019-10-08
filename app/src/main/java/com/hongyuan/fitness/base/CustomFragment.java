@@ -37,7 +37,7 @@ import java.util.Map;
 /*
  * 所有Fragment需继承本Fragment（可以方便接下来的快速开发哦^_^）
  * */
-public abstract class CustomFragment extends Fragment implements RetrofitListener{
+public abstract class CustomFragment<T> extends Fragment implements RetrofitListener{
 
     private boolean isFragmentVisible;
     private boolean isReuseView;
@@ -49,6 +49,8 @@ public abstract class CustomFragment extends Fragment implements RetrofitListene
     private LinearLayout customBg;
     private TitleView mTitle;
 
+    //泛型类
+    private Class<T> dataBean;
 
     //下面是当前基础布局
     private FrameLayout mainView;
@@ -587,6 +589,21 @@ public abstract class CustomFragment extends Fragment implements RetrofitListene
                 .from(mActivity)
                 .inflate(R.layout.view_bottom_height, (ViewGroup) v.getParent(), false);
         return convertView;
+    }
+
+    /*
+    * 设置泛型类
+    * */
+    public CustomFragment setMyClass(Class<T> dataBean){
+        this.dataBean = dataBean;
+        return this;
+    }
+
+    /*
+    * 获取泛型
+    * */
+    public Class<T> getMyClass(){
+        return this.dataBean;
     }
 
 }

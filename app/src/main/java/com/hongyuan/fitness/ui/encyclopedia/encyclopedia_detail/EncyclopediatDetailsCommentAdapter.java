@@ -10,11 +10,12 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.ui.encyclopedia.vthird_change.V3CommentBeans;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.hongyuan.fitness.util.ViewChangeUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-public class EncyclopediatDetailsCommentAdapter extends BaseQuickAdapter<EncyclopediaDetailCommentBean.DataBean.ListBean, BaseViewHolder> {
+public class EncyclopediatDetailsCommentAdapter extends BaseQuickAdapter<V3CommentBeans.DataBean.ListBean, BaseViewHolder> {
 
     public interface ReturnClick{
         void returnClick(int partentPosition, int position);
@@ -28,11 +29,11 @@ public class EncyclopediatDetailsCommentAdapter extends BaseQuickAdapter<Encyclo
     }
 
     @Override
-    protected void convert(final BaseViewHolder helper, EncyclopediaDetailCommentBean.DataBean.ListBean item) {
+    protected void convert(final BaseViewHolder helper, V3CommentBeans.DataBean.ListBean item) {
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img);
         Glide.with(mContext).load(item.getMi_head()).apply(options).into((RoundedImageView)helper.getView(R.id.headImg));
 
-        helper.setText(R.id.fName,item.getM_name()).setText(R.id.commentContent,item.getBr_content())
+        helper.setText(R.id.fName,item.getM_name()).setText(R.id.commentContent,item.getAr_content())
         .setText(R.id.attention,String.valueOf(item.getPraise_num())).setText(R.id.timeAfter, TimeUtil.friendly_time(item.getAdd_date()));
 
         if(item.getIs_praise() == 0){
@@ -67,12 +68,9 @@ public class EncyclopediatDetailsCommentAdapter extends BaseQuickAdapter<Encyclo
         .addOnClickListener(R.id.attention);
 
         //子项点击事件返回
-        adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                if(returnClick != null){
-                    returnClick.returnClick(helper.getPosition(),position);
-                }
+        adapter.setOnItemChildClickListener((adapter1, view, position) -> {
+            if(returnClick != null){
+                returnClick.returnClick(helper.getPosition(),position);
             }
         });
     }

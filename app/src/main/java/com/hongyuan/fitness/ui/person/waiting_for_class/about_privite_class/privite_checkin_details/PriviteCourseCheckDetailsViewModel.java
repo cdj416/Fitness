@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.person.waiting_for_class.about_privite_class.privite_checkin_details;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
@@ -17,6 +18,7 @@ import com.hongyuan.fitness.custom_view.StickyScrollView;
 import com.hongyuan.fitness.databinding.ActivtiyPriviteCourseSiginDetailsBinding;
 import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachKongTimeBeans;
 import com.hongyuan.fitness.ui.about_class.privite_class.course_details.CourseDetailsBean;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.TimeUtil;
 
@@ -48,6 +50,13 @@ public class PriviteCourseCheckDetailsViewModel extends CustomViewModel implemen
         });
         binding.checkIn.setOnClickListener(v -> {
             courseQD(getBundle().getString("cpa_id"));
+        });
+
+        binding.desDetails.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url","http://www.hongyuangood.com/courseNotice/index.html");
+            bundle.putString("title","私教课上课须知");
+            startActivity(WebViewActivity.class,bundle);
         });
 
         initListeners();

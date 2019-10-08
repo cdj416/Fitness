@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
@@ -24,13 +25,16 @@ import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomePageAct
 import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachKongTimeBeans;
 import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CommentAdapter;
 import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CommentBeans;
-import com.hongyuan.fitness.ui.main.main_about_class.group_class.GroupClassBean;
 import com.hongyuan.fitness.ui.about_class.privite_class.pay_order_detail.PayOrderDetailActivity;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.TimeUtil;
+import com.hongyuan.fitness.util.ViewChangeUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import me.goldze.mvvmhabit.binding.command.BindingAction;
@@ -40,6 +44,7 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
     private ActivtiyCourseDetailsBinding binding;
     private CommentAdapter commentAdapter;
     private CourseDetailsPriceAdapter priceAdapter;
+    private SuccessCaseImgAdapter imgAdapter;
 
     //课程详情
     private CourseDetailsBean detailsBean;
@@ -81,6 +86,13 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
         priceAdapter = new CourseDetailsPriceAdapter();
         binding.priceRec.setAdapter(priceAdapter);
 
+        //成功案例
+        LinearLayoutManager imgManager = new LinearLayoutManager(mActivity);
+        imgManager.setOrientation(RecyclerView.VERTICAL);
+        binding.successCaseImg.setLayoutManager(imgManager);
+        imgAdapter = new SuccessCaseImgAdapter();
+        binding.successCaseImg.setAdapter(imgAdapter);
+
         //评论的适配
         LinearLayoutManager manager1 = new LinearLayoutManager(mActivity);
         manager1.setOrientation(RecyclerView.VERTICAL);
@@ -101,6 +113,29 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
                 Bundle bundle = new Bundle();
                 bundle.putString("coach_mid",String.valueOf(detailsBean.getData().getM_id()));
                 startActivity(CoachHomePageActivity.class,bundle);
+            }
+        });
+
+        binding.desDetails.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url","http://www.hongyuangood.com/courseNotice/index.html");
+            bundle.putString("title","私教课上课须知");
+            startActivity(WebViewActivity.class,bundle);
+        });
+
+        binding.mainTitle.getRightView().setOnClickListener(new View.OnClickListener() {
+            @SingleClick
+            @Override
+            public void onClick(View v) {
+                if(detailsBean.getData().getIs_collection() == 1){
+                    CustomDialog.promptDialog(mActivity, "确定要取消收藏？", "确定取消", "暂不取消", true, v12 -> {
+                        if(v12.getId() == R.id.isOk){
+                            setCollect();
+                        }
+                    });
+                }else{
+                    setCollect();
+                }
             }
         });
 
@@ -182,7 +217,7 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
 
     @Override
     protected void lazyLoad() {
-
+        mActivity.showLoading();
         //获取课程详情
         clearParams().setParams("cp_id",getBundle().getString("cp_id"));
         Controller.myRequest(Constants.GET_COURSE_PRIVITE_INFO,Controller.TYPE_POST,getParams(), CourseDetailsBean.class,this);
@@ -228,6 +263,21 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
         Controller.myRequest(Constants.GET_COACH_REVIEW_IMG_LIST,Controller.TYPE_POST,getParams(), CommentBeans.class,this);
     }
 
+    /*
+    * 添加/取消 收藏
+    * */
+    private void setCollect(){
+        mActivity.closeLoading();
+        if(detailsBean.getData().getIs_collection() == 1){
+            clearParams().setParams("out_id",getBundle().getString("cp_id")).setParams("collection_code","cp");
+            Controller.myRequest(ConstantsCode.DEL_COLLECTION,Constants.DEL_COLLECTION,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+        }else{
+            clearParams().setParams("id",getBundle().getString("cp_id")).setParams("collection_code","cp");
+            Controller.myRequest(ConstantsCode.ADD_COLLECTION,Constants.ADD_COLLECTION,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+        }
+
+    }
+
     @Override
     public void onSuccess(Object data) {
         if(data instanceof CommentsNumBeans){
@@ -262,7 +312,13 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
             binding.courseContent.setText(detailsBean.getData().getCp_info());
             binding.coursePeople.setText(detailsBean.getData().getCp_people());
             binding.courseTime.setText(detailsBean.getData().getCp_duration());
-            //binding.courseSuggest.setText(detailsBean.getData().getCp_suggest());
+            binding.courseSuggest.setText(detailsBean.getData().getCp_suggest());
+
+            if(detailsBean.getData().getIs_collection() == 1){
+                binding.mainTitle.setRightImage(R.mipmap.orange_collection_mark);
+            }else{
+                binding.mainTitle.setRightImage(R.mipmap.white_collection_mark);
+            }
 
             //组装数据
             if (detailsBean.getData().getPrice_list() == null || detailsBean.getData().getPrice_list().size() <= 0){
@@ -277,9 +333,14 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
                 priceAdapter.setNewData(detailsBean.getData().getPrice_list());
             }
 
-
+            //组装成功案例图片
+            if(BaseUtil.isValue(detailsBean.getData().getCp_anli_imgs())){
+                imgAdapter.setNewData(Arrays.asList(detailsBean.getData().getCp_anli_imgs().split(",")));
+            }
 
             getKongTime(String.valueOf(detailsBean.getData().getM_id()));
+
+            mActivity.closeLoading();
         }
 
         if(data instanceof CommentBeans){
@@ -307,4 +368,15 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
         }
     }
 
+    @Override
+    public void onSuccess(int code, Object data) {
+        if(code == ConstantsCode.DEL_COLLECTION){
+            detailsBean.getData().setIs_collection(0);
+            binding.mainTitle.setRightImage(R.mipmap.white_collection_mark);
+        }
+        if(code == ConstantsCode.ADD_COLLECTION){
+            detailsBean.getData().setIs_collection(1);
+            binding.mainTitle.setRightImage(R.mipmap.orange_collection_mark);
+        }
+    }
 }

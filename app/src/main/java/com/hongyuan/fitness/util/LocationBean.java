@@ -21,7 +21,10 @@ public class LocationBean {
     private int os_id;//距离最近的门店id
 
     public String getLat() {
-        return lat;
+        if(BaseUtil.isValue(lat)){
+            return lat;
+        }
+        return "30.863069";
     }
 
     public void setLat(String lat) {
@@ -29,7 +32,10 @@ public class LocationBean {
     }
 
     public String getLng() {
-        return lng;
+        if(BaseUtil.isValue(lng)){
+            return lng;
+        }
+        return "120.099863";
     }
 
     public void setLng(String lng) {
@@ -45,7 +51,10 @@ public class LocationBean {
     }
 
     public String getCityName() {
-        return cityName;
+        if(BaseUtil.isValue(cityName)){
+            return cityName;
+        }
+        return "湖州市";
     }
 
     public void setCityName(String cityName) {

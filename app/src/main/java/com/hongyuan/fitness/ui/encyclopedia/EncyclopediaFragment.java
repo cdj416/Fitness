@@ -3,9 +3,6 @@ package com.hongyuan.fitness.ui.encyclopedia;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,12 +14,6 @@ import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.ui.encyclopedia.encyclopedia_detail.EncyclopediaDetailActivity;
 import com.hongyuan.fitness.util.DividerItemDecoration;
-import com.hongyuan.fitness.util.UseGlideImageLoader;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EncyclopediaFragment extends CustomFragment {
     private RecyclerView mRecycler;
@@ -56,9 +47,9 @@ public class EncyclopediaFragment extends CustomFragment {
             @SingleClick (2000)
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                /*Bundle bundle = new Bundle();
-                bundle.putString("baike_id",String.valueOf(listBean.getData().getList().get(position).getBaike_id()));
-                startActivity(EncyclopediaDetailActivity.class,bundle);*/
+                Bundle bundle = new Bundle();
+                bundle.putString("article_id",String.valueOf(listBean.getData().getList().get(position).getArticle_id()));
+                startActivity(EncyclopediaDetailActivity.class,bundle);
             }
         });
     }
@@ -86,12 +77,14 @@ public class EncyclopediaFragment extends CustomFragment {
     * 获取百科列表
     * */
     private void getList(){
+        mActivity.showLoading();
         clearParams().setParams("baike_categoryid", getFragType());
         Controller.myRequest(Constants.V3_GET_ARTICLE_LIST,Controller.TYPE_POST,getParams(), EncyclopediaBean.class,this);
     }
 
     @Override
     public void onSuccess(Object data) {
+        mActivity.closeLoading();
         if(data instanceof EncyclopediaBean && isSuccess(data)){
             EncyclopediaBean pageData = (EncyclopediaBean)data;
             if(curPage == FIRST_PAGE){

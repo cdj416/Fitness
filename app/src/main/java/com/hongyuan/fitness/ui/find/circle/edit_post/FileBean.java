@@ -9,6 +9,7 @@ public class FileBean {
     private Uri fileUri;
     private File mFile;
     private String fileKey;
+    private String fileType;
 
     public String getFilePath() {
         return filePath;
@@ -40,5 +41,13 @@ public class FileBean {
 
     public void setFileKey(String fileKey) {
         this.fileKey = fileKey;
+    }
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
     }
 }

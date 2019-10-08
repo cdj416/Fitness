@@ -20,9 +20,13 @@ import com.hongyuan.fitness.ui.about_class.class_failure.FailureActivity;
 import com.hongyuan.fitness.ui.about_class.class_success.SuccessClassActivity;
 import com.hongyuan.fitness.ui.about_class.privite_class.preservation_course.ReservationSuccessBeans;
 import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.PayUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
@@ -35,6 +39,7 @@ public class GoodsPayViewModel extends CustomViewModel {
     private final int PAY_FAILURE = 0x2;
     private ActivityGoodsPayBinding binding;
     private PayDataBean payDataBean;
+    private V3SuccessBeans successBeans;
 
     private String payType = "wechatPay";
 
@@ -42,19 +47,12 @@ public class GoodsPayViewModel extends CustomViewModel {
     private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            Bundle bundle = new Bundle();
             switch (msg.what){
                 case PAY_SUCCESS:
-                    if(payDataBean.getReservationData() != null){
-                        reservationCourse();
-                    }else{
-                        bundle.putString("titleName","支付结果");
-                        bundle.putString("successText","支付成功！");
-                        bundle.putString("buttonText","完成");
-                        startActivity(SuccessClassActivity.class,bundle);
-                    }
+                    goSuccess();
                     break;
                 case PAY_FAILURE:
+                    Bundle bundle = new Bundle();
                     bundle.putString("titleName","支付结果");
                     bundle.putString("failureText","支付失败！");
                     startActivity(FailureActivity.class,bundle);
@@ -74,6 +72,8 @@ public class GoodsPayViewModel extends CustomViewModel {
     @Override
     protected void initView() {
         payDataBean = (PayDataBean)getBundle().getSerializable("payDataBean");
+        successBeans = (V3SuccessBeans)getBundle().getSerializable("successBeans");
+
         if(BaseUtil.isValue(payDataBean.getShowPrice()) && Double.valueOf(payDataBean.getShowPrice()) > 0){
             binding.showPrice.setText(BaseUtil.getNoZoon(payDataBean.getShowPrice()));
         }else{
@@ -227,5 +227,24 @@ public class GoodsPayViewModel extends CustomViewModel {
         if("goldPay".equals(payType)){
             getGoldPay();
         }
+    }
+
+    /*
+    * 三版跳转
+    * */
+    private void goSuccess(){
+        if(BaseUtil.isValue(successBeans)){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("successBeans",successBeans);
+            startActivity(V3SuccessActivity.class,bundle);
+            mActivity.finish();
+        }else{
+            Bundle bundle = new Bundle();
+            bundle.putString("titleName","支付结果");
+            bundle.putString("successText","支付成功！");
+            bundle.putString("buttonText","完成");
+            startActivity(SuccessClassActivity.class,bundle);
+        }
+
     }
 }

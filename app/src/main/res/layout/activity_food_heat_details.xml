@@ -58,7 +58,7 @@
                     android:textColor="@color/color_FF999999"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:drawableTop="@mipmap/collection_img"
+                    android:drawableTop="@mipmap/gray_collection_img"
                     android:drawablePadding="5dp"
                     android:visibility="gone"
                     android:text="收藏"/>

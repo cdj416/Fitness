@@ -6,8 +6,9 @@ import java.util.List;
 
 public class StoreDetailBean extends BaseBean {
 
+
     /**
-     * data : {"os_id":17,"os_name":"爱山首玺健身会所","pid":35,"cid":3505,"did":350502,"os_address":"红旗路爱山广场7号楼星火百货B座6层","os_tel":"0572-2556111","os_leader":"范德萨","os_brief":"防守打法递四方速递阿范德萨范德萨","os_img":"http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/eb877e6b3ffee5eb1078633fb6e1f3434fc5cb52_600x338.jpg","os_lng":"120.10768","os_lat":"30.87206","os_addtime":1561119010,"admin_id":1,"update_time":0,"update_admin":0,"os_logo":"http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/1569ea775d80ebde3e4f2255db056e2e80875884_800x600.jpg","os_banner1":"http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/a3d2d6d6cc824b38481291dab6cecbdeb995659b_648x454.jpg","os_banner2":"","os_banner3":"http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/ebb260a59b667f763610415846d53faa095f1fbb_648x454.jpg","os_banner4":"http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/3e88b35788640b9808f6af541e6d1b433de5c107_800x600.jpg","os_banner5":"http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/44794df26868748542f77c78079ae5514471dd21_600x338.jpg","os_teshe":" 范德萨范德萨范德萨范德萨范德萨","os_start_time":"09:00:00","os_end_time":"22:00:00","os_week":"1,2,3,4,5,6,7","osf_ids":"4,3,2","os_area":1233,"os_area_privite":333,"osl_id":1,"address":"浙江省湖州市吴兴区红旗路爱山广场7号楼星火百货B座6层","banner":["http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/a3d2d6d6cc824b38481291dab6cecbdeb995659b_648x454.jpg","http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/a3d2d6d6cc824b38481291dab6cecbdeb995659b_648x454.jpg","http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/3e88b35788640b9808f6af541e6d1b433de5c107_800x600.jpg","http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/44794df26868748542f77c78079ae5514471dd21_600x338.jpg"],"osf":[{"osf_id":2,"osf_name":"动感单车房"},{"osf_id":3,"osf_name":"多功能器械区"},{"osf_id":4,"osf_name":"高温瑜伽馆"}]}
+     * data : {"os_id":21,"os_name":"湖州首玺健身爱山店","pid":35,"cid":3505,"did":350502,"os_address":"星火百货B座六楼","os_tel":"0572-2556111","os_leader":"王彩环","os_brief":"位于湖州最市中心、人气最足、楼下50米衣裳街（湖城最有名的美食街）。集健身、瑜伽、舞蹈、动感单车、洗浴等为一体的健身俱乐部。","os_img":"","os_lng":"120.107542","os_lat":"30.87196","os_addtime":1564128142,"admin_id":10,"update_time":0,"update_admin":0,"os_logo":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/86c57e8ced1df6b98af3a50d7bbe33a0951e23b3_1362x908.jpg","os_banner1":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/2597c083b9fb35b635d204404e3bae72fa829379_1440x1080.jpg","os_banner2":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/f57f94021ce5196bb68663d8bec3e978409a5a2f_1440x1080.jpg","os_banner3":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/cd891ddccaacb6fbec1910d6560e4a59bbdb8d86_2880x2160.jpg","os_banner4":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/9db96eddee4366346d47a69b3139546bd522a66e_1440x1080.jpg","os_banner5":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/db16e6d4d143fe98decb9ea6b1f165ea86c91c13_1440x1080.jpg","os_teshe":"专业的教练团队是你们的技术保障，优秀的会籍顾问让您健身没有后顾之忧，漂亮专业的前台小姐姐让您进门就从满好心情。","os_start_time":"10:00:00","os_end_time":"22:00:00","os_week":"1,2,3,4,5,6,7","osf_ids":"4,3,2,1","os_area":2500,"os_area_privite":300,"is_del":2,"osl_id":1,"address":"浙江省湖州市吴兴区星火百货B座六楼","banner":["http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/2597c083b9fb35b635d204404e3bae72fa829379_1440x1080.jpg","http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/f57f94021ce5196bb68663d8bec3e978409a5a2f_1440x1080.jpg","http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/cd891ddccaacb6fbec1910d6560e4a59bbdb8d86_2880x2160.jpg","http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/9db96eddee4366346d47a69b3139546bd522a66e_1440x1080.jpg","http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/db16e6d4d143fe98decb9ea6b1f165ea86c91c13_1440x1080.jpg"],"osf":[{"osf_id":1,"osf_name":"有氧器械区"},{"osf_id":2,"osf_name":"动感单车房"},{"osf_id":3,"osf_name":"多功能器械区"},{"osf_id":4,"osf_name":"高温瑜伽馆"}],"osl_name":"普通店","osl_img":""}
      */
 
     private DataBean data;
@@ -22,39 +23,42 @@ public class StoreDetailBean extends BaseBean {
 
     public static class DataBean {
         /**
-         * os_id : 17
-         * os_name : 爱山首玺健身会所
+         * os_id : 21
+         * os_name : 湖州首玺健身爱山店
          * pid : 35
          * cid : 3505
          * did : 350502
-         * os_address : 红旗路爱山广场7号楼星火百货B座6层
+         * os_address : 星火百货B座六楼
          * os_tel : 0572-2556111
-         * os_leader : 范德萨
-         * os_brief : 防守打法递四方速递阿范德萨范德萨
-         * os_img : http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/eb877e6b3ffee5eb1078633fb6e1f3434fc5cb52_600x338.jpg
-         * os_lng : 120.10768
-         * os_lat : 30.87206
-         * os_addtime : 1561119010
-         * admin_id : 1
+         * os_leader : 王彩环
+         * os_brief : 位于湖州最市中心、人气最足、楼下50米衣裳街（湖城最有名的美食街）。集健身、瑜伽、舞蹈、动感单车、洗浴等为一体的健身俱乐部。
+         * os_img :
+         * os_lng : 120.107542
+         * os_lat : 30.87196
+         * os_addtime : 1564128142
+         * admin_id : 10
          * update_time : 0
          * update_admin : 0
-         * os_logo : http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/1569ea775d80ebde3e4f2255db056e2e80875884_800x600.jpg
-         * os_banner1 : http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/a3d2d6d6cc824b38481291dab6cecbdeb995659b_648x454.jpg
-         * os_banner2 :
-         * os_banner3 : http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/ebb260a59b667f763610415846d53faa095f1fbb_648x454.jpg
-         * os_banner4 : http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/3e88b35788640b9808f6af541e6d1b433de5c107_800x600.jpg
-         * os_banner5 : http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/44794df26868748542f77c78079ae5514471dd21_600x338.jpg
-         * os_teshe :  范德萨范德萨范德萨范德萨范德萨
-         * os_start_time : 09:00:00
+         * os_logo : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/86c57e8ced1df6b98af3a50d7bbe33a0951e23b3_1362x908.jpg
+         * os_banner1 : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/2597c083b9fb35b635d204404e3bae72fa829379_1440x1080.jpg
+         * os_banner2 : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/f57f94021ce5196bb68663d8bec3e978409a5a2f_1440x1080.jpg
+         * os_banner3 : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/cd891ddccaacb6fbec1910d6560e4a59bbdb8d86_2880x2160.jpg
+         * os_banner4 : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/9db96eddee4366346d47a69b3139546bd522a66e_1440x1080.jpg
+         * os_banner5 : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/db16e6d4d143fe98decb9ea6b1f165ea86c91c13_1440x1080.jpg
+         * os_teshe : 专业的教练团队是你们的技术保障，优秀的会籍顾问让您健身没有后顾之忧，漂亮专业的前台小姐姐让您进门就从满好心情。
+         * os_start_time : 10:00:00
          * os_end_time : 22:00:00
          * os_week : 1,2,3,4,5,6,7
-         * osf_ids : 4,3,2
-         * os_area : 1233
-         * os_area_privite : 333
+         * osf_ids : 4,3,2,1
+         * os_area : 2500
+         * os_area_privite : 300
+         * is_del : 2
          * osl_id : 1
-         * address : 浙江省湖州市吴兴区红旗路爱山广场7号楼星火百货B座6层
-         * banner : ["http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/a3d2d6d6cc824b38481291dab6cecbdeb995659b_648x454.jpg","http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/a3d2d6d6cc824b38481291dab6cecbdeb995659b_648x454.jpg","http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/3e88b35788640b9808f6af541e6d1b433de5c107_800x600.jpg","http://88php.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190621/44794df26868748542f77c78079ae5514471dd21_600x338.jpg"]
-         * osf : [{"osf_id":2,"osf_name":"动感单车房"},{"osf_id":3,"osf_name":"多功能器械区"},{"osf_id":4,"osf_name":"高温瑜伽馆"}]
+         * address : 浙江省湖州市吴兴区星火百货B座六楼
+         * banner : ["http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/2597c083b9fb35b635d204404e3bae72fa829379_1440x1080.jpg","http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/f57f94021ce5196bb68663d8bec3e978409a5a2f_1440x1080.jpg","http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/cd891ddccaacb6fbec1910d6560e4a59bbdb8d86_2880x2160.jpg","http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/9db96eddee4366346d47a69b3139546bd522a66e_1440x1080.jpg","http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190726/db16e6d4d143fe98decb9ea6b1f165ea86c91c13_1440x1080.jpg"]
+         * osf : [{"osf_id":1,"osf_name":"有氧器械区"},{"osf_id":2,"osf_name":"动感单车房"},{"osf_id":3,"osf_name":"多功能器械区"},{"osf_id":4,"osf_name":"高温瑜伽馆"}]
+         * osl_name : 普通店
+         * osl_img :
          */
 
         private int os_id;
@@ -86,8 +90,11 @@ public class StoreDetailBean extends BaseBean {
         private String osf_ids;
         private int os_area;
         private int os_area_privite;
+        private int is_del;
         private int osl_id;
         private String address;
+        private String osl_name;
+        private String osl_img;
         private List<String> banner;
         private List<OsfBean> osf;
 
@@ -323,6 +330,14 @@ public class StoreDetailBean extends BaseBean {
             this.os_area_privite = os_area_privite;
         }
 
+        public int getIs_del() {
+            return is_del;
+        }
+
+        public void setIs_del(int is_del) {
+            this.is_del = is_del;
+        }
+
         public int getOsl_id() {
             return osl_id;
         }
@@ -337,6 +352,22 @@ public class StoreDetailBean extends BaseBean {
 
         public void setAddress(String address) {
             this.address = address;
+        }
+
+        public String getOsl_name() {
+            return osl_name;
+        }
+
+        public void setOsl_name(String osl_name) {
+            this.osl_name = osl_name;
+        }
+
+        public String getOsl_img() {
+            return osl_img;
+        }
+
+        public void setOsl_img(String osl_img) {
+            this.osl_img = osl_img;
         }
 
         public List<String> getBanner() {
@@ -357,8 +388,8 @@ public class StoreDetailBean extends BaseBean {
 
         public static class OsfBean {
             /**
-             * osf_id : 2
-             * osf_name : 动感单车房
+             * osf_id : 1
+             * osf_name : 有氧器械区
              */
 
             private int osf_id;

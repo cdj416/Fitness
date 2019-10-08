@@ -18,6 +18,7 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.StickyScrollView;
 import com.hongyuan.fitness.databinding.ActivityPersonMessageBinding;
+import com.hongyuan.fitness.ui.find.circle.post_details.AttentionBean;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsLikeBean;
 import com.hongyuan.fitness.ui.find.friends.FriendsActivity;
@@ -25,6 +26,7 @@ import com.hongyuan.fitness.ui.main.main_find.featured.FeatureBean;
 import com.hongyuan.fitness.ui.main.main_find.featured.V2FindContentAdapter;
 import com.hongyuan.fitness.ui.person.edit_information.EditInformationActivity;
 import com.hongyuan.fitness.ui.person.my_fan.MyFansActivity;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.ViewChangeUtil;
 
 public class PersonMessageViewModel extends CustomViewModel implements StickyScrollView.ScrollViewListener{
@@ -39,6 +41,9 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
     //当前（点赞/取消点赞/关注/取消关注）等操作的数据位置
     private int mPosition;
 
+    //别人的主页数据
+    private PersonAttentionBeans attentionBeans;
+
     public PersonMessageViewModel(CustomActivity mActivity, ActivityPersonMessageBinding binding) {
         super(mActivity);
         this.binding = binding;
@@ -50,6 +55,17 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
     protected void initView() {
         setEnableRefresh(true);
         setEnableLoadMore(true);
+
+        if(getBundle() != null && getBundle().getSerializable("otherPerson") != null){
+            attentionBeans = (PersonAttentionBeans) getBundle().getSerializable("otherPerson");
+            binding.myTitle.setCentreText(attentionBeans.getM_name()+"的主页");
+            if(attentionBeans.getIs_friend() == 1){
+                binding.myTitle.setRightText("取消关注");
+            }else{
+                binding.myTitle.setRightText("关注Ta");
+            }
+
+        }
 
         GridLayoutManager layoutManager = new GridLayoutManager(mActivity, 2);
         binding.mRecycler.setLayoutManager(layoutManager);
@@ -72,7 +88,19 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
             @SingleClick
             @Override
             public void onClick(View v) {
-                startActivity(EditInformationActivity.class,null);
+                if(attentionBeans == null){
+                    startActivity(EditInformationActivity.class,null);
+                }else{
+                    if(attentionBeans.getIs_friend() == 1){
+                        CustomDialog.promptDialog(mActivity, "确定要取消关注吗？", "暂不取消", "取消关注", false, v1 -> {
+                            if(v1.getId() == R.id.isCannel){
+                                sendAttention();
+                            }
+                        });
+                    }else{
+                        sendAttention();
+                    }
+                }
             }
         });
 
@@ -80,14 +108,18 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
             @SingleClick
             @Override
             public void onClick(View v) {
-                startActivity(FriendsActivity.class,null);
+                if(attentionBeans == null){
+                    startActivity(FriendsActivity.class,null);
+                }
             }
         });
         binding.fans.setOnClickListener(new View.OnClickListener() {
             @SingleClick
             @Override
             public void onClick(View v) {
-                startActivity(MyFansActivity.class,null);
+                if(attentionBeans == null){
+                    startActivity(MyFansActivity.class,null);
+                }
             }
         });
 
@@ -156,20 +188,34 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
 
     @Override
     protected void lazyLoad() {
-        Controller.myRequest(Constants.CIRCLE_MEMBER_INDEX,Controller.TYPE_POST,getParams(), PersonMessageBeans.class,this);
+        if(attentionBeans != null){
+            clearParams().setParams("other_m_id",String.valueOf(attentionBeans.getM_id()));
+            Controller.myRequest(Constants.CIRCLE_OTHER_MEMBER_INDEX,Controller.TYPE_POST,getParams(), PersonMessageBeans.class,this);
+        }else{
+            clearParams();
+            Controller.myRequest(Constants.CIRCLE_MEMBER_INDEX,Controller.TYPE_POST,getParams(), PersonMessageBeans.class,this);
+        }
     }
 
     /*
     * 请求个人的帖子列表
     * */
     private void getPersonCircle(){
-        Controller.myRequest(Constants.GET_MEMBER_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
+        if(attentionBeans != null){
+            clearParams().setParams("other_m_id",String.valueOf(attentionBeans.getM_id()));
+            Controller.myRequest(Constants.GET_OTHER_MEMBER_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
+        }else{
+            clearParams();
+            Controller.myRequest(Constants.GET_MEMBER_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
+        }
+
     }
 
     /*
      * 帖子点赞/取消
      * */
     private void getBaikeLike(int position){
+        mActivity.showLoading();
         mPosition = position;
         clearParams().setParams("circle_id",String.valueOf(featureBean.getData().getList().get(position).getCircle_id()));
         if(featureBean.getData().getList().get(position).getIs_praise() == 0){
@@ -177,6 +223,20 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
         }else{
             Controller.myRequest(ConstantsCode.CANCEL_CIRCLE_PRAISE,Constants.CANCEL_CIRCLE_PRAISE,Controller.TYPE_POST,getParams(), PostDetailsLikeBean.class,this);
         }
+    }
+
+    /*
+     *关注、取消
+     * */
+    private void sendAttention(){
+        mActivity.showLoading();
+        clearParams().setParams("f_mid",String.valueOf(attentionBeans.getM_id()));
+        if(attentionBeans.getIs_friend() == 1){
+            setParams("f_type","reduce");
+        }else{
+            setParams("f_type","add");
+        }
+        Controller.myRequest(ConstantsCode.ADD_FRIEND,Constants.ADD_FRIEND,Controller.TYPE_POST,getParams(), AttentionBean.class,this);
     }
 
     @Override
@@ -217,6 +277,8 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
      * */
     @Override
     public void onSuccess(int code, Object data) {
+        mActivity.closeLoading();
+
         if(code == ConstantsCode.ADD_CIRCLE_PRAISE){
             featureBean.getData().getList().get(mPosition).setIs_praise(1);
             featureBean.getData().getList().get(mPosition).setPraise_num(featureBean.getData().getList().get(mPosition).getPraise_num()+1);
@@ -228,6 +290,19 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
             featureBean.getData().getList().get(mPosition).setPraise_num(featureBean.getData().getList().get(mPosition).getPraise_num()-1);
             adapter.setNewData(featureBean.getData().getList());
             showSuccess("已取消点赞！");
+        }
+
+        if(code == ConstantsCode.ADD_FRIEND){
+            if(attentionBeans.getIs_friend() == 1){
+                attentionBeans.setIs_friend(0);
+                binding.myTitle.setRightText("关注Ta");
+                showSuccess("取关成功！");
+            }else{
+                attentionBeans.setIs_friend(1);
+                binding.myTitle.setRightText("取消关注");
+                showSuccess("关注成功！");
+            }
+            adapter.notifyDataSetChanged();
         }
     }
 }

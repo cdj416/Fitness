@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,6 +77,9 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     private Dialog loadingDialog = null;
     private AnimationDrawable animationDrawable = null;
     private HourMeterUtil hourUtil;
+
+    //需要下一个activity回传值的跳转码
+    private final static int ORDINARY_ACTIVITY_RESULT_CODE = 0x1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -335,6 +339,48 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
             refresh.finishRefresh();
             refresh.finishLoadMore();
         }
+    }
+
+    /*
+    * 有值回传的跳转
+    * */
+    public void startForResult(Class<?> clz,Bundle bundle){
+        Intent intent = new Intent();
+        intent.setClass(this,clz);
+        if(bundle != null){
+            intent.putExtra("bundle",bundle);
+        }
+        startActivityForResult(intent,ORDINARY_ACTIVITY_RESULT_CODE);
+    }
+
+    /*
+     * 回传上一个页面
+     * */
+    public void setResult(Bundle bundle){
+        Intent intent = new Intent();
+        intent.putExtra("bundle", bundle);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    /*
+    * 从写onActivityResult获取跳转传递的值
+    * */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == ORDINARY_ACTIVITY_RESULT_CODE && resultCode == RESULT_OK){
+            assert data != null;
+            forResult(data.getBundleExtra("bundle"));
+        }
+    }
+
+    /*
+    * 回传需要从写的函数
+    * @param bundle 跳转所携带的信息
+    * */
+    protected void forResult(Bundle bundle){
+
     }
 
     /**

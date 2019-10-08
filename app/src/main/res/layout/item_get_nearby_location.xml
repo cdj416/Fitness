@@ -3,18 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="54dp"
     android:orientation="vertical"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:id="@+id/box">
     <TextView
+        android:id="@+id/titleName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="衣裳街历史文化街区"
         android:textSize="@dimen/sp_14"
         android:textColor="@color/color_FF333333"/>
     <TextView
+        android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="浙江省湖州市吴兴区南街与衣裳街交叉口"
         android:textSize="@dimen/sp_12"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="@color/color_FF999999"/>
 
 </LinearLayout>

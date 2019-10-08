@@ -40,6 +40,15 @@ public class CoachHomeBean extends BaseBean implements Serializable{
         private CPhoto3Bean c_photo3;
         private int count_courses;
         private int count_students;
+        private int is_collection;
+
+        public int getIs_collection() {
+            return is_collection;
+        }
+
+        public void setIs_collection(int is_collection) {
+            this.is_collection = is_collection;
+        }
         private List<String> certs;
 
         public InfoBean getInfo() {

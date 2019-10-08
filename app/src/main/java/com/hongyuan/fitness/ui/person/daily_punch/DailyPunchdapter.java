@@ -20,6 +20,11 @@ public class DailyPunchdapter extends BaseQuickAdapter<DailyPunchDataListBean.Da
             }else{
                 helper.setBackgroundRes(R.id.dataText,R.color.transparent);
             }
+            if("-1".equals(item.getWeek())){
+                helper.setTextColor(R.id.dataText,mContext.getResources().getColor(R.color.color_83839b));
+            }else{
+                helper.setTextColor(R.id.dataText,mContext.getResources().getColor(R.color.color_FFFFFF));
+            }
         }else{
             helper.setText(R.id.dataText, "");
         }

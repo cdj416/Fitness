@@ -43,6 +43,15 @@ public class DailyPunchCheckBean extends BaseBean {
             private String is_qd;
             private int lx_day;
             private int point;
+            private int leiji_days;
+
+            public int getLeiji_days() {
+                return leiji_days;
+            }
+
+            public void setLeiji_days(int leiji_days) {
+                this.leiji_days = leiji_days;
+            }
 
             public String getIs_qd() {
                 return is_qd;

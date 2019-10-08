@@ -28,9 +28,13 @@ import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
 import com.hongyuan.fitness.ui.mall.good_order_details.SubmitOrderBean;
 import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayActivity;
 import com.hongyuan.fitness.ui.mall.good_pay.PayDataBean;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.BigDecimalUtils;
 import com.hongyuan.fitness.util.CustomDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import me.goldze.mvvmhabit.binding.command.BindingAction;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
@@ -226,8 +230,42 @@ public class PayOrderDetailViewModel extends CustomViewModel {
                 payDataBean.setReservationData(reservationData);
             }
 
+            V3SuccessBeans beans = new V3SuccessBeans();
+            beans.setTitleText("订单");
+            beans.setShowText("购买成功");
+            beans.setBtn2Text("完成");
+            List<V3SuccessBeans.ItemConten> list = new ArrayList<>();
+
+            V3SuccessBeans.ItemConten itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent(courseDetail.getFt_name()+" / 一对一私教课");
+            itemConten.setItemTitle("课程类型:");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent("¥"+ BaseUtil.getNoZoon(binding.coursePrice.getText().toString())+"/节");
+            itemConten.setItemTitle("单价:");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent(courseDetail.getHave_num()+"节");
+            itemConten.setItemTitle("数量:");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent("¥"+BaseUtil.getNoZoon(binding.allPrice.getText().toString()));
+            itemConten.setItemTitle("总价:");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent(binding.selectTime.getStartTime());
+            itemConten.setItemTitle("首次上课时间:");
+            list.add(itemConten);
+
+            beans.setItemContens(list);
+
             Bundle bundle = new Bundle();
             bundle.putSerializable("payDataBean",payDataBean);
+            bundle.putSerializable("successBeans",beans);
             startActivity(GoodsPayActivity.class,bundle);
         }
 
@@ -238,6 +276,7 @@ public class PayOrderDetailViewModel extends CustomViewModel {
                 int classNum = Integer.valueOf(binding.classNum.getText().toString());
                 String showPrice = BigDecimalUtils.mul(priceDataBeans.getData().getPrice(),String.valueOf(classNum),2);
                 binding.allPrice.setText(BaseUtil.getNoZoon(showPrice));
+                binding.coursePrice.setText(BaseUtil.getNoZoon(priceDataBeans.getData().getPrice()));
             }catch (Exception e){
                 e.printStackTrace();
             }

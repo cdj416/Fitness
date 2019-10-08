@@ -80,8 +80,44 @@ public class MissionDetailBean extends BaseBean implements Serializable{
         private String add_date;
         private String cs_start_date;
         private String cs_end_date;
+        private String cs_jy;
+        private String is_hy;
+        private long bm_time;
+        private String is_remind;
         private List<String> cs_time;
         private List<MemberOcsBean> member_ocs;
+
+        public String getIs_remind() {
+            return is_remind;
+        }
+
+        public void setIs_remind(String is_remind) {
+            this.is_remind = is_remind;
+        }
+
+        public long getBm_time() {
+            return bm_time;
+        }
+
+        public void setBm_time(long bm_time) {
+            this.bm_time = bm_time;
+        }
+
+        public String getCs_jy() {
+            return cs_jy;
+        }
+
+        public void setCs_jy(String cs_jy) {
+            this.cs_jy = cs_jy;
+        }
+
+        public String getIs_hy() {
+            return is_hy;
+        }
+
+        public void setIs_hy(String is_hy) {
+            this.is_hy = is_hy;
+        }
 
         public String getOs_name() {
             return os_name;

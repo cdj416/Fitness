@@ -862,6 +862,23 @@ public class TimeUtil {
 
     }
 
+    /*
+    * 获取当前时间距离指定时间相差多少毫秒
+    * */
+    public static long getDifferenceNow(String strDate, String inFormat){
+        Calendar calendar1 = new GregorianCalendar();
+        DateFormat df = new SimpleDateFormat(inFormat);
+        try {
+            calendar1.setTime(df.parse(strDate));
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.setTimeInMillis(System.currentTimeMillis());
+            return calendar1.getTimeInMillis() - calendar2.getTimeInMillis();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 
     /**
      * 判断给定字符串时间是否为今日
@@ -1332,9 +1349,9 @@ public class TimeUtil {
                 return "0" + hour + ":0" + minute + ":" + second;
             }
             if (second < 10) {
-                return "0" + hour + minute + ":0" + second;
+                return "0" + hour +":"+ minute + ":0" + second;
             }
-            return "0" + hour + minute + ":" + second;
+            return "0" + hour +":"+ minute + ":" + second;
         }
         if (minute < 10) {
             if (second < 10) {
@@ -1343,8 +1360,147 @@ public class TimeUtil {
             return hour + ":0" + minute + ":" + second;
         }
         if (second < 10) {
-            return hour + minute + ":0" + second;
+            return hour +":"+ minute + ":0" + second;
         }
-        return hour + minute + ":" + second;
+        return hour +":"+ minute + ":" + second;
+    }
+
+    /*
+    *
+    * 返回25天 22:22:22
+    * */
+    public static String getDaysTime(long second){
+        long days = second/86400;
+        long times = second%86400;
+
+        if (times < 10) {
+            if(days > 0){
+                return days+"天 "+"00:00:0" + times;
+            }else{
+                return "00:00:0" + times;
+            }
+
+        }
+        if (times < 60) {
+            if(days > 0){
+                return days+"天 "+"00:00:" + times;
+            }else{
+                return "00:00:" + times;
+            }
+        }
+        if (times < 3600) {
+            long minute = times / 60;
+            times = times - minute * 60;
+            if (minute < 10) {
+                if (times < 10) {
+                    if(days > 0){
+                        return days+"天 "+"00:0" + minute + ":0" + times;
+                    }else{
+                        return "00:0" + minute + ":0" + times;
+                    }
+
+                }
+                if(days > 0){
+                    return days+"天 "+"00:0" + minute + ":" + times;
+                }else{
+                    return "00:0" + minute + ":" + times;
+                }
+
+            }
+            if (times < 10) {
+                if(days > 0){
+                    return days+"天 "+"00:"+minute + ":0" + times;
+                }else{
+                    return "00:"+minute + ":0" + times;
+                }
+
+            }
+            if(days > 0){
+                return days+"天 "+"00:"+minute + ":" + times;
+            }else{
+                return "00:"+minute + ":" + times;
+            }
+
+        }
+        long hour = times / 3600;
+        long minute = (times - hour * 3600) / 60;
+        times = times - hour * 3600 - minute * 60;
+        if (hour < 10) {
+            if (minute < 10) {
+                if (times < 10) {
+                    if(days > 0){
+                        return days+"天 "+"0" + hour + ":0" + minute + ":0" + times;
+                    }else{
+                        return "0" + hour + ":0" + minute + ":0" + times;
+                    }
+
+                }
+                if(days > 0){
+                    return days+"天 "+"0" + hour + ":0" + minute + ":" + times;
+                }else{
+                    return "0" + hour + ":0" + minute + ":" + times;
+                }
+
+            }
+            if (times < 10) {
+                if(days > 0){
+                    return days+"天 "+"0" + hour +":"+ minute + ":0" + times;
+                }else{
+                    return "0" + hour +":"+ minute + ":0" + times;
+                }
+            }
+            if(days > 0){
+                return days+"天 "+"0" + hour +":"+ minute + ":" + times;
+            }else{
+                return "0" + hour +":"+ minute + ":" + times;
+            }
+
+        }
+        if (minute < 10) {
+            if (times < 10) {
+                if(days > 0){
+                    return days+"天 "+hour + ":0" + minute + ":0" + times;
+                }else{
+                    return hour + ":0" + minute + ":0" + times;
+                }
+
+            }
+            if(days > 0){
+                return days+"天 "+hour + ":0" + minute + ":" + times;
+            }else{
+                return hour + ":0" + minute + ":" + times;
+            }
+
+        }
+        if (times < 10) {
+            if(days > 0){
+                return days+"天 "+hour +":"+ minute + ":0" + times;
+            }else{
+                return hour +":"+ minute + ":0" + times;
+            }
+
+        }
+        if(days > 0){
+            return days+"天 "+hour +":"+ minute + ":" + times;
+        }else{
+            return hour +":"+ minute + ":" + times;
+        }
+
+    }
+
+    /*
+    * 获取今日号数
+    * */
+    public static String getTodays(){
+        Calendar calendar = Calendar.getInstance();
+        return String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+    }
+
+    /*
+    * 获取当前月份
+    * */
+    public static String getNowMonth(){
+        Calendar calendar = Calendar.getInstance();
+        return String.valueOf(calendar.get(Calendar.MONTH) + 1);
     }
 }

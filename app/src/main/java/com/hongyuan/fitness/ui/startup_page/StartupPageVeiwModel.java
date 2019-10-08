@@ -83,9 +83,6 @@ public class StartupPageVeiwModel extends CustomViewModel implements CustomDialo
 
     @Override
     protected void lazyLoad() {
-        //暂时写的死的
-        LocationBean.getInstance().setLng("120.099964");
-        LocationBean.getInstance().setLat("30.863071");
         clearParams().setParams("client","Android").setParams("at_name","fit").setParams("at_pwd", EncryptionUtil.md5DecodeTwo("123456"));
         Controller.myRequest(Constants.GET_TOKEN,Controller.TYPE_POST,getParams(), TokenBean.class,this);
     }

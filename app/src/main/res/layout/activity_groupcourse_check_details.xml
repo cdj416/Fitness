@@ -200,8 +200,32 @@
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
                     android:text="课程介绍"/>
-                <TextView
+
+                <WebView
                     android:id="@+id/courseContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:src="@mipmap/tips_img"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_FF333333"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="24dp"
+                    android:textSize="16sp"
+                    android:text="运动建议"/>
+
+                <TextView
+                    android:id="@+id/suggest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/color_777777"
@@ -209,7 +233,8 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     android:textSize="@dimen/sp_12"
-                    android:text="课程中可以完全放松地将身体置于一种平稳、安静、舒适的状态，使身心宁静，将意识集中导向无限自然的连接。"/>
+                    android:text="请穿着舒适、透气的运动服参加训练，在瑜伽训练过程中保持赤足，场馆将提供瑜伽垫等器材。\n课前不能有饱腹感，建议课后一小时进食，准备充足水注意少量多次"/>
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -229,6 +254,40 @@
                     android:textSize="@dimen/sp_12"
                     android:text="课程开始前1小时预约会员不足开课人数，后台系统可能会自动取消课程，请大家知晓，谢谢理解和配合；\n 若开课后到场人数不足开课人数，在征得您同意的情况下，教练可以取消课程。"/>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginBottom="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FF333333"
+                        android:layout_centerVertical="true"
+                        android:textSize="16sp"
+                        android:text="约课流程"/>
+                    <TextView
+                        android:id="@+id/desDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F06243"
+                        android:textSize="14sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="规则详情"/>
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/privit_course_process_img"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:scaleType="fitXY"/>
 
             </LinearLayout>
         </com.hongyuan.fitness.custom_view.StickyScrollView>

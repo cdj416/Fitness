@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hongyuan.fitness.R;
@@ -15,9 +16,9 @@ public class VtwoPrivateLessonsAdapter extends BaseQuickAdapter<VtwoPrivateLesso
     @Override
     protected void convert(BaseViewHolder helper, VtwoPrivateLessonsBeans.DataBean.ListBean item) {
         //helper.setText(R.id.mainName,item.getMainName()).setText(R.id.mark,item.getMark());
-
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img);
         Glide.with(mContext).load(item.getCp_img()).into((RoundedImageView)helper.getView(R.id.courseBgImg));
-        Glide.with(mContext).load(item.getCoach_head()).into((RoundedImageView)helper.getView(R.id.coachHeadImg));
+        Glide.with(mContext).load(item.getCoach_head()).apply(options).into((RoundedImageView)helper.getView(R.id.coachHeadImg));
 
         helper.setText(R.id.courseTime,"可约时间：最近 "+showTimeText(item.getLast_kong_date()))
                 .setText(R.id.courseName,item.getCp_name())

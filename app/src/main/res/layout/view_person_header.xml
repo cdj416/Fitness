@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="258dp"
+    android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
+    <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/person_bg"
-        android:scaleType="centerCrop"/>
+        android:background="@drawable/shape_gradient_h_39_4a"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,16 +30,62 @@
             android:textSize="@dimen/sp_16"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="48dp"
+            android:layout_marginBottom="16dp"
             android:text="GrayF"/>
 
-        <LinearLayout
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:src="@mipmap/person_member_bg"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/cardTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_FFFFFF"
+                android:textSize="@dimen/sp_16"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="12dp"
+                android:text="我的会员卡"/>
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_FFFFFF"
+                android:textSize="@dimen/sp_12"
+                android:layout_marginStart="50dp"
+                android:layout_below="@id/cardTitle"
+                android:text="暂无会籍卡"/>
+
+            <TextView
+                android:id="@+id/buttonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_EF5B48"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/shape_radius14_ffffffff"
+                android:layout_marginEnd="50dp"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="去购买"/>
+        </RelativeLayout>
+
+        <!--<LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp"
             android:gravity="center_vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
@@ -58,6 +103,8 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:progress="30"/>
-        </LinearLayout>
+        </LinearLayout>-->
+
+
     </LinearLayout>
 </RelativeLayout>

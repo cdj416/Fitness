@@ -108,7 +108,7 @@ public class HomeRecyclerItemView extends LinearLayout {
 
         more.setOnClickListener(v ->{
             //通过EventBus去通知MainActivity显示第三页
-            EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"");
+            EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
             //需要显示团课
             EventBus.getDefault().post(ConstantsCode.EB_SHOW_PRIVITE,"1");
         } );
@@ -133,7 +133,7 @@ public class HomeRecyclerItemView extends LinearLayout {
 
         more.setOnClickListener(v ->{
             //通过EventBus去通知MainActivity显示第三页
-            EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"");
+            EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
             //需要显示私教课
             EventBus.getDefault().post(ConstantsCode.EB_SHOW_PRIVITE,"0");
         } );

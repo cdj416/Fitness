@@ -1,7 +1,5 @@
 package com.hongyuan.fitness.ui.webview;
-
 import android.view.KeyEvent;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
@@ -23,13 +21,16 @@ public class WebViewModelView extends CustomViewModel {
     public WebViewModelView(CustomActivity mActivity, ActivityWebviewBinding binding) {
         super(mActivity);
         this.binding = binding;
+        initView();
     }
 
     @Override
     protected void initView() {
+        mActivity.getMainTitle().setCentreText(getBundle().getString("title"));
+
         mAgentWeb = AgentWeb.with(mActivity)
                 .setAgentWebParent(binding.mLinearLayout, new LinearLayout.LayoutParams(-1, -1))//传入AgentWeb的父控件。
-                .useDefaultIndicator(-1, 1)//设置进度条颜色与高度，-1为默认值，高度为2，单位为dp。
+                .useDefaultIndicator(mActivity.getResources().getColor(R.color.color_EF5B48), 1)//设置进度条颜色与高度，-1为默认值，高度为2，单位为dp。
                 .setSecurityType(AgentWeb.SecurityType.STRICT_CHECK) //严格模式 Android 4.2.2 以下会放弃注入对象 ，使用AgentWebView没影响。
                 .setMainFrameErrorView(R.layout.agentweb_error_page, -1) //参数1是错误显示的布局，参数2点击刷新控件ID -1表示点击整个布局都刷新， AgentWeb 3.0.0 加入。
                 .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.DISALLOW)//打开其他页面时，弹窗质询用户前往其他应用 AgentWeb 3.0.0 加入。
@@ -72,6 +73,9 @@ public class WebViewModelView extends CustomViewModel {
         //支持缩放
         mAgentWeb.getWebCreator().getWebView().getSettings().setBuiltInZoomControls(true);
         mAgentWeb.getWebCreator().getWebView().getSettings().setSupportZoom(true);
+
+        //初始化js交互对象
+        mAgentWeb.getJsInterfaceHolder().addJavaObject("android", new AndroidInterfaceWeb(mAgentWeb, mActivity, this));
 
         //允许webview对文件的操作
         mAgentWeb.getWebCreator().getWebView().getSettings().setAllowFileAccess(true);

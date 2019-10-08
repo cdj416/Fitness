@@ -60,6 +60,16 @@ public class ConstantsCode {
     public final static int CANCEL_COURSE_PRIVITE_APPOINTMENT = 0x027;
 
 
+    /*================================三版需要的=======================================*/
+    //团课--开启团课提醒
+    public final static int ADD_REMIND_CS = 0x028;
+    //团课--关闭团课提醒
+    public final static int DEL_REMIND_CS = 0x029;
+    //收藏--添加收藏
+    public final static int ADD_COLLECTION = 0x030;
+    //收藏--添加收藏
+    public final static int DEL_COLLECTION = 0x031;
+
     /*================================已下EventBus使用的=======================================*/
     //食物搜索
     public final static int EB_FOOD_SEARCH = 1;

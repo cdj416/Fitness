@@ -55,6 +55,7 @@ public class AboutUsViewModel extends CustomViewModel {
     public BindingCommand goYinSi = new BindingCommand(() -> {
         Bundle bundle = new Bundle();
         bundle.putString("url","http://www.hongyuangood.com/xy/xy.html");
+        bundle.putString("title","隐私政策");
         startActivity(WebViewActivity.class,bundle);});
 
     @Override

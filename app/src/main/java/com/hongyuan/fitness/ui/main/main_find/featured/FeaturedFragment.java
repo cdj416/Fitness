@@ -23,21 +23,28 @@ import com.hongyuan.fitness.ui.find.circle.circle_detail.CircleDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsLikeBean;
 import com.hongyuan.fitness.ui.find.friends.FriendsActivity;
+import com.hongyuan.fitness.ui.find.more_topic.MoreTopicActivity;
+import com.hongyuan.fitness.ui.find.topic.SlectTopicLeftBeans;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
 
 
 public class FeaturedFragment extends CustomFragment {
 
     private CustomRecyclerView topRecycler;
     private RecyclerView mRecycler;
-    private FindTopFriendsAdapter topAdapter;
+    private FindTopFriendsAdapter friendsAdapter;
+    private FindTopicAdapter topicAdapter;
     private V2FindContentAdapter adapter;
     private FeatureBean featureBean;
-    private TextView topTitle,moreFriends;
-    private RelativeLayout topBox;
+    private TextView topTitle,moreFriends,moreTopic;
+    private RelativeLayout topBox,topicBox;
+    private List<SlectTopicLeftBeans.DataBean.ListBean> topicList;
 
     //当前（点赞/取消点赞/关注/取消关注）等操作的数据位置
     private int mPosition;
@@ -61,6 +68,10 @@ public class FeaturedFragment extends CustomFragment {
         topTitle = mView.findViewById(R.id.topTitle);
         moreFriends = mView.findViewById(R.id.moreFriends);
         topBox = mView.findViewById(R.id.topBox);
+        topicBox = mView.findViewById(R.id.topicBox);
+        moreTopic = mView.findViewById(R.id.moreTopic);
+
+        moreTopic.setOnClickListener(v -> startActivity(MoreTopicActivity.class,null));
 
         moreFriends.setOnClickListener(new View.OnClickListener() {
             @SingleClick(2000)
@@ -72,19 +83,15 @@ public class FeaturedFragment extends CustomFragment {
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        topRecycler.addItemDecoration(new DividerItemDecoration(
-                getContext(), DividerItemDecoration.VERTICAL_LIST,30,0x00000000));
         topRecycler.setLayoutManager(manager);
-        topAdapter = new FindTopFriendsAdapter();
-        topRecycler.setAdapter(topAdapter);
-        //topAdapter.setNewData(getmeunList());
+
 
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         mRecycler.setLayoutManager(layoutManager);
         adapter = new V2FindContentAdapter();
         mRecycler.setAdapter(adapter);
 
-        topAdapter.setOnItemChildClickListener((adapter, view, position) -> startActivity(CircleDetailsActivity.class,null));
+
 
         adapter.setOnItemChildClickListener((adapter, view, position) -> {
             if(view.getId() == R.id.jumpDetails){
@@ -98,12 +105,34 @@ public class FeaturedFragment extends CustomFragment {
             }
         });
 
+        //初始化头部样式
+        initAdapter();
+    }
+
+    /*
+    * 初始化适配样式
+    * */
+    private void initAdapter(){
+        if(BaseUtil.isValue(getFragType())){
+            friendsAdapter = new FindTopFriendsAdapter();
+            topRecycler.setAdapter(friendsAdapter);
+            friendsAdapter.setOnItemChildClickListener((adapter, view, position) -> startActivity(CircleDetailsActivity.class,null));
+        }else{
+            topicAdapter = new FindTopicAdapter();
+            topRecycler.setAdapter(topicAdapter);
+            topicAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("circle_categoryid",String.valueOf(topicList.get(position).getCategory_id()));
+                startActivity(CircleDetailsActivity.class,bundle);
+            });
+        }
     }
 
     /*
      * 帖子点赞/取消
      * */
     private void getBaikeLike(int position){
+        mActivity.showLoading();
         mPosition = position;
         clearParams().setParams("circle_id",String.valueOf(featureBean.getData().getList().get(position).getCircle_id()));
         if(featureBean.getData().getList().get(position).getIs_praise() == 0){
@@ -119,6 +148,11 @@ public class FeaturedFragment extends CustomFragment {
         if(mActivity.userToken.getM_id() != null && "gz".equals(getFragType())){
             //获取好友列表
             Controller.myRequest(Constants.GET_MY_FRIENDS,Controller.TYPE_POST,getParams(), FriendsBeans.class,this);
+        }
+
+        if(!BaseUtil.isValue(getFragType())){
+            clearParams().setParams("page","4").setParams("curpage","");
+            Controller.myRequest(Constants.GET_CIRCLE_CATEGORY_LIST,Controller.TYPE_POST,getParams(), SlectTopicLeftBeans.class,this);
         }
 
         //获取推荐圈子
@@ -142,6 +176,7 @@ public class FeaturedFragment extends CustomFragment {
         //获取帖子
         clearParams().setParams("circle_state","1").setParams("circle_type",getFragType()).setParams("city_name","湖州市");
         Controller.myRequest(Constants.GET_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
+
     }
 
     /*
@@ -177,12 +212,26 @@ public class FeaturedFragment extends CustomFragment {
             if(friendsBeans.getData().getList() != null && friendsBeans.getData().getList().size() > 0){
                 topRecycler.setVisibility(View.VISIBLE);
                 topBox.setVisibility(View.VISIBLE);
-                topAdapter.setNewData(friendsBeans.getData().getList());
+                if(friendsAdapter != null){
+                    friendsAdapter.setNewData(friendsBeans.getData().getList());
+                }
             }else{
                 topRecycler.setVisibility(View.GONE);
                 topBox.setVisibility(View.GONE);
             }
 
+        }
+        if(data instanceof SlectTopicLeftBeans){
+            topicList = ((SlectTopicLeftBeans)data).getData().getList();
+            if(topicList != null && topicList.size() > 0){
+                topRecycler.setVisibility(View.VISIBLE);
+                topicBox.setVisibility(View.VISIBLE);
+                if(topicAdapter != null){
+                    topicAdapter.setNewData(topicList);
+                }
+            }else{
+                topicBox.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -191,6 +240,7 @@ public class FeaturedFragment extends CustomFragment {
     * */
     @Override
     public void onSuccess(int code, Object data) {
+        mActivity.closeLoading();
         if(code == ConstantsCode.ADD_CIRCLE_PRAISE){
             featureBean.getData().getList().get(mPosition).setIs_praise(1);
             featureBean.getData().getList().get(mPosition).setPraise_num(featureBean.getData().getList().get(mPosition).getPraise_num()+1);

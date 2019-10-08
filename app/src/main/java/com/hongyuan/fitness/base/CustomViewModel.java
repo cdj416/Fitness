@@ -55,6 +55,14 @@ public abstract class CustomViewModel implements RetrofitListener {
         userToken = TokenSingleBean.getInstance();
     }
 
+    /*
+     * 是否启用越界拖动（仿苹果效果）1.0.4
+     * */
+    public void setEnableOverScrollDrag(boolean flag){
+        if(mActivity.refresh != null){
+            mActivity.refresh.setEnableOverScrollDrag(flag);
+        }
+    }
 
     /*
      * 是否开启上拉加载(默认不开启)
@@ -162,6 +170,31 @@ public abstract class CustomViewModel implements RetrofitListener {
             intent.putExtras(bundle);
         }
         mActivity.startActivity(intent);
+    }
+
+    /*
+     * 有值回传的跳转
+     * @param clz    所跳转的目的Activity类
+     * @param bundle 跳转所携带的信息
+     * */
+    public void startActivityForResult(Class<?> clz, Bundle bundle){
+        mActivity.startForResult(clz,bundle);
+    }
+
+    /*
+     * 回传需要从写的函数
+     * @param bundle 跳转所携带的信息
+     * */
+    protected void forResult(Bundle bundle){
+
+    }
+
+    /*
+    * 回传数据
+    * @param bundle 回传所携带的信息
+    * */
+    public void setResult(Bundle bundle){
+        mActivity.setResult(bundle);
     }
 
     /*

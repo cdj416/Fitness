@@ -3,9 +3,9 @@ package com.hongyuan.fitness.base;
 public class Constants {
 
     //测试地址
-    //public static final String ADRESS = "http://192.168.0.102";
+    public static final String ADRESS = "http://192.168.0.102";
     //正式地址
-    public static final String ADRESS = "http://www.hongyuangood.com";
+    //public static final String ADRESS = "http://www.hongyuangood.com";
 
     /*==================================================================================*/
     //微信支付需要的appId
@@ -302,5 +302,49 @@ public class Constants {
     public static final String V3_GET_BAIKE_CATEGORY_LIST = ADRESS + "/api/articlehome/get_baike_category_list";
     //新百科--用户端文章列表
     public static final String V3_GET_ARTICLE_LIST = ADRESS + "/api/articlehome/get_article_list";
+    //积分--打卡分享图片
+    public static final String SHARE_IMGS = ADRESS + "/api/member/share_imgs";
+    //积分--获取积分任务列表
+    public static final String GETRWLIST = ADRESS + "/api/member/getRWList";
+    //积分--打卡分享
+    public static final String KA_SHARE = ADRESS + "/api/member/ka_share";
+    //圈子--读取主题分类
+    public static final String GET_CIRCLE_CATEGORY_LIST = ADRESS + "/api/circlehome/get_circle_category_list";
+    //圈子--话题分类详情
+    public static final String GET_CIRCLE_CATEGORY_INFO = ADRESS + "/api/circlehome/get_circle_category_info";
+    //圈子--读取参加主题的用户列表
+    public static final String GET_CIRCLE_MEMBER_LIST = ADRESS + "/api/circlehome/get_circle_member_list";
+    //会员--其他会员主页
+    public static final String CIRCLE_OTHER_MEMBER_INDEX = ADRESS + "/api/circle/circle_other_member_index";
+    //会员--其他会员主页帖子列表
+    public static final String GET_OTHER_MEMBER_CIRCLE_LIST = ADRESS + "/api/circle/get_other_member_circle_list";
+    //新百科--推荐热门文章列表
+    public static final String GET_ARTICLE_LIST_TJ = ADRESS + "/api/articlehome/get_article_list_tj";
+    //新百科--文章详情
+    public static final String GET_ARTICLE_INFO = ADRESS + "/api/articlehome/get_article_info";
+    //新百科--评论列表
+    public static final String GET_ARTICLE_REVIEWLIST = ADRESS + "/api/articlehome/get_article_reviewList";
+    //新百科--添加文章评论
+    public static final String ADD_ARTICLE_REVIEW = ADRESS + "/api/articlemember/add_article_review";
+    //新百科--点赞文章
+    public static final String ADD_ARTICLE_PRAISE = ADRESS + "/api/articlemember/add_article_praise";
+    //新百科--取消文章点赞
+    public static final String CANCEL_ARTICLE_PRAISE = ADRESS + "/api/articlemember/cancel_article_praise";
+    //新百科--点赞文章评论
+    public static final String ADD_ARTICLE_REVIEW_PRAISE = ADRESS + "/api/articlemember/add_article_review_praise";
+    //新百科--取消评论点赞
+    public static final String CANCEL_ARTICLE_REVIEW_PRAISE = ADRESS + "/api/articlemember/cancel_article_review_praise";
+    //新百科--评论具体的列表
+    public static final String GET_ARTICLE_REVIEWLIST_SON = ADRESS + "/api/articlehome/get_article_reviewList_son";
+    //团课--开启团课提醒
+    public static final String ADD_REMIND_CS = ADRESS + "/api/coursemember/add_remind_cs";
+    //团课--删除团课提醒
+    public static final String DEL_REMIND_CS = ADRESS + "/api/coursemember/del_remind_cs";
+    //收藏--我的收藏列表
+    public static final String GET_COLLECTION_LIST = ADRESS + "/api/member/get_collection_list";
+    //收藏--添加收藏
+    public static final String ADD_COLLECTION = ADRESS + "/api/member/add_collection";
+    //收藏--删除我的收藏
+    public static final String DEL_COLLECTION = ADRESS + "/api/member/del_collection";
 
 }

@@ -7,65 +7,145 @@
             type="com.hongyuan.fitness.ui.find.circle.circle_detail.CircleDetailsViewModel"/>
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:background="@color/white">
-        <LinearLayout
+        android:layout_height="match_parent">
+        <com.hongyuan.fitness.custom_view.StickyScrollView
             android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal">
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:layout_width="90dp"
-                android:layout_height="match_parent"
-                android:src="@mipmap/a_test2"
-                android:scaleType="fitXY"
-                app:riv_corner_radius="6dp"/>
+            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="14dp"
-                android:layout_gravity="center_vertical"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
-                    android:textSize="18sp"
-                    android:text="减肥交流站"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
-                    android:layout_marginTop="3dp"
-                    android:textSize="@dimen/sp_12"
-                    android:text="减肥交流站"/>
-                <TextView
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:background="@color/white"
+                android:paddingBottom="90dp">
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:textColor="@color/color_EF5B48"
-                    android:background="@drawable/shape_radius6_00000000_stroke_ef5b48"
-                    android:gravity="center"
-                    android:textSize="@dimen/sp_14"
-                    android:layout_marginTop="10dp"
-                    android:text="参与"/>
-            </LinearLayout>
-        </LinearLayout>
+                    android:layout_height="116dp">
 
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/topicImg"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:src="@mipmap/zhengfangxing_default_img"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        app:riv_corner_radius="6dp"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/topicImg"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/topicName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_FF333333"
+                            android:drawableLeft="@mipmap/topic_mark"
+                            android:drawablePadding="6dp"
+                            android:gravity="center"
+                            android:textSize="18sp"/>
+                        <TextView
+                            android:id="@+id/topicPeople"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_FF999999"
+                            android:layout_marginTop="3dp"
+                            android:textSize="@dimen/sp_12"/>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/topicDes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FF999999"
+                        android:textSize="@dimen/sp_12"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:layout_alignParentBottom="true"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/headRec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="44dp"
+                        android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/color_EEEEEE"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/color_777777"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="9dp"
+                    android:text="全部动态"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:id="@+id/emptyBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="500dp"
+                        android:visibility="gone">
+                        <TextView
+                            android:id="@+id/isEmpty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@mipmap/promt_empty_img"
+                            android:drawablePadding="10dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="visible"
+                            android:gravity="center"
+                            android:text="暂无数据！"
+                            android:textSize="12sp"
+                            android:textColor="@color/color_FF999999" />
+                    </RelativeLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/mRecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+                </FrameLayout>
+
+            </LinearLayout>
+        </com.hongyuan.fitness.custom_view.StickyScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:background="@color/color_FFFFFF">
+            <Button
+                android:id="@+id/goEdit"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/color_FFFFFF"
+                android:textSize="16sp"
+                android:text="参与话题"
+                android:background="@drawable/shape_gradient_v_radiu5_login"/>
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/color_EEEEEE"/>
+            android:background="@color/color_EEEEEE"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="84dp"/>
+    </FrameLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="16dp"/>
-    </LinearLayout>
 </layout>

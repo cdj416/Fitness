@@ -119,7 +119,17 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
 
-        <activity android:name=".ui.main.MainActivity" android:launchMode="singleTask"/>
+        <activity android:name=".ui.main.MainActivity" android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="host"
+                    android:scheme="scheme"/>
+            </intent-filter>
+        </activity>
+
         <activity android:name=".ui.out_door.RunActivity"/>
         <activity android:name=".ui.store.more_store.MoreStoreActivity"/>
         <activity android:name=".ui.encyclopedia.EncyclopediaActivity"/>
@@ -138,7 +148,8 @@
         <activity android:name=".ui.video.MyPlayActivity"/>
         <activity android:name=".ui.find.circle.edit_post.EditPostActivity" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.find.circle.choose_circlet.ChooseCircletActivity"/>
-        <activity android:name=".ui.find.circle.get_nearby_location.GetNearyLocationActivity"/>
+        <activity android:name=".ui.find.circle.get_nearby_location.GetNearyLocationActivity"
+            android:theme="@style/MyDialogStyleActivity"/>
         <activity android:name=".ui.find.circle.circle_detail.CircleDetailsActivity"/>
         <activity android:name=".ui.find.circle.post_details.PostDetailsActivity" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.find.circle.comment_details.CommentDetailsActivity" android:windowSoftInputMode="adjustResize"/>
@@ -210,6 +221,15 @@
         <activity android:name=".ui.webview.WebViewActivity"
             android:hardwareAccelerated="true"
             android:configChanges="orientation|screenSize"/>
+        <activity android:name=".ui.promt_success.V3SuccessActivity"/>
+        <activity android:name=".ui.about_class.course_search.CourseSearchActivity"/>
+
+        <activity android:name=".ui.person.push_share.PushShareActivity"
+        android:theme="@style/MyDialogStyleActivity"/>
+        <activity android:name=".ui.find.topic.SelectTopicActivity"/>
+        <activity android:name=".ui.find.circle.topic_participant.TopicParticipantActivity"/>
+        <activity android:name=".ui.find.more_topic.MoreTopicActivity"/>
+        <activity android:name=".ui.person.my_collection.MyCollectionActivity"/>
     </application>
 
 </manifest>

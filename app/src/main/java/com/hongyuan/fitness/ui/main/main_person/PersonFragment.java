@@ -3,6 +3,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
@@ -13,6 +14,7 @@ import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.MessageEvent;
 import com.hongyuan.fitness.custom_view.TitleView;
 import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchActivity;
+import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -21,8 +23,8 @@ import org.greenrobot.eventbus.ThreadMode;
 public class PersonFragment extends CustomFragment{
 
     private PersonHeaderView headView;
-    private PersonNumberView numberView;
     private TitleView myTitle;
+    private ImageView pushMark,messageMark;
 
     @Override
     public int getLayoutId() {
@@ -31,10 +33,14 @@ public class PersonFragment extends CustomFragment{
 
     @Override
     public void initView(View mView) {
+
         headView = mView.findViewById(R.id.headView);
-        numberView = mView.findViewById(R.id.numberView);
         myTitle = mView.findViewById(R.id.myTitle);
+        pushMark = mView.findViewById(R.id.pushMark);
+        messageMark = mView.findViewById(R.id.messageMark);
         myTitle.getRightView().setOnClickListener(v -> startActivity(DailyPunchActivity.class,null));
+        pushMark.setOnClickListener(v -> mActivity.startActivity(DailyPunchActivity.class,null));
+        messageMark.setOnClickListener(v -> mActivity.startActivity(MineMessageActivity.class,null));
     }
 
     @Override
@@ -64,7 +70,6 @@ public class PersonFragment extends CustomFragment{
         if(data instanceof PersonBean){
             PersonBean personBean = (PersonBean)data;
             headView.setHeadImg(personBean.getData().getInfo());
-            numberView.setData(personBean.getData().getInfo());
         }
     }
 

@@ -102,8 +102,8 @@ public class EditEncyclopediaViewModel extends CustomViewModel {
                 .setParams("baike_content",binding.editContent.getText().toString())
                 .setParams("baike_name",binding.encyclopediaTitle.getText().toString())
                 .setParams("ft_id",String.valueOf(typeBean.getFt_id()))
-                .setParams("lat", "11.0255465633255")
-                .setParams("lng","11.0255465633255")
+                .setParams("lat", LocationBean.getInstance().getLat())
+                .setParams("lng",LocationBean.getInstance().getLng())
                 .setParams("os_id",String.valueOf(LocationBean.getInstance().getOs_id()))
                 .setParams("baikefile",baiKeFile)
                 .setParams("baike_type",baiKe_type);

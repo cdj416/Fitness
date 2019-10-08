@@ -1,5 +1,4 @@
 package com.hongyuan.fitness.util;
-
 import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
@@ -15,6 +14,9 @@ public class MyLocationUtil {
 
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption locationOption = null;
+
+    //搜索成功码
+    public static final int SEARCH_SUCCESS = 1000;
 
     public interface GetLocation{
         void changeData(AMapLocation location);
@@ -126,7 +128,6 @@ public class MyLocationUtil {
             String result = sb.toString();
             //Log.e("cdj","=====定位结果====="+result);
 
-
         } else {
 
         }
@@ -168,10 +169,12 @@ public class MyLocationUtil {
      *
      */
     public void startLocation(){
-        // 设置定位参数
-        locationClient.setLocationOption(locationOption);
-        // 启动定位
-        locationClient.startLocation();
+        if(!locationClient.isStarted()){
+            // 设置定位参数
+            locationClient.setLocationOption(locationOption);
+            // 启动定位
+            locationClient.startLocation();
+        }
     }
 
     /**

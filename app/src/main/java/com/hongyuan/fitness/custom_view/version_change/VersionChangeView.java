@@ -7,19 +7,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.azhon.appupdate.config.UpdateConfiguration;
-import com.azhon.appupdate.listener.OnButtonClickListener;
 import com.azhon.appupdate.listener.OnDownloadListener;
 import com.azhon.appupdate.manager.DownloadManager;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.custom_view.my_progress.WaveProgress;
 import com.hongyuan.fitness.ui.main.CheckVersionBeans;
 import com.hongyuan.fitness.util.CacheUtil;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.HourMeterUtil;
+import com.hongyuan.fitness.util.PackageUtils;
 
 import java.io.File;
 
@@ -86,7 +86,11 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
     * 初始化配置
     * */
     private void startUpdate(boolean force){
-        Log.e("phm","======来的了===");
+        //更新类型
+        int code = PackageUtils.getVersionCode(getContext())+2;
+        if(force){
+            code = 1;
+        }
 
         //配置内容
         UpdateConfiguration configuration = new UpdateConfiguration()
@@ -141,6 +145,7 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
                     @Override
                     public void error(Exception e) {
                         e.printStackTrace();
+                        CustomDialog.showMessage(getContext(),"下载失败，请从新进入程序！");
                     }
                 });
 
@@ -151,10 +156,9 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
                 .setShowNewerToast(true)
                 .setConfiguration(configuration)
 //                .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
-                .setApkVersionCode(2)
-                .setApkVersionName("2.1.8")
-                .setApkSize("20.4")
-                .setApkVersionName(versionBeans.getApp_version().substring(1))
+                .setApkVersionCode(code)
+                .setApkVersionName(versionBeans.getApp_version())
+                .setApkSize("")
                 .download();
     }
 

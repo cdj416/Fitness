@@ -296,6 +296,42 @@
                     android:textSize="@dimen/sp_12"
                     android:visibility="gone"
                     android:text="1. 根据教练安排，坚持合理运动频率 \n2. 补充足够热量/碳水化合物/蛋白质等，帮助肌肉生长，在教练 指导下完成力量训练，不要过度承重。"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FF333333"
+                        android:layout_centerVertical="true"
+                        android:textSize="16sp"
+                        android:text="约课流程"/>
+                    <TextView
+                        android:id="@+id/desDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F06243"
+                        android:textSize="14sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="规则详情"/>
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/privit_course_process_img"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:scaleType="fitXY"/>
             </LinearLayout>
 
         </com.hongyuan.fitness.custom_view.StickyScrollView>

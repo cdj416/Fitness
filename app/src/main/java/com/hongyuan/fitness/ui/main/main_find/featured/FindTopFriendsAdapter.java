@@ -1,5 +1,7 @@
 package com.hongyuan.fitness.ui.main.main_find.featured;
 
+import android.view.View;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -18,6 +20,11 @@ public class FindTopFriendsAdapter extends BaseQuickAdapter<FriendsBeans.DataBea
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img);
         Glide.with(mContext).load(item.getMi_head()).apply(options).into((RoundedImageView)helper.getView(R.id.headImg));
 
-        //helper.addOnClickListener(R.id.jumpBox);
+        if(helper.getPosition() == 0){
+            helper.getView(R.id.firstView).setVisibility(View.VISIBLE);
+        }else{
+            helper.getView(R.id.firstView).setVisibility(View.GONE);
+        }
+
     }
 }

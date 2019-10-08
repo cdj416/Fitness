@@ -39,13 +39,53 @@
                 android:text="更多"/>
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/topicBox"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="60dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="@color/color_FF333333"
+                    android:text="热门"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="@color/color_EF5B48"
+                    android:text="话题"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/moreTopic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_FF999999"
+                android:visibility="visible"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textSize="12sp"
+                android:text="更多"
+                android:layout_marginEnd="16dp"/>
+        </RelativeLayout>
+
 
         <com.hongyuan.fitness.custom_view.CustomRecyclerView
             android:id="@+id/topRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
             android:visibility="gone"/>
 
         <TextView

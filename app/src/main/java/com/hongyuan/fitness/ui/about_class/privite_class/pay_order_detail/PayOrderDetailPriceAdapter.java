@@ -16,10 +16,10 @@ public class PayOrderDetailPriceAdapter extends BaseQuickAdapter<CourseDetailsBe
     protected void convert(BaseViewHolder helper, CourseDetailsBean.DataBean.PriceListBean item) {
 
         if(item.isSelect()){
-            helper.setText(R.id.showPriceText,item.getMin_num()+"/节起 ￥"+ BaseUtil.getNoZoon(item.getPrice())+"/节")
+            helper.setText(R.id.showPriceText,item.getMin_num()+"节起 ￥"+ BaseUtil.getNoZoon(item.getPrice())+"/节")
                     .setImageResource(R.id.status,R.mipmap.yuanquanquan_select_img);
         }else{
-            helper.setText(R.id.showPriceText,item.getMin_num()+"/节起 ￥"+ BaseUtil.getNoZoon(item.getPrice())+"/节")
+            helper.setText(R.id.showPriceText,item.getMin_num()+"节起 ￥"+ BaseUtil.getNoZoon(item.getPrice())+"/节")
                     .setImageResource(R.id.status,R.mipmap.yuanquanquan_no_select_img);
         }
 

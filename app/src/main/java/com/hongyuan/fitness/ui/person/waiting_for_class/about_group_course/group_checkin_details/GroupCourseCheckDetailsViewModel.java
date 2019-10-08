@@ -22,9 +22,16 @@ import com.hongyuan.fitness.custom_view.StickyScrollView;
 import com.hongyuan.fitness.databinding.ActivityGroupcourseCheckDetailsBinding;
 import com.hongyuan.fitness.ui.about_class.group_class.group_details.ApplyPersonNumAdapter;
 import com.hongyuan.fitness.ui.about_class.group_class.group_details.MissionDetailBean;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.TimeUtil;
+import com.luck.picture.lib.tools.ScreenUtils;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class GroupCourseCheckDetailsViewModel extends CustomViewModel implements StickyScrollView.ScrollViewListener{
     private ActivityGroupcourseCheckDetailsBinding binding;
@@ -69,6 +76,13 @@ public class GroupCourseCheckDetailsViewModel extends CustomViewModel implements
 
         binding.checkIn.setOnClickListener(v -> {
             courseQD(String.valueOf(detailBean.getData().getOcs_id()));
+        });
+
+        binding.desDetails.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url","http://www.hongyuangood.com/signUpRule/index.html");
+            bundle.putString("title","团课报名规则");
+            startActivity(WebViewActivity.class,bundle);
         });
 
         initListeners();
@@ -143,7 +157,9 @@ public class GroupCourseCheckDetailsViewModel extends CustomViewModel implements
                 +"-"+TimeUtil.formatDate(detailBean.getData().getCs_end_date(),TimeUtil.dateFormatYMDHMS,TimeUtil.dateFormatHM));
         binding.storeName.setText(detailBean.getData().getOs_name());
         binding.address.setText(detailBean.getData().getAddress());
-        binding.courseContent.setText(detailBean.getData().getCs_brief());
+        binding.suggest.setText(detailBean.getData().getCs_jy()+"");
+        //设置webview显示样式
+        binding.courseContent.loadDataWithBaseURL(null, getNewData(detailBean.getData().getCs_brief()),"text/html", "utf-8",null);
         //设置报名人的头像显示
         headAdapter.setNewData(detailBean.getData().getMember_ocs());
 
@@ -187,5 +203,30 @@ public class GroupCourseCheckDetailsViewModel extends CustomViewModel implements
             CustomDialog.groupCoursePunchSuccess(mActivity, TimeUtil.formatDataMsec(TimeUtil.dateFormatDotMD,System.currentTimeMillis()),
                     TimeUtil.getWeek());
         }
+    }
+
+    /**
+     * 设置img标签下的width为手机屏幕宽度，height自适应
+     *
+     * @param data html字符串
+     * @return 更新宽高属性后的html字符串
+     */
+    private String getNewData(String data) {
+        Document document = Jsoup.parse(data);
+
+        Elements pElements = document.select("p:has(img)");
+        for (Element pElement : pElements) {
+            pElement.attr("style", "text-align:center");
+            pElement.attr("max-width", ScreenUtils.getScreenWidth(mActivity) + "px")
+                    .attr("height", "auto");
+        }
+        Elements imgElements = document.select("img");
+        for (Element imgElement : imgElements) {
+            //重新设置宽高
+            imgElement.attr("max-width", "100%")
+                    .attr("height", "auto");
+            imgElement.attr("style", "max-width:100%;height:auto");
+        }
+        return document.toString();
     }
 }

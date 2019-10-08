@@ -16,6 +16,15 @@
             app:tabIndicatorColor="@color/color_EF5B48"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/color_EF5B48"/>
+        <ImageView
+            android:id="@+id/searchMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/search_back_mark"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:layout_marginEnd="16dp"/>
     </RelativeLayout>
 
 

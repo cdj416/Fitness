@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
@@ -12,12 +13,14 @@ import com.google.android.material.tabs.TabLayout;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomFragment;
+import com.hongyuan.fitness.ui.about_class.course_search.CourseSearchActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 public class AboutClassFragment extends CustomFragment {
 
+    private ImageView searchMark;
     private TabLayout layoutMenu;
     private ViewPager mViewPager;
     private AboutClassViewPagerAdapter meunAdapter;
@@ -29,6 +32,7 @@ public class AboutClassFragment extends CustomFragment {
 
     @Override
     public void initView(View mView) {
+        searchMark = mView.findViewById(R.id.searchMark);
         mViewPager = mView.findViewById(R.id.mViewPager);
         layoutMenu = mView.findViewById(R.id.layoutMenu);
 
@@ -37,6 +41,8 @@ public class AboutClassFragment extends CustomFragment {
         layoutMenu.setupWithViewPager(mViewPager);
 
         mViewPager.setOffscreenPageLimit(2);
+
+        searchMark.setOnClickListener(v -> startActivity(CourseSearchActivity.class,null));
     }
 
     @Override
