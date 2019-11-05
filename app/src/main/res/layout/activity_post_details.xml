@@ -102,7 +102,7 @@
                         android:id="@+id/videoImg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/a_test2"
+                        android:src="@mipmap/zhengfangxing_default_img"
                         android:adjustViewBounds="true"
                         app:riv_corner_radius="6dp"/>
                     <ImageView

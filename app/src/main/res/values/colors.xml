@@ -9,11 +9,7 @@
     <color name="pickerview_bg_topbar">#f5f5f5</color>
 
     <color name="pickerview_topbar_title">#000000</color>
-    <color name="pickerview_wheelview_textcolor_out">#a8a8a8</color>
-    <color name="pickerview_wheelview_textcolor_center">#2a2a2a</color>
-    <color name="pickerview_wheelview_textcolor_divider">#d5d5d5</color>
     <color name="pickerview_bgColor_overlay">#60000000</color>
-    <color name="pickerview_bgColor_default">#FFFFFFFF</color>
 
     <color name="dark">#803cbcb7</color>
     <color name="light">#800de6e8</color>
@@ -25,31 +21,17 @@
     <color name="color_FFD1D1D1">#FFD1D1D1</color>
     <color name="color_FFF5F5F5">#FFF5F5F5</color>
     <color name="color_FFFFFF">#FFFFFF</color>
-    <color name="color_13B6A5">#13B6A5</color>
-    <color name="color_EAEAEA">#EAEAEA</color>
-    <color name="color_48495F">#48495F</color>
-    <color name="color_A6A6A6">#A6A6A6</color>
-    <color name="color_ffb400">#ffb400</color>
     <color name="color_CCCCCC">#CCCCCC</color>
-    <color name="color_D2D2D2">#D2D2D2</color>
     <color name="color_5f5f5f">#5F5F5F</color>
-    <color name="color_F1F1F1">#F1F1F1</color>
-    <color name="color_9A9A9A">#9A9A9A</color>
     <color name="color_979797">#979797</color>
     <color name="color_EF5B48">#EF5B48</color>
-    <color name="color_F06E39">#F06E39</color>
-    <color name="color_F06D39">#F06D39</color>
-    <color name="color_EF693B">#EF693B</color>
-    <color name="color_F1F1F8">#F1F1F8</color>
     <color name="color_393A5A">#393A5A</color>
-    <color name="color_9D9DB7">#9D9DB7</color>
     <color name="color_6F71BA">#6F71BA</color>
     <color name="color_E8E8F4">#E8E8F4</color>
     <color name="color_777777">#777777</color>
     <color name="color_EEEEEE">#EEEEEE</color>
     <color name="color_4A4a6e">#4A4A6E</color>
     <color name="color_FF9B80">#FF9B80</color>
-    <color name="color_FFFDFD">#FFFDFD</color>
     <color name="color_FAD8CE">#FAD8CE</color>
     <color name="color_1f203d">#1F203D</color>
     <color name="color_007AFF">#007AFF</color>
@@ -65,6 +47,7 @@
     <color name="color_ff8441">#FF8441</color>
     <color name="color_83839b">#83839B</color>
     <color name="color_FF1BC177">#FF1BC177</color>
+    <color name="color_FF6787F1">#FF6787F1</color>
 
 
 </resources>

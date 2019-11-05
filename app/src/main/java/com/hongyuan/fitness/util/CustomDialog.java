@@ -3,27 +3,42 @@ package com.hongyuan.fitness.util;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.PixelFormat;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
-import com.hongyuan.fitness.base.MyApplication;
+import com.hongyuan.fitness.base.BaseBean;
+import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.AddFoodView;
 import com.hongyuan.fitness.custom_view.CountdownView;
+import com.hongyuan.fitness.custom_view.WheelView;
 import com.hongyuan.fitness.ui.heat.ItemClikeBean;
 import com.hongyuan.fitness.ui.heat.UpdataFoodView;
 import com.hongyuan.fitness.ui.heat.add_food.AddFoodBean;
 import com.hongyuan.fitness.ui.heat.heat_detail.HeatDetailBean;
+import com.hongyuan.fitness.ui.main.ScanCardsListAdapter;
+import com.hongyuan.fitness.ui.main.main_home.recommend.HomeRightBeans;
+import com.hongyuan.fitness.ui.person.my_coupon.CouponAdapter;
+import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
+import com.hongyuan.fitness.ui.person.my_coupon.main_receive_coupon.DialogReceiveCouponAdapter;
+import com.makeramen.roundedimageview.RoundedImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomDialog {
     /*
@@ -38,6 +53,20 @@ public class CustomDialog {
     * */
     public interface DialogClickMessage{
         void dialogClick(View v,String message);
+    }
+
+    /*
+    * 用于刷新列表数据
+    * */
+    public interface DialogClickList{
+        void dialogClick(View v,int position, BaseQuickAdapter adapter);
+    }
+
+    /*
+    * 用于返回选择的字符串
+    * */
+    public interface DialogClickGuWen{
+        void dialogClick(String selectText);
     }
 
 
@@ -437,6 +466,55 @@ public class CustomDialog {
         });
     }
 
+    /*
+    * 优惠券领取
+    * */
+    public static void receiveCoupon(Context mContext, List<CouponListBeans.DataBean.ListBean> mList,DialogClickList dialogClick){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_receive_coupon,null);
+        dialog.setContentView(view);
+        dialog.setCanceledOnTouchOutside(false);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        RecyclerView mRecycler = view.findViewById(R.id.mRecycler);
+        Button receiveAll = view.findViewById(R.id.receiveAll);
+        ImageView closeImg = view.findViewById(R.id.closeImg);
+
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
+        manager.setOrientation(RecyclerView.VERTICAL);
+        mRecycler.setLayoutManager(manager);
+        mRecycler.addItemDecoration(new DividerItemDecoration(
+                mContext, DividerItemDecoration.HORIZONTAL_LIST,32,0x00000000));
+        DialogReceiveCouponAdapter adapter = new DialogReceiveCouponAdapter();
+        mRecycler.setAdapter(adapter);
+
+        adapter.setNewData(mList);
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @SingleClick
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                dialogClick.dialogClick(view,position,adapter);
+            }
+        });
+
+        receiveAll.setOnClickListener(new View.OnClickListener() {
+            @SingleClick
+            @Override
+            public void onClick(View v) {
+                if(dialogClick != null){
+
+                }
+            }
+        });
+
+        closeImg.setOnClickListener(v -> dialog.dismiss());
+
+    }
+
 
     //标识男
     public static final int MAN_CLICK = 1;
@@ -464,6 +542,127 @@ public class CustomDialog {
             clickMan.setTextColor(0xFF999999);
             clickWoman.setTextColor(0xFFEF5B48);
         }
+    }
+
+    /*
+    * 二维码展示弹框
+    * */
+    public static Dialog showQRScan(Context mContext,String qrImg,String titleTxt,String isIn){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        dialog.setCanceledOnTouchOutside(false);
+        View view = View.inflate(mContext, R.layout.dialog_scan_qr,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        TextView titleName = view.findViewById(R.id.titleName);
+        TextView promptTxt = view.findViewById(R.id.promptTxt);
+        ImageView qrCodeImg = view.findViewById(R.id.qrCodeImg);
+        ImageView closeImg = view.findViewById(R.id.closeImg);
+
+        titleName.setText(titleTxt);
+        promptTxt.setText(isIn.equals("0") ? "进店出示二维码" : "离店出示二维码");
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
+        Glide.with(mContext).load(qrImg).apply(options).into(qrCodeImg);
+
+        closeImg.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        return dialog;
+
+    }
+
+    static String selectText = "";
+
+    /*
+    * 滚动选择器弹框
+    * */
+    public static Dialog showScollSelect(Context mContext,String title,List<String> mArrayList,DialogClickGuWen dialogClickGuWen){
+        selectText = mArrayList.get(0);
+
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_scoll_select_data,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        TextView titleText = view.findViewById(R.id.titleText);
+        ImageView closeImg = view.findViewById(R.id.closeImg);
+        WheelView mWheelView = view.findViewById(R.id.mWheelView);
+        Button submit = view.findViewById(R.id.submit);
+
+        titleText.setText(title);
+        // 在这里可以设置滚轮的偏移量
+        //mWheelView.setOffset(2);
+        //设置每一个Item中的数据 mArrayList中装着的是一堆String字符串
+        mWheelView.setItems(mArrayList);
+        mWheelView.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+            @Override
+            public void onSelected(int selectedIndex, String item) {
+                //selectedIndex当前高亮的位置
+                //item当前高亮的位置的内容
+                selectText = item;
+            }
+        });
+
+        closeImg.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        submit.setOnClickListener(v -> {
+            dialog.dismiss();
+            dialogClickGuWen.dialogClick(selectText);
+        });
+
+        return dialog;
+
+    }
+
+    /*
+     * 优惠券领取
+     * */
+    public static void showCards(Context mContext, List<HomeRightBeans.DataBean.ListBean> mList, DialogClickList dialogClick){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_scan_cards_list,null);
+        dialog.setContentView(view);
+        dialog.setCanceledOnTouchOutside(false);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        RecyclerView mRecycler = view.findViewById(R.id.mRecycler);
+        ImageView closeImg = view.findViewById(R.id.closeImg);
+
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
+        manager.setOrientation(RecyclerView.VERTICAL);
+        mRecycler.setLayoutManager(manager);
+        mRecycler.addItemDecoration(new DividerItemDecoration(
+                mContext, DividerItemDecoration.HORIZONTAL_LIST,32,0x00000000));
+        ScanCardsListAdapter adapter = new ScanCardsListAdapter();
+        mRecycler.setAdapter(adapter);
+
+        adapter.setNewData(mList);
+
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @SingleClick
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                dialog.dismiss();
+                dialogClick.dialogClick(view,position,adapter);
+            }
+        });
+
+        closeImg.setOnClickListener(v -> dialog.dismiss());
+
     }
 
 

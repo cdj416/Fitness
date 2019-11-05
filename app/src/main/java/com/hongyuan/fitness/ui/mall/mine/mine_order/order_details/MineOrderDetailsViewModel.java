@@ -68,7 +68,7 @@ public class MineOrderDetailsViewModel extends CustomViewModel {
 
     @Override
     protected void setData() {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_testbaner3).error(R.mipmap.a_testbaner3);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
         Glide.with(mActivity).load(detailsBeans.getO_img()).apply(options).into(binding.goodImg);
 
         binding.goodName.setText(detailsBeans.getO_name());

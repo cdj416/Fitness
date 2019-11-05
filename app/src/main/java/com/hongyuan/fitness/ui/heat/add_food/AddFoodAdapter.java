@@ -18,7 +18,7 @@ public class AddFoodAdapter extends BaseQuickAdapter<AddFoodBean.DataBean.ListBe
     @Override
     protected void convert(BaseViewHolder helper, AddFoodBean.DataBean.ListBean item) {
 
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
         Glide.with(mContext).load(item.getF_img()).apply(options).into((RoundedImageView)helper.getView(R.id.footImg));
 
         helper.setText(R.id.footName,item.getF_name()).setText(R.id.heatNum,((int)(Float.valueOf(item.getF_cal())*100))+"千卡");

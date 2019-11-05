@@ -1,15 +1,22 @@
 package com.hongyuan.fitness.ui.main;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
-
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityMainBinding;
-import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
+import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
+import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.PackageUtils;
+import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
+import java.util.List;
 
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 
@@ -17,9 +24,9 @@ public class MainViewModel extends CustomViewModel {
     private ActivityMainBinding binding;
     private MyViewPagerAdapter myViewPagerAdapter;
     private CheckVersionBeans.DataBean.InfoBean versionBeans;
-
-
-
+    private BaseQuickAdapter couponAdapter;
+    private List<CouponListBeans.DataBean.ListBean> mList;
+    private int mPosition;
 
 
     public MainViewModel(CustomActivity mActivity, ActivityMainBinding binding) {
@@ -46,6 +53,10 @@ public class MainViewModel extends CustomViewModel {
         navigationController.setupWithViewPager(binding.viewPager);
         binding.viewPager.addOnPageChangeListener(getOnPageChangeListener());
         binding.viewPager.setOffscreenPageLimit(5);
+
+        //启动各个平台的推送服务
+        HuanXinUtils.getInstance().setPush();
+
     }
 
     /*
@@ -69,7 +80,7 @@ public class MainViewModel extends CustomViewModel {
             @Override
             public void onPageSelected(int position) {
                 if(position == 4 && userToken.getM_mobile() == null){
-                    startActivity(VtwoLoginActivity.class,null);
+                    startActivity(VtwoVerificationLoginActivity.class,null);
                 }
                 if(position == 4){
                     mActivity.setTitleBar(mActivity.TYPE_BAR2,R.drawable.shape_gradient_h_39_4a,"");
@@ -89,17 +100,64 @@ public class MainViewModel extends CustomViewModel {
     protected void lazyLoad() {
         //检测是否需要更新版本
         clearParams().setParams("app_version", PackageUtils.getVersionName(mActivity)).setParams("app_type","1");
-        Controller.myRequest(Constants.CHECK_APP_VERSION, Controller.TYPE_POST,getParams(), CheckVersionBeans.class,this);
+        Controller.myRequest(Constants.INDEX_COUPON_LIST, Controller.TYPE_POST,getParams(), CheckVersionBeans.class,this);
+    }
+
+    /*
+    * 去检查是否有可领取的优惠券
+    * */
+    private void getHomeCoupon(){
+        mActivity.showLoading();
+        //检查是否有需要领取的优惠券
+        clearParams();
+        Controller.myRequest(Constants.INDEX_COUPON_LIST, Controller.TYPE_POST,getParams(), CouponListBeans.class,this);
+    }
+
+    /*
+    * 领取优惠券
+    * */
+    private void getReceive(String couponId){
+        mActivity.showLoading();
+        clearParams().setParams("coupon_id",couponId);
+        Controller.myRequest(ConstantsCode.GET_COUPON,Constants.GET_COUPON,Controller.TYPE_POST,getParams(), BaseBean.class,this);
     }
 
     @Override
     public void onSuccess(Object data) {
+        mActivity.closeLoading();
         if(data instanceof CheckVersionBeans){
             versionBeans = ((CheckVersionBeans)data).getData().getInfo();
-            //版本检测更新
-            binding.versionView.startChange(versionBeans);
+
+            if(BaseUtil.isValue(versionBeans)&&versionBeans.getIs_new() == 1){
+                //版本检测更新
+                binding.versionView.startChange(versionBeans);
+            }else{
+                getHomeCoupon();
+            }
+
+        }
+
+        if(data instanceof CouponListBeans){
+            mList = ((CouponListBeans)data).getData().getList();
+
+            if(mList != null && mList.size() > 0){
+                CustomDialog.receiveCoupon(mActivity, mList, (v, position, adapter) -> {
+                     couponAdapter = adapter;
+                     mPosition = position;
+                    getReceive(String.valueOf(mList.get(position).getCoupon_id()));
+                });
+            }
+
         }
     }
 
-
+    @Override
+    public void onSuccess(int code, Object data) {
+        mActivity.closeLoading();
+        if(code == ConstantsCode.GET_COUPON){
+            mList.get(mPosition).setReceive(true);
+            couponAdapter.notifyDataSetChanged();
+            showSuccess("领取成功！");
+        }
+    }
 }

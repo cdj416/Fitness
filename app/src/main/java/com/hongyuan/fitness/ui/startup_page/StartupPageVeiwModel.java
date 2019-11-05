@@ -19,9 +19,9 @@ import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.out_door.wallk.TodayStepUtils;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.EncryptionUtil;
-import com.hongyuan.fitness.util.LocationBean;
 import com.hongyuan.fitness.util.MyLocationUtil;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
+import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.today.step.lib.TodayStepManager;
 
@@ -101,6 +101,9 @@ public class StartupPageVeiwModel extends CustomViewModel implements CustomDialo
             if(loginBean != null){
                 userToken.setM_id(loginBean.getM_id());
                 userToken.setM_mobile(loginBean.getM_mobile());
+
+                //去注册登录环信账号。
+                HuanXinUtils.getInstance().registerdHuanXin(userToken.getM_mobile());
             }
 
             if(fistUseBean == null){

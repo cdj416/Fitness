@@ -139,6 +139,41 @@
                         android:elevation="16dp"/>
 
                 </FrameLayout>
+
+                <RelativeLayout
+                    android:id="@+id/courseTitleBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:visibility="gone">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/color_FF333333"
+                        android:text="所授课程"/>
+                    <TextView
+                        android:id="@+id/moreClass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F06044"
+                        android:textSize="14sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="更多"/>
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/courseRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="24dp"
+                    android:visibility="gone"/>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -223,5 +258,44 @@
                 app:text_color="@color/color_FFFFFF"
                 app:right_text="编辑资料"/>
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bottomBox"
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:background="@color/color_FFFFFF">
+
+            <TextView
+                android:id="@+id/goChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/chat_mark"
+                android:textSize="14sp"
+                android:textColor="@color/color_FF333333"
+                android:gravity="center"
+                android:drawablePadding="4dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="38dp"
+                android:text="聊天"/>
+            <Button
+                android:id="@+id/attention"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:textSize="14sp"
+                android:textColor="@color/color_FFFFFF"
+                android:background="@drawable/shape_gradient_v_radiu5_login"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="16dp"
+                android:layout_gravity="center_vertical"
+                android:text="关注"/>
+        </LinearLayout>
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_EEEEEE"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="84dp"/>
     </FrameLayout>
 </layout>

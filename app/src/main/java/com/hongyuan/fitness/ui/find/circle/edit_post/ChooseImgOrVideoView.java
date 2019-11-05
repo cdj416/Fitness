@@ -252,7 +252,7 @@ public class ChooseImgOrVideoView extends LinearLayout {
                             //videoFile = ImageFactory.compressImage(vedioBitmap);
 
                             videoImgFile = ImageFactory.saveImageToGallery(getContext(),vedioBitmap);
-                            RequestOptions options = new RequestOptions().error(R.mipmap.a_testbaner3);
+                            RequestOptions options = new RequestOptions().error(R.mipmap.defaul_no_img);
                             Glide.with(getContext()).load(vedioBitmap).apply(options).into(videoImg);
 
                             Log.e("cdj","========视频文件地址=-====="+ Environment.getExternalStorageDirectory().getPath()+"===="+videoPath);

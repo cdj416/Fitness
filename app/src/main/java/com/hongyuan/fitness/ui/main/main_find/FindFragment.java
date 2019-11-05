@@ -15,6 +15,7 @@ import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.find.circle.edit_post.EditPostActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -63,7 +64,7 @@ public class FindFragment extends CustomFragment {
             @Override
             public void onPageSelected(int position) {
                 if(position == 0 && mActivity.userToken.getM_mobile() == null){
-                    startActivity(VtwoLoginActivity.class,null);
+                    startActivity(VtwoVerificationLoginActivity.class,null);
                 }
             }
 

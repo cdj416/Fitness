@@ -28,7 +28,7 @@ public class PunchViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_testbaner3).error(R.mipmap.a_testbaner3);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img);
         Glide.with(mActivity).load(getBundle().getString("bg_img")).apply(options).into(binding.bgImg);
 
         binding.punchBut.setOnClickListener(new View.OnClickListener() {

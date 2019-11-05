@@ -16,7 +16,7 @@ public class StoreListImageAdapter extends BaseQuickAdapter<String, BaseViewHold
 
     @Override
     protected void convert(BaseViewHolder helper, String item) {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img);
         Glide.with(mContext).load(item).apply(options).into((RoundedImageView)helper.getView(R.id.img));
 
         helper.addOnClickListener(R.id.img);

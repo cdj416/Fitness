@@ -142,7 +142,7 @@ public class MyVideoView extends LinearLayout{
         //增加封面
         ImageView imageView = new ImageView(getContext());
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
         Glide.with(this).load(imgUrl).apply(options).into(imageView);
         return imageView;
     }

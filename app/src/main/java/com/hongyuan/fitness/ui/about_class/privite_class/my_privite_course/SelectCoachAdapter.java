@@ -16,7 +16,7 @@ public class SelectCoachAdapter extends BaseQuickAdapter<MyCoachBeans.DataBean.L
 
     @Override
     protected void convert(BaseViewHolder helper, MyCoachBeans.DataBean.ListBean item) {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img).centerCrop();
         Glide.with(mContext).load(item.getCoach_head()).apply(options).into((RoundedImageView)helper.getView(R.id.headImg));
         helper.setText(R.id.coachName,item.getCoach_nickname());
 

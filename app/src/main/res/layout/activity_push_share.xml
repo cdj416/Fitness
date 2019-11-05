@@ -28,7 +28,7 @@
                     android:id="@+id/showImg"
                     android:layout_width="match_parent"
                     android:layout_height="321dp"
-                    android:src="@mipmap/a_testbanner1"
+                    android:src="@mipmap/zhengfangxing_default_img"
                     android:scaleType="centerCrop"/>
                 <LinearLayout
                     android:layout_width="wrap_content"

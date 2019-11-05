@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -18,16 +20,26 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.StickyScrollView;
 import com.hongyuan.fitness.databinding.ActivityPersonMessageBinding;
+import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomePageActivity;
+import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomePageCouseListAdapter;
+import com.hongyuan.fitness.ui.about_class.privite_class.course_details.CourseDetailsActivity;
+import com.hongyuan.fitness.ui.about_class.privite_class.course_list.CourseListActivity;
+import com.hongyuan.fitness.ui.about_class.privite_class.course_list.CouseListBean;
 import com.hongyuan.fitness.ui.find.circle.post_details.AttentionBean;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsLikeBean;
 import com.hongyuan.fitness.ui.find.friends.FriendsActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.main.main_find.featured.FeatureBean;
 import com.hongyuan.fitness.ui.main.main_find.featured.V2FindContentAdapter;
 import com.hongyuan.fitness.ui.person.edit_information.EditInformationActivity;
+import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
 import com.hongyuan.fitness.ui.person.my_fan.MyFansActivity;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.ViewChangeUtil;
+import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
+
+import java.util.List;
 
 public class PersonMessageViewModel extends CustomViewModel implements StickyScrollView.ScrollViewListener{
 
@@ -35,6 +47,10 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
     private PersonMessageBeans.DataBean personMessageBeans;
     private V2FindContentAdapter adapter;
     private FeatureBean featureBean;
+
+    //教练主页显示教练课程
+    private CoachHomePageCouseListAdapter couseListAdapter;
+    private List<CouseListBean.DataBean.ListBean> courseList;
 
     //渐变高度
     private int height;
@@ -57,20 +73,42 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
         setEnableLoadMore(true);
 
         if(getBundle() != null && getBundle().getSerializable("otherPerson") != null){
+            binding.bottomBox.setVisibility(View.VISIBLE);
+            binding.viewLine.setVisibility(View.VISIBLE);
             attentionBeans = (PersonAttentionBeans) getBundle().getSerializable("otherPerson");
             binding.myTitle.setCentreText(attentionBeans.getM_name()+"的主页");
+            binding.myTitle.getRightView().setVisibility(View.GONE);
             if(attentionBeans.getIs_friend() == 1){
-                binding.myTitle.setRightText("取消关注");
+                binding.attention.setText("取消关注");
             }else{
-                binding.myTitle.setRightText("关注Ta");
+                binding.attention.setText("关注Ta");
             }
 
+        }else{
+            binding.bottomBox.setVisibility(View.GONE);
+            binding.viewLine.setVisibility(View.GONE);
         }
+
+        //教练的全部课程
+        LinearLayoutManager courserManager = new LinearLayoutManager(mActivity);
+        courserManager.setOrientation(RecyclerView.HORIZONTAL);
+        binding.courseRecycler.setLayoutManager(courserManager);
+        couseListAdapter = new CoachHomePageCouseListAdapter();
+        binding.courseRecycler.setAdapter(couseListAdapter);
+
+        couseListAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("cp_id",String.valueOf(courseList.get(position).getCp_id()));
+            startActivity(CourseDetailsActivity.class,bundle);
+        });
 
         GridLayoutManager layoutManager = new GridLayoutManager(mActivity, 2);
         binding.mRecycler.setLayoutManager(layoutManager);
         adapter = new V2FindContentAdapter();
         binding.mRecycler.setAdapter(adapter);
+        if(attentionBeans != null){
+            adapter.setFooterView(mActivity.getFooterHeight(binding.mRecycler));
+        }
 
         adapter.setOnItemChildClickListener((adapter, view, position) -> {
             if(view.getId() == R.id.jumpDetails){
@@ -88,9 +126,14 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
             @SingleClick
             @Override
             public void onClick(View v) {
-                if(attentionBeans == null){
-                    startActivity(EditInformationActivity.class,null);
-                }else{
+                startActivity(EditInformationActivity.class,null);
+            }
+        });
+
+        binding.attention.setOnClickListener(new View.OnClickListener() {
+            @SingleClick
+            @Override
+            public void onClick(View v) {
                     if(attentionBeans.getIs_friend() == 1){
                         CustomDialog.promptDialog(mActivity, "确定要取消关注吗？", "暂不取消", "取消关注", false, v1 -> {
                             if(v1.getId() == R.id.isCannel){
@@ -100,7 +143,7 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
                     }else{
                         sendAttention();
                     }
-                }
+
             }
         });
 
@@ -121,6 +164,16 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
                     startActivity(MyFansActivity.class,null);
                 }
             }
+        });
+
+        binding.goChat.setOnClickListener(v -> {
+            HuanXinUtils.getInstance().setBaseData(TokenSingleBean.getInstance().getM_mobile(),TokenSingleBean.getInstance().getHeadUrl()
+                    ,personMessageBeans.getM_name(),personMessageBeans.getMi_head());
+            Bundle bundle = new Bundle();
+            bundle.putString("title",personMessageBeans.getM_name());
+            bundle.putString("username",personMessageBeans.getM_mobile());
+            bundle.putString("lastMsgId",null);
+            startActivity(ChatPageActivity.class,bundle);
         });
 
         //设置滚动监听
@@ -173,6 +226,30 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
         }else{
             ViewChangeUtil.changeRightDrawable(mActivity,binding.userName,R.mipmap.person_girl_mark_img);
         }
+        if(personMessageBeans.getRole_id() == 2 && attentionBeans != null){
+            binding.myTitle.setRightText("教练主页");
+            binding.myTitle.getRightView().setVisibility(View.VISIBLE);
+            binding.myTitle.getRightView().setOnClickListener(new View.OnClickListener() {
+                @SingleClick
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("coach_mid",String.valueOf(personMessageBeans.getM_id()));
+                    startActivity(CoachHomePageActivity.class,bundle);
+                }
+            });
+            binding.moreClass.setOnClickListener(new View.OnClickListener() {
+                @SingleClick
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("jl_mid",String.valueOf(personMessageBeans.getM_id()));
+                    startActivity(CourseListActivity.class,bundle);
+                }
+            });
+
+            getCourse(String.valueOf(personMessageBeans.getM_id()));
+        }
     }
 
     @Override
@@ -188,6 +265,7 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
 
     @Override
     protected void lazyLoad() {
+        mActivity.showLoading();
         if(attentionBeans != null){
             clearParams().setParams("other_m_id",String.valueOf(attentionBeans.getM_id()));
             Controller.myRequest(Constants.CIRCLE_OTHER_MEMBER_INDEX,Controller.TYPE_POST,getParams(), PersonMessageBeans.class,this);
@@ -196,6 +274,17 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
             Controller.myRequest(Constants.CIRCLE_MEMBER_INDEX,Controller.TYPE_POST,getParams(), PersonMessageBeans.class,this);
         }
     }
+
+    /*
+    * 查询教练课程
+    * */
+    private void getCourse(String coach_mid){
+        //加载私教课
+        clearParams().setParams("jl_mid", coach_mid).setParams("page","10")
+                .setParams("curpage","1");
+        Controller.myRequest(Constants.GET_COACH_COURSE_PRIVITE,Controller.TYPE_POST,getParams(), CouseListBean.class,this);
+    }
+
 
     /*
     * 请求个人的帖子列表
@@ -241,9 +330,19 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
 
     @Override
     public void onSuccess(Object data) {
+        mActivity.closeLoading();
         if(data instanceof PersonMessageBeans){
             personMessageBeans = ((PersonMessageBeans)data).getData();
             setData();
+        }
+
+        if(data instanceof CouseListBean){
+            courseList = ((CouseListBean)data).getData().getList();
+            if(courseList != null && courseList.size() > 0){
+                binding.courseTitleBox.setVisibility(View.VISIBLE);
+                binding.courseRecycler.setVisibility(View.VISIBLE);
+                couseListAdapter.setNewData(courseList);
+            }
         }
 
         if(data instanceof FeatureBean && isSuccess(data)){
@@ -270,6 +369,7 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
             }
 
         }
+
     }
 
     /*
@@ -295,11 +395,11 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
         if(code == ConstantsCode.ADD_FRIEND){
             if(attentionBeans.getIs_friend() == 1){
                 attentionBeans.setIs_friend(0);
-                binding.myTitle.setRightText("关注Ta");
+                binding.attention.setText("关注Ta");
                 showSuccess("取关成功！");
             }else{
                 attentionBeans.setIs_friend(1);
-                binding.myTitle.setRightText("取消关注");
+                binding.attention.setText("取消关注");
                 showSuccess("关注成功！");
             }
             adapter.notifyDataSetChanged();

@@ -23,7 +23,7 @@ public class ImageLoaderUtil implements IZoomMediaLoader {
 
     @Override
     public void displayImage(@NonNull Fragment context, @NonNull String path, ImageView imageView, @NonNull final MySimpleTarget simpleTarget) {
-        RequestOptions options = new RequestOptions().error(R.mipmap.a_testbaner3);
+        RequestOptions options = new RequestOptions().error(R.mipmap.defaul_no_img);
         Glide.with(context).load(path).apply(options).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -41,7 +41,7 @@ public class ImageLoaderUtil implements IZoomMediaLoader {
 
     @Override
     public void displayGifImage(@NonNull Fragment context, @NonNull String path, ImageView imageView, @NonNull final MySimpleTarget simpleTarget) {
-        RequestOptions options = new RequestOptions().dontAnimate().error(R.mipmap.a_testbaner3);
+        RequestOptions options = new RequestOptions().dontAnimate().error(R.mipmap.defaul_no_img);
         Glide.with(context).load(path).apply(options).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

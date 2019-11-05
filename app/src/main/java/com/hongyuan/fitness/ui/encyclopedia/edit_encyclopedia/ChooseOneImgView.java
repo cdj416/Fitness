@@ -75,7 +75,7 @@ public class ChooseOneImgView extends LinearLayout {
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
                     if(selectList.get(0).getCompressPath() != null){
                         imgFile = new File(selectList.get(0).getCompressPath());
-                        RequestOptions options = new RequestOptions().error(R.mipmap.a_testbaner3);
+                        RequestOptions options = new RequestOptions().error(R.mipmap.zhengfangxing_default_img);
                         Glide.with(getContext()).load(imgFile).apply(options).into(img);
                     }
                     break;

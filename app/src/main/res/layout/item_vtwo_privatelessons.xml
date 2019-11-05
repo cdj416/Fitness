@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:id="@+id/jumpBox">
-        <LinearLayout
+       <!-- <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -23,24 +23,23 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:src="@mipmap/a_test2"
+                android:src="@mipmap/defaul_no_img"
                 app:riv_corner_radius_top_right="6dp"
                 app:riv_corner_radius_bottom_right="6dp"
                 android:scaleType="centerCrop"/>
-        </LinearLayout>
-        <com.makeramen.roundedimageview.RoundedImageView
+        </LinearLayout>-->
+        <!--<com.makeramen.roundedimageview.RoundedImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:riv_corner_radius="6dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/home_meng_ban"/>
+            android:src="@mipmap/home_meng_ban"/>-->
         <TextView
             android:id="@+id/courseTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_FFFFFF"
+            android:textColor="@color/color_FF999999"
             android:textSize="@dimen/sp_12"
-            android:text="可约时间：最近 今天16:00"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="12dp"/>
         <LinearLayout
@@ -68,15 +67,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_FFFFFF"
-                    android:text="急速减脂塑形"/>
+                    android:textColor="@color/color_FF333333"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
                 <TextView
                     android:id="@+id/coachNameAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FFFFFF"
-                    android:text="李梦雪 / 首玺爱山店"/>
+                    android:textColor="@color/color_FF999999"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_marginEnd="100dp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -93,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FFFFFF"
+                android:textColor="@color/color_FF999999"
                 android:text="最低"/>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -103,21 +105,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FFFFFF"
+                    android:textColor="@color/color_EF5B48"
                     android:text="¥ "/>
                 <TextView
                     android:id="@+id/coursePrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_FFFFFF"
-                    android:textStyle="bold"
-                    android:text="400 "/>
+                    android:textColor="@color/color_EF5B48"
+                    android:textStyle="bold"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FFFFFF"
+                    android:textColor="@color/color_EF5B48"
                     android:text="/节"/>
             </LinearLayout>
         </LinearLayout>

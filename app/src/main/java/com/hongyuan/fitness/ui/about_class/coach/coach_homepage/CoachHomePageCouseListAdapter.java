@@ -22,8 +22,8 @@ public class CoachHomePageCouseListAdapter extends BaseQuickAdapter<CouseListBea
         if(!imgUrl.contains("http")){
             imgUrl = Constants.ADRESS + item.getCp_img();
         }
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
-        Glide.with(mContext).load(imgUrl).apply(options).into((RoundedImageView)helper.getView(R.id.bgImg));
+        //RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
+        //Glide.with(mContext).load(imgUrl).apply(options).into((RoundedImageView)helper.getView(R.id.bgImg));
 
         helper.setText(R.id.classType,item.getCp_name()).setText(R.id.classBewrite,item.getCp_info())
                 .setText(R.id.coachPrice,item.getCp_price());

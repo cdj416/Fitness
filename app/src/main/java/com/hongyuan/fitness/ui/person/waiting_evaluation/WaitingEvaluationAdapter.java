@@ -19,7 +19,7 @@ public class WaitingEvaluationAdapter extends BaseQuickAdapter<PriviteCourseChec
     }
     @Override
     protected void convert(BaseViewHolder helper, PriviteCourseCheckBeans.DataBean.ListBean item) {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img).centerCrop();
         Glide.with(mContext).load(item.getCp_img()).apply(options).into((RoundedImageView)helper.getView(R.id.courseImg));
 
         helper.setText(R.id.courseName,item.getCp_name()).setText(R.id.courseNum,"x"+item.getNum())

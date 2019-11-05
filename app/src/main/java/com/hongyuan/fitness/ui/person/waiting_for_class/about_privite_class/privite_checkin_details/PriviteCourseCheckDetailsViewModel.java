@@ -120,7 +120,7 @@ public class PriviteCourseCheckDetailsViewModel extends CustomViewModel implemen
     public void onSuccess(Object data) {
         if(data instanceof CourseDetailsBean && isSuccess(data)){
             detailsBean = (CourseDetailsBean)data;
-            RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+            RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img).centerCrop();
             Glide.with(mActivity).load(detailsBean.getData().getCp_img()).apply(options).into(binding.headBg);
             RequestOptions optionsHead = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img).centerCrop();
             Glide.with(mActivity).load(detailsBean.getData().getCoach_head()).apply(optionsHead).into(binding.headImg);

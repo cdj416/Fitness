@@ -68,7 +68,7 @@ public class EditorialEvaluationViewModel extends CustomViewModel {
             }
         });
 
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
         Glide.with(mActivity).load(courseBeans.getCp_img()).apply(options).into(binding.courseImg);
 
         binding.myRat.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {

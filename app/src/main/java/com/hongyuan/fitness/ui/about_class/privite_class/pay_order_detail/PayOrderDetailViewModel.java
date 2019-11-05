@@ -28,6 +28,8 @@ import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
 import com.hongyuan.fitness.ui.mall.good_order_details.SubmitOrderBean;
 import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayActivity;
 import com.hongyuan.fitness.ui.mall.good_pay.PayDataBean;
+import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
+import com.hongyuan.fitness.ui.person.my_coupon.select_coupon.SelectCouponActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.BigDecimalUtils;
@@ -47,6 +49,9 @@ public class PayOrderDetailViewModel extends CustomViewModel {
 
     private PointBean pointBean;
     private PriceDataBeans priceDataBeans;
+    private int couponId;
+
+    private CouponListBeans.DataBean.ListBean coupon;
 
     public PayOrderDetailViewModel(CustomActivity mActivity, ActivityPayOrderDetailsBinding binding) {
         super(mActivity);
@@ -113,6 +118,9 @@ public class PayOrderDetailViewModel extends CustomViewModel {
         clearParams().setParams("jl_mid",String.valueOf(courseDetail.getM_id()))
                 .setParams("ocp_num",binding.classNum.getText().toString())
                 .setParams("cp_id",String.valueOf(courseDetail.getCp_id()));
+        if(BaseUtil.isValue(coupon)){
+           setParams("cm_id",String.valueOf(coupon.getCm_id()));
+        }
         Controller.myRequest(Constants.BUY_PRIVITE_COURSE,Controller.TYPE_POST,getParams(), SubmitOrderBean.class,this);
     }
 
@@ -130,7 +138,7 @@ public class PayOrderDetailViewModel extends CustomViewModel {
 
         //通知子view可以去干自己的事了
         binding.selectTime.setData(String.valueOf(courseDetail.getM_id()),this,0);
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
         Glide.with(mActivity).load(courseDetail.getCp_img()).apply(options).into(binding.courseImg);
         binding.coursePrice.setText(String.valueOf(courseDetail.getCp_price()));
         binding.classNum.setText(String.valueOf(courseDetail.getCp_num()));
@@ -151,6 +159,26 @@ public class PayOrderDetailViewModel extends CustomViewModel {
         });
 
         binding.classNum.addTextChangedListener(watcher);
+
+        binding.selectCouponBox.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("couponFor","3");
+            bundle.putString("totalMoney",binding.allPrice.getText().toString());
+            bundle.putInt("couponId",couponId);
+            startActivityForResult(SelectCouponActivity.class,bundle);
+        });
+    }
+
+    @Override
+    protected void forResult(Bundle bundle) {
+        coupon = (CouponListBeans.DataBean.ListBean) bundle.getSerializable("coupon");
+        if(BaseUtil.isValue(coupon)){
+            couponId = coupon.getCoupon_id();
+            binding.couponName.setText(coupon.getCoupon_name());
+        }else{
+            binding.couponName.setText("请选择优惠券");
+        }
+
     }
 
     TextWatcher watcher = new TextWatcher() {

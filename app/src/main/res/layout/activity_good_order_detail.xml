@@ -46,6 +46,35 @@
                 android:layout_height="1px"
                 android:background="@color/color_EEEEEE"/>
             <RelativeLayout
+                android:id="@+id/selectCouponBox"
+                android:layout_width="match_parent"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_height="44dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_777777"
+                    android:textSize="12sp"
+                    android:layout_centerVertical="true"
+                    android:text="优惠券:"/>
+                <TextView
+                    android:id="@+id/selectCoupon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_EF5B48"
+                    android:textSize="@dimen/sp_14"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:drawableRight="@mipmap/right_huise_img"
+                    android:gravity="center"
+                    android:text="请选择优惠券"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_EEEEEE"/>
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -56,7 +85,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     app:riv_corner_radius="3dp"
-                    android:src="@mipmap/a_test2"
+                    android:src="@mipmap/zhengfangxing_default_img"
                     android:scaleType="centerCrop"/>
                 <LinearLayout
                     android:layout_width="wrap_content"

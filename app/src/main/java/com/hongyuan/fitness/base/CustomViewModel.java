@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.google.gson.Gson;
 import com.hongyuan.fitness.ui.find.circle.edit_post.FileBean;
 import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.util.EncryptionUtil;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -213,6 +214,13 @@ public abstract class CustomViewModel implements RetrofitListener {
     }
 
     /*
+    * 获取startActivityForResult传递的值
+    * */
+    public Bundle getBundle(String key){
+        return mActivity.getIntent().getBundleExtra(key);
+    }
+
+    /*
     * 组装参数
     * */
     public CustomViewModel setParams(String key,String value){
@@ -363,7 +371,7 @@ public abstract class CustomViewModel implements RetrofitListener {
     public void onError(int err_code,String description) {
         mActivity.closeLoading();
         if(err_code == ISLOGIN && description.contains("先登录")){
-            startActivity(VtwoLoginActivity.class,null);
+            startActivity(VtwoVerificationLoginActivity.class,null);
         }else{
             LemonBubble.showError(mActivity, description, 2000);
         }
@@ -393,7 +401,7 @@ public abstract class CustomViewModel implements RetrofitListener {
            if(Integer.valueOf(baseBean.getStatus().getSucceed()) == SUCCESS ){
                return true;
            }else if(baseBean.getStatus().getError_code() == ISLOGIN){
-               startActivity(VtwoLoginActivity.class,null);
+               startActivity(VtwoVerificationLoginActivity.class,null);
            }else{
                LemonBubble.showError(mActivity, baseBean.getStatus().getError_desc(), 2000);
            }

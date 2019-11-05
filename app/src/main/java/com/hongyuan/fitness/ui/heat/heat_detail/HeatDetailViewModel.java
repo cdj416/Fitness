@@ -48,7 +48,7 @@ public class HeatDetailViewModel extends CustomViewModel {
 
     @Override
     protected void setData() {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
         Glide.with(mActivity).load(detailBean.getData().getF_img()).apply(options).into(binding.foodImg);
         binding.foodName.setText(detailBean.getData().getF_name());
         binding.foodScale.setText(BaseUtil.getNoZoon(Double.valueOf(detailBean.getData().getF_cal())*100)+"千卡/100克");

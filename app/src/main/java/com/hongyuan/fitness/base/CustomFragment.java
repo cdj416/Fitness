@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.custom_view.TitleView;
 import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.util.EncryptionUtil;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -450,7 +451,7 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     /*
      * 清空参数集
      * */
-    protected CustomFragment clearParams(){
+    public CustomFragment clearParams(){
         if(params != null){
             params.clear();
         }
@@ -460,7 +461,7 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     /*
      * 获取参数集合
      * */
-    protected Map<String,String> getParams(){
+    public Map<String,String> getParams(){
         if(getBaseParams() != null){
             if(params == null){
                 params = new HashMap<>();
@@ -532,7 +533,7 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     @Override
     public void onError(int err_code,String description) {
         if(err_code == ISLOGIN && description.contains("登录")){
-            startActivity(VtwoLoginActivity.class,null);
+            startActivity(VtwoVerificationLoginActivity.class,null);
         }else{
             LemonBubble.showError(getContext(), description, 2000);
         }
@@ -548,7 +549,7 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
             if(Integer.valueOf(baseBean.getStatus().getSucceed()) == SUCCESS ){
                 return true;
             }else if(baseBean.getStatus().getError_code() == ISLOGIN){
-                startActivity(VtwoLoginActivity.class,null);
+                startActivity(VtwoVerificationLoginActivity.class,null);
             }else{
                 LemonBubble.showError(mActivity, baseBean.getStatus().getError_desc(), 2000);
                 return false;

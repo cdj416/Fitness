@@ -16,6 +16,10 @@ import com.hongyuan.fitness.ui.mall.good_details.GoodDetailsBean;
 import com.hongyuan.fitness.ui.mall.good_details.GoodSelectSkuBean;
 import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayActivity;
 import com.hongyuan.fitness.ui.mall.good_pay.PayDataBean;
+import com.hongyuan.fitness.ui.membership_card.card_detail.CardAddPersonBeans;
+import com.hongyuan.fitness.ui.membership_card.card_detail.add_person.CardAddPersonViewModel;
+import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
+import com.hongyuan.fitness.ui.person.my_coupon.select_coupon.SelectCouponActivity;
 import com.hongyuan.fitness.ui.store.more_store.MoreStoreActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.BigDecimalUtils;
@@ -32,6 +36,10 @@ public class GoodOrderDetailsViewModel extends CustomViewModel {
     //查询的积分数据
     private PointBean pointBean;
 
+    //所选优惠价id
+    private int couponId;
+    private CouponListBeans.DataBean.ListBean coupon;
+
     public GoodOrderDetailsViewModel(CustomActivity mActivity, ActivityGoodOrderDetailBinding binding) {
         super(mActivity);
         this.binding = binding;
@@ -44,7 +52,7 @@ public class GoodOrderDetailsViewModel extends CustomViewModel {
         infoBean = (GoodDetailsBean.DataBean.InfoBean)getBundle().getSerializable("InfoBean");
         paramsBean = (CreateOrderDetailsBean)getBundle().getSerializable("paramsBean");
 
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_testbaner3).error(R.mipmap.a_testbaner3);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
         Glide.with(mActivity).load(infoBean.getG_img()).apply(options).into(binding.goodImg);
 
         binding.goodName.setText(infoBean.getG_name());
@@ -73,6 +81,14 @@ public class GoodOrderDetailsViewModel extends CustomViewModel {
         }else{
             binding.quhuoStoreName.setText("请选择");
         }
+
+        binding.selectCouponBox.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("couponFor","4");
+            bundle.putString("totalMoney",binding.allPrice.getText().toString());
+            bundle.putInt("couponId",couponId);
+            startActivityForResult(SelectCouponActivity.class,bundle);
+        });
     }
 
     //选择门店
@@ -89,12 +105,30 @@ public class GoodOrderDetailsViewModel extends CustomViewModel {
         }
     });
 
+    @Override
+    protected void forResult(Bundle bundle) {
+
+        if(bundle.getSerializable("coupon") instanceof CouponListBeans.DataBean.ListBean){
+            coupon = (CouponListBeans.DataBean.ListBean) bundle.getSerializable("coupon");
+            if(BaseUtil.isValue(coupon)){
+                couponId = coupon.getCoupon_id();
+                binding.selectCoupon.setText(coupon.getCoupon_name());
+            }else{
+                binding.selectCoupon.setText("请选择优惠券");
+            }
+        }
+
+    }
+
     /*
     * 下单
     * */
     private void creatOrder(){
         clearParams().setParams("gp_id",paramsBean.getGp_id()).setParams("op_num",paramsBean.getOp_num())
                 .setParams("store_id",paramsBean.getStore_id()).setParams("op_quhuo_osid",paramsBean.getOp_quhuo_osid());
+        if(coupon != null){
+            setParams("cm_id",String.valueOf(coupon.getCm_id()));
+        }
         Controller.myRequest(Constants.ADD_GOODS_ORDER,Controller.TYPE_POST,getParams(), SubmitOrderBean.class,this);
     }
 

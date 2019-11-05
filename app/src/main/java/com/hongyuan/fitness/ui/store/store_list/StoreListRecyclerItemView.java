@@ -23,17 +23,9 @@ import com.hongyuan.fitness.ui.about_class.coach.coach_list.CoachListAdapter;
 import com.hongyuan.fitness.ui.about_class.group_class.group_details.MissionDetailActivity;
 import com.hongyuan.fitness.ui.main.main_about_class.group_class.vtwo_group_class.VtwoGroupClassAdapter;
 import com.hongyuan.fitness.ui.main.main_about_class.group_class.vtwo_group_class.VtwoGroupClassBeans;
-import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.PrivateLessonsAdapter;
-import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.PrivateLessonsBean;
 import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons.VtwoPrivateLessonsAdapter;
 import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons.VtwoPrivateLessonsBeans;
-import com.hongyuan.fitness.ui.main.main_home.recommend.BoutiqueGroupBean;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vtwo_home.VtwoStarCoachBean;
-import com.hongyuan.fitness.ui.membership_card.card_detail.CardDetailsActivity;
-import com.hongyuan.fitness.ui.store.CardItemBean;
-import com.hongyuan.fitness.ui.store.StoreMembershipCardAdapter;
-import com.hongyuan.fitness.ui.store.StoreStarCoachAdapter;
-import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.previewlibrary.GPreviewBuilder;
 import com.previewlibrary.enitity.UserViewInfo;
 
@@ -136,25 +128,6 @@ public class StoreListRecyclerItemView extends LinearLayout {
                 ((CustomActivity)getContext()).startActivity(CoachHomePageActivity.class,bundle);
             }
         });
-    }
-
-    /*
-    * 会籍卡-门店使用
-    * */
-    public void setCardList(List<CardItemBean.DataBean.ListBean> mList){
-
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-        mRecycler.setLayoutManager(layoutManager);
-
-        StoreMembershipCardAdapter adapter = new StoreMembershipCardAdapter();
-        mRecycler.setAdapter(adapter);
-        adapter.setNewData(mList);
-        adapter.setOnItemChildClickListener((adapter1, view, position) -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("card_id",String.valueOf(mList.get(position).getCard_id()));
-            ((CustomActivity)getContext()).startActivity(CardDetailsActivity.class,bundle);
-        });
-
     }
 
     /*

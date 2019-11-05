@@ -7,11 +7,8 @@ import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.main.main_about_class.group_class.vtwo_group_class.VtwoGroupClassBeans;
-import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.PrivateLessonsBean;
 import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons.VtwoPrivateLessonsBeans;
-import com.hongyuan.fitness.ui.main.main_home.recommend.BoutiqueGroupBean;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vtwo_home.VtwoStarCoachBean;
-import com.hongyuan.fitness.ui.store.CardItemBean;
 import com.hongyuan.fitness.ui.store.StoreDetailBean;
 
 public class StoreListFragment extends CustomFragment {
@@ -19,8 +16,6 @@ public class StoreListFragment extends CustomFragment {
     private StoreListRecyclerItemView recItem;
     private String os_id = "";
     private String _type = "";
-
-    private CardItemBean cardBeans;
     private VtwoStarCoachBean starCoachBean;
     private VtwoPrivateLessonsBeans vtwoPrivateLessonsBeans;
     private VtwoGroupClassBeans botiqueBeans;
@@ -45,11 +40,6 @@ public class StoreListFragment extends CustomFragment {
 
     @Override
     protected void lazyLoad() {
-        /*if(_type.equals("0")){
-            //获取店铺发行的会员卡
-            clearParams().setParams("os_id",os_id);
-            Controller.myRequest(Constants.GET_CARD_LIST,Controller.TYPE_POST,getParams(), CardItemBean.class,this);
-        }*/
         if(_type.equals("1")){
             //读取门店的教练
             clearParams().setParams("os_ids",os_id);
@@ -86,35 +76,11 @@ public class StoreListFragment extends CustomFragment {
     //刷新数据
     @Override
     public void refreshData() {
-        cardBeans = null;
         lazyLoad();
     }
 
     @Override
     public void onSuccess(Object data) {
-        //设置会籍卡
-        if(data instanceof CardItemBean){
-            CardItemBean pageData = (CardItemBean)data;
-            if(curPage == FIRST_PAGE){
-                if(pageData.getData().getList() != null && pageData.getData().getList().size() > 0){
-                    cardBeans = pageData;
-                }
-            }else{
-                if(pageData.getData().getList() != null && pageData.getData().getList().size() > 0){
-                    cardBeans.getData().getList().addAll(pageData.getData().getList());
-                }
-            }
-
-            if(cardBeans != null && cardBeans.getData() != null &&
-                    cardBeans.getData().getList() != null &&
-                    cardBeans.getData().getList().size() > 0){
-                recItem.setCardList(cardBeans.getData().getList());
-                setPromtView(SHOW_DATA);
-            }else{
-                setPromtView(SHOW_EMPTY);
-            }
-        }
-
         //设置明星教练
         if(data instanceof VtwoStarCoachBean){
             VtwoStarCoachBean pageData = (VtwoStarCoachBean)data;

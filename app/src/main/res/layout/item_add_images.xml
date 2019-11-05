@@ -22,7 +22,7 @@
         android:scaleType="centerCrop"
         app:riv_corner_radius="6dp"
         android:visibility="gone"
-        android:src="@mipmap/a_test2"/>
+        android:src="@mipmap/zhengfangxing_default_img"/>
     <ImageView
         android:id="@+id/closeImg"
         android:layout_width="wrap_content"

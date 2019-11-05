@@ -93,7 +93,7 @@ public class ReservationDetailsViewModel extends CustomViewModel {
     public void onSuccess(Object data) {
         if(data instanceof ReservationBeans){
             detailsBean = (ReservationBeans)data;
-            RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+            RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
             Glide.with(mActivity).load(detailsBean.getData().getCp_img()).apply(options).into(binding.courseImg);
 
             binding.courseName.setText(detailsBean.getData().getCp_name());

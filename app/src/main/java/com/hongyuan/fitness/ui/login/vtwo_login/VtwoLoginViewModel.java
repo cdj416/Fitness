@@ -24,6 +24,7 @@ import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
 import com.hongyuan.fitness.util.ViewChangeUtil;
+import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
@@ -47,7 +48,7 @@ public class VtwoLoginViewModel extends CustomViewModel {
 
         //验证码登录
         binding.goVerificationLogin.setOnClickListener(v -> {
-            startActivity(VtwoVerificationLoginActivity.class,null);
+            mActivity.finish();
         });
         //修改密码
         binding.goModifyPassword.setOnClickListener(v -> {
@@ -153,6 +154,8 @@ public class VtwoLoginViewModel extends CustomViewModel {
                     JSONObject object = new JSONObject(data.toString());
                     JSONObject jsonObject = (JSONObject) object.get("data");
                     if(BaseUtil.isJsonValue(jsonObject.get("info"))){
+                        //去注册登录环信账号。
+                        HuanXinUtils.getInstance().registerdHuanXin(userToken.getM_mobile());
                         mActivity.showSuccess("登录成功", MainActivity.class,null);
                     }else{
                         Bundle bundle = new Bundle();

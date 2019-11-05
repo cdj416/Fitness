@@ -44,6 +44,11 @@ public class GoodOrderDetailsActivity extends CustomActivity {
     }
 
     @Override
+    protected void forResult(Bundle bundle) {
+        viewModel.forResult(bundle);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
         super.onCreate(savedInstanceState);

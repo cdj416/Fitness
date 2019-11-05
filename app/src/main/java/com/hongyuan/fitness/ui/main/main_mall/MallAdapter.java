@@ -17,7 +17,7 @@ public class MallAdapter extends BaseQuickAdapter<MallBeans.DataBean.ListBean, B
     }
     @Override
     protected void convert(BaseViewHolder helper, MallBeans.DataBean.ListBean item) {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_testbaner3).error(R.mipmap.a_testbaner3);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
         Glide.with(mContext).load(item.getG_img()).apply(options).into((RoundedImageView)helper.getView(R.id.goodImg));
 
         helper.setText(R.id.goodName,item.getG_name());

@@ -1,5 +1,6 @@
 package com.hongyuan.fitness.ui.mall.mine.mine_order.mine_order_list;
 
+import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -9,6 +10,8 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.BigDecimalUtils;
+import com.hongyuan.fitness.util.HourMeterUtil;
+import com.hongyuan.fitness.util.TimeUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
@@ -20,7 +23,7 @@ public class MineOrderAdapter extends BaseQuickAdapter<MineOrderBeans.DataBean.L
     }
     @Override
     protected void convert(BaseViewHolder helper, MineOrderBeans.DataBean.ListBean item) {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_testbaner3).error(R.mipmap.a_testbaner3);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
         Glide.with(mContext).load(item.getO_img()).apply(options).into((RoundedImageView)helper.getView(R.id.orderImg));
 
         helper.setText(R.id.orderTime,item.getAdd_date()).setText(R.id.orderStatus,getText(item.getO_pay_state()))
@@ -47,7 +50,37 @@ public class MineOrderAdapter extends BaseQuickAdapter<MineOrderBeans.DataBean.L
             helper.getView(R.id.orderPoint).setVisibility(View.GONE);
             helper.getView(R.id.orderAllPoint).setVisibility(View.GONE);
         }
-        helper.addOnClickListener(R.id.jumpBox);
+        if(item.getO_pay_state() == 2){
+            helper.getView(R.id.operatingBox).setVisibility(View.VISIBLE);
+        }else{
+            helper.getView(R.id.operatingBox).setVisibility(View.GONE);
+        }
+
+        helper.addOnClickListener(R.id.jumpBox).addOnClickListener(R.id.cancelOrder)
+                .addOnClickListener(R.id.goPay);
+
+
+        int times = (900 - (int) ((-TimeUtil.getDifferenceNow(item.getAdd_date(),TimeUtil.dateFormatYMDHMS)) / 1000));
+        if(times < 0 ){
+            helper.getView(R.id.goPay).setVisibility(View.GONE);
+        }else{
+            helper.getView(R.id.goPay).setVisibility(View.VISIBLE);
+
+            //计时回调
+            HourMeterUtil hourUtil = new HourMeterUtil();
+            hourUtil.setTimeCallBack(passedTime -> {
+                int showSeconds = times - passedTime;
+                if(showSeconds > 0){
+                    helper.setText(R.id.goPay,"支付 "+TimeUtil.getFenMiaoTime(times - passedTime));
+                }else{
+                    helper.getView(R.id.goPay).setVisibility(View.GONE);
+                    hourUtil.stopCount();
+                }
+
+            });
+            hourUtil.startCount();
+        }
+
     }
 
     /*
@@ -88,10 +121,6 @@ public class MineOrderAdapter extends BaseQuickAdapter<MineOrderBeans.DataBean.L
     }
 
     /*
-    * 显示积分还是显示价格
-    * */
-
-    /*
     * 获取规格的字符串显示
     * */
     private String getSkuStr(List<String> sku){
@@ -104,4 +133,8 @@ public class MineOrderAdapter extends BaseQuickAdapter<MineOrderBeans.DataBean.L
         }
         return showSku;
     }
+
+    /*
+    * 计算当前时间
+    * */
 }

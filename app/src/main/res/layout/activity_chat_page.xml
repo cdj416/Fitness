@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageViewModel"/>
+    </data>
+
+    <com.hongyuan.fitness.ui.person.mine_message.chat_page.views.ChatView
+        android:id="@+id/chatView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_FFFFFF">
+
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/chatRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/chatInput">
+            <cn.jiguang.imui.messages.MessageList
+                android:id="@+id/msgList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:avatarHeight="44dp"
+                app:avatarWidth="44dp"
+                app:showReceiverDisplayName="false"
+                app:showSenderDisplayName="false"
+                app:avatarRadius="22dp"
+                app:bubbleMaxWidth="0.70"
+                app:dateTextSize="12sp"
+                app:dateTextColor="@color/color_FF999999"
+                app:dateBackgroundColor="@color/transparent"
+                app:receiveBubblePaddingTop="12dp"
+                app:receiveBubblePaddingBottom="12dp"
+                app:receiveBubblePaddingLeft="16dp"
+                app:receiveBubblePaddingRight="10dp"
+                app:receiveTextColor="#FF333333"
+                app:receiveTextSize="14sp"
+                app:sendBubblePaddingBottom="12dp"
+                app:sendBubblePaddingTop="12dp"
+                app:sendBubblePaddingLeft="10dp"
+                app:sendBubblePaddingRight="16dp"
+                app:sendTextColor="#FFFFFFFF"
+                app:sendTextSize="14sp"
+                app:sendBubbleDrawable="@drawable/msg_list_my_cont_bg"
+                app:receiveBubbleDrawable="@drawable/msg_list_other_cont_bg"/>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+        <cn.jiguang.imui.chatinput.ChatInputView
+            android:id="@+id/chatInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:inputMarginLeft="3dp"
+            app:inputMarginRight="3dp"
+            app:cameraQuality="0.6"
+            app:showSelectAlbum="true"/>
+    </com.hongyuan.fitness.ui.person.mine_message.chat_page.views.ChatView>
+</layout>

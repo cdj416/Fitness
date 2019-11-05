@@ -80,7 +80,7 @@ public class CommentAdapter extends BaseQuickAdapter<CommentBeans.DataBean.ListB
     private NineGridImageViewAdapter<CommentBeans.DataBean.ListBean.CriBean> mAdapter = new NineGridImageViewAdapter<CommentBeans.DataBean.ListBean.CriBean>() {
         @Override
         protected void onDisplayImage(Context context, ImageView imageView, CommentBeans.DataBean.ListBean.CriBean s) {
-            RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_testbaner3).error(R.mipmap.a_testbaner3).centerCrop();
+            RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
             Glide.with(mContext).load(s.getCri_src()).apply(options).into(imageView);
         }
 

@@ -10,29 +10,31 @@
     <RelativeLayout
         android:layout_width="200dp"
         android:layout_height="98dp"
-        android:id="@+id/courseBox">
+        android:id="@+id/courseBox"
+        android:background="@drawable/shape_radius6_00000000_stroke_cccccc">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/color_FFFFFF">
             <View
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="match_parent" />
-            <com.makeramen.roundedimageview.RoundedImageView
+            <!--<com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/bgImg"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 app:riv_corner_radius="6dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/a_test2"/>
+                android:src="@mipmap/zhengfangxing_default_img"/>-->
         </LinearLayout>
-        <com.makeramen.roundedimageview.RoundedImageView
+        <!--<com.makeramen.roundedimageview.RoundedImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@mipmap/home_meng_ban"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"/>-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,16 +45,20 @@
                 android:id="@+id/classType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_16"
-                android:textColor="@color/color_FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_FF333333"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="增肌Max"/>
             <TextView
                 android:id="@+id/classBewrite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FFFFFF"
-                android:alpha="0.8"
+                android:textColor="@color/color_FF999999"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="私人定制肌肉强化训练"/>
 
             <LinearLayout
@@ -65,20 +71,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FFFFFF"
+                    android:textColor="@color/color_EF5B48"
                     android:text="¥"/>
                 <TextView
                     android:id="@+id/coachPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_FFFFFF"
+                    android:textColor="@color/color_EF5B48"
                     android:text="400"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FFFFFF"
+                    android:textColor="@color/color_EF5B48"
                     android:text="/节"/>
             </LinearLayout>
         </LinearLayout>

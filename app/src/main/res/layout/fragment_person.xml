@@ -115,6 +115,17 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/shape_radius6_ffffff"
+                    app:leftDrawable="@mipmap/person_coupon_mark"
+                    app:leftText="优惠券"
+                    app:itemType="coupon"/>
+
+                <com.hongyuan.fitness.custom_view.person_cloum.PersonItemCloumView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/shape_radius6_ffffff"
                     app:leftDrawable="@mipmap/person_share_mark"
                     app:leftText="邀请分享"
                     app:itemType="share"/>

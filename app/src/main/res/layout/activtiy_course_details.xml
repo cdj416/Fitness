@@ -33,8 +33,8 @@
                         android:id="@+id/headBg"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/a_test2"/>
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/defaul_no_img"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="90dp"

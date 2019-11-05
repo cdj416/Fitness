@@ -1,11 +1,9 @@
 package com.hongyuan.fitness.ui.main.main_about_class.group_class.vtwo_group_class;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.util.TimeUtil;
-import com.makeramen.roundedimageview.RoundedImageView;
 
 public class VtwoGroupClassAdapter extends BaseQuickAdapter<VtwoGroupClassBeans.DataBean.ListBean, BaseViewHolder> {
 
@@ -14,7 +12,7 @@ public class VtwoGroupClassAdapter extends BaseQuickAdapter<VtwoGroupClassBeans.
     }
     @Override
     protected void convert(BaseViewHolder helper, VtwoGroupClassBeans.DataBean.ListBean item) {
-        Glide.with(mContext).load(item.getCs_img()).into((RoundedImageView)helper.getView(R.id.courseImg));
+        //Glide.with(mContext).load(item.getCs_img()).into((RoundedImageView)helper.getView(R.id.courseImg));
 
         helper.setText(R.id.courseTime,showTimeText(item.getCs_start_date(),item.getCs_end_date()))
                 .setText(R.id.courseName,item.getCs_name())

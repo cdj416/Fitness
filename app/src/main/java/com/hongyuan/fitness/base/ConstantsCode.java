@@ -70,6 +70,10 @@ public class ConstantsCode {
     //收藏--添加收藏
     public final static int DEL_COLLECTION = 0x031;
 
+    /*================================四版需要的=======================================*/
+    //收藏--添加收藏
+    public final static int GET_COUPON = 0x032;
+
     /*================================已下EventBus使用的=======================================*/
     //食物搜索
     public final static int EB_FOOD_SEARCH = 1;

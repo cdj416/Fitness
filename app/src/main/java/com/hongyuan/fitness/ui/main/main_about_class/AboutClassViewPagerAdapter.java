@@ -6,9 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.main.TitleBean;
-import com.hongyuan.fitness.ui.main.main_about_class.group_class.GroupClassFragment;
 import com.hongyuan.fitness.ui.main.main_about_class.group_class.vtwo_group_class.VtwoGroupClassFragment;
-import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.PrivateLessonsFragment;
 import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons.VtwoPrivateLessonsFragment;
 
 import java.util.ArrayList;

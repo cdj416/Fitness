@@ -16,9 +16,26 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/color_EEEEEE"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mRecycler"
+        <com.hongyuan.fitness.custom_view.StickyScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/chatRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+
+        </com.hongyuan.fitness.custom_view.StickyScrollView>
+
     </LinearLayout>
 </layout>

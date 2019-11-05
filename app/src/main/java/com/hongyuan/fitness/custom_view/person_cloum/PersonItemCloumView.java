@@ -17,6 +17,7 @@ import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
 import com.hongyuan.fitness.ui.person.about_us.AboutUsActivity;
 import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchActivity;
 import com.hongyuan.fitness.ui.person.my_collection.MyCollectionActivity;
+import com.hongyuan.fitness.ui.person.my_coupon.MyCouponActivity;
 import com.hongyuan.fitness.ui.person.push_share.PushShareActivity;
 import com.hongyuan.fitness.ui.person.setting.SettingActivity;
 import com.hongyuan.fitness.util.BaseUtil;
@@ -91,6 +92,9 @@ public class PersonItemCloumView extends LinearLayout {
                 }
                 if(itemType == 5){
                     mActivity.startActivity(AboutUsActivity.class,null);
+                }
+                if(itemType == 6){
+                    mActivity.startActivity(MyCouponActivity.class,null);
                 }
             }
         });

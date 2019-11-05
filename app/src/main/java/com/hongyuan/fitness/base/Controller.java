@@ -127,7 +127,7 @@ public class Controller {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("cdj","====解析错误===="+mPath+"========"+e.getMessage());
+                    //Log.e("cdj","====解析错误===="+mPath+"========"+e.getMessage());
                     //解析出错
                     if(listener != null){
                         listener.onError(baseBean.getStatus().getError_code(),"解析异常！");
@@ -176,7 +176,7 @@ public class Controller {
                 String key = s;
                 String value = maps.get(s);
                 params.addBodyParameter(key, value);
-                Log.e("cdj","=====key===="+key+"=====value===="+value);
+                //Log.e("cdj","=====key===="+key+"=====value===="+value);
             }
         }
         if(requestTpey == TYPE_GET){
@@ -195,7 +195,7 @@ public class Controller {
             BaseBean baseBean;
             @Override
             public void onSuccess(String result) {
-                Log.e("cdj","====="+result);
+                //Log.e("cdj","====="+result);
                 try {
                     baseBean = GsonUtil.getGson().fromJson(result, new TypeToken<BaseBean>(){}.getType());
                     if("1".equals(baseBean.getStatus().getSucceed())){
@@ -252,7 +252,7 @@ public class Controller {
                                                   final RetrofitListener<T> listener){
         RequestParams params = new RequestParams(path);
         mPath = path;
-        Log.e("cdj","====接口地址==="+path);
+        //Log.e("cdj","====接口地址==="+path);
         if(maps != null){
             //组装常规参数
             Set<String> set = maps.keySet();
@@ -260,7 +260,7 @@ public class Controller {
                 String key = s;
                 String value = maps.get(s);
                 params.addBodyParameter(key, value);
-                Log.e("cdj","=====key===="+key+"=====value===="+value);
+                //Log.e("cdj","=====key===="+key+"=====value===="+value);
             }
         }
         if(requestTpey == TYPE_GET){
@@ -275,7 +275,7 @@ public class Controller {
         return new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                Log.e("cdj","====="+result);
+                //Log.e("cdj","====="+result);
                 listener.onSuccess(code,result);
             }
 

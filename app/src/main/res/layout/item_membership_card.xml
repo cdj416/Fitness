@@ -18,37 +18,56 @@
             android:layout_height="match_parent"
             app:riv_corner_radius="10dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/zhuanshi_card"/>
+            android:src="@mipmap/defaul_no_img"/>
+
+        <TextView
+            android:id="@+id/useMark"
+            android:layout_width="68dp"
+            android:layout_height="24dp"
+            android:textColor="#FF6484F0"
+            android:textSize="@dimen/sp_12"
+            android:background="@drawable/shape_radius16_right_ffffff"
+            android:gravity="center"
+            android:layout_marginTop="18dp"
+            android:text="正在使用"/>
+
+        <TextView
+            android:id="@+id/cardName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/color_FFFFFF"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="18dp"
+            android:text="钻石店通卡"/>
+
         <TextView
             android:id="@+id/cardUseTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_FFFFFF"
             android:textSize="@dimen/sp_16"
-            android:layout_marginLeft="16dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="21dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/cardName"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="10dp"
             android:text="2020.9.1到期"/>
+
         <TextView
-            android:id="@+id/cardTypeText"
+            android:id="@+id/memberQr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp_14"
             android:textColor="@color/color_FFFFFF"
-            android:layout_above="@id/cardUseTime"
-            android:layout_marginLeft="16dp"
-            android:layout_marginBottom="11dp"
-            android:text="钻石店通卡"/>
-        <TextView
-            android:id="@+id/xuKaButton"
-            android:layout_width="80dp"
-            android:layout_height="44dp"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/shape_radius24_stroke_ffffff"
-            android:layout_margin="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:textColor="@color/color_FFFFFF"
-            android:textSize="@dimen/sp_16"
-            android:text="续卡"/>
+            android:drawableLeft="@mipmap/eq_white_mark"
+            android:drawablePadding="6dp"
+            android:visibility="gone"
+            android:text="会员码"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

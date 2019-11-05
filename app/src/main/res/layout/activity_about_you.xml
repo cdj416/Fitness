@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/color_FF333333"
                     android:textSize="12sp"
-                    android:text="km"/>
+                    android:text="kg"/>
             </LinearLayout>
             <com.hongyuan.fitness.custom_view.MyRulerView
                 android:id="@+id/bodyWeightRuler"

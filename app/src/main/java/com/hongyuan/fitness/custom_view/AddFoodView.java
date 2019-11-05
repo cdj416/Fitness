@@ -81,7 +81,7 @@ public class AddFoodView extends LinearLayout implements View.OnClickListener {
         this.data = data;
         this.dialog = dialog;
 
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
         Glide.with(getContext()).load(data.getF_img()).apply(options).into(foodImg);
         foodName.setText(data.getF_name());
         foodNum.setText(100+(data.getF_type() == 1 ? "毫升" :"克"));

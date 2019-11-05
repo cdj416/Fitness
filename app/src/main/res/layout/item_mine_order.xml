@@ -56,7 +56,7 @@
                     app:riv_corner_radius="3dp"
                     android:scaleType="centerCrop"
                     android:layout_centerVertical="true"
-                    android:src="@mipmap/a_test2"/>
+                    android:src="@mipmap/zhengfangxing_default_img"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -154,6 +154,49 @@
                         android:textSize="18sp"
                         android:textColor="@color/color_EF5B48"
                         android:text="¥0"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/operatingBox"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/color_EEEEEE"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true">
+                    <TextView
+                        android:id="@+id/cancelOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_777777"
+                        android:textSize="@dimen/sp_12"
+                        android:text="取消订单"
+                        android:background="@drawable/shape_radius16_ffffff_stroke_979797"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="6dp"
+                        android:layout_marginEnd="16dp"
+                        android:paddingBottom="6dp"/>
+                    <TextView
+                        android:id="@+id/goPay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FFFFFF"
+                        android:textSize="@dimen/sp_12"
+                        android:text="支付 15:58"
+                        android:background="@drawable/shape_radius16_ef5b48"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="6dp"
+                        android:layout_marginEnd="16dp"
+                        android:paddingBottom="6dp"/>
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>

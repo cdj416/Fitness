@@ -31,7 +31,7 @@
                         android:layout_height="108dp"
                         app:riv_corner_radius="6dp"
                         android:scaleType="centerCrop"
-                        android:src="@mipmap/a_testbanner4"/>
+                        android:src="@mipmap/zhengfangxing_default_img"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

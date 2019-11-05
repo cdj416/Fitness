@@ -1,18 +1,23 @@
 package com.hongyuan.fitness.ui.mall.mine.mine_order.mine_order_list;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
+import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
+import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayActivity;
+import com.hongyuan.fitness.ui.mall.good_pay.PayDataBean;
 import com.hongyuan.fitness.ui.mall.mine.mine_order.order_details.MineOrderDetailsActivity;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -26,13 +31,19 @@ public class MineOrderFragment extends CustomFragment {
     private LinearLayout topBox;
     private RelativeLayout load_box;
 
+    //用户积分
+    private PointBean pointBean;
+
     //状态栏
     private List<TypeBeans> mList = new ArrayList<>();
     //订单信息
-    private MineOrderBeans mineOrderBeans;
+    private List<MineOrderBeans.DataBean.ListBean> orderList;
+    //点击取消订单的坐标
+    private int mPosition;
 
     //支付状态
     private String o_pay_state = "0";
+
 
     @Override
     public int getLayoutId() {
@@ -70,7 +81,10 @@ public class MineOrderFragment extends CustomFragment {
             typeAdapter.setNewData(mList);
             //赋值支付状态
             o_pay_state = mList.get(position).getTypeId();
-            mineOrderBeans = null;
+            if(orderList != null){
+                orderList.clear();
+            }
+
             getData();
         });
 
@@ -80,12 +94,36 @@ public class MineOrderFragment extends CustomFragment {
         adapter = new MineOrderAdapter();
         mRecycler.setAdapter(adapter);
         adapter.setOnItemChildClickListener((adapter, view, position) -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("o_id",String.valueOf(mineOrderBeans.getData().getList().get(position).getO_id()));
-            startActivity(MineOrderDetailsActivity.class,bundle);
+            if(view.getId() == R.id.jumpBox){
+                Bundle bundle = new Bundle();
+                bundle.putString("o_id",String.valueOf(orderList.get(position).getO_id()));
+                startActivity(MineOrderDetailsActivity.class,bundle);
+            }
+            if(view.getId() == R.id.cancelOrder){
+                mPosition = position;
+                CustomDialog.promptDialog(mActivity, "确定要取消订单？", "再想想", "确定", false, v -> {
+                    if(v.getId() == R.id.isCannel){
+                        getCancelOrder(String.valueOf(orderList.get(position).getO_id()));
+                    }
+                });
+            }
+            if(view.getId() == R.id.goPay){
+                try {
+                    PayDataBean payDataBean = new PayDataBean();
+                    payDataBean.setO_id(String.valueOf(orderList.get(position).getO_id()));
+                    payDataBean.setShowPoint(String.valueOf(orderList.get(position).getO_point()));
+                    payDataBean.setShowPrice(orderList.get(position).getO_money());
+                    payDataBean.setLavePoint(String.valueOf(pointBean.getData().getPoint()));
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("payDataBean",payDataBean);
+                    startActivity(GoodsPayActivity.class,bundle);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
         });
 
-        if(getFragType().equals("o_goods")){
+        if(getFragType().equals("o_goods") || getFragType().equals("o_card")){
             topBox.setVisibility(View.VISIBLE);
         }else{
             topBox.setVisibility(View.GONE);
@@ -99,17 +137,21 @@ public class MineOrderFragment extends CustomFragment {
         TypeBeans typeBeans1 = new TypeBeans("全部","0",true);
         TypeBeans typeBeans2 = new TypeBeans("已支付","1",false);
         TypeBeans typeBeans3 = new TypeBeans("未支付","2",false);
-        TypeBeans typeBeans4 = new TypeBeans("已收货","5",false);
+
         mList.add(typeBeans1);
         mList.add(typeBeans2);
         mList.add(typeBeans3);
-        mList.add(typeBeans4);
+
+        if(getFragType().equals("o_goods")){
+            TypeBeans typeBeans4 = new TypeBeans("已收货","5",false);
+            mList.add(typeBeans4);
+        }
+
     }
 
     /*
     * 上啦加载更多
     * */
-
     @Override
     public void loadMoreData() {
         getData();
@@ -117,8 +159,25 @@ public class MineOrderFragment extends CustomFragment {
 
     @Override
     protected void lazyLoad() {
-        mineOrderBeans = null;
+        if(orderList != null){
+            orderList.clear();
+        }
+
         getData();
+    }
+
+    @Override
+    protected void lazyOnceLoad() {
+        clearParams();
+        Controller.myRequest(Constants.GET_MEMBER_POINT,Controller.TYPE_POST,getParams(), PointBean.class,this);
+    }
+
+    /*
+     * 取消订单
+     * */
+    private void getCancelOrder(String o_id){
+        clearParams().setParams("o_id",o_id);
+        Controller.myRequest(ConstantsCode.CANCLE_ORDER,Constants.CANCLE_ORDER,Controller.TYPE_POST,getParams(), BaseBean.class,this);
     }
 
     /*
@@ -126,45 +185,47 @@ public class MineOrderFragment extends CustomFragment {
     * */
     private void getData(){
         clearParams().setParams("o_pay_state",o_pay_state).setParams("o_type_code",getFragType());
+        if("5".equals(o_pay_state)){
+            setParams("o_state",o_pay_state);
+        }
         Controller.myRequest(Constants.GET_ORDER_LIST,Controller.TYPE_POST,getParams(), MineOrderBeans.class,this);
     }
 
     @Override
     public void onSuccess(Object data) {
+        if(data instanceof PointBean){
+            pointBean = (PointBean)data;
+        }
+
         if(data instanceof MineOrderBeans){
-            MineOrderBeans pageData = (MineOrderBeans)data;
+            List<MineOrderBeans.DataBean.ListBean> list = ((MineOrderBeans)data).getData().getList();
             if(curPage == FIRST_PAGE){
-                if(pageData.getData().getList() != null && pageData.getData().getList().size() > 0){
-                    mineOrderBeans = pageData;
-                }
+                orderList = list;
             }else{
-                if(pageData.getData().getList() != null && pageData.getData().getList().size() > 0){
-                    mineOrderBeans.getData().getList().addAll(pageData.getData().getList());
+                if(list != null && list.size() > 0){
+                    orderList.addAll(list);
+                }else{
+                    refresh.finishLoadMoreWithNoMoreData();
                 }
             }
 
-            if(mineOrderBeans != null && mineOrderBeans.getData() != null &&
-                    mineOrderBeans.getData().getList() != null &&
-                    mineOrderBeans.getData().getList().size() > 0){
-                adapter.setNewData(mineOrderBeans.getData().getList());
-                /*if("o_goods".equals(getFragType())){
-                    mRecycler.setVisibility(View.VISIBLE);
-                    load_box.setVisibility(View.GONE);
-                }else{
-                    setPromtView(SHOW_DATA);
-                }*/
+            if(orderList != null && orderList.size() > 0){
+                adapter.setNewData(orderList);
                 mRecycler.setVisibility(View.VISIBLE);
                 load_box.setVisibility(View.GONE);
             }else{
                 mRecycler.setVisibility(View.GONE);
                 load_box.setVisibility(View.VISIBLE);
-                /*if("o_goods".equals(getFragType())){
-                    mRecycler.setVisibility(View.GONE);
-                    load_box.setVisibility(View.VISIBLE);
-                }else{
-                    setPromtView(SHOW_EMPTY);
-                }*/
             }
+        }
+    }
+
+    @Override
+    public void onSuccess(int code, Object data) {
+        if(code == ConstantsCode.CANCLE_ORDER){
+            orderList.remove(mPosition);
+            adapter.notifyDataSetChanged();
+            showSuccess("成功取消订单！");
         }
     }
 }

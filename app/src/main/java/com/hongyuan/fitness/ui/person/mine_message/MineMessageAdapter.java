@@ -14,7 +14,7 @@ public class MineMessageAdapter extends BaseQuickAdapter<MineMessageBeans.DataBe
     }
     @Override
     protected void convert(BaseViewHolder helper, MineMessageBeans.DataBean item) {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img).centerCrop();
         Glide.with(mContext).load(item.getMsg_category_img()).apply(options).into((RoundedImageView)helper.getView(R.id.messageImg));
 
         helper.setText(R.id.messageName,item.getMsg_category_name());

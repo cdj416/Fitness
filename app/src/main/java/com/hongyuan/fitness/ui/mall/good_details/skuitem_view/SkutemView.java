@@ -131,7 +131,7 @@ public class SkutemView extends RelativeLayout implements View.OnClickListener, 
             skuRec.setAdapter(skuAdapter);
             skuAdapter.addFooterView(getFooter(skuRec));
 
-            RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_testbaner3).error(R.mipmap.a_testbaner3);
+            RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
             Glide.with(getContext()).load(dataBeans.getG_img()).apply(options).into(goodImg);
 
             if(dataBeans.getSku() != null && dataBeans.getSku().size() > 0){

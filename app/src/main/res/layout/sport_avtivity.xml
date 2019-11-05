@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@mipmap/a_test2"
+        android:background="@mipmap/defaul_no_img"
         tools:ignore="MissingConstraints" />
     <TextView
         android:id="@+id/record"

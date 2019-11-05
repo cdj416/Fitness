@@ -58,7 +58,7 @@
                     android:id="@+id/callTel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@mipmap/tel_black_img"/>
             </RelativeLayout>
@@ -165,6 +165,192 @@
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
             </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/color_EEEEEE"
+                android:layout_margin="15dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="12dp">
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/store_dates_bg"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="12dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FF333333"
+                        android:textSize="@dimen/sp_14"
+                        android:text="课程"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FF999999"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginTop="6dp"
+                        android:text="包含私教课、团课和游泳课等门店课程"/>
+                </LinearLayout>
+                <Button
+                    android:id="@+id/goClass"
+                    android:layout_width="56dp"
+                    android:layout_height="24dp"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/color_FFFFFF"
+                    android:background="@drawable/shape_radius16_ef5b48"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="12dp"
+                    android:text="约课"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="12dp">
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/store_dates_bg"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="12dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FF333333"
+                        android:textSize="@dimen/sp_14"
+                        android:text="私教"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FF999999"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginTop="6dp"
+                        android:text="为您定制专属1v1训练"/>
+                </LinearLayout>
+                <Button
+                    android:id="@+id/goCoach"
+                    android:layout_width="56dp"
+                    android:layout_height="24dp"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/color_FFFFFF"
+                    android:background="@drawable/shape_radius16_ef5b48"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="12dp"
+                    android:text="查看"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="12dp">
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/store_dates_bg"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="12dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FF333333"
+                        android:textSize="@dimen/sp_14"
+                        android:text="会籍卡"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FF999999"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginTop="6dp"
+                        android:text="办理会籍卡，优惠多多"/>
+                </LinearLayout>
+                <Button
+                    android:id="@+id/goCards"
+                    android:layout_width="56dp"
+                    android:layout_height="24dp"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/color_FFFFFF"
+                    android:background="@drawable/shape_radius16_ef5b48"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="12dp"
+                    android:text="查看"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/store_chat_img"
+                    android:scaleType="fitXY"/>
+
+                <TextView
+                    android:id="@+id/goChat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="聊天咨询"
+                    android:textColor="#FF393B4F"
+                    android:textSize="@dimen/sp_12"
+                    android:background="@drawable/shape_radius14_ffffffff"
+                    android:drawableLeft="@mipmap/chat_mark"
+                    android:gravity="center"
+                    android:drawablePadding="4dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"/>
+                <TextView
+                    android:id="@+id/goCall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="电话咨询"
+                    android:textColor="#FF393B4F"
+                    android:textSize="@dimen/sp_12"
+                    android:background="@drawable/shape_radius14_ffffffff"
+                    android:drawableLeft="@mipmap/chat_mark"
+                    android:gravity="center"
+                    android:drawablePadding="4dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/goChat"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="16dp"/>
+            </RelativeLayout>
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -173,34 +359,8 @@
                 android:paddingRight="16dp"
                 android:background="@color/color_EEEEEE"/>
 
-
             <com.hongyuan.fitness.custom_view.HomeRecyclerItemView
-                android:id="@+id/membershipCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:layout_marginTop="24dp"/>
-
-            <com.hongyuan.fitness.custom_view.HomeRecyclerItemView
-                android:id="@+id/starCoach"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:layout_marginTop="24dp"/>
-
-            <com.hongyuan.fitness.custom_view.HomeRecyclerItemView
-                android:id="@+id/priviteCourse"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:visibility="gone"
-                android:layout_marginTop="24dp"/>
-
-            <com.hongyuan.fitness.custom_view.HomeRecyclerItemView
-                android:id="@+id/boutiqueGroup"
+                android:id="@+id/storeCoupon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"

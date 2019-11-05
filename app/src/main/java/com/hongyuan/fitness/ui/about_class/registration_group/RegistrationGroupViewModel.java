@@ -42,7 +42,7 @@ public class RegistrationGroupViewModel extends CustomViewModel {
     protected void initView() {
         detailBean = (MissionDetailBean.DataBean)getBundle().getSerializable("MissionDetailBean");
 
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
         Glide.with(mActivity).load(detailBean.getCs_img()).apply(options).into(binding.courseImg);
 
         binding.courseName.setText(detailBean.getCs_name());

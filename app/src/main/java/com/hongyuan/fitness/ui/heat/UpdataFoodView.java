@@ -102,7 +102,7 @@ public class UpdataFoodView extends LinearLayout implements View.OnClickListener
 
         String F_cal = BaseUtil.getNoZoon(Double.valueOf(setData.getFe_cal())/Double.valueOf(setData.getFe_num()));
 
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
         Glide.with(getContext()).load(setData.getF_img()).apply(options).into(foodImg);
         foodName.setText(setData.getF_name());
         foodNum.setText(setData.getFe_num()+(setData.getF_type() == 1 ? "毫升" :"克"));

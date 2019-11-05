@@ -13,6 +13,7 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.MessageEvent;
 import com.hongyuan.fitness.custom_view.TitleView;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchActivity;
 import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
 
@@ -70,6 +71,7 @@ public class PersonFragment extends CustomFragment{
         if(data instanceof PersonBean){
             PersonBean personBean = (PersonBean)data;
             headView.setHeadImg(personBean.getData().getInfo());
+            TokenSingleBean.getInstance().setHeadUrl(personBean.getData().getInfo().getMi_head());
         }
     }
 

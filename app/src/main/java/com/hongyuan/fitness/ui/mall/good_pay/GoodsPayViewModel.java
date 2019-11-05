@@ -23,6 +23,7 @@ import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.PayUtil;
 
 import java.util.ArrayList;
@@ -87,6 +88,13 @@ public class GoodsPayViewModel extends CustomViewModel {
         }else{
             binding.pointBox.setVisibility(View.GONE);
         }
+
+        binding.cancelPay.setOnClickListener(v -> CustomDialog.promptDialog(mActivity, "确定要取消支付吗？", "再想想", "确定", false, v1 -> {
+            if(v1.getId() == R.id.isCannel){
+                mActivity.finish();
+            }
+        }));
+        binding.pay.setOnClickListener(v -> call());
     }
 
     @Override
@@ -111,9 +119,6 @@ public class GoodsPayViewModel extends CustomViewModel {
     public BindingCommand wechatPay = new BindingCommand(() -> changeSelect("wechatPay"));
     //支付宝支付
     public BindingCommand alipayPay = new BindingCommand(() -> changeSelect("alipayPay"));
-
-    //吊旗支付接口
-    public BindingCommand pay = new BindingCommand(this::call);
 
     /*
      * 选中状态改变

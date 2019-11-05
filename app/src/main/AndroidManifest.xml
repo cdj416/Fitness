@@ -33,6 +33,13 @@
     <!--如果设置了target >= 28 如果需要启动后台定位则必须声明这个权限-->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
+    <!--环信需要的权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".base.MyApplication"
@@ -58,6 +65,29 @@
             android:name="com.amap.api.v2.apikey"
             android:value="161cc9e676884967e57d14312db3e9f0"/>
 
+        <!-- 设置环信应用的AppKey -->
+        <meta-data android:name="EASEMOB_APPKEY"  android:value="1110190911181553#suidong-ios" />
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <!-- 声明SDK所需的service SDK核心功能-->
+        <service android:name="com.hyphenate.chat.EMChatService" android:exported="true"/>
+        <service android:name="com.hyphenate.chat.EMJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true"
+            />
+
+
+        <!-- 声明SDK所需的receiver -->
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+            <!-- 可选filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
 
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService"/>
@@ -147,7 +177,6 @@
         <activity android:name=".ui.about_class.privite_class.my_privite_course.MyPriviteCourseActivity"/>
         <activity android:name=".ui.video.MyPlayActivity"/>
         <activity android:name=".ui.find.circle.edit_post.EditPostActivity" android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".ui.find.circle.choose_circlet.ChooseCircletActivity"/>
         <activity android:name=".ui.find.circle.get_nearby_location.GetNearyLocationActivity"
             android:theme="@style/MyDialogStyleActivity"/>
         <activity android:name=".ui.find.circle.circle_detail.CircleDetailsActivity"/>
@@ -184,7 +213,6 @@
         <activity android:name=".ui.person.mine_point.MinePointActivity"/>
         <activity android:name=".ui.person.mine_point.point_rules.RulesActivity"/>
         <activity android:name=".ui.person.daily_punch.DailyPunchActivity"/>
-        <activity android:name=".ui.membership_card.my_card_detail.MyCardDetailsActivity"/>
         <activity android:name=".ui.carousel.CarouselActivity"/>
         <activity android:name=".ui.encyclopedia.edit_encyclopedia.EditEncyclopediaActivity"/>
         <activity android:name=".ui.encyclopedia.select_encyclopedia_type.EncyclopediaTypeActivity"/>
@@ -200,7 +228,6 @@
         <activity android:name=".ui.about_class.privite_class.preservation_course.ReservationDetailsActivity"/>
         <activity android:name=".ui.person.mine_message.child_message.MineChildMessageActivity" />
         <activity android:name=".ui.store.store_page_list.StoreActivity"/>
-        <activity android:name=".ui.membership_card.renewal_card.RenewalCardActivity"/>
         <activity android:name=".ui.about_class.coach.coach_list.CoachListActivity"/>
         <activity android:name=".ui.person.person_message.PersonMessageActivity"/>
         <activity android:name=".ui.person.edit_information.EditInformationActivity"/>
@@ -230,6 +257,16 @@
         <activity android:name=".ui.find.circle.topic_participant.TopicParticipantActivity"/>
         <activity android:name=".ui.find.more_topic.MoreTopicActivity"/>
         <activity android:name=".ui.person.my_collection.MyCollectionActivity"/>
+
+        <!--*******************************************第四版添加的activity***********************************************-->
+        <activity android:name=".ui.person.my_coupon.MyCouponActivity"/>
+        <activity android:name=".ui.person.my_coupon.receive_coupon_list.ReceiveCouponListActivity"/>
+        <activity android:name=".ui.membership_card.v4_mycard_detail.V4MyCardDetail"/>
+        <activity android:name=".ui.person.my_coupon.select_coupon.SelectCouponActivity"/>
+        <activity android:name=".ui.person.mine_message.chat_page.ChatPageActivity"/>
+        <activity android:name=".ui.membership_card.v4_mycard_list.V4CardsListActivity"/>
+        <activity android:name=".ui.membership_card.card_detail.add_person.CardAddPersonActivity"
+            android:theme="@style/MyDialogStyleActivity"/>
     </application>
 
 </manifest>

@@ -74,7 +74,7 @@ public class FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.Li
         @Override
         protected void onDisplayImage(Context context, ImageView imageView, FeatureBean.DataBean.ListBean.CiBean s) {
             if(s.getCircle_type() == 1){
-                RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_testbaner3).error(R.mipmap.a_testbaner3).centerCrop();
+                RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
                 Glide.with(mContext).load(s.getFile_src()).apply(options).into(imageView);
             }
         }

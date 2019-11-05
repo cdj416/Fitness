@@ -53,7 +53,7 @@ public class GoodDetailsViewModel extends CustomViewModel implements SkutemView.
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void setData() {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_testbaner3).error(R.mipmap.a_testbaner3);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
         Glide.with(mActivity).load(detailsBean.getData().getInfo().getG_img()).apply(options).into(binding.goodImg);
 
         binding.goodName.setText(detailsBean.getData().getInfo().getG_name());

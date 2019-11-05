@@ -15,7 +15,7 @@
             android:layout_height="42dp"
             app:riv_corner_radius="100dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/a_test2"/>
+            android:src="@mipmap/default_head_img"/>
         <View
             android:id="@+id/mengCheng"
             android:layout_width="42dp"

@@ -16,7 +16,7 @@ public class CocahImageAdapter extends BaseQuickAdapter<CoachImgBeans.DataBean.L
 
     @Override
     protected void convert(BaseViewHolder helper, CoachImgBeans.DataBean.ListBean item) {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img);
         Glide.with(mContext).load(item.getImg_src()).apply(options).into((RoundedImageView)helper.getView(R.id.img));
 
         helper.addOnClickListener(R.id.img);

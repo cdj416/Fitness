@@ -18,6 +18,7 @@ import com.hongyuan.fitness.ui.person.setting.agreement.AgreementActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.ViewChangeUtil;
+import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 
 public class VtwoRegisterdViewModel extends CustomViewModel implements InputFieldView.CodeClick {
 
@@ -131,6 +132,8 @@ public class VtwoRegisterdViewModel extends CustomViewModel implements InputFiel
     @Override
     public void onSuccess(Object data) {
         if(data instanceof RegisterdBean && isSuccess(data)){
+            //去注册登录环信账号。
+            HuanXinUtils.getInstance().registerdHuanXin(userToken.getM_mobile());
             mActivity.showSuccess("注册成功");
         }
     }

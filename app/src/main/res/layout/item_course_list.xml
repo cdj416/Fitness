@@ -24,7 +24,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:src="@mipmap/a_test2"
+                android:src="@mipmap/defaul_no_img"
                 app:riv_corner_radius_top_right="6dp"
                 app:riv_corner_radius_bottom_right="6dp"
                 android:scaleType="centerCrop"/>

@@ -22,7 +22,7 @@ public class CouseListAdapter extends BaseQuickAdapter<CouseListBean.DataBean.Li
         if(!imgUrl.contains("http")){
             imgUrl = Constants.ADRESS + item.getCp_img();
         }*/
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img).centerCrop();
         Glide.with(mContext).load(item.getCp_img()).apply(options).into((RoundedImageView)helper.getView(R.id.bgImg));
 
         helper.setText(R.id.classTime,"可约时间："+item.getCp_duration())

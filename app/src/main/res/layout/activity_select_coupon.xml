@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.hongyuan.fitness.ui.person.my_coupon.select_coupon.SelectCouponViewModel"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_F5F6FB"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:orientation="vertical"
+            android:layout_gravity="bottom"
+            android:background="@color/color_FFFFFF"
+            android:gravity="center">
+            <Button
+                android:id="@+id/noUse"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/color_FF999999"
+                android:text="不使用红包"/>
+        </LinearLayout>
+    </FrameLayout>
+
+</layout>

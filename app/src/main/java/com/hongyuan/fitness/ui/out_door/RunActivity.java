@@ -44,9 +44,14 @@ public class RunActivity extends CustomActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        binding.myMap.activityOnDestroy();
-        viewModel.locationUtil.stopLocation();
+        try {
+            binding.myMap.activityOnDestroy();
+            viewModel.locationUtil.stopLocation();
+            super.onDestroy();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
     @Override
     protected void onResume() {

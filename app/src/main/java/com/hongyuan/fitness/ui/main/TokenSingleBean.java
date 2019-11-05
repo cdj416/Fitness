@@ -22,6 +22,15 @@ public class TokenSingleBean {
     private String m_id;
     private String m_mobile;
     private String role_id;
+    private String headUrl;
+
+    public String getHeadUrl() {
+        return headUrl;
+    }
+
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
+    }
 
     public String getRole_id() {
         return role_id;

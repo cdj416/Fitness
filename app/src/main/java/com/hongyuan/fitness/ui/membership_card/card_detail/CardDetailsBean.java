@@ -56,13 +56,58 @@ public class CardDetailsBean extends BaseBean {
         private int update_time;
         private int update_admin;
         private String card_note;
-        private int os_id;
+        private String os_id;
         private int card_type;
         private int osl_id;
         private String ct_name;
         private String os_name;
         private Object osl_name;
         private String card_type_name;
+        private String os_names;
+        private String cc_note;
+        private String c_img;
+        private int cc_adult_num;
+        private int cc_children_num;
+
+        public int getCc_adult_num() {
+            return cc_adult_num;
+        }
+
+        public void setCc_adult_num(int cc_adult_num) {
+            this.cc_adult_num = cc_adult_num;
+        }
+
+        public int getCc_children_num() {
+            return cc_children_num;
+        }
+
+        public void setCc_children_num(int cc_children_num) {
+            this.cc_children_num = cc_children_num;
+        }
+
+        public String getC_img() {
+            return c_img;
+        }
+
+        public void setC_img(String c_img) {
+            this.c_img = c_img;
+        }
+
+        public String getCc_note() {
+            return cc_note;
+        }
+
+        public void setCc_note(String cc_note) {
+            this.cc_note = cc_note;
+        }
+
+        public String getOs_names() {
+            return os_names;
+        }
+
+        public void setOs_names(String os_names) {
+            this.os_names = os_names;
+        }
 
         public int getCard_id() {
             return card_id;
@@ -168,11 +213,11 @@ public class CardDetailsBean extends BaseBean {
             this.card_note = card_note;
         }
 
-        public int getOs_id() {
+        public String getOs_id() {
             return os_id;
         }
 
-        public void setOs_id(int os_id) {
+        public void setOs_id(String os_id) {
             this.os_id = os_id;
         }
 

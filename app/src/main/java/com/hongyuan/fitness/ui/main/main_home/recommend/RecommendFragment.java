@@ -16,6 +16,7 @@ import com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsLikeBean;
 import com.hongyuan.fitness.ui.heat.HeatActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.main_about_class.group_class.vtwo_group_class.VtwoGroupClassBeans;
 import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons.VtwoPrivateLessonsBeans;
 import com.hongyuan.fitness.ui.main.main_find.featured.FeatureBean;
@@ -63,11 +64,12 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         //开启刷新功能
         setEnableRefresh(true);
 
-        getmTitle().setCentreText("首页");
         getmTitle().setRightImage(R.mipmap.scan_code_img);
         getmTitle().addLeftContentView(getLocation());
+        HomeRightView rightView = new HomeRightView(mActivity,this);
+        getmTitle().addRightContentView(rightView);
         addressName.setOnClickListener(v -> CustomDialog.selectLocation(mActivity));
-        getmTitle().getRightView().setOnClickListener(v -> startActivity(ScanActivity.class,null));
+        //getmTitle().getRightView().setOnClickListener(v -> startActivity(ScanActivity.class,null));
 
         //addressName.setText(LocationBean.getInstance().getCityName());
 
@@ -134,7 +136,6 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
                 .setParams("page","4").setParams("curpage","1");
         Controller.myRequest(Constants.GET_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
     }
-
 
 
     /*
@@ -205,7 +206,7 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
             try {
                 BaseBean baseBean = GsonUtil.getGson().fromJson(data.toString(), new TypeToken<BaseBean>(){}.getType());
                 if(baseBean.getStatus().getError_code() == ISLOGIN && baseBean.getStatus().getError_desc().contains("登录")){
-                    startActivity(VtwoLoginActivity.class,null);
+                    startActivity(VtwoVerificationLoginActivity.class,null);
                 }
 
                 JSONObject object = new JSONObject(data.toString());

@@ -4,16 +4,29 @@
     <data>
         <variable
             name="ViewModel"
-            type="com.hongyuan.fitness.ui.about_class.privite_class.course_list.CouseListViewModel"/>
+            type="com.hongyuan.fitness.ui.carousel.CarouseViewModel"/>
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <com.youth.banner.Banner
-            android:id="@+id/carouselBanner"
+        android:layout_height="match_parent">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/mViewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:background="@color/color_FFFFFF"/>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/layoutMenu"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/color_FFFFFF"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="47dp"
+            app:tabIndicatorColor="@color/color_EF5B48"
+            app:tabGravity="center"
+            app:tabMode="auto"
+            app:tabSelectedTextColor="@color/color_EF5B48"
+            app:tabIndicatorFullWidth="false"
+            android:visibility="gone"/>
+    </FrameLayout>
 </layout>

@@ -31,10 +31,6 @@
 
 
     <!--个人中心进度条-->
-    <style name="ProgressBar_Scale" parent="@android:style/Widget.ProgressBar.Horizontal">
-        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
-        <item name="android:progressDrawable">@drawable/layer_progress_scale</item>
-    </style>
 
     <!--评星样式-->
     <style name="fiveRatingBar" parent="@android:style/Widget.RatingBar">

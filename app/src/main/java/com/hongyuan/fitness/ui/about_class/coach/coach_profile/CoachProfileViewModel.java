@@ -47,7 +47,7 @@ public class CoachProfileViewModel extends CustomViewModel implements StickyScro
         }else{
             headUrl = Constants.ADRESS + coachBean.getInfo().getCoach_head();
         }
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img).centerCrop();
         Glide.with(mActivity).load(headUrl).apply(options).into(binding.headImg);
         binding.coachName.setText(coachBean.getInfo().getCoach_nickname());
         binding.coachGrade.setText("私教专业P"+coachBean.getInfo().getCoach_level());

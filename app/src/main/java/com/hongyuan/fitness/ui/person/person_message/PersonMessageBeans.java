@@ -47,6 +47,24 @@ public class PersonMessageBeans extends BaseBean {
         private int fs_num;
         private String birth;
         private String area;
+        private int role_id;
+        private int m_id;
+
+        public int getM_id() {
+            return m_id;
+        }
+
+        public void setM_id(int m_id) {
+            this.m_id = m_id;
+        }
+
+        public int getRole_id() {
+            return role_id;
+        }
+
+        public void setRole_id(int role_id) {
+            this.role_id = role_id;
+        }
 
         public String getM_name() {
             return m_name;

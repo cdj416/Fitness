@@ -3,7 +3,7 @@ package com.hongyuan.fitness.base;
 public class Constants {
 
     //测试地址
-    public static final String ADRESS = "http://192.168.0.102";
+    public static final String ADRESS = "http://192.168.1.16";
     //正式地址
     //public static final String ADRESS = "http://www.hongyuangood.com";
 
@@ -346,5 +346,28 @@ public class Constants {
     public static final String ADD_COLLECTION = ADRESS + "/api/member/add_collection";
     //收藏--删除我的收藏
     public static final String DEL_COLLECTION = ADRESS + "/api/member/del_collection";
+
+
+    /**************************************四期版本********************************************************/
+    //优惠券--能领取的所有优惠券
+    public static final String ALL_COUPON_LIST = ADRESS + "/api/couponmember/all_coupon_list";
+    //优惠券--领取优惠券
+    public static final String GET_COUPON = ADRESS + "/api/couponmember/get_coupon";
+    //优惠券--我的优惠券
+    public static final String MY_COUPON_LIST = ADRESS + "/api/couponmember/my_coupon_list";
+    //优惠券--首页弹出的优惠券列表
+    public static final String INDEX_COUPON_LIST = ADRESS + "/api/couponindex/index_coupon_list";
+    //进店扫码--生成二维码
+    public static final String SHOW_CODE = ADRESS + "/api/cardmember/show_code";
+    //进店扫码--检查扫码是否完成
+    public static final String check_do_card = ADRESS + "/api/cardmember/check_do_card";
+    //会籍卡--读取卡的年限比如月卡年卡
+    public static final String GET_CARD_TYPE_LIST = ADRESS + "/api/cardhome/get_card_type_list";
+    //会籍卡--卡分类列表比如情侣卡等
+    public static final String GET_CARD_CATEGORY_LIST = ADRESS + "/api/cardhome/get_card_category_list";
+    //销售--销售顾问列表
+    public static final String GET_SALER_LIST = ADRESS + "/api/salerindex/get_saler_list";
+    //会籍卡--得到进店打卡的会籍卡列表
+    public static final String GET_COME_CARD = ADRESS + "/api/cardmember/get_come_card";
 
 }

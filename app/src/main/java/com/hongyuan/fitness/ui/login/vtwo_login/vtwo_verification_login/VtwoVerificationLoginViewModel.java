@@ -10,12 +10,14 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.MessageEvent;
+import com.hongyuan.fitness.base.MyApplication;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.InputFieldView;
 import com.hongyuan.fitness.databinding.ActivityVtwoVerificationCodeLoginBinding;
 import com.hongyuan.fitness.ui.login.LoginBean;
 import com.hongyuan.fitness.ui.login.MessageCodeBean;
 import com.hongyuan.fitness.ui.login.PhoneMessageBean;
+import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_modify.VtwoModifyPasswordActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_registerd.VtwoRegisterdActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
@@ -26,9 +28,12 @@ import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
 import com.hongyuan.fitness.util.ViewChangeUtil;
+import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
+
+import cn.jpush.android.api.JPushInterface;
 
 public class VtwoVerificationLoginViewModel extends CustomViewModel implements InputFieldView.CodeClick{
 
@@ -46,9 +51,9 @@ public class VtwoVerificationLoginViewModel extends CustomViewModel implements I
     @Override
     protected void initView() {
         binding.phoneCode.setCodeClick(this);
-        //验证码登录
+        //密码登录
         binding.goPasswordLogin.setOnClickListener(v -> {
-            mActivity.finish();
+            startActivity(VtwoLoginActivity.class,null);
         });
         //修改密码
         binding.goModifyPassword.setOnClickListener(v -> {
@@ -169,6 +174,7 @@ public class VtwoVerificationLoginViewModel extends CustomViewModel implements I
 
             //检测是否录入身体指数
             getCheckBody();
+            JPushInterface.setAlias(MyApplication.getInstance(), 100, userToken.getM_mobile());//设置别名或标签
         }
     }
 
@@ -181,6 +187,8 @@ public class VtwoVerificationLoginViewModel extends CustomViewModel implements I
                     JSONObject object = new JSONObject(data.toString());
                     JSONObject jsonObject = (JSONObject) object.get("data");
                     if(BaseUtil.isJsonValue(jsonObject.get("info"))){
+                        //去注册登录环信账号。
+                        HuanXinUtils.getInstance().registerdHuanXin(userToken.getM_mobile());
                         mActivity.showSuccess("登录成功", MainActivity.class,null);
                     }else{
                         Bundle bundle = new Bundle();

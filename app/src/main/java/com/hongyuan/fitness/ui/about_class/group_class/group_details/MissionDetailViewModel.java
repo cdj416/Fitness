@@ -135,7 +135,7 @@ public class MissionDetailViewModel extends CustomViewModel implements StickyScr
     @SuppressLint("SetTextI18n")
     @Override
     protected void setData() {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img).centerCrop();
         Glide.with(mActivity).load(detailBean.getData().getCs_img()).apply(options).into(binding.headBg);
 
         binding.courseType.setText(detailBean.getData().getCs_name());

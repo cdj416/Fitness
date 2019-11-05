@@ -20,7 +20,7 @@ public class MyPriviteCourseCheckAdapter extends BaseQuickAdapter<PriviteCourseC
 
     @Override
     protected void convert(BaseViewHolder helper, PriviteCourseCheckBeans.DataBean.ListBean item) {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.a_test2).error(R.mipmap.a_test2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img).centerCrop();
         Glide.with(mContext).load(item.getCp_img()).apply(options).into((RoundedImageView)helper.getView(R.id.courseImg));
 
         helper.setText(R.id.courseName,item.getCp_name()).setText(R.id.userNum,"共"+item.getNum()+"节")

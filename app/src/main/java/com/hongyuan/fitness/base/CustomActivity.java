@@ -19,6 +19,8 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.custom_view.StatusBarHeightView;
 import com.hongyuan.fitness.custom_view.TitleView;
@@ -68,6 +70,7 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     public final int TYPE_BAR4 = 0X4;
     public final int TYPE_BAR5 = 0X5;
     public final int TYPE_BAR6 = 0X6;
+    public final int TYPE_BAR7 = 0X7;
 
     //跳转处理需要的对象
     private Class<?> clz;
@@ -183,6 +186,7 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     * TYPE_BAR4：有标题，沉浸式，有顶高，白色字体，自定义背景
     * TYPE_BAR5:有标题，非沉浸式，黑色字体，有标题底线，白色背景
     * TYPE_BAR6:没标题，沉浸式，无顶高，状态栏字体灰色
+    * TYPE_BAR7:没标题，沉浸式，无顶高，状态栏字体白色色
     * */
     public void setTitleBar(int barType,int drawableId,String titleName){
         if(barType == TYPE_BAR1){
@@ -228,6 +232,12 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
             //沉浸式
             setImmersive();
             StatusBarUtil.setCommonUI(this,true);
+        }
+        if(barType == TYPE_BAR7){
+            //隐藏标题
+            hideTitle(true);
+            //沉浸式
+            setImmersive();
         }
     }
 
@@ -329,6 +339,16 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
             load_box.setVisibility(View.GONE);
             mainView.setVisibility(View.VISIBLE);
         }
+    }
+
+    /*
+     * 获取固定底部顶高
+     * */
+    public View getFooterHeight(RecyclerView v){
+        View convertView = LayoutInflater
+                .from(this)
+                .inflate(R.layout.view_bottom_90height, (ViewGroup) v.getParent(), false);
+        return convertView;
     }
 
     /*
@@ -485,6 +505,16 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     public void onTime(int passedTime) {
         if(passedTime%30 == 0){
             closeLoading();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        try {
+            //日了狗，不知道啥原因老报这句错误，暂时抛出异常，后续再详查
+            super.onDestroy();
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

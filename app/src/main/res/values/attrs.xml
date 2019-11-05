@@ -248,6 +248,7 @@
             <enum name="share" value="3"/>
             <enum name="setting" value="4"/>
             <enum name="aboutUs" value="5"/>
+            <enum name="coupon" value="6"/>
         </attr>
         <attr name="leftDrawable" format="reference"/>
         <attr name="rightDrawable" format="reference"/>

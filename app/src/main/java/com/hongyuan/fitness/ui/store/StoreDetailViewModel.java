@@ -2,25 +2,34 @@ package com.hongyuan.fitness.ui.store;
 
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.FlowLayoutManager;
+import com.hongyuan.fitness.custom_view.HomeRecyclerItemView;
 import com.hongyuan.fitness.databinding.ActivityStoreDetailBinding;
-import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.PrivateLessonsBean;
-import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons.VtwoPrivateLessonsBeans;
-import com.hongyuan.fitness.ui.main.main_home.recommend.BoutiqueGroupBean;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
+import com.hongyuan.fitness.ui.membership_card.v4_mycard_list.V4CardsListActivity;
+import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
+import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
+import com.hongyuan.fitness.ui.store.consultant.ConsultantBeans;
+import com.hongyuan.fitness.ui.store.store_list.StoreListActivity;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
+import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 import com.previewlibrary.GPreviewBuilder;
 import com.previewlibrary.enitity.UserViewInfo;
 import com.youth.banner.BannerConfig;
@@ -29,13 +38,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class StoreDetailViewModel extends CustomViewModel {
+public class StoreDetailViewModel extends CustomViewModel implements HomeRecyclerItemView.IntReceiveCoupon {
 
     private ActivityStoreDetailBinding binding;
     private MarkTextAdapter mtAdapter;
     private StoreDetailBean detailBean;
 
-    private String os_id;
+    private String os_id,osl_id;
+    private int receivePosition;
+    private List<CouponListBeans.DataBean.ListBean> couponList;
+
+    private List<ConsultantBeans.DataBean.ListBean> consultantList;
+
+    //测试
+    private List<String> selectList;
 
     public StoreDetailViewModel(CustomActivity mActivity, ActivityStoreDetailBinding binding) {
         super(mActivity);
@@ -64,6 +80,68 @@ public class StoreDetailViewModel extends CustomViewModel {
         //占时用死数据
         //binding.priviteCourse.setPriviteCourse(getData());
         //binding.priviteCourse.setVisibility(View.VISIBLE);
+
+        binding.goClass.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("os_id",os_id);
+            bundle.putInt("showPosition",2);
+            startActivity(StoreListActivity.class,bundle);
+        });
+        binding.goCoach.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("os_id",os_id);
+            bundle.putInt("showPosition",1);
+            startActivity(StoreListActivity.class,bundle);
+        });
+        binding.goCards.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("os_id",os_id);
+            bundle.putString("osl_id",osl_id);
+            startActivity(V4CardsListActivity.class,bundle);
+        });
+
+        binding.goChat.setOnClickListener(v -> {
+
+            if(selectList != null && selectList.size() > 0){
+                CustomDialog.showScollSelect(mActivity, "选择会籍顾问", selectList, selectText -> {
+                    int mPosition = getPosition(selectText);
+
+                    HuanXinUtils.getInstance().setBaseData(TokenSingleBean.getInstance().getM_mobile(),TokenSingleBean.getInstance().getHeadUrl()
+                            ,consultantList.get(mPosition).getM_name(),consultantList.get(mPosition).getMi_head());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title",consultantList.get(mPosition).getM_name());
+                    bundle.putString("username",consultantList.get(mPosition).getM_mobile());
+                    bundle.putString("lastMsgId",null);
+                    startActivity(ChatPageActivity.class,bundle);
+                });
+            }else{
+                CustomDialog.showMessage(mActivity,"暂无会籍顾问！");
+            }
+
+        });
+        binding.goCall.setOnClickListener(v -> {
+            if(selectList != null && selectList.size() > 0) {
+                CustomDialog.showScollSelect(mActivity, "选择会籍顾问", selectList, selectText -> {
+                    CustomDialog.callTel(mActivity, consultantList.get(getPosition(selectText)).getM_mobile(), v1 -> {
+                        callTel(consultantList.get(getPosition(selectText)).getM_mobile());
+                    });
+                });
+            }else{
+                CustomDialog.showMessage(mActivity,"暂无会籍顾问！");
+            }
+        });
+    }
+
+    /*
+    * 获取选中的顾问所属的对象游标
+    * */
+    private int getPosition(String selectText){
+        for(int i = 0 ; i < consultantList.size() ; i++){
+            if(selectText.equals(consultantList.get(i).getM_name())){
+                return i;
+            }
+        }
+        return 0;
     }
 
     @SuppressLint("SetTextI18n")
@@ -131,83 +209,60 @@ public class StoreDetailViewModel extends CustomViewModel {
         clearParams().setParams("os_id",os_id);
         Controller.myRequest(Constants.GET_OFFLINE_STORE_INFO,Controller.TYPE_POST,getParams(), StoreDetailBean.class,this);
 
-        //获取门店的团课
-        clearParams().setParams("os_id",os_id).setParams("page","10").setParams("curpage","1");
-        Controller.myRequest(Constants.GET_COURSE_SUPER_LIST,Controller.TYPE_POST,getParams(), BoutiqueGroupBean.class,this);
+        //查询能领取的优惠价
+        clearParams().setParams("os_id",os_id);
+        Controller.myRequest(Constants.ALL_COUPON_LIST,Controller.TYPE_POST,getParams(), CouponListBeans.class,this);
 
-        //读取门店的教练
-        clearParams().setParams("os_id",os_id).setParams("page","10").setParams("curpage","1");
-        Controller.myRequest(Constants.GET_OS_COACH_LIST,Controller.TYPE_POST,getParams(), PrivateLessonsBean.class,this);
-
-        //课程--私教课列表
-        clearParams().setParams("page","5").setParams("curpage","1").setParams("os_ids",os_id);
-        Controller.myRequest(Constants.GET_COURSE_PRIVITE_LIST,Controller.TYPE_POST,getParams(), VtwoPrivateLessonsBeans.class,this);
-
-        //获取店铺发行的会员卡(目前不需要请求接口)
-        //clearParams().setParams("os_id",os_id);
-        //Controller.myRequest(Constants.GET_OS_CARD_LIST,Controller.TYPE_POST,getParams(),CardItemBean.class,this);
-
+        //读取销售顾问
+        clearParams().setParams("os_id",os_id);
+        Controller.myRequest(Constants.GET_SALER_LIST,Controller.TYPE_POST,getParams(), ConsultantBeans.class,this);
     }
 
 
     @Override
     public void onSuccess(Object data) {
+        mActivity.closeLoading();
 
         if(data instanceof StoreDetailBean){
             detailBean = (StoreDetailBean)data;
-            //设置汇集卡
-            binding.membershipCard.setCardList(detailBean.getData(),os_id);
+            //设置门店等级id
+            osl_id = String.valueOf(detailBean.getData().getOsl_id());
             setData();
         }
 
-        /*//设置会籍卡
-        if(data instanceof CardItemBean){
-            CardItemBean cardItemBean = (CardItemBean)data;
-            if(cardItemBean.getData() == null ||
-                    cardItemBean.getData().getList() == null ||
-                    cardItemBean.getData().getList().size() <= 0){
-                binding.membershipCard.setVisibility(View.GONE);
+        //可领取的优惠价
+        if(data instanceof CouponListBeans){
+           couponList = ((CouponListBeans)data).getData().getList();
+            if(couponList != null && couponList.size() > 0){
+                binding.storeCoupon.setStoreCoupon(couponList,this);
             }else{
-                binding.membershipCard.setCardList(cardItemBean.getData().getList(),os_id);
-            }
-        }*/
-
-        //设置精品团课
-        if(data instanceof BoutiqueGroupBean){
-            BoutiqueGroupBean groupBean = (BoutiqueGroupBean)data;
-            if(groupBean.getData() == null ||
-                    groupBean.getData().getList() == null ||
-                    groupBean.getData().getList().size() <= 0){
-                binding.boutiqueGroup.setVisibility(View.GONE);
-            }else{
-                binding.boutiqueGroup.setBoutiqueGroup(groupBean.getData().getList(),os_id);
+                binding.storeCoupon.setVisibility(View.GONE);
             }
         }
 
-        //设置明星教练
-        if(data instanceof PrivateLessonsBean){
-            PrivateLessonsBean privateLessonsBean = (PrivateLessonsBean)data;
-
-            if(privateLessonsBean.getData() == null ||
-                    privateLessonsBean.getData().getList() == null ||
-                    privateLessonsBean.getData().getList().size() <= 0){
-                binding.starCoach.setVisibility(View.GONE);
-            }else{
-                binding.starCoach.setStarCoach(privateLessonsBean.getData().getList(),os_id);
+        if(data instanceof ConsultantBeans){
+            consultantList = ((ConsultantBeans)data).getData().getList();
+            selectList = new ArrayList<>();
+            for(ConsultantBeans.DataBean.ListBean bean : consultantList){
+                selectList.add(bean.getM_name());
             }
         }
 
-        if(data instanceof VtwoPrivateLessonsBeans){
-            mActivity.closeLoading();
-            VtwoPrivateLessonsBeans priviteCourse = (VtwoPrivateLessonsBeans)data;
-            if(priviteCourse.getData() == null ||
-                    priviteCourse.getData().getList() == null ||
-                    priviteCourse.getData().getList().size() <= 0){
-                binding.priviteCourse.setVisibility(View.GONE);
-            }else{
-                binding.priviteCourse.setVisibility(View.VISIBLE);
-                binding.priviteCourse.setStorePriviteCourse(priviteCourse.getData().getList());
-            }
+    }
+
+    @Override
+    public void onSuccess(int code, Object data) {
+        if(code == ConstantsCode.GET_COUPON){
+            couponList.get(receivePosition).setReceive(true);
+            binding.storeCoupon.setStoreCoupon(couponList,this);
+            showSuccess("领取成功！");
         }
+    }
+
+    @Override
+    public void goReceive(String couponId,int position) {
+        receivePosition = position;
+        clearParams().setParams("coupon_id",couponId);
+        Controller.myRequest(ConstantsCode.GET_COUPON,Constants.GET_COUPON,Controller.TYPE_POST,getParams(), BaseBean.class,this);
     }
 }

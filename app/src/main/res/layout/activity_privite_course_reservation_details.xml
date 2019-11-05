@@ -27,7 +27,7 @@
                     android:id="@+id/courseImg"
                     android:layout_width="108dp"
                     android:layout_height="108dp"
-                    android:src="@mipmap/a_test2"
+                    android:src="@mipmap/zhengfangxing_default_img"
                     android:layout_centerVertical="true"
                     android:scaleType="fitXY"
                     app:riv_corner_radius="6dp"/>

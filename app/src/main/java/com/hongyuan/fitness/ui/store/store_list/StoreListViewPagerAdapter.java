@@ -57,14 +57,14 @@ public class StoreListViewPagerAdapter extends FragmentPagerAdapter {
         }
         fragments.clear();
         beans.clear();
-        beans.add(new TitleBean("会籍卡",0));
+        //beans.add(new TitleBean("会籍卡",0));
         beans.add(new TitleBean("明星私教",1));
         beans.add(new TitleBean("私教课",2));
         beans.add(new TitleBean("精品团课",3));
         beans.add(new TitleBean("出租柜",4));
         beans.add(new TitleBean("名店照片",5));
 
-        fragments.add(new StoreListCardFragment().setMyArguments(getBundle("0",os_id)));
+        //fragments.add(new StoreListCardFragment().setMyArguments(getBundle("0",os_id)));
         fragments.add(new StoreListFragment().setMyArguments(getBundle("1",os_id)));
         fragments.add(new StoreListFragment().setMyArguments(getBundle("2",os_id)));
         fragments.add(new StoreListFragment().setMyArguments(getBundle("3",os_id)));
