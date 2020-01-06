@@ -49,22 +49,11 @@
             app:vthird_type="store"/>
 
         <com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView
-            android:id="@+id/starCoach"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_marginTop="12dp"
-            app:vthird_type="startCoach"/>
-
-        <com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView
             android:id="@+id/priviteCourse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:layout_marginTop="12dp"
             app:vthird_type="priviteCourse"/>
 
         <com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView
@@ -72,9 +61,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:layout_marginTop="12dp"
             app:vthird_type="goupCourse"/>
+
+        <com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView
+            android:id="@+id/starCoach"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            app:vthird_type="startCoach"/>
 
         <com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView
             android:id="@+id/homeGoods"

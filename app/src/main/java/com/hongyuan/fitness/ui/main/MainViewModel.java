@@ -82,11 +82,11 @@ public class MainViewModel extends CustomViewModel {
                 if(position == 4 && userToken.getM_mobile() == null){
                     startActivity(VtwoVerificationLoginActivity.class,null);
                 }
-                if(position == 4){
+                /*if(position == 4){
                     mActivity.setTitleBar(mActivity.TYPE_BAR2,R.drawable.shape_gradient_h_39_4a,"");
                 }else{
                     mActivity.setTitleBar(mActivity.TYPE_BAR1,R.drawable.shape_soid_ffffff,"");
-                }
+                }*/
             }
 
             @Override
@@ -100,7 +100,7 @@ public class MainViewModel extends CustomViewModel {
     protected void lazyLoad() {
         //检测是否需要更新版本
         clearParams().setParams("app_version", PackageUtils.getVersionName(mActivity)).setParams("app_type","1");
-        Controller.myRequest(Constants.INDEX_COUPON_LIST, Controller.TYPE_POST,getParams(), CheckVersionBeans.class,this);
+        Controller.myRequest(Constants.CHECK_APP_VERSION, Controller.TYPE_POST,getParams(), CheckVersionBeans.class,this);
     }
 
     /*

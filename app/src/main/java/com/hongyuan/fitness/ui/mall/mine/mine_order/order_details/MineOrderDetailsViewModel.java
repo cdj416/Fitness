@@ -16,8 +16,10 @@ import com.hongyuan.fitness.databinding.ActivityMineOrderDetailBinding;
 import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
 import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayActivity;
 import com.hongyuan.fitness.ui.mall.good_pay.PayDataBean;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
@@ -52,6 +54,7 @@ public class MineOrderDetailsViewModel extends CustomViewModel {
             payDataBean.setLavePoint(String.valueOf(pointBean.getData().getPoint()));
             Bundle bundle = new Bundle();
             bundle.putSerializable("payDataBean",payDataBean);
+            bundle.putSerializable("successBeans",getSuccessBeans());
             startActivity(GoodsPayActivity.class,bundle);
         }catch (Exception e){
             e.printStackTrace();
@@ -101,6 +104,115 @@ public class MineOrderDetailsViewModel extends CustomViewModel {
             binding.bottomBox.setVisibility(View.GONE);
             binding.payOrSubmit.setText("确认收货");
         }
+    }
+
+    /*
+     * 组装订单显示信息
+     * */
+    private V3SuccessBeans getSuccessBeans(){
+        V3SuccessBeans beans = new V3SuccessBeans();
+
+        if("o_card".equals(detailsBeans.getO_type_code())){
+            beans.setTitleText("订单完成");
+            beans.setShowText("购买成功");
+            beans.setBtn1Text("跳过");
+            beans.setBtn2Text("人脸识别录入");
+            List<V3SuccessBeans.ItemConten> list = new ArrayList<>();
+
+            V3SuccessBeans.ItemConten itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent(detailsBeans.getO_name());
+            itemConten.setItemTitle("会籍卡名称:");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent("￥"+ BaseUtil.getNoZoon(detailsBeans.getO_price()));
+            itemConten.setItemTitle("价格:");
+            list.add(itemConten);
+
+            if(BaseUtil.isValue(detailsBeans.getO_coupon_money()) && Double.valueOf(detailsBeans.getO_coupon_money()) > 0){
+                itemConten = new V3SuccessBeans.ItemConten();
+                itemConten.setContent("-¥"+BaseUtil.getNoZoon(detailsBeans.getO_coupon_money()));
+                itemConten.setItemTitle("优惠:");
+                list.add(itemConten);
+            }
+            beans.setItemContens(list);
+        }
+
+        if("o_pric".equals(detailsBeans.getO_type_code())){
+            beans.setTitleText("订单");
+            beans.setShowText("购买成功");
+            beans.setBtn2Text("完成");
+            List<V3SuccessBeans.ItemConten> list = new ArrayList<>();
+
+            V3SuccessBeans.ItemConten itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent(detailsBeans.getO_name()+" / 一对一私教课");
+            itemConten.setItemTitle("课程类型:");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent("¥"+ BaseUtil.getNoZoon(detailsBeans.getO_price())+"/节");
+            itemConten.setItemTitle("单价:");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent(detailsBeans.getO_num()+"节");
+            itemConten.setItemTitle("数量:");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent("¥"+BaseUtil.getNoZoon(detailsBeans.getO_money()));
+            itemConten.setItemTitle("总价:");
+            list.add(itemConten);
+
+            if(BaseUtil.isValue(detailsBeans.getO_coupon_money()) && Double.valueOf(detailsBeans.getO_coupon_money()) > 0){
+                itemConten = new V3SuccessBeans.ItemConten();
+                itemConten.setContent("-¥"+BaseUtil.getNoZoon(detailsBeans.getO_coupon_money()));
+                itemConten.setItemTitle("优惠:");
+                list.add(itemConten);
+            }
+
+            beans.setItemContens(list);
+        }
+
+        if("o_goods".equals(detailsBeans.getO_type_code())){
+            beans.setTitleText("订单");
+            beans.setShowText("购买成功");
+            beans.setBtn2Text("完成");
+            List<V3SuccessBeans.ItemConten> list = new ArrayList<>();
+
+            V3SuccessBeans.ItemConten itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent(detailsBeans.getO_name());
+            itemConten.setItemTitle("商品名:");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent("¥"+ BaseUtil.getNoZoon(detailsBeans.getO_price()));
+            itemConten.setItemTitle("单价:");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent("x"+detailsBeans.getO_num());
+            itemConten.setItemTitle("数量:");
+            list.add(itemConten);
+
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent("¥"+BaseUtil.getNoZoon(detailsBeans.getO_money()));
+            itemConten.setItemTitle("总价:");
+            list.add(itemConten);
+
+            if(BaseUtil.isValue(detailsBeans.getO_coupon_money()) && Double.valueOf(detailsBeans.getO_coupon_money()) > 0){
+                itemConten = new V3SuccessBeans.ItemConten();
+                itemConten.setContent("-¥"+BaseUtil.getNoZoon(detailsBeans.getO_coupon_money()));
+                itemConten.setItemTitle("优惠:");
+                list.add(itemConten);
+            }
+
+            beans.setItemContens(list);
+        }
+
+
+
+        return beans;
     }
 
     /*

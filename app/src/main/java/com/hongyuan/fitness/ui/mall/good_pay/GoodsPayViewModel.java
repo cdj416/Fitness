@@ -4,10 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
-
-import com.alipay.sdk.app.PayResultActivity;
 import com.alipay.sdk.app.PayTask;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
@@ -16,18 +13,15 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityGoodsPayBinding;
-import com.hongyuan.fitness.ui.about_class.class_failure.FailureActivity;
 import com.hongyuan.fitness.ui.about_class.class_success.SuccessClassActivity;
 import com.hongyuan.fitness.ui.about_class.privite_class.preservation_course.ReservationSuccessBeans;
 import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
+import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.PayUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
@@ -40,7 +34,7 @@ public class GoodsPayViewModel extends CustomViewModel {
     private final int PAY_FAILURE = 0x2;
     private ActivityGoodsPayBinding binding;
     private PayDataBean payDataBean;
-    private V3SuccessBeans successBeans;
+    public static V3SuccessBeans successBeans;
 
     private String payType = "wechatPay";
 
@@ -53,10 +47,7 @@ public class GoodsPayViewModel extends CustomViewModel {
                     goSuccess();
                     break;
                 case PAY_FAILURE:
-                    Bundle bundle = new Bundle();
-                    bundle.putString("titleName","支付结果");
-                    bundle.putString("failureText","支付失败！");
-                    startActivity(FailureActivity.class,bundle);
+                    startActivity(MineOrderActivity.class,null);
                     break;
             }
         }
@@ -91,6 +82,7 @@ public class GoodsPayViewModel extends CustomViewModel {
 
         binding.cancelPay.setOnClickListener(v -> CustomDialog.promptDialog(mActivity, "确定要取消支付吗？", "再想想", "确定", false, v1 -> {
             if(v1.getId() == R.id.isCannel){
+                mActivity.startActivity(MineOrderActivity.class,null);
                 mActivity.finish();
             }
         }));

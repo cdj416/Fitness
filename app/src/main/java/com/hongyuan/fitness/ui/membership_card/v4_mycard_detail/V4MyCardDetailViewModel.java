@@ -99,6 +99,7 @@ public class V4MyCardDetailViewModel extends CustomViewModel {
             binding.useDays.setText(buyCardsBeans.getCard_days()+"天");
             binding.useStores.setText(buyCardsBeans.getOs_names());
             binding.cardPrice.setText(BaseUtil.getNoZoon(buyCardsBeans.getCard_sale_price()));
+            binding.cardName.setText(buyCardsBeans.getCard_name());
 
             if(BaseUtil.isValue(buyCardsBeans.getCc_note())){
                 binding.cardBuyDes.setVisibility(View.VISIBLE);

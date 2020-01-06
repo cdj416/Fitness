@@ -19,7 +19,6 @@ import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.KeyboardLayout;
 import com.hongyuan.fitness.databinding.ActivityEncyclopediaTestDetailBinding;
 import com.hongyuan.fitness.ui.encyclopedia.encyclopedia_comment_detail.EncyclopediaCommentDetailsActivity;
-import com.hongyuan.fitness.ui.encyclopedia.encyclopedia_comment_detail.EncyclopediaLikeBean;
 import com.hongyuan.fitness.ui.encyclopedia.vthird_change.BaikeTJBeans;
 import com.hongyuan.fitness.ui.encyclopedia.vthird_change.V3BaiKeDetialCommentLikeBean;
 import com.hongyuan.fitness.ui.encyclopedia.vthird_change.V3BaikeDetialLikeBean;

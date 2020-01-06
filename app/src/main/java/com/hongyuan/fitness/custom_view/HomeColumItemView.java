@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.custom_view;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -11,18 +12,28 @@ import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.ui.encyclopedia.EncyclopediaActivity;
-import com.hongyuan.fitness.ui.heat.HeatActivity;
 import com.hongyuan.fitness.ui.membership_card.MembershipCardActivity;
+import com.hongyuan.fitness.ui.only_equipment.indicator_details.IndicatorDetailsActivity;
+import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchActivity;
+import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchCheckBean;
+import com.hongyuan.fitness.ui.person.push_share.PushShareActivity;
+import com.hongyuan.fitness.ui.training_plan.TrainingPlanActivity;
 
 public class HomeColumItemView extends LinearLayout implements View.OnClickListener {
 
-    private LinearLayout memberCardBox,encyclopediaBox,outdoorBox,heatBox;
+    private LinearLayout memberCardBox,encyclopediaBox,outdoorBox,heatBox
+            ,shareDailyBox,pointsCenterBox,smartDeviceBox,activityCenterBox,trainingPlanBox;
     private CustomActivity mActivity;
+
+    //分享需要的数据
+    private DailyPunchCheckBean.DataBean dailyPunchCheckBean;
 
     //点击的运动
     public final static int RUN_CLICK = 0X1;
     //点击的热量的
     public final static int RUN_HEAT = 0X2;
+    //点击了计划
+    public final static int TRAINING_PLAN = 0X3;
 
     public interface ClickReturn{
         void itemClick(int clockType);
@@ -54,13 +65,29 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
         encyclopediaBox = view.findViewById(R.id.encyclopediaBox);
         outdoorBox = view.findViewById(R.id.outdoorBox);
         heatBox = view.findViewById(R.id.heatBox);
+        shareDailyBox = view.findViewById(R.id.shareDailyBox);
+        pointsCenterBox = view.findViewById(R.id.pointsCenterBox);
+        //activityCenterBox = view.findViewById(R.id.activityCenterBox);
+        smartDeviceBox = view.findViewById(R.id.smartDeviceBox);
+        trainingPlanBox = view.findViewById(R.id.trainingPlanBox);
 
         memberCardBox.setOnClickListener(this);
         encyclopediaBox.setOnClickListener(this);
         outdoorBox.setOnClickListener(this);
         heatBox.setOnClickListener(this);
+        shareDailyBox.setOnClickListener(this);
+        pointsCenterBox.setOnClickListener(this);
+        smartDeviceBox.setOnClickListener(this);
+        trainingPlanBox.setOnClickListener(this);
+
     }
 
+    /*
+    * 设置分享数据
+    * */
+    public void setDailyPunch(DailyPunchCheckBean.DataBean dailyPunchCheckBean){
+        this.dailyPunchCheckBean = dailyPunchCheckBean;
+    }
 
 
     @SingleClick(2000)
@@ -70,19 +97,46 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
             case R.id.memberCardBox:
                 mActivity.startActivity(MembershipCardActivity.class);
                 break;
+
             case R.id.encyclopediaBox:
                 mActivity.startActivity(EncyclopediaActivity.class);
                 break;
+
             case R.id.outdoorBox:
                 if(clickReturn != null){
                     clickReturn.itemClick(RUN_CLICK);
                 }
                 break;
+
             case R.id.heatBox:
                 if(clickReturn != null){
                     clickReturn.itemClick(RUN_HEAT);
                 }
                 break;
+
+            case R.id.shareDailyBox:
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("leiji_days",String.valueOf(dailyPunchCheckBean.getItem().getLeiji_days()));
+                mActivity.startActivity(PushShareActivity.class,bundle1);
+                break;
+
+            case R.id.pointsCenterBox:
+                mActivity.startActivity(DailyPunchActivity.class);
+                break;
+
+            case R.id.smartDeviceBox:
+                Bundle bundle2 = new Bundle();
+                bundle2.putInt("showPosition",0);
+                mActivity.startActivity(IndicatorDetailsActivity.class,bundle2);
+                break;
+
+            case R.id.trainingPlanBox:
+                if(clickReturn != null){
+                    clickReturn.itemClick(TRAINING_PLAN);
+                }
+                break;
+
+
         }
     }
 }

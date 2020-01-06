@@ -73,6 +73,38 @@ public class ConstantsCode {
     /*================================四版需要的=======================================*/
     //收藏--添加收藏
     public final static int GET_COUPON = 0x032;
+    //圈子--删除圈子帖子
+    public final static int DEL_CIRCLE = 0x033;
+    //用户上传识别的人脸
+    public final static int UPDATE_MEMBER_FACE = 0x034;
+
+    /*================================五版需要的=======================================*/
+    //用户上传识别的人脸
+    public final static int ADD_BODY_FAT = 0x035;
+    //删除体脂数据
+    public final static int DEL_BODY_FAT = 0x036;
+    //身体数据--添加身体数据
+    public final static int ADD_BODY_DATA = 0x037;
+    //身体数据--添加身体图片
+    public final static int ADD_BODY_IMG = 0x038;
+    //身体数据--删除身体图片
+    public final static int DEL_BODY_IMG = 0x039;
+    //计划--添加个人计划
+    public final static int ADD_PLAN = 0x040;
+    //手环--添加或者编辑闹钟设置
+    public final static int ADD_ALARM = 0x041;
+    //手环--删除闹钟设置
+    public final static int DEL_ALARM = 0x042;
+    //手环--闹钟开启或关闭
+    public final static int UPDATE_FLAG = 0x043;
+    //手环--批量导入睡眠数据
+    public final static int ADD_SLEEP_DAY = 0x044;
+    //手环--添加心率
+    public final static int ADD_HEAART_RATE_DAY = 0x045;
+    //手环--添加每天运动总数据
+    public final static int ADD_SPORT_DAY = 0x046;
+    //手环--添加每一项的运动数据(健身)
+    public final static int ADD_EXERCISE_DAY = 0x047;
 
     /*================================已下EventBus使用的=======================================*/
     //食物搜索
@@ -89,4 +121,6 @@ public class ConstantsCode {
     public final static int EB_START_COURSE = 6;
     //需要显示私教还是团课
     public final static int EB_SHOW_PRIVITE = 7;
+    //以获取手环数据时使用
+    public final static int EB_WRISTBAND_SHOW_CONTENT = 8;
 }

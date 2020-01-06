@@ -19,7 +19,12 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.ui.about_class.class_success.SuccessClassActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
+import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayViewModel;
+import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -91,22 +96,46 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 			switch (code) {
 				case 0:
 					msg = "支付成功！";
-
+					goSuccess();
 					break;
 				case -1:
 					msg = "支付失败！";
-					finish();
+					Intent intent = new Intent(this, MineOrderActivity.class);
+					startActivity(intent);
 					break;
 				case -2:
 					msg = "您取消了支付！";
-					finish();
+					Intent intent1 = new Intent(this, MineOrderActivity.class);
+					startActivity(intent1);
 					break;
 				default:
 					msg = "支付失败！";
-					finish();
+					Intent intent2 = new Intent(this, MineOrderActivity.class);
+					startActivity(intent2);
 					break;
 			}
 		}
+	}
+
+	/*
+	 * 三版跳转
+	 * */
+	private void goSuccess(){
+		if(BaseUtil.isValue(GoodsPayViewModel.successBeans)){
+			Intent intent = new Intent(this,V3SuccessActivity.class);
+			startActivity(intent);
+			finish();
+		}else{
+			Bundle bundle = new Bundle();
+			bundle.putString("titleName","支付结果");
+			bundle.putString("successText","支付成功！");
+			bundle.putString("buttonText","完成");
+			Intent intent = new Intent(this,V3SuccessActivity.class);
+			intent.putExtra("bundle",bundle);
+			startActivity(intent);
+			finish();
+		}
+
 	}
 
 

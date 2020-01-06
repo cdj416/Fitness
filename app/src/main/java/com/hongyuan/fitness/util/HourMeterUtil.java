@@ -14,6 +14,10 @@ public class HourMeterUtil {
     private final int MSG_TYPE_RESTART = 3;
     private int passedTime ;
     private TimeCallBack timeCallBack;
+    private TimeMoreCallBack timeMoreCallBack;
+
+    //type
+    private int TYPE_CODE;
 
     public HourMeterUtil() {
         passedTime = 0;
@@ -35,6 +39,9 @@ public class HourMeterUtil {
                     if (timeCallBack != null){
                         timeCallBack.onTime(passedTime);
                     }
+                    if(timeMoreCallBack != null){
+                        timeMoreCallBack.onTime(TYPE_CODE,passedTime);
+                    }
                     handler.removeCallbacks(recordTime);
                     handler.removeMessages(MSG_TYPE_START);
                     break;
@@ -54,11 +61,18 @@ public class HourMeterUtil {
             if (timeCallBack != null){
                 timeCallBack.onTime(passedTime);
             }
+            if(timeMoreCallBack != null){
+                timeMoreCallBack.onTime(TYPE_CODE,passedTime);
+            }
             handler.sendEmptyMessage(MSG_TYPE_START);
         }
     };
 
     public void startCount(){
+        handler.sendEmptyMessage(MSG_TYPE_START);
+    }
+    public void startCount(int code){
+        this.TYPE_CODE = code;
         handler.sendEmptyMessage(MSG_TYPE_START);
     }
     public void pauseCount(){
@@ -71,8 +85,14 @@ public class HourMeterUtil {
     public interface TimeCallBack{
         void onTime(int passedTime);
     }
+    public interface TimeMoreCallBack{
+        void onTime(int code,int passedTime);
+    }
     public void setTimeCallBack(TimeCallBack timeCallBack){
         this.timeCallBack = timeCallBack;
+    }
+    public void setTimeMoreCallBack(TimeMoreCallBack timeMoreCallBack){
+        this.timeMoreCallBack = timeMoreCallBack;
     }
 
     public void onDestory(){

@@ -4,7 +4,11 @@ package com.hongyuan.fitness.base;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+
 import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.util.ImageLoaderUtil;
@@ -15,8 +19,14 @@ import com.hyphenate.chat.EMOptions;
 import com.previewlibrary.ZoomMediaLoader;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
+import com.yolanda.health.qnblesdk.listener.QNResultCallback;
+import com.yolanda.health.qnblesdk.out.QNBleApi;
+import com.yolanda.health.qnblesdk.utils.QNSDKLogUtils;
+
 import org.greenrobot.eventbus.EventBus;
 import org.xutils.x;
+
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 import cn.jpush.android.api.JPushInterface;
@@ -134,6 +144,12 @@ public class MyApplication extends BaseApplication {
                 error.printStackTrace();
             }
         });
+        //手环体脂秤日志打印
+        //QNSDKLogUtils.setLogEnable(true);
+        //QNSDKLogUtils.setWriteEnable(true);
+        String encryptPath = "file:///android_asset/hywl20191120.qn";
+        //体脂称sdk初始化
+        QNBleApi.getInstance(this).initSdk("hywl20191120", encryptPath, (code, msg) -> Log.e("phm", "初始化文件" + msg));
     }
 
     /**

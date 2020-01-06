@@ -93,7 +93,9 @@ public class HomeRightView extends LinearLayout implements RetrofitListener,Hour
 
     @Override
     public void onError(int error_code, String description) {
-
+        if(description.contains("登录")){
+            CustomDialog.showMessage(mActivity,"请先登录！");
+        }
     }
 
     @Override

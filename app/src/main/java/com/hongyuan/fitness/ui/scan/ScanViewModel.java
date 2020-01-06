@@ -49,14 +49,19 @@ public class ScanViewModel extends CustomViewModel implements QRCodeView.Delegat
         vibrate();
         try {
             Log.e("cdj","======"+result);
-            ScanBeans beans = GsonUtil.getGson().fromJson(result, new TypeToken<ScanBeans>(){}.getType());
-            if("1".equals(beans.getHref_type())){
+            if(result.contains("share.api.yolanda.hk")){
                 //跳转原生
-                JumpUtils.goAtherPage(this,beans.getHref_code(),beans.getHref_id());
-            }else if("2".equals(beans.getHref_type())){
-                //跳转h5
+                JumpUtils.goAtherPage(this,"smart_equipment",result);
             }else{
-                showDialog();
+                ScanBeans beans = GsonUtil.getGson().fromJson(result, new TypeToken<ScanBeans>(){}.getType());
+                if("1".equals(beans.getHref_type())){
+                    //跳转原生
+                    JumpUtils.goAtherPage(this,beans.getHref_code(),beans.getHref_id());
+                }else if("2".equals(beans.getHref_type())){
+                    //跳转h5
+                }else{
+                    showDialog();
+                }
             }
         }catch (Exception e){
             e.printStackTrace();

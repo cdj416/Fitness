@@ -50,10 +50,10 @@ public class FindViewPagerAdapter extends FragmentPagerAdapter {
         beans.clear();
         beans.add(new TitleBean("关注",0));
         beans.add(new TitleBean("精选",1));
-        beans.add(new TitleBean("附近",2));
+        beans.add(new TitleBean("全部",2));
         fragments.add(new FeaturedFragment().setArguments("gz"));
+        fragments.add(new FeaturedFragment().setArguments("tj"));
         fragments.add(new FeaturedFragment().setArguments(""));
-        fragments.add(new FeaturedFragment().setArguments("fj"));
 
         notifyDataSetChanged();
     }

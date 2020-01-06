@@ -92,7 +92,7 @@ public class MyPriviteCourseViewModel extends CustomViewModel {
         });
 
 
-        binding.selectCoach.setOnClickListener(v -> HiddenAnimUtils.newInstance(mActivity,binding.coachBox,binding.downImg,108).toggle());
+        binding.selectCoach.setOnClickListener(v -> HiddenAnimUtils.newInstance(mActivity,binding.coachBox,binding.downImg,108,true).toggle());
     }
 
     /*

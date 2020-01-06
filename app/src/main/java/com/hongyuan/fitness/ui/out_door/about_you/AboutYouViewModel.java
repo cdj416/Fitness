@@ -15,7 +15,6 @@ import com.hongyuan.fitness.custom_view.MyRulerView;
 import com.hongyuan.fitness.databinding.ActivityAboutYouBinding;
 import com.hongyuan.fitness.ui.heat.HeatActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
-import com.hongyuan.fitness.ui.main.main_home.recommend.StarCoachBean;
 import com.hongyuan.fitness.ui.out_door.RunActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 

@@ -46,7 +46,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
@@ -125,6 +125,10 @@
             android:name=".service.MyStempReceiver"
             android:enabled="true"
             android:exported="true"/>
+
+        <!--智能手环使用的服务-->
+        <service android:name="com.qingniu.qnble.scanner.BleScanService"/>
+        <service android:name="com.qingniu.wrist.ble.WristBleService"/>
 
         <activity android:name=".ui.startup_page.StartupPageActivity"
             android:theme="@style/SplashStyle">
@@ -267,6 +271,34 @@
         <activity android:name=".ui.membership_card.v4_mycard_list.V4CardsListActivity"/>
         <activity android:name=".ui.membership_card.card_detail.add_person.CardAddPersonActivity"
             android:theme="@style/MyDialogStyleActivity"/>
+        <activity android:name=".ui.person.edit_information.take_photo.TakePhotoActivity"/>
+
+        <!--*******************************************第五版添加的activity***********************************************-->
+        <activity android:name=".ui.training_plan.TrainingPlanActivity"/>
+        <activity android:name=".ui.training_plan.basic_information.BasicInformationActivity" android:launchMode="singleTask"/>
+        <activity android:name=".ui.training_plan.fitness_goal.FitnessGoaltActivity"/>
+        <activity android:name=".ui.training_plan.target_weight.TargetWeightActivity"/>
+        <activity android:name=".ui.training_plan.days_of_week.DaysOfWeekActivity"/>
+        <activity android:name=".ui.only_equipment.smart_basic_information.SmartBasicInformationActivity"/>
+        <activity android:name=".ui.only_equipment.indicator_details.IndicatorDetailsActivity"/>
+        <activity android:name=".ui.only_equipment.smart_historical_data.SmartLineChartActivity"/>
+        <activity android:name=".ui.person.physical_data.PhysicalDataActivity"/>
+        <activity android:name=".ui.person.exercise_data.ExeriseDataActivity"/>
+        <activity android:name=".ui.person.physical_data.silhouette.SihouetteActivity"/>
+        <activity android:name=".ui.person.physical_data.add_physical.AddPhysicaldataActivity"/>
+        <activity android:name=".ui.look_img.MyLookImgActivity"/>
+        <activity android:name=".ui.training_plan.plan_details.PlanDetailsActivity"/>
+        <activity android:name=".ui.training_plan.plan_program.PlansProgramActivity"/>
+        <activity android:name=".ui.person.my_promote.PromotionCodeActivity"/>
+        <activity android:name=".ui.person.my_promote.promote_record.PromotionRecordActivity"/>
+        <activity android:name=".ui.only_equipment.indicator_details.wristband_setting.WristbandSettingActivity"/>
+        <activity android:name=".ui.only_equipment.indicator_details.wristband_step.WristbandStepActivity"/>
+        <activity android:name=".ui.only_equipment.indicator_details.wristband_sleep.WristbandSleepActivity"/>
+        <activity android:name=".ui.only_equipment.indicator_details.wristband_heart_rate.WristbandHeartRateActivity"/>
+        <activity android:name=".ui.only_equipment.indicator_details.wristband_setting.wristband_alarm_clock.WristbandAlarmClockActivity"/>
+        <activity android:name=".ui.only_equipment.indicator_details.wristband_setting.wristband_alarm_clock.add_alarm_clock.WristbandAddClockActivity"/>
+        <activity android:name=".ui.only_equipment.indicator_details.wristband_setting.wristband_msg.WristbandMsgActivity"/>
+        <activity android:name=".ui.show_big_img.ShowBigImgActivity"/>
     </application>
 
 </manifest>

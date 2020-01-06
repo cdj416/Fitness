@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.person.edit_information;
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
@@ -29,6 +30,11 @@ public class EditInformationActivity extends CustomActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         viewModel.onActivityResult(requestCode,resultCode,data);
+    }
+
+    @Override
+    protected void forResult(Bundle bundle) {
+        viewModel.forResult(bundle);
     }
 
 }

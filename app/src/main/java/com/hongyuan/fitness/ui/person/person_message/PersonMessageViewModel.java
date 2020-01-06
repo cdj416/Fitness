@@ -64,7 +64,6 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
         super(mActivity);
         this.binding = binding;
         initView();
-        getPersonCircle();
     }
 
     @Override
@@ -114,6 +113,9 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
             if(view.getId() == R.id.jumpDetails){
                 Bundle bundle = new Bundle();
                 bundle.putString("circle_id",String.valueOf(featureBean.getData().getList().get(position).getCircle_id()));
+                if(attentionBeans == null){
+                    bundle.putBoolean("mine",true);
+                }
                 startActivity(PostDetailsActivity.class,bundle);
             }
             if(view.getId() == R.id.attention){
@@ -143,7 +145,6 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
                     }else{
                         sendAttention();
                     }
-
             }
         });
 
@@ -273,6 +274,8 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
             clearParams();
             Controller.myRequest(Constants.CIRCLE_MEMBER_INDEX,Controller.TYPE_POST,getParams(), PersonMessageBeans.class,this);
         }
+
+        getPersonCircle();
     }
 
     /*

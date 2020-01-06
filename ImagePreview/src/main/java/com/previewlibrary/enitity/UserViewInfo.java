@@ -11,6 +11,15 @@ public class UserViewInfo implements IThumbViewInfo {
     private Rect mBounds; // 记录坐标
     private String user = "用户字段";
      private String videoUrl;
+     private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public UserViewInfo(String url) {
         this.url = url;
@@ -66,6 +75,7 @@ public class UserViewInfo implements IThumbViewInfo {
         dest.writeParcelable(this.mBounds, flags);
         dest.writeString(this.user);
         dest.writeString(this.videoUrl);
+        dest.writeString(id);
     }
 
     protected UserViewInfo(Parcel in) {
@@ -73,6 +83,7 @@ public class UserViewInfo implements IThumbViewInfo {
         this.mBounds = in.readParcelable(Rect.class.getClassLoader());
         this.user = in.readString();
         this.videoUrl = in.readString();
+        this.id = in.readString();
     }
 
     public static final Creator<UserViewInfo> CREATOR = new Creator<UserViewInfo>() {

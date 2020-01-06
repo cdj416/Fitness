@@ -29,8 +29,8 @@ public class HiddenAnimUtils {
      * @param down 按钮开关的view
      * @param height 布局展开的高度(根据实际需要传)
      */
-    public static HiddenAnimUtils newInstance(Context context, View hideView, View down, int height){
-        return new HiddenAnimUtils(context,hideView,down,height);
+    public static HiddenAnimUtils newInstance(Context context, View hideView, View down, int height,boolean isConversion){
+        return new HiddenAnimUtils(context,hideView,down,height,isConversion);
     }
 
     /**
@@ -49,11 +49,17 @@ public class HiddenAnimUtils {
     /*
     * 通过隐藏显示实现展开收缩
     * */
-    private HiddenAnimUtils(Context context,View hideView,View down,int height){
+    private HiddenAnimUtils(Context context,View hideView,View down,int height,boolean isConversion){
         this.mContext = context;
         this.hideView = hideView;
         this.down = down;
-        mHeight = getViewHeight(height);//伸展高度
+
+        if(isConversion){
+            mHeight = getViewHeight(height);//伸展高度
+        }else{
+            mHeight = height;
+        }
+
     }
 
     /*

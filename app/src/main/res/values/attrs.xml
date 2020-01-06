@@ -174,7 +174,7 @@
         <!--进度条背景色-->
         <attr name="barBgColor" format="reference" />
         <!--进度条颜色-->
-        <attr name="barProgressColor" format="reference" />
+        <attr name="barProgressColor" format="reference|color" />
         <!--渐变开始颜色-->
         <attr name="barStartColor" format="reference" />
         <!--渐变结束颜色-->
@@ -254,5 +254,6 @@
         <attr name="rightDrawable" format="reference"/>
         <attr name="leftText" format="reference|string"/>
         <attr name="rightText" format="reference|string"/>
+        <attr name="showItemLine" format="boolean"/>
     </declare-styleable>
 </resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.hongyuan.fitness.ui.look_img.MyLookImgViewModel"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginBottom="64dp">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/layoutMenu"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                app:tabIndicatorColor="@color/black"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/black"
+                app:tabTextColor="@color/black"
+                app:tabIndicatorFullWidth="false"
+                android:visibility="gone"/>
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/mViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/positionBox"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_gravity="bottom">
+            <TextView
+                android:id="@+id/showPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_FFFFFF"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"
+                android:text="1/12"/>
+        </RelativeLayout>
+    </FrameLayout>
+
+</layout>

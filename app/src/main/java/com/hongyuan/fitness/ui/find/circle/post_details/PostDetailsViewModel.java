@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
@@ -58,6 +59,9 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
     //要更改的数据position
     private int mPosition = -1;
 
+    //是否为自己的帖子
+    private boolean isMine;
+
     public PostDetailsViewModel(CustomActivity mActivity, ActivityPostDetailsBinding binding) {
         super(mActivity);
         this.binding = binding;
@@ -69,6 +73,18 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
         setEnableLoadMore(true);
         setEnableRefresh(true);
         circle_id = getBundle().getString("circle_id");
+        isMine = getBundle().getBoolean("mine",false);
+
+        if(isMine){
+            mActivity.getMainTitle().setRightImage(R.mipmap.delet_huise_img);
+            mActivity.getMainTitle().getRightView().setOnClickListener(v -> {
+                CustomDialog.promptDialog(mActivity, "确定要删除当前帖子？", "在想想", "确定删除", false, v12 -> {
+                    if(v12.getId() == R.id.isCannel){
+                        delPost();
+                    }
+                });
+            });
+        }
 
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);
         manager.setOrientation(RecyclerView.VERTICAL);
@@ -176,6 +192,14 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
             sendAttention();
         }
     });
+
+    /*
+    * 删除自己的帖子
+    * */
+    private void delPost(){
+        clearParams().setParams("circle_id",circle_id);
+        Controller.myRequest(ConstantsCode.DEL_CIRCLE,Constants.DEL_CIRCLE,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+    }
 
 
     /*
@@ -328,6 +352,10 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
                 binding.attention.setBackgroundResource(R.drawable.shape_radius16_ef5b48);
                 showSuccess("已取消关注！");
             }
+        }
+
+        if(code == ConstantsCode.DEL_CIRCLE){
+            mActivity.showSuccess("删除成功！");
         }
     }
 

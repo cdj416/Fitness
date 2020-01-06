@@ -19,6 +19,8 @@ public class MainActivity extends CustomActivity {
     public ActivityMainBinding binding;
     private MainViewModel viewModel;
 
+    public static MainActivity useActivity;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -26,6 +28,8 @@ public class MainActivity extends CustomActivity {
 
     @Override
     protected void initView() {
+        this.useActivity = this;
+
         setTitleBar(TYPE_BAR1,R.drawable.shape_soid_ffffff,"");
         binding = ActivityMainBinding.bind(mView);
         viewModel = new MainViewModel(this,binding);

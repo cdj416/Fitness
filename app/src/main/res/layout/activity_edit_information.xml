@@ -137,10 +137,37 @@
                     android:layout_centerVertical="true"
                     android:text=""/>
             </RelativeLayout>
-            <View
+
+
+            <RelativeLayout
+                android:id="@+id/takePhoto"
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
+                android:layout_height="44dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:background="@color/color_FFFFFF"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/color_FF333333"
+                    android:layout_centerVertical="true"
+                    android:text="人脸识别门禁"/>
+                <TextView
+                    android:id="@+id/faceText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_FF999999"
+                    android:textSize="@dimen/sp_14"
+                    android:drawableRight="@mipmap/right_huise_img"
+                    android:gravity="center"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="已录入"/>
+            </RelativeLayout>
+
             <com.hongyuan.fitness.custom_view.select_address.SelectAddressView
                 android:id="@+id/addressView"
                 android:layout_width="match_parent"

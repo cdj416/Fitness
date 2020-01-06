@@ -13,6 +13,7 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivityFindTopicBinding;
+import com.hongyuan.fitness.ui.find.circle.edit_post.EditPostViewModel;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
@@ -76,6 +77,7 @@ public class SelectTopicViewModel extends CustomViewModel {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("topicItemBean",rightList.get(position));
+                bundle.putInt("type", EditPostViewModel.TOPIC);
                 setResult(bundle);
             }
         });

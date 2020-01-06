@@ -16,6 +16,8 @@ public class ShareUtil {
 
     private static UMShareListener umShareListener;
 
+    private static ShareBeans shareBeans;
+
     /*
      * 分享面板
      * */
@@ -26,23 +28,23 @@ public class ShareUtil {
                     if (share_media == SHARE_MEDIA.QQ) {
                         KLog.e("点击QQ");
                         new ShareAction(mActivity).setPlatform(SHARE_MEDIA.QQ)
-                                .withMedia(setDataWeb(mActivity,null))
+                                .withMedia(setDataWeb(mActivity,shareBeans))
                                 .setCallback(umShareListener)
                                 .share();
                     } else if (share_media == SHARE_MEDIA.WEIXIN) {
                         KLog.e("点击微信");
                         new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN)
-                                .withMedia(setDataWeb(mActivity,null))
+                                .withMedia(setDataWeb(mActivity,shareBeans))
                                 .setCallback(umShareListener)
                                 .share();
                     } else if (share_media == SHARE_MEDIA.QZONE) {
                         new ShareAction(mActivity).setPlatform(SHARE_MEDIA.QZONE)
-                                .withMedia(setDataWeb(mActivity,null))
+                                .withMedia(setDataWeb(mActivity,shareBeans))
                                 .setCallback(umShareListener)
                                 .share();
                     } else if (share_media == SHARE_MEDIA.WEIXIN_CIRCLE) {
                         new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
-                                .withMedia(setDataWeb(mActivity,null))
+                                .withMedia(setDataWeb(mActivity,shareBeans))
                                 .setCallback(umShareListener)
                                 .share();
                     }
@@ -96,4 +98,16 @@ public class ShareUtil {
         beans.setShareWebsite("http://www.hongyuangood.com/app/suidong.html?from=singlemessage&isappinstalled=0");
         return beans;
     }
+
+    /*
+    * 二维码推广分享
+    * */
+    public static void setQrShare(String qrUrl){
+        shareBeans = new ShareBeans();
+        shareBeans.setShareImgUrl(qrUrl);
+        shareBeans.setShareInfo("扫码加入随动运动社区,燃烧你的卡路里.");
+        shareBeans.setShareTitle("推广码");
+        shareBeans.setShareWebsite("http://www.hongyuangood.com/app/suidong.html?from=singlemessage&isappinstalled=0");
+    }
+
 }

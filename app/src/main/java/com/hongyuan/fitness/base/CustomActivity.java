@@ -48,7 +48,7 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     //父类中的刷新控件
     public SmartRefreshLayout refresh;
     //子类中的主要布局内容
-    private FrameLayout mainView;
+    private FrameLayout mainView,bottomView;
     //全局使用的信息
     public TokenSingleBean userToken;
     //状态栏高度
@@ -97,10 +97,24 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
         barHeight = findViewById(R.id.barHeight);
         mainTitle = findViewById(R.id.mainTitle);
         mainView = findViewById(R.id.mainView);
+        bottomView = findViewById(R.id.bottomView);
+        refresh = findViewById(R.id.refresh);
+
         //加载主布局
         mView = LayoutInflater.from(this).inflate(getLayoutId(), null);
         mainView.addView(mView);
-        refresh = findViewById(R.id.refresh);
+
+        //加载底部布局
+        if(getBottomLayoutId() != 0){
+            View bottomChildView = LayoutInflater.from(this).inflate(getBottomLayoutId(), null);
+            bottomView.addView(bottomChildView);
+            bottomView.setVisibility(View.VISIBLE);
+
+            //加载底部布局控件
+            initBottomView(bottomChildView);
+        }else{
+            bottomView.setVisibility(View.GONE);
+        }
 
         //计时回调
         hourUtil = new HourMeterUtil();
@@ -317,9 +331,23 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     protected abstract int getLayoutId();
 
     /*
+    * 加载底部button布局
+    * */
+    public int getBottomLayoutId(){
+        return 0;
+    }
+
+    /*
      * 加载布局控件
      * */
     protected abstract void initView();
+
+    /*
+    * 加载底部布局控件
+    * */
+    protected void initBottomView(View bottomChildView){
+
+    }
 
     /*
      * 显示页面效果切换
@@ -455,6 +483,14 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     }
 
     /*
+    * 错误提示框，并过三门关闭当前activity
+    * */
+    public void showErr(String message){
+        LemonBubble.showError(this,message,2000);
+        handler.postDelayed(runnableClose, 2500);
+    }
+
+    /*
     * 关闭当前页面
     * */
     Runnable runnableClose = new Runnable() {
@@ -467,6 +503,34 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
             finish();
         }
     };
+
+    /*
+     * 提示加载中
+     * */
+    public void showLemonLoading(String message){
+        LemonBubble.showRoundProgress(this,message);
+    }
+
+    /*
+     * 成功提示
+     * */
+    public void showLemonSuccess(String message){
+        LemonBubble.showRight(this,message,2000);
+    }
+
+    /*
+     * 错误提示
+     * */
+    public void showLemonErr(String message){
+        LemonBubble.showError(this, message, 2000);
+    }
+
+    /*
+    * 关闭提示
+    * */
+    public void hidLEmon(){
+        LemonBubble.hide();
+    }
 
     /*
     * 显示加载弹框
@@ -487,15 +551,17 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
             ImageView loadImg = view.findViewById(R.id.loadImg);
             animationDrawable = (AnimationDrawable) loadImg.getBackground();
         }
-        loadingDialog.show();
-        animationDrawable.start();
+        if(!isFinishing()){
+            loadingDialog.show();
+            animationDrawable.start();
+        }
     }
 
     /*
     * 关闭加载弹框
     * */
     public void closeLoading(){
-        if(loadingDialog != null && loadingDialog.isShowing()){
+        if(!isFinishing() && loadingDialog != null && loadingDialog.isShowing()){
             loadingDialog.dismiss();
             hourUtil.stopCount();
         }

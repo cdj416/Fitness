@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,7 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     private Class<T> dataBean;
 
     //下面是当前基础布局
-    private FrameLayout mainView;
+    private FrameLayout mainView,bottomView;
     //页面效果
     private RelativeLayout load_box;
     private TextView isEmpty,isTvErr;
@@ -110,6 +111,17 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         Bundle bundle = getArguments();
         if(bundle != null){
             return bundle.getString(key);
+        }
+        return "";
+    }
+
+    /*
+     * 获取自定义的key值所对应的Serializable序列化对象
+     * */
+    public Object getSerializableBeans(String key){
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            return bundle.getSerializable(key);
         }
         return "";
     }
@@ -191,6 +203,7 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     @Override
     public void onResume() {
         super.onResume();
+        onMyResume();
         //当再次显示出来时，需要刷新
         if(!isFirstVisible && isFragmentVisible){
             curPage = FIRST_PAGE;
@@ -206,10 +219,21 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         customBg = mView.findViewById(R.id.customBg);
         mTitle = mView.findViewById(R.id.mTitle);
         mainView = mView.findViewById(R.id.mainView);
+        bottomView = mView.findViewById(R.id.bottomView);
         refresh = mView.findViewById(R.id.refresh);
         //加载主布局
         View childView = LayoutInflater.from(mContext).inflate(getLayoutId(), null);
         mainView.addView(childView);
+
+        //加载底部布局
+        if(getBottomLayoutId() != 0){
+            View bottomChildView = LayoutInflater.from(mContext).inflate(getBottomLayoutId(), null);
+            bottomView.addView(bottomChildView);
+            bottomView.setVisibility(View.VISIBLE);
+        }else{
+            bottomView.setVisibility(View.GONE);
+        }
+
         initPrompt(mView);
         setOnRefresh();
         initView(mView);
@@ -245,6 +269,15 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     * */
     public void setCustomBg(int mColor){
         customBg.setBackgroundColor(getResources().getColor(mColor));
+    }
+
+    /*
+     * 是否启用越界拖动（仿苹果效果）1.0.4
+     * */
+    public void setEnableOverScrollDrag(boolean flag){
+        if(refresh != null){
+            refresh.setEnableOverScrollDrag(flag);
+        }
     }
 
     /*
@@ -375,6 +408,11 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
 
     public abstract int getLayoutId();
     public abstract void initView(View mView);
+
+    public int getBottomLayoutId(){
+        return 0;
+    }
+
     public void refreshData(){
 
     }
@@ -392,6 +430,13 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     * 只加载一次
     * */
     protected void lazyOnceLoad(){
+
+    }
+
+    /*
+    * 每次都加载
+    * */
+    protected void onMyResume(){
 
     }
 
@@ -575,8 +620,9 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     public void showSuccess(String message){
         LemonBubble.showRight(mActivity,message,2000);
     }
+
     /*
-    * 成功提示
+    * 提升加载中
     * */
     public void showLoading(String message){
         LemonBubble.showRoundProgress(this,message);

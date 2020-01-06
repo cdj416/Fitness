@@ -184,6 +184,7 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
     * 请求团课
     * */
     private void getGroupClass(){
+        mActivity.showLoading();
         clearParams();
         if(BaseUtil.isValue(start_date)){
             setParams("start_date",start_date);
@@ -203,6 +204,7 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
 
     @Override
     public void onSuccess(Object data) {
+        mActivity.closeLoading();
         if(data instanceof TabTimeBean){
             tabTimeBean = (TabTimeBean)data;
             //更改默认选中项

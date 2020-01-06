@@ -59,6 +59,12 @@
                 android:textSize="12sp"
                 android:textColor="@color/color_FF999999" />
         </RelativeLayout>
+        
+        <FrameLayout
+            android:id="@+id/bottomView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"/>
     </FrameLayout>
 
 </LinearLayout>

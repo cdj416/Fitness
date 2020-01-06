@@ -59,28 +59,6 @@ public class MineOrderAdapter extends BaseQuickAdapter<MineOrderBeans.DataBean.L
         helper.addOnClickListener(R.id.jumpBox).addOnClickListener(R.id.cancelOrder)
                 .addOnClickListener(R.id.goPay);
 
-
-        int times = (900 - (int) ((-TimeUtil.getDifferenceNow(item.getAdd_date(),TimeUtil.dateFormatYMDHMS)) / 1000));
-        if(times < 0 ){
-            helper.getView(R.id.goPay).setVisibility(View.GONE);
-        }else{
-            helper.getView(R.id.goPay).setVisibility(View.VISIBLE);
-
-            //计时回调
-            HourMeterUtil hourUtil = new HourMeterUtil();
-            hourUtil.setTimeCallBack(passedTime -> {
-                int showSeconds = times - passedTime;
-                if(showSeconds > 0){
-                    helper.setText(R.id.goPay,"支付 "+TimeUtil.getFenMiaoTime(times - passedTime));
-                }else{
-                    helper.getView(R.id.goPay).setVisibility(View.GONE);
-                    hourUtil.stopCount();
-                }
-
-            });
-            hourUtil.startCount();
-        }
-
     }
 
     /*
@@ -133,8 +111,4 @@ public class MineOrderAdapter extends BaseQuickAdapter<MineOrderBeans.DataBean.L
         }
         return showSku;
     }
-
-    /*
-    * 计算当前时间
-    * */
 }

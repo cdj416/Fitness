@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="3dp"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="6dp">
+    android:background="@drawable/shape_radius6_ffffff"
+    android:layout_margin="3dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:id="@+id/jumpBox">
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:riv_corner_radius="6dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/private_lessses_bg"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +18,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/color_FFFFFF"
+                android:textColor="@color/color_FF999999"
                 android:textSize="@dimen/sp_12"
                 android:text="门店：首玺健身爱山店 可约时间：最近 今天16:00"
                 android:maxLines="1"
@@ -37,7 +30,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/color_FFFFFF"
+                android:textColor="@color/color_FF999999"
                 android:textSize="@dimen/sp_12"
                 android:text="可约时间：最近 今天16:00"
                 android:maxLines="1"
@@ -70,14 +63,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_FFFFFF"
+                    android:textColor="@color/color_FF333333"
                     android:text="李梦雪"/>
                 <TextView
                     android:id="@+id/coachType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FFFFFF"
+                    android:textColor="@color/color_FF999999"
                     android:layout_marginEnd="80dp"
                     android:ellipsize="end"
                     android:maxLines="1"
@@ -98,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FFFFFF"
+                android:textColor="@color/color_FF999999"
                 android:text="最低"/>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -108,24 +101,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FFFFFF"
+                    android:textColor="@color/color_FF333333"
                     android:text="¥ "/>
                 <TextView
                     android:id="@+id/coursePrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_FFFFFF"
+                    android:textColor="@color/color_FF333333"
                     android:textStyle="bold"
                     android:text="400 "/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FFFFFF"
+                    android:textColor="@color/color_FF333333"
                     android:text="/节"/>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
 
-</androidx.cardview.widget.CardView>
+</RelativeLayout>

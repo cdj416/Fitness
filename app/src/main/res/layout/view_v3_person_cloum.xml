@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="44dp"
+    android:layout_height="match_parent"
     android:id="@+id/box">
     <TextView
         android:id="@+id/leftView"
@@ -25,6 +25,13 @@
         android:layout_marginEnd="15dp"
         android:drawableEnd="@mipmap/right_huise_img"
         android:textSize="@dimen/sp_14"
-        android:gravity="center_vertical"
-        android:drawablePadding="12dp"/>
+        android:gravity="center"
+        android:drawablePadding="6dp"/>
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color_EEEEEE"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"/>
 </RelativeLayout>

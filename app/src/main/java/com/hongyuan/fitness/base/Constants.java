@@ -3,9 +3,9 @@ package com.hongyuan.fitness.base;
 public class Constants {
 
     //测试地址
-    public static final String ADRESS = "http://192.168.1.16";
+    //public static final String ADRESS = "http://192.168.1.16";
     //正式地址
-    //public static final String ADRESS = "http://www.hongyuangood.com";
+    public static final String ADRESS = "http://www.hongyuangood.com";
 
     /*==================================================================================*/
     //微信支付需要的appId
@@ -357,6 +357,8 @@ public class Constants {
     public static final String MY_COUPON_LIST = ADRESS + "/api/couponmember/my_coupon_list";
     //优惠券--首页弹出的优惠券列表
     public static final String INDEX_COUPON_LIST = ADRESS + "/api/couponindex/index_coupon_list";
+    //优惠券--去使用的优惠券列表
+    public static final String USE_COUPON_LIST = ADRESS + "/api/couponmember/use_coupon_list";
     //进店扫码--生成二维码
     public static final String SHOW_CODE = ADRESS + "/api/cardmember/show_code";
     //进店扫码--检查扫码是否完成
@@ -369,5 +371,79 @@ public class Constants {
     public static final String GET_SALER_LIST = ADRESS + "/api/salerindex/get_saler_list";
     //会籍卡--得到进店打卡的会籍卡列表
     public static final String GET_COME_CARD = ADRESS + "/api/cardmember/get_come_card";
+    //圈子--删除圈子帖子
+    public static final String DEL_CIRCLE = ADRESS + "/api/circle/del_circle";
+    //个人资料--用户修改人脸图片
+    public static final String UPDATE_MEMBER_FACE = ADRESS + "/api/member/update_member_face";
+
+    /**************************************五期版本********************************************************/
+    // 体脂--添加体脂数据
+    public static final String ADD_BODY_FAT = ADRESS + "/api/body/add_body_fat";
+    // 体脂--读取最新一条体脂数据
+    public static final String GET_NEW_BODY_FAT_INFO = ADRESS + "/api/body/get_new_body_fat_info";
+    // 体脂--体脂数据列表
+    public static final String GET_BODY_FAT_LIST = ADRESS + "/api/body/get_body_fat_list";
+    // 体脂--删除体脂数据
+    public static final String DEL_BODY_FAT = ADRESS + "/api/body/del_body_fat";
+    // 体脂--读取最新的十条数据
+    public static final String GET_BODY_FAT_LIST_NEW = ADRESS + "/api/body/get_body_fat_list_new";
+    // 身体数据--获取最新的身体数据
+    public static final String GET_BODY_DATA_INFO = ADRESS + "/api/body/get_body_data_info";
+    // 身体数据--获取身体数据列表
+    public static final String GET_BODY_DATA_LIST = ADRESS + "/api/body/get_body_data_list";
+    // 身体数据--添加身体数据
+    public static final String ADD_BODY_DATA = ADRESS + "/api/body/add_body_data";
+    // 身体数据--最新4张图片
+    public static final String GET_BODY_IMG = ADRESS + "/api/body/get_body_img";
+    // 身体数据--添加身体图片
+    public static final String ADD_BODY_IMG = ADRESS + "/api/body/add_body_img";
+    // 身体数据--身体图片列表
+    public static final String GET_BODY_IMG_LIST = ADRESS + "/api/body/get_body_img_list";
+    // 身体数据--删除身体图片
+    public static final String DEL_BODY_IMG = ADRESS + "/api/body/del_body_img";
+    // 计划--添加个人计划
+    public static final String ADD_PLAN = ADRESS + "/api/body/add_plan";
+    // 计划--计划目标
+    public static final String GET_PLAN_MB = ADRESS + "/api/body/get_plan_mb";
+    // 计划--读取计划信息
+    public static final String GET_PLAN_INFO = ADRESS + "/api/body/get_plan_info";
+    // 计划--用户计划状态
+    public static final String GET_PLAN_STATE = ADRESS + "/api/body/get_plan_state";
+    // 计划--教练已完成计划列表
+    public static final String GET_PLAN_CONTENT_LIST = ADRESS + "/api/body/get_plan_content_list";
+    // 计划--教练计划详情
+    public static final String GET_PLAN_CONTENT_INFO = ADRESS + "/api/body/get_plan_content_info";
+    // 推广--进入推广码
+    public static final String TGINFO = ADRESS + "/api/member/tginfo";
+    // 推广--我的推广下级列表
+    public static final String GET_TG_MEMBER_LIST = ADRESS + "/api/member/get_tg_member_list";
+    // 手环--读取闹钟设置列表
+    public static final String GET_ALARM_LIST = ADRESS + "/api/sh/get_alarm_list";
+    // 手环--添加或者编辑闹钟设置
+    public static final String ADD_ALARM = ADRESS + "/api/sh/add_alarm";
+    // 手环--获取alarmId
+    public static final String GET_LAST_ID = ADRESS + "/api/sh/get_last_id";
+    // 手环--删除闹钟设置
+    public static final String DEL_ALARM = ADRESS + "/api/sh/del_alarm";
+    // 手环--闹钟开启或关闭
+    public static final String UPDATE_FLAG = ADRESS + "/api/sh/update_flag";
+    // 手环--添加手环配置信息
+    public static final String ADD_SH_CONFIG = ADRESS + "/api/sh/add_sh_config";
+    // 手环--读取手环配置信息
+    public static final String GET_SH_CONFIG_INFO = ADRESS + "/api/sh/get_sh_config_info";
+    // 手环--批量导入睡眠数据
+    public static final String ADD_SLEEP_DAY = ADRESS + "/api/sh/add_sleep_day";
+    // 手环--添加心率
+    public static final String ADD_HEAART_RATE_DAY = ADRESS + "/api/sh/add_heart_rate_day";
+    // 手环--添加每天运动总数据
+    public static final String ADD_SPORT_DAY = ADRESS + "/api/sh/add_sport_day";
+    // 手环--添加每一项的运动数据(健身)
+    public static final String ADD_EXERCISE_DAY = ADRESS + "/api/sh/add_exercise_day";
+    // 手环--各项运动数据总览(包括单项)
+    public static final String GET_EXERCISE_ITEM_INFO = ADRESS + "/api/sh/get_exercise_item_info";
+    // 手环--读取运动列表
+    public static final String GET_SPORT_LIST = ADRESS + "/api/sh/get_sport_list";
+    // 手环--读取睡眠列表
+    public static final String GET_SLEEP_LIST = ADRESS + "/api/sh/get_sleep_list";
 
 }

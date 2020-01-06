@@ -176,7 +176,7 @@ public class Controller {
                 String key = s;
                 String value = maps.get(s);
                 params.addBodyParameter(key, value);
-                //Log.e("cdj","=====key===="+key+"=====value===="+value);
+                Log.e("cdj","=====key===="+key+"=====value===="+value);
             }
         }
         if(requestTpey == TYPE_GET){
@@ -195,7 +195,7 @@ public class Controller {
             BaseBean baseBean;
             @Override
             public void onSuccess(String result) {
-                //Log.e("cdj","====="+result);
+                Log.e("cdj","====="+result);
                 try {
                     baseBean = GsonUtil.getGson().fromJson(result, new TypeToken<BaseBean>(){}.getType());
                     if("1".equals(baseBean.getStatus().getSucceed())){

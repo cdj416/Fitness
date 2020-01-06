@@ -6,8 +6,8 @@ android {
         applicationId "com.hongyuan.fitness"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 5
-        versionName "1.2.0"
+        versionCode 10
+        versionName "1.4.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -197,4 +197,8 @@ dependencies {
 
     //音频转换库
     implementation 'com.github.adrielcafe:ffmpeg-android-java:2a627f6ecd@aar'
+    //云康宝体脂称对接
+    //implementation 'com.github.YolandaQingniu:qnscalesdk:0.6.4-beta2'
+    //云康宝手环
+    ///implementation 'com.github.YolandaQingniu:SDK-Band-Android:1.0.6'
 }

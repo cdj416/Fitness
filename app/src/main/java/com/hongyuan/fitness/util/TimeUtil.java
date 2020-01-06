@@ -379,6 +379,21 @@ public class TimeUtil {
         return after;
     }
 
+    /*
+    * 获取指定日期的毫秒数
+    * */
+    public static Date formatDate(String strDate){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse(strDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return date;
+    }
+
 
     /**
      * 描述：获取指定日期时间的字符串,用于导出想要的格式.

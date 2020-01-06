@@ -80,7 +80,16 @@ public class MineOrderDetailsBeans extends BaseBean {
             private int op_point;
             private String os_name;
             private String tihuo_code;
+            private String o_coupon_money;
             private List<String> sku;
+
+            public String getO_coupon_money() {
+                return o_coupon_money;
+            }
+
+            public void setO_coupon_money(String o_coupon_money) {
+                this.o_coupon_money = o_coupon_money;
+            }
 
             public int getO_id() {
                 return o_id;

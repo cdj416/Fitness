@@ -166,8 +166,8 @@ public class CircleDetailsViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        mActivity.closeLoading();
         if(data instanceof FeatureBean && isSuccess(data)){
-            mActivity.closeLoading();
             FeatureBean pageData = (FeatureBean)data;
             if(curPage == FIRST_PAGE){
                 if(pageData.getData().getList() != null && pageData.getData().getList().size() > 0){

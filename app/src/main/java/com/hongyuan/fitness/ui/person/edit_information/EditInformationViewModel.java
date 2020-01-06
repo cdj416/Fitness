@@ -3,6 +3,7 @@ package com.hongyuan.fitness.ui.person.edit_information;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +24,12 @@ import com.hongyuan.fitness.custom_view.time_selecter.get_address.GetDataUtils;
 import com.hongyuan.fitness.custom_view.time_selecter.time_data.GetTimeData;
 import com.hongyuan.fitness.databinding.ActivityEditInformationBinding;
 import com.hongyuan.fitness.ui.find.circle.edit_post.FileBean;
+import com.hongyuan.fitness.ui.main.main_person.PersonBean;
 import com.hongyuan.fitness.ui.main.main_person.RetrunImgBean;
+import com.hongyuan.fitness.ui.person.edit_information.take_photo.TakePhotoActivity;
+import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.person_message.PersonMessageBeans;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.BasisTimesUtils;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.luck.picture.lib.PictureSelector;
@@ -38,14 +43,12 @@ import java.util.List;
 public class EditInformationViewModel extends CustomViewModel {
 
     private ActivityEditInformationBinding binding;
-    private PersonMessageBeans.DataBean personMessageBeans;
+    private PersonBean.DataBean.InfoBean personMessageBeans;
     private  Dialog dialog;
 
 
     //地区
     private GetDataUtils dataUtils;
-    //生日
-    private GetTimeData timeData;
 
     //生日使用的年月日
     private int birthYear = 1991;
@@ -68,7 +71,6 @@ public class EditInformationViewModel extends CustomViewModel {
     protected void initView() {
         //初始化获取地址的数据
         dataUtils = new GetDataUtils(mActivity);
-        timeData = new GetTimeData(mActivity);
 
         binding.headImgBox.setOnClickListener(new View.OnClickListener() {
             @SingleClick
@@ -100,7 +102,6 @@ public class EditInformationViewModel extends CustomViewModel {
             @SingleClick
             @Override
             public void onClick(View v) {
-                //timeData.showTime();
                 BasisTimesUtils.showDatePickerDialog(mActivity, BasisTimesUtils.THEME_HOLO_DARK, "请选择年月日", birthYear, birthMonth, birthDay, new BasisTimesUtils.OnDatePickerListener() {
 
                     @Override
@@ -129,6 +130,7 @@ public class EditInformationViewModel extends CustomViewModel {
                 });
             }
         });
+
     }
 
     /*
@@ -265,6 +267,15 @@ public class EditInformationViewModel extends CustomViewModel {
         }else{
             binding.sex.setText("女");
         }
+        if(BaseUtil.isValue(personMessageBeans.getMi_face())){
+            binding.faceText.setText("已录入");
+        }else{
+            binding.faceText.setText("未录入");
+            //弹出拍照提示框
+            binding.takePhoto.setOnClickListener(v -> CustomDialog.showTakePhoto(mActivity, v13 -> {
+                startActivityForResult(TakePhotoActivity.class,null);
+            }));
+        }
 
         try {
             //初始化dialog显示的数据
@@ -278,8 +289,18 @@ public class EditInformationViewModel extends CustomViewModel {
     }
 
     @Override
+    protected void forResult(Bundle bundle) {
+        boolean isSuccess = bundle.getBoolean("isSuccess");
+        if(isSuccess){
+            binding.takePhoto.setClickable(false);
+            binding.faceText.setText("已录入");
+        }
+
+    }
+
+    @Override
     protected void lazyLoad() {
-        Controller.myRequest(Constants.CIRCLE_MEMBER_INDEX,Controller.TYPE_POST,getParams(), PersonMessageBeans.class,this);
+        Controller.myRequest(Constants.GET_MEMBER_INDEX_INFO,Controller.TYPE_POST,getParams(), PersonBean.class,this);
     }
 
     @Override
@@ -289,8 +310,8 @@ public class EditInformationViewModel extends CustomViewModel {
             upHeand(imgBean.getData().getFile_url());
         }
 
-        if(data instanceof PersonMessageBeans){
-            personMessageBeans = ((PersonMessageBeans)data).getData();
+        if(data instanceof PersonBean){
+            personMessageBeans = ((PersonBean)data).getData().getInfo();
             setData();
         }
     }

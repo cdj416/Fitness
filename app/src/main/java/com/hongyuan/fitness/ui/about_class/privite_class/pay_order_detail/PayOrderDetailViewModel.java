@@ -53,6 +53,8 @@ public class PayOrderDetailViewModel extends CustomViewModel {
 
     private CouponListBeans.DataBean.ListBean coupon;
 
+    private String showAllPrice;
+
     public PayOrderDetailViewModel(CustomActivity mActivity, ActivityPayOrderDetailsBinding binding) {
         super(mActivity);
         this.binding = binding;
@@ -146,7 +148,9 @@ public class PayOrderDetailViewModel extends CustomViewModel {
         binding.coachName.setText(courseDetail.getMi_realname());
         binding.courseTypeTwo.setText(courseDetail.getFt_name()+" / 一对一私教课");
         binding.courseType.setText(courseDetail.getFt_name());
-        binding.allPrice.setText(BigDecimalUtils.mul(courseDetail.getCp_price(),String.valueOf(courseDetail.getCp_num()),2));
+
+        showAllPrice = BigDecimalUtils.mul(courseDetail.getCp_price(),String.valueOf(courseDetail.getCp_num()),2);
+        binding.allPrice.setText(showAllPrice);
 
 
         priceAdapter.setOnItemChildClickListener((adapter, view, position) -> {
@@ -165,6 +169,7 @@ public class PayOrderDetailViewModel extends CustomViewModel {
             bundle.putString("couponFor","3");
             bundle.putString("totalMoney",binding.allPrice.getText().toString());
             bundle.putInt("couponId",couponId);
+            bundle.putString("os_id",String.valueOf(courseDetail.getOs_id()));
             startActivityForResult(SelectCouponActivity.class,bundle);
         });
     }
@@ -175,8 +180,10 @@ public class PayOrderDetailViewModel extends CustomViewModel {
         if(BaseUtil.isValue(coupon)){
             couponId = coupon.getCoupon_id();
             binding.couponName.setText(coupon.getCoupon_name());
+            binding.allPrice.setText(BaseUtil.getNoZoon(BigDecimalUtils.sub(showAllPrice,coupon.getCoupon_money(),2)));
         }else{
             binding.couponName.setText("请选择优惠券");
+            binding.allPrice.setText(BaseUtil.getNoZoon(showAllPrice));
         }
 
     }
@@ -288,6 +295,13 @@ public class PayOrderDetailViewModel extends CustomViewModel {
             itemConten.setContent(binding.selectTime.getStartTime());
             itemConten.setItemTitle("首次上课时间:");
             list.add(itemConten);
+
+            if(coupon != null){
+                itemConten = new V3SuccessBeans.ItemConten();
+                itemConten.setContent("-¥"+BaseUtil.getNoZoon(coupon.getCoupon_money()));
+                itemConten.setItemTitle("优惠:");
+                list.add(itemConten);
+            }
 
             beans.setItemContens(list);
 

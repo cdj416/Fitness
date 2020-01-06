@@ -151,7 +151,7 @@ public class ChatView extends RelativeLayout implements SensorEventListener {
         menuManager.setMenu(Menu.newBuilder().
                 customize(true).
                 setRight(Menu.TAG_SEND).
-                setBottom(Menu.TAG_VOICE,Menu.TAG_EMOJI,Menu.TAG_GALLERY,Menu.TAG_CAMERA).
+                setBottom(Menu.TAG_VOICE,Menu.TAG_EMOJI/*Menu.TAG_GALLERY,Menu.TAG_CAMERA*/).
                 build());
         menuManager.setCustomMenuClickListener(new CustomMenuEventListener() {
             @Override

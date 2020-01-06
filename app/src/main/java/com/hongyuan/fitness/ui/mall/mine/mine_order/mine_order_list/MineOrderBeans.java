@@ -101,6 +101,15 @@ public class MineOrderBeans extends BaseBean {
             private String o_price;
             private int op_point;
             private List<String> sku;
+            private String o_coupon_money;
+
+            public String getO_coupon_money() {
+                return o_coupon_money;
+            }
+
+            public void setO_coupon_money(String o_coupon_money) {
+                this.o_coupon_money = o_coupon_money;
+            }
 
             public int getO_id() {
                 return o_id;

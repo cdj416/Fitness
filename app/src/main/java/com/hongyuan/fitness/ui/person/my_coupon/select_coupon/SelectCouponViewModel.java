@@ -15,6 +15,7 @@ import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivitySelectCouponBinding;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.receive_coupon_list.ReceiveCouponListActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class SelectCouponViewModel extends CustomViewModel {
     private ActivitySelectCouponBinding binding;
     private SelectCouponAdapter adapter;
     private List<CouponListBeans.DataBean.ListBean> mList;
+
+    private String os_id;
 
     public SelectCouponViewModel(CustomActivity mActivity, ActivitySelectCouponBinding binding) {
         super(mActivity);
@@ -35,6 +38,8 @@ public class SelectCouponViewModel extends CustomViewModel {
     protected void initView() {
         setEnableLoadMore(true);
         setEnableRefresh(true);
+
+        os_id = getBundle("bundle").getString("os_id");
 
         mActivity.getMainTitle().setRightText("领取");
         mActivity.getMainTitle().getRightView().setOnClickListener(new View.OnClickListener() {
@@ -64,7 +69,7 @@ public class SelectCouponViewModel extends CustomViewModel {
 
         binding.noUse.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putSerializable("coupon",null);
+            bundle.putSerializable("coupon",new CouponListBeans.DataBean.ListBean());
             setResult(bundle);
         });
     }
@@ -82,9 +87,12 @@ public class SelectCouponViewModel extends CustomViewModel {
     @Override
     protected void lazyLoad() {
         mActivity.showLoading();
-        clearParams().setParams("is_use","0").setParams("coupon_for",getBundle("bundle").getString("couponFor"))
+        clearParams().setParams("coupon_for",getBundle("bundle").getString("couponFor"))
                 .setParams("total_money",getBundle("bundle").getString("totalMoney"));
-        Controller.myRequest(Constants.MY_COUPON_LIST,Controller.TYPE_POST,getParams(), CouponListBeans.class,this);
+        if(BaseUtil.isValue(os_id)){
+           setParams("os_id",os_id);
+        }
+        Controller.myRequest(Constants.USE_COUPON_LIST,Controller.TYPE_POST,getParams(), CouponListBeans.class,this);
     }
 
     @Override

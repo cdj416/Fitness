@@ -24,8 +24,11 @@ import com.hongyuan.fitness.ui.membership_card.card_detail.add_person.CardAddPer
 import com.hongyuan.fitness.ui.membership_card.vtwo_my_card_list.VtwoMycardStoreList;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.select_coupon.SelectCouponActivity;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.ui.store.consultant.ConsultantBeans;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.BigDecimalUtils;
 import com.hongyuan.fitness.util.CustomDialog;
 
 import java.util.ArrayList;
@@ -58,6 +61,7 @@ public class CardDetailsViewModel extends CustomViewModel {
     //销售顾问id
     private String saler_id = "";
 
+    private String showAllPrice;
 
     public CardDetailsViewModel(CustomActivity mActivity, ActivityCardDetailsBinding binding) {
         super(mActivity);
@@ -73,6 +77,7 @@ public class CardDetailsViewModel extends CustomViewModel {
             bundle.putString("couponFor","2");
             bundle.putString("totalMoney",binding.allPrice.getText().toString());
             bundle.putInt("couponId",couponId);
+            bundle.putString("os_id",getBundle().getString("os_id"));
             startActivityForResult(SelectCouponActivity.class,bundle);
         });
 
@@ -117,10 +122,15 @@ public class CardDetailsViewModel extends CustomViewModel {
         });
 
         binding.selectGuWenBox.setOnClickListener(v -> {
-            CustomDialog.showScollSelect(mActivity, "选择会籍顾问", selectList, selectText -> {
-                binding.selectAdviser.setText(selectText);
-                searchSaler(selectText);
-            });
+            if(selectList != null && selectList.size() > 0){
+                CustomDialog.showScollSelect(mActivity, "选择会籍顾问", selectList, selectText -> {
+                    binding.selectAdviser.setText(selectText);
+                    searchSaler(selectText);
+                });
+            }else{
+                CustomDialog.showMessage(mActivity,"暂无会籍顾问！");
+            }
+
         });
 
     }
@@ -172,11 +182,13 @@ public class CardDetailsViewModel extends CustomViewModel {
 
         if(bundle.getSerializable("coupon") instanceof CouponListBeans.DataBean.ListBean){
             coupon = (CouponListBeans.DataBean.ListBean) bundle.getSerializable("coupon");
-            if(BaseUtil.isValue(coupon)){
+            if(BaseUtil.isValue(coupon.getCoupon_money())){
                 couponId = coupon.getCoupon_id();
                 binding.selectCoupon.setText(coupon.getCoupon_name());
+                binding.allPrice.setText(BaseUtil.getNoZoon(BigDecimalUtils.sub(showAllPrice,coupon.getCoupon_money(),2)));
             }else{
                 binding.selectCoupon.setText("请选择优惠券");
+                binding.allPrice.setText(BaseUtil.getNoZoon(showAllPrice));
             }
         }
 
@@ -205,6 +217,7 @@ public class CardDetailsViewModel extends CustomViewModel {
         binding.cardName.setText(detailsBean.getCard_name());
 
         binding.cardUseTime.setText(detailsBean.getCard_days()+"天");
+        showAllPrice = detailsBean.getCard_sale_price();
         binding.allPrice.setText(BaseUtil.getNoZoon(detailsBean.getCard_sale_price()));
         binding.cardPrice.setText(BaseUtil.getNoZoon(detailsBean.getCard_sale_price()));
 
@@ -261,7 +274,7 @@ public class CardDetailsViewModel extends CustomViewModel {
             if(addList.get(i).getType() == CardAddPersonViewModel.CHILD){
                 childParmas+= addList.get(i).getName()+","+addList.get(i).getPhoneOrDays()+";";
             }else{
-                personParmas+= addList.get(i).getName()+","+addList.get(i).getPhoneOrDays()+";";
+                personParmas+= addList.get(i).getPhoneOrDays()+","+addList.get(i).getName()+";";
             }
         }
     }
@@ -304,12 +317,44 @@ public class CardDetailsViewModel extends CustomViewModel {
                 bundle.putString("buttonText","返回");
                 startActivity(SuccessClassActivity.class,bundle);
             }else{
+                V3SuccessBeans beans = new V3SuccessBeans();
+                beans.setTitleText("订单完成");
+                beans.setShowText("购买成功");
+                beans.setBtn1Text("跳过");
+                beans.setBtn2Text("人脸识别录入");
+                List<V3SuccessBeans.ItemConten> list = new ArrayList<>();
+
+                V3SuccessBeans.ItemConten itemConten = new V3SuccessBeans.ItemConten();
+                itemConten.setContent(detailsBean.getCard_name()+"");
+                itemConten.setItemTitle("会籍卡名称:");
+                list.add(itemConten);
+
+                itemConten = new V3SuccessBeans.ItemConten();
+                itemConten.setContent(detailsBean.getOs_names());
+                itemConten.setItemTitle("门店:");
+                list.add(itemConten);
+
+                itemConten = new V3SuccessBeans.ItemConten();
+                itemConten.setContent("￥"+detailsBean.getCard_sale_price());
+                itemConten.setItemTitle("价格:");
+                list.add(itemConten);
+
+                if(coupon != null){
+                    itemConten = new V3SuccessBeans.ItemConten();
+                    itemConten.setContent("-¥"+coupon.getCoupon_money());
+                    itemConten.setItemTitle("优惠:");
+                    list.add(itemConten);
+                }
+                beans.setItemContens(list);
+
                 PayDataBean payDataBean = new PayDataBean();
                 payDataBean.setO_id(orderBean.getData().getO_id());
                 payDataBean.setShowPoint("0");
                 payDataBean.setShowPrice(binding.allPrice.getText().toString());
+
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("payDataBean",payDataBean);
+                bundle.putSerializable("successBeans",beans);
                 startActivity(GoodsPayActivity.class,bundle);
             }
 

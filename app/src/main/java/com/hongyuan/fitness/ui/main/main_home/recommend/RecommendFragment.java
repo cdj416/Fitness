@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.main.main_home.recommend;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,7 +16,6 @@ import com.hongyuan.fitness.custom_view.HomeColumItemView;
 import com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsLikeBean;
 import com.hongyuan.fitness.ui.heat.HeatActivity;
-import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.main_about_class.group_class.vtwo_group_class.VtwoGroupClassBeans;
 import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons.VtwoPrivateLessonsBeans;
@@ -24,8 +24,11 @@ import com.hongyuan.fitness.ui.main.main_home.recommend.vtwo_home.VtwoStarCoachB
 import com.hongyuan.fitness.ui.main.main_mall.MallBeans;
 import com.hongyuan.fitness.ui.out_door.RunActivity;
 import com.hongyuan.fitness.ui.out_door.about_you.AboutYouActivity;
-import com.hongyuan.fitness.ui.scan.ScanActivity;
+import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchCheckBean;
 import com.hongyuan.fitness.ui.store.more_store.StoreBean;
+import com.hongyuan.fitness.ui.training_plan.PlanInfoBeans;
+import com.hongyuan.fitness.ui.training_plan.TrainingPlanActivity;
+import com.hongyuan.fitness.ui.training_plan.plan_details.PlanDetailsActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.GsonUtil;
@@ -133,8 +136,13 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
 
         //获取发现数据
         clearParams().setParams("circle_state","1").setParams("circle_type","").setParams("city_name",LocationBean.getInstance().getCityName())
-                .setParams("page","4").setParams("curpage","1");
+                .setParams("page","4").setParams("curpage","1").setParams("is_tj","1");
         Controller.myRequest(Constants.GET_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
+
+        //检查是否签到
+        Controller.myRequest(Constants.CHECK_IS_QD,Controller.TYPE_POST,getParams(), DailyPunchCheckBean.class,this);
+
+
     }
 
 
@@ -198,6 +206,20 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
             homeFinds.setVisibility(View.VISIBLE);
             homeFinds.setFind(featureBean.getData().getList(),this);
         }
+
+        if(data instanceof DailyPunchCheckBean){
+            DailyPunchCheckBean.DataBean dailyPunchCheckBean = ((DailyPunchCheckBean)data).getData();
+            homeColum.setDailyPunch(dailyPunchCheckBean);
+        }
+
+        if(data instanceof PlanInfoBeans){
+            PlanInfoBeans.DataBean dataBean = ((PlanInfoBeans)data).getData();
+            if(dataBean.getInfo() != null && BaseUtil.isValue(dataBean.getInfo().getHeight())){
+                startActivity(PlanDetailsActivity.class,null);
+            }else{
+                startActivity(TrainingPlanActivity.class,null);
+            }
+        }
     }
 
     @Override
@@ -250,8 +272,15 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
     * */
     @Override
     public void itemClick(int code) {
-        clickType = code;
-        Controller.myRequest(ConstantsCode.CHECK_MEMBER_BOBY_INDEX,Constants.CHECK_MEMBER_BOBY_INDEX,Controller.TYPE_POST,getParams(),this);
+        if(code == HomeColumItemView.TRAINING_PLAN){
+            //检查是否有计划目标
+            clearParams();
+            Controller.myRequest(Constants.GET_PLAN_INFO,Controller.TYPE_POST,getParams(), PlanInfoBeans.class,this);
+        }else{
+            clickType = code;
+            Controller.myRequest(ConstantsCode.CHECK_MEMBER_BOBY_INDEX,Constants.CHECK_MEMBER_BOBY_INDEX,Controller.TYPE_POST,getParams(),this);
+        }
+
     }
 
     @Override

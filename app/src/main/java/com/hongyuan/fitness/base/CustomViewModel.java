@@ -5,14 +5,21 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
+
 import com.google.gson.Gson;
+import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.ui.find.circle.edit_post.FileBean;
 import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
+import com.hongyuan.fitness.ui.video.MyPlayActivity;
 import com.hongyuan.fitness.util.EncryptionUtil;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -171,6 +178,26 @@ public abstract class CustomViewModel implements RetrofitListener {
             intent.putExtras(bundle);
         }
         mActivity.startActivity(intent);
+    }
+
+    /*
+    * 动画跳转
+    * */
+    public void animStartActivity(Class<?> clz, View view, Bundle bundle, int inAnim, int outAnim){
+        Intent intent = new Intent();
+        intent.setClass(mActivity,clz);
+        if(bundle != null){
+            intent.putExtras(bundle);
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Pair pair = new Pair<>(view, MyPlayActivity.IMG_TRANSITION);
+            ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    mActivity, pair);
+            ActivityCompat.startActivity(mActivity, intent, activityOptions.toBundle());
+        } else {
+            mActivity.startActivity(intent);
+            mActivity.overridePendingTransition(inAnim, outAnim);
+        }
     }
 
     /*

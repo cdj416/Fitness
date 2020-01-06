@@ -8,6 +8,7 @@ import android.view.Window;
 import android.widget.FrameLayout;
 
 import com.hongyuan.fitness.base.CustomActivity;
+import com.hongyuan.fitness.custom_view.time_selecter.OnTimeSelectListener;
 import com.hongyuan.fitness.custom_view.time_selecter.TimePickerBuilder;
 import com.hongyuan.fitness.custom_view.time_selecter.TimePickerView;
 import com.hongyuan.fitness.util.TimeUtil;
@@ -19,16 +20,16 @@ public class GetTimeData {
 
     private TimePickerView pvTime;
 
-    public GetTimeData(CustomActivity mActivity){
+    public GetTimeData(CustomActivity mActivity,OnTimeSelectListener selectListener){
         this.mActivity = mActivity;
-        initTimePicker();
+        initTimePicker(selectListener);
     }
 
     public void showTime(){
         pvTime.show();
     }
 
-    private void initTimePicker() {//Dialog 模式下，在底部弹出
+    private void initTimePicker(OnTimeSelectListener selectListener) {//Dialog 模式下，在底部弹出
         Calendar startData = Calendar.getInstance();
         Calendar selectData = Calendar.getInstance();
         Calendar endData = Calendar.getInstance();
@@ -37,9 +38,7 @@ public class GetTimeData {
         selectData.setTime(TimeUtil.getDateByFormat("1991-11-11",TimeUtil.dateFormatYMD));
         endData.add(Calendar.DATE, 1);
 
-        pvTime = new TimePickerBuilder(mActivity, (date, v) -> {
-
-        })
+        pvTime = new TimePickerBuilder(mActivity,selectListener)
                 .setTimeSelectChangeListener(date -> Log.i("pvTime", "onTimeSelectChanged"))
                 .setType(new boolean[]{true, true, true, false, false, false})
                 .isDialog(true) //默认设置false ，内部实现将DecorView 作为它的父控件。

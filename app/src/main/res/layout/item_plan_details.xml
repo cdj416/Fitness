@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="@color/color_FFFFFF"
+    android:layout_marginBottom="12dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/headImg"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:riv_corner_radius="24dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:src="@mipmap/default_head_img"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toEndOf="@id/headImg"
+        android:layout_marginStart="12dp"
+        android:layout_centerVertical="true">
+        <TextView
+            android:id="@+id/coachName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_16"
+            android:textColor="@color/color_FF333333"
+            android:text="kaka"/>
+        <TextView
+            android:id="@+id/goodAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_FF999999"
+            android:text="擅长: 减脂塑形/力量增肌"/>
+        <TextView
+            android:id="@+id/storeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_FF999999"
+            android:text="门店：首玺健身爱山店"/>
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/goNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_FFFFFF"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:textSize="@dimen/sp_12"
+        android:text="查看计划"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/shape_radius16_ef5b48"/>
+
+</RelativeLayout>

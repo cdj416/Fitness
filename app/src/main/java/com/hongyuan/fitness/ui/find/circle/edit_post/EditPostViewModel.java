@@ -30,6 +30,11 @@ public class EditPostViewModel extends CustomViewModel {
     //地址的选择
     private NearLocationBeans nearLocationBeans;
 
+    //选择话题类型
+    public static final int TOPIC = 0X01;
+    //位置
+    public static final int ADDRESS = 0X02;
+
     private ActivityEditPostBinding binding;
     public EditPostViewModel(CustomActivity mActivity, ActivityEditPostBinding binding) {
         super(mActivity);
@@ -169,17 +174,20 @@ public class EditPostViewModel extends CustomViewModel {
 
     @Override
     protected void forResult(Bundle bundle) {
-        topicBean = (SlectTopicRighttBeans.DataBean.ListBean)bundle.getSerializable("topicItemBean");
-        nearLocationBeans = (NearLocationBeans) bundle.getSerializable("NearLocationBeans");
-
-        if(topicBean != null){
-            binding.topMark.setVisibility(View.VISIBLE);
-            binding.topicName.setText(topicBean.getCategory_name());
-        }
-        if(nearLocationBeans != null){
-            binding.address.setText(nearLocationBeans.getTitle());
+        int type = bundle.getInt("type");
+        if(type == TOPIC){
+            topicBean = (SlectTopicRighttBeans.DataBean.ListBean)bundle.getSerializable("topicItemBean");
+            if(topicBean != null){
+                binding.topMark.setVisibility(View.VISIBLE);
+                binding.topicName.setText(topicBean.getCategory_name());
+            }
         }else{
-            binding.address.setText("你在哪里？");
+            nearLocationBeans = (NearLocationBeans) bundle.getSerializable("NearLocationBeans");
+            if(nearLocationBeans != null){
+                binding.address.setText(nearLocationBeans.getTitle());
+            }else{
+                binding.address.setText("你在哪里？");
+            }
         }
 
     }

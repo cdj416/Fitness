@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
@@ -13,9 +15,19 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.MessageEvent;
 import com.hongyuan.fitness.custom_view.TitleView;
+import com.hongyuan.fitness.custom_view.share_view.ShareUtil;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
+import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
+import com.hongyuan.fitness.ui.person.about_us.AboutUsActivity;
 import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchActivity;
+import com.hongyuan.fitness.ui.person.exercise_data.ExeriseDataActivity;
 import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
+import com.hongyuan.fitness.ui.person.my_collection.MyCollectionActivity;
+import com.hongyuan.fitness.ui.person.my_coupon.MyCouponActivity;
+import com.hongyuan.fitness.ui.person.my_promote.PromotionCodeActivity;
+import com.hongyuan.fitness.ui.person.physical_data.PhysicalDataActivity;
+import com.hongyuan.fitness.ui.person.setting.SettingActivity;
+import com.hongyuan.fitness.util.TimeUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -25,7 +37,11 @@ public class PersonFragment extends CustomFragment{
 
     private PersonHeaderView headView;
     private TitleView myTitle;
+    private TextView weightNum,weightDate,calories,exerciseDays;
     private ImageView pushMark,messageMark;
+
+    private LinearLayout personOrderBox,personCouponBox,personCollectionBox,personShareBox,personSettingBox
+            ,personAboutUsBox,physicalDataBox,exerciseDataBox,promotionCodeBox;
 
     @Override
     public int getLayoutId() {
@@ -42,6 +58,34 @@ public class PersonFragment extends CustomFragment{
         myTitle.getRightView().setOnClickListener(v -> startActivity(DailyPunchActivity.class,null));
         pushMark.setOnClickListener(v -> mActivity.startActivity(DailyPunchActivity.class,null));
         messageMark.setOnClickListener(v -> mActivity.startActivity(MineMessageActivity.class,null));
+
+        personOrderBox = mView.findViewById(R.id.personOrderBox);
+        personCouponBox = mView.findViewById(R.id.personCouponBox);
+        personCollectionBox = mView.findViewById(R.id.personCollectionBox);
+        personShareBox = mView.findViewById(R.id.personShareBox);
+        personSettingBox = mView.findViewById(R.id.personSettingBox);
+        personAboutUsBox = mView.findViewById(R.id.personAboutUsBox);
+        promotionCodeBox = mView.findViewById(R.id.promotionCodeBox);
+
+        physicalDataBox = mView.findViewById(R.id.physicalDataBox);
+        exerciseDataBox = mView.findViewById(R.id.exerciseDataBox);
+
+        weightNum = mView.findViewById(R.id.weightNum);
+        weightDate = mView.findViewById(R.id.weightDate);
+        calories = mView.findViewById(R.id.calories);
+        exerciseDays = mView.findViewById(R.id.exerciseDays);
+
+        personOrderBox.setOnClickListener(v -> startActivity(MineOrderActivity.class,null));
+        personCouponBox.setOnClickListener(v -> startActivity(MyCouponActivity.class,null));
+        personCollectionBox.setOnClickListener(v -> startActivity(MyCollectionActivity.class,null));
+        personShareBox.setOnClickListener(v -> ShareUtil.showShare(mActivity));
+        personSettingBox.setOnClickListener(v -> startActivity(SettingActivity.class,null));
+        personAboutUsBox.setOnClickListener(v -> startActivity(AboutUsActivity.class,null));
+        promotionCodeBox.setOnClickListener(v -> startActivity(PromotionCodeActivity.class,null));
+
+        physicalDataBox.setOnClickListener(v -> startActivity(PhysicalDataActivity.class,null));
+        exerciseDataBox.setOnClickListener(v -> startActivity(ExeriseDataActivity.class,null));
+
     }
 
     @Override
@@ -72,6 +116,20 @@ public class PersonFragment extends CustomFragment{
             PersonBean personBean = (PersonBean)data;
             headView.setHeadImg(personBean.getData().getInfo());
             TokenSingleBean.getInstance().setHeadUrl(personBean.getData().getInfo().getMi_head());
+
+            if("暂未数据".equals(personBean.getData().getInfo().getWeight())){
+                weightNum.setText("0.00");
+            }else{
+                weightNum.setText(personBean.getData().getInfo().getWeight());
+            }
+            if("暂未数据".equals(personBean.getData().getInfo().getWeight_date())){
+                weightDate.setText("未记录");
+            }else{
+                weightDate.setText("上次记录"+TimeUtil.friendly_time(personBean.getData().getInfo().getWeight_date()));
+            }
+
+            calories.setText(String.valueOf(personBean.getData().getInfo().getCalories()));
+            exerciseDays.setText("总训练天数"+personBean.getData().getInfo().getExercise_days()+"天");
         }
     }
 

@@ -20,9 +20,13 @@ import com.hongyuan.fitness.ui.membership_card.card_detail.CardAddPersonBeans;
 import com.hongyuan.fitness.ui.membership_card.card_detail.add_person.CardAddPersonViewModel;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.select_coupon.SelectCouponActivity;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.ui.store.more_store.MoreStoreActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.BigDecimalUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 
@@ -39,6 +43,8 @@ public class GoodOrderDetailsViewModel extends CustomViewModel {
     //所选优惠价id
     private int couponId;
     private CouponListBeans.DataBean.ListBean coupon;
+
+    private String showAllPrice;
 
     public GoodOrderDetailsViewModel(CustomActivity mActivity, ActivityGoodOrderDetailBinding binding) {
         super(mActivity);
@@ -61,7 +67,9 @@ public class GoodOrderDetailsViewModel extends CustomViewModel {
         binding.unitPrice.setText(BaseUtil.getNoZoon(infoBean.getG_price()));
         binding.buyNum.setText(paramsBean.getOp_num());
         binding.buyPoint.setText(BaseUtil.getNoZoon(BigDecimalUtils.mul(String.valueOf(infoBean.getG_point()),paramsBean.getOp_num(),2)));
-        binding.buyAllPrice.setText(BaseUtil.getNoZoon(BigDecimalUtils.mul(infoBean.getG_price(),paramsBean.getOp_num(),2)));
+
+        showAllPrice = BaseUtil.getNoZoon(BigDecimalUtils.mul(infoBean.getG_price(),paramsBean.getOp_num(),2));
+        binding.buyAllPrice.setText(BaseUtil.getNoZoon(showAllPrice));
         if(Double.valueOf(infoBean.getG_price()) > 0){
             binding.goodPrice.setText(BaseUtil.getNoZoon(infoBean.getG_price()));
             binding.allPrice.setText(BaseUtil.getNoZoon(BigDecimalUtils.mul(infoBean.getG_price(),paramsBean.getOp_num(),2)));
@@ -87,6 +95,7 @@ public class GoodOrderDetailsViewModel extends CustomViewModel {
             bundle.putString("couponFor","4");
             bundle.putString("totalMoney",binding.allPrice.getText().toString());
             bundle.putInt("couponId",couponId);
+            bundle.putString("os_id","");
             startActivityForResult(SelectCouponActivity.class,bundle);
         });
     }
@@ -110,11 +119,15 @@ public class GoodOrderDetailsViewModel extends CustomViewModel {
 
         if(bundle.getSerializable("coupon") instanceof CouponListBeans.DataBean.ListBean){
             coupon = (CouponListBeans.DataBean.ListBean) bundle.getSerializable("coupon");
-            if(BaseUtil.isValue(coupon)){
+            if(BaseUtil.isValue(coupon.getCoupon_name())){
                 couponId = coupon.getCoupon_id();
                 binding.selectCoupon.setText(coupon.getCoupon_name());
+                binding.allPrice.setText(BaseUtil.getNoZoon(BigDecimalUtils.sub(showAllPrice,coupon.getCoupon_money(),2)));
+                binding.buyAllPrice.setText(BaseUtil.getNoZoon(BigDecimalUtils.sub(showAllPrice,coupon.getCoupon_money(),2)));
             }else{
                 binding.selectCoupon.setText("请选择优惠券");
+                binding.allPrice.setText(BaseUtil.getNoZoon(showAllPrice));
+                binding.buyAllPrice.setText(BaseUtil.getNoZoon(showAllPrice));
             }
         }
 
@@ -152,7 +165,52 @@ public class GoodOrderDetailsViewModel extends CustomViewModel {
             payDataBean.setLavePoint(String.valueOf(pointBean.getData().getPoint()));
             Bundle bundle = new Bundle();
             bundle.putSerializable("payDataBean",payDataBean);
+            bundle.putSerializable("successBeans",getSuccessBeans());
             startActivity(GoodsPayActivity.class,bundle);
         }
+    }
+
+    /*
+     * 组装订单显示信息
+     * */
+    private V3SuccessBeans getSuccessBeans(){
+        V3SuccessBeans beans = new V3SuccessBeans();
+
+        beans.setTitleText("订单");
+        beans.setShowText("购买成功");
+        beans.setBtn2Text("完成");
+        List<V3SuccessBeans.ItemConten> list = new ArrayList<>();
+
+        V3SuccessBeans.ItemConten itemConten = new V3SuccessBeans.ItemConten();
+        itemConten.setContent(infoBean.getG_name());
+        itemConten.setItemTitle("商品名:");
+        list.add(itemConten);
+
+        itemConten = new V3SuccessBeans.ItemConten();
+        itemConten.setContent("¥"+ BaseUtil.getNoZoon(infoBean.getG_price()));
+        itemConten.setItemTitle("单价:");
+        list.add(itemConten);
+
+        itemConten = new V3SuccessBeans.ItemConten();
+        itemConten.setContent("x"+paramsBean.getOp_num());
+        itemConten.setItemTitle("数量:");
+        list.add(itemConten);
+
+        itemConten = new V3SuccessBeans.ItemConten();
+        itemConten.setContent("¥"+BaseUtil.getNoZoon(binding.allPrice.getText().toString()));
+        itemConten.setItemTitle("总价:");
+        list.add(itemConten);
+
+        if(coupon != null){
+            itemConten = new V3SuccessBeans.ItemConten();
+            itemConten.setContent("-¥"+BaseUtil.getNoZoon(coupon.getCoupon_money()));
+            itemConten.setItemTitle("优惠:");
+            list.add(itemConten);
+        }
+
+        beans.setItemContens(list);
+
+
+        return beans;
     }
 }

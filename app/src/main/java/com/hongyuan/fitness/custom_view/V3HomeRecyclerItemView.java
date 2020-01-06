@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -55,12 +56,12 @@ import java.util.List;
 public class V3HomeRecyclerItemView extends LinearLayout {
     private MainActivity mActivity;
 
-    private CardView TypeOneBox;
-    private RelativeLayout boxBg;
-    private RoundedImageView topBgImg;
-    private TextView titleText;
+    private RelativeLayout TypeOneBox;
+    private ImageView topBgImg;
+    private TextView titleText,des;
     private RecyclerView mRecycler;
     private LinearLayout emptyBox;
+    private View topHeightView;
 
     private LinearLayout typeTwoBox;
     private TextView typeTwoTitle,typeTwoRight;
@@ -107,11 +108,12 @@ public class V3HomeRecyclerItemView extends LinearLayout {
     public void initLayoutView() {
         View view = View.inflate(getContext(), R.layout.view_vthird_home_page_item, this);
         TypeOneBox = view.findViewById(R.id.TypeOneBox);
-        boxBg = view.findViewById(R.id.boxBg);
         topBgImg = view.findViewById(R.id.topBgImg);
         titleText = view.findViewById(R.id.titleText);
         mRecycler = view.findViewById(R.id.mRecycler);
         emptyBox = view.findViewById(R.id.emptyBox);
+        topHeightView = view.findViewById(R.id.topHeightView);
+        des = view.findViewById(R.id.des);
 
 
         typeTwoBox = view.findViewById(R.id.typeTwoBox);
@@ -164,9 +166,10 @@ public class V3HomeRecyclerItemView extends LinearLayout {
     * */
     @SuppressLint("WrongConstant")
     private void initStartCoach(){
-        boxBg.setBackgroundResource(R.drawable.shape_radius6_6684f1);
+        topHeightView.setVisibility(VISIBLE);
         topBgImg.setImageResource(R.mipmap.item_home_star_coach_bg);
         titleText.setText("明星教练");
+        des.setText("11.12-11.19");
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -211,9 +214,10 @@ public class V3HomeRecyclerItemView extends LinearLayout {
     * */
     @SuppressLint("WrongConstant")
     private void initPriviteCourse(){
-        boxBg.setBackgroundResource(R.drawable.shape_radius6_37cfbf);
+        topHeightView.setVisibility(GONE);
         topBgImg.setImageResource(R.mipmap.itm_home_privite_course_bg);
         titleText.setText("精品私教课");
+        des.setText("专属1v1指导，更加快速达到运动目标");
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -258,9 +262,10 @@ public class V3HomeRecyclerItemView extends LinearLayout {
     * */
     @SuppressLint("WrongConstant")
     private void initGourpCourse(){
-        boxBg.setBackgroundResource(R.drawable.shape_radius6_ff8441);
+        topHeightView.setVisibility(GONE);
         topBgImg.setImageResource(R.mipmap.item_home_goup_course_bg);
         titleText.setText("精品团课");
+        des.setText("根据不同需求人群开设的免费课程");
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);

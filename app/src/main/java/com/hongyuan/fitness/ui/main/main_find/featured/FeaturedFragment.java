@@ -113,11 +113,11 @@ public class FeaturedFragment extends CustomFragment {
     * 初始化适配样式
     * */
     private void initAdapter(){
-        if(BaseUtil.isValue(getFragType())){
+        if("gz".equals(getFragType())){
             friendsAdapter = new FindTopFriendsAdapter();
             topRecycler.setAdapter(friendsAdapter);
             friendsAdapter.setOnItemChildClickListener((adapter, view, position) -> startActivity(CircleDetailsActivity.class,null));
-        }else{
+        }else if("tj".equals(getFragType())){
             topicAdapter = new FindTopicAdapter();
             topRecycler.setAdapter(topicAdapter);
             topicAdapter.setOnItemChildClickListener((adapter, view, position) -> {
@@ -150,7 +150,7 @@ public class FeaturedFragment extends CustomFragment {
             Controller.myRequest(Constants.GET_MY_FRIENDS,Controller.TYPE_POST,getParams(), FriendsBeans.class,this);
         }
 
-        if(!BaseUtil.isValue(getFragType())){
+        if("tj".equals(getFragType())){
             clearParams().setParams("page","4").setParams("curpage","");
             Controller.myRequest(Constants.GET_CIRCLE_CATEGORY_LIST,Controller.TYPE_POST,getParams(), SlectTopicLeftBeans.class,this);
         }
@@ -173,8 +173,14 @@ public class FeaturedFragment extends CustomFragment {
     * */
     private void getCircleList(){
         mActivity.showLoading();
+        clearParams().setParams("circle_state","1").setParams("city_name","湖州市");
         //获取帖子
-        clearParams().setParams("circle_state","1").setParams("circle_type",getFragType()).setParams("city_name","湖州市");
+        if("tj".equals(getFragType())){
+            setParams("is_tj","1");
+        }
+        if(BaseUtil.isValue(getFragType())){
+            setParams("circle_type",getFragType());
+        }
         Controller.myRequest(Constants.GET_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
 
     }

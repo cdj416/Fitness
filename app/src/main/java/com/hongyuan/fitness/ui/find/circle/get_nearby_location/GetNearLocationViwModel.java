@@ -22,6 +22,7 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.MyApplication;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivityGetNearbyLocationBinding;
+import com.hongyuan.fitness.ui.find.circle.edit_post.EditPostViewModel;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.LocationBean;
 import com.hongyuan.fitness.util.MyLocationUtil;
@@ -61,6 +62,7 @@ public class GetNearLocationViwModel extends CustomViewModel implements PoiSearc
         binding.noAddress.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putSerializable("NearLocationBeans",null);
+            bundle.putInt("type", EditPostViewModel.ADDRESS);
             setResult(bundle);
         });
 
@@ -77,6 +79,7 @@ public class GetNearLocationViwModel extends CustomViewModel implements PoiSearc
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("NearLocationBeans",mlist.get(position));
+                bundle.putInt("type", EditPostViewModel.ADDRESS);
                 setResult(bundle);
             }
         });

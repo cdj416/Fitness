@@ -1,6 +1,5 @@
 package com.hongyuan.fitness.ui.membership_card.v4_mycard_list;
-
-import android.util.Log;
+import android.view.View;
 
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
@@ -25,6 +24,8 @@ public class V4CardsListViewModel extends CustomViewModel {
         binding.layoutMenu.setupWithViewPager(binding.viewPager);
 
         binding.viewPager.setOffscreenPageLimit(2);
+
+        binding.goBack.setOnClickListener(v -> mActivity.finish());
     }
 
     @Override

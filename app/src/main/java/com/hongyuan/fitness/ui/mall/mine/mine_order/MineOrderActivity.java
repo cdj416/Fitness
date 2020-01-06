@@ -3,6 +3,7 @@ package com.hongyuan.fitness.ui.mall.mine.mine_order;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityMineOrderBinding;
+import com.hongyuan.fitness.ui.main.MainActivity;
 
 public class MineOrderActivity extends CustomActivity {
     @Override
@@ -19,5 +20,10 @@ public class MineOrderActivity extends CustomActivity {
         ActivityMineOrderBinding binding = ActivityMineOrderBinding.bind(mView);
         MineOrderViewModel viewModel = new MineOrderViewModel(this,binding);
         binding.setViewModel(viewModel);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(MainActivity.class,null);
     }
 }

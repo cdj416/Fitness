@@ -19,6 +19,7 @@ import com.hongyuan.fitness.ui.mall.GoodActivity;
 import com.hongyuan.fitness.ui.mall.good_details.GoodDetailsActivity;
 import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
 import com.hongyuan.fitness.ui.mall.mine.mine_order.order_details.MineOrderDetailsActivity;
+import com.hongyuan.fitness.ui.only_equipment.smart_basic_information.SmartBasicInformationActivity;
 import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
 import com.hongyuan.fitness.ui.store.StoreDetailActivity;
 import com.hongyuan.fitness.ui.store.punch.PunchActivity;
@@ -46,6 +47,8 @@ public class JumpUtils {
             activity.overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
         }
     }
+
+
 
     /*
     *
@@ -107,6 +110,10 @@ public class JumpUtils {
             case "order_info"://订单详情
                 bundle.putString("o_id",href_id);
                 viewModel.startActivity(MineOrderDetailsActivity.class,bundle);
+                break;
+            case "smart_equipment"://体脂称扫描
+                bundle.putString("url",href_id);
+                viewModel.startActivity(SmartBasicInformationActivity.class,bundle);
                 break;
 
         }

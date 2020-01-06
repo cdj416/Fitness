@@ -82,7 +82,7 @@ public class MyPlayActivity extends CustomActivity {
         //videoPlayer.setSpeed(2f);
 
         //设置返回键
-        videoPlayer.getBackButton().setVisibility(View.GONE);
+        videoPlayer.getBackButton().setVisibility(View.VISIBLE);
         //设置旋转
         orientationUtils = new OrientationUtils(this, videoPlayer);
         //禁止旋转

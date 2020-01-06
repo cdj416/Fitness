@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by yangc on 2017/4/26.
  * E-Mail:yangchaojiang@outlook.com
  * Deprecated:图片预览页面
  */

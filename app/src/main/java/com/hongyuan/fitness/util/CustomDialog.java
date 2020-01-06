@@ -665,5 +665,89 @@ public class CustomDialog {
 
     }
 
+    /*
+    * 人脸识别录像弹框
+    * */
+    public static void showTakePhoto(Context mContext,DialogClick dialogClick){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        dialog.setCanceledOnTouchOutside(false);
+        View view = View.inflate(mContext, R.layout.dialog_take_photo,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setWindowAnimations(R.style.main_menu_animStyle);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        Button goTakePhoto = view.findViewById(R.id.goTakePhoto);
+        ImageView closeImg = view.findViewById(R.id.closeImg);
+        closeImg.setOnClickListener(v -> dialog.dismiss());
+
+        goTakePhoto.setOnClickListener(v -> {
+            dialog.dismiss();
+            dialogClick.dialogClick(v);
+        });
+    }
+
+    /*
+    * 添加身体数据输入框
+    * */
+    public static void showAddPhysicaldata(Context mContext,String titleText,String unitStr,DialogClickMessage clickMessage){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        dialog.setCanceledOnTouchOutside(false);
+        View view = View.inflate(mContext, R.layout.dialog_add_physicaldata,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setWindowAnimations(R.style.main_menu_animStyle);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        TextView titleName = view.findViewById(R.id.titleName);
+        TextView unitText = view.findViewById(R.id.unitText);
+        TextView save = view.findViewById(R.id.save);
+        TextView cancel = view.findViewById(R.id.cancel);
+        EditText etText = view.findViewById(R.id.etText);
+        titleName.setText(titleText);
+        unitText.setText(unitStr);
+
+        save.setOnClickListener(v -> {if(clickMessage != null && BaseUtil.isValue(etText.getText().toString())){
+            clickMessage.dialogClick(v,etText.getText().toString());
+            dialog.dismiss();
+        }else{
+            showMessage(mContext,"请输入值！");
+        }});
+        cancel.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    /*
+    * 文字输入弹框
+    * */
+    public static void showAddText(Context mContext,String titleText,DialogClickMessage clickMessage){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        dialog.setCanceledOnTouchOutside(false);
+        View view = View.inflate(mContext, R.layout.dialog_modify_text,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setWindowAnimations(R.style.main_menu_animStyle);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        TextView titleName = view.findViewById(R.id.titleName);
+        TextView save = view.findViewById(R.id.save);
+        TextView cancel = view.findViewById(R.id.cancel);
+        EditText etText = view.findViewById(R.id.etText);
+        titleName.setText(titleText);
+
+        save.setOnClickListener(v -> {if(clickMessage != null && BaseUtil.isValue(etText.getText().toString())){
+            clickMessage.dialogClick(v,etText.getText().toString());
+            dialog.dismiss();
+        }else{
+            showMessage(mContext,"请输入值！");
+        }});
+        cancel.setOnClickListener(v -> dialog.dismiss());
+    }
+
 
 }

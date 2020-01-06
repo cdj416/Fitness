@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.hongyuan.fitness.ui.training_plan.TrainingPlanViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/color_FFFFFF">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/color_FF333333"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="135dp"
+            android:text="随动健身计划"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/color_FF999999"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="点击开始评测，按步骤填写个人档案\n最后通知教练为您定制专属训练计划"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/plan_img"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="41dp"/>
+
+        <TextView
+            android:id="@+id/goNext"
+            android:layout_width="218dp"
+            android:layout_height="44dp"
+            android:background="@drawable/shape_gradient_v_radiu5_login"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/color_FFFFFF"
+            android:layout_marginTop="40dp"
+            android:textSize="@dimen/sp_14"
+            android:text="开始评测"/>
+    </LinearLayout>
+</layout>

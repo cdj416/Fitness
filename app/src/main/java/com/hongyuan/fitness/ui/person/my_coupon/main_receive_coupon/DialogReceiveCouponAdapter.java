@@ -38,17 +38,17 @@ public class DialogReceiveCouponAdapter extends BaseQuickAdapter<CouponListBeans
         if(item.isReceive()){
             helper.getView(R.id.cReceive).setClickable(false);
             helper.setBackgroundRes(R.id.cReceive,R.color.transparent);
-            helper.setTextColor(R.id.cReceive,mContext.getResources().getColor(R.color.color_FFFFFF));
+            //helper.setTextColor(R.id.cReceive,mContext.getResources().getColor(R.color.color_FFFFFF));
             helper.setText(R.id.cReceive,"已领取");
         }else{
             helper.getView(R.id.cReceive).setClickable(true);
-            helper.setBackgroundRes(R.id.cReceive,R.drawable.shape_radius14_ffffffff);
+            //helper.setBackgroundRes(R.id.cReceive,R.drawable.shape_radius14_ffffffff);
             if(item.getCoupon_type() == 1){
-                helper.setBackgroundRes(R.id.box,R.mipmap.blue_coupon_bg);
-                helper.setTextColor(R.id.cReceive,mContext.getResources().getColor(R.color.color_FF6787F1));
+                //helper.setBackgroundRes(R.id.box,R.mipmap.blue_coupon_bg);
+                //helper.setTextColor(R.id.cReceive,mContext.getResources().getColor(R.color.color_FF6787F1));
             }else{
-                helper.setBackgroundRes(R.id.box,R.mipmap.orange_coupon_bg);
-                helper.setTextColor(R.id.cReceive,mContext.getResources().getColor(R.color.color_EF5B48));
+                //helper.setBackgroundRes(R.id.box,R.mipmap.orange_coupon_bg);
+                //helper.setTextColor(R.id.cReceive,mContext.getResources().getColor(R.color.color_EF5B48));
             }
             helper.setText(R.id.cReceive,"立即领取");
             helper.addOnClickListener(R.id.cReceive);
