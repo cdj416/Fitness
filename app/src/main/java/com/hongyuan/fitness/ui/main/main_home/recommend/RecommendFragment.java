@@ -90,6 +90,17 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
 
     }
 
+    @Override
+    protected void onMyResume() {
+        super.onMyResume();
+        //需要自动刷新
+        if(isAutoRefresh("refreshTime")){
+            refresh.autoRefresh();
+            //存储当前刷新时间
+            inAutoRefreshTime("refreshTime");
+        }
+    }
+
     /*
      * 加载坐标定位视图控件
      * */

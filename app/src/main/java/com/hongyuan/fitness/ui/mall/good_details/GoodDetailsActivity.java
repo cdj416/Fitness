@@ -22,7 +22,7 @@ public class GoodDetailsActivity extends CustomActivity {
     @Override
     protected void initView() {
         setTitle("商品详情");
-        getMainTitle().setRightText("我的");
+        //getMainTitle().setRightText("我的");
         setsetImmersive(0x55000000);
         binding = ActivityGoodDetailsBinding.bind(mView);
         GoodDetailsViewModel viewModel = new GoodDetailsViewModel(this,binding);

@@ -174,7 +174,8 @@ public class VtwoVerificationLoginViewModel extends CustomViewModel implements I
 
             //检测是否录入身体指数
             getCheckBody();
-            JPushInterface.setAlias(MyApplication.getInstance(), 100, userToken.getM_mobile());//设置别名或标签
+            //设置别名或标签
+            JPushInterface.setAlias(MyApplication.getInstance(), 100, userToken.getM_mobile());
         }
     }
 

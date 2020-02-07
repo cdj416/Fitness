@@ -41,7 +41,7 @@ public class GoodDetailsViewModel extends CustomViewModel implements SkutemView.
 
     @Override
     protected void initView() {
-        mActivity.getMainTitle().getRightView().setOnClickListener(v -> startActivity(MineOrderBeans.class,null));
+        //mActivity.getMainTitle().getRightView().setOnClickListener(v -> startActivity(MineOrderBeans.class,null));
     }
 
     @Override

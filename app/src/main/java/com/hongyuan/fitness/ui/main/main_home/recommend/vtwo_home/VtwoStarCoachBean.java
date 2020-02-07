@@ -91,7 +91,8 @@ public class VtwoStarCoachBean extends BaseBean {
             private String last_kong_date;
 
             public String getCoach_head() {
-                return coach_head;
+                //涉及到图片的地方都需要处理下，节省流量
+                return coach_head+"?x-oss-process=image/resize,h_200,w_200";
             }
 
             public void setCoach_head(String coach_head) {

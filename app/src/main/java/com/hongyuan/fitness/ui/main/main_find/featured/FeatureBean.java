@@ -290,7 +290,8 @@ public class FeatureBean extends BaseBean implements Serializable {
             }
 
             public String getMi_head() {
-                return mi_head;
+                //涉及到图片的地方都需要处理下，节省流量
+                return mi_head+"?x-oss-process=image/resize,h_200,w_200";
             }
 
             public void setMi_head(String mi_head) {
@@ -351,7 +352,8 @@ public class FeatureBean extends BaseBean implements Serializable {
                 }
 
                 public String getFile_src() {
-                    return file_src;
+                    //涉及到图片的地方都需要处理下，节省流量
+                    return file_src+"?x-oss-process=image/resize,h_400,w_400";
                 }
 
                 public void setFile_src(String file_src) {

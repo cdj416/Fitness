@@ -188,7 +188,8 @@ public class VtwoPrivateLessonsBeans extends BaseBean {
             }
 
             public String getCp_img() {
-                return cp_img;
+                //涉及到图片的地方都需要处理下，节省流量
+                return cp_img+"?x-oss-process=image/resize,h_200,w_200";
             }
 
             public void setCp_img(String cp_img) {

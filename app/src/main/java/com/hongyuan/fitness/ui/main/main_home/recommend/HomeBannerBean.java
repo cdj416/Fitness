@@ -1,5 +1,7 @@
 package com.hongyuan.fitness.ui.main.main_home.recommend;
 
+import android.util.Log;
+
 import com.hongyuan.fitness.base.BaseBean;
 
 import java.util.List;
@@ -57,7 +59,8 @@ public class HomeBannerBean extends BaseBean {
             }
 
             public String getImg_src() {
-                return img_src;
+                //涉及到图片的地方都需要处理下，节省流量
+                return img_src+"?x-oss-process=image/resize,h_300,w_500";
             }
 
             public void setImg_src(String img_src) {

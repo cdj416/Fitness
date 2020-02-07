@@ -191,7 +191,8 @@ public class VtwoGroupClassBeans extends BaseBean {
             }
 
             public String getCs_img() {
-                return cs_img;
+                //涉及到图片的地方都需要处理下，节省流量
+                return cs_img+"?x-oss-process=image/resize,h_200,w_200";
             }
 
             public void setCs_img(String cs_img) {

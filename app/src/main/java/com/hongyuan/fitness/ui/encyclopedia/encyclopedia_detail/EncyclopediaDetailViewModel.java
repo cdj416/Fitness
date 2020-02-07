@@ -85,9 +85,11 @@ public class EncyclopediaDetailViewModel extends CustomViewModel implements View
             @SingleClick
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putString("article_id",String.valueOf(commentBean.getData().getList().get(position).getArticle_id()));
-                startActivity(EncyclopediaDetailActivity.class,bundle);
+                if(commentBean != null && commentBean.getData() != null){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("article_id",String.valueOf(commentBean.getData().getList().get(position).getArticle_id()));
+                    startActivity(EncyclopediaDetailActivity.class,bundle);
+                }
             }
         });
 

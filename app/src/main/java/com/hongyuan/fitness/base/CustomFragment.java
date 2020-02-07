@@ -22,7 +22,9 @@ import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.custom_view.TitleView;
 import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.EncryptionUtil;
+import com.hongyuan.fitness.util.SharedPreferencesUtil;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
@@ -651,6 +653,43 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     * */
     public Class<T> getMyClass(){
         return this.dataBean;
+    }
+
+
+    /*
+    * 存储当前自动刷新时间
+    * */
+    protected void inAutoRefreshTime(String key){
+        String nowTime = String.valueOf(System.currentTimeMillis());
+        SharedPreferencesUtil.putBean(mActivity,key,nowTime);
+    }
+
+    /*
+    * 获取上次自动刷新的时间
+    * */
+    protected Long getAutoRefreshTime(String key){
+        String lastTime = String.valueOf(SharedPreferencesUtil.getBean(mActivity,key));
+        if(BaseUtil.isValue(lastTime)){
+            return Long.valueOf(lastTime);
+        }
+
+        return 0l;
+    }
+
+    //用来标识是否是第一次创建
+
+    /*
+    * 是否需要自动刷新
+    * */
+    protected boolean isAutoRefresh(String key){
+        long nowTime = System.currentTimeMillis();
+        long lastTime = getAutoRefreshTime(key);
+
+        long apartTime = nowTime - lastTime;
+        if(apartTime > 3600000 && !isFirstVisible){
+            return true;
+        }
+        return false;
     }
 
 }

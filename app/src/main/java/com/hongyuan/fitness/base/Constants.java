@@ -3,9 +3,9 @@ package com.hongyuan.fitness.base;
 public class Constants {
 
     //测试地址
-    //public static final String ADRESS = "http://192.168.1.16";
+    public static final String ADRESS = "http://192.168.1.16";
     //正式地址
-    public static final String ADRESS = "http://www.hongyuangood.com";
+    //public static final String ADRESS = "http://www.hongyuangood.com";
 
     /*==================================================================================*/
     //微信支付需要的appId

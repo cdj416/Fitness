@@ -211,7 +211,8 @@ public class StoreBean extends BaseBean implements Serializable{
             }
 
             public String getOs_img() {
-                return os_img;
+                //涉及到图片的地方都需要处理下，节省流量
+                return os_img+"?x-oss-process=image/resize,h_220,w_370";
             }
 
             public void setOs_img(String os_img) {

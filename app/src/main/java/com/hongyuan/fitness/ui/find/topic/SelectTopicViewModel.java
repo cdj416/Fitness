@@ -180,10 +180,7 @@ public class SelectTopicViewModel extends CustomViewModel {
             SlectTopicRighttBeans slectTopicRighttBeans = (SlectTopicRighttBeans)data;
 
             if(curPage == FIRST_PAGE){
-                if(slectTopicRighttBeans.getData().getList() != null && slectTopicRighttBeans.getData().getList().size() > 0){
-                    rightList = slectTopicRighttBeans.getData().getList();
-                }
-
+                rightList = slectTopicRighttBeans.getData().getList();
             }else{
                 if(slectTopicRighttBeans.getData().getList() != null && slectTopicRighttBeans.getData().getList().size() > 0){
                     rightList.addAll(slectTopicRighttBeans.getData().getList());
@@ -194,6 +191,11 @@ public class SelectTopicViewModel extends CustomViewModel {
 
             if(rightList != null && rightList.size() > 0){
                 rightdapter.setNewData(rightList);
+                binding.promptTxt.setVisibility(View.GONE);
+                binding.rightRec.setVisibility(View.VISIBLE);
+            }else{
+                binding.promptTxt.setVisibility(View.VISIBLE);
+                binding.rightRec.setVisibility(View.GONE);
             }
 
         }
