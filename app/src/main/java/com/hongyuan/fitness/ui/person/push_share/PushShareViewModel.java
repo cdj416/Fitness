@@ -19,6 +19,7 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityPushShareBinding;
 import com.hongyuan.fitness.ui.main.main_person.PersonBean;
+import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchCheckBean;
 import com.hongyuan.fitness.util.ScreenshotUtil;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.luck.picture.lib.PictureSelector;
@@ -51,7 +52,6 @@ public class PushShareViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
-        binding.grandTotal.setText("本月已累计打卡"+getBundle().getString("leiji_days")+"天");
 
         mActivity.getMainTitle().setLeftImage(R.mipmap.close_heise_img);
         mActivity.getMainTitle().setRightTextColor("分享",mActivity.getResources().getColor(R.color.color_FF333333));
@@ -163,6 +163,9 @@ public class PushShareViewModel extends CustomViewModel {
         Controller.myRequest(Constants.SHARE_IMGS,Controller.TYPE_POST,getParams(), PushShareBeans.class,this);
         //获取个人信息
         Controller.myRequest(Constants.GET_MEMBER_INDEX_INFO,Controller.TYPE_POST,getParams(), PersonBean.class,this);
+
+        //检查是否签到
+        Controller.myRequest(Constants.CHECK_IS_QD,Controller.TYPE_POST,getParams(), DailyPunchCheckBean.class,this);
     }
 
     /*
@@ -241,6 +244,11 @@ public class PushShareViewModel extends CustomViewModel {
             RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img);
             Glide.with(mActivity).load(personBean.getData().getInfo().getMi_head()).apply(options).into(binding.headImg);
             binding.userName.setText(personBean.getData().getInfo().getM_name());
+        }
+
+        if(data instanceof DailyPunchCheckBean){
+            DailyPunchCheckBean.DataBean dailyPunchCheckBean = ((DailyPunchCheckBean)data).getData();
+            binding.grandTotal.setText("本月已累计打卡"+dailyPunchCheckBean.getItem().getLeiji_days()+"天");
         }
     }
 }

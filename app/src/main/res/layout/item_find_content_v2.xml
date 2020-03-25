@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="3dp"
     app:cardCornerRadius="3dp"
     app:cardUseCompatPadding="true">
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="220dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/jumpDetails">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="166dp">
+            android:layout_height="wrap_content">
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/coverImg"
                 android:layout_width="match_parent"
-                android:layout_height="156dp"
+                android:layout_height="wrap_content"
                 app:riv_corner_radius_top_right="6dp"
                 app:riv_corner_radius_top_left="6dp"
                 android:src="@mipmap/zhengfangxing_default_img"
-                android:scaleType="centerCrop"/>
-            <TextView
+                android:scaleType="fitXY"/>
+            <ImageView
+                android:id="@+id/playMark"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:src="@mipmap/play_baise_img"
+                android:visibility="gone"
+                android:layout_centerInParent="true"/>
             <TextView
                 android:id="@+id/styleImgNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="16"
+                android:text="0"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:paddingLeft="10dp"

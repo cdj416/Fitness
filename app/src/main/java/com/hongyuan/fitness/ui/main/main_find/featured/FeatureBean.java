@@ -353,7 +353,8 @@ public class FeatureBean extends BaseBean implements Serializable {
 
                 public String getFile_src() {
                     //涉及到图片的地方都需要处理下，节省流量
-                    return file_src+"?x-oss-process=image/resize,h_400,w_400";
+                    //return file_src+"?x-oss-process=image/resize,h_400,w_400";
+                    return file_src;
                 }
 
                 public void setFile_src(String file_src) {

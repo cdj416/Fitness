@@ -256,4 +256,12 @@
         <attr name="rightText" format="reference|string"/>
         <attr name="showItemLine" format="boolean"/>
     </declare-styleable>
+
+    <!--水滴指示器-->
+    <declare-styleable name="WaterDropIndicator">
+        <attr name="defaultColor" format="color"/>
+        <attr name="selectColor" format="color"/>
+        <attr name="bigRadius" format="dimension"/>
+        <attr name="itemSpace" format="dimension"/>
+    </declare-styleable>
 </resources>

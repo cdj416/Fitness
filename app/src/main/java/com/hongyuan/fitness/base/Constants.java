@@ -3,7 +3,9 @@ package com.hongyuan.fitness.base;
 public class Constants {
 
     //测试地址
-    public static final String ADRESS = "http://192.168.1.16";
+    //public static final String ADRESS = "https://www.1667799.com";
+    //预发环境
+    public static final String ADRESS = "http://test.1667799.com";
     //正式地址
     //public static final String ADRESS = "http://www.hongyuangood.com";
 
@@ -446,4 +448,7 @@ public class Constants {
     // 手环--读取睡眠列表
     public static final String GET_SLEEP_LIST = ADRESS + "/api/sh/get_sleep_list";
 
+    /**************************************五期版本********************************************************/
+    // 首页--弹出商品
+    public static final String GET_FREE_GODDS = ADRESS + "/api/goodshome/get_free_goods";
 }

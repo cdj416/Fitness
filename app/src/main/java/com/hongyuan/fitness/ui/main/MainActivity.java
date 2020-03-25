@@ -53,6 +53,14 @@ public class MainActivity extends CustomActivity {
     }
 
     /*
+     * 刷新免费商品领取数据
+     * */
+    @Subscribe(id = ConstantsCode.EB_CHAGEE_RECEVER_GOODS)
+    public void refreshGoods(String message) {
+        viewModel.changeGoods(Integer.valueOf(message));
+    }
+
+    /*
      * 控制跳转到指定页面
      * */
     @Subscribe(id = ConstantsCode.EB_START_COURSE)

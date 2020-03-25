@@ -69,6 +69,16 @@ public class SkutemView extends RelativeLayout implements View.OnClickListener, 
     }
     private ClickSku clickSku;
 
+    //点击了submit的回调
+    public interface ClickSkuSubmit{
+        void getClickSubmit();
+    }
+    private ClickSkuSubmit clickSkuSubmit;
+
+    public void setClickSkuSubmit(ClickSkuSubmit clickSkuSubmit){
+        this.clickSkuSubmit = clickSkuSubmit;
+    }
+
     private SubAddNumView.NumChange numChange;
 
     public SkutemView(Context context) {
@@ -138,15 +148,28 @@ public class SkutemView extends RelativeLayout implements View.OnClickListener, 
                 skuAdapter.setNewData(dataBeans.getSku());
                 titleName.setText(getTitleText());
             }
+
+            if(dataBeans.getG_point() == 0 && Double.valueOf(dataBeans.getG_price()) == 0){
+                submit.setText("立即领取");
+            }else{
+                submit.setText("立即购买");
+            }
+
             //去购买
             submit.setOnClickListener(v -> {
                 if(getCensor()){
-                    Bundle bundle = new Bundle();
-                    //传递需要请求的参数集
-                    bundle.putSerializable("paramsBean",getParamsBean());
-                    //传递需要显示的参数集
-                    bundle.putSerializable("InfoBean",dataBeans);
-                    ((CustomActivity)getContext()).startActivity(GoodOrderDetailsActivity.class,bundle);
+                    if(dataBeans.getG_point() == 0 && Double.valueOf(dataBeans.getG_price()) == 0){
+                        if(clickSkuSubmit != null){
+                            clickSkuSubmit.getClickSubmit();
+                        }
+                    }else{
+                        Bundle bundle = new Bundle();
+                        //传递需要请求的参数集
+                        bundle.putSerializable("paramsBean",getParamsBean());
+                        //传递需要显示的参数集
+                        bundle.putSerializable("InfoBean",dataBeans);
+                        ((CustomActivity)getContext()).startActivity(GoodOrderDetailsActivity.class,bundle);
+                    }
                 }
             });
             //初始化数量显示为1
@@ -458,6 +481,13 @@ public class SkutemView extends RelativeLayout implements View.OnClickListener, 
         }
 
         return paramsBean;
+    }
+
+    /*
+    * 单独获取商品数量
+    * */
+    public String getNum(){
+        return goodNum != null ? goodNum.getText().toString() : "1";
     }
 
 }

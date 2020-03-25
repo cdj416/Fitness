@@ -87,9 +87,7 @@ public class DailyPunchViewModel extends CustomViewModel implements StickyScroll
             }
         });
         binding.sharePush.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("leiji_days",String.valueOf(dailyPunchCheckBean.getData().getItem().getLeiji_days()));
-            startActivity(PushShareActivity.class,bundle);
+            startActivity(PushShareActivity.class,null);
         });
 
         //设置滚动监听
@@ -231,9 +229,7 @@ public class DailyPunchViewModel extends CustomViewModel implements StickyScroll
     private void itemClickDealWith(int position){
         switch (taskList.get(position).getCode()){
             case "ka_share":
-                Bundle bundle = new Bundle();
-                bundle.putString("leiji_days",String.valueOf(dailyPunchCheckBean.getData().getItem().getLeiji_days()));
-                startActivity(PushShareActivity.class,bundle);
+                startActivity(PushShareActivity.class,null);
                 break;
             case "qd":
                 checkIn();

@@ -96,6 +96,13 @@ public class HuanXinUtils {
     }
 
     /*
+    * 判断是否连接环信服务器
+    * */
+    public boolean isConnect(){
+        return EMClient.getInstance().isConnected();
+    }
+
+    /*
     * 环信登录账号
     * */
     private void loginHuanXin(String userName){

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">随动</string>
+    <!--<string name="app_name">随动</string>-->
 
     <string name="pickerview_cancel">取消</string>
     <string name="pickerview_submit">确定</string>
@@ -14,4 +14,9 @@
     <string name="rationale_photo">This app needs access photos.</string>
     <string name="rationale_camera">This app needs access camera.</string>
 
+    <!--跳转淘宝天猫京东需要的连接数据-->
+    <string name="taobao_app_shop">taobao://shop.m.taobao.com/shop/shop_index.htm?shop_id=%1$s</string>
+    <string name="taobao_app_goods">taobao://item.taobao.com/item.htm?id=%1$s</string>
+    <string name="tmall_app_shop">tmall://page.tm/shop?shop_id=%1$s</string>
+    <string name="tmall_app_goods">tmall://tmallclient/?{"action":"item:id=%1$s"}</string>
 </resources>

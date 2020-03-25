@@ -123,4 +123,7 @@ public class ConstantsCode {
     public final static int EB_SHOW_PRIVITE = 7;
     //以获取手环数据时使用
     public final static int EB_WRISTBAND_SHOW_CONTENT = 8;
+    //领取商品后数据的刷新
+    public final static int EB_CHAGEE_RECEVER_GOODS = 9;
+
 }

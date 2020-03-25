@@ -1,8 +1,11 @@
 package com.hongyuan.fitness.ui.webview;
 
+import android.view.KeyEvent;
+
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityWebviewBinding;
+import com.hongyuan.fitness.ui.main.MainActivity;
 
 public class WebViewActivity extends CustomActivity {
 
@@ -38,5 +41,19 @@ public class WebViewActivity extends CustomActivity {
     protected void onDestroy() {
         modelView.mAgentWeb.getWebLifeCycle().onDestroy();
         super.onDestroy();
+    }
+
+    //安卓重写返回键事件
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            if(getBundle().getString("backType") != null && "goMain".endsWith(getBundle().getString("backType"))){
+                startActivity(MainActivity.class,null);
+            }else{
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 }

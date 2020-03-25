@@ -80,9 +80,27 @@ public class MineOrderDetailsViewModel extends CustomViewModel {
         binding.unitPrice.setText(BaseUtil.getNoZoon(detailsBeans.getO_price()));
         binding.buyNum.setText(String.valueOf(detailsBeans.getO_num()));
         binding.buyPoint.setText(BaseUtil.getNoZoon(detailsBeans.getO_point()));
-        binding.orderAddTime.setText(detailsBeans.getAdd_date());
-        binding.orderNum.setText(detailsBeans.getO_sn());
-        binding.orderPayTime.setText(detailsBeans.getPay_date());
+
+        if(BaseUtil.isValue(detailsBeans.getAdd_date())){
+            binding.orderAddTime.setText("创建时间："+detailsBeans.getAdd_date());
+            binding.orderAddTime.setVisibility(View.VISIBLE);
+        }
+        if(BaseUtil.isValue(detailsBeans.getO_sn())){
+            binding.orderNum.setText("订单编号："+detailsBeans.getO_sn());
+            binding.orderNum.setVisibility(View.VISIBLE);
+        }
+        if(BaseUtil.isValue(detailsBeans.getPay_date())){
+            binding.orderPayTime.setText("付款时间："+detailsBeans.getPay_date());
+            binding.orderPayTime.setVisibility(View.VISIBLE);
+        }
+        if(BaseUtil.isValue(detailsBeans.getTihuo_code())){
+            binding.pickupCode.setText("提货码："+detailsBeans.getTihuo_code());
+            binding.pickupCode.setVisibility(View.VISIBLE);
+        }
+        if(BaseUtil.isValue(detailsBeans.getOs_name())){
+            binding.pickUpAddress.setText("取货门店："+detailsBeans.getOs_name());
+            binding.pickUpAddress.setVisibility(View.VISIBLE);
+        }
 
         if(BaseUtil.isValue(detailsBeans.getO_price()) && Double.valueOf(detailsBeans.getO_price()) > 0){
             binding.goodPrice.setText(BaseUtil.getNoZoon(detailsBeans.getO_price()));

@@ -90,7 +90,7 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
         //初始化token，全局使用
         userToken = TokenSingleBean.getInstance();
         //禁止使用横屏
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         //加载父布局
         setContentView(R.layout.activity_custom);
 
@@ -555,6 +555,13 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
             loadingDialog.show();
             animationDrawable.start();
         }
+    }
+
+    /*
+     * 获取传递参数的bundle
+     * */
+    public Bundle getBundle(){
+        return getIntent().getExtras();
     }
 
     /*

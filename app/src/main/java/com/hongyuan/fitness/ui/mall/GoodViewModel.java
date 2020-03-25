@@ -2,7 +2,6 @@ package com.hongyuan.fitness.ui.mall;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;

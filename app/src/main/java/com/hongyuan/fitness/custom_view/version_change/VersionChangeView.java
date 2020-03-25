@@ -87,10 +87,13 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
     * */
     private void startUpdate(boolean force){
         //更新类型
-        int code = PackageUtils.getVersionCode(getContext())+2;
-        if(force){
+        int code = PackageUtils.getVersionCode(getContext())+1;
+        /*if(force){
             code = 1;
-        }
+        }*/
+
+        //下载管理器
+        DownloadManager manager = DownloadManager.getInstance(getContext());
 
         //配置内容
         UpdateConfiguration configuration = new UpdateConfiguration()
@@ -116,15 +119,16 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
                 .setForcedUpgrade(force)
                 //设置对话框按钮的点击监听
                 .setButtonClickListener(id -> {
-
+                    //关闭弹框
+                    manager.getDefaultDialog().dismiss();
                 })
                 //设置下载过程的监听
                 .setOnDownloadListener(new OnDownloadListener() {
                     @Override
                     public void start() {
-                        Message msg = new Message();
-                        msg.what = START_DOWN;
-                        handler.sendMessage(msg);
+                        //Message msg = new Message();
+                        //msg.what = START_DOWN;
+                        //handler.sendMessage(msg);
                     }
 
                     @Override
@@ -140,16 +144,16 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
 
                     @Override
                     public void cancel() {
+                        Log.e("phm","=====下载取消======");
                     }
 
                     @Override
                     public void error(Exception e) {
+                        Log.e("phm","=====下载出错了======");
                         e.printStackTrace();
-                        CustomDialog.showMessage(getContext(),"下载失败，请从新进入程序！");
                     }
                 });
 
-        DownloadManager manager = DownloadManager.getInstance(getContext());
         manager.setApkName("suiDong.apk")
                 .setApkUrl(versionBeans.getDownloadurl())
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -159,6 +163,7 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
                 .setApkVersionCode(code)
                 .setApkVersionName(versionBeans.getApp_version())
                 .setApkSize("")
+                .setApkDescription("升级进度在后台查看！")
                 .download();
     }
 

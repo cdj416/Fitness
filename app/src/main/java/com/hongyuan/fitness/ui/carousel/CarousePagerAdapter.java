@@ -1,10 +1,15 @@
 package com.hongyuan.fitness.ui.carousel;
 
+import android.os.Bundle;
+
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.google.android.exoplayer2.metadata.id3.MlltFrame;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.main.TitleBean;
+import com.hongyuan.fitness.ui.main.main_home.recommend.HomeBannerBean;
+import com.hongyuan.fitness.util.BaseUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +19,12 @@ public class CarousePagerAdapter extends FragmentPagerAdapter {
     private List<CustomFragment> fragments;
     private List<TitleBean> beans;
 
-    public CarousePagerAdapter(FragmentManager fm) {
+    //广告实体类
+    private HomeBannerBean.DataBean.ListBean advertBean;
+
+    public CarousePagerAdapter(FragmentManager fm,HomeBannerBean.DataBean.ListBean advertBean) {
         super(fm);
-        setData();
+        this.advertBean = advertBean;
     }
 
     @Override
@@ -40,7 +48,7 @@ public class CarousePagerAdapter extends FragmentPagerAdapter {
     /*
      * 初始化数据
      * */
-    public void setData() {
+    public void setData(List<HomeBannerBean.DataBean.ListBean> mList) {
         if(beans == null){
             beans = new ArrayList<>();
         }
@@ -49,14 +57,25 @@ public class CarousePagerAdapter extends FragmentPagerAdapter {
         }
         fragments.clear();
         beans.clear();
-        beans.add(new TitleBean("",0));
-        beans.add(new TitleBean("",1));
-        beans.add(new TitleBean("",2));
 
-        fragments.add(new CarouseFragment().setArguments("1"));
-        fragments.add(new CarouseFragment().setArguments("2"));
-        fragments.add(new CarouseFragment().setArguments("3"));
+        for(int i = 0 ; i < mList.size() ; i++){
+            beans.add(new TitleBean("",i));
+            fragments.add(new CarouseFragment().setMyArguments(getBundle(mList.get(i).getImg_src(),mList.get(i).getImg_id(),i == (mList.size() - 1))));
+        }
 
         notifyDataSetChanged();
+    }
+
+    private Bundle getBundle(String imgUrl,int imgId,boolean isLast){
+        Bundle bundle = new Bundle();
+        bundle.putString("imgUrl",imgUrl);
+        bundle.putBoolean("last",isLast);
+        if(!BaseUtil.isValue(imgUrl)){
+            bundle.putInt("imgId",imgId);
+        }
+        if(isLast){
+            bundle.putSerializable("advertImgBean",advertBean);
+        }
+        return bundle;
     }
 }

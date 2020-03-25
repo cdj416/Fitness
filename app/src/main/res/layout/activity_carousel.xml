@@ -28,5 +28,16 @@
             app:tabSelectedTextColor="@color/color_EF5B48"
             app:tabIndicatorFullWidth="false"
             android:visibility="gone"/>
+        
+        <com.hongyuan.fitness.custom_view.WaterDropIndicator
+            android:id="@+id/waterdrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="50dp"
+            app:selectColor="@color/colorAccent"
+            app:defaultColor="@color/colorPrimary"
+            app:itemSpace="60dp"
+            app:bigRadius="15dp"/>
     </FrameLayout>
 </layout>

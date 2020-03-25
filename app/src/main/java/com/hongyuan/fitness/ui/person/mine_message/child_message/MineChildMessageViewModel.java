@@ -114,8 +114,12 @@ public class MineChildMessageViewModel extends CustomViewModel {
 
             //跳转
             if(mineChildMessageBeans.getData().getList().get(mPosition).getHref_type() == 1){
-                JumpUtils.goAtherPage(this,mineChildMessageBeans.getData().getList().get(mPosition).getHref_code(),
-                        String.valueOf(mineChildMessageBeans.getData().getList().get(mPosition).getHref_id()));
+                JumpUtils.JumpBeans jumpBeans = new JumpUtils.JumpBeans();
+                jumpBeans.setImg_href_type(1);
+                jumpBeans.setHref_code(mineChildMessageBeans.getData().getList().get(mPosition).getHref_code());
+                jumpBeans.setHref_id(String.valueOf(mineChildMessageBeans.getData().getList().get(mPosition).getHref_id()));
+
+                JumpUtils.goAtherPage(mActivity,jumpBeans);
             }
         }
     }

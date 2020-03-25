@@ -20,8 +20,6 @@ import java.util.Set;
 public class Controller {
     public static final int TYPE_GET = 0x1;
     public static final int TYPE_POST = 0x2;
-
-    private static String mPath;
     /*
     * post,get键值对请求方式
     * */
@@ -30,8 +28,6 @@ public class Controller {
                                                   final Class<T> dataBean,
                                                   final RetrofitListener<T> listener){
         RequestParams params = new RequestParams(path);
-        mPath = path;
-        Log.e("cdj","====接口地址==="+path);
         if(maps != null){
             //组装常规参数
             Set<String> set = maps.keySet();
@@ -43,9 +39,9 @@ public class Controller {
             }
         }
         if(requestTpey == TYPE_GET){
-            x.http().get(params, getCallback(dataBean,listener));
+            x.http().get(params, getCallback(path,dataBean,listener));
         }else{
-            x.http().post(params, getCallback(dataBean,listener));
+            x.http().post(params, getCallback(path,dataBean,listener));
         }
 
     }
@@ -64,9 +60,9 @@ public class Controller {
             params.setMultipart(true);
         }
         if(requestTpey == TYPE_GET){
-            x.http().get(params, getCallback(dataBean,listener));
+            x.http().get(params, getCallback(path,dataBean,listener));
         }else{
-            x.http().post(params, getCallback(dataBean,listener));
+            x.http().post(params, getCallback(path,dataBean,listener));
         }
 
     }
@@ -93,9 +89,9 @@ public class Controller {
         }
 
         if(requestTpey == TYPE_GET){
-            x.http().get(params, getCallback(dataBean,listener));
+            x.http().get(params, getCallback(path,dataBean,listener));
         }else{
-            x.http().post(params, getCallback(dataBean,listener));
+            x.http().post(params, getCallback(path,dataBean,listener));
         }
 
     }
@@ -104,13 +100,13 @@ public class Controller {
     /*
     * callback
     * */
-    private static <T> Callback.CommonCallback<String> getCallback(final Class<T> dataBean,
+    private static <T> Callback.CommonCallback<String> getCallback(String mPath,final Class<T> dataBean,
                                                                    final RetrofitListener<T> listener){
         return new Callback.CommonCallback<String>() {
             BaseBean baseBean;
             @Override
             public void onSuccess(String result) {
-                Log.e("cdj","====="+result);
+                Log.e("cdj","=====接口====="+mPath+"====="+result);
                 try {
                     JSONObject object = new JSONObject(result);
                     baseBean = GsonUtil.getGson().fromJson(result, new TypeToken<BaseBean>(){}.getType());
@@ -195,7 +191,6 @@ public class Controller {
             BaseBean baseBean;
             @Override
             public void onSuccess(String result) {
-                Log.e("cdj","====="+result);
                 try {
                     baseBean = GsonUtil.getGson().fromJson(result, new TypeToken<BaseBean>(){}.getType());
                     if("1".equals(baseBean.getStatus().getSucceed())){
@@ -251,7 +246,6 @@ public class Controller {
                                                   Map<String,String> maps,
                                                   final RetrofitListener<T> listener){
         RequestParams params = new RequestParams(path);
-        mPath = path;
         //Log.e("cdj","====接口地址==="+path);
         if(maps != null){
             //组装常规参数

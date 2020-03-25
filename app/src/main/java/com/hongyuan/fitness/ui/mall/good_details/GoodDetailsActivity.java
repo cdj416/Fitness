@@ -14,6 +14,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class GoodDetailsActivity extends CustomActivity {
     private ActivityGoodDetailsBinding binding;
+    private GoodDetailsViewModel viewModel;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_good_details;
@@ -25,7 +26,7 @@ public class GoodDetailsActivity extends CustomActivity {
         //getMainTitle().setRightText("我的");
         setsetImmersive(0x55000000);
         binding = ActivityGoodDetailsBinding.bind(mView);
-        GoodDetailsViewModel viewModel = new GoodDetailsViewModel(this,binding);
+        viewModel = new GoodDetailsViewModel(this,binding);
         binding.setViewModel(viewModel);
     }
 
@@ -39,6 +40,7 @@ public class GoodDetailsActivity extends CustomActivity {
             binding.storeName.setText(selectStoreBean.getOs_name());
             binding.skuView.setOp_quhuo_osid(String.valueOf(selectStoreBean.getOs_id()));
             binding.skuView.setQuhuoStoreName(selectStoreBean.getOs_name());
+            viewModel.setQuhuo_osid(String.valueOf(selectStoreBean.getOs_id()));
         }
     }
 

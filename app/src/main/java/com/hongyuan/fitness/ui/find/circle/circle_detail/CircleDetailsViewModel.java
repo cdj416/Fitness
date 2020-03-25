@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -24,7 +25,9 @@ import com.hongyuan.fitness.ui.find.circle.topic_participant.TopicParticipantAct
 import com.hongyuan.fitness.ui.find.topic.SlectTopicRighttBeans;
 import com.hongyuan.fitness.ui.main.main_find.featured.FeatureBean;
 import com.hongyuan.fitness.ui.main.main_find.featured.V2FindContentAdapter;
+import com.hongyuan.fitness.util.DensityUtil;
 import com.hongyuan.fitness.util.DividerItemDecoration;
+import com.hongyuan.fitness.util.MMStaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +61,10 @@ public class CircleDetailsViewModel extends CustomViewModel {
         //开启加载更多功能
         setEnableLoadMore(true);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(mActivity, 2);
+        MMStaggeredGridLayoutManager layoutManager =
+                new MMStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         binding.mRecycler.setLayoutManager(layoutManager);
-        adapter = new V2FindContentAdapter();
+        adapter = new V2FindContentAdapter(DensityUtil.getColumnWhith(mActivity,38,2));
         binding.mRecycler.setAdapter(adapter);
         adapter.setOnItemChildClickListener((adapter, view, position) -> {
             if(view.getId() == R.id.jumpDetails){

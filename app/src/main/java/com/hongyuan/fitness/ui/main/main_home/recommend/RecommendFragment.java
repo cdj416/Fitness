@@ -32,10 +32,12 @@ import com.hongyuan.fitness.ui.training_plan.plan_details.PlanDetailsActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.GsonUtil;
+import com.hongyuan.fitness.util.JumpUtils;
 import com.hongyuan.fitness.util.LocationBean;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONObject;
 
@@ -150,9 +152,6 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
                 .setParams("page","4").setParams("curpage","1").setParams("is_tj","1");
         Controller.myRequest(Constants.GET_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
 
-        //检查是否签到
-        Controller.myRequest(Constants.CHECK_IS_QD,Controller.TYPE_POST,getParams(), DailyPunchCheckBean.class,this);
-
 
     }
 
@@ -170,7 +169,14 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
                 .setDelayTime(3000)
                 .isAutoPlay(true)
                 .setBannerStyle(BannerConfig.CIRCLE_INDICATOR )
-                .setIndicatorGravity(BannerConfig.CENTER).start();
+                .setIndicatorGravity(BannerConfig.CENTER).setOnBannerListener(position -> {
+            JumpUtils.JumpBeans jumpBeans = new JumpUtils.JumpBeans();
+            jumpBeans.setImg_href_type(bannerList.get(position).getImg_href_type());
+            jumpBeans.setHref_code(bannerList.get(position).getImg_href_code());
+            jumpBeans.setHref_id(String.valueOf(bannerList.get(position).getImg_href_id()));
+
+            JumpUtils.goAtherPage(mActivity,jumpBeans);
+                }).start();
     }
 
     @Override
@@ -216,11 +222,6 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
             featureBean = (FeatureBean)data;
             homeFinds.setVisibility(View.VISIBLE);
             homeFinds.setFind(featureBean.getData().getList(),this);
-        }
-
-        if(data instanceof DailyPunchCheckBean){
-            DailyPunchCheckBean.DataBean dailyPunchCheckBean = ((DailyPunchCheckBean)data).getData();
-            homeColum.setDailyPunch(dailyPunchCheckBean);
         }
 
         if(data instanceof PlanInfoBeans){

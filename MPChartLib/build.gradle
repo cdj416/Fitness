@@ -41,13 +41,13 @@ dependencies {
     testImplementation "org.mockito:mockito-core:1.10.19"
 }
 
-android.libraryVariants.all { variant ->
-    def name = variant.buildType.name
-    def task = project.tasks.create "jar${name.capitalize()}", Jar
-    task.dependsOn variant.javaCompiler
-    task.from variant.javaCompiler.destinationDir
-    artifacts.add('archives', task)
-}
+//android.libraryVariants.all { variant ->
+//    def name = variant.buildType.name
+//    def task = project.tasks.create "jar${name.capitalize()}", Jar
+//    task.dependsOn variant.javaCompiler
+//    task.from variant.javaCompiler.destinationDir
+//    artifacts.add('archives', task)
+//}
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs

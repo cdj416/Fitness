@@ -1,5 +1,6 @@
 package com.hongyuan.fitness.ui.webview;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
@@ -8,6 +9,7 @@ import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityWebviewBinding;
+import com.hongyuan.fitness.ui.main.MainActivity;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.AgentWebConfig;
 import com.just.agentweb.DefaultWebClient;
@@ -26,7 +28,14 @@ public class WebViewModelView extends CustomViewModel {
 
     @Override
     protected void initView() {
-        mActivity.getMainTitle().setCentreText(getBundle().getString("title"));
+        mActivity.getMainTitle().setCentreText(getBundle().getString("title",""));
+
+        mActivity.getMainTitle().getLeftView().setOnClickListener(v -> {
+            if(getBundle().getString("backType") != null && "goMain".endsWith(getBundle().getString("backType",""))){
+                startActivity(MainActivity.class,null);
+            }
+            mActivity.finish();
+        });
 
         mAgentWeb = AgentWeb.with(mActivity)
                 .setAgentWebParent(binding.mLinearLayout, new LinearLayout.LayoutParams(-1, -1))//传入AgentWeb的父控件。

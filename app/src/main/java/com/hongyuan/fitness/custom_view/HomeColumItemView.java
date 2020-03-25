@@ -82,14 +82,6 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
 
     }
 
-    /*
-    * 设置分享数据
-    * */
-    public void setDailyPunch(DailyPunchCheckBean.DataBean dailyPunchCheckBean){
-        this.dailyPunchCheckBean = dailyPunchCheckBean;
-    }
-
-
     @SingleClick(2000)
     @Override
     public void onClick(View v) {
@@ -115,9 +107,7 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
                 break;
 
             case R.id.shareDailyBox:
-                Bundle bundle1 = new Bundle();
-                bundle1.putString("leiji_days",String.valueOf(dailyPunchCheckBean.getItem().getLeiji_days()));
-                mActivity.startActivity(PushShareActivity.class,bundle1);
+                mActivity.startActivity(PushShareActivity.class,null);
                 break;
 
             case R.id.pointsCenterBox:

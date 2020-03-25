@@ -1,4 +1,7 @@
 package com.hongyuan.fitness.ui.main;
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -11,6 +14,8 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityMainBinding;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
+import com.hongyuan.fitness.ui.mall.good_details.GoodDetailsActivity;
+import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
@@ -25,8 +30,11 @@ public class MainViewModel extends CustomViewModel {
     private MyViewPagerAdapter myViewPagerAdapter;
     private CheckVersionBeans.DataBean.InfoBean versionBeans;
     private BaseQuickAdapter couponAdapter;
+    private BaseQuickAdapter goodsAdapter;
     private List<CouponListBeans.DataBean.ListBean> mList;
     private int mPosition;
+    //免费领取商品的数据
+    private HomeGoodsBeans.DataBean goodsBeans;
 
 
     public MainViewModel(CustomActivity mActivity, ActivityMainBinding binding) {
@@ -114,6 +122,16 @@ public class MainViewModel extends CustomViewModel {
     }
 
     /*
+    * 去检查是否有可免费领取的商品
+    * */
+    private void getHomeGoods(){
+        Log.e("cnn","===========来了几次啊=========");
+        mActivity.showLoading();
+        clearParams();
+        Controller.myRequest(Constants.GET_FREE_GODDS, Controller.TYPE_POST,getParams(), HomeGoodsBeans.class,this);
+    }
+
+    /*
     * 领取优惠券
     * */
     private void getReceive(String couponId){
@@ -132,7 +150,10 @@ public class MainViewModel extends CustomViewModel {
                 //版本检测更新
                 binding.versionView.startChange(versionBeans);
             }else{
+                //获取优惠券弹框
                 getHomeCoupon();
+                //获取首页商品弹框
+                getHomeGoods();
             }
 
         }
@@ -149,6 +170,19 @@ public class MainViewModel extends CustomViewModel {
             }
 
         }
+
+        if(data instanceof HomeGoodsBeans){
+            goodsBeans = ((HomeGoodsBeans)data).getData();
+            if(goodsBeans != null && goodsBeans.getList() != null && goodsBeans.getList().size() > 0){
+                //谈出领取免费商品弹框
+                CustomDialog.receiveGoods(mActivity, goodsBeans.getList(), (v, position, adapter) -> {
+                    goodsAdapter = adapter;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("g_id",String.valueOf(goodsBeans.getList().get(position).getG_id()));
+                    mActivity.startActivity(GoodDetailsActivity.class,bundle);
+                });
+            }
+        }
     }
 
     @Override
@@ -158,6 +192,21 @@ public class MainViewModel extends CustomViewModel {
             mList.get(mPosition).setReceive(true);
             couponAdapter.notifyDataSetChanged();
             showSuccess("领取成功！");
+        }
+    }
+
+    /*
+    * 刷新免费领取商品的显示数据
+    * */
+    public void changeGoods(int g_id){
+        for(HomeGoodsBeans.DataBean.ListBean bean : goodsBeans.getList()){
+            if(g_id == bean.getG_id()){
+                bean.setReceive(true);
+            }
+        }
+
+        if(goodsAdapter != null){
+            goodsAdapter.notifyDataSetChanged();
         }
     }
 }

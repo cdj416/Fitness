@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
@@ -26,7 +27,9 @@ import com.hongyuan.fitness.ui.find.friends.FriendsActivity;
 import com.hongyuan.fitness.ui.find.more_topic.MoreTopicActivity;
 import com.hongyuan.fitness.ui.find.topic.SlectTopicLeftBeans;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.DensityUtil;
 import com.hongyuan.fitness.util.DividerItemDecoration;
+import com.hongyuan.fitness.util.MMStaggeredGridLayoutManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -86,9 +89,11 @@ public class FeaturedFragment extends CustomFragment {
         topRecycler.setLayoutManager(manager);
 
 
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        MMStaggeredGridLayoutManager layoutManager =
+                new MMStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        //layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         mRecycler.setLayoutManager(layoutManager);
-        adapter = new V2FindContentAdapter();
+        adapter = new V2FindContentAdapter(DensityUtil.getColumnWhith(mActivity,38,2));
         mRecycler.setAdapter(adapter);
 
 

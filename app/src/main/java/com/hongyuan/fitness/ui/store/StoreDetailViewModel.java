@@ -25,6 +25,7 @@ import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.store.consultant.ConsultantBeans;
 import com.hongyuan.fitness.ui.store.store_list.StoreListActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.TimeUtil;
@@ -147,21 +148,27 @@ public class StoreDetailViewModel extends CustomViewModel implements HomeRecycle
     @SuppressLint("SetTextI18n")
     @Override
     protected void setData() {
-        //设置轮播图
-        binding.banner.setImages(detailBean.getData().getBanner())
-                .setImageLoader(new UseGlideImageLoader())
-                .setDelayTime(3000)
-                .isAutoPlay(true)
-                .setBannerStyle(BannerConfig.CIRCLE_INDICATOR )
-                .setOnBannerListener(position -> {
-                    //点击查看大图功能
-                    GPreviewBuilder.from(mActivity)
-                            .setData(getInfoList(detailBean.getData().getBanner()))
-                            .setCurrentIndex(position)
-                            .setType(GPreviewBuilder.IndicatorType.Dot)
-                            .start();
-                })
-                .setIndicatorGravity(BannerConfig.CENTER).start();
+
+        if(BaseUtil.isValue(detailBean.getData().getBanner())){
+            //设置轮播图
+            binding.banner.setImages(detailBean.getData().getBanner())
+                    .setImageLoader(new UseGlideImageLoader())
+                    .setDelayTime(3000)
+                    .isAutoPlay(true)
+                    .setBannerStyle(BannerConfig.CIRCLE_INDICATOR )
+                    .setOnBannerListener(position -> {
+                        //点击查看大图功能
+                        GPreviewBuilder.from(mActivity)
+                                .setData(getInfoList(detailBean.getData().getBanner()))
+                                .setCurrentIndex(position)
+                                .setType(GPreviewBuilder.IndicatorType.Dot)
+                                .start();
+                    })
+                    .setIndicatorGravity(BannerConfig.CENTER).start();
+        }else{
+            binding.banner.setVisibility(View.GONE);
+        }
+
         //设置门店设施
         mtAdapter.setNewData(detailBean.getData().getOsf());
 

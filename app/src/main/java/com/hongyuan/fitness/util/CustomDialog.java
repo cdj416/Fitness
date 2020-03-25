@@ -32,6 +32,8 @@ import com.hongyuan.fitness.ui.heat.add_food.AddFoodBean;
 import com.hongyuan.fitness.ui.heat.heat_detail.HeatDetailBean;
 import com.hongyuan.fitness.ui.main.ScanCardsListAdapter;
 import com.hongyuan.fitness.ui.main.main_home.recommend.HomeRightBeans;
+import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsAdapter;
+import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponAdapter;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.main_receive_coupon.DialogReceiveCouponAdapter;
@@ -508,6 +510,44 @@ public class CustomDialog {
                 if(dialogClick != null){
 
                 }
+            }
+        });
+
+        closeImg.setOnClickListener(v -> dialog.dismiss());
+
+    }
+
+    /*
+    * 免费商品领取
+    * */
+    public static void receiveGoods(Context mContext, List<HomeGoodsBeans.DataBean.ListBean> mList, DialogClickList dialogClick){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_receive_goods,null);
+        dialog.setContentView(view);
+        dialog.setCanceledOnTouchOutside(false);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        RecyclerView mRecycler = view.findViewById(R.id.mRecycler);
+        ImageView closeImg = view.findViewById(R.id.closeImg);
+
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
+        manager.setOrientation(RecyclerView.VERTICAL);
+        mRecycler.setLayoutManager(manager);
+        mRecycler.addItemDecoration(new DividerItemDecoration(
+                mContext, DividerItemDecoration.HORIZONTAL_LIST,32,0x00000000));
+        HomeGoodsAdapter adapter = new HomeGoodsAdapter();
+        mRecycler.setAdapter(adapter);
+
+        adapter.setNewData(mList);
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @SingleClick
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                dialogClick.dialogClick(view,position,adapter);
             }
         });
 

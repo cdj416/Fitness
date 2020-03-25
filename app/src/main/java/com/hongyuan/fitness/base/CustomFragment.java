@@ -116,6 +116,16 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         }
         return "";
     }
+    /*
+    * 获取具体key的值
+    * */
+    public boolean getBoolenFrag(String key) {
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            return bundle.getBoolean(key);
+        }
+        return false;
+    }
 
     /*
      * 获取自定义的key值所对应的Serializable序列化对象

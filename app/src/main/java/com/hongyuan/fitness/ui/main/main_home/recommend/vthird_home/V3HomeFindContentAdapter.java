@@ -20,7 +20,10 @@ public class V3HomeFindContentAdapter extends BaseQuickAdapter<FeatureBean.DataB
     protected void convert(final BaseViewHolder helper, FeatureBean.DataBean.ListBean item) {
 
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
-        Glide.with(mContext).load(item.getMi_head()).apply(options).into((RoundedImageView)helper.getView(R.id.headImg));
+        Glide.with(mContext).load(item.getMi_head()).apply(new RequestOptions()
+                .placeholder(R.mipmap.default_head_img)
+                .error(R.mipmap.default_head_img))
+                .into((RoundedImageView)helper.getView(R.id.headImg));
 
 
 

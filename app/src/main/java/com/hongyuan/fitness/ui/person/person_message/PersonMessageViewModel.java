@@ -8,6 +8,7 @@ import android.view.ViewTreeObserver;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -36,6 +37,8 @@ import com.hongyuan.fitness.ui.person.edit_information.EditInformationActivity;
 import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
 import com.hongyuan.fitness.ui.person.my_fan.MyFansActivity;
 import com.hongyuan.fitness.util.CustomDialog;
+import com.hongyuan.fitness.util.DensityUtil;
+import com.hongyuan.fitness.util.MMStaggeredGridLayoutManager;
 import com.hongyuan.fitness.util.ViewChangeUtil;
 import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 
@@ -101,9 +104,10 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
             startActivity(CourseDetailsActivity.class,bundle);
         });
 
-        GridLayoutManager layoutManager = new GridLayoutManager(mActivity, 2);
+        MMStaggeredGridLayoutManager layoutManager =
+                new MMStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         binding.mRecycler.setLayoutManager(layoutManager);
-        adapter = new V2FindContentAdapter();
+        adapter = new V2FindContentAdapter(DensityUtil.getColumnWhith(mActivity,38,2));
         binding.mRecycler.setAdapter(adapter);
         if(attentionBeans != null){
             adapter.setFooterView(mActivity.getFooterHeight(binding.mRecycler));

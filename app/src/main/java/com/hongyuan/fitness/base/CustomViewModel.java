@@ -50,6 +50,8 @@ public abstract class CustomViewModel implements RetrofitListener {
     private final int ISLOGIN = 600;
     //存储用户登录的信息（避免每次登录）
     protected final String LOGIN_SESSION = "login_session";
+    //存储用户token信息（避免接口请求失败，卡在启动页）
+    protected final String TOKEN_SESSION = "token_session";
 
     //分页需要的数据
     protected int curPage = 1;//当前页数

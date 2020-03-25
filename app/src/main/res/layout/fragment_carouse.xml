@@ -7,11 +7,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@mipmap/banner_one"
-        android:scaleType="fitXY"/>
-    <TextView
-        android:id="@+id/goMain"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="80dp"/>
+        android:scaleType="centerCrop"/>
 </FrameLayout>

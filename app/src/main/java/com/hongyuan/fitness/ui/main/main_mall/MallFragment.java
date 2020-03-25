@@ -18,6 +18,7 @@ import com.hongyuan.fitness.ui.mall.GoodActivity;
 import com.hongyuan.fitness.ui.mall.good_details.GoodDetailsActivity;
 import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
 import com.hongyuan.fitness.util.DividerItemDecoration;
+import com.hongyuan.fitness.util.JumpUtils;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -108,7 +109,14 @@ public class MallFragment extends CustomFragment {
                 .setDelayTime(3000)
                 .isAutoPlay(true)
                 .setBannerStyle(BannerConfig.CIRCLE_INDICATOR )
-                .setIndicatorGravity(BannerConfig.CENTER).start();
+                .setIndicatorGravity(BannerConfig.CENTER).setOnBannerListener(position -> {
+            JumpUtils.JumpBeans jumpBeans = new JumpUtils.JumpBeans();
+            jumpBeans.setImg_href_type(bannerList.get(position).getImg_href_type());
+            jumpBeans.setHref_code(bannerList.get(position).getImg_href_code());
+            jumpBeans.setHref_id(String.valueOf(bannerList.get(position).getImg_href_id()));
+
+            JumpUtils.goAtherPage(mActivity,jumpBeans);
+        }).start();
     }
 
     @Override

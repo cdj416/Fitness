@@ -51,14 +51,32 @@ public class ScanViewModel extends CustomViewModel implements QRCodeView.Delegat
             Log.e("cdj","======"+result);
             if(result.contains("share.api.yolanda.hk")){
                 //跳转原生
-                JumpUtils.goAtherPage(this,"smart_equipment",result);
+                //JumpUtils.goAtherPage(mActivity,"smart_equipment",result);
+                JumpUtils.JumpBeans jumpBeans = new JumpUtils.JumpBeans();
+                jumpBeans.setImg_href_type(1);
+                jumpBeans.setHref_code("smart_equipment");
+                jumpBeans.setHref_id(result);
+
+                JumpUtils.goAtherPage(mActivity,jumpBeans);
             }else{
                 ScanBeans beans = GsonUtil.getGson().fromJson(result, new TypeToken<ScanBeans>(){}.getType());
                 if("1".equals(beans.getHref_type())){
                     //跳转原生
-                    JumpUtils.goAtherPage(this,beans.getHref_code(),beans.getHref_id());
+                    //JumpUtils.goAtherPage(mActivity,beans.getHref_code(),beans.getHref_id());
+                    JumpUtils.JumpBeans jumpBeans = new JumpUtils.JumpBeans();
+                    jumpBeans.setImg_href_type(1);
+                    jumpBeans.setHref_code(beans.getHref_code());
+                    jumpBeans.setHref_id(beans.getHref_id());
+
+                    JumpUtils.goAtherPage(mActivity,jumpBeans);
                 }else if("2".equals(beans.getHref_type())){
-                    //跳转h5
+                    JumpUtils.JumpBeans jumpBeans = new JumpUtils.JumpBeans();
+                    jumpBeans.setImg_href_type(2);
+                    jumpBeans.setHref_code(beans.getHref_code());
+                    jumpBeans.setHref_id(beans.getHref_id());
+                    jumpBeans.setImg_href(beans.getHref());
+
+                    JumpUtils.goAtherPage(mActivity,jumpBeans);
                 }else{
                     showDialog();
                 }
