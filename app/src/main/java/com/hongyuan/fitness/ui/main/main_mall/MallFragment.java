@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.main.main_mall;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -114,7 +115,7 @@ public class MallFragment extends CustomFragment {
             jumpBeans.setImg_href_type(bannerList.get(position).getImg_href_type());
             jumpBeans.setHref_code(bannerList.get(position).getImg_href_code());
             jumpBeans.setHref_id(String.valueOf(bannerList.get(position).getImg_href_id()));
-
+            jumpBeans.setImg_href(bannerList.get(position).getImg_href());
             JumpUtils.goAtherPage(mActivity,jumpBeans);
         }).start();
     }
