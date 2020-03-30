@@ -1,19 +1,10 @@
 package com.hongyuan.fitness.ui.main.main_find.featured;
-import android.graphics.Bitmap;
-import android.util.Log;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hongyuan.fitness.R;
@@ -25,6 +16,7 @@ import java.util.HashMap;
 
 
 public class V2FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.ListBean, BaseViewHolder> {
+
 
     //存储图片宽高比例
     private HashMap<Integer, Float> hashMap = new HashMap<>();
@@ -46,6 +38,21 @@ public class V2FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.
 
         /*****************************************瀑布流处理***************************************/
 
+
+
+        //如果当前视图比例未被存储，先去存储
+        if(hashMap.size() <= helper.getAdapterPosition()){
+            //获取宽高并计算比例
+            String whStr = item.getCircle_img().substring((item.getCircle_img().indexOf("_")+1),item.getCircle_img().lastIndexOf("."));
+            String[] wh = whStr.split("x");
+            float ratio = Float.valueOf(wh[0])/Float.valueOf(wh[1]);
+            hashMap.put(helper.getAdapterPosition(),ratio);
+        }
+
+        //获取比例并设置视图高度并加载图片
+        setImgViewHeight(helper.getView(R.id.coverImg),(int) (useWidth/hashMap.get(helper.getAdapterPosition())), item.getCircle_img());
+
+
         //获取图片链接
         int imgNum = 0;
         String imgUrl = "";
@@ -53,31 +60,6 @@ public class V2FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.
             imgNum = item.getCi().size();
             imgUrl = item.getCi().get(0).getFile_src();
         }
-
-        //获取图片视图
-        RoundedImageView coverImg = helper.getView(R.id.coverImg);
-        //获取原始图片宽高比例并存储到集合中
-        if(hashMap.get(helper.getAdapterPosition()) == null){
-            String finalImgUrl = imgUrl;
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(imgUrl)
-                    .into(new SimpleTarget<Bitmap>() {
-                        @Override
-                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                            float ratio = Float.valueOf(resource.getWidth())/Float.valueOf(resource.getHeight());
-                            if(hashMap.size() <= helper.getAdapterPosition()){
-                                hashMap.put(helper.getAdapterPosition(),ratio);
-                                setImgViewHeight(coverImg,(int) (useWidth/ratio), finalImgUrl);
-                            }
-
-                        }
-                    });
-        }else{
-            //已存在比例就直接设置高度
-            setImgViewHeight(coverImg, (int) (useWidth / hashMap.get(helper.getAdapterPosition())),imgUrl);
-        }
-
 
 
         /*****************************************文字信息设置**************************************/
@@ -99,16 +81,16 @@ public class V2FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.
     }
 
     /*
-    * 设置图片控件高度
-    * */
+     * 设置图片控件高度
+     * */
     private void setImgViewHeight(ImageView coverImg,int height,String imgUrl){
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) coverImg.getLayoutParams();
         layoutParams.height = height;
         coverImg.setLayoutParams(layoutParams);
 
         //显示图片
-        RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
-        Glide.with(mContext).load(imgUrl).apply(options).into(coverImg);
+        RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
+        Glide.with(mContext).load(imgUrl).transition(DrawableTransitionOptions.withCrossFade()).apply(options).into(coverImg);
     }
 
 }

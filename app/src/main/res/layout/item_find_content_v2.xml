@@ -13,15 +13,15 @@
         android:id="@+id/jumpDetails">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/color_f2">
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/coverImg"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 app:riv_corner_radius_top_right="6dp"
                 app:riv_corner_radius_top_left="6dp"
-                android:src="@mipmap/zhengfangxing_default_img"
-                android:scaleType="fitXY"/>
+                android:scaleType="centerCrop"/>
             <ImageView
                 android:id="@+id/playMark"
                 android:layout_width="wrap_content"
