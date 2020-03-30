@@ -48,7 +48,7 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     private boolean isFirstVisible;
     private View rootView;
     private Context mContext;
-    private View mView;
+    private View mView,headLayt;
     protected SmartRefreshLayout refresh;
     private LinearLayout customBg;
     private TitleView mTitle;
@@ -57,7 +57,7 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     private Class<T> dataBean;
 
     //下面是当前基础布局
-    private FrameLayout mainView,bottomView;
+    private FrameLayout mainView,headView,bottomView;
     //页面效果
     private RelativeLayout load_box;
     private TextView isEmpty,isTvErr;
@@ -75,6 +75,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     private Map<String,String> headParams;
     public CustomActivity mActivity;
 
+    //标识木有头部布局或者底部布局
+    private final int NO_VIEW = 0;
     //请求成功状态码
     private final int SUCCESS = 1;
     //需要登录的错误码
@@ -107,8 +109,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 获取具体key的值
-    * */
+     * 获取具体key的值
+     * */
     public String getFragType(String key) {
         Bundle bundle = getArguments();
         if(bundle != null){
@@ -117,8 +119,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         return "";
     }
     /*
-    * 获取具体key的值
-    * */
+     * 获取具体key的值
+     * */
     public boolean getBoolenFrag(String key) {
         Bundle bundle = getArguments();
         if(bundle != null){
@@ -231,11 +233,18 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         customBg = mView.findViewById(R.id.customBg);
         mTitle = mView.findViewById(R.id.mTitle);
         mainView = mView.findViewById(R.id.mainView);
+        headView = mView.findViewById(R.id.headView);
         bottomView = mView.findViewById(R.id.bottomView);
         refresh = mView.findViewById(R.id.refresh);
         //加载主布局
         View childView = LayoutInflater.from(mContext).inflate(getLayoutId(), null);
         mainView.addView(childView);
+        if(getHeadLayoutId() != NO_VIEW){
+            headLayt = LayoutInflater.from(mContext).inflate(getHeadLayoutId(), null);
+            headView.addView(headLayt);
+            headView.setVisibility(View.VISIBLE);
+            initHeadView(headLayt);
+        }
 
         //加载底部布局
         if(getBottomLayoutId() != 0){
@@ -277,8 +286,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 设置背景颜色
-    * */
+     * 设置背景颜色
+     * */
     public void setCustomBg(int mColor){
         customBg.setBackgroundColor(getResources().getColor(mColor));
     }
@@ -303,6 +312,20 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
+     * flag 是否开启上拉加载(默认不开启)
+     * auto 是否开启拉到底部自动加载
+     * */
+    public void setEnableLoadMore(boolean flag,boolean auto){
+        if(refresh != null){
+            isLoadMore = flag;
+            refresh.setEnableLoadMore(flag);
+        }
+        if(auto){
+            refresh.setEnableAutoLoadMore(auto);
+        }
+    }
+
+    /*
      * 是否开启自动刷新(默认不开启)
      * */
     public void setAutoRefresh(boolean flag){
@@ -321,8 +344,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 设置标题
-    * */
+     * 设置标题
+     * */
     public TitleView getmTitle(){
         mTitle.setVisibility(View.VISIBLE);
         return this.mTitle;
@@ -340,8 +363,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 上啦加载更多监听
-    * */
+     * 上啦加载更多监听
+     * */
     private OnLoadMoreListener onLoadMore(){
         return refreshLayout -> {
             curPage++;
@@ -420,6 +443,19 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
 
     public abstract int getLayoutId();
     public abstract void initView(View mView);
+    /*
+     * 加载头部布局文件
+     * */
+    protected int getHeadLayoutId(){
+        return NO_VIEW;
+    }
+
+    /*
+     * 初始化头部布局各个控件
+     * */
+    protected void initHeadView(View headLayt){
+
+    }
 
     public int getBottomLayoutId(){
         return 0;
@@ -432,22 +468,22 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
 
     }
     /*
-    * 加载数据
-    * */
+     * 加载数据
+     * */
     protected void lazyLoad(){
 
     }
 
     /*
-    * 只加载一次
-    * */
+     * 只加载一次
+     * */
     protected void lazyOnceLoad(){
 
     }
 
     /*
-    * 每次都加载
-    * */
+     * 每次都加载
+     * */
     protected void onMyResume(){
 
     }
@@ -565,8 +601,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 需要做区分，子类需要实现该方法
-    * */
+     * 需要做区分，子类需要实现该方法
+     * */
     @Override
     public void onSuccess(int code, Object data) {
 
@@ -627,15 +663,15 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 成功提示
-    * */
+     * 成功提示
+     * */
     public void showSuccess(String message){
         LemonBubble.showRight(mActivity,message,2000);
     }
 
     /*
-    * 提升加载中
-    * */
+     * 提升加载中
+     * */
     public void showLoading(String message){
         LemonBubble.showRoundProgress(this,message);
     }
@@ -651,32 +687,32 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 设置泛型类
-    * */
+     * 设置泛型类
+     * */
     public CustomFragment setMyClass(Class<T> dataBean){
         this.dataBean = dataBean;
         return this;
     }
 
     /*
-    * 获取泛型
-    * */
+     * 获取泛型
+     * */
     public Class<T> getMyClass(){
         return this.dataBean;
     }
 
 
     /*
-    * 存储当前自动刷新时间
-    * */
+     * 存储当前自动刷新时间
+     * */
     protected void inAutoRefreshTime(String key){
         String nowTime = String.valueOf(System.currentTimeMillis());
         SharedPreferencesUtil.putBean(mActivity,key,nowTime);
     }
 
     /*
-    * 获取上次自动刷新的时间
-    * */
+     * 获取上次自动刷新的时间
+     * */
     protected Long getAutoRefreshTime(String key){
         String lastTime = String.valueOf(SharedPreferencesUtil.getBean(mActivity,key));
         if(BaseUtil.isValue(lastTime)){
@@ -689,8 +725,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     //用来标识是否是第一次创建
 
     /*
-    * 是否需要自动刷新
-    * */
+     * 是否需要自动刷新
+     * */
     protected boolean isAutoRefresh(String key){
         long nowTime = System.currentTimeMillis();
         long lastTime = getAutoRefreshTime(key);
