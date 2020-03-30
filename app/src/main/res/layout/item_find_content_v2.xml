@@ -1,68 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="182dp"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/color_FFFFFF"
-    android:paddingEnd="16dp"
-    android:paddingStart="16dp">
-
-    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="3dp"
+    app:cardCornerRadius="3dp"
+    app:cardUseCompatPadding="true">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp">
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/shopImg"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            app:riv_corner_radius="@dimen/dp_4"
-            android:layout_centerVertical="true"
-            android:src="@color/color_f2"/>
-        <LinearLayout
-            android:layout_toRightOf="@id/shopImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:orientation="vertical">
-            <TextView
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/jumpDetails">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/coverImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:riv_corner_radius_top_right="6dp"
+                app:riv_corner_radius_top_left="6dp"
+                android:src="@mipmap/zhengfangxing_default_img"
+                android:scaleType="fitXY"/>
+            <ImageView
+                android:id="@+id/playMark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
-                android:text="店铺名称店铺名称店铺名称"/>
+                android:src="@mipmap/play_baise_img"
+                android:visibility="gone"
+                android:layout_centerInParent="true"/>
+            <TextView
+                android:id="@+id/styleImgNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="12dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/shape_radius16_000000"
+                android:visibility="visible"
+                android:alpha="0.5"/>
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/headImg"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/about_class_select"
+                app:riv_corner_radius="100dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:scaleType="centerCrop"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal">
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/headImg"
+                android:layout_marginLeft="12dp"
+                android:orientation="vertical">
                 <TextView
+                    android:id="@+id/fName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
-                    android:textSize="@dimen/sp_12"
-                    android:text="好评率100% |"/>
-
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/color_FF333333"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_marginRight="20dp"
+                    android:text="Valentina"/>
                 <TextView
+                    android:id="@+id/timeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
                     android:textSize="@dimen/sp_12"
-                    android:text="5年店铺"/>
+                    android:textColor="@color/color_FF999999"
+                    android:text="湖州"/>
             </LinearLayout>
-        </LinearLayout>
-        <TextView
-            android:layout_width="55dp"
-            android:layout_height="24dp"
-            android:textSize="@dimen/sp_12"
-            android:textColor="@color/color_FFFFFF"
-            android:gravity="center"
-            android:text="进店"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/shape_radius6_ef5b48"/>
-    </RelativeLayout>
 
-
-</LinearLayout>
+            <TextView
+                android:id="@+id/attention"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="5dp"
+                android:drawableBottom="@mipmap/like_huise_img"
+                android:gravity="center"
+                android:drawablePadding="5dp"
+                android:text="11"/>
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
