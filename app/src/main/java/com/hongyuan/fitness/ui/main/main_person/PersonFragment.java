@@ -35,7 +35,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class PersonFragment extends CustomFragment{
 
-    private PersonHeaderView headView;
+    private PersonHeaderView pHeadView;
     private TitleView myTitle;
     private TextView weightNum,weightDate,calories,exerciseDays;
     private ImageView pushMark,messageMark;
@@ -51,7 +51,7 @@ public class PersonFragment extends CustomFragment{
     @Override
     public void initView(View mView) {
 
-        headView = mView.findViewById(R.id.headView);
+        pHeadView = mView.findViewById(R.id.pHeadView);
         myTitle = mView.findViewById(R.id.myTitle);
         pushMark = mView.findViewById(R.id.pushMark);
         messageMark = mView.findViewById(R.id.messageMark);
@@ -114,7 +114,7 @@ public class PersonFragment extends CustomFragment{
     public void onSuccess(Object data) {
         if(data instanceof PersonBean){
             PersonBean personBean = (PersonBean)data;
-            headView.setHeadImg(personBean.getData().getInfo());
+            pHeadView.setHeadImg(personBean.getData().getInfo());
             TokenSingleBean.getInstance().setHeadUrl(personBean.getData().getInfo().getMi_head());
 
             if("暂未数据".equals(personBean.getData().getInfo().getWeight())){

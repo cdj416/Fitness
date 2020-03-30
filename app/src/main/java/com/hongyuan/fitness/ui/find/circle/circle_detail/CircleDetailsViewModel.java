@@ -59,7 +59,7 @@ public class CircleDetailsViewModel extends CustomViewModel {
         //开启刷新功能
         setEnableRefresh(true);
         //开启加载更多功能
-        setEnableLoadMore(true);
+        setEnableLoadMore(true,true);
 
         MMStaggeredGridLayoutManager layoutManager =
                 new MMStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);

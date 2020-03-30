@@ -87,6 +87,22 @@ public abstract class CustomViewModel implements RetrofitListener {
     }
 
     /*
+     * flag 是否开启上拉加载(默认不开启)
+     * auto 是否开启拉到底部自动加载
+     * */
+    public void setEnableLoadMore(boolean flag,boolean auto){
+        if(mActivity.refresh != null){
+            isLoadMore = flag;
+            //加载更多监听
+            mActivity.refresh.setOnLoadMoreListener(onLoadMore());
+            mActivity.refresh.setEnableLoadMore(flag);
+        }
+        if(auto){
+            mActivity.refresh.setEnableAutoLoadMore(auto);
+        }
+    }
+
+    /*
      * 是否开启自动刷新(默认不开启)
      * */
     public void setAutoRefresh(boolean flag){

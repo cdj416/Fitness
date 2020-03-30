@@ -61,7 +61,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <com.hongyuan.fitness.ui.main.main_person.PersonHeaderView
-                    android:id="@+id/headView"
+                    android:id="@+id/pHeadView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
