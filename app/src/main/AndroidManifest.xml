@@ -300,6 +300,9 @@
         <activity android:name=".ui.only_equipment.indicator_details.wristband_setting.wristband_alarm_clock.add_alarm_clock.WristbandAddClockActivity"/>
         <activity android:name=".ui.only_equipment.indicator_details.wristband_setting.wristband_msg.WristbandMsgActivity"/>
         <activity android:name=".ui.show_big_img.ShowBigImgActivity"/>
+
+        <!--*******************************************第六版商城版本***********************************************-->
+        <activity android:name=".ui.shop.sactivity.ShopMenuActivity"/>
     </application>
 
 </manifest>

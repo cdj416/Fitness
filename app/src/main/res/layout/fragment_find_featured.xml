@@ -102,6 +102,7 @@
             android:id="@+id/mRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"/>
     </LinearLayout>

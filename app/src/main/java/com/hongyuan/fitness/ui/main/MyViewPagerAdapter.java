@@ -9,6 +9,7 @@ import com.hongyuan.fitness.ui.main.main_find.FindFragment;
 import com.hongyuan.fitness.ui.main.main_home.recommend.RecommendFragment;
 import com.hongyuan.fitness.ui.main.main_mall.MallFragment;
 import com.hongyuan.fitness.ui.main.main_person.PersonFragment;
+import com.hongyuan.fitness.ui.shop.sfragment.ShopFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,8 @@ public class MyViewPagerAdapter extends FragmentPagerAdapter {
         fragments.add(new RecommendFragment());
         fragments.add(new FindFragment());
         fragments.add(new AboutClassFragment());
-        fragments.add(new MallFragment());
+        //fragments.add(new MallFragment());
+        fragments.add(new ShopFragment());
         fragments.add(lastFragment);
 
         notifyDataSetChanged();

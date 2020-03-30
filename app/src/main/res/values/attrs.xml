@@ -264,4 +264,9 @@
         <attr name="bigRadius" format="dimension"/>
         <attr name="itemSpace" format="dimension"/>
     </declare-styleable>
+
+    <!--商城首页标题-->
+    <declare-styleable name="ShopMainTitleView">
+        <attr name="smTitleName" format="string"/>
+    </declare-styleable>
 </resources>

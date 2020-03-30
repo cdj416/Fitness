@@ -64,7 +64,7 @@ public class FeaturedFragment extends CustomFragment {
         //开启刷新功能
         setEnableRefresh(true);
         //开启加载更多功能
-        setEnableLoadMore(true);
+        setEnableLoadMore(true,true);
 
         topRecycler = mView.findViewById(R.id.topRecycler);
         mRecycler = mView.findViewById(R.id.mRecycler);

@@ -90,11 +90,11 @@ public class MainViewModel extends CustomViewModel {
                 if(position == 4 && userToken.getM_mobile() == null){
                     startActivity(VtwoVerificationLoginActivity.class,null);
                 }
-                /*if(position == 4){
-                    mActivity.setTitleBar(mActivity.TYPE_BAR2,R.drawable.shape_gradient_h_39_4a,"");
+                if(position == 3){
+                    mActivity.setTitleBar(mActivity.TYPE_BAR8,R.drawable.shape_soid_ffef5b48,"");
                 }else{
                     mActivity.setTitleBar(mActivity.TYPE_BAR1,R.drawable.shape_soid_ffffff,"");
-                }*/
+                }
             }
 
             @Override

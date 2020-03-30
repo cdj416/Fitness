@@ -48,7 +48,7 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     private boolean isFirstVisible;
     private View rootView;
     private Context mContext;
-    private View mView;
+    private View mView,headLayt;
     protected SmartRefreshLayout refresh;
     private LinearLayout customBg;
     private TitleView mTitle;
@@ -57,7 +57,7 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     private Class<T> dataBean;
 
     //下面是当前基础布局
-    private FrameLayout mainView,bottomView;
+    private FrameLayout mainView,headView,bottomView;
     //页面效果
     private RelativeLayout load_box;
     private TextView isEmpty,isTvErr;
@@ -75,6 +75,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     private Map<String,String> headParams;
     public CustomActivity mActivity;
 
+    //标识木有头部布局或者底部布局
+    private final int NO_VIEW = 0;
     //请求成功状态码
     private final int SUCCESS = 1;
     //需要登录的错误码
@@ -231,11 +233,18 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         customBg = mView.findViewById(R.id.customBg);
         mTitle = mView.findViewById(R.id.mTitle);
         mainView = mView.findViewById(R.id.mainView);
+        headView = mView.findViewById(R.id.headView);
         bottomView = mView.findViewById(R.id.bottomView);
         refresh = mView.findViewById(R.id.refresh);
         //加载主布局
         View childView = LayoutInflater.from(mContext).inflate(getLayoutId(), null);
         mainView.addView(childView);
+        if(getHeadLayoutId() != NO_VIEW){
+            headLayt = LayoutInflater.from(mContext).inflate(getHeadLayoutId(), null);
+            headView.addView(headLayt);
+            headView.setVisibility(View.VISIBLE);
+            initHeadView(headLayt);
+        }
 
         //加载底部布局
         if(getBottomLayoutId() != 0){
@@ -299,6 +308,20 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         if(refresh != null){
             isLoadMore = flag;
             refresh.setEnableLoadMore(flag);
+        }
+    }
+
+    /*
+     * flag 是否开启上拉加载(默认不开启)
+     * auto 是否开启拉到底部自动加载
+     * */
+    public void setEnableLoadMore(boolean flag,boolean auto){
+        if(refresh != null){
+            isLoadMore = flag;
+            refresh.setEnableLoadMore(flag);
+        }
+        if(auto){
+            refresh.setEnableAutoLoadMore(auto);
         }
     }
 
@@ -420,6 +443,19 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
 
     public abstract int getLayoutId();
     public abstract void initView(View mView);
+    /*
+     * 加载头部布局文件
+     * */
+    protected int getHeadLayoutId(){
+        return NO_VIEW;
+    }
+
+    /*
+     * 初始化头部布局各个控件
+     * */
+    protected void initHeadView(View headLayt){
+
+    }
 
     public int getBottomLayoutId(){
         return 0;
