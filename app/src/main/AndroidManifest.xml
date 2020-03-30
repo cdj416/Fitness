@@ -303,6 +303,7 @@
 
         <!--*******************************************第六版商城版本***********************************************-->
         <activity android:name=".ui.shop.sactivity.ShopMenuActivity"/>
+        <activity android:name=".ui.shop.sactivity.ShopSearchActivity"/>
     </application>
 
 </manifest>
