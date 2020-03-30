@@ -13,6 +13,11 @@
         android:visibility="gone"
         app:line_show="false"/>
     <FrameLayout
+        android:id="@+id/headView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -59,7 +64,7 @@
                 android:textSize="12sp"
                 android:textColor="@color/color_FF999999" />
         </RelativeLayout>
-        
+
         <FrameLayout
             android:id="@+id/bottomView"
             android:layout_width="match_parent"
