@@ -124,7 +124,7 @@ public class JumpUtils {
     public static void goAtherPage(CustomActivity mContext,JumpBeans jumpBeans){
         Bundle bundle = new Bundle();
 
-        if(jumpBeans.getImg_href_type() == TYPE_APP && BaseUtil.isValue(jumpBeans.getHref_id())){
+        if(jumpBeans.getImg_href_type() == TYPE_APP){
             switch (jumpBeans.href_code){
                 case "cs_info"://团课详情
                     bundle.putString("cs_id",jumpBeans.getHref_id());
@@ -144,7 +144,7 @@ public class JumpUtils {
                     mContext.startActivity(StoreDetailActivity.class,bundle);
                     break;
                 case "goods_list"://商品列表
-                    //bundle.putString("os_id",href_id);
+                    bundle.putInt("position",0);
                     mContext.startActivity(GoodActivity.class,null);
                     break;
                 case "goods_info"://商品详情
