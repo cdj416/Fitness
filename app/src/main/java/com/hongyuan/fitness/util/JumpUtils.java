@@ -145,7 +145,7 @@ public class JumpUtils {
                     break;
                 case "goods_list"://商品列表
                     bundle.putInt("position",0);
-                    mContext.startActivity(GoodActivity.class,null);
+                    mContext.startActivity(GoodActivity.class,bundle);
                     break;
                 case "goods_info"://商品详情
                     bundle.putString("g_id",jumpBeans.getHref_id());

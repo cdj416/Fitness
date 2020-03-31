@@ -1,12 +1,8 @@
 package com.hongyuan.fitness.ui.person.physical_data;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
@@ -150,7 +146,7 @@ public class PhysicalDataViewModel extends CustomViewModel implements SelectImgU
         }
 
         if(BaseUtil.isValue(infoBean.getHeight())){
-            binding.height.setRightText(infoBean.getWeight()+"cm");
+            binding.height.setRightText(infoBean.getHeight()+"cm");
         }else{
             binding.height.setRightText("--");
         }

@@ -25,6 +25,7 @@ import com.hongyuan.fitness.ui.find.circle.topic_participant.TopicParticipantAct
 import com.hongyuan.fitness.ui.find.topic.SlectTopicRighttBeans;
 import com.hongyuan.fitness.ui.main.main_find.featured.FeatureBean;
 import com.hongyuan.fitness.ui.main.main_find.featured.V2FindContentAdapter;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.DensityUtil;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.MMStaggeredGridLayoutManager;
@@ -59,13 +60,14 @@ public class CircleDetailsViewModel extends CustomViewModel {
         //开启刷新功能
         setEnableRefresh(true);
         //开启加载更多功能
-        setEnableLoadMore(true,true);
+        setEnableLoadMore(true);
 
         MMStaggeredGridLayoutManager layoutManager =
                 new MMStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         binding.mRecycler.setLayoutManager(layoutManager);
         adapter = new V2FindContentAdapter(DensityUtil.getColumnWhith(mActivity,38,2));
         binding.mRecycler.setAdapter(adapter);
+        adapter.setFooterView(mActivity.getFooterHeight(binding.mRecycler));
         adapter.setOnItemChildClickListener((adapter, view, position) -> {
             if(view.getId() == R.id.jumpDetails){
                 Bundle bundle = new Bundle();
@@ -90,20 +92,23 @@ public class CircleDetailsViewModel extends CustomViewModel {
             bundle.putString("circle_categoryid",String.valueOf(detailsBeans.getCategory_id()));
             startActivity(TopicParticipantActivity.class,bundle);
         });
+    }
 
-        binding.goEdit.setOnClickListener(v -> {
-            SlectTopicRighttBeans.DataBean.ListBean topBean = new SlectTopicRighttBeans.DataBean.ListBean();
-            topBean.setCategory_id(detailsBeans.getCategory_id());
-            topBean.setCategory_name(detailsBeans.getCategory_name());
-            topBean.setParent_id(detailsBeans.getParent_id());
-            topBean.setCount(detailsBeans.getCount());
-            topBean.setCategory_note(detailsBeans.getCategory_note());
-            topBean.setCategory_img(detailsBeans.getCategory_img());
+    /*
+    * 跳转到发帖页面
+    * */
+    public void goEdit(){
+        SlectTopicRighttBeans.DataBean.ListBean topBean = new SlectTopicRighttBeans.DataBean.ListBean();
+        topBean.setCategory_id(detailsBeans.getCategory_id());
+        topBean.setCategory_name(detailsBeans.getCategory_name());
+        topBean.setParent_id(detailsBeans.getParent_id());
+        topBean.setCount(detailsBeans.getCount());
+        topBean.setCategory_note(detailsBeans.getCategory_note());
+        topBean.setCategory_img(detailsBeans.getCategory_img());
 
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("topBeans",topBean);
-            startActivity(EditPostActivity.class,bundle);
-        });
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("topBeans",topBean);
+        startActivity(EditPostActivity.class,bundle);
     }
 
     @Override
@@ -116,8 +121,12 @@ public class CircleDetailsViewModel extends CustomViewModel {
         binding.topicDes.setText(detailsBeans.getCategory_note());
 
         headList.clear();
-        headList.addAll(detailsBeans.getHead());
-        headList.add(null);
+        for(String headStr : detailsBeans.getHead()){
+            if(BaseUtil.isValue(headStr)){
+                headList.add(headStr);
+            }
+        }
+        headList.add("lastImg");
         headerAdapter.setNewData(headList);
     }
 

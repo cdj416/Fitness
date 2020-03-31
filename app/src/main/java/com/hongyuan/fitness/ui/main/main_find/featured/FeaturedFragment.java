@@ -64,7 +64,7 @@ public class FeaturedFragment extends CustomFragment {
         //开启刷新功能
         setEnableRefresh(true);
         //开启加载更多功能
-        setEnableLoadMore(true,true);
+        setEnableLoadMore(true);
 
         topRecycler = mView.findViewById(R.id.topRecycler);
         mRecycler = mView.findViewById(R.id.mRecycler);
@@ -95,7 +95,7 @@ public class FeaturedFragment extends CustomFragment {
         mRecycler.setLayoutManager(layoutManager);
         adapter = new V2FindContentAdapter(DensityUtil.getColumnWhith(mActivity,38,2));
         mRecycler.setAdapter(adapter);
-
+        adapter.setFooterView(getFooterHeight(mRecycler));
 
 
         adapter.setOnItemChildClickListener((adapter, view, position) -> {

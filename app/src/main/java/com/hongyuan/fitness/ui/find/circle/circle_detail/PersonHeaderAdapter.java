@@ -18,10 +18,12 @@ public class PersonHeaderAdapter extends BaseQuickAdapter<String, BaseViewHolder
     protected void convert(BaseViewHolder helper, String item) {
 
         if(BaseUtil.isValue(item)){
-            RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img);
-            Glide.with(mContext).load(item).apply(options).into((RoundedImageView)helper.getView(R.id.headImg));
-        }else{
-            helper.setImageResource(R.id.headImg,R.mipmap.black_dot_more_mark);
+            if("lastImg".equals(item)){
+                helper.setImageResource(R.id.headImg,R.mipmap.black_dot_more_mark);
+            }else{
+                RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img);
+                Glide.with(mContext).load(item).apply(options).into((RoundedImageView)helper.getView(R.id.headImg));
+            }
         }
         helper.addOnClickListener(R.id.headImg);
     }
