@@ -8,6 +8,7 @@ import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.main.TitleBean;
 import com.hongyuan.fitness.ui.shop.sfragment.SsearchGoodsFragment;
 import com.hongyuan.fitness.ui.shop.sfragment.SsearchShopFragment;
+import com.hongyuan.fitness.ui.shop.sinterface.SearchOCDrawerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +18,9 @@ public class SsearchShopPagerAdapter extends FragmentPagerAdapter {
     private List<CustomFragment> fragments;
     private List<TitleBean> beans;
 
-    public SsearchShopPagerAdapter(FragmentManager fm) {
+    public SsearchShopPagerAdapter(FragmentManager fm,SearchOCDrawerListener drawerListener) {
         super(fm);
-        setData();
+        setData(drawerListener);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class SsearchShopPagerAdapter extends FragmentPagerAdapter {
     /*
      * 初始化数据
      * */
-    public void setData() {
+    public void setData(SearchOCDrawerListener drawerListener) {
         if (fragments == null) {
             fragments = new ArrayList<>();
         }
@@ -51,7 +52,7 @@ public class SsearchShopPagerAdapter extends FragmentPagerAdapter {
         beans.clear();
         beans.add(new TitleBean("全部",0));
         beans.add(new TitleBean("店铺",1));
-        fragments.add(new SsearchGoodsFragment());
+        fragments.add(new SsearchGoodsFragment(drawerListener));
         fragments.add(new SsearchShopFragment());
 
         notifyDataSetChanged();

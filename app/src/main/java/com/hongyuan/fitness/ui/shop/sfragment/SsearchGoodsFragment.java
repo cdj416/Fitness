@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.shop.sfragment;
 
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,7 @@ import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.shop.sadapter.SsearchGoodsAdapter;
+import com.hongyuan.fitness.ui.shop.sinterface.SearchOCDrawerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +20,26 @@ public class SsearchGoodsFragment extends CustomFragment {
     private RecyclerView mRec;
     private SsearchGoodsAdapter adapter;
 
+    //头部控件
+    private LinearLayout openFilter;
+
+    //筛选栏的打开操作
+    private SearchOCDrawerListener drawerListener;
+
+    public SsearchGoodsFragment(SearchOCDrawerListener drawerListener){
+        this.drawerListener = drawerListener;
+    }
+
     @Override
     protected int getHeadLayoutId() {
         return R.layout.fragment_headview_searchgoods;
+    }
+
+    @Override
+    protected void initHeadView(View headLayt) {
+        openFilter = headLayt.findViewById(R.id.openFilter);
+
+        openFilter.setOnClickListener(v -> drawerListener.openOrClose(true));
     }
 
     @Override
