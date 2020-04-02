@@ -57,9 +57,9 @@ public class V4CardsListViewPagerAdapter extends FragmentPagerAdapter {
         fragments.clear();
         beans.clear();
         beans.add(new TitleBean("门店卡",0));
-        beans.add(new TitleBean("通用卡",1));
+        //beans.add(new TitleBean("通用卡",1));
         fragments.add(new V4CardsListFragment().setMyArguments(getBundle("1",os_id,osl_id)));
-        fragments.add(new V4CardsListFragment().setMyArguments(getBundle("2",os_id,osl_id)));
+        //fragments.add(new V4CardsListFragment().setMyArguments(getBundle("2",os_id,osl_id)));
 
         notifyDataSetChanged();
     }

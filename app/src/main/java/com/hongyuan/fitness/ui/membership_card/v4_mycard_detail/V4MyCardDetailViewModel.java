@@ -1,5 +1,6 @@
 package com.hongyuan.fitness.ui.membership_card.v4_mycard_detail;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -90,12 +91,13 @@ public class V4MyCardDetailViewModel extends CustomViewModel {
             binding.cardName.setVisibility(View.GONE);
             binding.cardData.setVisibility(View.GONE);
             binding.cardPriceBox.setVisibility(View.GONE);
+            binding.cardOldPriceBox.setVisibility(View.GONE);
             binding.cardButton.setText("暂未开通停卡退卡功能\n如有需要请联系线下客服人员");
             binding.cardButton.setBackgroundResource(R.drawable.shape_radius5_cccccc);
             binding.cardButton.setClickable(false);
         }else{
             RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img);
-            Glide.with(mActivity).load(buyCardsBeans.getC_img()).apply(options).into(binding.cardImg);
+            Glide.with(mActivity).load(buyCardsBeans.getCard_img()).apply(options).into(binding.cardImg);
             binding.useDays.setText(buyCardsBeans.getCard_days()+"天");
             binding.useStores.setText(buyCardsBeans.getOs_names());
             binding.cardPrice.setText(BaseUtil.getNoZoon(buyCardsBeans.getCard_sale_price()));
@@ -119,6 +121,12 @@ public class V4MyCardDetailViewModel extends CustomViewModel {
             binding.cardButton.setText("购买");
             binding.cardButton.setBackgroundResource(R.drawable.shape_gradient_v_radiu5_login);
             binding.cardButton.setClickable(true);
+
+            //原价
+            if(BaseUtil.isValue(buyCardsBeans.getCard_original_price())){
+                binding.cardOldPrice.setText(BaseUtil.getNoZoon(buyCardsBeans.getCard_original_price()));
+                binding.cardOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            }
         }
     }
 

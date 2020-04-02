@@ -64,7 +64,7 @@
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/color_FF333333"
                     android:layout_centerVertical="true"
-                    android:text="名字"/>
+                    android:text="真实姓名"/>
                 <TextView
                     android:id="@+id/userName"
                     android:layout_width="wrap_content"

@@ -11,7 +11,7 @@ public class ConsultantBeans extends BaseBean {
      * hasmore : false
      * curpage : 1
      * page_total : 1
-     * data : {"list":[{"m_id":63,"m_name":"m88888","m_mobile":"18888888888","mi_head":"","pid":0,"cid":0,"did":0,"tj_mid":0,"sale_mid":0,"add_time":1571629990,"province":null,"city":null,"distinct":null,"tj_mobile":"","sale_mobile":"","add_date":"2019-10-21 11:53:10"},{"m_id":62,"m_name":"m21565","m_mobile":"15757121565","mi_head":"","pid":0,"cid":0,"did":0,"tj_mid":0,"sale_mid":0,"add_time":1569308838,"province":null,"city":null,"distinct":null,"tj_mobile":"","sale_mobile":"","add_date":"2019-09-24 15:07:18"},{"m_id":61,"m_name":"m83571","m_mobile":"13868283571","mi_head":"","pid":0,"cid":0,"did":0,"tj_mid":0,"sale_mid":0,"add_time":1569308838,"province":null,"city":null,"distinct":null,"tj_mobile":"","sale_mobile":"","add_date":"2019-09-24 15:07:18"},{"m_id":60,"m_name":"m26984","m_mobile":"13625726984","mi_head":"","pid":0,"cid":0,"did":0,"tj_mid":0,"sale_mid":0,"add_time":1569308838,"province":null,"city":null,"distinct":null,"tj_mobile":"","sale_mobile":"","add_date":"2019-09-24 15:07:18"},{"m_id":59,"m_name":"m03908","m_mobile":"18267203908","mi_head":"","pid":0,"cid":0,"did":0,"tj_mid":0,"sale_mid":0,"add_time":1569308837,"province":null,"city":null,"distinct":null,"tj_mobile":"","sale_mobile":"","add_date":"2019-09-24 15:07:17"}]}
+     * data : {"list":[{"m_id":5133,"m_name":"沈路","m_mobile":"17858759016","mi_head":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20200103/cdc12f8534c4fbabf8048ab8395cb94344ca68d7_240x240.jpg","pid":35,"cid":3505,"did":350502,"tj_mid":0,"sale_mid":0,"add_time":1575005291,"mi_realname":"沈路","province":"浙江省","city":"湖州市","distinct":"吴兴区","tj_mobile":"","sale_mobile":"","add_date":"2019-11-29 13:28:11"},{"m_id":120,"m_name":"林峰","m_mobile":"18367253038","mi_head":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20200301/b70ec7877a497a4b0ef0c1305c6857331905ab9d_828x828.jpg","pid":35,"cid":3505,"did":350502,"tj_mid":0,"sale_mid":0,"add_time":1567349495,"mi_realname":"卜川平","province":"浙江省","city":"湖州市","distinct":"吴兴区","tj_mobile":"","sale_mobile":"","add_date":"2019-09-01 22:51:35"},{"m_id":86,"m_name":"叶臣武","m_mobile":"15857234115","mi_head":"","pid":35,"cid":3505,"did":0,"tj_mid":0,"sale_mid":0,"add_time":1565342576,"mi_realname":"叶臣武","province":"浙江省","city":"湖州市","distinct":null,"tj_mobile":"","sale_mobile":"","add_date":"2019-08-09 17:22:56"},{"m_id":35,"m_name":"费森佳就是费费","m_mobile":"15268290191","mi_head":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20200106/81f4d51e9422223e843305b4a50cfbf85fe29fb3_2436x2436.jpg","pid":35,"cid":3505,"did":350502,"tj_mid":0,"sale_mid":0,"add_time":1564367379,"mi_realname":"费森佳","province":"浙江省","city":"湖州市","distinct":"吴兴区","tj_mobile":"","sale_mobile":"","add_date":"2019-07-29 10:29:39"}]}
      */
 
     private boolean hasmore;
@@ -64,22 +64,23 @@ public class ConsultantBeans extends BaseBean {
 
         public static class ListBean {
             /**
-             * m_id : 63
-             * m_name : m88888
-             * m_mobile : 18888888888
-             * mi_head :
-             * pid : 0
-             * cid : 0
-             * did : 0
+             * m_id : 5133
+             * m_name : 沈路
+             * m_mobile : 17858759016
+             * mi_head : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20200103/cdc12f8534c4fbabf8048ab8395cb94344ca68d7_240x240.jpg
+             * pid : 35
+             * cid : 3505
+             * did : 350502
              * tj_mid : 0
              * sale_mid : 0
-             * add_time : 1571629990
-             * province : null
-             * city : null
-             * distinct : null
+             * add_time : 1575005291
+             * mi_realname : 沈路
+             * province : 浙江省
+             * city : 湖州市
+             * distinct : 吴兴区
              * tj_mobile :
              * sale_mobile :
-             * add_date : 2019-10-21 11:53:10
+             * add_date : 2019-11-29 13:28:11
              */
 
             private int m_id;
@@ -92,9 +93,10 @@ public class ConsultantBeans extends BaseBean {
             private int tj_mid;
             private int sale_mid;
             private int add_time;
-            private Object province;
-            private Object city;
-            private Object distinct;
+            private String mi_realname;
+            private String province;
+            private String city;
+            private String distinct;
             private String tj_mobile;
             private String sale_mobile;
             private String add_date;
@@ -179,27 +181,35 @@ public class ConsultantBeans extends BaseBean {
                 this.add_time = add_time;
             }
 
-            public Object getProvince() {
+            public String getMi_realname() {
+                return mi_realname;
+            }
+
+            public void setMi_realname(String mi_realname) {
+                this.mi_realname = mi_realname;
+            }
+
+            public String getProvince() {
                 return province;
             }
 
-            public void setProvince(Object province) {
+            public void setProvince(String province) {
                 this.province = province;
             }
 
-            public Object getCity() {
+            public String getCity() {
                 return city;
             }
 
-            public void setCity(Object city) {
+            public void setCity(String city) {
                 this.city = city;
             }
 
-            public Object getDistinct() {
+            public String getDistinct() {
                 return distinct;
             }
 
-            public void setDistinct(Object distinct) {
+            public void setDistinct(String distinct) {
                 this.distinct = distinct;
             }
 

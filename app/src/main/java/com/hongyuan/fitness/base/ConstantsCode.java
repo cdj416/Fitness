@@ -105,6 +105,8 @@ public class ConstantsCode {
     public final static int ADD_SPORT_DAY = 0x046;
     //手环--添加每一项的运动数据(健身)
     public final static int ADD_EXERCISE_DAY = 0x047;
+    //会员-修改会员基本信息
+    public final static int UPDATE_M_INFO = 0x048;
 
     /*================================已下EventBus使用的=======================================*/
     //食物搜索

@@ -64,21 +64,21 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
         memberCardBox = view.findViewById(R.id.memberCardBox);
         encyclopediaBox = view.findViewById(R.id.encyclopediaBox);
         outdoorBox = view.findViewById(R.id.outdoorBox);
-        heatBox = view.findViewById(R.id.heatBox);
-        shareDailyBox = view.findViewById(R.id.shareDailyBox);
+        //heatBox = view.findViewById(R.id.heatBox);
+        //shareDailyBox = view.findViewById(R.id.shareDailyBox);
         pointsCenterBox = view.findViewById(R.id.pointsCenterBox);
         //activityCenterBox = view.findViewById(R.id.activityCenterBox);
         smartDeviceBox = view.findViewById(R.id.smartDeviceBox);
-        trainingPlanBox = view.findViewById(R.id.trainingPlanBox);
+        //trainingPlanBox = view.findViewById(R.id.trainingPlanBox);
 
         memberCardBox.setOnClickListener(this);
         encyclopediaBox.setOnClickListener(this);
         outdoorBox.setOnClickListener(this);
-        heatBox.setOnClickListener(this);
-        shareDailyBox.setOnClickListener(this);
+        //heatBox.setOnClickListener(this);
+        //shareDailyBox.setOnClickListener(this);
         pointsCenterBox.setOnClickListener(this);
         smartDeviceBox.setOnClickListener(this);
-        trainingPlanBox.setOnClickListener(this);
+        //trainingPlanBox.setOnClickListener(this);
 
     }
 
@@ -100,15 +100,15 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
                 }
                 break;
 
-            case R.id.heatBox:
+           /* case R.id.heatBox:
                 if(clickReturn != null){
                     clickReturn.itemClick(RUN_HEAT);
                 }
-                break;
+                break;*/
 
-            case R.id.shareDailyBox:
+            /*case R.id.shareDailyBox:
                 mActivity.startActivity(PushShareActivity.class,null);
-                break;
+                break;*/
 
             case R.id.pointsCenterBox:
                 mActivity.startActivity(DailyPunchActivity.class);
@@ -120,11 +120,11 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
                 mActivity.startActivity(IndicatorDetailsActivity.class,bundle2);
                 break;
 
-            case R.id.trainingPlanBox:
+           /* case R.id.trainingPlanBox:
                 if(clickReturn != null){
                     clickReturn.itemClick(TRAINING_PLAN);
                 }
-                break;
+                break;*/
 
 
         }

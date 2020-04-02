@@ -1,5 +1,6 @@
 package com.hongyuan.fitness.ui.membership_card.card_detail;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,10 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
+import com.hongyuan.fitness.custom_view.time_selecter.use_time.GetTimeData;
 import com.hongyuan.fitness.databinding.ActivityCardDetailsBinding;
 import com.hongyuan.fitness.ui.about_class.check_payment_method.OrderBean;
 import com.hongyuan.fitness.ui.about_class.class_success.SuccessClassActivity;
@@ -28,8 +32,10 @@ import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.ui.store.consultant.ConsultantBeans;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.BasisTimesUtils;
 import com.hongyuan.fitness.util.BigDecimalUtils;
 import com.hongyuan.fitness.util.CustomDialog;
+import com.hongyuan.fitness.util.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +54,10 @@ public class CardDetailsViewModel extends CustomViewModel {
     private int personNum = 0;
 
     private List<ConsultantBeans.DataBean.ListBean> consultantList;
+    private MyInfoBeans.DataBean bean;
+
+    //生日选择器
+    private GetTimeData birthDay;
 
     //测试
     private List<String> selectList;
@@ -133,6 +143,29 @@ public class CardDetailsViewModel extends CustomViewModel {
 
         });
 
+        binding.mSex.setOnClickListener(v -> {
+            int sexNum = 1;
+            if(bean != null && bean.getMi_sex() != 0){
+                sexNum = bean.getMi_sex();
+            }
+            CustomDialog.updateSex(mActivity, sexNum, (v1, message) -> {
+                Log.e("cdj","========="+message);
+                if(BaseUtil.isValue(bean)){
+                    bean.setMi_sex(Integer.valueOf(message));
+                }
+                binding.mSex.setRightText(Integer.valueOf(message) == 1 ? "男" : "女");
+                binding.mSex.setUseValue(message);
+            });
+        });
+
+        //初始化生日选择器
+        birthDay = new GetTimeData(mActivity, (date, v) -> {
+            binding.mBirth.setRightText(TimeUtil.getStringByFormat(date,TimeUtil.dateFormatYMD));
+            binding.mBirth.setUseValue(TimeUtil.getStringByFormat(date,TimeUtil.dateFormatYMD));
+        }, TimeUtil.getCurrentDateFormat(),TimeUtil.getCurrentDateFormat(),GetTimeData.YMD);
+        binding.mBirth.setOnClickListener(view -> {
+            birthDay.showTime();
+        });
     }
 
     /*
@@ -213,11 +246,13 @@ public class CardDetailsViewModel extends CustomViewModel {
     @Override
     protected void setData() {
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img);
-        Glide.with(mActivity).load(detailsBean.getC_img()).apply(options).into(binding.cardBg);
+        Glide.with(mActivity).load(detailsBean.getCard_img()).apply(options).into(binding.cardBg);
         binding.cardName.setText(detailsBean.getCard_name());
 
         binding.cardUseTime.setText(detailsBean.getCard_days()+"天");
         showAllPrice = detailsBean.getCard_sale_price();
+        binding.cardOldPrice.setText(BaseUtil.getNoZoon(detailsBean.getCard_original_price()));
+        binding.cardOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         binding.allPrice.setText(BaseUtil.getNoZoon(detailsBean.getCard_sale_price()));
         binding.cardPrice.setText(BaseUtil.getNoZoon(detailsBean.getCard_sale_price()));
 
@@ -237,7 +272,7 @@ public class CardDetailsViewModel extends CustomViewModel {
 
     //去支付生产购买订单
     public BindingCommand goPay = new BindingCommand(() -> {
-        addCardOrder();
+        updatBean();
     });
 
     /*
@@ -295,6 +330,34 @@ public class CardDetailsViewModel extends CustomViewModel {
         //读取销售顾问
         clearParams().setParams("os_id",getBundle().getString("os_id"));
         Controller.myRequest(Constants.GET_SALER_LIST,Controller.TYPE_POST,getParams(), ConsultantBeans.class,this);
+
+        //会员--读取会员基本信息
+        clearParams();
+        Controller.myRequest(Constants.GET_M_INFO,Controller.TYPE_POST,getParams(), MyInfoBeans.class,this);
+
+    }
+
+    /*
+    * 提交用户信息
+    * */
+    private void updatBean(){
+        if(!BaseUtil.isValue(binding.mBirth.getRightText())){
+            CustomDialog.showMessage(mActivity,"请选择生日");
+            return;
+        }
+        if(!BaseUtil.isValue(binding.mName.getRightText())){
+            CustomDialog.showMessage(mActivity,"请填写姓名");
+            return;
+        }
+        if(!BaseUtil.isValue(binding.mSex.getRightText())){
+            CustomDialog.showMessage(mActivity,"请选择性别");
+            return;
+        }
+
+        //会员--读取会员基本信息
+        clearParams().setParams("mi_birth",binding.mBirth.getRightText()).setParams("mi_realname",binding.mName.getRightText())
+                .setParams("mi_sex",binding.mSex.getRightText());
+        Controller.myRequest(ConstantsCode.UPDATE_M_INFO,Constants.UPDATE_M_INFO,Controller.TYPE_POST,getParams(), BaseBean.class,this);
     }
 
     @Override
@@ -364,7 +427,7 @@ public class CardDetailsViewModel extends CustomViewModel {
             consultantList = ((ConsultantBeans)data).getData().getList();
             selectList = new ArrayList<>();
             for(ConsultantBeans.DataBean.ListBean bean : consultantList){
-                selectList.add(bean.getM_name());
+                selectList.add(bean.getMi_realname());
             }
         }
 
@@ -378,5 +441,31 @@ public class CardDetailsViewModel extends CustomViewModel {
             }
         }
 
+        if(data instanceof MyInfoBeans){
+            bean = ((MyInfoBeans)(data)).getData();
+
+            if(BaseUtil.isValue(bean.getMi_realname())){
+                binding.mName.setRightText(bean.getMi_realname(),true);
+                binding.mName.setUseValue(bean.getMi_realname());
+            }
+
+            if(BaseUtil.isValue(bean.getMi_sex())){
+                binding.mSex.setRightText(bean.getMi_sex() == 1 ? "男":"女");
+                binding.mSex.setUseValue(bean.getMi_sex()+"");
+            }
+
+            if(BaseUtil.isValue(bean.getMi_birth())){
+                binding.mBirth.setRightText(bean.getMi_birth());
+                binding.mBirth.setUseValue(bean.getMi_birth());
+            }
+        }
+
+    }
+
+    @Override
+    public void onSuccess(int code, Object data) {
+        if(code == ConstantsCode.UPDATE_M_INFO){
+            addCardOrder();
+        }
     }
 }

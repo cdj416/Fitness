@@ -6,8 +6,8 @@ android {
         //applicationId "com.hongyuan.fitness"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 15
-        versionName "1.4.5"
+        versionCode 16
+        versionName "1.4.6"
         flavorDimensions "versionCode"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true

@@ -28,6 +28,7 @@ public class Controller {
                                                   final Class<T> dataBean,
                                                   final RetrofitListener<T> listener){
         RequestParams params = new RequestParams(path);
+        Log.e("cdj","=====path===="+path);
         if(maps != null){
             //组装常规参数
             Set<String> set = maps.keySet();
