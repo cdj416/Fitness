@@ -789,5 +789,23 @@ public class CustomDialog {
         cancel.setOnClickListener(v -> dialog.dismiss());
     }
 
+    /*************************************商城用到的弹框*********************************************/
 
+    /*
+     * 文字输入弹框
+     * */
+    public static void showGoodsParameter(Context mContext){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        dialog.setCanceledOnTouchOutside(false);
+        View view = View.inflate(mContext, R.layout.dialog_goods_parameter,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        TextView submit = view.findViewById(R.id.submit);
+        submit.setOnClickListener(v -> dialog.dismiss());
+    }
 }

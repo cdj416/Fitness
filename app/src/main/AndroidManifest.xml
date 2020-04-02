@@ -304,6 +304,7 @@
         <!--*******************************************第六版商城版本***********************************************-->
         <activity android:name=".ui.shop.sactivity.ShopMenuActivity"/>
         <activity android:name=".ui.shop.sactivity.ShopSearchActivity"/>
+        <activity android:name=".ui.shop.sactivity.SgoodsDetailActivity"/>
     </application>
 
 </manifest>

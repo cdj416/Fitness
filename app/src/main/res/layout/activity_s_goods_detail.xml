@@ -1,19 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="ViewModel"
-            type="com.hongyuan.fitness.ui.heat.add_food.AddFoodViewModel"/>
+            type="com.hongyuan.fitness.ui.shop.sviewmodel.SgoodsDetailViewModel"/>
     </data>
 
-    <LinearLayout
+    <com.hongyuan.fitness.custom_view.StickyScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/color_FFFFFF"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:background="@color/color_F5F6FB">
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.hongyuan.fitness.ui.shop.smyview.SGoodsDetailsHeadView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="12dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="@color/color_FFFFFF">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FF333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_centerVertical="true"
+                        android:text="商品评价(20)"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/sp_14"
+                        android:textColor="@color/color_EF5B48"
+                        android:gravity="center_vertical"
+                        android:drawableRight="@mipmap/right_huise_img"
+                        android:text="查看全部"/>
+                </RelativeLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/commentRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/color_FFFFFF"
+                android:layout_marginTop="12dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/shopImg"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        app:riv_corner_radius="@dimen/dp_4"
+                        android:layout_centerVertical="true"
+                        android:src="@color/color_f2"/>
+                    <LinearLayout
+                        android:layout_toRightOf="@id/shopImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="120dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_14"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textColor="@color/color_FF333333"
+                            android:text="店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_FF999999"
+                                android:textSize="@dimen/sp_12"
+                                android:text="好评率100% |"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_FF999999"
+                                android:textSize="@dimen/sp_12"
+                                android:text="5年店铺"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/goStore"
+                        android:layout_width="55dp"
+                        android:layout_height="24dp"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="@color/color_FFFFFF"
+                        android:gravity="center"
+                        android:text="进店"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/shape_radius6_ef5b48"/>
+                    <TextView
+                        android:layout_width="55dp"
+                        android:layout_height="24dp"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="@color/color_EF5B48"
+                        android:gravity="center"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:layout_toLeftOf="@id/goStore"
+                        android:text="收藏"
+                        android:background="@drawable/shape_radius6_border_ef5b48"/>
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@color/color_EEEEEE"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/goodsRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:nestedScrollingEnabled="false"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="1dp"
+                        android:background="@drawable/shape_gradient_h_e8_cc"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_14"
+                        android:textColor="@color/color_FF999999"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="商品详情"/>
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="1dp"
+                        android:background="@drawable/shape_gradient_h_cc_e8"/>
+                </LinearLayout>
+
+                <WebView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="WebViewLayout" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.hongyuan.fitness.custom_view.StickyScrollView>
 </layout>

@@ -275,6 +275,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/parameterBox"
         android:layout_width="match_parent"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"

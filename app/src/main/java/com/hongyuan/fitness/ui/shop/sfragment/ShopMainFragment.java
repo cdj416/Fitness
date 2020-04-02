@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.CustomFragment;
+import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SMGoodsAdapter;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
 import com.youth.banner.Banner;
@@ -40,6 +41,9 @@ public class ShopMainFragment extends CustomFragment {
         gAdapter = new SMGoodsAdapter();
         mRec.setAdapter(gAdapter);
         gAdapter.setNewData(getList());
+        gAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            startActivity(SgoodsDetailActivity.class,null);
+        });
 
         setTopBanner(getBannerList());
         setSBanner(getBannerList());

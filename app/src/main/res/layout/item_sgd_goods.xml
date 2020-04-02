@@ -5,12 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_margin="6dp"
-    android:id="@+id/jumpBox"
     android:background="@drawable/shape_radius6_ffffff">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:layout_width="match_parent"
-        android:layout_height="166dp"
+        android:layout_height="106dp"
         android:src="@mipmap/zhengfangxing_default_img"
         app:riv_corner_radius_top_right="6dp"
         app:riv_corner_radius_top_left="6dp"
@@ -22,26 +21,16 @@
         android:layout_height="wrap_content"
         android:textColor="@color/color_FF333333"
         android:textSize="@dimen/sp_12"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="4dp"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="商品名称商品名称商品名称商品名称商品名称"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:background="@color/color_EEEEEE"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="43dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingStart="12dp">
+        android:gravity="center_vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
