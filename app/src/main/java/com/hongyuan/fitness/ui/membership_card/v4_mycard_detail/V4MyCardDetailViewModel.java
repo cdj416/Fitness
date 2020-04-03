@@ -89,7 +89,7 @@ public class V4MyCardDetailViewModel extends CustomViewModel {
             binding.useStores.setText(detailsBeans.getOs_names());
 
             binding.cardName.setVisibility(View.GONE);
-            binding.cardData.setVisibility(View.GONE);
+            //binding.cardData.setVisibility(View.GONE);
             binding.cardPriceBox.setVisibility(View.GONE);
             binding.cardOldPriceBox.setVisibility(View.GONE);
             binding.cardButton.setText("暂未开通停卡退卡功能\n如有需要请联系线下客服人员");
@@ -116,7 +116,7 @@ public class V4MyCardDetailViewModel extends CustomViewModel {
             }
 
             binding.cardName.setVisibility(View.VISIBLE);
-            binding.cardData.setVisibility(View.VISIBLE);
+            //binding.cardData.setVisibility(View.VISIBLE);
             binding.cardPriceBox.setVisibility(View.VISIBLE);
             binding.cardButton.setText("购买");
             binding.cardButton.setBackgroundResource(R.drawable.shape_gradient_v_radiu5_login);

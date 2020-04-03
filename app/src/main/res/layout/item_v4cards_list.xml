@@ -56,22 +56,36 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="16dp">
         <TextView
+            android:id="@+id/oldPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/color_FF999999"
             android:textSize="@dimen/sp_12"
-            android:textColor="@color/color_EF5B48"
-            android:text="¥"/>
-        <TextView
-            android:id="@+id/cardPrice"
+            android:text="¥2200"/>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/color_EF5B48"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_EF5B48"
+                android:text="¥"/>
+            <TextView
+                android:id="@+id/cardPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_EF5B48"/>
+        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>

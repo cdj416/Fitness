@@ -51,6 +51,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="16dp"
                         android:layout_marginTop="10dp"
+                        android:visibility="gone"
                         android:text="2021.9.1到期"/>
 
                     <LinearLayout
