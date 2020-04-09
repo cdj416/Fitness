@@ -17,6 +17,7 @@ import java.util.HashMap;
 
 public class V2FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.ListBean, BaseViewHolder> {
 
+
     //存储图片宽高比例
     private HashMap<Integer, Float> hashMap = new HashMap<>();
     //单列的宽度
@@ -80,8 +81,8 @@ public class V2FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.
     }
 
     /*
-    * 设置图片控件高度
-    * */
+     * 设置图片控件高度
+     * */
     private void setImgViewHeight(ImageView coverImg,int height,String imgUrl){
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) coverImg.getLayoutParams();
         layoutParams.height = height;

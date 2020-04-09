@@ -95,7 +95,7 @@ public class FeaturedFragment extends CustomFragment {
         mRecycler.setLayoutManager(layoutManager);
         adapter = new V2FindContentAdapter(DensityUtil.getColumnWhith(mActivity,38,2));
         mRecycler.setAdapter(adapter);
-
+        adapter.setFooterView(getFooterHeight(mRecycler));
 
 
         adapter.setOnItemChildClickListener((adapter, view, position) -> {
@@ -115,8 +115,8 @@ public class FeaturedFragment extends CustomFragment {
     }
 
     /*
-    * 初始化适配样式
-    * */
+     * 初始化适配样式
+     * */
     private void initAdapter(){
         if("gz".equals(getFragType())){
             friendsAdapter = new FindTopFriendsAdapter();
@@ -174,8 +174,8 @@ public class FeaturedFragment extends CustomFragment {
     }
 
     /*
-    * 获取发现帖子
-    * */
+     * 获取发现帖子
+     * */
     private void getCircleList(){
         mActivity.showLoading();
         clearParams().setParams("circle_state","1").setParams("city_name","湖州市");
@@ -191,8 +191,8 @@ public class FeaturedFragment extends CustomFragment {
     }
 
     /*
-    * 不需要做区分走这里
-    * */
+     * 不需要做区分走这里
+     * */
     @Override
     public void onSuccess(Object data) {
         if(data instanceof FeatureBean && isSuccess(data)){
@@ -247,8 +247,8 @@ public class FeaturedFragment extends CustomFragment {
     }
 
     /*
-    * 需要做区分走这里
-    * */
+     * 需要做区分走这里
+     * */
     @Override
     public void onSuccess(int code, Object data) {
         mActivity.closeLoading();

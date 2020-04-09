@@ -51,7 +51,33 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="16dp"
                         android:layout_marginTop="10dp"
+                        android:visibility="gone"
                         android:text="2021.9.1到期"/>
+
+                    <LinearLayout
+                        android:id="@+id/cardOldPriceBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="30dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_FFFFFF"
+                            android:textSize="14sp"
+                            android:text="¥"/>
+                        <TextView
+                            android:id="@+id/cardOldPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/color_FFFFFF"
+                            android:text=""/>
+                    </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/cardPriceBox"
                         android:layout_width="wrap_content"
@@ -60,7 +86,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="20dp">
+                        android:layout_marginBottom="10dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -73,7 +99,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="20sp"
                             android:textColor="@color/color_FFFFFF"
-                            android:text="1999"/>
+                            android:text=""/>
                     </LinearLayout>
 
                 </RelativeLayout>

@@ -1,5 +1,8 @@
 package com.hongyuan.fitness.ui.membership_card.v4_mycard_list;
 
+import android.graphics.Paint;
+import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -20,9 +23,10 @@ public class V4CardsListAdapter extends BaseQuickAdapter<V4CardsListBeans.DataBe
 
         helper.setText(R.id.cardName,item.getCard_name())
                 .setText(R.id.cardStore,item.getOs_names())
+                .setText(R.id.oldPrice,"¥"+BaseUtil.getNoZoon(item.getCard_original_price()))
                 .setText(R.id.cardDays,"有效期："+item.getCard_days()+"天")
                 .setText(R.id.cardPrice, BaseUtil.getNoZoon(item.getCard_sale_price()));
-
+        ((TextView)helper.getView(R.id.oldPrice)).getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         helper.addOnClickListener(R.id.jumpBox);
     }
 }

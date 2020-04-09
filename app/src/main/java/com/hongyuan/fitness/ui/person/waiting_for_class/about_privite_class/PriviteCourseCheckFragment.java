@@ -54,7 +54,7 @@ public class PriviteCourseCheckFragment extends CustomFragment {
                 //签到
                 if(view.getId() == R.id.qdBox && courseBeans.getData().getList().get(position).getXy_qd_state() != 1){
                     mPosition = position;
-                    courseQD(String.valueOf(courseBeans.getData().getList().get(position).getCp_id()));
+                    courseQD(String.valueOf(courseBeans.getData().getList().get(position).getCpa_id()));
                 }
 
                 //去课程详情和签到详情

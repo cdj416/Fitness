@@ -14,20 +14,19 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_FFFFFF">
+            android:background="@color/color_F5F6FB">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@color/color_FFFFFF"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="90dp">
+                android:background="@color/color_FFFFFF">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="182dp"
-                    android:layout_marginTop="12dp">
+                    android:layout_marginTop="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp">
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/cardBg"
                         android:layout_width="match_parent"
@@ -47,12 +46,36 @@
                         android:text="首玺健身爱山店"/>
 
                     <LinearLayout
+                        android:id="@+id/cardOldPriceBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="40dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_FFFFFF"
+                            android:textSize="14sp"
+                            android:text="¥"/>
+                        <TextView
+                            android:id="@+id/cardOldPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/color_FFFFFF"
+                            android:text=""/>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginEnd="16dp">
                         <TextView
                             android:layout_width="wrap_content"
@@ -77,7 +100,9 @@
                     android:layout_marginTop="23dp"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="44dp">
+                    android:layout_height="44dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -105,7 +130,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp">
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="44dp">
@@ -172,7 +199,9 @@
                 <RelativeLayout
                     android:id="@+id/selectCouponBox"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp">
+                    android:layout_height="44dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -195,7 +224,9 @@
                 <RelativeLayout
                     android:id="@+id/selectGuWenBox"
                     android:layout_width="match_parent"
-                    android:layout_height="44dp">
+                    android:layout_height="44dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -216,6 +247,42 @@
                         android:text="选择会籍顾问"/>
                 </RelativeLayout>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:textSize="@dimen/sp_12"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/dp_16"
+                    android:background="@color/color_F5F6FB"
+                    android:textColor="@color/color_FF999999"
+                    android:text="会员基本信息（必填）"/>
+                <com.hongyuan.fitness.custom_view.InputOrSlectView
+                    android:id="@+id/mName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_FFFFFF"
+                    app:isvName="真实姓名"
+                    app:isvLineShow="true"
+                    app:isvHintText="请输入"
+                    app:isvType="input"/>
+                <com.hongyuan.fitness.custom_view.InputOrSlectView
+                    android:id="@+id/mSex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_FFFFFF"
+                    app:isvName="性别"
+                    app:isvLineShow="true"
+                    app:isvRightText="请选择"
+                    app:isvType="select"/>
+                <com.hongyuan.fitness.custom_view.InputOrSlectView
+                    android:id="@+id/mBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_FFFFFF"
+                    app:isvName="生日"
+                    app:isvLineShow="true"
+                    app:isvRightText="请选择"
+                    app:isvType="select"/>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

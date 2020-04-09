@@ -35,7 +35,7 @@ import com.hongyuan.fitness.ui.webview.WebViewActivity;
 public class JumpUtils {
 
     public static final int TYPE_APP = 1;
-    public static final int TYPE_H5 = 1;
+    public static final int TYPE_H5 = 2;
 
     public static class JumpBeans{
         private int img_href_type;//跳转类型
@@ -144,8 +144,8 @@ public class JumpUtils {
                     mContext.startActivity(StoreDetailActivity.class,bundle);
                     break;
                 case "goods_list"://商品列表
-                    //bundle.putString("os_id",href_id);
-                    mContext.startActivity(GoodActivity.class,null);
+                    bundle.putInt("position",0);
+                    mContext.startActivity(GoodActivity.class,bundle);
                     break;
                 case "goods_info"://商品详情
                     bundle.putString("g_id",jumpBeans.getHref_id());
@@ -207,7 +207,7 @@ public class JumpUtils {
                     break;
 
             }
-        }else{
+        }else if(jumpBeans.getImg_href_type() == TYPE_H5 && BaseUtil.isValue(jumpBeans.getImg_href())){
             bundle.putString("url",jumpBeans.getImg_href());
             if(BaseUtil.isValue(jumpBeans.getH5Title())){
                 bundle.putString("title",jumpBeans.getH5Title());

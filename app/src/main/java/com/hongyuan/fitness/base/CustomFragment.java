@@ -109,8 +109,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 获取具体key的值
-    * */
+     * 获取具体key的值
+     * */
     public String getFragType(String key) {
         Bundle bundle = getArguments();
         if(bundle != null){
@@ -119,8 +119,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         return "";
     }
     /*
-    * 获取具体key的值
-    * */
+     * 获取具体key的值
+     * */
     public boolean getBoolenFrag(String key) {
         Bundle bundle = getArguments();
         if(bundle != null){
@@ -286,8 +286,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 设置背景颜色
-    * */
+     * 设置背景颜色
+     * */
     public void setCustomBg(int mColor){
         customBg.setBackgroundColor(getResources().getColor(mColor));
     }
@@ -344,8 +344,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 设置标题
-    * */
+     * 设置标题
+     * */
     public TitleView getmTitle(){
         mTitle.setVisibility(View.VISIBLE);
         return this.mTitle;
@@ -363,8 +363,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 上啦加载更多监听
-    * */
+     * 上啦加载更多监听
+     * */
     private OnLoadMoreListener onLoadMore(){
         return refreshLayout -> {
             curPage++;
@@ -468,22 +468,22 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
 
     }
     /*
-    * 加载数据
-    * */
+     * 加载数据
+     * */
     protected void lazyLoad(){
 
     }
 
     /*
-    * 只加载一次
-    * */
+     * 只加载一次
+     * */
     protected void lazyOnceLoad(){
 
     }
 
     /*
-    * 每次都加载
-    * */
+     * 每次都加载
+     * */
     protected void onMyResume(){
 
     }
@@ -601,8 +601,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 需要做区分，子类需要实现该方法
-    * */
+     * 需要做区分，子类需要实现该方法
+     * */
     @Override
     public void onSuccess(int code, Object data) {
 
@@ -663,15 +663,15 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 成功提示
-    * */
+     * 成功提示
+     * */
     public void showSuccess(String message){
         LemonBubble.showRight(mActivity,message,2000);
     }
 
     /*
-    * 提升加载中
-    * */
+     * 提升加载中
+     * */
     public void showLoading(String message){
         LemonBubble.showRoundProgress(this,message);
     }
@@ -687,32 +687,32 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     }
 
     /*
-    * 设置泛型类
-    * */
+     * 设置泛型类
+     * */
     public CustomFragment setMyClass(Class<T> dataBean){
         this.dataBean = dataBean;
         return this;
     }
 
     /*
-    * 获取泛型
-    * */
+     * 获取泛型
+     * */
     public Class<T> getMyClass(){
         return this.dataBean;
     }
 
 
     /*
-    * 存储当前自动刷新时间
-    * */
+     * 存储当前自动刷新时间
+     * */
     protected void inAutoRefreshTime(String key){
         String nowTime = String.valueOf(System.currentTimeMillis());
         SharedPreferencesUtil.putBean(mActivity,key,nowTime);
     }
 
     /*
-    * 获取上次自动刷新的时间
-    * */
+     * 获取上次自动刷新的时间
+     * */
     protected Long getAutoRefreshTime(String key){
         String lastTime = String.valueOf(SharedPreferencesUtil.getBean(mActivity,key));
         if(BaseUtil.isValue(lastTime)){
@@ -725,8 +725,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
     //用来标识是否是第一次创建
 
     /*
-    * 是否需要自动刷新
-    * */
+     * 是否需要自动刷新
+     * */
     protected boolean isAutoRefresh(String key){
         long nowTime = System.currentTimeMillis();
         long lastTime = getAutoRefreshTime(key);

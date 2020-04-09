@@ -451,4 +451,9 @@ public class Constants {
     /**************************************五期版本********************************************************/
     // 首页--弹出商品
     public static final String GET_FREE_GODDS = ADRESS + "/api/goodshome/get_free_goods";
+    //会员--读取会员基本信息
+    public static final String GET_M_INFO = ADRESS + "/api/member/get_m_info";
+    //会员-修改会员基本信息
+    public static final String UPDATE_M_INFO = ADRESS + "/api/member/update_m_info";
+
 }
