@@ -305,6 +305,8 @@
         <activity android:name=".ui.shop.sactivity.ShopMenuActivity"/>
         <activity android:name=".ui.shop.sactivity.ShopSearchActivity"/>
         <activity android:name=".ui.shop.sactivity.SgoodsDetailActivity"/>
+        <activity android:name=".ui.shop.sactivity.SCartActivity"/>
+        <activity android:name=".ui.shop.sactivity.SorderPaySuccessActivity"/>
     </application>
 
 </manifest>

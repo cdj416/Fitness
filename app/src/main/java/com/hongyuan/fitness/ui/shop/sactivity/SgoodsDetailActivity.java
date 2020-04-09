@@ -7,7 +7,6 @@ import com.hongyuan.fitness.ui.shop.sviewmodel.SgoodsDetailViewModel;
 
 public class SgoodsDetailActivity extends CustomActivity {
 
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_s_goods_detail;
@@ -16,7 +15,7 @@ public class SgoodsDetailActivity extends CustomActivity {
     @Override
     protected void initView() {
 
-        setTitleBar(TYPE_BAR5,R.drawable.shape_soid_ffffff,"商品详情");
+        setTitleBar(TYPE_BAR1,R.drawable.shape_soid_ffffff,"");
         ActivitySGoodsDetailBinding binding = ActivitySGoodsDetailBinding.bind(mView);
         SgoodsDetailViewModel viewModel = new SgoodsDetailViewModel(this,binding);
         binding.setViewModel(viewModel);

@@ -4,6 +4,7 @@ package com.hongyuan.fitness.util;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -37,6 +38,9 @@ import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponAdapter;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.main_receive_coupon.DialogReceiveCouponAdapter;
+import com.hongyuan.fitness.ui.shop.sadapter.SGDcommentAdapter;
+import com.hongyuan.fitness.ui.shop.sadapter.SGDspecificationAdapter;
+import com.hongyuan.fitness.ui.shop.smyview.SGDspecificationView;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -792,11 +796,11 @@ public class CustomDialog {
     /*************************************商城用到的弹框*********************************************/
 
     /*
-     * 文字输入弹框
+     * 参数弹框
      * */
     public static void showGoodsParameter(Context mContext){
         final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
-        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCanceledOnTouchOutside(true);
         View view = View.inflate(mContext, R.layout.dialog_goods_parameter,null);
         dialog.setContentView(view);
         Window window = dialog.getWindow();
@@ -808,4 +812,65 @@ public class CustomDialog {
         TextView submit = view.findViewById(R.id.submit);
         submit.setOnClickListener(v -> dialog.dismiss());
     }
+
+    /*
+    * 规格
+    * */
+    public static void showGoodsSpecification(Context mContext){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        dialog.setCanceledOnTouchOutside(true);
+        View view = View.inflate(mContext, R.layout.dialog_goods_specification,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        SGDspecificationView spView = view.findViewById(R.id.spView);
+
+        ImageView close = view.findViewById(R.id.close);
+        close.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    /*
+     * 商城优惠卷
+     * */
+    public static void showSGDCoupon(Context mContext){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        dialog.setCanceledOnTouchOutside(true);
+        View view = View.inflate(mContext, R.layout.dialog_sgd_goods_coupon,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+
+        RecyclerView mRecycler = view.findViewById(R.id.mRecycler);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
+        manager.setOrientation(RecyclerView.VERTICAL);
+        mRecycler.setLayoutManager(manager);
+        mRecycler.addItemDecoration(new DividerItemDecoration(
+                mContext, DividerItemDecoration.HORIZONTAL_LIST,32,0x00000000));
+        ScanCardsListAdapter adapter = new ScanCardsListAdapter();
+        mRecycler.setAdapter(adapter);
+
+        //adapter.setNewData(mList);
+
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @SingleClick
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                dialog.dismiss();
+                //dialogClick.dialogClick(view,position,adapter);
+            }
+        });
+
+
+        TextView submit = view.findViewById(R.id.submit);
+        submit.setOnClickListener(v -> dialog.dismiss());
+    }
+
 }

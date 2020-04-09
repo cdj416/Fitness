@@ -42,7 +42,7 @@ import io.reactivex.annotations.Nullable;
 public abstract class CustomActivity extends AppCompatActivity implements HourMeterUtil.TimeCallBack {
     private Handler handler = new Handler();
     //加载器
-    public View mView;
+    public View mView,bottomChildView;
     //父类中的标题栏
     private TitleView mainTitle;
     //父类中的刷新控件
@@ -107,7 +107,7 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
 
         //加载底部布局
         if(getBottomLayoutId() != 0){
-            View bottomChildView = LayoutInflater.from(this).inflate(getBottomLayoutId(), null);
+            bottomChildView = LayoutInflater.from(this).inflate(getBottomLayoutId(), null);
             bottomView.addView(bottomChildView);
             bottomView.setVisibility(View.VISIBLE);
 

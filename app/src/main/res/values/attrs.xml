@@ -269,4 +269,11 @@
     <declare-styleable name="ShopMainTitleView">
         <attr name="smTitleName" format="string"/>
     </declare-styleable>
+    <!--view_item_cloumn-->
+    <declare-styleable name="ItemCloumView">
+        <attr name="icLeftText" format="string"/>
+        <attr name="icRightText" format="string"/>
+        <attr name="icLine" format="boolean"/>
+        <attr name="icRightColor" format="color"/>
+    </declare-styleable>
 </resources>

@@ -6,8 +6,8 @@ android {
         //applicationId "com.hongyuan.fitness"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 14
-        versionName "1.4.5"
+        versionCode 16
+        versionName "1.4.6"
         flavorDimensions "versionCode"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -130,9 +130,6 @@ dependencies {
 
     //适配框架
     implementation 'me.jessyan:autosize:0.9.5'
-
-    //增加一个图片加载库 ***
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
 
     //mvvm框架
     implementation 'com.github.goldze:MVVMHabit:3.1.2'

@@ -121,7 +121,7 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
         }
         if (!TextUtils.isEmpty(rightText)) {
             tv_right.setText(rightText);
-            tv_right.setVisibility(View.VISIBLE);
+            tv_left.setVisibility(View.VISIBLE);
         }
 
         //设置图片
@@ -146,57 +146,62 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
         }
 
         tv_center.setTextColor(text_color);
-        tv_right.setTextColor(text_color);
     }
 
 
     /*
     * 设置左边的文字
     * */
-    public void setLeftText(String leftText) {
+    public TitleView setLeftText(String leftText) {
         if (leftText != null) {
             tv_left.setText(leftText);
             tv_left.setVisibility(View.VISIBLE);
         }
+        return this;
     }
 
     /*
     * 隐藏分割线
     * */
-    public void hideLine(){
+    public TitleView hideLine(){
         title_line.setVisibility(View.GONE);
+        return this;
     }
     /*
     * 显示分割线
     * */
-    public void showLine(){
+    public TitleView showLine(){
         title_line.setVisibility(View.VISIBLE);
+        return this;
     }
 
     /*
     * 设置中间文字
     * */
-    public void setCentreText(String centreText) {
+    public TitleView setCentreText(String centreText) {
         if (!TextUtils.isEmpty(centreText)) {
             tv_center.setText(centreText);
             tv_center.setVisibility(View.VISIBLE);
         }
+        return this;
     }
 
     /*
      * 设置右边文字
      * */
-    public void setRightText(String rightText) {
+    public TitleView setRightText(String rightText) {
         if (!TextUtils.isEmpty(rightText)) {
             tv_right.setText(rightText);
             tv_right.setVisibility(View.VISIBLE);
+            ll_right.setVisibility(VISIBLE);
         }
+        return this;
     }
 
     /*
      * 设置左边的内容和字的颜色
      * */
-    public void setLeftTextColor(String leftText, int color) {
+    public TitleView setLeftTextColor(String leftText, int color) {
         if (!TextUtils.isEmpty(leftText)) {
             tv_left.setVisibility(View.VISIBLE);
             tv_left.setText(leftText);
@@ -204,12 +209,13 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
         }else {
             tv_left.setVisibility(View.GONE);
         }
+        return this;
     }
 
     /*
      * 设置中间的内容和字的颜色
      * */
-    public void setCenterTextColor(String centerText, int color) {
+    public TitleView setCenterTextColor(String centerText, int color) {
         if (!TextUtils.isEmpty(centerText)) {
             tv_center.setVisibility(View.VISIBLE);
             tv_center.setText(centerText);
@@ -217,12 +223,13 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
         }else {
             tv_center.setVisibility(View.GONE);
         }
+        return this;
     }
 
     /*
      * 设置左边的内容和字的颜色
      * */
-    public void setRightTextColor(String rightText, int color) {
+    public TitleView setRightTextColor(String rightText, int color) {
         if (!TextUtils.isEmpty(rightText)) {
             tv_right.setVisibility(View.VISIBLE);
             tv_right.setText(rightText);
@@ -230,51 +237,55 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
         }else {
             tv_right.setVisibility(View.GONE);
         }
+        return this;
     }
 
 
     /*
     * 设置左边的图片
     * */
-    public void setLeftImage(int id) {
+    public TitleView setLeftImage(int id) {
         iv_left.setVisibility(View.VISIBLE);
         if (0 == id) {
             iv_left.setVisibility(View.GONE);
         }else {
             iv_left.setImageResource(id);
         }
-
+        return this;
     }
 
     /*
     * 关闭左边返回按钮
     * */
-    public void hideLeft(){
+    public TitleView hideLeft(){
         iv_left.setVisibility(GONE);
+        return this;
     }
 
     /*
      * 设置中间的图片
      * */
-    public void setCenterImage(int id) {
+    public TitleView setCenterImage(int id) {
         iv_center.setVisibility(View.VISIBLE);
         if (0 == id) {
             iv_center.setVisibility(View.GONE);
         }else {
             iv_center.setImageResource(id);
         }
+        return this;
     }
 
     /*
     * 设置右边的图片
     * */
-    public void setRightImage(int id) {
+    public TitleView setRightImage(int id) {
         iv_right.setVisibility(View.VISIBLE);
         if (0 == id) {
             iv_right.setVisibility(View.GONE);
         }else {
             iv_right.setImageResource(id);
         }
+        return this;
     }
 
     /*
@@ -289,28 +300,31 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
     /*
     * 添加左边view
     * */
-    public void addLeftContentView(View view) {
+    public TitleView addLeftContentView(View view) {
         ll_left_content.addView(view);
         ll_left_content.setVisibility(View.VISIBLE);
+        return this;
     }
 
     /*
     * 添加中间view
     * */
-    public void addCenterContentView(View view) {
+    public TitleView addCenterContentView(View view) {
         ll_center_content.addView(view);
         ll_center_content.setVisibility(View.VISIBLE);
+        return this;
     }
 
     /*
     * 添加左边view
     * */
-    public void addRightContentView(View view) {
+    public TitleView addRightContentView(View view) {
         ll_right_content.removeAllViews();
         iv_right.setVisibility(GONE);
         tv_right.setVisibility(GONE);
         ll_right_content.addView(view);
         ll_right_content.setVisibility(View.VISIBLE);
+        return this;
     }
 
     /*
@@ -325,6 +339,20 @@ public class TitleView extends LinearLayout implements View.OnClickListener {
     * */
     public View getRightView(){
         return this.ll_right;
+    }
+
+    /*
+    * 获取右边的图片view
+    * */
+    public View getRightImgView(){
+        return this.iv_right;
+    }
+
+    /*
+    * 获取右边的文字view
+    * */
+    public View getRightTvView(){
+        return this.tv_right;
     }
 
     /*

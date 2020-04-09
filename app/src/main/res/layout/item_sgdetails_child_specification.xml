@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="13dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shape_soid_ffffff_border_eeeeee"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="12dp">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/colorImg"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:riv_corner_radius="8dp"
+            android:visibility="visible"
+            android:src="#FFE73333"/>
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/goodImg"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:riv_corner_radius="2dp"
+            android:layout_marginEnd="6dp"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/specText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_FF333333"
+            android:textSize="@dimen/sp_12"
+            android:visibility="gone"
+            android:text="36"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,25 +1,16 @@
 package com.hongyuan.fitness.ui.shop.sviewmodel;
-
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivitySGoodsDetailBinding;
-import com.hongyuan.fitness.ui.shop.sadapter.SGDcommentAdapter;
-import com.hongyuan.fitness.ui.shop.sadapter.SGDgoodsAdapter;
+import com.hongyuan.fitness.ui.shop.sactivity.SCartActivity;
+import com.hongyuan.fitness.ui.shop.sinterface.GoOtherPageListener;
+import com.hongyuan.fitness.ui.shop.sviewpage.SshopDetailsViewPagerAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SgoodsDetailViewModel extends CustomViewModel {
+public class SgoodsDetailViewModel extends CustomViewModel implements GoOtherPageListener {
 
     private ActivitySGoodsDetailBinding binding;
 
-    private SGDcommentAdapter sgDcommentAdapter;
-    private SGDgoodsAdapter sgDgoodsAdapter;
+
 
     public SgoodsDetailViewModel(CustomActivity mActivity,ActivitySGoodsDetailBinding binding) {
         super(mActivity);
@@ -29,36 +20,27 @@ public class SgoodsDetailViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
-        LinearLayoutManager comManager = new LinearLayoutManager(mActivity);
-        comManager.setOrientation(RecyclerView.VERTICAL);
-        binding.commentRec.setLayoutManager(comManager);
-        sgDcommentAdapter = new SGDcommentAdapter();
-        binding.commentRec.setAdapter(sgDcommentAdapter);
-        List<BaseBean> ll = new ArrayList<>();
-        ll.add(new BaseBean());
-        sgDcommentAdapter.setNewData(ll);
+        SshopDetailsViewPagerAdapter meunAdapter = new SshopDetailsViewPagerAdapter(mActivity.getSupportFragmentManager(),this);
+        binding.viewPager.setAdapter(meunAdapter);
+        binding.layoutMenu.setupWithViewPager(binding.viewPager);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(mActivity, 3);
-        binding.goodsRec.setLayoutManager(layoutManager);
-        sgDgoodsAdapter = new SGDgoodsAdapter();
-        binding.goodsRec.setAdapter(sgDgoodsAdapter);
-        sgDgoodsAdapter.setNewData(getList());
+        binding.viewPager.setOffscreenPageLimit(3);
+
+
+        binding.cart.setOnClickListener(v -> {
+            startActivity(SCartActivity.class,null);
+        });
     }
 
-    /*
-    * 添加假数据
-    * */
-    private List<BaseBean> getList(){
-        List<BaseBean> mList = new ArrayList<>();
-        for(int i = 0 ; i < 6 ; i++){
-            BaseBean bean = new BaseBean();
-            mList.add(bean);
-        }
-        return mList;
-    }
+
 
     @Override
     public void onSuccess(Object data) {
 
+    }
+
+    @Override
+    public void goPage(int pageNum) {
+        binding.viewPager.setCurrentItem(pageNum);
     }
 }
