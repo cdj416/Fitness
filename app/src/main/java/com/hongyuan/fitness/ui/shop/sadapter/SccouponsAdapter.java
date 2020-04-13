@@ -5,14 +5,14 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 
-public class SsearchShopAdapter extends BaseQuickAdapter<BaseBean, BaseViewHolder> {
+public class SccouponsAdapter extends BaseQuickAdapter<BaseBean, BaseViewHolder> {
 
-    public SsearchShopAdapter(){
-        super(R.layout.item_search_shops);
+    public SccouponsAdapter(){
+        super(R.layout.item_collect_coupons);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, BaseBean item) {
-        helper.addOnClickListener(R.id.goStore);
+
     }
 }

@@ -5,7 +5,7 @@ import android.view.View;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityBottomScartBinding;
-import com.hongyuan.fitness.ui.shop.sactivity.SorderPaySuccessActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.SorderDetailsActivity;
 
 public class ScartBottomViewModel extends CustomViewModel {
 
@@ -24,7 +24,7 @@ public class ScartBottomViewModel extends CustomViewModel {
     protected void initView() {
         binding.submit.setOnClickListener(v -> {
             if(!mode){
-                startActivity(SorderPaySuccessActivity.class,null);
+                startActivity(SorderDetailsActivity.class,null);
             }else{
 
             }

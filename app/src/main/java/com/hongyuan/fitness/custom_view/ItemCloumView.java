@@ -16,7 +16,7 @@ public class ItemCloumView extends LinearLayout {
 
     private String leftText,rightText;
     private boolean isShow;
-    private int rightColor;
+    private int rightColor,LeftColor;
 
     private TextView titleName,content;
     private View line;
@@ -32,6 +32,7 @@ public class ItemCloumView extends LinearLayout {
         rightText = a.getString(R.styleable.ItemCloumView_icRightText);
         isShow = a.getBoolean(R.styleable.ItemCloumView_icLine,true);
         rightColor = a.getColor(R.styleable.ItemCloumView_icRightColor,getResources().getColor(R.color.color_FF333333));
+        LeftColor = a.getColor(R.styleable.ItemCloumView_icLeftColor,getResources().getColor(R.color.color_FF999999));
 
         initView();
     }
@@ -56,6 +57,9 @@ public class ItemCloumView extends LinearLayout {
         }
         if(BaseUtil.isValue(rightColor)){
             content.setTextColor(rightColor);
+        }
+        if(BaseUtil.isValue(LeftColor)){
+            titleName.setTextColor(LeftColor);
         }
     }
 

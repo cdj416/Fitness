@@ -271,6 +271,8 @@
         <attr name="isvLineShow" format="boolean"/>
         <attr name="isvHintText" format="string"/>
         <attr name="isvRightText" format="string"/>
+        <attr name="isvLeftColor" format="color"/>
+        <attr name="isvRightColor" format="color"/>
         <attr name="isvType">
             <enum name="input" value="0"/>
             <enum name="select" value="1"/>
@@ -294,5 +296,6 @@
         <attr name="icRightText" format="string"/>
         <attr name="icLine" format="boolean"/>
         <attr name="icRightColor" format="color"/>
+        <attr name="icLeftColor" format="color"/>
     </declare-styleable>
 </resources>

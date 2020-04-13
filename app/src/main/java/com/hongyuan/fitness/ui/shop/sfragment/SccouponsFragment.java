@@ -5,25 +5,17 @@ import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.CustomFragment;
-import com.hongyuan.fitness.ui.shop.sactivity.SstoreActivity;
-import com.hongyuan.fitness.ui.shop.sadapter.SsearchShopAdapter;
-
+import com.hongyuan.fitness.ui.shop.sadapter.SccouponsAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SsearchShopFragment extends CustomFragment {
+public class SccouponsFragment extends CustomFragment {
 
     private RecyclerView mRec;
-    private SsearchShopAdapter adapter;
-
-    @Override
-    protected int getHeadLayoutId() {
-        return R.layout.fragment_headview_searchshops;
-    }
+    private SccouponsAdapter adapter;
 
     @Override
     public int getLayoutId() {
@@ -37,12 +29,13 @@ public class SsearchShopFragment extends CustomFragment {
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRec.setLayoutManager(manager);
-        adapter = new SsearchShopAdapter();
+        adapter = new SccouponsAdapter();
         mRec.setAdapter(adapter);
         adapter.setNewData(getList());
+        adapter.setFooterView(mActivity.getFooterHeight(mRec));
 
         adapter.setOnItemChildClickListener((adapter, view, position) -> {
-            startActivity(SstoreActivity.class,null);
+            //startActivity(SstoreActivity.class,null);
         });
 
     }

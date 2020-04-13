@@ -32,6 +32,8 @@ public class InputOrSlectView extends LinearLayout {
     private String isvName;
     private String isvHintText;
     private String isvRightText;
+    private int isvLeftColor;
+    private int isvRightColor;
     private boolean isvLineShow;
     private int isvType;
     private int isvInputType;
@@ -62,6 +64,8 @@ public class InputOrSlectView extends LinearLayout {
         isvLineShow = a.getBoolean(R.styleable.InputOrSlectView_isvLineShow,false);
         isvType = a.getInt(R.styleable.InputOrSlectView_isvType,0);
         isvInputType = a.getInt(R.styleable.InputOrSlectView_isvInputType,0);
+        isvLeftColor = a.getInt(R.styleable.InputOrSlectView_isvLeftColor,getResources().getColor(R.color.color_FF999999));
+        isvRightColor = a.getInt(R.styleable.InputOrSlectView_isvRightColor,getResources().getColor(R.color.color_FF333333));
         initLayoutView();
     }
 
@@ -91,6 +95,9 @@ public class InputOrSlectView extends LinearLayout {
             setRightText(isvRightText);
         }
 
+        titleName.setTextColor(isvLeftColor);
+        selText.setTextColor(isvRightColor);
+        edText.setTextColor(isvRightColor);
     }
 
     /*

@@ -38,6 +38,7 @@ import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponAdapter;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.main_receive_coupon.DialogReceiveCouponAdapter;
+import com.hongyuan.fitness.ui.shop.sadapter.DialogUseCouponAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SGDcommentAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SGDspecificationAdapter;
 import com.hongyuan.fitness.ui.shop.smyview.SGDspecificationView;
@@ -868,6 +869,47 @@ public class CustomDialog {
             }
         });
 
+
+        TextView submit = view.findViewById(R.id.submit);
+        submit.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    /*
+     * 商品订单页面选择优惠券弹框
+     * */
+    public static void showSOUseCoupon(Context mContext){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        dialog.setCanceledOnTouchOutside(true);
+        View view = View.inflate(mContext, R.layout.dialog_sgd_goods_coupon,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+
+        RecyclerView mRecycler = view.findViewById(R.id.mRecycler);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
+        manager.setOrientation(RecyclerView.VERTICAL);
+        mRecycler.setLayoutManager(manager);
+        mRecycler.addItemDecoration(new DividerItemDecoration(
+                mContext, DividerItemDecoration.HORIZONTAL_LIST,32,0x00000000));
+        DialogUseCouponAdapter adapter = new DialogUseCouponAdapter();
+        mRecycler.setAdapter(adapter);
+
+        //adapter.setNewData(mList);
+
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @SingleClick
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                dialog.dismiss();
+                //dialogClick.dialogClick(view,position,adapter);
+            }
+        });
+        TextView title = view.findViewById(R.id.title);
+        title.setText("我的优惠券");
 
         TextView submit = view.findViewById(R.id.submit);
         submit.setOnClickListener(v -> dialog.dismiss());

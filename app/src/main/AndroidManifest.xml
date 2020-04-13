@@ -307,6 +307,11 @@
         <activity android:name=".ui.shop.sactivity.SgoodsDetailActivity"/>
         <activity android:name=".ui.shop.sactivity.SCartActivity"/>
         <activity android:name=".ui.shop.sactivity.SorderPaySuccessActivity"/>
+        <activity android:name=".ui.shop.sactivity.SorderDetailsActivity"/>
+        <activity android:name=".ui.shop.sactivity.SstoreActivity"/>
+        <activity android:name=".ui.shop.sactivity.IntegralGoodsActivity"/>
+        <activity android:name=".ui.shop.sactivity.IntegralGoodsDetailsActivity"/>
+        <activity android:name=".ui.shop.sactivity.CollectCouponsActivity"/>
     </application>
 
 </manifest>

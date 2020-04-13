@@ -1,12 +1,15 @@
 package com.hongyuan.fitness.ui.shop.sfragment;
 
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.CustomFragment;
+import com.hongyuan.fitness.ui.shop.sactivity.CollectCouponsActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.IntegralGoodsActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SMGoodsAdapter;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
@@ -16,10 +19,11 @@ import com.youth.banner.BannerConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopMainFragment extends CustomFragment {
+public class ShopMainFragment extends CustomFragment implements View.OnClickListener {
 
     private Banner topBanner,sBanner;
     private RecyclerView mRec;
+    private TextView goIntegral,goCoupons;
 
     private SMGoodsAdapter gAdapter;
 
@@ -34,6 +38,9 @@ public class ShopMainFragment extends CustomFragment {
         sBanner = mView.findViewById(R.id.sBanner);
         mRec = mView.findViewById(R.id.mRec);
 
+        goIntegral = mView.findViewById(R.id.goIntegral);
+        goCoupons = mView.findViewById(R.id.goCoupons);
+
         GridLayoutManager layoutManager =
                 new GridLayoutManager(mActivity,2);
         //layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
@@ -47,6 +54,9 @@ public class ShopMainFragment extends CustomFragment {
 
         setTopBanner(getBannerList());
         setSBanner(getBannerList());
+
+        goIntegral.setOnClickListener(this);
+        goCoupons.setOnClickListener(this);
     }
 
     /*
@@ -112,7 +122,21 @@ public class ShopMainFragment extends CustomFragment {
     }
 
     @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.goIntegral:
+                startActivity(IntegralGoodsActivity.class,null);
+                break;
+            case R.id.goCoupons:
+                startActivity(CollectCouponsActivity.class,null);
+                break;
+        }
+    }
+
+    @Override
     public void onSuccess(Object data) {
 
     }
+
+
 }
