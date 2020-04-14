@@ -29,6 +29,7 @@ import com.hongyuan.fitness.ui.person.edit_information.take_photo.TakePhotoActiv
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.BasisTimesUtils;
 import com.hongyuan.fitness.util.CustomDialog;
+import com.hongyuan.fitness.util.GlideEngine;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -198,6 +199,7 @@ public class EditInformationViewModel extends CustomViewModel {
     private void openSection(){
         PictureSelector.create(mActivity)
                 .openGallery(PictureMimeType.ofImage())
+                .loadImageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
                 .selectionMode(PictureConfig.SINGLE)// 多选 or 单选
                 .enableCrop(true)// 是否裁剪
                 .compress(true)// 是否压缩
@@ -256,6 +258,7 @@ public class EditInformationViewModel extends CustomViewModel {
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img);
         Glide.with(mActivity).load(personMessageBeans.getMi_head()).apply(options).into(binding.headImg);
         binding.userName.setText(personMessageBeans.getM_name());
+        binding.actualName.setText(personMessageBeans.getMi_realname()+"");
         binding.userSignature.setText(personMessageBeans.getMi_sign());
         binding.birthday.setText(personMessageBeans.getBirth());
         binding.addressView.setShowAddress(this,personMessageBeans.getArea());

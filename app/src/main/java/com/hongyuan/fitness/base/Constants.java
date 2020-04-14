@@ -5,9 +5,9 @@ public class Constants {
     //测试地址
     //public static final String ADRESS = "https://www.1667799.com";
     //预发环境
-    public static final String ADRESS = "http://test.1667799.com";
+    //public static final String ADRESS = "http://test.1667799.com";
     //正式地址
-    //public static final String ADRESS = "http://www.hongyuangood.com";
+    public static final String ADRESS = "http://www.hongyuangood.com";
 
     /*==================================================================================*/
     //微信支付需要的appId

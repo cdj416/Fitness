@@ -17,10 +17,17 @@ public class VtwoGroupClassAdapter extends BaseQuickAdapter<VtwoGroupClassBeans.
         helper.setText(R.id.courseTime,showTimeText(item.getCs_start_date(),item.getCs_end_date()))
                 .setText(R.id.courseName,item.getCs_name())
                 .setText(R.id.storeName,item.getOs_name())
-                .setText(R.id.signButton,item.getState_name())
                 .setText(R.id.signUpNum,item.getCs_sign_up_num()+"/"+item.getCs_max_num());
 
-
+        if(System.currentTimeMillis() > item.getBm_time()*1000){
+            helper.setText(R.id.signButton,"报名中")
+                    .setBackgroundRes(R.id.signButton,R.drawable.shape_radius14_ffffffff)
+                    .setTextColor(R.id.signButton,mContext.getResources().getColor(R.color.color_EF5B48));
+        }else{
+            helper.setText(R.id.signButton,"未开放")
+                    .setBackgroundRes(R.id.signButton,R.drawable.shape_radius16_f1f1f8)
+                    .setTextColor(R.id.signButton,mContext.getResources().getColor(R.color.color_FF999999));
+        }
         helper.addOnClickListener(R.id.jumpBox);
     }
 
