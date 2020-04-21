@@ -101,6 +101,15 @@ public class VtwoGroupClassBeans extends BaseBean {
             private String add_date;
             private String cs_start_date;
             private String cs_end_date;
+            private long bm_time;
+
+            public long getBm_time() {
+                return bm_time;
+            }
+
+            public void setBm_time(long bm_time) {
+                this.bm_time = bm_time;
+            }
 
             public String getOs_name() {
                 return os_name;

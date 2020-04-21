@@ -3,11 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        //applicationId "com.hongyuan.fitness"
+        applicationId "com.hongyuan.fitness"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 17
-        versionName "1.4.7"
+        versionCode 18
+        versionName "1.4.8"
         flavorDimensions "versionCode"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -26,12 +26,12 @@ android {
             // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
         }
 
-//        manifestPlaceholders = [
-//                JPUSH_PKGNAME: applicationId,
-//                JPUSH_APPKEY : "d1f1693406a13f70e85373f3", //JPush上注册的包名对应的appkey（*换成你的*）
-//                JPUSH_CHANNEL: "HYapp", //暂时填写默认值即可.
-//                qqappid:"101738721"
-//        ]
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "d1f1693406a13f70e85373f3", //JPush上注册的包名对应的appkey（*换成你的*）
+                JPUSH_CHANNEL: "HYapp", //暂时填写默认值即可.
+                qqappid:"101738721"
+        ]
     }
 
     dataBinding {
@@ -81,40 +81,7 @@ android {
 //        }
 //    }
 
-    //打包生成两个app
-    productFlavors {
-        // 正式app
-        app1 {
 
-            // 设置applicationId（这里很重要，两个相同applicationId的apk不同同时安装在同一台Android手机中）
-            applicationId "com.hongyuan.fitness"
-
-            // 自动生成@string/app_name为demo
-            resValue "string","app_name","随动"
-
-            // 定义app_icon字段，在AndroidManifest.xml文件中用到
-            manifestPlaceholders = [app_icon : "@mipmap/ic_launcher",
-                                    JPUSH_PKGNAME: applicationId,
-                                    JPUSH_APPKEY : "d1f1693406a13f70e85373f3", //JPush上注册的包名对应的appkey（*换成你的*）
-                                    JPUSH_CHANNEL: "HYapp", //暂时填写默认值即可.
-                                    qqappid:"101738721"]
-        }
-        // 测试版app
-        app2 {
-            // 解释同app1
-            applicationId "com.hongyuan.fitnessceshi"
-            resValue "string","app_name","随动测试版"
-            manifestPlaceholders = [app_icon : "@mipmap/ic_launcher_test",
-                                    JPUSH_PKGNAME: applicationId,
-                                    JPUSH_APPKEY : "d1f1693406a13f70e85373f3", //JPush上注册的包名对应的appkey（*换成你的*）
-                                    JPUSH_CHANNEL: "HYapp", //暂时填写默认值即可.
-                                    qqappid:"101738721"]
-        }
-    }
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
 
 }
 
@@ -145,8 +112,10 @@ dependencies {
     implementation 'com.github.1em0nsOft:LemonBubble4Android:1.0.13'
     implementation 'com.github.1em0nsOft:LemonHello4Android:1.0.1'
 
+    //图片加载器
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
     //图片选择
-    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.2'
 
     //图片查看库
     implementation project(path: ':ImagePreview')

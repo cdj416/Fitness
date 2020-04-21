@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.util.GlideEngine;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -55,6 +56,7 @@ public class ChooseOneImgView extends LinearLayout {
     public void selectContent(){
         PictureSelector.create((Activity) getContext())
                 .openGallery(PictureMimeType.ofImage())
+                .loadImageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
                 .selectionMode(PictureConfig.SINGLE)// 多选 or 单选
                 .enableCrop(true)// 是否裁剪
                 .compress(true)// 是否压缩

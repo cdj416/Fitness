@@ -23,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.SingleClick;
+import com.hongyuan.fitness.util.GlideEngine;
 import com.hongyuan.fitness.util.JumpUtils;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.ImageFactory;
@@ -179,6 +180,7 @@ public class ChooseImgOrVideoView extends LinearLayout {
 
         PictureSelector.create((Activity) getContext())
                 .openGallery(selectTpye)
+                .loadImageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
                 .selectionMode(numType)// 多选 or 单选
                 .maxSelectNum(9)// 最大图片选择数量 int
                 .enableCrop(false)// 是否裁剪

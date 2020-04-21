@@ -39,6 +39,7 @@ public class SelectImgUtils {
     public void selectImg(CustomActivity mActivity,int imgNum){
         PictureSelector.create(mActivity)
                 .openGallery(PictureMimeType.ofImage())
+                .loadImageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
                 .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选
                 .maxSelectNum(imgNum)// 最大图片选择数量 int
                 .enableCrop(false)// 是否裁剪
@@ -57,8 +58,8 @@ public class SelectImgUtils {
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
                     for (LocalMedia bean:selectList){
                         FileBean imageBean = new FileBean();
-                        imageBean.setFileType(bean.getPictureType());
-                        if(bean.getPictureType().contains("image")){
+                        imageBean.setFileType(bean.getMimeType());
+                        if(bean.getMimeType().contains("image")){
                             if(bean.isCompressed()){
                                 imageBean.setmFile(new File(bean.getCompressPath()));
                                 imageBean.setFileKey("oss_file[]");

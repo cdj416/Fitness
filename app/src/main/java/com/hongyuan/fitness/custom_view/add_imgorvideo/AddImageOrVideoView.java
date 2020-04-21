@@ -21,6 +21,7 @@ import com.hongyuan.fitness.ui.find.circle.edit_post.FileBean;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.DividerItemDecoration;
+import com.hongyuan.fitness.util.GlideEngine;
 import com.hongyuan.fitness.util.ImageFactory;
 import com.hongyuan.fitness.util.JumpUtils;
 import com.luck.picture.lib.PictureSelector;
@@ -151,6 +152,7 @@ public class AddImageOrVideoView extends LinearLayout {
     public void selectContent(){
         PictureSelector.create((Activity) getContext())
                 .openGallery(PictureMimeType.ofAll())
+                .loadImageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
                 .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选
                 .maxSelectNum(10-mList.size())// 最大图片选择数量 int
                 .enableCrop(false)// 是否裁剪
@@ -199,8 +201,8 @@ public class AddImageOrVideoView extends LinearLayout {
                     // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
                         for (LocalMedia bean:selectList){
                             FileBean imageBean = new FileBean();
-                            imageBean.setFileType(bean.getPictureType());
-                            if(bean.getPictureType().contains("image")){
+                            imageBean.setFileType(bean.getMimeType());
+                            if(bean.getMimeType().contains("image")){
                                 nowType = SHOW_IMG;
                                 videoPath = null;
 
@@ -218,7 +220,7 @@ public class AddImageOrVideoView extends LinearLayout {
                                 if(mList.size() == 10){
                                     mList.remove(9);
                                 }
-                            }else if(bean.getPictureType().contains("video")){
+                            }else if(bean.getMimeType().contains("video")){
                                 nowType = SHOW_VEDIO;
                                 videoPath = selectList.get(0).getPath();
 

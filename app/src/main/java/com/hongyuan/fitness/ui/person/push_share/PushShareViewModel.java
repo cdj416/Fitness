@@ -20,6 +20,7 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityPushShareBinding;
 import com.hongyuan.fitness.ui.main.main_person.PersonBean;
 import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchCheckBean;
+import com.hongyuan.fitness.util.GlideEngine;
 import com.hongyuan.fitness.util.ScreenshotUtil;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.luck.picture.lib.PictureSelector;
@@ -183,6 +184,7 @@ public class PushShareViewModel extends CustomViewModel {
     private void chooseMyImg(){
         PictureSelector.create(mActivity)
                 .openGallery(PictureMimeType.ofImage())
+                .loadImageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
                 .selectionMode(PictureConfig.SINGLE)// 多选 or 单选
                 .enableCrop(true)// 是否裁剪
                 .compress(true)// 是否压缩

@@ -80,6 +80,8 @@ public class PersonBean extends BaseBean {
             private String weight_date;
             private int exercise_days;
             private int calories;
+            private String mi_realname;
+
 
             public String getM_name() {
                 return m_name;
@@ -99,6 +101,14 @@ public class PersonBean extends BaseBean {
 
             public int getM_id() {
                 return m_id;
+            }
+
+            public String getMi_realname() {
+                return mi_realname;
+            }
+
+            public void setMi_realname(String mi_realname) {
+                this.mi_realname = mi_realname;
             }
 
             public void setM_id(int m_id) {
