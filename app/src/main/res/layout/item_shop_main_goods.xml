@@ -9,6 +9,7 @@
     android:background="@drawable/shape_radius6_ffffff">
 
     <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/goodsImg"
         android:layout_width="match_parent"
         android:layout_height="166dp"
         android:src="@mipmap/zhengfangxing_default_img"
@@ -18,6 +19,7 @@
 
 
     <TextView
+        android:id="@+id/goodsName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/color_FF333333"
@@ -49,6 +51,7 @@
             android:textColor="@color/color_FF333333"
             android:text="¥"/>
         <TextView
+            android:id="@+id/goodsPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_EF5B48"

@@ -23,10 +23,13 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
+import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.AddFoodView;
 import com.hongyuan.fitness.custom_view.CountdownView;
 import com.hongyuan.fitness.custom_view.WheelView;
+import com.hongyuan.fitness.custom_view.scllor_view.UnitBean;
+import com.hongyuan.fitness.custom_view.scllor_view.UnitPicker;
 import com.hongyuan.fitness.ui.heat.ItemClikeBean;
 import com.hongyuan.fitness.ui.heat.UpdataFoodView;
 import com.hongyuan.fitness.ui.heat.add_food.AddFoodBean;
@@ -39,8 +42,15 @@ import com.hongyuan.fitness.ui.person.my_coupon.CouponAdapter;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.main_receive_coupon.DialogReceiveCouponAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.DialogUseCouponAdapter;
+import com.hongyuan.fitness.ui.shop.sadapter.PickUpAddressAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SGDcommentAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SGDspecificationAdapter;
+import com.hongyuan.fitness.ui.shop.sadapter.SgoodsGouponAdapter;
+import com.hongyuan.fitness.ui.shop.sadapter.SorderCouponsAdapter;
+import com.hongyuan.fitness.ui.shop.sbeans.PickUpAddress;
+import com.hongyuan.fitness.ui.shop.sbeans.ScouponsBean;
+import com.hongyuan.fitness.ui.shop.sbeans.SgoodsDetailBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.SorderCouponBeans;
 import com.hongyuan.fitness.ui.shop.smyview.SGDspecificationView;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -817,7 +827,7 @@ public class CustomDialog {
     /*
     * 规格
     * */
-    public static void showGoodsSpecification(Context mContext){
+    public static void showGoodsSpecification(Context mContext, SgoodsDetailBeans.DataBean.InfoBean infoBean, CustomFragment fragment){
         final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
         dialog.setCanceledOnTouchOutside(true);
         View view = View.inflate(mContext, R.layout.dialog_goods_specification,null);
@@ -829,6 +839,7 @@ public class CustomDialog {
         dialog.show();
 
         SGDspecificationView spView = view.findViewById(R.id.spView);
+        spView.setDatas(infoBean,fragment);
 
         ImageView close = view.findViewById(R.id.close);
         close.setOnClickListener(v -> dialog.dismiss());
@@ -837,7 +848,7 @@ public class CustomDialog {
     /*
      * 商城优惠卷
      * */
-    public static void showSGDCoupon(Context mContext){
+    public static void showSGDCoupon(Context mContext,List<ScouponsBean.DataBean> mList,DialogClickList dialogClick){
         final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
         dialog.setCanceledOnTouchOutside(true);
         View view = View.inflate(mContext, R.layout.dialog_sgd_goods_coupon,null);
@@ -853,19 +864,15 @@ public class CustomDialog {
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(RecyclerView.VERTICAL);
         mRecycler.setLayoutManager(manager);
-        mRecycler.addItemDecoration(new DividerItemDecoration(
-                mContext, DividerItemDecoration.HORIZONTAL_LIST,32,0x00000000));
-        ScanCardsListAdapter adapter = new ScanCardsListAdapter();
+        SgoodsGouponAdapter adapter = new SgoodsGouponAdapter();
         mRecycler.setAdapter(adapter);
-
-        //adapter.setNewData(mList);
+        adapter.setNewData(mList);
 
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @SingleClick
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                dialog.dismiss();
-                //dialogClick.dialogClick(view,position,adapter);
+                dialogClick.dialogClick(view,position,adapter);
             }
         });
 
@@ -915,4 +922,119 @@ public class CustomDialog {
         submit.setOnClickListener(v -> dialog.dismiss());
     }
 
+    /*
+     * 滚动选择控件
+     * */
+    public static void scroller(Context mContext, List<UnitBean> mList, String titleText , DialogClickMessage dialogClick ){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_scroller,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        TextView titleView= view.findViewById(R.id.titleName);
+        UnitPicker content = view.findViewById(R.id.content);
+        content.setData(mList);
+        titleView.setText(titleText);
+        view.findViewById(R.id.closeImg).setOnClickListener(v -> dialog.dismiss());
+        view.findViewById(R.id.submit).setOnClickListener(v -> {
+            if(dialogClick != null){
+                dialogClick.dialogClick(v,content.getCurrentUnit().unit_cn);
+            }
+            dialog.dismiss();
+        });
+    }
+
+    /*
+     * 自提地址的选择
+     * */
+    public static void showPickUpAddress(Context mContext, List<PickUpAddress.DataBean.ListBean> mList, DialogClickList dialogClick){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        dialog.setCanceledOnTouchOutside(true);
+        View view = View.inflate(mContext, R.layout.dialog_pickup_address_recylerview,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+
+        RecyclerView mRec = view.findViewById(R.id.mRec);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
+        manager.setOrientation(RecyclerView.VERTICAL);
+        mRec.setLayoutManager(manager);
+        PickUpAddressAdapter adapter = new PickUpAddressAdapter();
+        mRec.setAdapter(adapter);
+        adapter.setNewData(mList);
+
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @SingleClick
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                for(PickUpAddress.DataBean.ListBean listBean : mList){
+                    listBean.setSelect(false);
+                }
+                mList.get(position).setSelect(true);
+                adapter.notifyDataSetChanged();
+
+                dialogClick.dialogClick(view,position,adapter);
+            }
+        });
+
+
+        TextView submit = view.findViewById(R.id.submit);
+        submit.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+        view.findViewById(R.id.closeImg).setOnClickListener(v -> dialog.dismiss());
+    }
+
+    /*
+     * 确认订单页面的红包数据
+     * */
+    public static void showSorderCoupons(Context mContext, List<SorderCouponBeans.DataBean.ListBean> mList, DialogClickList dialogClick){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        dialog.setCanceledOnTouchOutside(true);
+        View view = View.inflate(mContext, R.layout.dialog_sorder_coupons_recylerview,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+
+        RecyclerView mRec = view.findViewById(R.id.mRec);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
+        manager.setOrientation(RecyclerView.VERTICAL);
+        mRec.setLayoutManager(manager);
+        SorderCouponsAdapter adapter = new SorderCouponsAdapter();
+        mRec.setAdapter(adapter);
+        adapter.setNewData(mList);
+
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @SingleClick
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                for(SorderCouponBeans.DataBean.ListBean listBean : mList){
+                    listBean.setSelect(false);
+                }
+                mList.get(position).setSelect(true);
+                adapter.notifyDataSetChanged();
+
+                dialogClick.dialogClick(view,position,adapter);
+            }
+        });
+
+
+        TextView submit = view.findViewById(R.id.submit);
+        submit.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+        view.findViewById(R.id.closeImg).setOnClickListener(v -> dialog.dismiss());
+    }
 }

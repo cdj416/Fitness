@@ -107,7 +107,7 @@ public class V3SuccessViewModel extends CustomViewModel {
     }
 
     @Override
-    protected void forResult(Bundle bundle) {
+    public void forResult(Bundle bundle) {
         boolean isSuccess = bundle.getBoolean("isSuccess");
         if(isSuccess){
             mActivity.showSuccess("录入成功！",MainActivity.class,null);

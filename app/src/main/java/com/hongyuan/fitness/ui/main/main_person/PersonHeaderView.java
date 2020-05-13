@@ -24,7 +24,7 @@ public class PersonHeaderView extends LinearLayout {
 
     private CustomActivity mActivity;
     private RoundedImageView headImg;
-    private TextView userName,statusText,buttonText,miSign,fansNum,attentionNum,dynamicNum,pointNum;
+    private TextView userName,statusText,buttonText,miSign,fansNum,attentionNum,dynamicNum,pointNum,goSignIn;
     private RelativeLayout headBox;
     private LinearLayout myFans,myAttention,myDynamic,myPoint;
 
@@ -69,6 +69,7 @@ public class PersonHeaderView extends LinearLayout {
         attentionNum = view.findViewById(R.id.attentionNum);
         dynamicNum = view.findViewById(R.id.dynamicNum);
         pointNum = view.findViewById(R.id.pointNum);
+        goSignIn = view.findViewById(R.id.goSignIn);
 
         headBox.setOnClickListener(v -> {
             ((CustomActivity)getContext()).startActivity(PersonMessageActivity.class);
@@ -79,6 +80,8 @@ public class PersonHeaderView extends LinearLayout {
         myFans.setOnClickListener(v -> mActivity.startActivity(MyFansActivity.class,null));
         myAttention.setOnClickListener(v -> mActivity.startActivity(FriendsActivity.class,null));
         myDynamic.setOnClickListener(v -> mActivity.startActivity(PersonMessageActivity.class,null));
+
+        goSignIn.setOnClickListener(v -> mActivity.startActivity(DailyPunchActivity.class,null));
     }
 
     public void setHeadImg(PersonBean.DataBean.InfoBean bean){

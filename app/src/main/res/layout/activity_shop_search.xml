@@ -39,14 +39,18 @@
                     android:layout_marginEnd="12dp"
                     android:layout_marginBottom="9dp"
                     android:background="@drawable/shape_radius6_fff5f5f5">
-                    <EditText
+
+                    <TextView
+                        android:id="@+id/searchText"
                         android:layout_width="match_parent"
                         android:layout_centerVertical="true"
-                        android:background="@color/transparent"
+                        android:gravity="center_vertical"
                         android:layout_marginStart="36dp"
-                        android:hint="搜索"
+                        android:textColor="@color/color_FF999999"
+                        android:text="收拾"
                         android:textSize="@dimen/sp_14"
-                        android:layout_height="36dp"/>
+                        android:layout_height="match_parent"/>
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

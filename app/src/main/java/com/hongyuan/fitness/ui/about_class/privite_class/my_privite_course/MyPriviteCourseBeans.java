@@ -94,6 +94,15 @@ public class MyPriviteCourseBeans extends BaseBean {
             private String os_name;
             private int bnum;
             private int cnum;
+            private String last_kong_date;
+
+            public String getLast_kong_date() {
+                return last_kong_date;
+            }
+
+            public void setLast_kong_date(String last_kong_date) {
+                this.last_kong_date = last_kong_date;
+            }
 
             public int getMy_course_id() {
                 return my_course_id;

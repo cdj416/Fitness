@@ -17,6 +17,8 @@ public class SshopDetailsViewPagerAdapter extends FragmentPagerAdapter {
 
     private List<CustomFragment> fragments;
     private List<TitleBean> beans;
+    //评论详情
+    private SshopDetailMainFragment mainFragment;
 
     public SshopDetailsViewPagerAdapter(FragmentManager fm, GoOtherPageListener pageListener) {
         super(fm);
@@ -51,12 +53,18 @@ public class SshopDetailsViewPagerAdapter extends FragmentPagerAdapter {
         fragments.clear();
         beans.clear();
         beans.add(new TitleBean("商品",0));
-        beans.add(new TitleBean("详情",1));
         beans.add(new TitleBean("评论",1));
-        fragments.add(new SshopDetailMainFragment(pageListener));
-        fragments.add(new SshopDetailMainFragment(pageListener));
+        mainFragment = new SshopDetailMainFragment(pageListener);
+        fragments.add(mainFragment);
         fragments.add(new SshopCommentsFragment());
 
         notifyDataSetChanged();
+    }
+
+    /*
+    * 打开规格弹框
+    * */
+    public void showGuiGe(){
+        mainFragment.showGG();
     }
 }

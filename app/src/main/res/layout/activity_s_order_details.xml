@@ -27,6 +27,7 @@
                     android:layout_height="104dp"
                     app:layout_collapseMode="parallax">
                     <RelativeLayout
+                        android:id="@+id/goAddress"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:layout_gravity="center_vertical"
@@ -46,21 +47,21 @@
                                 android:textSize="@dimen/sp_14"
                                 android:text="联系人"/>
                             <TextView
+                                android:id="@+id/telNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_14"
                                 android:textColor="@color/color_FF333333"
-                                android:layout_marginStart="18dp"
-                                android:text="15212344321"/>
+                                android:layout_marginStart="18dp"/>
                         </LinearLayout>
                         <TextView
+                            android:id="@+id/address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/color_FF333333"
                             android:textSize="@dimen/sp_14"
                             android:layout_below="@id/telBox"
-                            android:layout_marginTop="12dp"
-                            android:text="浙江省湖州市爱山街道XXX小区XX栋XXX"/>
+                            android:layout_marginTop="12dp"/>
 
                         <ImageView
                             android:layout_width="wrap_content"

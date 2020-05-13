@@ -15,6 +15,7 @@ public class SstoreViewPagerAdapter extends FragmentPagerAdapter {
 
     private List<CustomFragment> fragments;
     private List<TitleBean> beans;
+    private SstoreMainFragment mainFragment;
 
     public SstoreViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -50,9 +51,15 @@ public class SstoreViewPagerAdapter extends FragmentPagerAdapter {
         beans.clear();
         beans.add(new TitleBean("首页",0));
         beans.add(new TitleBean("全部商品",1));
-        fragments.add(new SstoreMainFragment());
+
+        mainFragment = new SstoreMainFragment();
+        fragments.add(mainFragment);
         fragments.add(new SstoreGoodsFragment());
 
         notifyDataSetChanged();
+    }
+
+    public void setImgs(String imgs){
+        mainFragment.setImgs(imgs);
     }
 }

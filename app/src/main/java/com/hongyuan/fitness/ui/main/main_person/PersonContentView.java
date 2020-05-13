@@ -12,26 +12,26 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.hongyuan.fitness.R;
-import com.hongyuan.fitness.base.SingleClick;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.ui.about_class.privite_class.my_privite_course.MyPriviteCourseActivity;
 import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
-import com.hongyuan.fitness.ui.person.about_us.AboutUsActivity;
-import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
-import com.hongyuan.fitness.ui.person.mine_point.MinePointActivity;
-import com.hongyuan.fitness.ui.person.setting.SettingActivity;
-import com.hongyuan.fitness.ui.person.waiting_evaluation.WaitingEvaluationActivity;
+import com.hongyuan.fitness.ui.person.fix.SixPriviteCourseActivity;
 import com.hongyuan.fitness.ui.person.waiting_for_class.WaitingForClassActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.ShopNewOrderAcitivity;
 
-public class PersonContentView extends LinearLayout implements View.OnClickListener {
+public class PersonContentView extends LinearLayout {
 
-    private TextView titleName,rightText,tv1,tv2,tv3;
-    private ImageView iv1,iv2,iv3;
-    private LinearLayout box1,box2,box3,box4,box5,secondBox;
+    private CustomActivity mActivity;
+
+    private TextView titleName,rightText,tv1,tv2,tv3,tv6,tv5,tv4;
+    private ImageView iv1,iv2,iv3,iv6,iv5,iv4;
+    private LinearLayout box1,box2,box3,box4,box5,box6,secondBox;
 
     //显示类型
     private int showType;
-    private final int MY_COURSE = 0;
-    private final int MY_SERVICE = 1;
+    private final int ORDER = 0;
+    private final int RUN = 1;
+    private final int RACE = 2;
 
     public PersonContentView(Context context) {
         super(context);
@@ -40,8 +40,11 @@ public class PersonContentView extends LinearLayout implements View.OnClickListe
 
     public PersonContentView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        if(context instanceof CustomActivity){
+            mActivity = (CustomActivity)context;
+        }
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PersonContentView);
-        showType = a.getInt(R.styleable.PersonContentView_person_show_type,0);
+        showType = a.getInt(R.styleable.PersonContentView_pcvType,0);
 
         initLayoutView();
     }
@@ -66,13 +69,15 @@ public class PersonContentView extends LinearLayout implements View.OnClickListe
         box3 = view.findViewById(R.id.box3);
         box4 = view.findViewById(R.id.box4);
         box5 = view.findViewById(R.id.box5);
+        tv6 = view.findViewById(R.id.tv6);
+        tv5 = view.findViewById(R.id.tv5);
+        iv4 = view.findViewById(R.id.iv4);
+        iv6 = view.findViewById(R.id.iv6);
+        iv5 = view.findViewById(R.id.iv5);
+        tv4 = view.findViewById(R.id.tv4);
+        box6 = view.findViewById(R.id.box6);
         secondBox = view.findViewById(R.id.secondBox);
 
-        box1.setOnClickListener(this);
-        box2.setOnClickListener(this);
-        box3.setOnClickListener(this);
-        box4.setOnClickListener(this);
-        box5.setOnClickListener(this);
         setShowView(showType);
     }
 
@@ -80,69 +85,82 @@ public class PersonContentView extends LinearLayout implements View.OnClickListe
     * 初始化显示类型
     * */
     private void setShowView(int showType){
-        if(showType == MY_COURSE){
-            secondBox.setVisibility(GONE);
-            titleName.setText("我的课程");
+        if(showType == ORDER){
+            titleName.setText("订单服务");
+            tv1.setText("会员卡订单");
+            tv2.setText("私教课订单");
+            tv3.setText("场馆订单");
+            tv4.setText("陪练订单");
+            tv5.setText("商城订单");
+            box6.setVisibility(INVISIBLE);
+            box1.setOnClickListener(v -> {
+                mActivity.startActivity(MineOrderActivity.class,null);
+            });
+            box2.setOnClickListener(v -> {
+                mActivity.startActivity(MineOrderActivity.class,null);
+            });
+            box3.setOnClickListener(v -> {
+                //mActivity.startActivity(MineOrderActivity.class,null);
+            });
+            box4.setOnClickListener(v -> {
+                //mActivity.startActivity(MineOrderActivity.class,null);
+            });
+            box5.setOnClickListener(v -> {
+                mActivity.startActivity(ShopNewOrderAcitivity.class,null);
+            });
         }
 
-        if(showType == MY_SERVICE){
-            titleName.setText("我的服务");
+        if(showType == RUN){
+            titleName.setText("运动服务");
             rightText.setVisibility(GONE);
-            tv1.setText("我的订单");
-            tv2.setText("我的消息");
-            tv3.setText("设置");
-            iv1.setImageResource(R.mipmap.wodedingdan_img);
-            iv2.setImageResource(R.mipmap.xiaoxi_img);
-            iv3.setImageResource(R.mipmap.shezhi_img);
-            secondBox.setVisibility(VISIBLE);
+            tv1.setText("我的私教课");
+            tv2.setText("我报名的团课");
+            tv3.setText("我发起的运动");
+            tv4.setText("我参加的运动");
+            tv5.setText("我是陪练");
+            tv6.setText("我的接单");
+            box1.setOnClickListener(v -> {
+                //mActivity.startActivity(MyPriviteCourseActivity.class,null);
+                mActivity.startActivity(SixPriviteCourseActivity.class,null);
+            });
+            box2.setOnClickListener(v -> {
+                mActivity.startActivity(WaitingForClassActivity.class,null);
+            });
+            box3.setOnClickListener(v -> {
+                //跳转h5
+
+            });
+            box4.setOnClickListener(v -> {
+                //跳转h5
+
+            });
+            box5.setOnClickListener(v -> {
+                //跳转h5
+
+            });
+            box6.setOnClickListener(v -> {
+                //跳转h5
+
+            });
         }
-    }
 
-    @SingleClick(2000)
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent();
-        switch (v.getId()){
+        if(showType == RACE){
+            secondBox.setVisibility(GONE);
+            titleName.setText("赛事服务");
+            rightText.setVisibility(GONE);
+            tv1.setText("我是运动达人");
+            tv2.setText("我的队伍");
+            tv3.setText("我的赛事");
+            box1.setOnClickListener(v -> {
+                //跳转h5
+            });
+            box2.setOnClickListener(v -> {
+                //跳转h5
+            });
+            box3.setOnClickListener(v -> {
+                //跳转h5
 
-            case R.id.box1:
-                if(showType == MY_SERVICE){
-                    intent.setClass(getContext(), MineOrderActivity.class);
-                    getContext().startActivity(intent);
-                }else{
-                    intent.setClass(getContext(), MyPriviteCourseActivity.class);
-                    getContext().startActivity(intent);
-                }
-                break;
-
-            case R.id.box2:
-                if(showType == MY_SERVICE){
-                    intent.setClass(getContext(), MineMessageActivity.class);
-                    getContext().startActivity(intent);
-                }else{
-                    intent.setClass(getContext(), WaitingForClassActivity.class);
-                    getContext().startActivity(intent);
-                }
-
-                break;
-
-            case R.id.box3:
-                if(showType == MY_COURSE) {
-                    intent.setClass(getContext(), WaitingEvaluationActivity.class);
-                    getContext().startActivity(intent);
-                }else{
-                    intent.setClass(getContext(), SettingActivity.class);
-                    getContext().startActivity(intent);
-                }
-                break;
-
-            case R.id.box4:
-                intent.setClass(getContext(), MinePointActivity.class);
-                getContext().startActivity(intent);
-                break;
-            case R.id.box5:
-                intent.setClass(getContext(), AboutUsActivity.class);
-                getContext().startActivity(intent);
-                break;
+            });
         }
     }
 }

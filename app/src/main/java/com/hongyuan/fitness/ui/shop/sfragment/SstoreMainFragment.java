@@ -1,20 +1,19 @@
 package com.hongyuan.fitness.ui.shop.sfragment;
 
 import android.view.View;
-
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.hongyuan.fitness.R;
-import com.hongyuan.fitness.base.BaseBean;
+import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.custom_view.CustomRecyclerView;
-import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
-import com.hongyuan.fitness.ui.shop.sadapter.SMGoodsAdapter;
+import com.hongyuan.fitness.ui.shop.sadapter.SDMimgAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SstoreGouponAdapter;
-
-import java.util.ArrayList;
+import com.hongyuan.fitness.ui.shop.sbeans.StoreCouponBeans;
+import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.DensityUtil;
+import java.util.Arrays;
 import java.util.List;
 
 public class SstoreMainFragment extends CustomFragment {
@@ -22,8 +21,9 @@ public class SstoreMainFragment extends CustomFragment {
     private RecyclerView mRec;
     private CustomRecyclerView couponRec;
     private SstoreGouponAdapter topAdapter;
-    private SMGoodsAdapter gAdapter;
+    private SDMimgAdapter gAdapter;
 
+    private List<StoreCouponBeans.DataBean> mList;
     @Override
     public int getLayoutId() {
         return R.layout.fragment_shop_store_main;
@@ -39,32 +39,36 @@ public class SstoreMainFragment extends CustomFragment {
         couponRec.setLayoutManager(topManager);
         topAdapter = new SstoreGouponAdapter();
         couponRec.setAdapter(topAdapter);
-        topAdapter.setNewData(getList());
 
-        GridLayoutManager layoutManager =
-                new GridLayoutManager(mActivity,2);
-        mRec.setLayoutManager(layoutManager);
-        gAdapter = new SMGoodsAdapter();
+        LinearLayoutManager imgManager = new LinearLayoutManager(mActivity);
+        imgManager.setOrientation(RecyclerView.VERTICAL);
+        mRec.setLayoutManager(imgManager);
+        gAdapter = new SDMimgAdapter(DensityUtil.getScreensWith(mActivity));
         mRec.setAdapter(gAdapter);
-        gAdapter.setNewData(getList());
-        gAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            startActivity(SgoodsDetailActivity.class,null);
-        });
     }
 
     /*
-     * 组装假数据
-     * */
-    private List<BaseBean> getList(){
-        List<BaseBean> mList = new ArrayList<>();
-        for(int i = 0 ; i < 10 ; i++){
-            mList.add(new BaseBean());
+    * 设置店铺首页图片
+    * */
+    public void setImgs(String imgs){
+        if(BaseUtil.isValue(imgs)){
+            String[] imgAry = imgs.split(",");
+            List<String> imgList = Arrays.asList(imgAry);
+            gAdapter.setNewData(imgList);
         }
-        return mList;
+    }
+
+    @Override
+    protected void lazyLoad() {
+        clearParams().setParams("store_id",mActivity.getBundle().getString("store_id"));
+        Controller.myRequest(Constants.GET_STORE_COUPON_LIST,Controller.TYPE_POST,getParams(), StoreCouponBeans.class,this);
     }
 
     @Override
     public void onSuccess(Object data) {
-
+        if(data instanceof StoreCouponBeans){
+            mList = ((StoreCouponBeans)data).getData();
+            topAdapter.setNewData(mList);
+        }
     }
 }

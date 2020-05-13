@@ -98,7 +98,7 @@ public class SettingViewModel extends CustomViewModel {
     }
 
     @Override
-    protected void forResult(Bundle bundle) {
+    public void forResult(Bundle bundle) {
         boolean isSuccess = bundle.getBoolean("isSuccess");
         if(isSuccess){
             binding.takePhoto.setClickable(false);

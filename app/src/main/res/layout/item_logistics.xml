@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="right"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_FF333333"
+                android:textSize="@dimen/sp_14"
+                android:text="02-22"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_FF999999"
+                android:textSize="@dimen/sp_12"
+                android:text="19:16"/>
+        </LinearLayout>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/mark"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/checkmark_circle"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="54dp"
+            app:riv_corner_radius="10dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/mark"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/color_FF333333"
+                android:text="已签收"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_FF999999"
+                android:textSize="@dimen/sp_12"
+                android:text="[自提柜]已签收，凭取货码签收，感谢使用丰巢自提柜，期待再次为您服务。"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -105,7 +105,10 @@ public class HiddenAnimUtils {
         animation.setInterpolator(new LinearInterpolator());
         animation.setRepeatMode(Animation.REVERSE);//设置反方向执行
         animation.setFillAfter(true);//动画执行完后是否停留在执行完的状态
-        down.startAnimation(animation);
+        if(down != null){
+            down.startAnimation(animation);
+        }
+
     }
     /**
      * 开关旋转动画
@@ -120,7 +123,9 @@ public class HiddenAnimUtils {
         animation.setInterpolator(new LinearInterpolator());
         animation.setRepeatMode(Animation.REVERSE);//设置反方向执行
         animation.setFillAfter(true);//动画执行完后是否停留在执行完的状态
-        down.startAnimation(animation);
+        if(down != null){
+            down.startAnimation(animation);
+        }
     }
 
     private void openAnim(View v) {
@@ -167,6 +172,31 @@ public class HiddenAnimUtils {
             //隐藏view，高度从height变为0
             va = ValueAnimator.ofInt(mHeight,startHeigh);
             isOpen = true;
+        }
+        va.addUpdateListener(valueAnimator -> {
+            //获取当前的height值
+            int h =(Integer)valueAnimator.getAnimatedValue();
+            //动态更新view的高度
+            hideView.getLayoutParams().height = h;
+            hideView.requestLayout();
+        });
+        va.setDuration(300);
+        //开始动画
+        va.start();
+    }
+    /*
+     * 通过改变高度实现展开收缩
+     * */
+    public void toggleHeight(boolean flag){
+        startAnimation(isOpen);
+        //属性动画对象
+        ValueAnimator va ;
+        if(flag){
+            //显示view，高度从0变到height值
+            va = ValueAnimator.ofInt(startHeigh,mHeight);
+        }else{
+            //隐藏view，高度从height变为0
+            va = ValueAnimator.ofInt(mHeight,startHeigh);
         }
         va.addUpdateListener(valueAnimator -> {
             //获取当前的height值

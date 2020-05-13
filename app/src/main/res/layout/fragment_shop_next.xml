@@ -45,12 +45,36 @@
                 android:layout_marginBottom="12dp"
                 app:smTitleName="更多热卖"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mRec"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mRec"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <RelativeLayout
+                    android:id="@+id/childEmpty"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="300dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@mipmap/promt_empty_img"
+                        android:drawablePadding="10dp"
+                        android:layout_centerInParent="true"
+                        android:visibility="visible"
+                        android:gravity="center"
+                        android:text="暂无数据！"
+                        android:textSize="12sp"
+                        android:textColor="@color/color_FF999999" />
+                </RelativeLayout>
+
+            </FrameLayout>
+
         </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

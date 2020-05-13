@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <TextView
         android:id="@+id/rMenuTitle"
@@ -12,6 +13,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:textStyle="bold"
+        android:visibility="gone"
         android:text="专场推荐"/>
 
     <LinearLayout
@@ -22,12 +24,15 @@
         android:orientation="vertical"
         android:paddingTop="8dp"
         android:paddingBottom="8dp">
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img"
             android:layout_width="44dp"
             android:layout_height="44dp"
-            android:src="@mipmap/heat_img"
+            android:src="@color/color_f2"
+            app:riv_corner_radius="22dp"
             android:scaleType="centerCrop"/>
         <TextView
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_12"

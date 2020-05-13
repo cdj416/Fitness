@@ -7,7 +7,7 @@ public class Constants {
     //预发环境
     //public static final String ADRESS = "http://test.1667799.com";
     //正式地址
-    public static final String ADRESS = "http://www.hongyuangood.com";
+    //public static final String ADRESS = "http://www.hongyuangood.com";
 
     /*==================================================================================*/
     //微信支付需要的appId
@@ -455,5 +455,82 @@ public class Constants {
     public static final String GET_M_INFO = ADRESS + "/api/member/get_m_info";
     //会员-修改会员基本信息
     public static final String UPDATE_M_INFO = ADRESS + "/api/member/update_m_info";
+
+
+    /**************************************六期版本********************************************************/
+    //申请入驻
+    public static final String APPLY_IN = ADRESS + "/api/goodsmember/apply_in";
+    //检查超级管理员账号是否可用
+    public static final String CHECK_ADMIN_NAME = ADRESS + "/api/goodsmember/check_admin_name";
+    //申请入驻状态列表
+    public static final String GET_APPLY_STATE = ADRESS + "/api/goodsmember/get_apply_state";
+    //申请详情
+    public static final String GET_APPLY_INFO = ADRESS + "/api/goodsmember/get_apply_info";
+    //修改申请
+    public static final String EDIT_APPLY = ADRESS + "/api/goodsmember/edit_apply";
+    //添加收货地址
+    public static final String ADD_RECEIVING_ADDRESS = ADRESS + "/api/goodsmember/add_receiving_address";
+    //收货地址列表
+    public static final String GET_RECEIVING_ADDRESS_LIST = ADRESS + "/api/goodsmember/get_receiving_address_list";
+    //收货地址详情
+    public static final String GET_RECEIVING_ADDRESS_INFO = ADRESS + "/api/goodsmember/get_receiving_address_info";
+    //修改收货地址
+    public static final String EDIT_RECEIVING_ADDRESS = ADRESS + "/api/goodsmember/edit_receiving_address";
+    //删除收货地址
+    public static final String DETL_RECEIVING_ADDRESS = ADRESS + "/api/goodsmember/del_receiving_address";
+    //默认收货地址详情
+    public static final String GET_DEFAULT_RECEIVING_ADDRESS_INFO = ADRESS + "/api/goodsmember/get_default_receiving_address_info";
+    //搜索商品列表
+    public static final String GET_GOODS_LIST_SIX = ADRESS + "/api/goodshome/get_goods_list";
+    //搜索店铺列表
+    public static final String GET_STORE_LIST = ADRESS + "/api/goodshome/get_store_list";
+    //商品详情
+    public static final String GET_GOODS_DETAIL_SIX = ADRESS + "/api/goodshome/get_goods_detail";
+    //商品详情可领取的红包列表
+    public static final String GET_GOODS_COUPON_LIST = ADRESS + "/api/goodsmember/get_goods_coupon_list";
+    //添加商品到购物车
+    public static final String ADD_SHOPPING_CART = ADRESS + "/api/goodsmember/add_shopping_cart";
+    //用户搜索历史
+    public static final String GET_VISIT_HABIT = ADRESS + "/api/goodshome/get_visit_habit";
+    //大家都在搜
+    public static final String GET_HOT_WORD = ADRESS + "/api/goodshome/get_hot_word";
+    //清空搜索历史记录
+    public static final String DEL_VISIT_HABIT = ADRESS + "/api/goodsmember/del_visit_habit";
+    //商品详情的店铺信息/推荐商品
+    public static final String GET_GOODS_STORE_INFO = ADRESS + "/api/goodshome/get_goods_store_info";
+    //商城首页商品信息
+    public static final String GET_BUSINESS_INDEX = ADRESS + "/api/goodshome/get_business_Index";
+    //猜你喜欢商品列表
+    public static final String GET_HABIT_GODDS_LIST = ADRESS + "/api/goodshome/get_habit_goods_list";
+    //商品分类获取第三级分类
+    public static final String GET_THIRD_CATEGORY_BY_FIRST_ID = ADRESS + "/api/goodshome/get_third_category_by_first_id";
+    //商品分类-点击一级菜单的子分类
+    public static final String GET_CATEGORY_BY_FIRST_ID = ADRESS + "/api/goodshome/get_category_by_first_id";
+    //店铺主页
+    public static final String GET_STORE_INFO = ADRESS + "/api/goodshome/get_store_info";
+    //店铺主页红包列表
+    public static final String GET_STORE_COUPON_LIST = ADRESS + "/api/goodshome/get_store_coupon_list";
+    //店铺所有商品
+    public static final String GET_STORE_GOODS_LIST = ADRESS + "/api/goodshome/get_store_goods_list";
+    //读取我的购物车
+    public static final String GET_SHOPPING_CART = ADRESS + "/api/goodsmember/get_shopping_cart";
+    //删除购物车
+    public static final String DEL_SHOPPING_CART = ADRESS + "/api/goodsmember/del_shopping_cart";
+    //订单结算详情信息
+    public static final String GET_COMFIRM_ORDER_INFO = ADRESS + "/api/goodsmember/get_comfirm_order_info";
+    //店铺自提地址列表
+    public static final String GET_GOODS_ZT_ADDRESS = ADRESS + "/api/goodshome/get_goods_zt_address";
+    //订单结算我的优惠券列表
+    public static final String GET_ORDER_CONFIRM_COUPON_LIST = ADRESS + "/api/goodsmember/get_order_confirm_coupon_list";
+    //生成订单
+    public static final String ADD_GOODS_ORDER_NEW = ADRESS + "/api/goodsmember/add_goods_order_new";
+    //取消订单原因
+    public static final String GET_CANCEL_REASON_LIST = ADRESS + "/api/goodshome/get_cancel_reason_list";
+    //确认订单
+    public static final String CONFIRM_ORDER = ADRESS + "/api/goodsmember/confirm_order";
+    //读取订单的所有商品
+    public static final String GET_ORDER_GOODS = ADRESS + "/api/goodsmember/get_order_goods";
+    //添加商品评论
+    public static final String ADD_GOODS_EVALUTION = ADRESS + "/api/goodsmember/add_goods_evaluation";
 
 }

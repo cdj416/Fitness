@@ -11,7 +11,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/color_FFFFFF"
+        android:clickable="true">
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
@@ -27,21 +28,25 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
                 <LinearLayout
+                    android:id="@+id/selectAll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:tag="false">
                     <ImageView
+                        android:id="@+id/selectAllImg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:scaleType="centerCrop"
                         android:src="@mipmap/yuanquanquan_no_select_img"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_14"
-                        android:textColor="@color/color_FF999999"
                         android:layout_marginStart="3dp"
+                        android:textColor="@color/color_FF999999"
                         android:text="全选"/>
                 </LinearLayout>
                 <LinearLayout
@@ -65,11 +70,12 @@
                         android:textColor="@color/color_EF5B48"
                         android:text="¥"/>
                     <TextView
+                        android:id="@+id/allPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_16"
                         android:textColor="@color/color_EF5B48"
-                        android:text="5000"/>
+                        android:text="0"/>
 
                 </LinearLayout>
             </RelativeLayout>

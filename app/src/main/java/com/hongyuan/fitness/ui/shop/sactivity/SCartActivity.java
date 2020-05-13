@@ -9,6 +9,8 @@ import com.hongyuan.fitness.ui.shop.sviewmodel.bottomviewmodel.ScartBottomViewMo
 
 public class SCartActivity extends CustomActivity {
 
+    private ScartViewModel viewModel;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_scart;
@@ -27,7 +29,13 @@ public class SCartActivity extends CustomActivity {
         bottomScartBinding.setViewModel(bottomViewModel);
 
         ActivityScartBinding binding = ActivityScartBinding.bind(mView);
-        ScartViewModel viewModel = new ScartViewModel(this,binding,bottomViewModel);
+        viewModel = new ScartViewModel(this,binding,bottomViewModel);
         binding.setViewModel(viewModel);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.refreshData();
     }
 }

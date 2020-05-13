@@ -27,6 +27,10 @@ import com.hongyuan.fitness.ui.person.my_coupon.MyCouponActivity;
 import com.hongyuan.fitness.ui.person.my_promote.PromotionCodeActivity;
 import com.hongyuan.fitness.ui.person.physical_data.PhysicalDataActivity;
 import com.hongyuan.fitness.ui.person.setting.SettingActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.CheckInMeActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.IncomeMangeActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.ShopCollectActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.ShopNewOrderAcitivity;
 import com.hongyuan.fitness.util.TimeUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -38,10 +42,11 @@ public class PersonFragment extends CustomFragment{
     private PersonHeaderView pHeadView;
     private TitleView myTitle;
     private TextView weightNum,weightDate,calories,exerciseDays;
-    private ImageView pushMark,messageMark;
+    private ImageView messageMark;
 
-    private LinearLayout personOrderBox,personCouponBox,personCollectionBox,personShareBox,personSettingBox
-            ,personAboutUsBox,physicalDataBox,exerciseDataBox,promotionCodeBox;
+    private LinearLayout personCouponBox,personCollectionBox,personShareBox,personSettingBox
+            ,personAboutUsBox,physicalDataBox,exerciseDataBox,promotionCodeBox,shopCollectBox
+            ,checkInMeBox,goIncomeBox;
 
     @Override
     public int getLayoutId() {
@@ -53,19 +58,19 @@ public class PersonFragment extends CustomFragment{
 
         pHeadView = mView.findViewById(R.id.pHeadView);
         myTitle = mView.findViewById(R.id.myTitle);
-        pushMark = mView.findViewById(R.id.pushMark);
         messageMark = mView.findViewById(R.id.messageMark);
         myTitle.getRightView().setOnClickListener(v -> startActivity(DailyPunchActivity.class,null));
-        pushMark.setOnClickListener(v -> mActivity.startActivity(DailyPunchActivity.class,null));
         messageMark.setOnClickListener(v -> mActivity.startActivity(MineMessageActivity.class,null));
 
-        personOrderBox = mView.findViewById(R.id.personOrderBox);
         personCouponBox = mView.findViewById(R.id.personCouponBox);
         personCollectionBox = mView.findViewById(R.id.personCollectionBox);
         personShareBox = mView.findViewById(R.id.personShareBox);
         personSettingBox = mView.findViewById(R.id.personSettingBox);
         personAboutUsBox = mView.findViewById(R.id.personAboutUsBox);
         promotionCodeBox = mView.findViewById(R.id.promotionCodeBox);
+        shopCollectBox = mView.findViewById(R.id.shopCollectBox);
+        checkInMeBox = mView.findViewById(R.id.checkInMeBox);
+        goIncomeBox = mView.findViewById(R.id.goIncomeBox);
 
         physicalDataBox = mView.findViewById(R.id.physicalDataBox);
         exerciseDataBox = mView.findViewById(R.id.exerciseDataBox);
@@ -75,16 +80,18 @@ public class PersonFragment extends CustomFragment{
         calories = mView.findViewById(R.id.calories);
         exerciseDays = mView.findViewById(R.id.exerciseDays);
 
-        personOrderBox.setOnClickListener(v -> startActivity(MineOrderActivity.class,null));
         personCouponBox.setOnClickListener(v -> startActivity(MyCouponActivity.class,null));
         personCollectionBox.setOnClickListener(v -> startActivity(MyCollectionActivity.class,null));
         personShareBox.setOnClickListener(v -> ShareUtil.showShare(mActivity));
         personSettingBox.setOnClickListener(v -> startActivity(SettingActivity.class,null));
         personAboutUsBox.setOnClickListener(v -> startActivity(AboutUsActivity.class,null));
         promotionCodeBox.setOnClickListener(v -> startActivity(PromotionCodeActivity.class,null));
+        shopCollectBox.setOnClickListener(v -> startActivity(ShopCollectActivity.class,null));
 
         physicalDataBox.setOnClickListener(v -> startActivity(PhysicalDataActivity.class,null));
         exerciseDataBox.setOnClickListener(v -> startActivity(ExeriseDataActivity.class,null));
+        checkInMeBox.setOnClickListener(v -> startActivity(CheckInMeActivity.class,null));
+        goIncomeBox.setOnClickListener(v -> startActivity(IncomeMangeActivity.class,null));
 
     }
 

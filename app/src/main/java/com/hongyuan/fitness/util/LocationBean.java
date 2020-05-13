@@ -15,6 +15,7 @@ public class LocationBean {
         return locationBean;
     }
 
+    private String proName;
     private String cityName;
     private String lat;
     private String lng;
@@ -48,6 +49,17 @@ public class LocationBean {
 
     public void setOs_id(int os_id) {
         this.os_id = os_id;
+    }
+
+    public String getProName() {
+        if(BaseUtil.isValue(proName)){
+            return proName;
+        }
+        return "浙江省";
+    }
+
+    public void setProName(String proName) {
+        this.proName = proName;
     }
 
     public String getCityName() {

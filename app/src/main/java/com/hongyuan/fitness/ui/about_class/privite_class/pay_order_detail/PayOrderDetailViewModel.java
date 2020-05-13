@@ -175,7 +175,7 @@ public class PayOrderDetailViewModel extends CustomViewModel {
     }
 
     @Override
-    protected void forResult(Bundle bundle) {
+    public void forResult(Bundle bundle) {
         coupon = (CouponListBeans.DataBean.ListBean) bundle.getSerializable("coupon");
         if(BaseUtil.isValue(coupon)){
             couponId = coupon.getCoupon_id();

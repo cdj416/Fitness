@@ -20,7 +20,6 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
-import com.hongyuan.fitness.custom_view.time_selecter.get_address.GetDataUtils;
 import com.hongyuan.fitness.databinding.ActivityEditInformationBinding;
 import com.hongyuan.fitness.ui.find.circle.edit_post.FileBean;
 import com.hongyuan.fitness.ui.main.main_person.PersonBean;
@@ -44,10 +43,6 @@ public class EditInformationViewModel extends CustomViewModel {
     private PersonBean.DataBean.InfoBean personMessageBeans;
     private  Dialog dialog;
 
-
-    //地区
-    private GetDataUtils dataUtils;
-
     //生日使用的年月日
     private int birthYear = 1991;
     private int birthMonth = 12;
@@ -67,8 +62,6 @@ public class EditInformationViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
-        //初始化获取地址的数据
-        dataUtils = new GetDataUtils(mActivity);
 
         binding.headImgBox.setOnClickListener(new View.OnClickListener() {
             @SingleClick
@@ -289,7 +282,7 @@ public class EditInformationViewModel extends CustomViewModel {
     }
 
     @Override
-    protected void forResult(Bundle bundle) {
+    public void forResult(Bundle bundle) {
         boolean isSuccess = bundle.getBoolean("isSuccess");
         if(isSuccess){
             binding.takePhoto.setClickable(false);

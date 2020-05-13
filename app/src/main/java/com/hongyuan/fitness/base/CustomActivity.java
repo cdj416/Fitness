@@ -202,7 +202,7 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     * TYPE_BAR5:有标题，非沉浸式，黑色字体，有标题底线，白色背景
     * TYPE_BAR6:没标题，沉浸式，无顶高，状态栏字体灰色
     * TYPE_BAR7:没标题，沉浸式，无顶高，状态栏字体白色色
-    * TYPE_BAR7:没标题，沉浸式，有顶高，状态栏字体白色色，自定义顶高背景颜色
+    * TYPE_BAR8:没标题，沉浸式，有顶高，状态栏字体白色色，自定义顶高背景颜色
     * */
     public void setTitleBar(int barType,int drawableId,String titleName){
         if(barType == TYPE_BAR1){

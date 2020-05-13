@@ -56,6 +56,9 @@ public class AddImageOrVideoView extends LinearLayout {
     public static final int SHOW_VEDIO = 0X2;
     public int nowType = SHOW_IMG;
 
+    //是否只允许选择图片
+    public boolean flag = false;
+
     public AddImageOrVideoView(Context context) {
         super(context);
         initLayoutView();
@@ -151,7 +154,7 @@ public class AddImageOrVideoView extends LinearLayout {
     * */
     public void selectContent(){
         PictureSelector.create((Activity) getContext())
-                .openGallery(PictureMimeType.ofAll())
+                .openGallery(flag ? PictureMimeType.ofImage() : PictureMimeType.ofAll())
                 .loadImageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
                 .selectionMode(PictureConfig.MULTIPLE)// 多选 or 单选
                 .maxSelectNum(10-mList.size())// 最大图片选择数量 int

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="112dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_FFFFFF"
+    android:orientation="horizontal"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:src="@color/color_f2"
+        android:scaleType="center"
+        app:riv_border_width="1dp"
+        app:riv_border_color="@color/color_EEEEEE"
+        android:layout_gravity="center_vertical"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_FF333333"
+            android:textSize="@dimen/sp_14"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="商品名称商品名称商品名称商品名称商品名称商品名称"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_FF999999"
+                android:text="42码 红色"
+                android:background="@drawable/shape_radius16_f1f1f8"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:drawableRight="@mipmap/down_huise_img"
+                android:layout_marginTop="6dp"
+                android:drawablePadding="4dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_FF333333"
+                    android:textSize="@dimen/sp_12"
+                    android:text="¥"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/color_FF333333"
+                    android:text="200"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_EF5B48"
+                android:text="收益：¥"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/color_EF5B48"
+                android:textStyle="bold"
+                android:text="5"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
+

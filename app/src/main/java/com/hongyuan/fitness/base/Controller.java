@@ -194,6 +194,7 @@ public class Controller {
             @Override
             public void onSuccess(String result) {
                 try {
+                    Log.e("cdj","====="+result);
                     baseBean = GsonUtil.getGson().fromJson(result, new TypeToken<BaseBean>(){}.getType());
                     if("1".equals(baseBean.getStatus().getSucceed())){
                         T data = GsonUtil.getGson().fromJson(result,dataBean);
@@ -271,7 +272,6 @@ public class Controller {
         return new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                //Log.e("cdj","====="+result);
                 listener.onSuccess(code,result);
             }
 

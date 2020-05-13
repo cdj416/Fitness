@@ -130,6 +130,9 @@
         <service android:name="com.qingniu.qnble.scanner.BleScanService"/>
         <service android:name="com.qingniu.wrist.ble.WristBleService"/>
 
+        <!--注册获取地址的数据-->
+        <service android:name=".custom_view.time_selecter.get_address.GetAddressDataService"/>
+        
         <activity android:name=".ui.startup_page.StartupPageActivity"
             android:theme="@style/SplashStyle">
             <intent-filter>
@@ -305,13 +308,36 @@
         <activity android:name=".ui.shop.sactivity.ShopMenuActivity"/>
         <activity android:name=".ui.shop.sactivity.ShopSearchActivity"/>
         <activity android:name=".ui.shop.sactivity.SgoodsDetailActivity"/>
-        <activity android:name=".ui.shop.sactivity.SCartActivity"/>
+        <activity android:name=".ui.shop.sactivity.SCartActivity" android:launchMode="singleTask"/>
         <activity android:name=".ui.shop.sactivity.SorderPaySuccessActivity"/>
         <activity android:name=".ui.shop.sactivity.SorderDetailsActivity"/>
         <activity android:name=".ui.shop.sactivity.SstoreActivity"/>
         <activity android:name=".ui.shop.sactivity.IntegralGoodsActivity"/>
         <activity android:name=".ui.shop.sactivity.IntegralGoodsDetailsActivity"/>
         <activity android:name=".ui.shop.sactivity.CollectCouponsActivity"/>
+        <activity android:name=".ui.shop.sactivity.CheckInMeActivity"/>
+        <activity android:name=".ui.shop.sactivity.CheckInShopActivity"/>
+        <activity android:name=".ui.shop.sactivity.RefundPricesActivity"/>
+        <activity android:name=".ui.shop.sactivity.ShopCollectActivity"/>
+        <activity android:name=".ui.shop.sactivity.ShopMessageActivity"/>
+        <activity android:name=".ui.shop.sactivity.ShopNewOrderAcitivity"/>
+        <activity android:name=".ui.person.fix.SixPriviteCourseActivity"/>
+        <activity android:name=".ui.person.fix.coures_record.PriviteCourseRecordActivity"/>
+        <activity android:name=".ui.shop.sactivity.IncomeMangeActivity"/>
+        <activity android:name=".ui.shop.sactivity.IncomeFormActivity"/>
+        <activity android:name=".ui.shop.sactivity.MyUsersActivity"/>
+        <activity android:name=".ui.shop.sactivity.StartPromoteActivity"/>
+        <activity android:name=".ui.shop.sactivity.PromateOrdersActivity"/>
+        <activity android:name=".ui.shop.sactivity.RewardWithdrawalActivity"/>
+        <activity android:name=".ui.shop.sactivity.ShopAddressActivity"/>
+        <activity android:name=".ui.shop.sactivity.ChangeAddressActivity"/>
+        <activity android:name=".ui.shop.sactivity.AftersaleOrderActivity"/>
+        <activity android:name=".ui.shop.sactivity.MainSearchActivity"/>
+        <activity android:name=".ui.shop.sactivity.LogisticsActivity"/>
+        <activity android:name=".ui.shop.sactivity.AfterSalesActivity"/>
+        <activity android:name=".ui.shop.sactivity.ProductReviewActivity"/>
+
+
     </application>
 
 </manifest>

@@ -99,6 +99,9 @@ public class CoachHomePageViewModel extends CustomViewModel implements CommentTi
 
         //拨打电话
         binding.callTel.setOnClickListener(v -> {
+            if(!BaseUtil.isValue(coachHomeBean)){
+                return;
+            }
             CustomDialog.callTel(mActivity, coachHomeBean.getData().getInfo().getM_mobile(), v1 -> {
                 callTel(coachHomeBean.getData().getInfo().getM_mobile());
             });

@@ -173,7 +173,7 @@ public class EditPostViewModel extends CustomViewModel {
     }
 
     @Override
-    protected void forResult(Bundle bundle) {
+    public void forResult(Bundle bundle) {
         int type = bundle.getInt("type");
         if(type == TOPIC){
             topicBean = (SlectTopicRighttBeans.DataBean.ListBean)bundle.getSerializable("topicItemBean");

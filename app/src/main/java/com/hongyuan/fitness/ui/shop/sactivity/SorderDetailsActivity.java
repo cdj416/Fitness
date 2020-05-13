@@ -1,5 +1,7 @@
 package com.hongyuan.fitness.ui.shop.sactivity;
 
+import android.os.Bundle;
+
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityBottomSorderDetailsBinding;
@@ -8,6 +10,8 @@ import com.hongyuan.fitness.ui.shop.sviewmodel.SorderDetailViewModel;
 import com.hongyuan.fitness.ui.shop.sviewmodel.bottomviewmodel.SorderBottomViewModel;
 
 public class SorderDetailsActivity extends CustomActivity {
+
+    private  SorderDetailViewModel viewModel;
 
     @Override
     protected int getLayoutId() {
@@ -24,11 +28,16 @@ public class SorderDetailsActivity extends CustomActivity {
         setTitleBar(TYPE_BAR5,R.drawable.shape_soid_ffffff,"订单详情");
 
         ActivitySOrderDetailsBinding binding = ActivitySOrderDetailsBinding.bind(mView);
-        SorderDetailViewModel viewModel = new SorderDetailViewModel(this,binding);
+        viewModel = new SorderDetailViewModel(this,binding);
         binding.setViewModel(viewModel);
 
         ActivityBottomSorderDetailsBinding bottomBinding = ActivityBottomSorderDetailsBinding.bind(bottomChildView);
-        SorderBottomViewModel bottomViewModel = new SorderBottomViewModel(this,bottomBinding);
+        SorderBottomViewModel bottomViewModel = new SorderBottomViewModel(this,viewModel,bottomBinding);
         bottomBinding.setViewModel(bottomViewModel);
+    }
+
+    @Override
+    protected void forResult(Bundle bundle) {
+        viewModel.forResult(bundle);
     }
 }

@@ -142,18 +142,31 @@ public class PriviteCourseCheckDetailsViewModel extends CustomViewModel implemen
 
             int time = TimeUtil.getOffectMinutes(getBundle().getString("showTime"),TimeUtil.dateFormatYMDHMS);
 
-            if(time > 0 && time < 60){
-                binding.checkIn.setClickable(true);
-                binding.checkIn.setText("签到");
-                binding.checkIn.setBackgroundResource(R.drawable.shape_gradient_v_radiu5_login);
-            }else if(time < 0){
+            if(time < -4320){
+                binding.bottomBox.setVisibility(View.GONE);
+            }else{
+                binding.bottomBox.setVisibility(View.VISIBLE);
+            }
+
+            if(getBundle().getBoolean("isSign")){
                 binding.checkIn.setClickable(false);
-                binding.checkIn.setText("未签到");
+                binding.checkIn.setText("已签到");
                 binding.checkIn.setBackgroundResource(R.drawable.shape_radius6_999999);
             }else{
-                binding.checkIn.setClickable(false);
-                binding.checkIn.setText("签到(开课前一小时可签到)");
-                binding.checkIn.setBackgroundResource(R.drawable.shape_radius6_999999);
+                if((time > 0 && time < 60) || (time < 0 && time > -4320)){
+                    binding.checkIn.setClickable(true);
+                    binding.checkIn.setText("签到");
+                    binding.checkIn.setBackgroundResource(R.drawable.shape_gradient_v_radiu5_login);
+                }else if(time < -259200){
+                    binding.checkIn.setClickable(false);
+                    binding.checkIn.setText("已自动签到");
+                    binding.checkIn.setBackgroundResource(R.drawable.shape_radius6_999999);
+
+                }else{
+                    binding.checkIn.setClickable(false);
+                    binding.checkIn.setText("签到(开课前一小时可签到)");
+                    binding.checkIn.setBackgroundResource(R.drawable.shape_radius6_999999);
+                }
             }
         }
     }

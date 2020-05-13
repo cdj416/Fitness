@@ -1,5 +1,4 @@
 package com.hongyuan.fitness.util.huanxin;
-import android.os.Environment;
 import android.util.Log;
 
 import com.hongyuan.fitness.base.MyApplication;
@@ -13,6 +12,8 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
+import com.hyphenate.chat.EMGroupManager;
+import com.hyphenate.chat.EMGroupOptions;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.chat.EMTextMessageBody;
@@ -22,7 +23,6 @@ import com.hyphenate.push.EMPushConfig;
 import com.hyphenate.push.EMPushHelper;
 import com.hyphenate.push.EMPushType;
 import com.hyphenate.push.PushListener;
-import com.hyphenate.util.EMLog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -88,7 +88,7 @@ public class HuanXinUtils {
                 loginHuanXin(userName);
             } catch (HyphenateException e) {
                 e.printStackTrace();
-                if(e.getErrorCode() == 203){
+                if(e.getErrorCode() == 203 || e.getErrorCode() == 4){
                     loginHuanXin(userName);
                 }
             }
@@ -111,7 +111,7 @@ public class HuanXinUtils {
             public void onSuccess() {
                 EMClient.getInstance().groupManager().loadAllGroups();
                 EMClient.getInstance().chatManager().loadAllConversations();
-                //Log.e("cdj","=====================登录成功======");
+                Log.e("phm","=====================登录成功======");
             }
 
             @Override
@@ -121,7 +121,7 @@ public class HuanXinUtils {
 
             @Override
             public void onError(int code, String message) {
-                //Log.e("cdj","=====================登录失败======"+code+"================"+message);
+                Log.e("phm","=====================登录失败======"+code+"================"+message);
             }
         });
     }
@@ -313,11 +313,11 @@ public class HuanXinUtils {
         return null;
     }
 
-
     /*
     * 发送(单聊)文本消息
     * */
     public void sendTxtMessage(String content,String toChatUsername,CallBackStatus backStatus){
+        Log.e("phm","=======来发送消息了========");
         //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id
         EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
         // 增加自己特定的属性
@@ -326,24 +326,7 @@ public class HuanXinUtils {
         message.setAttribute("receivernickname", receivernickname);
         message.setAttribute("receiveravatar", receiveravatar);
         //设置发送状态回调
-        message.setMessageStatusCallback(new EMCallBack(){
-            @Override
-            public void onSuccess() {
-                Log.e("cdj","===============发送成功=====");
-                backStatus.sendStatus(SUCCESS_CODE);
-            }
-
-            @Override
-            public void onError(int code, String error) {
-                Log.e("cdj","===============code====="+code+"======error====="+error);
-                backStatus.sendStatus(ERROR_CODE);
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-                Log.e("cdj","===============发送中=====");
-            }
-        });
+        message.setMessageStatusCallback(getEmCallBack(backStatus));
 
         //发送消息
         EMClient.getInstance().chatManager().sendMessage(message);
@@ -361,25 +344,62 @@ public class HuanXinUtils {
         message.setAttribute("receivernickname", receivernickname);
         message.setAttribute("receiveravatar", receiveravatar);
         //设置发送状态回调
-        message.setMessageStatusCallback(new EMCallBack(){
+        message.setMessageStatusCallback(getEmCallBack(backStatus));
+        EMClient.getInstance().chatManager().sendMessage(message);
+    }
+
+    public EMCallBack getEmCallBack(CallBackStatus backStatus){
+        EMCallBack emCallBack = new EMCallBack() {
             @Override
             public void onSuccess() {
-                Log.e("cdj","===============发送成功=====");
+                Log.e("phm","===============发送成功=====");
                 backStatus.sendStatus(SUCCESS_CODE);
             }
 
             @Override
             public void onError(int code, String error) {
-                Log.e("cdj","===============code====="+code+"======error====="+error);
+                Log.e("phm","===============code====="+code+"======error====="+error);
                 backStatus.sendStatus(ERROR_CODE);
             }
 
             @Override
             public void onProgress(int progress, String status) {
-                Log.e("cdj","===============发送中=====");
+                Log.e("phm","===============发送中=====");
             }
-        });
-        EMClient.getInstance().chatManager().sendMessage(message);
+        };
+        return emCallBack;
+    }
+
+    /*
+    * 创建群组
+     * @param groupName 群组名称
+     * @param desc 群组简介
+     * @param allMembers 群组初始成员，如果只有自己传空数组即可
+     * @param reason 邀请成员加入的reason
+     * @param option 群组类型选项，可以设置群组最大用户数(默认200)及群组类型@see {@link EMGroupStyle}
+     *               option.inviteNeedConfirm表示邀请对方进群是否需要对方同意，默认是需要用户同意才能加群的。
+     *               option.extField创建群时可以为群组设定扩展字段，方便个性化订制。
+     * @return 创建好的group
+     * @throws HyphenateException
+    * */
+    public void createGoup(String groupName,String desc){
+        EMGroupOptions option = new EMGroupOptions();
+        option.maxUsers = 200;
+        option.style = EMGroupManager.EMGroupStyle.EMGroupStylePublicJoinNeedApproval;
+
+        try {
+            EMClient.getInstance().groupManager().createGroup(groupName, desc, null, "", option);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    /*
+    * 加入群组
+    * */
+    public void joinGroup(){
+
     }
 
     /*

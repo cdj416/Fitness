@@ -46,25 +46,52 @@
                             android:textColor="@color/color_FF333333"
                             android:text="¥"/>
                         <TextView
+                            android:id="@+id/goodPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="24sp"
                             android:textColor="@color/color_FF333333"
                             android:text="2000"/>
+                        <TextView
+                            android:id="@+id/addMark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_12"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:visibility="gone"
+                            android:text="+"/>
+                        <TextView
+                            android:id="@+id/goodPoint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_FF333333"
+                            android:visibility="gone"
+                            android:textSize="24sp"
+                            android:text="0"/>
+                        <TextView
+                            android:id="@+id/pointText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_12"
+                            android:visibility="gone"
+                            android:text="积分"/>
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/goodStock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_12"
                         android:textColor="@color/color_FF999999"
                         android:text="库存500"/>
                     <TextView
+                        android:id="@+id/changeNorm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_12"
                         android:textColor="@color/color_FF999999"
-                        android:text="已选择42码 / 红色"/>
+                        android:text=""/>
                 </LinearLayout>
             </RelativeLayout>
             <View
@@ -92,6 +119,7 @@
             android:gravity="center_vertical">
 
             <LinearLayout
+                android:id="@+id/addCart"
                 android:layout_width="0dp"
                 android:layout_height="44dp"
                 android:layout_weight="1"
@@ -101,7 +129,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/video_quanping_baise"
+                    android:src="@mipmap/cart_white_mark"
                     android:layout_marginEnd="8dp"/>
                 <TextView
                     android:id="@+id/addCard"

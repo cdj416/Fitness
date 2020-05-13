@@ -4,6 +4,7 @@ import com.hongyuan.fitness.base.BaseBean;
 
 public class ModifyBean extends BaseBean {
 
+
     /**
      * data : {}
      */

@@ -37,11 +37,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16dp"
                     android:orientation="horizontal">
-                    <ImageView
-                        android:id="@+id/pushMark"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/person_push_mark"/>
+
                     <ImageView
                         android:id="@+id/messageMark"
                         android:layout_width="wrap_content"
@@ -72,8 +68,17 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="16dp"
-                    app:person_show_type="0"/>
-                
+                    app:pcvType="order"/>
+
+                <com.hongyuan.fitness.ui.main.main_person.PersonContentView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_radius6_ffffff"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    app:pcvType="run"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="142dp"
@@ -231,10 +236,19 @@
                             android:text="总训练天数0天"/>
                     </LinearLayout>
                 </LinearLayout>
+
+                <com.hongyuan.fitness.ui.main.main_person.PersonContentView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_radius6_ffffff"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    app:pcvType="race"/>
                 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="152dp"
+                    android:layout_height="216dp"
                     android:orientation="vertical"
                     android:background="@drawable/shape_radius6_ffffff"
                     android:layout_marginTop="12dp"
@@ -246,7 +260,7 @@
                         android:layout_weight="1"
                         android:orientation="horizontal">
                         <LinearLayout
-                            android:id="@+id/personOrderBox"
+                            android:id="@+id/promotionCodeBox"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -257,10 +271,10 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/color_FF333333"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/person_order_mark"
+                                android:drawableTop="@mipmap/promotion_code_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
-                                android:text="我的订单"/>
+                                android:text="推广码"/>
                         </LinearLayout>
                         <LinearLayout
                             android:id="@+id/personCouponBox"
@@ -294,10 +308,10 @@
                                 android:drawableTop="@mipmap/person_collect_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
-                                android:text="我的收藏"/>
+                                android:text="运动收藏"/>
                         </LinearLayout>
                         <LinearLayout
-                            android:id="@+id/promotionCodeBox"
+                            android:id="@+id/shopCollectBox"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -308,10 +322,10 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/color_FF333333"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/promotion_code_mark"
+                                android:drawableTop="@mipmap/person_collect_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
-                                android:text="推广码"/>
+                                android:text="商城收藏"/>
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -320,7 +334,7 @@
                         android:layout_weight="1"
                         android:orientation="horizontal">
                         <LinearLayout
-                            android:id="@+id/personSettingBox"
+                            android:id="@+id/goIncomeBox"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -334,26 +348,8 @@
                                 android:drawableTop="@mipmap/person_setting_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
-                                android:text="设置"/>
+                                android:text="收益管理"/>
                         </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/personAboutUsBox"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:gravity="center">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
-                                android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/person_aboutus_mark"
-                                android:gravity="center"
-                                android:drawablePadding="8dp"
-                                android:text="关于我们"/>
-                        </LinearLayout>
-
                         <LinearLayout
                             android:id="@+id/personShareBox"
                             android:layout_width="0dp"
@@ -372,10 +368,106 @@
                                 android:text="邀请分享"/>
                         </LinearLayout>
 
-                        <View
+                        <LinearLayout
+                            android:id="@+id/checkInMeBox"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_FF333333"
+                                android:textSize="@dimen/sp_12"
+                                android:drawableTop="@mipmap/person_share_mark"
+                                android:gravity="center"
+                                android:drawablePadding="8dp"
+                                android:text="入驻随动"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_FF333333"
+                                android:textSize="@dimen/sp_12"
+                                android:drawableTop="@mipmap/person_collect_mark"
+                                android:gravity="center"
+                                android:drawablePadding="8dp"
+                                android:text="智能设备"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:id="@+id/personAboutUsBox"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_FF333333"
+                                android:textSize="@dimen/sp_12"
+                                android:drawableTop="@mipmap/person_aboutus_mark"
+                                android:gravity="center"
+                                android:drawablePadding="8dp"
+                                android:text="关于我们"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_FF333333"
+                                android:textSize="@dimen/sp_12"
+                                android:drawableTop="@mipmap/person_message_mark"
+                                android:gravity="center"
+                                android:drawablePadding="8dp"
+                                android:text="随动客服"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/personSettingBox"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_FF333333"
+                                android:textSize="@dimen/sp_12"
+                                android:drawableTop="@mipmap/person_share_mark"
+                                android:gravity="center"
+                                android:drawablePadding="8dp"
+                                android:text="设置"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 

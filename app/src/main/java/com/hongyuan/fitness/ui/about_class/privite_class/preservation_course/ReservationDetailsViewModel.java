@@ -97,8 +97,8 @@ public class ReservationDetailsViewModel extends CustomViewModel {
             Glide.with(mActivity).load(detailsBean.getData().getCp_img()).apply(options).into(binding.courseImg);
 
             binding.courseName.setText(detailsBean.getData().getCp_name());
-            binding.useCourseNum.setText(String.valueOf(detailsBean.getData().getBnum()-detailsBean.getData().getHave_num()));
-            binding.haveNum.setText("节 / 共"+detailsBean.getData().getBnum()+"节");
+            binding.useCourseNum.setText(String.valueOf(detailsBean.getData().getCp_num()-detailsBean.getData().getHave_num()));
+            binding.haveNum.setText("节 / 共"+detailsBean.getData().getCp_num()+"节");
             binding.courseType.setText(detailsBean.getData().getFt_name());
             binding.coachName.setText(detailsBean.getData().getMi_realname());
             binding.courseAddress.setText(detailsBean.getData().getOs_name());

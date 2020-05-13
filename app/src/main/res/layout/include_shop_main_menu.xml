@@ -17,42 +17,14 @@
             android:gravity="center"
             android:layout_weight="1">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
-                android:drawableTop="@mipmap/heat_img"
-                android:drawablePadding="8dp"
-                android:text="随动礼品卡"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="1">
-            <TextView
                 android:id="@+id/goIntegral"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
                 android:textColor="@color/color_FF333333"
-                android:drawableTop="@mipmap/heat_img"
+                android:drawableTop="@mipmap/redeem_mark"
                 android:drawablePadding="8dp"
                 android:text="积分兑换"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="1">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
-                android:drawableTop="@mipmap/heat_img"
-                android:drawablePadding="8dp"
-                android:text="随动礼品卡"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -65,29 +37,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
                 android:textColor="@color/color_FF333333"
-                android:drawableTop="@mipmap/heat_img"
+                android:drawableTop="@mipmap/leadership_center_mark"
                 android:drawablePadding="8dp"
-                android:text="领劵中心"/>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal"
-        android:background="@color/color_FFFFFF">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="1">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
-                android:drawableTop="@mipmap/heat_img"
-                android:drawablePadding="8dp"
-                android:text="随动礼品卡"/>
+                android:text="领券中心"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -99,9 +51,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
                 android:textColor="@color/color_FF333333"
-                android:drawableTop="@mipmap/heat_img"
+                android:drawableTop="@mipmap/sports_life_mark"
                 android:drawablePadding="8dp"
-                android:text="随动礼品卡"/>
+                android:text="运动生活"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -113,23 +65,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
                 android:textColor="@color/color_FF333333"
-                android:drawableTop="@mipmap/heat_img"
+                android:drawableTop="@mipmap/promotion_area_mark"
                 android:drawablePadding="8dp"
-                android:text="随动礼品卡"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_weight="1">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
-                android:drawableTop="@mipmap/heat_img"
-                android:drawablePadding="8dp"
-                android:text="随动礼品卡"/>
+                android:text="推广专区"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

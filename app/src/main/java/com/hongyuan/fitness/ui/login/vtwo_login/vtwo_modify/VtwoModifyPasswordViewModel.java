@@ -3,6 +3,7 @@ package com.hongyuan.fitness.ui.login.vtwo_login.vtwo_modify;
 import android.view.View;
 
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
@@ -85,7 +86,7 @@ public class VtwoModifyPasswordViewModel extends CustomViewModel implements Inpu
         clearParams().setParams("m_mobile",binding.phoneNum.getText()).setParams("m_pwd",binding.phonePassword.getText())
                 .setParams("re_pwd",binding.phonePassword.getText())
                 .setParams("dxm",binding.phoneCode.getText());
-        Controller.myRequest(Constants.DO_FIND_PASSWORD,Controller.TYPE_POST,getParams(), ModifyBean.class,this);
+        Controller.myRequest(ConstantsCode.DO_FIND_PASSWORD,Constants.DO_FIND_PASSWORD,Controller.TYPE_POST,getParams(), ModifyBean.class,this);
     }
 
     @Override
@@ -99,9 +100,12 @@ public class VtwoModifyPasswordViewModel extends CustomViewModel implements Inpu
             //showSuccess("验证码发送成功！");
         }
 
-        if(data instanceof ModifyBean){
+    }
+
+    @Override
+    public void onSuccess(int code, Object data) {
+        if(code == ConstantsCode.DO_FIND_PASSWORD){
             mActivity.showSuccess("修改成功！");
         }
-
     }
 }

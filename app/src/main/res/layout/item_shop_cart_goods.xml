@@ -9,12 +9,14 @@
     android:paddingEnd="16dp"
     android:gravity="center_vertical">
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/yuanquanquan_no_select_img"
+        android:id="@+id/childSelectImg"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:scaleType="centerCrop"
         android:padding="5dp"
         android:layout_marginEnd="4dp"/>
     <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/goodImg"
         android:layout_width="92dp"
         android:layout_height="92dp"
         android:src="@drawable/banner_test1"
@@ -22,11 +24,13 @@
         app:riv_border_width="1dp"
         app:riv_border_color="@color/color_EEEEEE"/>
     <LinearLayout
+        android:id="@+id/goDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/goodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_FF333333"
@@ -35,6 +39,7 @@
             android:maxLines="2"
             android:text="商品名称商品名称商品名称商品名称商品名称商品名称"/>
         <TextView
+            android:id="@+id/goodType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_12"
@@ -63,6 +68,7 @@
                     android:textSize="@dimen/sp_12"
                     android:text="¥"/>
                 <TextView
+                    android:id="@+id/goodPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
@@ -79,6 +85,7 @@
                 android:background="@drawable/shape_radius6_f5f5f5_stroke_dddddd">
 
                 <TextView
+                    android:id="@+id/sub"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -91,6 +98,7 @@
                     android:layout_height="match_parent"
                     android:background="#FFDDDDDD"/>
                 <TextView
+                    android:id="@+id/goodNum"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.2"
@@ -104,6 +112,7 @@
                     android:layout_height="match_parent"
                     android:background="#FFDDDDDD"/>
                 <TextView
+                    android:id="@+id/add"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

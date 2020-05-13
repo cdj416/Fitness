@@ -59,6 +59,9 @@ public class ConstantsCode {
     //课程--取消私教课报名
     public final static int CANCEL_COURSE_PRIVITE_APPOINTMENT = 0x027;
 
+    //修改密码
+    public final static int DO_FIND_PASSWORD = 0x049;
+
 
     /*================================三版需要的=======================================*/
     //团课--开启团课提醒
@@ -108,6 +111,37 @@ public class ConstantsCode {
     //会员-修改会员基本信息
     public final static int UPDATE_M_INFO = 0x048;
 
+
+    /*================================六版需要的=======================================*/
+    //申请入驻
+    public final static int APPLY_IN = 0x049;
+    //修改申请
+    public final static int EDIT_APPLY = 0x050;
+    //添加收货地址
+    public final static int ADD_RECEIVING_ADDRESS = 0x051;
+    //添修改收货地址
+    public final static int EDIT_RECEIVING_ADDRESS = 0x052;
+    //删除收货地址
+    public final static int DETL_RECEIVING_ADDRESS = 0x053;
+    //添加商品到购
+    public final static int ADD_SHOPPING_CART = 0x054;
+    //清空搜索历史记录
+    public final static int DEL_VISIT_HABIT = 0x055;
+    //商城第一个banner
+    public final static int FIRST_BANNER = 0x056;
+    //商城第二个banner
+    public final static int SECOND_BANNER = 0x057;
+    //商品分类获取第三级分类
+    public final static int GET_THIRD_CATEGORY_BY_FIRST_ID = 0x058;
+    //删除购物车里面的商品
+    public final static int DEL_SHOPPING_CART = 0x059;
+    //获取购物车数据
+    public final static int GET_SHOPPING_CART = 0x060;
+    //确认订单
+    public final static int CONFIRM_ORDER = 0x061;
+    //添加商品评论
+    public final static int ADD_GOODS_EVALUTION = 0x062;
+
     /*================================已下EventBus使用的=======================================*/
     //食物搜索
     public final static int EB_FOOD_SEARCH = 1;
@@ -127,5 +161,9 @@ public class ConstantsCode {
     public final static int EB_WRISTBAND_SHOW_CONTENT = 8;
     //领取商品后数据的刷新
     public final static int EB_CHAGEE_RECEVER_GOODS = 9;
+    //搜索商品列表
+    public final static int GET_GOODS_LIST_SIX = 10;
+    //关闭搜索列表商品页面
+    public final static int EB_CLOSE_SERARCH = 11;
 
 }

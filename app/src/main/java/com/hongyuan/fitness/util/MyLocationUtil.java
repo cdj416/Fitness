@@ -106,6 +106,7 @@ public class MyLocationUtil {
                 //去记录更新金纬度
                 LocationBean.getInstance().setLat(String.valueOf(location.getLatitude()));
                 LocationBean.getInstance().setLng(String.valueOf(location.getLongitude()));
+                LocationBean.getInstance().setProName(location.getProvince());
                 LocationBean.getInstance().setCityName(location.getCity());
 
             } else {

@@ -51,12 +51,20 @@
                     android:layout_marginEnd="20dp"/>
             </LinearLayout>
 
-            <ImageView
+            <TextView
+                android:id="@+id/goSignIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/right_huise_img"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_FFFFFF"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:background="@drawable/shape_radius6_ef5b48"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:text="签到"/>
         </RelativeLayout>
 
         <LinearLayout

@@ -8,6 +8,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/transparent"
         app:elevation="0dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -37,6 +38,7 @@
             android:orientation="vertical"
             android:paddingBottom="90dp">
             <com.hongyuan.fitness.ui.shop.smyview.SGoodsDetailsHeadView
+                android:id="@+id/goodHeads"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <LinearLayout
@@ -93,6 +95,7 @@
                         android:layout_height="36dp"
                         app:riv_corner_radius="@dimen/dp_4"
                         android:layout_centerVertical="true"
+                        android:scaleType="centerCrop"
                         android:src="@color/color_f2"/>
                     <LinearLayout
                         android:layout_toRightOf="@id/shopImg"
@@ -103,6 +106,7 @@
                         android:layout_marginEnd="120dp"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/shopName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_14"
@@ -115,20 +119,33 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
+                            <RatingBar
+                                android:id="@+id/myRat"
+                                android:layout_width="wrap_content"
+                                android:layout_height="12dp"
+                                style="@style/evaluationRatingBar"
+                                android:layout_gravity="center"
+                                android:layout_toEndOf="@id/startTitle"
+                                android:layout_centerVertical="true"
+                                android:isIndicator="true"
+                                android:numStars="5"
+                                android:rating="5"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/color_FF999999"
-                                android:textSize="@dimen/sp_12"
-                                android:text="好评率100% |"/>
-
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:text="|"/>
                             <TextView
+                                android:id="@+id/collectionNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/color_FF999999"
                                 android:textSize="@dimen/sp_12"
-                                android:text="5年店铺"/>
+                                android:text="1.2万人收藏"/>
                         </LinearLayout>
                     </LinearLayout>
                     <TextView
@@ -143,6 +160,7 @@
                         android:layout_centerVertical="true"
                         android:background="@drawable/shape_radius6_ef5b48"/>
                     <TextView
+                        android:id="@+id/collectStore"
                         android:layout_width="55dp"
                         android:layout_height="24dp"
                         android:textSize="@dimen/sp_12"
@@ -160,6 +178,33 @@
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:background="@color/color_EEEEEE"/>
+
+                <com.hongyuan.fitness.custom_view.CustomRecyclerView
+                    android:id="@+id/sgRec1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="1dp"
+                        android:background="@drawable/shape_gradient_h_e8_cc"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_14"
+                        android:textColor="@color/color_FF999999"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="店铺推荐"/>
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="1dp"
+                        android:background="@drawable/shape_gradient_h_cc_e8"/>
+                </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/goodsRec"
                     android:layout_width="match_parent"
@@ -198,10 +243,10 @@
                         android:background="@drawable/shape_gradient_h_cc_e8"/>
                 </LinearLayout>
 
-                <WebView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailsImg"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:ignore="WebViewLayout" />
+                    android:layout_height="match_parent"/>
             </LinearLayout>
 
         </LinearLayout>

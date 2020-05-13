@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -231,7 +232,7 @@ public abstract class CustomViewModel implements RetrofitListener {
      * 回传需要从写的函数
      * @param bundle 跳转所携带的信息
      * */
-    protected void forResult(Bundle bundle){
+    public void forResult(Bundle bundle){
 
     }
 
@@ -290,11 +291,16 @@ public abstract class CustomViewModel implements RetrofitListener {
     * 获取参数集合
     * */
     public Map<String,String> getParams(){
-        if(getBaseParams() != null){
+        Map<String,String> baseParams = getBaseParams();
+        if(baseParams != null){
             if(params == null){
                 params = new HashMap<>();
             }
-            params.putAll(getBaseParams());
+            //处理切换登录手机号覆盖问题
+            if(params.containsKey("m_mobile")){
+                baseParams.remove("m_mobile");
+            }
+            params.putAll(baseParams);
         }
         return this.params;
     }

@@ -26,4 +26,6 @@
     <string name="lingjuan">领券</string>
     <string name="shoucang">收藏</string>
     <string name="fahuo">发货：</string>
+
+    <string name="login_only_can_input">qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890</string>
 </resources>

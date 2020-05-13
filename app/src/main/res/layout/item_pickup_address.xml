@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="54dp"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
+    android:background="@color/color_FFFFFF"
+    android:id="@+id/box">
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/yuanquanquan_no_select_img"
+        android:layout_centerVertical="true"/>
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/color_FF333333"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/img"
+        android:text="自提点地址自提点地址自提点地址自提点地址 自提点地址自提点地址自提点地址"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="10dp"/>
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_FF999999"
+        android:textSize="@dimen/sp_12"
+        android:text="4.2km"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color_EEEEEE"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

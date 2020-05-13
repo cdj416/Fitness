@@ -4,7 +4,7 @@
     <data>
         <variable
             name="ViewModel"
-            type="com.hongyuan.fitness.ui.person.waiting_for_class.WaitingForClassViewModel"/>
+            type="com.hongyuan.fitness.ui.shop.sviewmodel.ShopMessageViewModel"/>
     </data>
 
     <LinearLayout
@@ -24,7 +24,8 @@
                 app:tabTextColor="@color/color_FF333333"
                 app:tabIndicatorColor="@color/color_EF5B48"
                 app:tabMode="fixed"
-                app:tabSelectedTextColor="@color/color_EF5B48"/>
+                app:tabSelectedTextColor="@color/color_EF5B48"
+                app:tabIndicatorFullWidth="false"/>
         </RelativeLayout>
 
         <androidx.viewpager.widget.ViewPager

@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/color_EF5B48">
+        android:background="@color/color_FFFFFF">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -31,7 +31,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_toLeftOf="@id/mMessage"
                 android:gravity="center_vertical"
-                android:background="@drawable/shape_radius6_ffffff">
+                android:background="@drawable/shape_radius6_fff5f5f5">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,26 +55,54 @@
             <ImageView
                 android:id="@+id/sortMark"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/qr_mark"/>
+                android:src="@mipmap/more_category_mark"/>
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/layoutMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_marginEnd="10dp"
-                app:tabTextColor="#FFFFD0C9"
-                app:tabIndicatorColor="@color/color_FFFFFF"
+                app:tabTextColor="@color/color_FF999999"
+                app:tabIndicatorColor="@color/color_EF5B48"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/color_FFFFFF"
+                app:tabSelectedTextColor="@color/color_FF333333"
                 android:layout_toLeftOf="@id/sortMark"
                 app:tabIndicatorFullWidth="false"/>
         </RelativeLayout>
     </LinearLayout>
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/mViewPager"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="1px"
+        android:background="@color/color_EEEEEE"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/mViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="56dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/goCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/my_cart_img"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:src="@mipmap/my_store_img"/>
+        </LinearLayout>
+    </FrameLayout>
+
 </LinearLayout>

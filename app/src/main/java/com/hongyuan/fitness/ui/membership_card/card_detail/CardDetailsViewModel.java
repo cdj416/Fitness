@@ -149,7 +149,6 @@ public class CardDetailsViewModel extends CustomViewModel {
                 sexNum = bean.getMi_sex();
             }
             CustomDialog.updateSex(mActivity, sexNum, (v1, message) -> {
-                Log.e("cdj","========="+message);
                 if(BaseUtil.isValue(bean)){
                     bean.setMi_sex(Integer.valueOf(message));
                 }
@@ -211,7 +210,7 @@ public class CardDetailsViewModel extends CustomViewModel {
     }
 
     @Override
-    protected void forResult(Bundle bundle) {
+    public void forResult(Bundle bundle) {
 
         if(bundle.getSerializable("coupon") instanceof CouponListBeans.DataBean.ListBean){
             coupon = (CouponListBeans.DataBean.ListBean) bundle.getSerializable("coupon");
