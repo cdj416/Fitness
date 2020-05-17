@@ -2,6 +2,7 @@ package com.hongyuan.fitness.ui.shop.sviewmodel.bottomviewmodel;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
@@ -16,6 +17,9 @@ import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.AddressInfoBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.CreateOrderBeans;
 import com.hongyuan.fitness.ui.shop.sviewmodel.SorderDetailViewModel;
+import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.CustomDialog;
+
 public class SorderBottomViewModel extends CustomViewModel {
 
     private ActivityBottomSorderDetailsBinding binding;
@@ -24,6 +28,9 @@ public class SorderBottomViewModel extends CustomViewModel {
 
     //查询的积分数据
     private PointBean pointBean;
+
+    //积分兑换，商品积分
+    private int mPoint;
 
     public SorderBottomViewModel(CustomActivity mActivity, SorderDetailViewModel viewModel, ActivityBottomSorderDetailsBinding binding) {
         super(mActivity);
@@ -39,10 +46,9 @@ public class SorderBottomViewModel extends CustomViewModel {
 
         binding.submit.setOnClickListener(v -> {
 
-            //startActivity(SorderPaySuccessActivity.class,null);
-
             //去生成订单
             lazyLoad();
+
         });
     }
 
@@ -50,7 +56,17 @@ public class SorderBottomViewModel extends CustomViewModel {
     * 显示总价
     * */
     public void changeAllPrice(String allPrice){
-        binding.allPrice.setText(allPrice);
+
+        if(Integer.parseInt(allPrice) > 0){
+            binding.allPrice.setText(allPrice);
+        }else{
+            mPoint = viewModel.getInfoData().getList().get(0).getAll_point();
+            binding.pointNum.setVisibility(View.VISIBLE);
+            binding.pointNum.setText("+积分："+mPoint);
+            binding.submit.setText("立即兑换");
+        }
+
+
     }
 
     /*
@@ -87,10 +103,21 @@ public class SorderBottomViewModel extends CustomViewModel {
             CreateOrderBeans.DataBean bean = ((CreateOrderBeans)data).getData();
 
             PayDataBean payDataBean = new PayDataBean();
-            payDataBean.setO_id(bean.getO_ids());
-            payDataBean.setShowPoint("");
-            payDataBean.setShowPrice(binding.allPrice.getText().toString());
-            payDataBean.setLavePoint(String.valueOf(pointBean.getData().getPoint()));
+            if(BaseUtil.isValue(bean.getO_ids().getMoney_o_ids())){
+                payDataBean.setO_id(bean.getO_ids().getMoney_o_ids());
+                payDataBean.setShowPoint("");
+                payDataBean.setShowPrice(binding.allPrice.getText().toString());
+                payDataBean.setLavePoint(String.valueOf(pointBean.getData().getPoint()));
+            }else if(BaseUtil.isValue(bean.getO_ids().getPoint_o_ids())){
+                payDataBean.setO_id(bean.getO_ids().getPoint_o_ids());
+                payDataBean.setShowPoint(""+mPoint);
+                payDataBean.setShowPrice(binding.allPrice.getText().toString());
+                payDataBean.setLavePoint(String.valueOf(pointBean.getData().getPoint()));
+            }else{
+                CustomDialog.showMessage(mActivity,"该商品已下架！");
+            }
+
+
             Bundle bundle = new Bundle();
             bundle.putSerializable("payDataBean",payDataBean);
             bundle.putSerializable("successBeans",getSuccessBeans());

@@ -4,7 +4,6 @@ package com.hongyuan.fitness.util;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -15,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,8 +22,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
-import com.hongyuan.fitness.base.BaseBean;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomFragment;
+import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.AddFoodView;
 import com.hongyuan.fitness.custom_view.CountdownView;
@@ -34,17 +35,17 @@ import com.hongyuan.fitness.ui.heat.ItemClikeBean;
 import com.hongyuan.fitness.ui.heat.UpdataFoodView;
 import com.hongyuan.fitness.ui.heat.add_food.AddFoodBean;
 import com.hongyuan.fitness.ui.heat.heat_detail.HeatDetailBean;
+import com.hongyuan.fitness.ui.main.AllCitysActivity;
+import com.hongyuan.fitness.ui.main.OpenCitysBeans;
 import com.hongyuan.fitness.ui.main.ScanCardsListAdapter;
+import com.hongyuan.fitness.ui.main.main_home.CheckCitysAdapter;
 import com.hongyuan.fitness.ui.main.main_home.recommend.HomeRightBeans;
 import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsAdapter;
 import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsBeans;
-import com.hongyuan.fitness.ui.person.my_coupon.CouponAdapter;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.main_receive_coupon.DialogReceiveCouponAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.DialogUseCouponAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.PickUpAddressAdapter;
-import com.hongyuan.fitness.ui.shop.sadapter.SGDcommentAdapter;
-import com.hongyuan.fitness.ui.shop.sadapter.SGDspecificationAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SgoodsGouponAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SorderCouponsAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.PickUpAddress;
@@ -52,9 +53,7 @@ import com.hongyuan.fitness.ui.shop.sbeans.ScouponsBean;
 import com.hongyuan.fitness.ui.shop.sbeans.SgoodsDetailBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.SorderCouponBeans;
 import com.hongyuan.fitness.ui.shop.smyview.SGDspecificationView;
-import com.makeramen.roundedimageview.RoundedImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CustomDialog {
@@ -827,7 +826,7 @@ public class CustomDialog {
     /*
     * 规格
     * */
-    public static void showGoodsSpecification(Context mContext, SgoodsDetailBeans.DataBean.InfoBean infoBean, CustomFragment fragment){
+    public static void showGoodsSpecification(Context mContext, SgoodsDetailBeans.DataBean.InfoBean infoBean, CustomFragment fragment, CustomViewModel model){
         final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
         dialog.setCanceledOnTouchOutside(true);
         View view = View.inflate(mContext, R.layout.dialog_goods_specification,null);
@@ -839,7 +838,7 @@ public class CustomDialog {
         dialog.show();
 
         SGDspecificationView spView = view.findViewById(R.id.spView);
-        spView.setDatas(infoBean,fragment);
+        spView.setDatas(infoBean,fragment,model);
 
         ImageView close = view.findViewById(R.id.close);
         close.setOnClickListener(v -> dialog.dismiss());
@@ -1036,5 +1035,71 @@ public class CustomDialog {
             dialog.dismiss();
         });
         view.findViewById(R.id.closeImg).setOnClickListener(v -> dialog.dismiss());
+    }
+    /*
+     * 已入住城市
+     * */
+    public static void showCtitys(CustomActivity mContext, List<OpenCitysBeans.DataBean.ListBean> mList){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        dialog.setCanceledOnTouchOutside(true);
+        View view = View.inflate(mContext, R.layout.dialog_check_ctitys,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+
+        RecyclerView mRec = view.findViewById(R.id.mRec);
+        GridLayoutManager manager = new GridLayoutManager(mContext,3);
+        manager.setOrientation(RecyclerView.VERTICAL);
+        mRec.setLayoutManager(manager);
+        CheckCitysAdapter adapter = new CheckCitysAdapter();
+        mRec.setAdapter(adapter);
+        adapter.setNewData(mList);
+
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @SingleClick
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                LocationBean.getInstance().setCityName(mList.get(position).getRegion_name());
+                dialog.dismiss();
+            }
+        });
+
+        view.findViewById(R.id.openAllCity).setOnClickListener(v ->{mContext.startActivity(AllCitysActivity.class,null);
+        dialog.dismiss();});
+        view.findViewById(R.id.goRuZhu).setOnClickListener(v -> dialog.dismiss());
+        view.findViewById(R.id.close).setOnClickListener(v -> dialog.dismiss());
+    }
+
+    /*
+     * 支付弹框
+     * */
+    public static void showPay(Context mContext, DialogClickMessage dialogClick ){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_pay_way,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        //支付宝支付
+        view.findViewById(R.id.alipay).setOnClickListener(v -> {
+            dialogClick.dialogClick(v,"支付宝");
+            dialog.dismiss();
+        });
+        //微信支付
+        view.findViewById(R.id.wxPay).setOnClickListener(v -> {
+            dialogClick.dialogClick(v,"微信");
+            dialog.dismiss();
+        });
+        //取消支付
+        view.findViewById(R.id.cancel).setOnClickListener(v -> {
+            dialog.dismiss();
+        });
     }
 }

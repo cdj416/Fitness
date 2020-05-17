@@ -97,7 +97,7 @@ public class SGoodsDetailsHeadView extends LinearLayout implements RetrofitListe
         });
         //规格弹框
         specificationBox.setOnClickListener(v -> {
-            CustomDialog.showGoodsSpecification(getContext(),infoBean,mFragment);
+            CustomDialog.showGoodsSpecification(getContext(),infoBean,mFragment,null);
         });
         //收藏商品
         collectionBox.setOnClickListener(v -> {

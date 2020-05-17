@@ -5,29 +5,46 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
+import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
+import com.hongyuan.fitness.custom_view.CustomRecyclerView;
+import com.hongyuan.fitness.ui.find.circle.circle_detail.CircleDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.edit_post.EditPostActivity;
+import com.hongyuan.fitness.ui.find.more_topic.MoreTopicActivity;
+import com.hongyuan.fitness.ui.find.topic.SlectTopicLeftBeans;
 import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
+import com.hongyuan.fitness.ui.main.main_find.featured.FindTopicAdapter;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
 
 public class FindFragment extends CustomFragment {
 
     private TabLayout layoutMenu;
     private ViewPager mViewPager;
+    private TextView moreTopic;
+    private CustomRecyclerView topRecycler;
+    private RelativeLayout goYue,goPei,goSai;
+
+    private FindTopicAdapter topicAdapter;
+    private List<SlectTopicLeftBeans.DataBean.ListBean> topicList;
 
     private FindViewPagerAdapter meunAdapter;
-
-    private ImageView releasePost;
 
     @Override
     public int getLayoutId() {
@@ -36,19 +53,70 @@ public class FindFragment extends CustomFragment {
 
     @Override
     public void initView(View mView) {
+        getmTitle().showLine().setCentreText("发现").setRightImage(R.mipmap.release_heise_img).getRightImgView().setOnClickListener(v -> {
+            startActivity(EditPostActivity.class,null);
+        });
+
         layoutMenu = mView.findViewById(R.id.layoutMenu);
         mViewPager = mView.findViewById(R.id.mViewPager);
-        releasePost = mView.findViewById(R.id.releasePost);
+        moreTopic = mView.findViewById(R.id.moreTopic);
+        goYue = mView.findViewById(R.id.goYue);
+        goPei = mView.findViewById(R.id.goPei);
+        goSai = mView.findViewById(R.id.goSai);
+
+        topRecycler = mView.findViewById(R.id.topRecycler);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        topRecycler.setLayoutManager(manager);
+        topicAdapter = new FindTopicAdapter();
+        topRecycler.setAdapter(topicAdapter);
+        topicAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("circle_categoryid",String.valueOf(topicList.get(position).getCategory_id()));
+            startActivity(CircleDetailsActivity.class,bundle);
+        });
+        moreTopic.setOnClickListener(v -> startActivity(MoreTopicActivity.class,null));
+
+        goYue.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", Constants.WEB_ADDRESS+"/Asportslist");
+            bundle.putString("title","约运动列表");
+            mActivity.startActivity(WebViewActivity.class,bundle);
+        });
+        goPei.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", Constants.WEB_ADDRESS+"/train");
+            bundle.putString("title","培训课");
+            mActivity.startActivity(WebViewActivity.class,bundle);
+        });
+        goPei.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", Constants.WEB_ADDRESS+"/train");
+            bundle.putString("title","培训课");
+            mActivity.startActivity(WebViewActivity.class,bundle);
+        });
+        goSai.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", Constants.WEB_ADDRESS+"/event");
+            bundle.putString("title","赛事");
+            mActivity.startActivity(WebViewActivity.class,bundle);
+        });
+
 
         meunAdapter = new FindViewPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(meunAdapter);
         layoutMenu.setupWithViewPager(mViewPager);
 
         mViewPager.setOffscreenPageLimit(3);
-        mViewPager.setCurrentItem(1);
-        releasePost.setOnClickListener(v -> startActivity(EditPostActivity.class,null));
+        mViewPager.setCurrentItem(0);
 
         mViewPager.addOnPageChangeListener(getOnPageChangeListener());
+    }
+
+    @Override
+    protected void lazyLoad() {
+        clearParams().setParams("page","4").setParams("curpage","");
+        Controller.myRequest(Constants.GET_CIRCLE_CATEGORY_LIST,Controller.TYPE_POST,getParams(), SlectTopicLeftBeans.class,this);
     }
 
     /*
@@ -77,7 +145,15 @@ public class FindFragment extends CustomFragment {
 
     @Override
     public void onSuccess(Object data) {
-
+        if(data instanceof SlectTopicLeftBeans){
+            topicList = ((SlectTopicLeftBeans)data).getData().getList();
+            if(topicList != null && topicList.size() > 0){
+                topRecycler.setVisibility(View.VISIBLE);
+                if(topicAdapter != null){
+                    topicAdapter.setNewData(topicList);
+                }
+            }
+        }
     }
 
     /*

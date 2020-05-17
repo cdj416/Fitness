@@ -31,11 +31,16 @@ public class SDMimgAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
 
         //如果当前视图比例未被存储，先去存储
         if(hashMap.size() <= helper.getAdapterPosition()){
-            //获取宽高并计算比例
-            String whStr = item.substring((item.indexOf("_")+1),item.lastIndexOf("."));
-            String[] wh = whStr.split("x");
-            float ratio = Float.valueOf(wh[0])/Float.valueOf(wh[1]);
-            hashMap.put(helper.getAdapterPosition(),ratio);
+            try {
+                //获取宽高并计算比例
+                String whStr = item.substring((item.indexOf("_")+1),item.lastIndexOf("."));
+                String[] wh = whStr.split("x");
+                float ratio = Float.valueOf(wh[0])/Float.valueOf(wh[1]);
+                hashMap.put(helper.getAdapterPosition(),ratio);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
         }
 
         //获取比例并设置视图高度并加载图片

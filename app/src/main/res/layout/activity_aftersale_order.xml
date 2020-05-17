@@ -35,8 +35,9 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@mipmap/walk_select_img"/>
+                            android:src="@mipmap/white_wait_img"/>
                         <TextView
+                            android:id="@+id/statusName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="18sp"
@@ -45,6 +46,7 @@
                             android:text="等待确认收货"/>
                     </LinearLayout>
                     <RelativeLayout
+                        android:id="@+id/logisticsBox"
                         android:layout_width="match_parent"
                         android:layout_height="88dp"
                         android:layout_marginTop="12dp"
@@ -56,7 +58,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:src="@mipmap/heat_img"/>
+                            android:src="@mipmap/logistics_img"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -65,27 +67,52 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="14dp">
                             <TextView
+                                android:id="@+id/deliverCompany"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/color_EF5B48"
-                                android:textSize="@dimen/sp_16"
-                                android:text="运输中"/>
+                                android:textSize="@dimen/sp_16"/>
+                            <TextView
+                                android:id="@+id/content"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_FF333333"
+                                android:ellipsize="end"
+                                android:layout_marginEnd="30dp"
+                                android:maxLines="1"
+                                android:textSize="@dimen/sp_14"/>
+                            <TextView
+                                android:id="@+id/delTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_FF333333"
+                                android:textSize="@dimen/sp_12"/>
                         </LinearLayout>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/right_huise_img"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"/>
                     </RelativeLayout>
                     <RelativeLayout
                         android:id="@+id/goAddress"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:layout_gravity="center_vertical"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp"
                         android:layout_marginTop="12dp"
                         android:background="@color/color_FFFFFF">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/address_top_img"
+                            android:scaleType="centerCrop"/>
                         <LinearLayout
                             android:id="@+id/telBox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
+                            android:layout_marginStart="16dp"
                             android:orientation="horizontal">
                             <TextView
                                 android:layout_width="wrap_content"
@@ -108,14 +135,11 @@
                             android:textColor="@color/color_FF333333"
                             android:textSize="@dimen/sp_14"
                             android:layout_below="@id/telBox"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
                             android:layout_marginTop="12dp"/>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:src="@mipmap/right_huise_img"/>
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -133,8 +157,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="12dp"
+                android:paddingBottom="90dp">
                 <TextView
+                    android:id="@+id/storeName"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:textColor="@color/color_FF333333"
@@ -153,6 +179,7 @@
                     android:layout_height="1px"
                     android:background="@color/color_EEEEEE"/>
                 <com.hongyuan.fitness.custom_view.ItemCloumView
+                    android:id="@+id/allPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
@@ -160,6 +187,7 @@
                     app:icRightText="¥2000"/>
 
                 <com.hongyuan.fitness.custom_view.ItemCloumView
+                    android:id="@+id/freight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
@@ -167,22 +195,26 @@
                     app:icRightText="¥0.00" />
 
                 <com.hongyuan.fitness.custom_view.ItemCloumView
+                    android:id="@+id/coupon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
                     app:icLeftText="店铺优惠:"
                     app:icRightText="¥100"/>
                 <com.hongyuan.fitness.custom_view.ItemCloumView
+                    android:id="@+id/payType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
+                    android:visibility="visible"
                     app:icLeftText="支付方式:"
                     app:icRightText="微信支付"/>
                 <com.hongyuan.fitness.custom_view.ItemCloumView
+                    android:id="@+id/needPayPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
-                    app:icLeftText="已付款:"
+                    app:icLeftText="应付款:"
                     app:icRightText="¥1900"/>
 
                 <TextView
@@ -195,6 +227,7 @@
                     android:text="订单详情"/>
 
                 <com.hongyuan.fitness.custom_view.ItemCloumView
+                    android:id="@+id/notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
@@ -205,21 +238,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
+                    android:visibility="gone"
                     app:icLeftText="积分:"
                     app:icRightText="+90"/>
                 <com.hongyuan.fitness.custom_view.ItemCloumView
+                    android:id="@+id/orderNum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
                     app:icLeftText="订单号:"
-                    app:icRightText="sdjs21982192"/>
+                    app:icRightText="sdjs21982192"
+                    app:icShowCopy="true"/>
                 <com.hongyuan.fitness.custom_view.ItemCloumView
+                    android:id="@+id/createTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
                     app:icLeftText="创建时间："
                     app:icRightText="2020.3.24 14:23:12"/>
                 <com.hongyuan.fitness.custom_view.ItemCloumView
+                    android:id="@+id/payTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
@@ -264,6 +302,7 @@
                 android:background="@color/color_EEEEEE"/>
             <!--完成时状态显示的按钮-->
             <LinearLayout
+                android:id="@+id/compelteBox"
                 android:layout_width="match_parent"
                 android:layout_height="84dp"
                 android:background="@color/color_FFFFFF"
@@ -305,6 +344,7 @@
 
             <!--待付款时状态-->
             <LinearLayout
+                android:id="@+id/waitPayBox"
                 android:layout_width="match_parent"
                 android:layout_height="84dp"
                 android:background="@color/color_FFFFFF"
@@ -314,6 +354,7 @@
                 android:visibility="gone"
                 android:gravity="center_vertical">
                 <TextView
+                    android:id="@+id/cancelOrdel"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
                     android:layout_weight="1"
@@ -323,6 +364,7 @@
                     android:background="@drawable/shape_radius6_border_ef5b48"
                     android:text="取消"/>
                 <TextView
+                    android:id="@+id/goPay"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
                     android:layout_weight="3"
@@ -335,6 +377,7 @@
             </LinearLayout>
             <!--代发货状态-->
             <LinearLayout
+                android:id="@+id/dDeliveryBox"
                 android:layout_width="match_parent"
                 android:layout_height="84dp"
                 android:background="@color/color_FFFFFF"
@@ -344,6 +387,7 @@
                 android:visibility="gone"
                 android:gravity="center_vertical">
                 <TextView
+                    android:id="@+id/dDelivery"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
                     android:layout_weight="1"
@@ -357,6 +401,7 @@
 
             <!--待收货状态-->
             <LinearLayout
+                android:id="@+id/shippedBox"
                 android:layout_width="match_parent"
                 android:layout_height="84dp"
                 android:background="@color/color_FFFFFF"
@@ -366,6 +411,7 @@
                 android:visibility="gone"
                 android:gravity="center_vertical">
                 <TextView
+                    android:id="@+id/lateDelivery"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
                     android:layout_weight="1"
@@ -375,6 +421,7 @@
                     android:background="@drawable/shape_radius6_border_ef5b48"
                     android:text="延长收货"/>
                 <TextView
+                    android:id="@+id/goLookLogistics"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
                     android:layout_weight="1"
@@ -386,6 +433,7 @@
                     android:background="@drawable/shape_radius6_border_ef5b48"
                     android:text="查看物流"/>
                 <TextView
+                    android:id="@+id/confirmReceipt"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
                     android:layout_weight="1"
@@ -398,6 +446,7 @@
 
             <!--待评价-->
             <LinearLayout
+                android:id="@+id/beEvaluatedBox"
                 android:layout_width="match_parent"
                 android:layout_height="84dp"
                 android:background="@color/color_FFFFFF"
@@ -429,6 +478,7 @@
                     android:background="@drawable/shape_radius6_border_ef5b48"
                     android:text="再次购买"/>
                 <TextView
+                    android:id="@+id/goEvaluation"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
                     android:layout_weight="1"
@@ -499,7 +549,7 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:orientation="horizontal"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:gravity="center_vertical|right">
                 <TextView
                     android:layout_width="0dp"

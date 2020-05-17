@@ -2,9 +2,12 @@ package com.hongyuan.fitness.ui.shop.sviewmodel;
 
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
+import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityCollectCouponsBinding;
+import com.hongyuan.fitness.ui.shop.sbeans.FirstCategoryBeans;
 import com.hongyuan.fitness.ui.shop.sviewpage.SccouponsPagerAdapter;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
 import com.youth.banner.BannerConfig;
@@ -18,10 +21,14 @@ public class CollectCouponsViewModel extends CustomViewModel {
 
     private SccouponsPagerAdapter pageAdapter;
 
+    //分类数据
+    private FirstCategoryBeans.DataBean dataBean;
+
     public CollectCouponsViewModel(CustomActivity mActivity,ActivityCollectCouponsBinding binding) {
         super(mActivity);
         this.binding = binding;
         initView();
+        lazyLoad();
     }
 
     @Override
@@ -31,9 +38,6 @@ public class CollectCouponsViewModel extends CustomViewModel {
         pageAdapter = new SccouponsPagerAdapter(mActivity.getSupportFragmentManager());
         binding.mViewPager.setAdapter(pageAdapter);
         binding.layoutMenu.setupWithViewPager(binding.mViewPager);
-        binding.mViewPager.setOffscreenPageLimit(getList().size());
-        pageAdapter.setData(getList());
-
 
     }
 
@@ -69,20 +73,22 @@ public class CollectCouponsViewModel extends CustomViewModel {
         return bList;
     }
 
-    /*
-     * 获取假数据
-     * */
-    private List<BaseBean> getList(){
-        List<BaseBean> mList = new ArrayList<>();
-        for(int i = 0 ; i < 10 ; i++){
-            BaseBean baseBean = new BaseBean();
-            mList.add(baseBean);
-        }
-        return mList;
+    @Override
+    protected void lazyLoad() {
+        mActivity.showLoading();
+        clearParams();
+        Controller.myRequest(Constants.GET_FIRST_CATEGORY,Controller.TYPE_POST,getParams(), FirstCategoryBeans.class,this);
     }
 
     @Override
     public void onSuccess(Object data) {
+        mActivity.closeLoading();
+        if(data instanceof FirstCategoryBeans){
+            dataBean = ((FirstCategoryBeans)data).getData();
 
+            binding.mViewPager.setOffscreenPageLimit(dataBean.getList().size());
+            pageAdapter.setData(dataBean.getList());
+
+        }
     }
 }

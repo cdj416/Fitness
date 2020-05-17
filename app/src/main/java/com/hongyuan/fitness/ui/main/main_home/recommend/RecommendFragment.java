@@ -13,19 +13,14 @@ import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.custom_view.HomeColumItemView;
-import com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsLikeBean;
 import com.hongyuan.fitness.ui.heat.HeatActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
-import com.hongyuan.fitness.ui.main.main_about_class.group_class.vtwo_group_class.VtwoGroupClassBeans;
-import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons.VtwoPrivateLessonsBeans;
-import com.hongyuan.fitness.ui.main.main_find.featured.FeatureBean;
-import com.hongyuan.fitness.ui.main.main_home.recommend.vtwo_home.VtwoStarCoachBean;
-import com.hongyuan.fitness.ui.main.main_mall.MallBeans;
+import com.hongyuan.fitness.ui.main.main_home.recommend.vthour.HomeIndexBeans;
+import com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeBeans;
+import com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeRecyclerItemView;
 import com.hongyuan.fitness.ui.out_door.RunActivity;
 import com.hongyuan.fitness.ui.out_door.about_you.AboutYouActivity;
-import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchCheckBean;
-import com.hongyuan.fitness.ui.store.more_store.StoreBean;
 import com.hongyuan.fitness.ui.training_plan.PlanInfoBeans;
 import com.hongyuan.fitness.ui.training_plan.TrainingPlanActivity;
 import com.hongyuan.fitness.ui.training_plan.plan_details.PlanDetailsActivity;
@@ -33,25 +28,22 @@ import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.GsonUtil;
 import com.hongyuan.fitness.util.JumpUtils;
-import com.hongyuan.fitness.util.LocationBean;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-import com.youth.banner.listener.OnBannerListener;
-
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecommendFragment extends CustomFragment implements HomeColumItemView.ClickReturn, V3HomeRecyclerItemView.Commback {
+public class RecommendFragment extends CustomFragment implements HomeColumItemView.ClickReturn, V4HomeRecyclerItemView.Commback {
 
     private Banner banner;
     private HomeColumItemView homeColum;
     private TextView addressName;
-    private V3HomeRecyclerItemView boutiqueGroup,starCoach,priviteCourse,storeItem,homeGoods,homeFinds;
+    private V4HomeRecyclerItemView storeItem,yueYunDong,jianZhi,LiLiang,groupCours,PeiXun,goods,topic,finds;
 
-    private FeatureBean featureBean;
+    private V4HomeBeans.DataBean infoData;
     //当前（点赞/取消点赞/关注/取消关注）等操作的数据位置
     private int mPosition;
 
@@ -78,18 +70,24 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
 
         //addressName.setText(LocationBean.getInstance().getCityName());
 
-        storeItem = mView.findViewById(R.id.storeItem);
-        boutiqueGroup = mView.findViewById(R.id.boutiqueGroup);
-        starCoach = mView.findViewById(R.id.starCoach);
+
         banner = mView.findViewById(R.id.banner);
         homeColum = mView.findViewById(R.id.homeColum);
-        priviteCourse = mView.findViewById(R.id.priviteCourse);
-        homeGoods = mView.findViewById(R.id.homeGoods);
-        homeFinds = mView.findViewById(R.id.homeFinds);
 
+        storeItem = mView.findViewById(R.id.storeItem);
+        yueYunDong = mView.findViewById(R.id.yueYunDong);
+        jianZhi = mView.findViewById(R.id.jianZhi);
+        LiLiang = mView.findViewById(R.id.LiLiang);
+        groupCours = mView.findViewById(R.id.groupCours);
+        PeiXun = mView.findViewById(R.id.PeiXun);
+        goods = mView.findViewById(R.id.goods);
+        topic = mView.findViewById(R.id.topic);
+        finds = mView.findViewById(R.id.finds);
 
         homeColum.setClickReturn(this);
 
+
+        Log.e("phm","========用户信息json数据======="+GsonUtil.toJsonStr(getParams()));
     }
 
     @Override
@@ -120,39 +118,12 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         clearParams().setParams("img_code","index_hd").setParams("img_num","8");
         Controller.myRequest(Constants.GET_IMG_LIST,Controller.TYPE_POST,getParams(), HomeBannerBean.class,this);
 
-        //读取附近门店
-        clearParams().setParams("lat", LocationBean.getInstance().getLat())
-                .setParams("lng",LocationBean.getInstance().getLng())
-                .setParams("page","5").setParams("curpage","1");
-        Controller.myRequest(Constants.GET_OFFLINE_STORE_LIST_JULI,Controller.TYPE_POST,getParams(), StoreBean.class,this);
-
-        //首页--读取首页教练
-        clearParams().setParams("city_name",LocationBean.getInstance().getCityName())
-                .setParams("page","3").setParams("curpage","1");
-        Controller.myRequest(Constants.GET_COACH_LIST,Controller.TYPE_POST,getParams(), VtwoStarCoachBean.class,this);
-
-        //课程--私教课列表
-        clearParams().setParams("page","3").setParams("curpage","1");
-        Controller.myRequest(Constants.GET_COURSE_PRIVITE_LIST,Controller.TYPE_POST,getParams(), VtwoPrivateLessonsBeans.class,this);
-
-        //获取门店的团课
-        clearParams().setParams("city_name",LocationBean.getInstance().getCityName())
-                .setParams("lat", LocationBean.getInstance().getLat())
-                .setParams("lng",LocationBean.getInstance().getLng())
-                .setParams("page","3").setParams("curpage","1");
-        Controller.myRequest(Constants.GET_TWO_COURSE_SUPER_LIST,Controller.TYPE_POST,getParams(), VtwoGroupClassBeans.class,this);
-
-        //获取商品数据
-        clearParams().setParams("first_category_id","0").setParams("second_category_id","0")
-                .setParams("page","5").setParams("curpage","1");
-        Controller.myRequest(Constants.GET_GOODS_LIST,Controller.TYPE_POST,getParams(), MallBeans.class,this);
-
-        //获取发现数据
-        clearParams().setParams("circle_state","1").setParams("circle_type","").setParams("city_name",LocationBean.getInstance().getCityName())
-                .setParams("page","4").setParams("curpage","1").setParams("is_tj","1");
-        Controller.myRequest(Constants.GET_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
-
-
+        //获取首页数据
+        clearParams();
+        Controller.myRequest(Constants.GET_INDEX_OS_PC_BUSINESS_CIRCLE,Controller.TYPE_POST,getParams(), V4HomeBeans.class,this);
+        //获取首页约运动和精品培训课数据
+        clearParams();
+        Controller.myRequest(Constants.INDEX,Controller.TYPE_POST,getParams(), HomeIndexBeans.class,this);
     }
 
 
@@ -182,46 +153,30 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
     @Override
     public void onSuccess(Object data) {
 
-        if(data instanceof StoreBean){
-            mActivity.closeLoading();
-            StoreBean storeBean = (StoreBean)data;
-            storeItem.setVisibility(View.VISIBLE);
-            storeItem.setStore(storeBean.getData().getList());
-        }
-
-        if(data instanceof VtwoStarCoachBean){
-            VtwoStarCoachBean starCoachBean = (VtwoStarCoachBean)data;
-            starCoach.setVisibility(View.VISIBLE);
-            starCoach.setStartCoach(starCoachBean.getData().getList());
-        }
-
-        if(data instanceof VtwoPrivateLessonsBeans){
-            VtwoPrivateLessonsBeans privateLessonsBeans = (VtwoPrivateLessonsBeans)data;
-            priviteCourse.setVisibility(View.VISIBLE);
-            priviteCourse.setPriviteCourse(privateLessonsBeans.getData().getList());
-        }
-
-        if(data instanceof VtwoGroupClassBeans){
-            VtwoGroupClassBeans groupBean = (VtwoGroupClassBeans)data;
-            boutiqueGroup.setVisibility(View.VISIBLE);
-            boutiqueGroup.setGroupCourse(groupBean.getData().getList());
-        }
-
         if(data instanceof HomeBannerBean){
             HomeBannerBean homeBannerBean = (HomeBannerBean)data;
             setBanner(homeBannerBean.getData().getList());
         }
 
-        if(data instanceof MallBeans){
-            MallBeans mallBeans = (MallBeans)data;
-            homeGoods.setVisibility(View.VISIBLE);
-            homeGoods.setGood(mallBeans.getData().getList());
+        if(data instanceof V4HomeBeans){
+            mActivity.closeLoading();
+
+            infoData = ((V4HomeBeans)data).getData();
+
+            storeItem.setStore(infoData.getOffline_store());
+            //yueYunDong.setYueYundong(infoData.get);
+            jianZhi.setJianzhi(infoData.getCp1());
+            LiLiang.setLiLiang(infoData.getCp2());
+            groupCours.setGroup(infoData.getSuper_course());
+            goods.setGoods(infoData.getGoods());
+            topic.setTopic(infoData.getCircle_category());
+            finds.setFind(infoData.getCircle(),this);
         }
 
-        if(data instanceof FeatureBean){
-            featureBean = (FeatureBean)data;
-            homeFinds.setVisibility(View.VISIBLE);
-            homeFinds.setFind(featureBean.getData().getList(),this);
+        if(data instanceof HomeIndexBeans){
+            HomeIndexBeans.DataBean indexBeans = ((HomeIndexBeans)data).getData();
+            yueYunDong.setYueYundong(indexBeans.getSport());
+            PeiXun.setPeiXun(indexBeans.getCourse_train());
         }
 
         if(data instanceof PlanInfoBeans){
@@ -266,17 +221,18 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         }
 
         if(code == ConstantsCode.ADD_CIRCLE_PRAISE){
-            featureBean.getData().getList().get(mPosition).setIs_praise(1);
-            featureBean.getData().getList().get(mPosition).setPraise_num(featureBean.getData().getList().get(mPosition).getPraise_num()+1);
-            homeFinds.setFind(featureBean.getData().getList(),this);
+            infoData.getCircle().get(mPosition).setIs_praise(1);
+            //infoData.getCircle().get(mPosition).setPraise_num(featureBean.getData().getList().get(mPosition).getPraise_num()+1);
+            finds.setFind(infoData.getCircle(),this);
             showSuccess("点赞成功！");
         }
         if(code == ConstantsCode.CANCEL_CIRCLE_PRAISE){
-            featureBean.getData().getList().get(mPosition).setIs_praise(0);
-            featureBean.getData().getList().get(mPosition).setPraise_num(featureBean.getData().getList().get(mPosition).getPraise_num()-1);
-            homeFinds.setFind(featureBean.getData().getList(),this);
+            infoData.getCircle().get(mPosition).setIs_praise(0);
+            //featureBean.getData().getList().get(mPosition).setPraise_num(infoData.getCircle().get(mPosition).getPraise_num()-1);
+            finds.setFind(infoData.getCircle(),this);
             showSuccess("已取消点赞！");
         }
+
     }
 
     /*
@@ -298,8 +254,8 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
     @Override
     public void commback(int position,String datas) {
         mPosition = position;
-        clearParams().setParams("circle_id",String.valueOf(featureBean.getData().getList().get(position).getCircle_id()));
-        if(featureBean.getData().getList().get(position).getIs_praise() == 0){
+        clearParams().setParams("circle_id",String.valueOf(infoData.getCircle().get(position).getCircle_id()));
+        if(infoData.getCircle().get(position).getIs_praise() == 0){
             Controller.myRequest(ConstantsCode.ADD_CIRCLE_PRAISE,Constants.ADD_CIRCLE_PRAISE,Controller.TYPE_POST,getParams(), PostDetailsLikeBean.class,this);
         }else{
             Controller.myRequest(ConstantsCode.CANCEL_CIRCLE_PRAISE,Constants.CANCEL_CIRCLE_PRAISE,Controller.TYPE_POST,getParams(), PostDetailsLikeBean.class,this);

@@ -8,12 +8,14 @@
         android:layout_height="118dp"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/color_FFFFFF"
+        android:id="@+id/box">
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/goodsImg"
             android:layout_width="92dp"
             android:layout_height="92dp"
             android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
             android:src="@color/color_f2"/>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -23,6 +25,7 @@
             android:layout_centerVertical="true"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/shopName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
@@ -32,16 +35,19 @@
                 android:text="商品名称商品名称商品名称商品名称商品名称商品名称"/>
 
             <TextView
+                android:id="@+id/numCollection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
                 android:textColor="@color/color_FF999999"
                 android:text="1234人收藏"
+                android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="14dp"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -50,6 +56,7 @@
                     android:textSize="@dimen/sp_12"
                     android:text="¥"/>
                 <TextView
+                    android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
@@ -71,6 +78,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="12dp"
+            android:visibility="gone"
             android:text="找相似的"/>
     </RelativeLayout>
     <View

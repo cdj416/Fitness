@@ -3,7 +3,9 @@ package com.hongyuan.fitness.ui.shop.sviewmodel;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
@@ -33,6 +35,27 @@ public class SstoreViewModel extends CustomViewModel {
         binding.mViewPager.setAdapter(pageApter);
         binding.layoutMenu.setupWithViewPager(binding.mViewPager);
         binding.mViewPager.setOffscreenPageLimit(2);
+
+        binding.collectStore.setOnClickListener(v -> {
+            addCollection(String.valueOf(storeBeans.getStore_id()));
+        });
+    }
+
+
+    /*
+     * 收藏商品
+     * */
+    private void addCollection(String id){
+        mActivity.showLoading();
+        clearParams().setParams("collection_code","store");
+        if(storeBeans.getIs_collection() == 1){
+            setParams("out_id",id);
+            Controller.myRequest(ConstantsCode.DEL_COLLECTION,Constants.DEL_COLLECTION,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+        }else{
+            setParams("id",id);
+            Controller.myRequest(ConstantsCode.ADD_COLLECTION,Constants.ADD_COLLECTION,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+        }
+
     }
 
     @Override
@@ -61,5 +84,20 @@ public class SstoreViewModel extends CustomViewModel {
             pageApter.setImgs(storeBeans.getStore_content());
         }
 
+    }
+
+    @Override
+    public void onSuccess(int code, Object data) {
+        mActivity.closeLoading();
+        if(code == ConstantsCode.ADD_COLLECTION){
+            showSuccess("收藏成功！");
+            binding.collectStore.setText("取消");
+            storeBeans.setIs_collection(1);
+        }
+        if(code == ConstantsCode.DEL_COLLECTION){
+            showSuccess("已取消收藏！");
+            binding.collectStore.setText("收藏");
+            storeBeans.setIs_collection(0);
+        }
     }
 }

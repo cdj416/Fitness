@@ -1,21 +1,25 @@
 package com.hongyuan.fitness.ui.shop.sfragment;
 
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.hongyuan.fitness.R;
-import com.hongyuan.fitness.base.BaseBean;
+import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
+import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SgoodsCollectAdapter;
-import java.util.ArrayList;
+import com.hongyuan.fitness.ui.shop.sbeans.SgCollectGoodsBeans;
 import java.util.List;
 
 public class SgCollectFragment extends CustomFragment {
 
     private RecyclerView mRec;
     private SgoodsCollectAdapter adapter;
+
+    private List<SgCollectGoodsBeans.DataBean.ListBean> mList;
 
     @Override
     public int getLayoutId() {
@@ -24,6 +28,9 @@ public class SgCollectFragment extends CustomFragment {
 
     @Override
     public void initView(View mView) {
+        setEnableLoadMore(true);
+        setEnableRefresh(true);
+
         mRec = mView.findViewById(R.id.mRec);
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -31,22 +38,50 @@ public class SgCollectFragment extends CustomFragment {
         mRec.setLayoutManager(manager);
         adapter = new SgoodsCollectAdapter();
         mRec.setAdapter(adapter);
-        adapter.setNewData(getList());
+
+        adapter.setOnItemChildClickListener((adapter, view, position) -> {
+            if(view.getId() == R.id.box){
+                Bundle bundle = new Bundle();
+                bundle.putString("g_id",String.valueOf(mList.get(position).getInfo().getG_id()));
+                startActivity(SgoodsDetailActivity.class,bundle);
+            }
+        });
     }
 
-    /*
-     * 组装假数据
-     * */
-    private List<BaseBean> getList(){
-        List<BaseBean> mList = new ArrayList<>();
-        for(int i = 0 ; i < 10 ; i++){
-            mList.add(new BaseBean());
-        }
-        return mList;
+    @Override
+    protected void lazyLoad() {
+        mActivity.showLoading();
+        clearParams().setParams("collection_code",getFragType());
+        Controller.myRequest(Constants.GET_COLLECTION_LIST,Controller.TYPE_POST,getParams(), getMyClass(),this);
+    }
+
+    @Override
+    public void loadMoreData() {
+        lazyLoad();
     }
 
     @Override
     public void onSuccess(Object data) {
+        mActivity.closeLoading();
 
+        if(data instanceof SgCollectGoodsBeans){
+            List<SgCollectGoodsBeans.DataBean.ListBean> list = ((SgCollectGoodsBeans)data).getData().getList();
+            if(curPage == FIRST_PAGE){
+                mList = list;
+            }else{
+                if(list != null && list.size() > 0){
+                    mList.addAll(list);
+                }else{
+                    refresh.finishLoadMoreWithNoMoreData();
+                }
+            }
+
+            if(mList != null && mList.size() > 0){
+                adapter.setNewData(mList);
+                setPromtView(SHOW_DATA);
+            }else{
+                setPromtView(SHOW_EMPTY);
+            }
+        }
     }
 }

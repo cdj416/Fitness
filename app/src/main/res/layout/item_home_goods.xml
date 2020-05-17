@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
     <View
-        android:id="@+id/firstView"
-        android:layout_width="10dp"
+        android:id="@+id/startWith"
+        android:layout_width="16dp"
         android:layout_height="match_parent"/>
     <LinearLayout
         android:layout_width="200dp"
@@ -15,20 +15,13 @@
         android:orientation="vertical"
         android:layout_marginBottom="20dp"
         android:id="@+id/jumpBox">
-        <androidx.cardview.widget.CardView
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/goodImg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="6dp"
-            app:cardUseCompatPadding="true">
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/goodImg"
-                android:layout_width="match_parent"
-                android:layout_height="122dp"
-                app:riv_corner_radius="6dp"
-                android:background="@color/color_EEEEEE"
-                android:scaleType="centerCrop"/>
-        </androidx.cardview.widget.CardView>
+            android:layout_height="122dp"
+            app:riv_corner_radius="6dp"
+            android:src="@color/color_f2"
+            android:scaleType="centerCrop"/>
 
 
         <TextView
@@ -87,8 +80,13 @@
         </LinearLayout>
     </LinearLayout>
     <View
-        android:id="@+id/lastView"
-        android:layout_width="10dp"
+        android:id="@+id/normWhith"
+        android:layout_width="12dp"
+        android:layout_height="match_parent"/>
+    <View
+        android:id="@+id/endWith"
+        android:layout_width="16dp"
+        android:visibility="gone"
         android:layout_height="match_parent"/>
 </LinearLayout>
 

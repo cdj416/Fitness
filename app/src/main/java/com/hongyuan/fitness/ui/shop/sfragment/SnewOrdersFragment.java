@@ -22,7 +22,6 @@ import com.hongyuan.fitness.ui.shop.sactivity.ProductReviewActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SnewOrdersAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.CancelOrderReasonBeans;
-import com.hongyuan.fitness.ui.shop.sbeans.CreateOrderBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.SnewOrderBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
@@ -116,7 +115,17 @@ public class SnewOrdersFragment extends CustomFragment {
             }
 
             if(view.getId() == R.id.titleBox){
-                startActivity(AftersaleOrderActivity.class,null);
+                SnewOrderBeans.DataBean.ListBean oneBean = (SnewOrderBeans.DataBean.ListBean) mList.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("o_id",String.valueOf(oneBean.getO_id()));
+                startActivity(AftersaleOrderActivity.class,bundle);
+            }
+
+            if(view.getId() == R.id.goodsBox){
+                SnewOrderBeans.DataBean.ListBean.GoodsListBean goodsListBean = (SnewOrderBeans.DataBean.ListBean.GoodsListBean) mList.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("o_id",String.valueOf(goodsListBean.getG_oid()));
+                startActivity(AftersaleOrderActivity.class,bundle);
             }
         });
     }

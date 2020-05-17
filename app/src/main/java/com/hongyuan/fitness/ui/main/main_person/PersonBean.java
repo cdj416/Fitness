@@ -81,7 +81,15 @@ public class PersonBean extends BaseBean {
             private int exercise_days;
             private int calories;
             private String mi_realname;
+            private String mi_money;
 
+            public String getMi_money() {
+                return mi_money;
+            }
+
+            public void setMi_money(String mi_money) {
+                this.mi_money = mi_money;
+            }
 
             public String getM_name() {
                 return m_name;

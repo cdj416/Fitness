@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.main.TitleBean;
+import com.hongyuan.fitness.ui.shop.sbeans.SgCollectGoodsBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.SsCollectBeans;
 import com.hongyuan.fitness.ui.shop.sfragment.SgCollectFragment;
 import com.hongyuan.fitness.ui.shop.sfragment.SsCollectFragment;
 
@@ -51,8 +53,8 @@ public class ScollectPagerAdapter extends FragmentPagerAdapter {
         beans.clear();
         beans.add(new TitleBean("商品",0));
         beans.add(new TitleBean("店铺",1));
-        fragments.add(new SgCollectFragment());
-        fragments.add(new SsCollectFragment());
+        fragments.add(new SgCollectFragment().setArguments("product").setMyClass(SgCollectGoodsBeans.class));
+        fragments.add(new SsCollectFragment().setArguments("store").setMyClass(SsCollectBeans.class));
 
         notifyDataSetChanged();
     }

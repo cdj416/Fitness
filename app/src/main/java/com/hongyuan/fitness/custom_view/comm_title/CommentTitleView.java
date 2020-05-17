@@ -110,6 +110,10 @@ public class CommentTitleView extends RelativeLayout {
         adapter.setNewData(mList);
     }
 
+    public void setObjectNum(List<CommentTitleBeans> mList){
+        this.mList = mList;
+        adapter.setNewData(mList);
+    }
 
     /*
     * 获取写死的数据

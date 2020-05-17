@@ -227,7 +227,7 @@ public class SsearchGoodsFragment extends CustomFragment {
     @Override
     protected void lazyLoad() {
         mActivity.showLoading();
-        clearParams();
+        clearParams().setParams("is_point","0");
         if(BaseUtil.isValue(filterBeans.getFirst_category_id())){
             setParams("first_category_id",filterBeans.getFirst_category_id());
         }

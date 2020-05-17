@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/cityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="13dp"
+        android:paddingEnd="13dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/shape_radius16_00000000_stroke_ef5b48"
+        android:textSize="@dimen/sp_14"
+        android:layout_centerInParent="true"
+        android:textColor="@color/color_EF5B48"
+        android:text="湖州"/>
+</RelativeLayout>

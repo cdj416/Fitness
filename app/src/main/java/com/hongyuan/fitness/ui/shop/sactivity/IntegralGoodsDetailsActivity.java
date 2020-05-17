@@ -27,7 +27,7 @@ public class IntegralGoodsDetailsActivity extends CustomActivity {
         binding.setViewModel(viewModel);
 
         ActivityBottomIntegralDetailsBinding bottomBinding = ActivityBottomIntegralDetailsBinding.bind(bottomChildView);
-        IgdBottomViewModel bottomViewModel = new IgdBottomViewModel(this,bottomBinding);
+        IgdBottomViewModel bottomViewModel = new IgdBottomViewModel(this,bottomBinding,viewModel);
         bottomBinding.setViewModel(bottomViewModel);
 
     }

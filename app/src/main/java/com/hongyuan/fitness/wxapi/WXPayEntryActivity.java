@@ -24,6 +24,7 @@ import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayViewModel;
 import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
+import com.hongyuan.fitness.ui.webview.WebPayModelUtils;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
@@ -91,8 +92,16 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 	public void onResp(BaseResp baseResp) {
 		if (baseResp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 			int code = baseResp.errCode;
-			Log.e("cdj","========pay_code==="+code);
 			String msg = "";
+			//处理网页的跳转
+			if(WebPayModelUtils.agent != null){
+				WebPayModelUtils.WXPayDealWith();
+				//并至空
+				WebPayModelUtils.agent = null;
+				//并关闭当前页面
+				finish();
+				return;
+			}
 			switch (code) {
 				case 0:
 					msg = "支付成功！";

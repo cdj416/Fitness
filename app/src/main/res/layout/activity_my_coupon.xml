@@ -8,36 +8,48 @@
             type="com.hongyuan.fitness.ui.person.my_coupon.MyCouponViewModel"/>
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/layoutMenu"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/color_FFFFFF"
-                app:tabIndicatorColor="@color/color_EF5B48"
-                app:tabMode="fixed"
-                app:tabSelectedTextColor="@color/color_EF5B48"
-                app:tabIndicatorFullWidth="false"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/mViewPager"
-                android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:background="@color/color_FFFFFF">
+            <TextView
+                android:id="@+id/storeCoupon"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@color/color_FFFFFF"/>
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_EF5B48"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="门店优惠券"/>
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/color_EEEEEE"/>
+            <TextView
+                android:id="@+id/shopCoupon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_FF333333"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="商城优惠券"/>
         </LinearLayout>
-    </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/color_EEEEEE"/>
+
+        <FrameLayout
+            android:id="@+id/fragmentBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
 
 </layout>

@@ -52,10 +52,10 @@ public class PromateOrdersViwPageAdapter extends FragmentPagerAdapter {
         beans.add(new TitleBean("已付款",1));
         beans.add(new TitleBean("已完成",2));
         beans.add(new TitleBean("已失效",3));
-        fragments.add(new PromateOrderFragment());
-        fragments.add(new PromateOrderFragment());
-        fragments.add(new PromateOrderFragment());
-        fragments.add(new PromateOrderFragment());
+        fragments.add(new PromateOrderFragment().setArguments(""));
+        fragments.add(new PromateOrderFragment().setArguments("3"));
+        fragments.add(new PromateOrderFragment().setArguments("8"));
+        fragments.add(new PromateOrderFragment().setArguments("3"));
 
         notifyDataSetChanged();
     }

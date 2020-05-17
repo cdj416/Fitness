@@ -1,6 +1,5 @@
 package com.hongyuan.fitness.ui.person.fix;
 
-import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -28,43 +27,56 @@ public class PcourseSiginAdapter extends BaseQuickAdapter<PriviteCourseCheckBean
                 .setText(R.id.courseStartTime, getShowTime(item.getStart_time()));
 
         int time = TimeUtil.getOffectMinutes(item.getStart_time(),TimeUtil.dateFormatYMDHMS);
-        if(time < -4320){
-            helper.getView(R.id.qdBox).setVisibility(View.GONE);
-            helper.getView(R.id.wcSignBox).setVisibility(View.VISIBLE);
-            helper.getView(R.id.wcCancelSign).setVisibility(View.GONE);
-        }else{
-            helper.getView(R.id.wcCancelSign).setVisibility(View.VISIBLE);
-        }
+        int endtime = TimeUtil.getOffectMinutes(item.getEnd_time(),TimeUtil.dateFormatYMDHMS);
 
-        if(item.getXy_qd_state() == 1){
-            helper.getView(R.id.qdBox).setVisibility(View.GONE);
-            helper.getView(R.id.wcSignBox).setVisibility(View.VISIBLE);
-        }else{
+        if(time > 0){
             helper.getView(R.id.qdBox).setVisibility(View.VISIBLE);
-            helper.getView(R.id.wcSignBox).setVisibility(View.GONE);
+            helper.getView(R.id.signSuccess).setVisibility(View.GONE);
 
-            if((time > 0 && time < 60) || (time < 0 && time > -4320)){
-                helper.getView(R.id.showTime).setVisibility(View.VISIBLE);
-                if(time > 0 && time < 60){
-                    helper.setText(R.id.showTime,"距离开课还有"+time+"分钟");
+            helper.setText(R.id.showTime,"未到课程签到时间");
+            helper.getView(R.id.qdText).setVisibility(View.GONE);
+            helper.getView(R.id.cancelSign).setVisibility(View.VISIBLE);
+
+            helper.addOnClickListener(R.id.cancelSign);
+        }else if(time <= 0 && time >= -4320){
+
+
+            if(item.getXy_qd_state() != 1 && endtime >= 0){
+                helper.getView(R.id.qdBox).setVisibility(View.VISIBLE);
+                helper.getView(R.id.signSuccess).setVisibility(View.GONE);
+
+                helper.setText(R.id.showTime,"课程已开始");
+
+                helper.getView(R.id.qdText).setVisibility(View.VISIBLE);
+                helper.getView(R.id.cancelSign).setVisibility(View.VISIBLE);
+
+                helper.addOnClickListener(R.id.cancelSign).addOnClickListener(R.id.qdText);
+            }else if(item.getXy_qd_state() != 1 && endtime < 0){
+                helper.getView(R.id.qdBox).setVisibility(View.VISIBLE);
+                helper.getView(R.id.signSuccess).setVisibility(View.GONE);
+
+                helper.setText(R.id.showTime,"课程已结束\n请在三天内完成签到");
+
+                helper.getView(R.id.qdText).setVisibility(View.VISIBLE);
+                helper.getView(R.id.cancelSign).setVisibility(View.VISIBLE);
+
+                helper.addOnClickListener(R.id.cancelSign).addOnClickListener(R.id.qdText);
+
+            }else{
+                helper.getView(R.id.qdBox).setVisibility(View.GONE);
+                helper.getView(R.id.signSuccess).setVisibility(View.VISIBLE);
+                if(endtime >= 0){
+                    helper.setText(R.id.succeTV,"课程已开始");
                 }else{
-                    helper.setText(R.id.showTime,"三天后自动完成签到");
+                    helper.setText(R.id.succeTV,"课程已结束");
                 }
-                helper.setBackgroundRes(R.id.qdText,R.drawable.shape_radius16_ef5b48);
-                helper.getView(R.id.qdText).setClickable(true);
-                helper.addOnClickListener(R.id.qdText);
-            }else if(time > 60){
-                helper.getView(R.id.showTime).setVisibility(View.VISIBLE);
-                helper.setText(R.id.showTime,"开课前一小时可签到");
-
-                helper.setBackgroundRes(R.id.qdText,R.drawable.shape_radius16_42000000);
-                helper.getView(R.id.qdText).setClickable(false);
             }
-        }
 
-        helper.addOnClickListener(R.id.wcCancelSign)
-                .addOnClickListener(R.id.cancelSign)
-                .addOnClickListener(R.id.goSignDetail);
+        }else{
+            helper.getView(R.id.qdBox).setVisibility(View.GONE);
+            helper.getView(R.id.signSuccess).setVisibility(View.VISIBLE);
+            helper.setText(R.id.succeTV,"已自动签到");
+        }
     }
 
     /*

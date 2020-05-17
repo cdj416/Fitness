@@ -14,6 +14,7 @@ import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.shop.sactivity.MainSearchActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.MyShopActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SCartActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopMenuActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopMessageActivity;
@@ -28,7 +29,7 @@ public class ShopFragment extends CustomFragment {
 
     private TabLayout layoutMenu;
     private ViewPager mViewPager;
-    private ImageView sortMark,mMessage,goCart;
+    private ImageView sortMark,mMessage,goCart,goMyShop;
     private LinearLayout searchBox;
 
     private ShopViewPagerAdapter meunAdapter;
@@ -49,6 +50,7 @@ public class ShopFragment extends CustomFragment {
         sortMark = mView.findViewById(R.id.sortMark);
         mMessage = mView.findViewById(R.id.mMessage);
         goCart = mView.findViewById(R.id.goCart);
+        goMyShop = mView.findViewById(R.id.goMyShop);
 
         sortMark.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -69,6 +71,9 @@ public class ShopFragment extends CustomFragment {
         });
         goCart.setOnClickListener(v ->{
             startActivity(SCartActivity.class,null);
+        });
+        goMyShop.setOnClickListener(v -> {
+            startActivity(MyShopActivity.class,null);
         });
     }
 

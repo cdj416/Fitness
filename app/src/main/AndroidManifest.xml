@@ -336,6 +336,15 @@
         <activity android:name=".ui.shop.sactivity.LogisticsActivity"/>
         <activity android:name=".ui.shop.sactivity.AfterSalesActivity"/>
         <activity android:name=".ui.shop.sactivity.ProductReviewActivity"/>
+        <activity android:name=".ui.shop.sactivity.MyShopActivity"/>
+        <activity android:name=".ui.shop.sactivity.SportsLifeActivity"/>
+        <activity android:name=".ui.shop.sactivity.PromoteGoodsActivity"/>
+        <activity android:name=".ui.shop.sactivity.CustomServerActivity"/>
+        <activity android:name=".ui.shop.sactivity.IncomeDetailsActivity"/>
+        <activity android:name=".ui.shop.sactivity.NewOrderActivity"/>
+        <activity android:name=".ui.shop.sactivity.GroupChatUserActivity"/>
+        <activity android:name=".ui.person.fix.CancelCourseActivity"/>
+        <activity android:name=".ui.main.AllCitysActivity"/>
 
 
     </application>

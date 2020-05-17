@@ -68,7 +68,8 @@ public class V2FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.
                 .setVisible(R.id.playMark,imgUrl.contains("mp4"))
                 .setText(R.id.fName,item.getM_name())
                 .setText(R.id.timeText,TimeUtil.friendly_time(item.getAdd_date()))
-                .setText(R.id.attention, String.valueOf(item.getPraise_num()));
+                .setText(R.id.attention, String.valueOf(item.getPraise_num()))
+                .setText(R.id.content,item.getCircle_content());
 
         if(item.getIs_praise() == 0){
             ViewChangeUtil.changeBottomDrawable(mContext,helper.getView(R.id.attention),R.mipmap.like_huise_img);

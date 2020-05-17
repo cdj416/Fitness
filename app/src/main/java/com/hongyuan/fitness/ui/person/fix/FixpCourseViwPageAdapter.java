@@ -48,9 +48,9 @@ public class FixpCourseViwPageAdapter extends FragmentPagerAdapter {
         fragments.clear();
         beans.clear();
         beans.add(new TitleBean("全部",0));
-        beans.add(new TitleBean("待预约",1));
-        beans.add(new TitleBean("待上课",2));
-        beans.add(new TitleBean("待评价",3));
+        beans.add(new TitleBean("待上课",1));
+        beans.add(new TitleBean("待评价",2));
+        beans.add(new TitleBean("已上完",3));
         fragments.add(new SixpCourseAllFragment());
         fragments.add(new SixReservationFragment());
         fragments.add(new SixSiginFragment());

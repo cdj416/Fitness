@@ -64,7 +64,7 @@ public class SstoreGoodsFragment extends CustomFragment {
         gAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             Bundle bundle = new Bundle();
             bundle.putString("g_id",String.valueOf(mList.get(position).getG_id()));
-            startActivity(SgoodsDetailActivity.class,null);
+            startActivity(SgoodsDetailActivity.class,bundle);
         });
     }
 

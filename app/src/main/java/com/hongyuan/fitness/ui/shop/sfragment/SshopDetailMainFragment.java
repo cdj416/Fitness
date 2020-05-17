@@ -26,6 +26,7 @@ import com.hongyuan.fitness.ui.shop.sadapter.ShopMainGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.ScouponsBean;
 import com.hongyuan.fitness.ui.shop.sbeans.SgoodsDeailStoreBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.SgoodsDetailBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.ShopCommentBeans;
 import com.hongyuan.fitness.ui.shop.sinterface.GoOtherPageListener;
 import com.hongyuan.fitness.ui.shop.smyview.SGoodsDetailsHeadView;
 import com.hongyuan.fitness.util.BaseUtil;
@@ -45,9 +46,9 @@ public class SshopDetailMainFragment extends CustomFragment {
     private Banner banner;
     private RecyclerView commentRec,goodsRec,detailsImg;
     private CustomRecyclerView sgRec1;
-    private TextView goComments,shopName,collectionNum,collectStore,goStore;
+    private TextView goComments,shopName,collectionNum,collectStore,goStore,userName,cComtent;
     private SGoodsDetailsHeadView goodHeads;
-    private RoundedImageView shopImg;
+    private RoundedImageView shopImg,cheadImg;
     private RatingBar myRat;
 
     private SGDcommentAdapter sgDcommentAdapter;
@@ -81,7 +82,7 @@ public class SshopDetailMainFragment extends CustomFragment {
         g_id = mActivity.getBundle().getString("g_id");
 
         banner = mView.findViewById(R.id.banner);
-        commentRec = mView.findViewById(R.id.commentRec);
+        //commentRec = mView.findViewById(R.id.commentRec);
         goodsRec = mView.findViewById(R.id.goodsRec);
         detailsImg = mView.findViewById(R.id.detailsImg);
         goComments = mView.findViewById(R.id.goComments);
@@ -93,15 +94,18 @@ public class SshopDetailMainFragment extends CustomFragment {
         collectionNum = mView.findViewById(R.id.collectionNum);
         collectStore = mView.findViewById(R.id.collectStore);
         goStore = mView.findViewById(R.id.goStore);
+        cheadImg = mView.findViewById(R.id.cheadImg);
+        userName = mView.findViewById(R.id.userName);
+        cComtent = mView.findViewById(R.id.cComtent);
 
-        LinearLayoutManager comManager = new LinearLayoutManager(mActivity);
+        /*LinearLayoutManager comManager = new LinearLayoutManager(mActivity);
         comManager.setOrientation(RecyclerView.VERTICAL);
         commentRec.setLayoutManager(comManager);
         sgDcommentAdapter = new SGDcommentAdapter();
         commentRec.setAdapter(sgDcommentAdapter);
         List<BaseBean> ll = new ArrayList<>();
         ll.add(new BaseBean());
-        sgDcommentAdapter.setNewData(ll);
+        sgDcommentAdapter.setNewData(ll);*/
 
         GridLayoutManager layoutManager = new GridLayoutManager(mActivity, 3);
         goodsRec.setLayoutManager(layoutManager);
@@ -164,7 +168,7 @@ public class SshopDetailMainFragment extends CustomFragment {
     * 打开规格弹框
     * */
     public void showGG(){
-        CustomDialog.showGoodsSpecification(getContext(),infoBean,this);
+        CustomDialog.showGoodsSpecification(getContext(),infoBean,this,null);
     }
 
     /*
@@ -210,6 +214,10 @@ public class SshopDetailMainFragment extends CustomFragment {
         //商品详情的店铺信息/推荐商品
         clearParams().setParams("g_id",g_id);
         Controller.myRequest(Constants.GET_GOODS_STORE_INFO,Controller.TYPE_POST,getParams(), SgoodsDeailStoreBeans.class,this);
+
+        //获取商品评论
+        clearParams().setParams("g_id",g_id);
+        Controller.myRequest(Constants.GET_GOODS_EVALUATION,Controller.TYPE_POST,getParams(), ShopCommentBeans.class,this);
     }
 
     @Override
@@ -249,6 +257,17 @@ public class SshopDetailMainFragment extends CustomFragment {
 
             stroeAdapter.setNewData(storeBean.getGoods_list());
             sgDgoodsAdapter.setNewData(storeBean.getTj_goods_list());
+        }
+
+        if(data instanceof ShopCommentBeans){
+            ShopCommentBeans.DataBean comentBeans = ((ShopCommentBeans)data).getData();
+            if(comentBeans.getList() != null && comentBeans.getList().size() > 0){
+                RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img);
+                Glide.with(mActivity).load(storeBean.getStore_logo()).apply(options).into(cheadImg);
+
+                userName.setText(comentBeans.getList().get(0).getM_name());
+                cComtent.setText(comentBeans.getList().get(0).getEvaluation_content());
+            }
         }
     }
 

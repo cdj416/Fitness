@@ -24,5 +24,7 @@ public class SstoreGouponAdapter extends BaseQuickAdapter<StoreCouponBeans.DataB
 
         helper.setText(R.id.couponMoney, BaseUtil.getNoZoon(item.getCoupon_money()))
                 .setText(R.id.minMoney,"满"+BaseUtil.getNoZoon(item.getMin_money())+"可用");
+
+        helper.addOnClickListener(R.id.recCoupon);
     }
 }

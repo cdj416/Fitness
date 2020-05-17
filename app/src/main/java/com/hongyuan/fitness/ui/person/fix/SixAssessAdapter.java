@@ -27,13 +27,13 @@ public class SixAssessAdapter extends BaseQuickAdapter<PriviteCourseCheckBeans.D
                 .setText(R.id.coachName,"教练："+item.getCoach_nickname()+"/"+item.getOs_name())
                 .setText(R.id.courseName,item.getCp_name());
 
-        if(item.getState() == 3){
+        /*if(item.getState() == 3){
             helper.getView(R.id.evaluatedBox).setVisibility(View.VISIBLE);
             helper.getView(R.id.goAssess).setVisibility(View.GONE);
         }else{
             helper.getView(R.id.evaluatedBox).setVisibility(View.GONE);
             helper.getView(R.id.goAssess).setVisibility(View.VISIBLE);
-        }
+        }*/
 
         helper.addOnClickListener(R.id.goDetails).addOnClickListener(R.id.goAssess);
     }

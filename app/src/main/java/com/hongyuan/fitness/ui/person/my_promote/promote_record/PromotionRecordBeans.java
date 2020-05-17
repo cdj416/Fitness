@@ -6,11 +6,12 @@ import java.util.List;
 
 public class PromotionRecordBeans extends BaseBean {
 
+
     /**
      * hasmore : false
      * curpage : 1
-     * page_total : 0
-     * data : {"list":[{"m_name":"m88888","m_mobile":"186****4159","mi_head":""}],"mytg":{"m_name":"m88888","m_mobile":"186****4159","mi_head":""},"num":0}
+     * page_total : 1
+     * data : {"list":[{"m_name":"Jamace","m_mobile":"152****9931","mi_head":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20191108/9f73e46a3c49c7b9d86a9bc48be19c52bb6107be_1792x1792.jpg"}],"mytg":{"m_name":"Jamace","m_mobile":"152****9931","mi_head":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20191108/9f73e46a3c49c7b9d86a9bc48be19c52bb6107be_1792x1792.jpg"},"num":1}
      */
 
     private boolean hasmore;
@@ -52,9 +53,9 @@ public class PromotionRecordBeans extends BaseBean {
 
     public static class DataBean {
         /**
-         * list : [{"m_name":"m88888","m_mobile":"186****4159","mi_head":""}]
-         * mytg : {"m_name":"m88888","m_mobile":"186****4159","mi_head":""}
-         * num : 0
+         * list : [{"m_name":"Jamace","m_mobile":"152****9931","mi_head":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20191108/9f73e46a3c49c7b9d86a9bc48be19c52bb6107be_1792x1792.jpg"}]
+         * mytg : {"m_name":"Jamace","m_mobile":"152****9931","mi_head":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20191108/9f73e46a3c49c7b9d86a9bc48be19c52bb6107be_1792x1792.jpg"}
+         * num : 1
          */
 
         private MytgBean mytg;
@@ -87,9 +88,9 @@ public class PromotionRecordBeans extends BaseBean {
 
         public static class MytgBean {
             /**
-             * m_name : m88888
-             * m_mobile : 186****4159
-             * mi_head :
+             * m_name : Jamace
+             * m_mobile : 152****9931
+             * mi_head : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20191108/9f73e46a3c49c7b9d86a9bc48be19c52bb6107be_1792x1792.jpg
              */
 
             private String m_name;
@@ -123,9 +124,9 @@ public class PromotionRecordBeans extends BaseBean {
 
         public static class ListBean {
             /**
-             * m_name : m88888
-             * m_mobile : 186****4159
-             * mi_head :
+             * m_name : Jamace
+             * m_mobile : 152****9931
+             * mi_head : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20191108/9f73e46a3c49c7b9d86a9bc48be19c52bb6107be_1792x1792.jpg
              */
 
             private String m_name;

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/startWith"
+        android:layout_width="16dp"
+        android:layout_height="match_parent"/>
+    <RelativeLayout
+        android:id="@+id/goDetail"
+        android:layout_width="185dp"
+        android:layout_height="90dp">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/bgImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="6dp"
+            android:src="@color/color_f2"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_radius6_black"
+            android:alpha="0.1"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="14sp"
+            android:layout_marginStart="12dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/firstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_FFFFFF"
+                android:text="急速减脂训练"/>
+            <TextView
+                android:id="@+id/secondName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_FFFFFF"
+                android:layout_marginTop="6dp"
+                android:text="教练：Kevin"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <View
+        android:id="@+id/normWhith"
+        android:layout_width="12dp"
+        android:layout_height="match_parent"/>
+    <View
+        android:id="@+id/endWith"
+        android:layout_width="16dp"
+        android:visibility="gone"
+        android:layout_height="match_parent"/>
+</LinearLayout>

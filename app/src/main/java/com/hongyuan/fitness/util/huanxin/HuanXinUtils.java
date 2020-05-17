@@ -1,4 +1,5 @@
 package com.hongyuan.fitness.util.huanxin;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.hongyuan.fitness.base.MyApplication;
@@ -12,6 +13,8 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
+import com.hyphenate.chat.EMCursorResult;
+import com.hyphenate.chat.EMGroup;
 import com.hyphenate.chat.EMGroupManager;
 import com.hyphenate.chat.EMGroupOptions;
 import com.hyphenate.chat.EMMessage;
@@ -370,37 +373,6 @@ public class HuanXinUtils {
         return emCallBack;
     }
 
-    /*
-    * 创建群组
-     * @param groupName 群组名称
-     * @param desc 群组简介
-     * @param allMembers 群组初始成员，如果只有自己传空数组即可
-     * @param reason 邀请成员加入的reason
-     * @param option 群组类型选项，可以设置群组最大用户数(默认200)及群组类型@see {@link EMGroupStyle}
-     *               option.inviteNeedConfirm表示邀请对方进群是否需要对方同意，默认是需要用户同意才能加群的。
-     *               option.extField创建群时可以为群组设定扩展字段，方便个性化订制。
-     * @return 创建好的group
-     * @throws HyphenateException
-    * */
-    public void createGoup(String groupName,String desc){
-        EMGroupOptions option = new EMGroupOptions();
-        option.maxUsers = 200;
-        option.style = EMGroupManager.EMGroupStyle.EMGroupStylePublicJoinNeedApproval;
-
-        try {
-            EMClient.getInstance().groupManager().createGroup(groupName, desc, null, "", option);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-    /*
-    * 加入群组
-    * */
-    public void joinGroup(){
-
-    }
 
     /*
     * 消息接收监听
@@ -488,6 +460,65 @@ public class HuanXinUtils {
                 // TODO：开发者可以复写该方法控制设备是否支持某推送的判断。
             }
         });
+    }
+
+
+    /***********************************************************************************************/
+
+    /**
+     * 耗时操作需要在子线程中创建
+     * 创建群组
+     * @param groupName 群组名称
+     * @param desc 群组简介
+     *  allMembers 群组初始成员，如果只有自己传空数组即可
+     * @param reason 邀请成员加入的reason
+     *  option 群组类型选项，可以设置群组最大用户数(默认200)及群组类型@see {@link EMGroupStyle}
+     *               option.inviteNeedConfirm表示邀请对方进群是否需要对方同意，默认是需要用户同意才能加群的。
+     *               option.extField创建群时可以为群组设定扩展字段，方便个性化订制。
+     * @return 创建好的group
+     * @throws HyphenateException
+     */
+    public EMGroup createGroup(String groupName, String desc, String reason) throws Exception{
+
+        EMGroupOptions option = new EMGroupOptions();
+        option.maxUsers = 200;
+        option.style = EMGroupManager.EMGroupStyle.EMGroupStylePublicOpenJoin;
+
+       return EMClient.getInstance().groupManager().createGroup(groupName, desc, null, reason, option);
+    }
+
+    /*
+    *
+    * 加入某个群组
+    * 如果群开群是自由加入的，即group.isMembersOnly()为false，直接join
+    * */
+    public void joinGroup(String groupid) throws Exception{
+        //需异步处理
+        EMClient.getInstance().groupManager().joinGroup(groupid);
+    }
+
+    /*
+    * 解散群组
+    * */
+    public void destroyGroup(String groupId) throws Exception{
+        //需异步处理
+        EMClient.getInstance().groupManager().destroyGroup(groupId);
+    }
+
+    /*
+    * 获取完整的群成员列表
+    * */
+    public void getMemberList(String groupId) throws Exception{
+        //如果群成员较多，需要多次从服务器获取完成
+
+        List<String> memberList = new ArrayList<>();
+        EMCursorResult<String> result = null;
+        final int pageSize = 20;
+        do {
+            result = EMClient.getInstance().groupManager().fetchGroupMembers(groupId,
+                    result != null ? result.getCursor() : "", pageSize);
+            memberList.addAll(result.getData());
+        } while (!TextUtils.isEmpty(result.getCursor()) && result.getData().size() == pageSize);
     }
 }
 

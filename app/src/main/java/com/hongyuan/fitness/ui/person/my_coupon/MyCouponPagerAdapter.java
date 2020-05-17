@@ -7,7 +7,6 @@ import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.main.TitleBean;
 import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons.VtwoPrivateLessonsBeans;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vtwo_home.VtwoStarCoachBean;
-import com.hongyuan.fitness.ui.person.my_collection.MyCollectionFragment;
 import com.hongyuan.fitness.ui.person.my_collection.collection_baike.CollectionBaikeBeans;
 
 import java.util.ArrayList;
@@ -15,12 +14,19 @@ import java.util.List;
 
 public class MyCouponPagerAdapter extends FragmentPagerAdapter {
 
+    public static final int SHOP_COUPON = 0X1;
+    public static final int STORE_COUPON = 0X2;
+
     private List<CustomFragment> fragments;
     private List<TitleBean> beans;
 
-    public MyCouponPagerAdapter(FragmentManager fm) {
+
+
+    public MyCouponPagerAdapter(FragmentManager fm,int type) {
         super(fm);
-        setData();
+        if(type == STORE_COUPON){
+            setData();
+        }
     }
 
     @Override

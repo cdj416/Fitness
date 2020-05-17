@@ -14,7 +14,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.custom_view.nine_gridimg.NineGridImageView;
 import com.hongyuan.fitness.custom_view.nine_gridimg.NineGridImageViewAdapter;
-import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CommentBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.ShopCommentBeans;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.previewlibrary.GPreviewBuilder;
@@ -23,29 +23,28 @@ import com.previewlibrary.enitity.UserViewInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SGDCommentsAdapter extends BaseQuickAdapter<CommentBeans.DataBean.ListBean, BaseViewHolder> {
+public class SGDCommentsAdapter extends BaseQuickAdapter<ShopCommentBeans.DataBean.ListBean, BaseViewHolder> {
 
     public SGDCommentsAdapter(){
         super(R.layout.item_sgd_comments);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, CommentBeans.DataBean.ListBean item) {
+    protected void convert(BaseViewHolder helper, ShopCommentBeans.DataBean.ListBean item) {
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img).centerCrop();
         Glide.with(mContext).load(item.getMi_head()).apply(options).into((RoundedImageView)helper.getView(R.id.headImg));
         helper.setText(R.id.userName,item.getM_name())
-                .setText(R.id.commentTime, TimeUtil.friendly_time(item.getCr_date()))
-                .setText(R.id.cpName,item.getCp_name())
-                .setText(R.id.barText,getBarString(Float.valueOf(item.getCoach_s())));
+                .setText(R.id.commentTime, TimeUtil.friendly_time(item.getEvaluation_date()))
+                .setText(R.id.barText,getBarString(Float.valueOf(item.getEvaluation_score())));
         RatingBar ratingBar = helper.getView(R.id.myRat);
-        ratingBar.setRating(Float.valueOf(item.getCoach_s()));
+        ratingBar.setRating(Float.valueOf(item.getEvaluation_score()));
 
 
-        if(item.getCri() != null && item.getCri().size() > 0){
+        if(item.getEvaluation_img() != null && item.getEvaluation_img().size() > 0){
             helper.getView(R.id.nineGridImg).setVisibility(View.VISIBLE);
             NineGridImageView nineGridImageView = helper.getView(R.id.nineGridImg);
             nineGridImageView.setAdapter(mAdapter);
-            nineGridImageView.setImagesData(item.getCri());
+            nineGridImageView.setImagesData(item.getEvaluation_img());
         }else{
             helper.getView(R.id.nineGridImg).setVisibility(View.GONE);
         }
@@ -78,11 +77,11 @@ public class SGDCommentsAdapter extends BaseQuickAdapter<CommentBeans.DataBean.L
     /*
      * 九宫格适配器
      * */
-    private NineGridImageViewAdapter<CommentBeans.DataBean.ListBean.CriBean> mAdapter = new NineGridImageViewAdapter<CommentBeans.DataBean.ListBean.CriBean>() {
+    private NineGridImageViewAdapter<ShopCommentBeans.DataBean.ListBean.EvaluationImgBean> mAdapter = new NineGridImageViewAdapter<ShopCommentBeans.DataBean.ListBean.EvaluationImgBean>() {
         @Override
-        protected void onDisplayImage(Context context, ImageView imageView, CommentBeans.DataBean.ListBean.CriBean s) {
+        protected void onDisplayImage(Context context, ImageView imageView, ShopCommentBeans.DataBean.ListBean.EvaluationImgBean s) {
             RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
-            Glide.with(mContext).load(s.getCri_src()).apply(options).into(imageView);
+            Glide.with(mContext).load(s.getImg_url()).apply(options).into(imageView);
         }
 
         @Override
@@ -91,7 +90,7 @@ public class SGDCommentsAdapter extends BaseQuickAdapter<CommentBeans.DataBean.L
         }
 
         @Override
-        protected void onItemImageClick(Context context, List<ImageView> mImageViewList, ImageView imageView, int index, List<CommentBeans.DataBean.ListBean.CriBean> list) {
+        protected void onItemImageClick(Context context, List<ImageView> mImageViewList, ImageView imageView, int index, List<ShopCommentBeans.DataBean.ListBean.EvaluationImgBean> list) {
 
             //点击查看大图功能
             GPreviewBuilder.from((Activity) context)
@@ -105,10 +104,10 @@ public class SGDCommentsAdapter extends BaseQuickAdapter<CommentBeans.DataBean.L
     /*
      * 获取图片集和图片所处位置
      * */
-    private List<UserViewInfo> getInfoList(List<CommentBeans.DataBean.ListBean.CriBean> list,List<ImageView> mImageViewList){
+    private List<UserViewInfo> getInfoList(List<ShopCommentBeans.DataBean.ListBean.EvaluationImgBean> list,List<ImageView> mImageViewList){
         List<UserViewInfo> imgList = new ArrayList<>();
         for(int i = 0 ; i < list.size() ; i++){
-            imgList.add(new UserViewInfo(list.get(i).getCri_src()));
+            imgList.add(new UserViewInfo(list.get(i).getImg_url()));
             Rect bounds = new Rect();
             mImageViewList.get(i).getGlobalVisibleRect(bounds);
             imgList.get(i).setBounds(bounds);

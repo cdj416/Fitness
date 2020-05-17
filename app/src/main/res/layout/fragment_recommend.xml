@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<com.hongyuan.fitness.custom_view.StickyScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -9,23 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="60dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/color_F5F6FB">
 
-        <androidx.cardview.widget.CardView
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            app:cardElevation="6dp"
-            app:cardUseCompatPadding="true">
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="109dp"
-                app:indicator_drawable_selected="@drawable/shape_select_dot"/>
-        </androidx.cardview.widget.CardView>
+            android:layout_height="166dp"
+            app:indicator_drawable_selected="@drawable/shape_select_dot"/>
 
         <com.hongyuan.fitness.custom_view.HomeColumItemView
             android:id="@+id/homeColum"
@@ -33,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="10dp"
+            android:background="@color/color_FFFFFF"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"/>
 
@@ -41,53 +33,67 @@
             android:layout_height="1px"
             android:background="@color/color_EEEEEE"/>
 
-        <com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView
+        <com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeRecyclerItemView
             android:id="@+id/storeItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:vthird_type="store"/>
+            app:vthourth_type="store"/>
 
-        <com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView
-            android:id="@+id/priviteCourse"
+        <com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeRecyclerItemView
+            android:id="@+id/yueYunDong"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginTop="12dp"
-            app:vthird_type="priviteCourse"/>
+            app:vthourth_type="yueyundong"/>
 
-        <com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView
-            android:id="@+id/boutiqueGroup"
+        <com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeRecyclerItemView
+            android:id="@+id/jianZhi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginTop="12dp"
-            app:vthird_type="goupCourse"/>
+            app:vthourth_type="jianzhi"/>
 
-        <com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView
-            android:id="@+id/starCoach"
+        <com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeRecyclerItemView
+            android:id="@+id/LiLiang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
-            app:vthird_type="startCoach"/>
+            app:vthourth_type="liliang"/>
 
-        <com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView
-            android:id="@+id/homeGoods"
+        <com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeRecyclerItemView
+            android:id="@+id/groupCours"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:vthird_type="mall"/>
+            app:vthourth_type="groupCourse"/>
 
-        <com.hongyuan.fitness.custom_view.V3HomeRecyclerItemView
-            android:id="@+id/homeFinds"
+        <com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeRecyclerItemView
+            android:id="@+id/PeiXun"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:vthird_type="find"
+            app:vthourth_type="peixun"/>
+
+        <com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeRecyclerItemView
+            android:id="@+id/goods"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:vthourth_type="goods"/>
+
+        <com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeRecyclerItemView
+            android:id="@+id/topic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            app:vthourth_type="topic"/>
+
+        <com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeRecyclerItemView
+            android:id="@+id/finds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:vthourth_type="find"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"/>
     </LinearLayout>
 
-</androidx.core.widget.NestedScrollView>
+</com.hongyuan.fitness.custom_view.StickyScrollView>

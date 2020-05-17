@@ -17,7 +17,7 @@ import com.hongyuan.fitness.base.MessageEvent;
 import com.hongyuan.fitness.custom_view.TitleView;
 import com.hongyuan.fitness.custom_view.share_view.ShareUtil;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
-import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
+import com.hongyuan.fitness.ui.only_equipment.indicator_details.IndicatorDetailsActivity;
 import com.hongyuan.fitness.ui.person.about_us.AboutUsActivity;
 import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchActivity;
 import com.hongyuan.fitness.ui.person.exercise_data.ExeriseDataActivity;
@@ -28,11 +28,10 @@ import com.hongyuan.fitness.ui.person.my_promote.PromotionCodeActivity;
 import com.hongyuan.fitness.ui.person.physical_data.PhysicalDataActivity;
 import com.hongyuan.fitness.ui.person.setting.SettingActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.CheckInMeActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.CustomServerActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.IncomeMangeActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopCollectActivity;
-import com.hongyuan.fitness.ui.shop.sactivity.ShopNewOrderAcitivity;
 import com.hongyuan.fitness.util.TimeUtil;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -46,7 +45,7 @@ public class PersonFragment extends CustomFragment{
 
     private LinearLayout personCouponBox,personCollectionBox,personShareBox,personSettingBox
             ,personAboutUsBox,physicalDataBox,exerciseDataBox,promotionCodeBox,shopCollectBox
-            ,checkInMeBox,goIncomeBox;
+            ,checkInMeBox,goIncomeBox,goSheBei,goCustomServer;
 
     @Override
     public int getLayoutId() {
@@ -71,6 +70,8 @@ public class PersonFragment extends CustomFragment{
         shopCollectBox = mView.findViewById(R.id.shopCollectBox);
         checkInMeBox = mView.findViewById(R.id.checkInMeBox);
         goIncomeBox = mView.findViewById(R.id.goIncomeBox);
+        goSheBei = mView.findViewById(R.id.goSheBei);
+        goCustomServer = mView.findViewById(R.id.goCustomServer);
 
         physicalDataBox = mView.findViewById(R.id.physicalDataBox);
         exerciseDataBox = mView.findViewById(R.id.exerciseDataBox);
@@ -87,11 +88,17 @@ public class PersonFragment extends CustomFragment{
         personAboutUsBox.setOnClickListener(v -> startActivity(AboutUsActivity.class,null));
         promotionCodeBox.setOnClickListener(v -> startActivity(PromotionCodeActivity.class,null));
         shopCollectBox.setOnClickListener(v -> startActivity(ShopCollectActivity.class,null));
+        goSheBei.setOnClickListener(v -> {
+            Bundle bundle2 = new Bundle();
+            bundle2.putInt("showPosition",0);
+            mActivity.startActivity(IndicatorDetailsActivity.class,bundle2);
+        });
 
         physicalDataBox.setOnClickListener(v -> startActivity(PhysicalDataActivity.class,null));
         exerciseDataBox.setOnClickListener(v -> startActivity(ExeriseDataActivity.class,null));
         checkInMeBox.setOnClickListener(v -> startActivity(CheckInMeActivity.class,null));
         goIncomeBox.setOnClickListener(v -> startActivity(IncomeMangeActivity.class,null));
+        goCustomServer.setOnClickListener(v -> startActivity(CustomServerActivity.class,null));
 
     }
 

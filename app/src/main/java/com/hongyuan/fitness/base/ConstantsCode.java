@@ -141,6 +141,10 @@ public class ConstantsCode {
     public final static int CONFIRM_ORDER = 0x061;
     //添加商品评论
     public final static int ADD_GOODS_EVALUTION = 0x062;
+    //学员取消上课
+    public final static int CANCEL_COURSE_PRIVITE_APPOINTMENT_NEW = 0x063;
+    //运动群聊组id添加
+    public final static int GYM_SPORT_GROUP_CHAT_ADD = 0x064;
 
     /*================================已下EventBus使用的=======================================*/
     //食物搜索

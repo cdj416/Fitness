@@ -9,6 +9,8 @@ public class ShopNewOrderViewModel extends CustomViewModel {
 
     private ActivityShopNewordersBinding binding;
 
+    private int mPosition = 0;
+
     public ShopNewOrderViewModel(CustomActivity mActivity, ActivityShopNewordersBinding binding) {
         super(mActivity);
         this.binding = binding;
@@ -17,11 +19,17 @@ public class ShopNewOrderViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
+        if(getBundle() != null){
+            mPosition = getBundle().getInt("position");
+        }
+
         SnewOrderViwPageAdapter meunAdapter = new SnewOrderViwPageAdapter(mActivity.getSupportFragmentManager());
         binding.viewPager.setAdapter(meunAdapter);
         binding.layoutMenu.setupWithViewPager(binding.viewPager);
 
         binding.viewPager.setOffscreenPageLimit(6);
+
+        binding.viewPager.setCurrentItem(mPosition);
     }
 
     @Override

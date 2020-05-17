@@ -42,12 +42,10 @@ public class FeaturedFragment extends CustomFragment {
     private CustomRecyclerView topRecycler;
     private RecyclerView mRecycler;
     private FindTopFriendsAdapter friendsAdapter;
-    private FindTopicAdapter topicAdapter;
     private V2FindContentAdapter adapter;
     private FeatureBean featureBean;
-    private TextView topTitle,moreFriends,moreTopic;
+    private TextView topTitle,moreFriends;
     private RelativeLayout topBox,topicBox;
-    private List<SlectTopicLeftBeans.DataBean.ListBean> topicList;
 
     //当前（点赞/取消点赞/关注/取消关注）等操作的数据位置
     private int mPosition;
@@ -66,15 +64,14 @@ public class FeaturedFragment extends CustomFragment {
         //开启加载更多功能
         setEnableLoadMore(true,true);
 
-        topRecycler = mView.findViewById(R.id.topRecycler);
         mRecycler = mView.findViewById(R.id.mRecycler);
         topTitle = mView.findViewById(R.id.topTitle);
         moreFriends = mView.findViewById(R.id.moreFriends);
         topBox = mView.findViewById(R.id.topBox);
         topicBox = mView.findViewById(R.id.topicBox);
-        moreTopic = mView.findViewById(R.id.moreTopic);
 
-        moreTopic.setOnClickListener(v -> startActivity(MoreTopicActivity.class,null));
+        topRecycler = mView.findViewById(R.id.topRecycler);
+
 
         moreFriends.setOnClickListener(new View.OnClickListener() {
             @SingleClick(2000)
@@ -87,6 +84,9 @@ public class FeaturedFragment extends CustomFragment {
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         topRecycler.setLayoutManager(manager);
+        friendsAdapter = new FindTopFriendsAdapter();
+        topRecycler.setAdapter(friendsAdapter);
+        friendsAdapter.setOnItemChildClickListener((adapter, view, position) -> startActivity(CircleDetailsActivity.class,null));
 
 
         MMStaggeredGridLayoutManager layoutManager =
@@ -110,27 +110,6 @@ public class FeaturedFragment extends CustomFragment {
             }
         });
 
-        //初始化头部样式
-        initAdapter();
-    }
-
-    /*
-     * 初始化适配样式
-     * */
-    private void initAdapter(){
-        if("gz".equals(getFragType())){
-            friendsAdapter = new FindTopFriendsAdapter();
-            topRecycler.setAdapter(friendsAdapter);
-            friendsAdapter.setOnItemChildClickListener((adapter, view, position) -> startActivity(CircleDetailsActivity.class,null));
-        }else if("tj".equals(getFragType())){
-            topicAdapter = new FindTopicAdapter();
-            topRecycler.setAdapter(topicAdapter);
-            topicAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-                Bundle bundle = new Bundle();
-                bundle.putString("circle_categoryid",String.valueOf(topicList.get(position).getCategory_id()));
-                startActivity(CircleDetailsActivity.class,bundle);
-            });
-        }
     }
 
     /*
@@ -231,18 +210,6 @@ public class FeaturedFragment extends CustomFragment {
                 topBox.setVisibility(View.GONE);
             }
 
-        }
-        if(data instanceof SlectTopicLeftBeans){
-            topicList = ((SlectTopicLeftBeans)data).getData().getList();
-            if(topicList != null && topicList.size() > 0){
-                topRecycler.setVisibility(View.VISIBLE);
-                topicBox.setVisibility(View.VISIBLE);
-                if(topicAdapter != null){
-                    topicAdapter.setNewData(topicList);
-                }
-            }else{
-                topicBox.setVisibility(View.GONE);
-            }
         }
     }
 

@@ -1,5 +1,7 @@
 package com.hongyuan.fitness.custom_view;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -11,14 +13,15 @@ import androidx.annotation.Nullable;
 
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.CustomDialog;
 
 public class ItemCloumView extends LinearLayout {
 
     private String leftText,rightText;
-    private boolean isShow;
+    private boolean isShow,icShowCopy;
     private int rightColor,LeftColor;
 
-    private TextView titleName,content;
+    private TextView titleName,content,copyTv;
     private View line;
 
     public ItemCloumView(Context context) {
@@ -31,6 +34,7 @@ public class ItemCloumView extends LinearLayout {
         leftText = a.getString(R.styleable.ItemCloumView_icLeftText);
         rightText = a.getString(R.styleable.ItemCloumView_icRightText);
         isShow = a.getBoolean(R.styleable.ItemCloumView_icLine,true);
+        icShowCopy = a.getBoolean(R.styleable.ItemCloumView_icShowCopy,false);
         rightColor = a.getColor(R.styleable.ItemCloumView_icRightColor,getResources().getColor(R.color.color_FF333333));
         LeftColor = a.getColor(R.styleable.ItemCloumView_icLeftColor,getResources().getColor(R.color.color_FF999999));
 
@@ -42,6 +46,7 @@ public class ItemCloumView extends LinearLayout {
         View view = View.inflate(getContext(), R.layout.view_item_cloum, this);
         titleName = view.findViewById(R.id.titleName);
         content = view.findViewById(R.id.content);
+        copyTv = view.findViewById(R.id.copyTv);
         line = view.findViewById(R.id.line);
 
         if(BaseUtil.isValue(leftText)){
@@ -61,6 +66,23 @@ public class ItemCloumView extends LinearLayout {
         if(BaseUtil.isValue(LeftColor)){
             titleName.setTextColor(LeftColor);
         }
+        if(icShowCopy){
+            copyTv.setVisibility(VISIBLE);
+        }
+
+        copyTv.setOnClickListener(v -> {
+            //获取剪贴板管理器：
+            ClipboardManager cm = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            // 创建普通字符型ClipData
+            ClipData mClipData = ClipData.newPlainText("Label", content.getText().toString());
+            // 将ClipData内容放到系统剪贴板里。
+            cm.setPrimaryClip(mClipData);
+            CustomDialog.showMessage(getContext(),"复制成功！");
+        });
+    }
+
+    public void setRightText(String contentText){
+        content.setText(contentText);
     }
 
 }

@@ -9,6 +9,9 @@ public class Constants {
     //正式地址
     //public static final String ADRESS = "http://www.hongyuangood.com";
 
+    //webUrl需要的地址
+    public static final String WEB_ADDRESS = "https://www.1667799.com/#";
+
     /*==================================================================================*/
     //微信支付需要的appId
     public static final String APP_ID = "wx96322a2480850d96";
@@ -532,5 +535,53 @@ public class Constants {
     public static final String GET_ORDER_GOODS = ADRESS + "/api/goodsmember/get_order_goods";
     //添加商品评论
     public static final String ADD_GOODS_EVALUTION = ADRESS + "/api/goodsmember/add_goods_evaluation";
+    //查询详细物流信息
+    public static final String GET_DELIVER_INFO = ADRESS + "/api/goodsmember/get_deliver_info";
+    //领券中心
+    public static final String GET_CATEGORY_COUPON_LIST = ADRESS + "/api/goodshome/get_category_coupon_list";
+    //商品的评价列表
+    public static final String GET_GOODS_EVALUATION = ADRESS + "/api/goodshome/get_goods_evaluation";
+    //运动生活热卖推荐
+    public static final String GET_SPORT_GOODS_LIST = ADRESS + "/api/goodshome/get_sport_goods_list";
+    //运动生活二级分类列表
+    public static final String GET_SPORT_GOODS_CATEGORY = ADRESS + "/api/goodshome/get_sport_goods_category";
+    //推广商品商家
+    public static final String GET_FX_STORE_LIST = ADRESS + "/api/goodshome/get_fx_store_list";
+    //推广商品列表
+    public static final String GET_FX_GOODS_LIST = ADRESS + "/api/goodshome/get_fx_goods_list";
+    //热门推广商品
+    public static final String GET_HOT_FX_GOODS_LIST = ADRESS + "/api/goodshome/get_hot_fx_goods_list";
+    //收益首页数据
+    public static final String GET_INDEX_INCOME_DATA = ADRESS + "/api/income/get_index_income_data";
+    //收益报表
+    public static final String GET_INCOME_FORMS_DATA = ADRESS + "/api/income/get_income_forms_data";
+    //结算订单明细
+    public static final String GET_SETTLEMENT_LIST = ADRESS + "/api/income/get_settlement_list";
+    //推广订单
+    public static final String GET_INCOME_ORDER_LIST = ADRESS + "/api/income/get_order_list";
+
+
+    //我的私教课单独一条
+    public static final String GET_MEMBER_APPOINTMENT_COURSE_PRIVITE_ONE = ADRESS + "/api/coursemember/get_member_appointment_course_privite_one";
+    //我的私教课单独一条
+    public static final String GET_CANCEL_REASON = ADRESS + "/api/coursemember/get_cancel_reason";
+    //学员取消预约
+    public static final String CANCEL_COURSE_PRIVITE_APPOINTMENT_NEW = ADRESS + "/api/coursemember/cancel_course_privite_appointment_new";
+    //首页场馆\团课\私教课\商品\发现
+    public static final String GET_INDEX_OS_PC_BUSINESS_CIRCLE = ADRESS + "/api/appindex/get_index_os_pc_business_circle";
+    //app首页  精品培训课 和朋友一起约运动
+    public static final String INDEX = ADRESS + "/api/gymhome/index";
+    //检查定位城市是否开通
+    public static final String CHECK_CUR_CITY_IS_OPEN = ADRESS + "/api/goodshome/check_cur_city_is_open";
+    //获取热门开通城市
+    public static final String GET_OPEN_HOT_CITYS = ADRESS + "/api/goodshome/get_open_hot_citys";
+    //开通城市的列表
+    public static final String GET_OPEN_CITYS = ADRESS + "/api/goodshome/get_open_citys";
+    //运动群聊组id添加
+    public static final String GYM_SPORT_GROUP_CHAT_ADD = ADRESS + "/api/gymmember/gym_sport_group_chat_add";
+    //运动群聊组会员列表获取
+    public static final String SPORT_CHAT_MEMBER_LIST = ADRESS + "/api/gymmember/sport_chat_member_list";
+
+
 
 }

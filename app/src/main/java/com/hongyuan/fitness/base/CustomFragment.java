@@ -137,7 +137,7 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         if(bundle != null){
             return bundle.getSerializable(key);
         }
-        return "";
+        return null;
     }
 
 

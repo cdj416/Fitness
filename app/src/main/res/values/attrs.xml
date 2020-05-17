@@ -234,13 +234,16 @@
 
     <!--自定义首页item项-->
     <declare-styleable name="homeItem">
-        <attr name="vthird_type">
-            <enum name="startCoach" value="0"/>
-            <enum name="priviteCourse" value="1"/>
-            <enum name="goupCourse" value="2"/>
-            <enum name="mall" value="3"/>
-            <enum name="find" value="4"/>
-            <enum name="store" value="5"/>
+        <attr name="vthourth_type">
+            <enum name="store" value="0"/>
+            <enum name="yueyundong" value="1"/>
+            <enum name="jianzhi" value="2"/>
+            <enum name="liliang" value="3"/>
+            <enum name="groupCourse" value="4"/>
+            <enum name="peixun" value="5"/>
+            <enum name="goods" value="6"/>
+            <enum name="topic" value="7"/>
+            <enum name="find" value="8"/>
         </attr>
     </declare-styleable>
 
@@ -301,6 +304,7 @@
         <attr name="icLine" format="boolean"/>
         <attr name="icRightColor" format="color"/>
         <attr name="icLeftColor" format="color"/>
+        <attr name="icShowCopy" format="boolean"/>
     </declare-styleable>
 
     <!--上传入住需要的控件-->

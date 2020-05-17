@@ -3,6 +3,8 @@ package com.hongyuan.fitness.ui.main.main_person;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.os.Build;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,12 +14,15 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.CustomActivity;
-import com.hongyuan.fitness.ui.about_class.privite_class.my_privite_course.MyPriviteCourseActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
 import com.hongyuan.fitness.ui.person.fix.SixPriviteCourseActivity;
 import com.hongyuan.fitness.ui.person.waiting_for_class.WaitingForClassActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.NewOrderActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopNewOrderAcitivity;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
 
 public class PersonContentView extends LinearLayout {
 
@@ -88,22 +93,40 @@ public class PersonContentView extends LinearLayout {
         if(showType == ORDER){
             titleName.setText("订单服务");
             tv1.setText("会员卡订单");
+            iv1.setImageResource(R.mipmap.member_order_mark);
             tv2.setText("私教课订单");
+            iv2.setImageResource(R.mipmap.pcourse_mark);
             tv3.setText("场馆订单");
-            tv4.setText("陪练订单");
+            iv3.setImageResource(R.mipmap.venue_order_mark);
+            tv4.setText("培训课订单");
+            iv4.setImageResource(R.mipmap.training_class_mark);
             tv5.setText("商城订单");
+            iv5.setImageResource(R.mipmap.shop_mark);
             box6.setVisibility(INVISIBLE);
             box1.setOnClickListener(v -> {
-                mActivity.startActivity(MineOrderActivity.class,null);
+                Bundle bundle = new Bundle();
+                bundle.putString("title","会员卡订单");
+                bundle.putString("type","o_card");
+                mActivity.startActivity(NewOrderActivity.class,bundle);
             });
             box2.setOnClickListener(v -> {
-                mActivity.startActivity(MineOrderActivity.class,null);
+                //mActivity.startActivity(MineOrderActivity.class,null);
+                Bundle bundle = new Bundle();
+                bundle.putString("title","私教课订单");
+                bundle.putString("type","o_pric");
+                mActivity.startActivity(NewOrderActivity.class,bundle);
             });
             box3.setOnClickListener(v -> {
-                //mActivity.startActivity(MineOrderActivity.class,null);
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+"/practice_order?m_id="+ TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
+                bundle.putString("title","场馆订单");
+                mActivity.startActivity(WebViewActivity.class,bundle);
             });
             box4.setOnClickListener(v -> {
-                //mActivity.startActivity(MineOrderActivity.class,null);
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+"/train_orderList?m_id="+ TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
+                bundle.putString("title","培训课订单");
+                mActivity.startActivity(WebViewActivity.class,bundle);
             });
             box5.setOnClickListener(v -> {
                 mActivity.startActivity(ShopNewOrderAcitivity.class,null);
@@ -114,34 +137,30 @@ public class PersonContentView extends LinearLayout {
             titleName.setText("运动服务");
             rightText.setVisibility(GONE);
             tv1.setText("我的私教课");
+            iv1.setImageResource(R.mipmap.my_pcourse_order_mark);
             tv2.setText("我报名的团课");
-            tv3.setText("我发起的运动");
-            tv4.setText("我参加的运动");
-            tv5.setText("我是陪练");
-            tv6.setText("我的接单");
+            iv2.setImageResource(R.mipmap.my_group_courser_mark);
+            tv3.setText("我的约运动");
+            iv3.setImageResource(R.mipmap.my_yuyue_yundong_mark);
+            secondBox.setVisibility(GONE);
             box1.setOnClickListener(v -> {
                 //mActivity.startActivity(MyPriviteCourseActivity.class,null);
                 mActivity.startActivity(SixPriviteCourseActivity.class,null);
             });
             box2.setOnClickListener(v -> {
-                mActivity.startActivity(WaitingForClassActivity.class,null);
+                //mActivity.startActivity(WaitingForClassActivity.class,null);
+                Bundle bundle = new Bundle();
+                bundle.putString("title","我报名的团课");
+                bundle.putString("type","group");
+                mActivity.startActivity(NewOrderActivity.class,bundle);
             });
             box3.setOnClickListener(v -> {
-                //跳转h5
-
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+"/my_sportList?m_id="+ TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
+                bundle.putString("title","我的约运动");
+                mActivity.startActivity(WebViewActivity.class,bundle);
             });
-            box4.setOnClickListener(v -> {
-                //跳转h5
 
-            });
-            box5.setOnClickListener(v -> {
-                //跳转h5
-
-            });
-            box6.setOnClickListener(v -> {
-                //跳转h5
-
-            });
         }
 
         if(showType == RACE){
@@ -149,16 +168,28 @@ public class PersonContentView extends LinearLayout {
             titleName.setText("赛事服务");
             rightText.setVisibility(GONE);
             tv1.setText("我是运动达人");
+            iv1.setImageResource(R.mipmap.my_yundongdaren_marik);
             tv2.setText("我的队伍");
+            iv2.setImageResource(R.mipmap.my_duiwu_marik);
             tv3.setText("我的赛事");
+            iv3.setImageResource(R.mipmap.my_saishi_mark);
             box1.setOnClickListener(v -> {
-                //跳转h5
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+"/sports_talent?m_id="+ TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
+                bundle.putString("title","我是运动达人");
+                mActivity.startActivity(WebViewActivity.class,bundle);
             });
             box2.setOnClickListener(v -> {
-                //跳转h5
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+"/group?m_id="+ TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
+                bundle.putString("title","我的队伍");
+                mActivity.startActivity(WebViewActivity.class,bundle);
             });
             box3.setOnClickListener(v -> {
-                //跳转h5
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+"/myevent?m_id="+ TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
+                bundle.putString("title","我的赛事");
+                mActivity.startActivity(WebViewActivity.class,bundle);
 
             });
         }

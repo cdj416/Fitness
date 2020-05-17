@@ -163,7 +163,8 @@ public class ShopNextFragment extends CustomFragment {
     * */
     private void getData(){
         mActivity.showLoading();
-        clearParams().setParams("first_category_id",String.valueOf(item.getCategory_id()));
+        clearParams().setParams("first_category_id",String.valueOf(item.getCategory_id()))
+                .setParams("is_point","0");
         if(BaseUtil.isValue(third_category_id)){
             setParams("third_category_id",third_category_id);
         }

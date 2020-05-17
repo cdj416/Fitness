@@ -8,6 +8,7 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp">
     <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/goodImg"
         android:layout_width="92dp"
         android:layout_height="92dp"
         android:src="@color/color_f2"
@@ -22,6 +23,7 @@
         android:orientation="vertical"
         android:layout_marginTop="10dp">
         <TextView
+            android:id="@+id/goodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_FF333333"
@@ -35,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp">
             <TextView
+                android:id="@+id/goodType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
@@ -62,6 +65,7 @@
                     android:textSize="@dimen/sp_12"
                     android:text="¥"/>
                 <TextView
+                    android:id="@+id/goodPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
@@ -83,6 +87,7 @@
                 android:textColor="@color/color_EF5B48"
                 android:text="收益：¥"/>
             <TextView
+                android:id="@+id/incomeNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_16"

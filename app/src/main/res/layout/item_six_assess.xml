@@ -69,6 +69,7 @@
                     android:layout_marginEnd="70dp"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/rightBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"

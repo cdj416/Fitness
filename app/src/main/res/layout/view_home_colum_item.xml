@@ -24,7 +24,7 @@
                 android:drawableTop="@mipmap/member_img"
                 android:gravity="center"
                 android:drawablePadding="3dp"
-                android:text="会籍卡"/>
+                android:text="健身购卡"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/encyclopediaBox"
@@ -61,7 +61,7 @@
                 android:text="积分中心"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/smartDeviceBox"
+            android:id="@+id/goVue"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -72,10 +72,10 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
                 android:textColor="@color/color_FF333333"
-                android:drawableTop="@mipmap/smart_device_mark"
+                android:drawableTop="@mipmap/vue_img"
                 android:gravity="center"
                 android:drawablePadding="3dp"
-                android:text="智能设备"/>
+                android:text="运动场馆"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/outdoorBox"

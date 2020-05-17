@@ -11,6 +11,7 @@ import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.about_class.privite_class.course_details.CourseDetailsActivity;
+import com.hongyuan.fitness.ui.about_class.privite_class.my_privite_course.MyPriviteCourseBeans;
 import com.hongyuan.fitness.ui.person.waiting_evaluation.editorial_evaluation.EditorialEvaluationActivity;
 import com.hongyuan.fitness.ui.person.waiting_for_class.about_privite_class.PriviteCourseCheckBeans;
 import java.util.List;
@@ -18,9 +19,9 @@ import java.util.List;
 public class SixAssessFragment extends CustomFragment {
 
     private RecyclerView mRec;
-    private SixAssessAdapter adapter;
+    private CourseCompleteAdapter adapter;
 
-    private List<PriviteCourseCheckBeans.DataBean.ListBean> mList;
+    private List<MyPriviteCourseBeans.DataBean.ListBean> mList;
 
     @Override
     public int getLayoutId() {
@@ -37,20 +38,13 @@ public class SixAssessFragment extends CustomFragment {
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRec.setLayoutManager(manager);
-        adapter = new SixAssessAdapter();
+        adapter = new CourseCompleteAdapter();
         mRec.setAdapter(adapter);
         adapter.addFooterView(getFooterHeight(mRec));
         adapter.setOnItemChildClickListener((adapter, view, position) -> {
-            if(view.getId() == R.id.goDetails){
-                //startActivity(EvalutationDetailsActivity.class,null);
-                Bundle bundle = new Bundle();
-                bundle.putString("cp_id",String.valueOf(mList.get(position).getCp_id()));
-                startActivity(CourseDetailsActivity.class,bundle);
-            }else{
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("courseBeans",mList.get(position));
-                startActivity(EditorialEvaluationActivity.class,bundle);
-            }
+            Bundle bundle = new Bundle();
+            bundle.putString("cp_id",String.valueOf(mList.get(position).getCp_id()));
+            startActivity(CourseDetailsActivity.class,bundle);
         });
     }
 
@@ -72,16 +66,16 @@ public class SixAssessFragment extends CustomFragment {
     @Override
     protected void lazyLoad() {
         mActivity.showLoading();
-        clearParams().setParams("state_str","1,2");
-        Controller.myRequest(Constants.GET_MEMBER_APPOINTMENT_COURSE_PRIVITE_LIST,Controller.TYPE_POST,getParams(), PriviteCourseCheckBeans.class,this);
+        clearParams().setParams("have_num","0");
+        Controller.myRequest(Constants.GET_MY_COURSE_PRIVITE_LIST,Controller.TYPE_POST,getParams(), MyPriviteCourseBeans.class,this);
     }
 
     @Override
     public void onSuccess(Object data) {
         mActivity.closeLoading();
 
-        if(data instanceof PriviteCourseCheckBeans){
-            List<PriviteCourseCheckBeans.DataBean.ListBean> list = ((PriviteCourseCheckBeans)data).getData().getList();
+        if(data instanceof MyPriviteCourseBeans){
+            List<MyPriviteCourseBeans.DataBean.ListBean> list = ((MyPriviteCourseBeans)data).getData().getList();
             if(curPage == FIRST_PAGE){
                 mList = list;
             }else{

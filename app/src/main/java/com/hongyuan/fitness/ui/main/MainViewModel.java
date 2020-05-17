@@ -14,11 +14,13 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityMainBinding;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
+import com.hongyuan.fitness.ui.main.main_person.PersonBean;
 import com.hongyuan.fitness.ui.mall.good_details.GoodDetailsActivity;
 import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
+import com.hongyuan.fitness.util.LocationBean;
 import com.hongyuan.fitness.util.PackageUtils;
 import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 import java.util.List;
@@ -111,6 +113,7 @@ public class MainViewModel extends CustomViewModel {
         Controller.myRequest(Constants.CHECK_APP_VERSION, Controller.TYPE_POST,getParams(), CheckVersionBeans.class,this);
     }
 
+
     /*
     * 去检查是否有可领取的优惠券
     * */
@@ -125,10 +128,27 @@ public class MainViewModel extends CustomViewModel {
     * 去检查是否有可免费领取的商品
     * */
     private void getHomeGoods(){
-        Log.e("cnn","===========来了几次啊=========");
         mActivity.showLoading();
         clearParams();
         Controller.myRequest(Constants.GET_FREE_GODDS, Controller.TYPE_POST,getParams(), HomeGoodsBeans.class,this);
+    }
+
+    /*
+    * 检查当前城市是否开通服务
+    * */
+    private void getCheckCity(){
+        mActivity.showLoading();
+        clearParams().setParams("city_name", LocationBean.getInstance().getCityName());
+        Controller.myRequest(Constants.CHECK_CUR_CITY_IS_OPEN, Controller.TYPE_POST,getParams(), CheckCityBeans.class,this);
+    }
+
+    /*
+    * 获取热门开通城市
+    * */
+    private void getCitys(){
+        mActivity.showLoading();
+        clearParams();
+        Controller.myRequest(Constants.GET_OPEN_HOT_CITYS, Controller.TYPE_POST,getParams(), OpenCitysBeans.class,this);
     }
 
     /*
@@ -138,6 +158,17 @@ public class MainViewModel extends CustomViewModel {
         mActivity.showLoading();
         clearParams().setParams("coupon_id",couponId);
         Controller.myRequest(ConstantsCode.GET_COUPON,Constants.GET_COUPON,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+    }
+
+    /*
+    * 读取下个人信息，因为有的地方进去聊天需要头像
+    * */
+    private void getMyInfo(){
+        if(mActivity.userToken.getM_id() != null){
+            //读取个人信息
+            clearParams();
+            Controller.myRequest(Constants.GET_MEMBER_INDEX_INFO,Controller.TYPE_POST,getParams(), PersonBean.class,this);
+        }
     }
 
     @Override
@@ -150,12 +181,30 @@ public class MainViewModel extends CustomViewModel {
                 //版本检测更新
                 binding.versionView.startChange(versionBeans);
             }else{
+                //检查城市是否开通服务
+                getCheckCity();
+
+            }
+
+        }
+
+        if(data instanceof CheckCityBeans){
+            CheckCityBeans.DataBean  checkCityBeans = ((CheckCityBeans)data).getData();
+            if(checkCityBeans.getIs_open() != 1){
+                getCitys();
+            }else{
+                //读取个人信息
+                getMyInfo();
                 //获取优惠券弹框
                 getHomeCoupon();
                 //获取首页商品弹框
                 getHomeGoods();
             }
+        }
 
+        if(data instanceof OpenCitysBeans){
+            OpenCitysBeans.DataBean dataBean = ((OpenCitysBeans)data).getData();
+            CustomDialog.showCtitys(mActivity,dataBean.getList());
         }
 
         if(data instanceof CouponListBeans){
@@ -182,6 +231,11 @@ public class MainViewModel extends CustomViewModel {
                     mActivity.startActivity(GoodDetailsActivity.class,bundle);
                 });
             }
+        }
+
+        if(data instanceof PersonBean){
+            PersonBean personBean = (PersonBean)data;
+            TokenSingleBean.getInstance().setHeadUrl(personBean.getData().getInfo().getMi_head());
         }
     }
 

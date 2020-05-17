@@ -21,7 +21,9 @@ import com.hongyuan.fitness.custom_view.CustomRecyclerView;
 import com.hongyuan.fitness.ui.main.main_home.recommend.HomeBannerBean;
 import com.hongyuan.fitness.ui.shop.sactivity.CollectCouponsActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.IntegralGoodsActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.PromoteGoodsActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.SportsLifeActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SMGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.ShopMainGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.HabitGoddsBeans;
@@ -38,7 +40,7 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
 
     private Banner topBanner,sBanner;
     private RecyclerView mRec;
-    private TextView goIntegral,goCoupons;
+    private TextView goIntegral,goCoupons,goSportsLife,goHot;
     private CustomRecyclerView daysRes,newsRec,hotRec,storeRec;
 
     private SMGoodsAdapter gAdapter;
@@ -69,6 +71,8 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
         goIntegral = mView.findViewById(R.id.goIntegral);
         goCoupons = mView.findViewById(R.id.goCoupons);
         daysRes = mView.findViewById(R.id.daysRes);
+        goSportsLife = mView.findViewById(R.id.goSportsLife);
+        goHot = mView.findViewById(R.id.goHot);
 
         GridLayoutManager layoutManager =
                 new GridLayoutManager(mActivity,2);
@@ -224,6 +228,8 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
 
         goIntegral.setOnClickListener(this);
         goCoupons.setOnClickListener(this);
+        goSportsLife.setOnClickListener(this);
+        goHot.setOnClickListener(this);
     }
 
     /*
@@ -317,6 +323,12 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
                 break;
             case R.id.goCoupons:
                 startActivity(CollectCouponsActivity.class,null);
+                break;
+            case R.id.goSportsLife:
+                startActivity(SportsLifeActivity.class,null);
+                break;
+            case R.id.goHot:
+                startActivity(PromoteGoodsActivity.class,null);
                 break;
         }
     }

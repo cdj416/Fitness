@@ -247,7 +247,7 @@ public abstract class CustomViewModel implements RetrofitListener {
     /*
      * 调用直接拨打电话功能
      * */
-    protected void callTel(String telNum){
+    public void callTel(String telNum){
         Intent intent=new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+telNum));
         mActivity.startActivity(intent);
     }

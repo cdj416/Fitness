@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.hongyuan.fitness.ui.person.fix.CanncelCourseViewModel"/>
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/color_F5F6FB">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.hongyuan.fitness.custom_view.InputOrSlectView
+                android:id="@+id/selectRec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:isvName="取消原因"
+                app:isvRightText="其他"
+                app:isvType="select"
+                app:isvLineShow="true"/>
+
+            <EditText
+                android:id="@+id/notes"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:background="@color/color_FFFFFF"
+                android:padding="16dp"
+                android:gravity="top"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_FF333333"
+                android:hint="请输入取消上课原因"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:orientation="horizontal"
+            android:background="@color/color_FFFFFF"
+            android:layout_gravity="bottom">
+
+            <LinearLayout
+                android:id="@+id/callTel"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/online_service_mark"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/color_FF333333"
+                    android:layout_marginTop="5dp"
+                    android:text="联系教练"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cancel"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="44dp"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical"
+                android:background="@drawable/shape_radius6_ef5b48"
+                android:layout_marginEnd="16dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/color_FFFFFF"
+                    android:text="确定取消"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/color_FFFFFF"
+                    android:text="取消上课需教练确认后生效"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>

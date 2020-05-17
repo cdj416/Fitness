@@ -40,6 +40,9 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
     private SorderBottomViewModel bottomViewModel;
     private SorderDetailsAdapter adapter;
 
+    //商品数据
+    private SorderDetailBeans.DataBean sorderBeans;
+
 
     //地址选择之后回调的数据
     private ShopAddressBeans.DataBean addressBeans;
@@ -76,6 +79,11 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
         binding.goAddress.setOnClickListener(v -> {
             startActivityForResult(ShopAddressActivity.class,null);
         });
+    }
+
+    //返回数据对象
+    public SorderDetailBeans.DataBean getInfoData(){
+        return this.sorderBeans;
     }
 
     @Override
@@ -178,7 +186,7 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
 
         if(data instanceof SorderDetailBeans){
 
-            SorderDetailBeans.DataBean sorderBeans = ((SorderDetailBeans)data).getData();
+           sorderBeans = ((SorderDetailBeans)data).getData();
 
             if(sorderBeans.getList() != null && sorderBeans.getList().size() > 0){
                 if(sorderBeans.getmList() != null && sorderBeans.getmList().size() > 0){

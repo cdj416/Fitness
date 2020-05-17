@@ -16,7 +16,7 @@ public class PromotionAdapter extends BaseQuickAdapter<PromotionRecordBeans.Data
     @Override
     protected void convert(BaseViewHolder helper, PromotionRecordBeans.DataBean.ListBean item) {
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img).centerCrop();
-        Glide.with(mContext).load(item.getM_mobile()).apply(options).into((RoundedImageView)helper.getView(R.id.superiorHead));
+        Glide.with(mContext).load(item.getMi_head()).apply(options).into((RoundedImageView)helper.getView(R.id.superiorHead));
 
         helper.setText(R.id.superiorName,item.getM_name()).setText(R.id.superiorTel,item.getM_mobile());
     }

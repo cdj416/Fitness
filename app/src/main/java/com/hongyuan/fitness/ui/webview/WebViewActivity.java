@@ -18,7 +18,7 @@ public class WebViewActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitleBar(TYPE_BAR3,0,"");
+        setTitleBar(TYPE_BAR1,R.drawable.shape_soid_ffffff,"");
         ActivityWebviewBinding binding = ActivityWebviewBinding.bind(mView);
         modelView = new WebViewModelView(this,binding);
         binding.setViewModel(modelView);
@@ -46,14 +46,10 @@ public class WebViewActivity extends CustomActivity {
     //安卓重写返回键事件
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode==KeyEvent.KEYCODE_BACK){
-            if(getBundle().getString("backType") != null && "goMain".endsWith(getBundle().getString("backType"))){
-                startActivity(MainActivity.class,null);
-            }else{
-                finish();
-            }
-            return false;
+        if (keyCode == KeyEvent.KEYCODE_BACK && modelView.mAgentWeb.getWebCreator().getWebView().canGoBack()) {
+            modelView.mAgentWeb.getWebCreator().getWebView().goBack();//返回上个页面
+            return true;
         }
-        return true;
+        return super.onKeyDown(keyCode, event);//退出H5界面
     }
 }

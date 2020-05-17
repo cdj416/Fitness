@@ -11,9 +11,6 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityPersonCourseRecordBinding;
-import com.hongyuan.fitness.ui.about_class.privite_class.course_details.CourseDetailsActivity;
-import com.hongyuan.fitness.ui.person.fix.SixAssessAdapter;
-import com.hongyuan.fitness.ui.person.waiting_evaluation.editorial_evaluation.EditorialEvaluationActivity;
 import com.hongyuan.fitness.ui.person.waiting_for_class.about_privite_class.PriviteCourseCheckBeans;
 
 import java.util.List;
@@ -21,7 +18,7 @@ import java.util.List;
 public class PriviteCourseRecordViewModel extends CustomViewModel {
 
     private ActivityPersonCourseRecordBinding binding;
-    private SixAssessAdapter adapter;
+    private RecordCourseAdapter adapter;
 
     private List<PriviteCourseCheckBeans.DataBean.ListBean> mList;
 
@@ -40,20 +37,9 @@ public class PriviteCourseRecordViewModel extends CustomViewModel {
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);
         manager.setOrientation(RecyclerView.VERTICAL);
         binding.mRecycler.setLayoutManager(manager);
-        adapter = new SixAssessAdapter();
+        adapter = new RecordCourseAdapter();
         binding.mRecycler.setAdapter(adapter);
 
-        adapter.setOnItemChildClickListener((adapter, view, position) -> {
-            if(view.getId() == R.id.goDetails){
-                Bundle bundle = new Bundle();
-                bundle.putString("cp_id",String.valueOf(mList.get(position).getCp_id()));
-                startActivity(CourseDetailsActivity.class,bundle);
-            }else{
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("courseBeans",mList.get(position));
-                startActivity(EditorialEvaluationActivity.class,bundle);
-            }
-        });
     }
 
     @Override
@@ -69,7 +55,7 @@ public class PriviteCourseRecordViewModel extends CustomViewModel {
 
     @Override
     protected void lazyLoad() {
-        clearParams().setParams("state_str","1,2,3");
+        clearParams();
         Controller.myRequest(Constants.GET_MEMBER_APPOINTMENT_COURSE_PRIVITE_LIST,Controller.TYPE_POST,getParams(), PriviteCourseCheckBeans.class,this);
     }
 

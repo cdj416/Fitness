@@ -2,14 +2,19 @@ package com.hongyuan.fitness.ui.person.mine_message.chat_page;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+
+import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityChatPageBinding;
+import com.hongyuan.fitness.ui.shop.sactivity.GroupChatUserActivity;
+
 import cn.jiguang.imui.chatinput.ChatInputView;
 
 public class ChatPageViewModel extends CustomViewModel implements View.OnTouchListener {
@@ -35,6 +40,15 @@ public class ChatPageViewModel extends CustomViewModel implements View.OnTouchLi
 
         this.mImm = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
         mWindow = mActivity.getWindow();
+
+        if(getBundle().getBoolean("isGroup",false)){
+            mActivity.getMainTitle().setRightImage(R.mipmap.black_dot_more_mark)
+                    .getRightImgView().setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("group_chat_id",getBundle().getString("username"));
+                startActivity(GroupChatUserActivity.class,bundle);
+                    });
+        }
 
         //初始化查询数据需要的参数值
         binding.chatView.setDataParms(getBundle().getString("username"),getBundle().getString("lastMsgId"));

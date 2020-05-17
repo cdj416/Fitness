@@ -9,20 +9,24 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.ui.encyclopedia.EncyclopediaActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.membership_card.MembershipCardActivity;
 import com.hongyuan.fitness.ui.only_equipment.indicator_details.IndicatorDetailsActivity;
 import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchActivity;
 import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchCheckBean;
 import com.hongyuan.fitness.ui.person.push_share.PushShareActivity;
+import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
 import com.hongyuan.fitness.ui.training_plan.TrainingPlanActivity;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
 
 public class HomeColumItemView extends LinearLayout implements View.OnClickListener {
 
     private LinearLayout memberCardBox,encyclopediaBox,outdoorBox,heatBox
-            ,shareDailyBox,pointsCenterBox,smartDeviceBox,activityCenterBox,trainingPlanBox;
+            ,shareDailyBox,pointsCenterBox,goVue,activityCenterBox,trainingPlanBox;
     private CustomActivity mActivity;
 
     //分享需要的数据
@@ -68,7 +72,7 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
         //shareDailyBox = view.findViewById(R.id.shareDailyBox);
         pointsCenterBox = view.findViewById(R.id.pointsCenterBox);
         //activityCenterBox = view.findViewById(R.id.activityCenterBox);
-        smartDeviceBox = view.findViewById(R.id.smartDeviceBox);
+        goVue = view.findViewById(R.id.goVue);
         //trainingPlanBox = view.findViewById(R.id.trainingPlanBox);
 
         memberCardBox.setOnClickListener(this);
@@ -77,7 +81,7 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
         //heatBox.setOnClickListener(this);
         //shareDailyBox.setOnClickListener(this);
         pointsCenterBox.setOnClickListener(this);
-        smartDeviceBox.setOnClickListener(this);
+        goVue.setOnClickListener(this);
         //trainingPlanBox.setOnClickListener(this);
 
     }
@@ -87,7 +91,8 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.memberCardBox:
-                mActivity.startActivity(MembershipCardActivity.class);
+                mActivity.startActivity(StoreActivity.class,null);
+                //mActivity.startActivity(MembershipCardActivity.class);
                 break;
 
             case R.id.encyclopediaBox:
@@ -114,10 +119,11 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
                 mActivity.startActivity(DailyPunchActivity.class);
                 break;
 
-            case R.id.smartDeviceBox:
-                Bundle bundle2 = new Bundle();
-                bundle2.putInt("showPosition",0);
-                mActivity.startActivity(IndicatorDetailsActivity.class,bundle2);
+            case R.id.goVue:
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+"/?m_id="+ TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
+                bundle.putString("title","场馆首页");
+                mActivity.startActivity(WebViewActivity.class,bundle);
                 break;
 
            /* case R.id.trainingPlanBox:

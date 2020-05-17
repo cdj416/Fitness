@@ -24,6 +24,7 @@ public class PromotionRecordViewModel extends CustomViewModel {
     public PromotionRecordViewModel(CustomActivity mActivity, ActivityPromotionRecordBinding binding) {
         super(mActivity);
         this.binding = binding;
+        initView();
         lazyLoad();
     }
 

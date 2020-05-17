@@ -1,61 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <RelativeLayout
+
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
-        <LinearLayout
-            android:id="@+id/addressBox"
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_centerVertical="true"
-            android:visibility="gone"
-            android:gravity="center_vertical">
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@mipmap/location_img"/>
-            <TextView
-                android:id="@+id/addressName"
-                android:layout_width="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_16"
-                android:gravity="center"
-                android:layout_marginLeft="5dp"
-                android:text="湖州"/>
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/down_img"
-                android:layout_marginLeft="5dp"/>
-        </LinearLayout>
+                android:orientation="vertical"
+                app:layout_collapseMode="parallax"
+                android:background="@color/color_F5F6FB"
+                android:paddingBottom="10dp">
+
+                <RelativeLayout
+                    android:id="@+id/topicBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="16dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="24sp"
+                            android:textColor="@color/color_FF333333"
+                            android:text="热门"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="24sp"
+                            android:textColor="@color/color_EF5B48"
+                            android:text="话题"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/moreTopic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_FF999999"
+                        android:visibility="visible"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textSize="12sp"
+                        android:text="更多"
+                        android:layout_marginEnd="16dp"/>
+                </RelativeLayout>
+
+                <com.hongyuan.fitness.custom_view.CustomRecyclerView
+                    android:id="@+id/topRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="156dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+                    <RelativeLayout
+                        android:id="@+id/goYue"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/find_yue_bg"
+                            android:scaleType="centerCrop"
+                            app:riv_corner_radius="6dp"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="9dp"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_16"
+                                android:textStyle="bold"
+                                android:textColor="@color/color_FF333333"
+                                android:text="约运动"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_12"
+                                android:textColor="@color/color_FF999999"
+                                android:text="邀请小伙伴"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_12"
+                                android:textColor="@color/color_FF999999"
+                                android:text="让运动不再孤单"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            android:id="@+id/goPei"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
+                            <com.makeramen.roundedimageview.RoundedImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@mipmap/find_peixun_bg"
+                                android:scaleType="centerCrop"
+                                app:riv_corner_radius="6dp"/>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="9dp"
+                                android:layout_marginStart="12dp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_16"
+                                    android:textColor="@color/color_FF333333"
+                                    android:textStyle="bold"
+                                    android:text="培训"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_12"
+                                    android:textColor="@color/color_FF999999"
+                                    android:text="专业运动培训"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_12"
+                                    android:textColor="@color/color_FF999999"
+                                    android:text="帮助您赢在起点"/>
+                            </LinearLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:id="@+id/goSai"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_weight="1">
+                            <com.makeramen.roundedimageview.RoundedImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@mipmap/find_saishi_bg"
+                                android:scaleType="centerCrop"
+                                app:riv_corner_radius="6dp"/>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="9dp"
+                                android:layout_marginStart="12dp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_16"
+                                    android:textColor="@color/color_FF333333"
+                                    android:textStyle="bold"
+                                    android:text="赛事"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_12"
+                                    android:textColor="@color/color_FF999999"
+                                    android:text="各类运动赛事"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_12"
+                                    android:textColor="@color/color_FF999999"
+                                    android:text="精彩纷呈"/>
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/layoutMenu"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
             app:tabIndicatorColor="@color/color_EF5B48"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/color_EF5B48"
+            app:tabIndicatorFullWidth="false"
             app:tabMaxWidth="60dp"
             app:tabMinWidth="40dp"/>
-        <ImageView
-            android:id="@+id/releasePost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/release_heise_img"/>
-    </RelativeLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/mViewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

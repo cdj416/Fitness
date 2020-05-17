@@ -71,11 +71,46 @@
                         android:drawableRight="@mipmap/right_huise_img"
                         android:text="查看全部"/>
                 </RelativeLayout>
-                <androidx.recyclerview.widget.RecyclerView
+                <!--<androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/commentRec"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"/>
+                    android:nestedScrollingEnabled="false"/>-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/cheadImg"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:riv_corner_radius="20dp"
+                        android:src="@mipmap/default_head_img"
+                        android:scaleType="centerCrop"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/userName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_FF333333"
+                            android:textSize="@dimen/sp_16"
+                            android:text="Valentina"/>
+                        <TextView
+                            android:id="@+id/cComtent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_FF333333"
+                            android:textSize="@dimen/sp_14"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="很好，非常满意"/>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

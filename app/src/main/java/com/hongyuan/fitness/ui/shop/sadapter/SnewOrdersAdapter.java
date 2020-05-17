@@ -1,5 +1,4 @@
 package com.hongyuan.fitness.ui.shop.sadapter;
-import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;

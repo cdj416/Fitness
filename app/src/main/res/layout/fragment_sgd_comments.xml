@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.hongyuan.fitness.custom_view.StickyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <com.hongyuan.fitness.custom_view.comm_title.CommentTitleView
-        android:id="@+id/commentTitle"
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:background="@color/color_FFFFFF"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mRec"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
+        android:orientation="vertical">
+        <com.hongyuan.fitness.custom_view.comm_title.CommentTitleView
+            android:id="@+id/commentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:paddingLeft="16dp"
+            android:background="@color/color_FFFFFF"
+            android:tag="sticky"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingEnd="@dimen/dp_16">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mRec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:id="@+id/childEmpty"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="300dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@mipmap/promt_empty_img"
+                    android:drawablePadding="10dp"
+                    android:layout_centerInParent="true"
+                    android:visibility="visible"
+                    android:gravity="center"
+                    android:text="暂无数据！"
+                    android:textSize="12sp"
+                    android:textColor="@color/color_FF999999" />
+            </RelativeLayout>
+
+        </FrameLayout>
+    </LinearLayout>
+</com.hongyuan.fitness.custom_view.StickyScrollView>

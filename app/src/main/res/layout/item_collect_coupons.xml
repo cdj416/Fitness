@@ -25,11 +25,13 @@
                 android:textColor="@color/color_EF5B48"
                 android:text="¥"/>
             <TextView
+                android:id="@+id/money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
                 android:textColor="@color/color_EF5B48"/>
             <TextView
+                android:id="@+id/minMoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_FF999999"
@@ -39,6 +41,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/useStores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_12"
@@ -47,6 +50,7 @@
             android:layout_marginTop="4dp"/>
 
         <TextView
+            android:id="@+id/recCoupon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/color_FFFFFF"
@@ -73,17 +77,20 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/goodBox1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
             <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img1"
                 android:layout_width="match_parent"
                 android:layout_height="96dp"
                 app:riv_corner_radius="6dp"
                 android:src="@color/color_F5F6FB"
                 android:scaleType="center"/>
             <TextView
+                android:id="@+id/goodName1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
@@ -103,15 +110,18 @@
                     android:textSize="@dimen/sp_12"
                     android:text="¥"/>
                 <TextView
+                    android:id="@+id/goodPrice1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/color_EF5B48"
-                    android:textSize="@dimen/sp_14"/>
+                    android:textSize="@dimen/sp_14"
+                    android:text="0"/>
             </LinearLayout>
         </LinearLayout>
 
 
         <LinearLayout
+            android:id="@+id/goodBox2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -119,12 +129,14 @@
             android:layout_marginStart="11dp"
             android:layout_weight="1">
             <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img2"
                 android:layout_width="match_parent"
                 android:layout_height="96dp"
                 app:riv_corner_radius="6dp"
                 android:src="@color/color_F5F6FB"
                 android:scaleType="center"/>
             <TextView
+                android:id="@+id/goodName2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
@@ -144,25 +156,30 @@
                     android:textSize="@dimen/sp_12"
                     android:text="¥"/>
                 <TextView
+                    android:id="@+id/goodPrice2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/color_EF5B48"
-                    android:textSize="@dimen/sp_14"/>
+                    android:textSize="@dimen/sp_14"
+                    android:text="0"/>
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/goodBox3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
             <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img3"
                 android:layout_width="match_parent"
                 android:layout_height="96dp"
                 app:riv_corner_radius="6dp"
                 android:src="@color/color_F5F6FB"
                 android:scaleType="center"/>
             <TextView
+                android:id="@+id/goodName3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
@@ -182,10 +199,12 @@
                     android:textSize="@dimen/sp_12"
                     android:text="¥"/>
                 <TextView
+                    android:id="@+id/goodPrice3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/color_EF5B48"
-                    android:textSize="@dimen/sp_14"/>
+                    android:textSize="@dimen/sp_14"
+                    android:text="0"/>
             </LinearLayout>
         </LinearLayout>
 

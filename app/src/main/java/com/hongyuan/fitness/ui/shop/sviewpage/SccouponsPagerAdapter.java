@@ -1,12 +1,15 @@
 package com.hongyuan.fitness.ui.shop.sviewpage;
 
 
+import android.os.Bundle;
+
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.main.TitleBean;
+import com.hongyuan.fitness.ui.shop.sbeans.FirstCategoryBeans;
 import com.hongyuan.fitness.ui.shop.sfragment.SccouponsFragment;
 import com.hongyuan.fitness.ui.shop.sfragment.ShopMainFragment;
 import com.hongyuan.fitness.ui.shop.sfragment.ShopNextFragment;
@@ -44,7 +47,7 @@ public class SccouponsPagerAdapter extends FragmentPagerAdapter {
     /*
      * 初始化数据
      * */
-    public void setData(List<BaseBean> mList) {
+    public void setData(List<FirstCategoryBeans.DataBean.ListBean> mList) {
         if (fragments == null) {
             fragments = new ArrayList<>();
         }
@@ -56,16 +59,19 @@ public class SccouponsPagerAdapter extends FragmentPagerAdapter {
 
         if(mList != null && mList.size() > 0){
             for(int i = 0 ; i < mList.size() ; i++){
-                if(i == 0){
-                    beans.add(new TitleBean("推荐",i));
-                    fragments.add(new SccouponsFragment().setArguments(""));
-                }else{
-                    beans.add(new TitleBean("关注",i));
-                    fragments.add(new SccouponsFragment().setArguments(""));
-                }
+                beans.add(new TitleBean(mList.get(i).getCategory_name(),i));
+                fragments.add(new SccouponsFragment().setMyArguments(getBundle(mList.get(i))));
             }
+            beans.add(0,new TitleBean("推荐",0));
+            fragments.add(0,new SccouponsFragment().setArguments(""));
         }
 
         notifyDataSetChanged();
+    }
+
+    private Bundle getBundle(FirstCategoryBeans.DataBean.ListBean item){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("item",item);
+        return bundle;
     }
 }

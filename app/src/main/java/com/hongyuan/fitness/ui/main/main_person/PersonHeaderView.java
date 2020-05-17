@@ -18,13 +18,14 @@ import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchActivity;
 import com.hongyuan.fitness.ui.person.my_fan.MyFansActivity;
 import com.hongyuan.fitness.ui.person.person_message.PersonMessageActivity;
 import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 public class PersonHeaderView extends LinearLayout {
 
     private CustomActivity mActivity;
     private RoundedImageView headImg;
-    private TextView userName,statusText,buttonText,miSign,fansNum,attentionNum,dynamicNum,pointNum,goSignIn;
+    private TextView userName,statusText,buttonText,miSign,balance,attentionNum,fansNum,pointNum,goSignIn;
     private RelativeLayout headBox;
     private LinearLayout myFans,myAttention,myDynamic,myPoint;
 
@@ -65,9 +66,10 @@ public class PersonHeaderView extends LinearLayout {
         myAttention = view.findViewById(R.id.myAttention);
         myDynamic = view.findViewById(R.id.myDynamic);
         myPoint = view.findViewById(R.id.myPoint);
+        balance = view.findViewById(R.id.balance);
         fansNum = view.findViewById(R.id.fansNum);
         attentionNum = view.findViewById(R.id.attentionNum);
-        dynamicNum = view.findViewById(R.id.dynamicNum);
+        //dynamicNum = view.findViewById(R.id.dynamicNum);
         pointNum = view.findViewById(R.id.pointNum);
         goSignIn = view.findViewById(R.id.goSignIn);
 
@@ -89,9 +91,9 @@ public class PersonHeaderView extends LinearLayout {
         Glide.with(getContext()).load(bean.getMi_head()).apply(options).into(headImg);
         userName.setText(bean.getM_name());
         miSign.setText(bean.getMi_sign());
-        fansNum.setText(String.valueOf(bean.getFans_num()));
+        balance.setText(BaseUtil.getNoZoon(bean.getMi_money()));
         attentionNum.setText(String.valueOf(bean.getGz_num()));
-        dynamicNum.setText(String.valueOf(bean.getCircle_num()));
+        fansNum.setText(String.valueOf(bean.getFans_num()));
         pointNum.setText(String.valueOf(bean.getMi_point()));
         if(bean.getCard_count() > 0){
             buttonText.setText("查看");
@@ -109,7 +111,6 @@ public class PersonHeaderView extends LinearLayout {
             }
 
         });
-
 
     }
 }

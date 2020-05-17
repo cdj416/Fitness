@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
@@ -23,23 +25,25 @@ import com.hongyuan.fitness.ui.person.waiting_for_class.about_privite_class.Priv
 import com.hongyuan.fitness.ui.person.waiting_for_class.about_privite_class.privite_checkin_details.PriviteCourseCheckDetails;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.TimeUtil;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
 public class SixpCourseAllFragment extends CustomFragment {
 
-    private LinearLayout oBox,tBox;
-    private RecyclerView oRec,tRec;
-    private PcourseSiginAdapter oAdapter;
-    private PcourseReservationAdapter tAdapter;
+    //状态1待上课 2已取消 3学员签到已完成 5申请取消中 6取消驳回
 
-    List<PriviteCourseCheckBeans.DataBean.ListBean> oList;
+    private LinearLayout oBox,tBox,qdBox,descriptionBox;
+    private RecyclerView tRec;
+    private PcourseReservationAdapter tAdapter;
+    private TextView courseStartTime,courseName,coachName,showTime,cancelSign,qdText,tTvtext,btvText;
+    private RoundedImageView headImg;
+
+    private DanduOneCourseBeans.DataBean.InfoBean infoBean;
+
+
     List<MyPriviteCourseBeans.DataBean.ListBean> tList;
 
-    //记录当前签到的是哪一项
-    private int mPosition;
-    //记录当前取消的哪一项
-    private int cPosition;
     @Override
     public int getLayoutId() {
         return R.layout.fragment_six_p_course_all;
@@ -52,45 +56,32 @@ public class SixpCourseAllFragment extends CustomFragment {
 
         oBox = mView.findViewById(R.id.oBox);
         tBox = mView.findViewById(R.id.tBox);
-        oRec = mView.findViewById(R.id.oRec);
         tRec = mView.findViewById(R.id.tRec);
 
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        oRec.setLayoutManager(manager);
-        oAdapter = new PcourseSiginAdapter();
-        oRec.setAdapter(oAdapter);
-        oAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @SingleClick(2000)
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                //签到
-                if(view.getId() == R.id.qdText && oList.get(position).getXy_qd_state() != 1){
-                    mPosition = position;
-                    courseQD(String.valueOf(oList.get(position).getCpa_id()));
-                }
+        courseStartTime = mView.findViewById(R.id.courseStartTime);
+        courseName = mView.findViewById(R.id.courseName);
+        coachName = mView.findViewById(R.id.coachName);
+        showTime = mView.findViewById(R.id.showTime);
+        cancelSign = mView.findViewById(R.id.cancelSign);
+        qdText = mView.findViewById(R.id.qdText);
+        descriptionBox = mView.findViewById(R.id.descriptionBox);
+        headImg = mView.findViewById(R.id.headImg);
+        tTvtext = mView.findViewById(R.id.tTvtext);
+        btvText = mView.findViewById(R.id.btvText);
+        qdBox = mView.findViewById(R.id.qdBox);
 
-                if(view.getId() == R.id.wcCancelSign || view.getId() == R.id.cancelSign){
-                    CustomDialog.promptDialog(mActivity, "确定取消预约该课程吗？", "确定取消", "暂不取消", false, v1 -> {
-                        if(v1.getId() == R.id.isOk){
-                            cPosition = position;
-                            cancelRese(String.valueOf(oList.get(position).getCpa_id()));
-                        }
-                    });
 
-                }
-
-                //去课程详情和签到详情
-                if(view.getId() == R.id.goSignDetail){
-                    Bundle bundle = new Bundle();
-                    bundle.putString("cp_id",String.valueOf(oList.get(position).getCp_id()));
-                    bundle.putString("cpa_id",String.valueOf(oList.get(position).getCpa_id()));
-                    bundle.putString("showTime",oList.get(position).getStart_time());
-                    bundle.putBoolean("isSign",oList.get(position).getXy_qd_state() == 1);
-                    startActivity(PriviteCourseCheckDetails.class,bundle);
-                }
-            }
+        qdText.setOnClickListener(v -> {
+            courseQD(String.valueOf(infoBean.getCpa_id()));
         });
+
+        cancelSign.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("cpa_id",String.valueOf(infoBean.getCpa_id()));
+            bundle.putString("tel","18173195472");
+            startActivity(CancelCourseActivity.class,bundle);
+        });
+
 
 
         LinearLayoutManager manager1 = new LinearLayoutManager(getContext());
@@ -128,6 +119,19 @@ public class SixpCourseAllFragment extends CustomFragment {
     }
 
     /*
+     * 课程开始时间处理
+     * */
+    private String getShowTime(String startTime){
+        String showText;
+        if(TimeUtil.isToday(startTime,TimeUtil.dateFormatYMDHMS)){
+            showText = "上课时间：今天 "+TimeUtil.formatDate(startTime,TimeUtil.dateFormatYMDHMS,TimeUtil.dateFormatHM);
+        }else{
+            showText = "上课时间："+TimeUtil.formatDate(startTime,TimeUtil.dateFormatYMDHMS,TimeUtil.dateFormat);
+        }
+        return showText;
+    }
+
+    /*
      * 加载更多
      * */
     @Override
@@ -138,7 +142,6 @@ public class SixpCourseAllFragment extends CustomFragment {
     //刷新数据
     @Override
     public void refreshData() {
-        if(oList != null)oList.clear();
         if(tList != null)tList.clear();
         lazyLoad();
     }
@@ -146,8 +149,8 @@ public class SixpCourseAllFragment extends CustomFragment {
     @Override
     protected void lazyLoad() {
         mActivity.showLoading();
-        clearParams().setParams("state_str","1");
-        Controller.myRequest(Constants.GET_MEMBER_APPOINTMENT_COURSE_PRIVITE_LIST,Controller.TYPE_POST,getParams(), PriviteCourseCheckBeans.class,this);
+        clearParams();
+        Controller.myRequest(Constants.GET_MEMBER_APPOINTMENT_COURSE_PRIVITE_ONE,Controller.TYPE_POST,getParams(), DanduOneCourseBeans.class,this);
 
         clearParams().clearParams();
         Controller.myRequest(Constants.GET_MY_COURSE_PRIVITE_LIST,Controller.TYPE_POST,getParams(), MyPriviteCourseBeans.class,this);
@@ -161,35 +164,51 @@ public class SixpCourseAllFragment extends CustomFragment {
         Controller.myRequest(ConstantsCode.PRIVITE_COURSE_QD,Constants.PRIVITE_COURSE_QD,Controller.TYPE_POST,getParams(), BaseBean.class,this);
     }
 
-    /*
-     * 取消私教课预约
-     * */
-    private void cancelRese(String cpa_id){
-        clearParams().setParams("cpa_id",cpa_id);
-        Controller.myRequest(ConstantsCode.CANCEL_COURSE_PRIVITE_APPOINTMENT,Constants.CANCEL_COURSE_PRIVITE_APPOINTMENT,Controller.TYPE_POST,getParams(), BaseBean.class,this);
-    }
 
     @Override
     public void onSuccess(Object data) {
         mActivity.closeLoading();
-        if(data instanceof PriviteCourseCheckBeans){
-            List<PriviteCourseCheckBeans.DataBean.ListBean> list = ((PriviteCourseCheckBeans)data).getData().getList();
-            if(curPage == FIRST_PAGE){
-                oList = list;
-            }else{
-                if(list != null && list.size() > 0){
-                    oList.addAll(list);
-                }else{
-                    //refresh.finishLoadMoreWithNoMoreData();
-                }
+
+        if(data instanceof DanduOneCourseBeans){
+            infoBean = ((DanduOneCourseBeans)data).getData().getInfo();
+
+            RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img).centerCrop();
+            Glide.with(mActivity).load(infoBean.getCoach_head()).apply(options).into(headImg);
+
+            courseStartTime.setText(getShowTime(infoBean.getStart_time()));
+            courseName.setText(infoBean.getCp_name());
+            coachName.setText(infoBean.getCoach_nickname()+"/"+infoBean.getOs_name());
+
+            if(infoBean.getState() == 1){
+                qdBox.setVisibility(View.VISIBLE);
+                descriptionBox.setVisibility(View.GONE);
+            }
+            if(infoBean.getState() == 2){
+                qdBox.setVisibility(View.GONE);
+                descriptionBox.setVisibility(View.VISIBLE);
+                tTvtext.setVisibility(View.GONE);
+                btvText.setText("课程取消成功");
             }
 
-            if(oList != null && oList.size() > 0){
-                oAdapter.setNewData(oList);
-                oBox.setVisibility(View.VISIBLE);
-            }else{
-                oBox.setVisibility(View.GONE);
+            if(infoBean.getState() == 3){
+                tTvtext.setText("课程已结束");
+                cancelSign.setVisibility(View.GONE);
+                qdText.setText("评价");
+                qdBox.setVisibility(View.VISIBLE);
+                descriptionBox.setVisibility(View.GONE);
             }
+
+            if(infoBean.getState() == 5){
+                qdBox.setVisibility(View.GONE);
+                descriptionBox.setVisibility(View.VISIBLE);
+            }
+
+            if(infoBean.getState() == 6){
+                qdBox.setVisibility(View.VISIBLE);
+                descriptionBox.setVisibility(View.GONE);
+                tTvtext.setText("申请已驳回");
+            }
+
         }
 
         if(data instanceof MyPriviteCourseBeans){
@@ -212,7 +231,7 @@ public class SixpCourseAllFragment extends CustomFragment {
             }
         }
 
-        if((tList == null || tList.size() == 0) && (oList == null || oList.size() == 0)){
+        if(tList == null || tList.size() == 0){
             setPromtView(SHOW_EMPTY);
         }else{
             setPromtView(SHOW_DATA);
@@ -222,14 +241,11 @@ public class SixpCourseAllFragment extends CustomFragment {
     @Override
     public void onSuccess(int code, Object data) {
         if(code == ConstantsCode.CANCEL_COURSE_PRIVITE_APPOINTMENT){
-            oList.remove(cPosition);
-            oAdapter.setNewData(oList);
+
             showSuccess("已取消预约！");
         }
 
         if(code == ConstantsCode.PRIVITE_COURSE_QD){
-            oList.get(mPosition).setXy_qd_state(1);
-            oAdapter.setNewData(oList);
             CustomDialog.priviteCoursePunchSuccess(mActivity, TimeUtil.formatDataMsec(TimeUtil.dateFormatDotMD,System.currentTimeMillis()),
                     TimeUtil.getWeek());
         }

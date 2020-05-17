@@ -80,7 +80,7 @@
                 android:gravity="center"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/fansNum"
+                    android:id="@+id/balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/color_FF333333"
@@ -92,7 +92,7 @@
                     android:textColor="@color/color_FF999999"
                     android:textSize="@dimen/sp_12"
                     android:layout_marginTop="6dp"
-                    android:text="粉丝"/>
+                    android:text="余额"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/myAttention"
@@ -124,7 +124,7 @@
                 android:gravity="center"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/dynamicNum"
+                    android:id="@+id/fansNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/color_FF333333"
@@ -136,7 +136,7 @@
                     android:textColor="@color/color_FF999999"
                     android:textSize="@dimen/sp_12"
                     android:layout_marginTop="6dp"
-                    android:text="动态"/>
+                    android:text="粉丝"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/myPoint"

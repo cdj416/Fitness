@@ -35,7 +35,8 @@ public class CommentAdapter extends BaseQuickAdapter<CommentBeans.DataBean.ListB
         helper.setText(R.id.userName,item.getM_name())
                 .setText(R.id.commentTime, TimeUtil.friendly_time(item.getCr_date()))
                 .setText(R.id.cpName,item.getCp_name())
-                .setText(R.id.barText,getBarString(Float.valueOf(item.getCoach_s())));
+                .setText(R.id.barText,getBarString(Float.valueOf(item.getCoach_s())))
+                .setText(R.id.commentContent,item.getCr_content());
         RatingBar ratingBar = helper.getView(R.id.myRat);
         ratingBar.setRating(Float.valueOf(item.getCoach_s()));
 

@@ -85,8 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/color_FF333333"
-        android:textSize="@dimen/sp_14"
-        android:text="你们有没有在好好健身呀～"/>
+        android:textSize="@dimen/sp_14"/>
 
     <com.hongyuan.fitness.custom_view.nine_gridimg.NineGridImageView
         android:id="@+id/nineGridImg"

@@ -1,15 +1,22 @@
 package com.hongyuan.fitness.ui.webview;
+import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.BaseBean;
+import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
+import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityWebviewBinding;
-import com.hongyuan.fitness.ui.main.MainActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
+import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
+import com.hongyuan.fitness.util.huanxin.ChatDataBeans;
+import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.AgentWebConfig;
 import com.just.agentweb.DefaultWebClient;
@@ -28,12 +35,17 @@ public class WebViewModelView extends CustomViewModel {
 
     @Override
     protected void initView() {
-        mActivity.getMainTitle().setCentreText(getBundle().getString("title",""));
-
-        mActivity.getMainTitle().getLeftView().setOnClickListener(v -> {
-            if(getBundle().getString("backType") != null && "goMain".endsWith(getBundle().getString("backType",""))){
-                startActivity(MainActivity.class,null);
+        binding.title.setText(getBundle().getString("title",""));
+        binding.goBack.setOnClickListener(v -> {
+            if (mAgentWeb.getWebCreator().getWebView().canGoBack()) {
+                mAgentWeb.getWebCreator().getWebView().goBack();//返回上个页面
+                return;
+            } else {
+                mActivity.finish();
             }
+
+        });
+        binding.close.setOnClickListener(v -> {
             mActivity.finish();
         });
 
@@ -91,21 +103,47 @@ public class WebViewModelView extends CustomViewModel {
         mAgentWeb.getWebCreator().getWebView().getSettings().setAllowFileAccessFromFileURLs(true);
         mAgentWeb.getWebCreator().getWebView().getSettings().setAllowUniversalAccessFromFileURLs(true);
         mAgentWeb.getWebCreator().getWebView().setOnKeyListener((v, keyCode, event) -> {
-            if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                if (keyCode == KeyEvent.KEYCODE_BACK && mAgentWeb.getWebCreator().getWebView().canGoBack()) { // 表示按返回键时的操作
-                    mAgentWeb.getWebCreator().getWebView().goBack(); // 后退
-                    // webview.goForward();//前进
-                    return true; // 已处理
-                } else if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    mActivity.moveTaskToBack(true);
-                }
+            if (keyCode == KeyEvent.KEYCODE_BACK && mAgentWeb.getWebCreator().getWebView().canGoBack()) {
+                mAgentWeb.getWebCreator().getWebView().goBack();//返回上个页面
+                return true;
             }
-            return false;
+            return mActivity.onKeyDown(keyCode, event);//退出H5界面
         });
+
+    }
+
+    /*
+    * 请求保存创建的群组id
+    * */
+    public void updateGroup(String groupTitle,String gs_id,String group_chat_id){
+        this.groupTitle = groupTitle;
+        this.group_chat_id = group_chat_id;
+        clearParams().setParams("gs_id",gs_id).setParams("group_chat_id",group_chat_id);
+        Controller.myRequest(ConstantsCode.GYM_SPORT_GROUP_CHAT_ADD,Constants.GYM_SPORT_GROUP_CHAT_ADD,Controller.TYPE_POST,getParams(), BaseBean.class,this);
     }
 
     @Override
     public void onSuccess(Object data) {
 
+    }
+
+    //会话标题
+    private String groupTitle;
+    //会话id
+    private String group_chat_id;
+
+    @Override
+    public void onSuccess(int code, Object data) {
+        mActivity.closeLoading();
+        if(code == ConstantsCode.GYM_SPORT_GROUP_CHAT_ADD){
+            HuanXinUtils.getInstance().setBaseData(TokenSingleBean.getInstance().getM_mobile(),TokenSingleBean.getInstance().getHeadUrl()
+                    ,"","");
+            Bundle bundle = new Bundle();
+            bundle.putString("title",groupTitle);
+            bundle.putString("username",group_chat_id);
+            bundle.putBoolean("isGroup",true);
+            bundle.putString("lastMsgId","");
+            startActivity(ChatPageActivity.class,bundle);
+        }
     }
 }

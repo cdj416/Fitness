@@ -1,8 +1,8 @@
 package com.hongyuan.fitness.ui.shop.smyview;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +20,17 @@ import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
+import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.RetrofitListener;
-import com.hongyuan.fitness.ui.mall.good_details.GoodDetailsBean;
-import com.hongyuan.fitness.ui.mall.good_details.GoodSelectSkuBean;
+import com.hongyuan.fitness.ui.shop.sactivity.SCartActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.SorderDetailsActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SGDspecificationAdapter;
+import com.hongyuan.fitness.ui.shop.sbeans.CartJsonBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.SgoodsDetailBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.SgoodselectSkunBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
+import com.hongyuan.fitness.util.GsonUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
@@ -38,12 +41,14 @@ import java.util.List;
 public class SGDspecificationView extends LinearLayout implements RetrofitListener,SGDspecificationAdapter.ChangeData {
 
     private CustomFragment mFragment;
+    private CustomViewModel model;
+
     private RecyclerView mRec;
     private  SGDspecificationAdapter adapter;
 
     private RoundedImageView goodImg;
     private TextView goodPrice,goodStock,changeNorm,addMark,goodPoint,pointText,numText,goBuy;
-    private LinearLayout addCart;
+    private LinearLayout addCart,buyBox,exchangeBox;
 
     //数据源
     private SgoodsDetailBeans.DataBean.InfoBean infoBean;
@@ -52,6 +57,9 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
 
     //当前可购买的最大数量
     private int maxNum = 99999;
+
+    //是否立即购买
+    private boolean isBuyNow = false;
 
     //选中的sku
     List<SgoodsDetailBeans.DataBean.InfoBean.SkuBean> selectList = new ArrayList<>();
@@ -74,6 +82,8 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
         addMark = view.findViewById(R.id.addMark);
         goodPoint = view.findViewById(R.id.goodPoint);
         pointText = view.findViewById(R.id.pointText);
+        buyBox = view.findViewById(R.id.buyBox);
+        exchangeBox = view.findViewById(R.id.exchangeBox);
 
 
         LinearLayoutManager comManager = new LinearLayoutManager(getContext());
@@ -85,7 +95,48 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
         adapter.setFooterView(getFooter());
 
         addCart.setOnClickListener(v -> {
+            isBuyNow = false;
             addCart();
+        });
+
+        goBuy.setOnClickListener(v -> {
+            isBuyNow = true;
+            addCart();
+        });
+
+        //直接去到订单确认页面
+        exchangeBox.setOnClickListener(v -> {
+
+            String gp_id;
+            if(infoBean.getSku() != null && infoBean.getSku().size() > 0){
+                if(itemBean == null || itemBean.getGp_stock() <=0 ){
+                    CustomDialog.showMessage(getContext(),"库存不足！");
+                    return;
+                }else{
+                    gp_id = String.valueOf(itemBean.getGp_id());
+                }
+            }else{
+                if(infoBean.getGp() != null && infoBean.getGp().size() > 0 && infoBean.getGp().get(0).getGp_stock() > 0){
+                    gp_id = String.valueOf(infoBean.getGp().get(0).getGp_id());
+                }else{
+                    CustomDialog.showMessage(getContext(),"库存不足！");
+                    return;
+                }
+            }
+
+            if(Integer.valueOf(numText.getText().toString()) <= 0){
+                CustomDialog.showMessage(getContext(),"购买数量不能少于1");
+                return;
+            }
+
+            Bundle bundle = new Bundle();
+            bundle.putString("cartJson",getJson(Integer.parseInt(gp_id)));
+            if(model != null){
+                model.startActivity(SorderDetailsActivity.class,bundle);
+            }else if(mFragment != null){
+                mFragment.startActivity(SorderDetailsActivity.class,bundle);
+            }
+
         });
     }
 
@@ -121,11 +172,43 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
     }
 
     /*
+    * 积分兑换需要组装的json数据
+    * */
+    private String getJson(int gp_id){
+        List<CartJsonBeans> jsonList = new ArrayList<>();
+        CartJsonBeans jsonBeans = new CartJsonBeans();
+        jsonBeans.setStore_id(infoBean.getStore_id());
+
+        List<CartJsonBeans.GoodsListBean> goodsList = new ArrayList<>();
+        CartJsonBeans.GoodsListBean goodsListBean = new CartJsonBeans.GoodsListBean();
+
+        goodsListBean.setCart_id(0);
+        goodsListBean.setBuy_num(Integer.parseInt(numText.getText().toString()));
+        goodsListBean.setGp_id(gp_id);
+        goodsList.add(goodsListBean);
+
+        jsonBeans.setGoods_list(goodsList);
+        jsonList.add(jsonBeans);
+
+        return GsonUtil.toJsonStr(jsonList);
+
+    }
+
+    /*
     * 设置规格相关数据
     * */
-    public void setDatas(SgoodsDetailBeans.DataBean.InfoBean infoBean,CustomFragment mFragment){
+    public void setDatas(SgoodsDetailBeans.DataBean.InfoBean infoBean,CustomFragment mFragment,CustomViewModel model){
         this.mFragment = mFragment;
+        this.model = model;
         this.infoBean = infoBean;
+
+        if(mFragment != null){
+            exchangeBox.setVisibility(GONE);
+            buyBox.setVisibility(VISIBLE);
+        }else if(model != null){
+            exchangeBox.setVisibility(VISIBLE);
+            buyBox.setVisibility(GONE);
+        }
 
         maxNum = infoBean.getG_stock();
         Glide.with(getContext()).load(infoBean.getG_img()).into(goodImg);
@@ -181,14 +264,27 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
      * 请求获取全部规格选择后的数据
      * */
     private void getSelectSkun(List<SgoodsDetailBeans.DataBean.InfoBean.SkuBean> selectList){
-        mFragment.clearParams().setParams("g_id",String.valueOf(infoBean.getG_id()))
-                .setParams("third_category_id",String.valueOf(infoBean.getThird_category_id()));
+
+
+        if(model != null){
+            model.clearParams().setParams("g_id",String.valueOf(infoBean.getG_id()))
+                    .setParams("third_category_id",String.valueOf(infoBean.getThird_category_id()));
+        }else if(mFragment != null){
+            mFragment.clearParams().setParams("g_id",String.valueOf(infoBean.getG_id()))
+                    .setParams("third_category_id",String.valueOf(infoBean.getThird_category_id()));
+        }
+
         for(SgoodsDetailBeans.DataBean.InfoBean.SkuBean skuBean: selectList){
             if(skuBean.getSelectChildName() != null){
-                mFragment.setParams("sku_name_"+skuBean.getSku_type_id(),skuBean.getSelectChildName());
+                if(model != null){
+                    model.setParams("sku_name_"+skuBean.getSku_type_id(),skuBean.getSelectChildName());
+                }else if(mFragment != null){
+                    mFragment.setParams("sku_name_"+skuBean.getSku_type_id(),skuBean.getSelectChildName());
+                }
+
             }
         }
-        Controller.myRequest(Constants.SELECT_SKU,Controller.TYPE_POST,mFragment.getParams(), SgoodselectSkunBeans.class,this);
+        Controller.myRequest(Constants.SELECT_SKU,Controller.TYPE_POST,mFragment != null ? mFragment.getParams() : model.getParams(), SgoodselectSkunBeans.class,this);
     }
 
     /*
@@ -216,9 +312,17 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
             CustomDialog.showMessage(getContext(),"购买数量不能少于1");
             return;
         }
-        mFragment.clearParams().setParams("gp_id",gp_id)
-                .setParams("buy_num",numText.getText().toString());
-        Controller.myRequest(ConstantsCode.ADD_SHOPPING_CART,Constants.ADD_SHOPPING_CART,Controller.TYPE_POST,mFragment.getParams(), BaseBean.class,this);
+
+        if(model != null){
+            model.clearParams().setParams("gp_id",gp_id)
+                    .setParams("buy_num",numText.getText().toString());
+        }else if(mFragment != null){
+            mFragment.clearParams().setParams("gp_id",gp_id)
+                    .setParams("buy_num",numText.getText().toString());
+        }
+
+
+        Controller.myRequest(ConstantsCode.ADD_SHOPPING_CART,Constants.ADD_SHOPPING_CART,Controller.TYPE_POST,mFragment != null ? mFragment.getParams() : model.getParams(), BaseBean.class,this);
     }
 
     /**********************************************数据回调*****************************************/
@@ -260,7 +364,20 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
     @Override
     public void onSuccess(int code, Object data) {
         if(code == ConstantsCode.ADD_SHOPPING_CART){
-            mFragment.showSuccess("已加入购物车");
+            if(isBuyNow){
+                if(mFragment != null){
+                    mFragment.startActivity(SCartActivity.class,null);
+                }else if(model != null){
+                    model.startActivity(SCartActivity.class,null);
+                }
+            }else{
+                if(mFragment != null){
+                    mFragment.showSuccess("已加入购物车");
+                }else if(model != null){
+                    model.showSuccess("已加入购物车");
+                }
+            }
+
         }
     }
 

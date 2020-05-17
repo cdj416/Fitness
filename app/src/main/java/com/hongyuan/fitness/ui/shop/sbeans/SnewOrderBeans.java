@@ -73,6 +73,7 @@ public class SnewOrderBeans extends BaseBean {
                     String allPrice = "0";
                     int g_id = 0;
                     for(ListBean.GoodsListBean goodsListBean : listBean.getGoods_list()){
+                        goodsListBean.setG_oid(listBean.getO_id());
                         listBean.addSubItem(goodsListBean);
                         goodsNum += goodsListBean.getBuy_num();
                         allPrice = BigDecimalUtils.add(allPrice,BigDecimalUtils.mul(goodsListBean.getGp_price(),String.valueOf(goodsListBean.getBuy_num()),2),2);
@@ -451,6 +452,15 @@ public class SnewOrderBeans extends BaseBean {
                 private int gp_point;
                 private String sku_names;
                 private int buy_num;
+                private int g_oid;
+
+                public int getG_oid() {
+                    return g_oid;
+                }
+
+                public void setG_oid(int g_oid) {
+                    this.g_oid = g_oid;
+                }
 
                 public int getG_id() {
                     return g_id;
