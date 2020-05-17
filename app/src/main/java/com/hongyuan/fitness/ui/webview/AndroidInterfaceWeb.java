@@ -1,13 +1,11 @@
 package com.hongyuan.fitness.ui.webview;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.webkit.JavascriptInterface;
 
 import com.google.gson.reflect.TypeToken;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
-import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.custom_view.share_view.ShareUtil;
 import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
@@ -47,11 +45,7 @@ public class AndroidInterfaceWeb {
     * */
     @JavascriptInterface
     public String androidGetUserInfo(){
-       String jsonStr = GsonUtil.toJsonStr(viewModel.getParams());
-        CustomDialog.promptDialog(mActivity, "获取用户信息调用成功", "很不错哦", "非常棒", false, v -> {
-
-        });
-        return jsonStr;
+        return GsonUtil.toJsonStr(viewModel.getParams());
     }
 
     /*
@@ -59,9 +53,6 @@ public class AndroidInterfaceWeb {
     * */
     @JavascriptInterface
     public void androidLogin() {
-        CustomDialog.promptDialog(mActivity, "登录调用成功", "很不错哦", "非常棒", false, v -> {
-
-        });
         mActivity.startActivity(VtwoLoginActivity.class,null);
     }
 

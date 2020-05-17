@@ -27,7 +27,7 @@ public class PersonHeaderView extends LinearLayout {
     private RoundedImageView headImg;
     private TextView userName,statusText,buttonText,miSign,balance,attentionNum,fansNum,pointNum,goSignIn;
     private RelativeLayout headBox;
-    private LinearLayout myFans,myAttention,myDynamic,myPoint;
+    private LinearLayout myFans,myAttention,myPoint;
 
     public PersonHeaderView(Context context) {
         super(context);
@@ -64,7 +64,7 @@ public class PersonHeaderView extends LinearLayout {
         miSign = view.findViewById(R.id.miSign);
         myFans = view.findViewById(R.id.myFans);
         myAttention = view.findViewById(R.id.myAttention);
-        myDynamic = view.findViewById(R.id.myDynamic);
+        //myDynamic = view.findViewById(R.id.myDynamic);
         myPoint = view.findViewById(R.id.myPoint);
         balance = view.findViewById(R.id.balance);
         fansNum = view.findViewById(R.id.fansNum);
@@ -81,7 +81,7 @@ public class PersonHeaderView extends LinearLayout {
         myPoint.setOnClickListener(v -> mActivity.startActivity(DailyPunchActivity.class,null));
         myFans.setOnClickListener(v -> mActivity.startActivity(MyFansActivity.class,null));
         myAttention.setOnClickListener(v -> mActivity.startActivity(FriendsActivity.class,null));
-        myDynamic.setOnClickListener(v -> mActivity.startActivity(PersonMessageActivity.class,null));
+        //myDynamic.setOnClickListener(v -> mActivity.startActivity(PersonMessageActivity.class,null));
 
         goSignIn.setOnClickListener(v -> mActivity.startActivity(DailyPunchActivity.class,null));
     }
