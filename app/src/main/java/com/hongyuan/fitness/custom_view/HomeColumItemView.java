@@ -22,6 +22,7 @@ import com.hongyuan.fitness.ui.person.push_share.PushShareActivity;
 import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
 import com.hongyuan.fitness.ui.training_plan.TrainingPlanActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 
 public class HomeColumItemView extends LinearLayout implements View.OnClickListener {
 
@@ -121,7 +122,7 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
 
             case R.id.goVue:
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/?m_id="+ TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
+                bundle.putString("url", Constants.WEB_ADDRESS+TokenSingleBean.getInstance().getWebParams());
                 bundle.putString("title","场馆首页");
                 mActivity.startActivity(WebViewActivity.class,bundle);
                 break;

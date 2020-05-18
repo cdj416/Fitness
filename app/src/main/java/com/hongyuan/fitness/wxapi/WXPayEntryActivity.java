@@ -3,13 +3,9 @@ package com.hongyuan.fitness.wxapi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -19,11 +15,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
-import com.hongyuan.fitness.ui.about_class.class_success.SuccessClassActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayViewModel;
-import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.ShopNewOrderAcitivity;
 import com.hongyuan.fitness.ui.webview.WebPayModelUtils;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
@@ -39,6 +34,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
 	private ImageView successImg;
 	private TextView goHome;
+
+	public static boolean isShop = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -109,18 +106,34 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 					break;
 				case -1:
 					msg = "支付失败！";
-					Intent intent = new Intent(this, MineOrderActivity.class);
-					startActivity(intent);
+					if(isShop){
+						Intent intent = new Intent(this, ShopNewOrderAcitivity.class);
+						startActivity(intent);
+					}else{
+						Intent intent = new Intent(this, MainActivity.class);
+						startActivity(intent);
+					}
+
 					break;
 				case -2:
 					msg = "您取消了支付！";
-					Intent intent1 = new Intent(this, MineOrderActivity.class);
-					startActivity(intent1);
+					if(isShop){
+						Intent intent = new Intent(this, ShopNewOrderAcitivity.class);
+						startActivity(intent);
+					}else{
+						Intent intent = new Intent(this, MainActivity.class);
+						startActivity(intent);
+					}
 					break;
 				default:
 					msg = "支付失败！";
-					Intent intent2 = new Intent(this, MineOrderActivity.class);
-					startActivity(intent2);
+					if(isShop){
+						Intent intent = new Intent(this, ShopNewOrderAcitivity.class);
+						startActivity(intent);
+					}else{
+						Intent intent = new Intent(this, MainActivity.class);
+						startActivity(intent);
+					}
 					break;
 			}
 		}

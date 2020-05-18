@@ -1102,4 +1102,49 @@ public class CustomDialog {
             dialog.dismiss();
         });
     }
+
+    /*
+     * 客服
+     * */
+    public static void keFuWay(Context mContext, DialogClickMessage dialogClick ){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_kefu_way,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        //支付宝支付
+        view.findViewById(R.id.telNum).setOnClickListener(v -> {
+            dialogClick.dialogClick(v,"电话联系");
+            dialog.dismiss();
+        });
+        //微信支付
+        view.findViewById(R.id.goChat).setOnClickListener(v -> {
+            dialogClick.dialogClick(v,"发送消息");
+            dialog.dismiss();
+        });
+        //取消支付
+        view.findViewById(R.id.cancel).setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+    }
+    /*
+     * 查看url连接
+     * */
+    public static void showUrl(Context mContext, String url){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_show_url,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setWindowAnimations(R.style.main_menu_animStyle);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        TextView tv = view.findViewById(R.id.urlTv);
+        tv.setText(url);
+    }
 }

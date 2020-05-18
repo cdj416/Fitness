@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,10 +22,11 @@ import com.hongyuan.fitness.ui.find.circle.circle_detail.CircleDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.edit_post.EditPostActivity;
 import com.hongyuan.fitness.ui.find.more_topic.MoreTopicActivity;
 import com.hongyuan.fitness.ui.find.topic.SlectTopicLeftBeans;
-import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.main.main_find.featured.FindTopicAdapter;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -78,28 +78,37 @@ public class FindFragment extends CustomFragment {
         moreTopic.setOnClickListener(v -> startActivity(MoreTopicActivity.class,null));
 
         goYue.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("url", Constants.WEB_ADDRESS+"/Asportslist");
-            bundle.putString("title","约运动列表");
-            mActivity.startActivity(WebViewActivity.class,bundle);
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+ "/Asportslist"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("title","约运动列表");
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+
         });
         goPei.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("url", Constants.WEB_ADDRESS+"/train");
-            bundle.putString("title","培训课");
-            mActivity.startActivity(WebViewActivity.class,bundle);
-        });
-        goPei.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("url", Constants.WEB_ADDRESS+"/train");
-            bundle.putString("title","培训课");
-            mActivity.startActivity(WebViewActivity.class,bundle);
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+"/train"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("title","培训课");
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+
         });
         goSai.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("url", Constants.WEB_ADDRESS+"/event");
-            bundle.putString("title","赛事");
-            mActivity.startActivity(WebViewActivity.class,bundle);
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+"/event"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("title","赛事");
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+
         });
 
 
@@ -131,7 +140,7 @@ public class FindFragment extends CustomFragment {
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 0 && mActivity.userToken.getM_mobile() == null){
+                if(position == 1 && mActivity.userToken.getM_mobile() == null){
                     startActivity(VtwoVerificationLoginActivity.class,null);
                 }
             }
@@ -161,7 +170,7 @@ public class FindFragment extends CustomFragment {
      * */
     @Subscribe(id = ConstantsCode.EB_START_MAIN)
     public void result(String message) {
-        mViewPager.setCurrentItem(1);
+        mViewPager.setCurrentItem(0);
     }
 
     @Nullable

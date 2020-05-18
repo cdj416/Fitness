@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.hongyuan.fitness.ui.person.my_coupon.newcoupon.NewCouponViewModel"/>
+    </data>
+
+    <com.hongyuan.fitness.custom_view.filter_view.DropDownMenu
+        android:id="@+id/dropDownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@id/mFilterContentView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_F5F6FB">
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/mRecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="13dp"
+                        android:paddingRight="13dp"
+                        android:paddingTop="16dp"/>
+                    <RelativeLayout
+                        android:id="@+id/loadBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:layout_marginTop="40dp"
+                        android:layout_centerInParent="true">
+
+                        <TextView
+                            android:id="@+id/isEmpty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@mipmap/promt_empty_img"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:layout_centerInParent="true"
+                            android:visibility="visible"
+                            android:gravity="center"
+                            android:text="暂无数据！"
+                            android:textSize="12sp"
+                            android:textColor="@color/color_FF999999" />
+
+                        <TextView
+                            android:id="@+id/isErr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@mipmap/view_erro"
+                            android:drawablePadding="@dimen/dp_5"
+                            android:layout_centerInParent="true"
+                            android:text="出错啦，请下拉刷新！"
+                            android:visibility="gone"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:textColor="@color/color_FF999999" />
+                    </RelativeLayout>
+                </FrameLayout>
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_gravity="bottom"
+                android:background="@color/color_FFFFFF"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/color_EEEEEE"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="@drawable/shape_gradient_v_radiu5_login"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/color_FFFFFF"
+                    android:text="去领券中心"/>
+            </RelativeLayout>
+        </FrameLayout>
+
+    </com.hongyuan.fitness.custom_view.filter_view.DropDownMenu>
+</layout>

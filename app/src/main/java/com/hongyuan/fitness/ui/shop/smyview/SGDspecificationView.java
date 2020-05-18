@@ -101,43 +101,47 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
 
         goBuy.setOnClickListener(v -> {
             isBuyNow = true;
-            addCart();
+            goDetails();
         });
 
         //直接去到订单确认页面
         exchangeBox.setOnClickListener(v -> {
 
-            String gp_id;
-            if(infoBean.getSku() != null && infoBean.getSku().size() > 0){
-                if(itemBean == null || itemBean.getGp_stock() <=0 ){
-                    CustomDialog.showMessage(getContext(),"库存不足！");
-                    return;
-                }else{
-                    gp_id = String.valueOf(itemBean.getGp_id());
-                }
-            }else{
-                if(infoBean.getGp() != null && infoBean.getGp().size() > 0 && infoBean.getGp().get(0).getGp_stock() > 0){
-                    gp_id = String.valueOf(infoBean.getGp().get(0).getGp_id());
-                }else{
-                    CustomDialog.showMessage(getContext(),"库存不足！");
-                    return;
-                }
-            }
-
-            if(Integer.valueOf(numText.getText().toString()) <= 0){
-                CustomDialog.showMessage(getContext(),"购买数量不能少于1");
-                return;
-            }
-
-            Bundle bundle = new Bundle();
-            bundle.putString("cartJson",getJson(Integer.parseInt(gp_id)));
-            if(model != null){
-                model.startActivity(SorderDetailsActivity.class,bundle);
-            }else if(mFragment != null){
-                mFragment.startActivity(SorderDetailsActivity.class,bundle);
-            }
+            goDetails();
 
         });
+    }
+
+    private void goDetails(){
+        String gp_id;
+        if(infoBean.getSku() != null && infoBean.getSku().size() > 0){
+            if(itemBean == null || itemBean.getGp_stock() <=0 ){
+                CustomDialog.showMessage(getContext(),"库存不足！");
+                return;
+            }else{
+                gp_id = String.valueOf(itemBean.getGp_id());
+            }
+        }else{
+            if(infoBean.getGp() != null && infoBean.getGp().size() > 0 && infoBean.getGp().get(0).getGp_stock() > 0){
+                gp_id = String.valueOf(infoBean.getGp().get(0).getGp_id());
+            }else{
+                CustomDialog.showMessage(getContext(),"库存不足！");
+                return;
+            }
+        }
+
+        if(Integer.valueOf(numText.getText().toString()) <= 0){
+            CustomDialog.showMessage(getContext(),"购买数量不能少于1");
+            return;
+        }
+
+        Bundle bundle = new Bundle();
+        bundle.putString("cartJson",getJson(Integer.parseInt(gp_id)));
+        if(model != null){
+            model.startActivity(SorderDetailsActivity.class,bundle);
+        }else if(mFragment != null){
+            mFragment.startActivity(SorderDetailsActivity.class,bundle);
+        }
     }
 
     private View getFooter(){

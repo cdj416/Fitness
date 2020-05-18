@@ -28,6 +28,7 @@ import com.hongyuan.fitness.ui.shop.sbeans.SgoodsDeailStoreBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.SgoodsDetailBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.ShopCommentBeans;
 import com.hongyuan.fitness.ui.shop.sinterface.GoOtherPageListener;
+import com.hongyuan.fitness.ui.shop.sinterface.GoodsDetailIntener;
 import com.hongyuan.fitness.ui.shop.smyview.SGoodsDetailsHeadView;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
@@ -57,6 +58,7 @@ public class SshopDetailMainFragment extends CustomFragment {
     private ShopMainGoodsAdapter stroeAdapter;
 
     private GoOtherPageListener pageListener;
+    private GoodsDetailIntener returnListener;
 
     //商品详情数据
     private SgoodsDetailBeans.DataBean.InfoBean infoBean;
@@ -68,8 +70,9 @@ public class SshopDetailMainFragment extends CustomFragment {
     //商品id
     private String g_id;
 
-    public SshopDetailMainFragment(GoOtherPageListener pageListener){
+    public SshopDetailMainFragment(GoOtherPageListener pageListener,GoodsDetailIntener returnListener){
         this.pageListener = pageListener;
+        this.returnListener = returnListener;
     }
 
     @Override
@@ -236,6 +239,10 @@ public class SshopDetailMainFragment extends CustomFragment {
                 String[] imgAry = infoBean.getG_desc().split(",");
                 List<String> imgList = Arrays.asList(imgAry);
                 imgAdapter.setNewData(imgList);
+            }
+
+            if(returnListener != null){
+                returnListener.returenData(infoBean);
             }
 
         }

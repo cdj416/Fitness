@@ -1,5 +1,7 @@
 package com.hongyuan.fitness.ui.main;
 
+import com.hongyuan.fitness.util.BaseUtil;
+
 public class TokenSingleBean {
 
     public static TokenSingleBean tokenBean;
@@ -13,6 +15,8 @@ public class TokenSingleBean {
         return tokenBean;
     }
 
+    private int islogin;
+
     private int at_id;
     private String at_name;
     private String at_pwd;
@@ -23,6 +27,21 @@ public class TokenSingleBean {
     private String m_mobile;
     private String role_id;
     private String headUrl;
+
+
+    /*
+     * 登录状态值
+     * */
+    public int getIslogin() {
+        return BaseUtil.isValue(m_id) ? 2 : 1;
+    }
+
+    /*
+    * 获取web连接拼接的参数
+    * */
+    public String getWebParams(){
+        return "?m_id="+ this.m_id+"&m_mobile="+this.m_mobile+"&islogin="+ getIslogin();
+    }
 
     public String getHeadUrl() {
         return headUrl;
@@ -89,10 +108,11 @@ public class TokenSingleBean {
     }
 
     /*
-    * 情况登录信息
+    * 清空登录信息
     * */
     public void clearToken(){
         this.m_id = null;
         this.m_mobile = null;
     }
+
 }

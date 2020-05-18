@@ -130,6 +130,10 @@ public class JumpUtils {
                     bundle.putString("cs_id",jumpBeans.getHref_id());
                     mContext.startActivity(MissionDetailActivity.class,bundle);
                     break;
+                case "cs_qd"://团课扫码签到
+                    //bundle.putString("cs_id",jumpBeans.getHref_id());
+                    //mContext.startActivity(MissionDetailActivity.class,bundle);
+                    break;
                 case "cp_info"://私教课详情
                     bundle.putString("cp_id",jumpBeans.getHref_id());
                     mContext.startActivity(CourseDetailsActivity.class,bundle);

@@ -34,6 +34,7 @@
             android:gravity="center"
             android:background="@color/color_FFFFFF">
             <TextView
+                android:id="@+id/chatKeFu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_FF333333"
@@ -42,6 +43,7 @@
                 android:drawablePadding="8dp"
                 android:text="在线客服"/>
             <TextView
+                android:id="@+id/telKeFu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_FF333333"

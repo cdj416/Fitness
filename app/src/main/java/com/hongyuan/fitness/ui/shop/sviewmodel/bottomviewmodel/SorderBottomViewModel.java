@@ -121,6 +121,7 @@ public class SorderBottomViewModel extends CustomViewModel {
             Bundle bundle = new Bundle();
             bundle.putSerializable("payDataBean",payDataBean);
             bundle.putSerializable("successBeans",getSuccessBeans());
+            bundle.putBoolean("isShop",true);
             startActivity(GoodsPayActivity.class,bundle);
         }
 

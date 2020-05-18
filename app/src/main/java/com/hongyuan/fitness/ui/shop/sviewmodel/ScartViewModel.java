@@ -17,6 +17,7 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityScartBinding;
+import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SstoreActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SCartAdapter;
@@ -299,6 +300,7 @@ public class ScartViewModel extends CustomViewModel implements MyClickListener {
                 }
                 break;
             case R.id.message:
+                startActivity(MineMessageActivity.class,null);
                 break;
 
             case R.id.sub:

@@ -13,6 +13,7 @@ import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
+import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.MainSearchActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.MyShopActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SCartActivity;
@@ -58,7 +59,8 @@ public class ShopFragment extends CustomFragment {
             startActivity(ShopMenuActivity.class,bundle);
         });
         mMessage.setOnClickListener(v -> {
-            startActivity(ShopMessageActivity.class,null);
+            //startActivity(ShopMessageActivity.class,null);
+            startActivity(MineMessageActivity.class,null);
         });
 
         meunAdapter = new ShopViewPagerAdapter(getChildFragmentManager());

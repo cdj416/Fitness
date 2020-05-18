@@ -4,6 +4,8 @@ public class Constants {
 
     //测试地址
     public static final String ADRESS = "https://www.1667799.com";
+    //内网测试环境
+    //public static final String ADRESS = "http://192.168.31.38:8080/#";
     //预发环境
     //public static final String ADRESS = "http://test.1667799.com";
     //正式地址
@@ -11,6 +13,8 @@ public class Constants {
 
     //webUrl需要的地址
     public static final String WEB_ADDRESS = "https://www.1667799.com/#";
+    //webUrl内网需要的地址
+    //public static final String WEB_ADDRESS = " http://192.168.31.38:8080/#";
 
     /*==================================================================================*/
     //微信支付需要的appId
@@ -559,8 +563,6 @@ public class Constants {
     public static final String GET_SETTLEMENT_LIST = ADRESS + "/api/income/get_settlement_list";
     //推广订单
     public static final String GET_INCOME_ORDER_LIST = ADRESS + "/api/income/get_order_list";
-
-
     //我的私教课单独一条
     public static final String GET_MEMBER_APPOINTMENT_COURSE_PRIVITE_ONE = ADRESS + "/api/coursemember/get_member_appointment_course_privite_one";
     //我的私教课单独一条
@@ -581,6 +583,8 @@ public class Constants {
     public static final String GYM_SPORT_GROUP_CHAT_ADD = ADRESS + "/api/gymmember/gym_sport_group_chat_add";
     //运动群聊组会员列表获取
     public static final String SPORT_CHAT_MEMBER_LIST = ADRESS + "/api/gymmember/sport_chat_member_list";
+    //在线聊天信息
+    public static final String GET_ONLINE_KF = ADRESS + "/api/appindex/get_online_kf";
 
 
 

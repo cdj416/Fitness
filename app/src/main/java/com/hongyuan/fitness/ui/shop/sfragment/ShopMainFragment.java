@@ -29,6 +29,7 @@ import com.hongyuan.fitness.ui.shop.sadapter.ShopMainGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.HabitGoddsBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.ShopMainBeans;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.JumpUtils;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -247,12 +248,12 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
                 .setBannerStyle(BannerConfig.CIRCLE_INDICATOR )
                 .setIndicatorGravity(BannerConfig.CENTER).setOnBannerListener(position -> {
 
-            /*JumpUtils.JumpBeans jumpBeans = new JumpUtils.JumpBeans();
+            JumpUtils.JumpBeans jumpBeans = new JumpUtils.JumpBeans();
             jumpBeans.setImg_href_type(bannerList.get(position).getImg_href_type());
             jumpBeans.setHref_code(bannerList.get(position).getImg_href_code());
             jumpBeans.setHref_id(String.valueOf(bannerList.get(position).getImg_href_id()));
 
-            JumpUtils.goAtherPage(mActivity,jumpBeans);*/
+            JumpUtils.goAtherPage(mActivity,jumpBeans);
         }).start();
     }
     /*
@@ -270,12 +271,12 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
                 .setBannerStyle(BannerConfig.CIRCLE_INDICATOR )
                 .setIndicatorGravity(BannerConfig.CENTER).setOnBannerListener(position -> {
 
-            /*JumpUtils.JumpBeans jumpBeans = new JumpUtils.JumpBeans();
+            JumpUtils.JumpBeans jumpBeans = new JumpUtils.JumpBeans();
             jumpBeans.setImg_href_type(bannerList.get(position).getImg_href_type());
             jumpBeans.setHref_code(bannerList.get(position).getImg_href_code());
             jumpBeans.setHref_id(String.valueOf(bannerList.get(position).getImg_href_id()));
 
-            JumpUtils.goAtherPage(mActivity,jumpBeans);*/
+            JumpUtils.goAtherPage(mActivity,jumpBeans);
         }).start();
     }
 

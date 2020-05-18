@@ -345,6 +345,7 @@
         <activity android:name=".ui.shop.sactivity.GroupChatUserActivity"/>
         <activity android:name=".ui.person.fix.CancelCourseActivity"/>
         <activity android:name=".ui.main.AllCitysActivity"/>
+        <activity android:name=".ui.person.my_coupon.newcoupon.NewCouponActivity"/>
 
 
     </application>

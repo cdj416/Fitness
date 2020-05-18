@@ -16,6 +16,7 @@ import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.main.main_person.PersonBean;
 import com.hongyuan.fitness.ui.person.my_coupon.MyCouponActivity;
+import com.hongyuan.fitness.ui.person.my_coupon.newcoupon.NewCouponActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopAddressActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopNewOrderAcitivity;
@@ -98,7 +99,8 @@ public class MyShopViewModel extends CustomViewModel {
             startActivityForResult(ShopAddressActivity.class,null);
         });
         binding.goCoupon.setOnClickListener(v -> {
-            startActivity(MyCouponActivity.class,null);
+            //startActivity(MyCouponActivity.class,null);
+            startActivity(NewCouponActivity.class,null);
         });
 
     }

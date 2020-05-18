@@ -24,6 +24,7 @@ import com.hongyuan.fitness.ui.person.exercise_data.ExeriseDataActivity;
 import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
 import com.hongyuan.fitness.ui.person.my_collection.MyCollectionActivity;
 import com.hongyuan.fitness.ui.person.my_coupon.MyCouponActivity;
+import com.hongyuan.fitness.ui.person.my_coupon.newcoupon.NewCouponActivity;
 import com.hongyuan.fitness.ui.person.my_promote.PromotionCodeActivity;
 import com.hongyuan.fitness.ui.person.physical_data.PhysicalDataActivity;
 import com.hongyuan.fitness.ui.person.setting.SettingActivity;
@@ -81,7 +82,10 @@ public class PersonFragment extends CustomFragment{
         calories = mView.findViewById(R.id.calories);
         exerciseDays = mView.findViewById(R.id.exerciseDays);
 
-        personCouponBox.setOnClickListener(v -> startActivity(MyCouponActivity.class,null));
+        personCouponBox.setOnClickListener(v -> {
+            //startActivity(MyCouponActivity.class,null);
+            startActivity(NewCouponActivity.class,null);
+        });
         personCollectionBox.setOnClickListener(v -> startActivity(MyCollectionActivity.class,null));
         personShareBox.setOnClickListener(v -> ShareUtil.showShare(mActivity));
         personSettingBox.setOnClickListener(v -> startActivity(SettingActivity.class,null));

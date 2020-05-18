@@ -1,4 +1,5 @@
 package com.hongyuan.fitness.ui.webview;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebSettings;
@@ -15,7 +16,7 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityWebviewBinding;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
-import com.hongyuan.fitness.util.huanxin.ChatDataBeans;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.AgentWebConfig;
@@ -33,8 +34,15 @@ public class WebViewModelView extends CustomViewModel {
         initView();
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void initView() {
+        //测试使用
+        binding.showUrl.setOnClickListener(v -> {
+            CustomDialog.showUrl(mActivity,mAgentWeb.getWebCreator().getWebView().getUrl());
+        });
+
+
         binding.title.setText(getBundle().getString("title",""));
         binding.goBack.setOnClickListener(v -> {
             if (mAgentWeb.getWebCreator().getWebView().canGoBack()) {
@@ -91,9 +99,10 @@ public class WebViewModelView extends CustomViewModel {
         mAgentWeb.getWebCreator().getWebView().getSettings().setLoadWithOverviewMode(true);
         //开启DOM storage API功能（HTML5 提供的一种标准的接口，主要将键值对存储在本地，在页面加载完毕后可以通过 javascript 来操作这些数据。）
         mAgentWeb.getWebCreator().getWebView().getSettings().setDomStorageEnabled(true);
+        mAgentWeb.getWebCreator().getWebView().getSettings().setDatabaseEnabled(true);
         //支持缩放
-        mAgentWeb.getWebCreator().getWebView().getSettings().setBuiltInZoomControls(true);
-        mAgentWeb.getWebCreator().getWebView().getSettings().setSupportZoom(true);
+        mAgentWeb.getWebCreator().getWebView().getSettings().setBuiltInZoomControls(false);
+        mAgentWeb.getWebCreator().getWebView().getSettings().setSupportZoom(false);
 
         //初始化js交互对象
         mAgentWeb.getJsInterfaceHolder().addJavaObject("android", new AndroidInterfaceWeb(mAgentWeb, mActivity, this));
@@ -109,7 +118,6 @@ public class WebViewModelView extends CustomViewModel {
             }
             return mActivity.onKeyDown(keyCode, event);//退出H5界面
         });
-
     }
 
     /*

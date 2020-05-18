@@ -3,6 +3,7 @@ package com.hongyuan.fitness.base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -720,6 +721,14 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         }
 
         return 0l;
+    }
+
+    /*
+     * 调用直接拨打电话功能
+     * */
+    public void callTel(String telNum){
+        Intent intent=new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+telNum));
+        mActivity.startActivity(intent);
     }
 
     //用来标识是否是第一次创建

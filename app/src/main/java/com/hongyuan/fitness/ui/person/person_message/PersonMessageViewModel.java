@@ -4,8 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
-
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -74,22 +72,34 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
         setEnableRefresh(true);
         setEnableLoadMore(true);
 
-        if(getBundle() != null && getBundle().getSerializable("otherPerson") != null){
-            binding.bottomBox.setVisibility(View.VISIBLE);
-            binding.viewLine.setVisibility(View.VISIBLE);
-            attentionBeans = (PersonAttentionBeans) getBundle().getSerializable("otherPerson");
-            binding.myTitle.setCentreText(attentionBeans.getM_name()+"的主页");
-            binding.myTitle.getRightView().setVisibility(View.GONE);
-            if(attentionBeans.getIs_friend() == 1){
-                binding.attention.setText("取消关注");
-            }else{
-                binding.attention.setText("关注Ta");
-            }
-
+        if(getBundle().getBoolean("isMe",false)){
+            binding.myTitle.setRightTextColor("个人资料",mActivity.getResources().getColor(R.color.color_FFFFFF));
+            binding.myTitle.getRightView().setOnClickListener(new View.OnClickListener() {
+                @SingleClick
+                @Override
+                public void onClick(View v) {
+                    startActivity(EditInformationActivity.class,null);
+                }
+            });
         }else{
-            binding.bottomBox.setVisibility(View.GONE);
-            binding.viewLine.setVisibility(View.GONE);
+            if(getBundle() != null && getBundle().getSerializable("otherPerson") != null){
+                binding.bottomBox.setVisibility(View.VISIBLE);
+                binding.viewLine.setVisibility(View.VISIBLE);
+                attentionBeans = (PersonAttentionBeans) getBundle().getSerializable("otherPerson");
+                binding.myTitle.setCentreText(attentionBeans.getM_name()+"的主页");
+                binding.myTitle.getRightView().setVisibility(View.GONE);
+                if(attentionBeans.getIs_friend() == 1){
+                    binding.attention.setText("取消关注");
+                }else{
+                    binding.attention.setText("关注Ta");
+                }
+
+            }else{
+                binding.bottomBox.setVisibility(View.GONE);
+                binding.viewLine.setVisibility(View.GONE);
+            }
         }
+
 
         //教练的全部课程
         LinearLayoutManager courserManager = new LinearLayoutManager(mActivity);
@@ -125,14 +135,6 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
             if(view.getId() == R.id.attention){
                 //帖子点赞/取消点赞
                 getBaikeLike(position);
-            }
-        });
-
-        binding.myTitle.getRightView().setOnClickListener(new View.OnClickListener() {
-            @SingleClick
-            @Override
-            public void onClick(View v) {
-                startActivity(EditInformationActivity.class,null);
             }
         });
 
@@ -231,8 +233,8 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
         }else{
             ViewChangeUtil.changeRightDrawable(mActivity,binding.userName,R.mipmap.person_girl_mark_img);
         }
-        if(personMessageBeans.getRole_id() == 2 && attentionBeans != null){
-            binding.myTitle.setRightText("教练主页");
+        if(!getBundle().getBoolean("isMe",false) && personMessageBeans.getRole_id() == 2 && attentionBeans != null){
+            binding.myTitle.setRightTextColor("教练主页",mActivity.getResources().getColor(R.color.color_FFFFFF));
             binding.myTitle.getRightView().setVisibility(View.VISIBLE);
             binding.myTitle.getRightView().setOnClickListener(new View.OnClickListener() {
                 @SingleClick

@@ -19,9 +19,12 @@ import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
 import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
+import com.hongyuan.fitness.ui.shop.sactivity.ShopNewOrderAcitivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.PayUtil;
+import com.hongyuan.fitness.wxapi.WXPayEntryActivity;
+
 import java.util.Map;
 
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
@@ -63,6 +66,10 @@ public class GoodsPayViewModel extends CustomViewModel {
     @SuppressLint("SetTextI18n")
     @Override
     protected void initView() {
+        if(getBundle().getBoolean("isShop")){
+            WXPayEntryActivity.isShop = true;
+        }
+
         payDataBean = (PayDataBean)getBundle().getSerializable("payDataBean");
         successBeans = (V3SuccessBeans)getBundle().getSerializable("successBeans");
 
@@ -82,8 +89,12 @@ public class GoodsPayViewModel extends CustomViewModel {
 
         binding.cancelPay.setOnClickListener(v -> CustomDialog.promptDialog(mActivity, "确定要取消支付吗？", "再想想", "确定", false, v1 -> {
             if(v1.getId() == R.id.isCannel){
-                mActivity.startActivity(MineOrderActivity.class,null);
-                mActivity.finish();
+                if(getBundle().getBoolean("isShop")){
+                    mActivity.startActivity(ShopNewOrderAcitivity.class,null);
+                    mActivity.finish();
+                }else{
+                    mActivity.finish();
+                }
             }
         }));
         binding.pay.setOnClickListener(v -> call());

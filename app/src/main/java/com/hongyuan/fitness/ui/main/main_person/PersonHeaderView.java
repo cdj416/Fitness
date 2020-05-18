@@ -1,5 +1,7 @@
 package com.hongyuan.fitness.ui.main.main_person;
 import android.content.Context;
+import android.os.Build;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -74,7 +76,9 @@ public class PersonHeaderView extends LinearLayout {
         goSignIn = view.findViewById(R.id.goSignIn);
 
         headBox.setOnClickListener(v -> {
-            ((CustomActivity)getContext()).startActivity(PersonMessageActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("isMe",true);
+            mActivity.startActivity(PersonMessageActivity.class,bundle);
             //upHeadimg();
         });
 

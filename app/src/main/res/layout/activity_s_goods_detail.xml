@@ -61,6 +61,7 @@
             android:paddingEnd="16dp"
             android:layout_gravity="bottom">
             <TextView
+                android:id="@+id/goStore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
@@ -72,6 +73,7 @@
                 android:drawablePadding="4dp"
                 android:text="店铺"/>
             <TextView
+                android:id="@+id/goKeFu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"

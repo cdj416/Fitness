@@ -285,6 +285,7 @@
         android:layout_width="match_parent"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        android:visibility="gone"
         android:layout_height="44dp">
         <TextView
             android:id="@+id/tv2"

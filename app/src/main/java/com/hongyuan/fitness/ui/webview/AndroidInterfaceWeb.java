@@ -7,9 +7,10 @@ import com.google.gson.reflect.TypeToken;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.custom_view.share_view.ShareUtil;
-import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.NewOrderActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.GsonUtil;
@@ -53,7 +54,7 @@ public class AndroidInterfaceWeb {
     * */
     @JavascriptInterface
     public void androidLogin() {
-        mActivity.startActivity(VtwoLoginActivity.class,null);
+        mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
     }
 
     /*
@@ -70,7 +71,17 @@ public class AndroidInterfaceWeb {
                 payModelUtils.wxPay(orderId);
             }
         });
+    }
 
+    /*
+    * 跳转原生购卡订单列表
+    * */
+    @JavascriptInterface
+    public void androidGoMemberCardList(){
+        Bundle bundle = new Bundle();
+        bundle.putString("title","会员卡订单");
+        bundle.putString("type","o_card");
+        mActivity.startActivity(NewOrderActivity.class,bundle);
     }
 
     /*
@@ -144,9 +155,6 @@ public class AndroidInterfaceWeb {
     * */
     @JavascriptInterface
     public String androidIsLogin(){
-        CustomDialog.promptDialog(mActivity, "判断登录调用成功"+BaseUtil.isValue(viewModel.userToken.getM_id()), "很不错哦", "非常棒", false, v -> {
-
-        });
         return String.valueOf(BaseUtil.isValue(viewModel.userToken.getM_id()));
     }
 }

@@ -18,6 +18,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:gravity="center"
+            android:clickable="true"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -36,6 +37,7 @@
                     android:layout_marginStart="6dp"
                     android:text="我已阅读同意"/>
                 <TextView
+                    android:id="@+id/goXieYi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,7 +125,7 @@ public class V4HomeRecyclerItemView extends LinearLayout {
 
             typeRight.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/Asportslist?m_id="+ TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
+                bundle.putString("url", Constants.WEB_ADDRESS+"/Asportslist"+TokenSingleBean.getInstance().getWebParams());
                 bundle.putString("title","约运动");
                 mActivity.startActivity(WebViewActivity.class,bundle);
             });
@@ -189,7 +190,7 @@ public class V4HomeRecyclerItemView extends LinearLayout {
 
             typeRight.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/train?m_id="+ TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
+                bundle.putString("url", Constants.WEB_ADDRESS+"/train"+TokenSingleBean.getInstance().getWebParams());
                 bundle.putString("title","培训课");
                 mActivity.startActivity(WebViewActivity.class,bundle);
             });
@@ -259,8 +260,11 @@ public class V4HomeRecyclerItemView extends LinearLayout {
         adapter.setNewData(mList);
 
         adapter.setOnItemChildClickListener((adapter1, view, position) -> {
+            Log.e("cdj","======"+Constants.WEB_ADDRESS+"/apply_reserve?gs_id="+mList.get(position).getGs_id()+"&m_id="+TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
             Bundle bundle = new Bundle();
-            bundle.putString("url", Constants.WEB_ADDRESS+"/apply_reserve?gs_id="+mList.get(position).getGs_id());
+            //bundle.putString("url", Constants.WEB_ADDRESS+"/apply_reserve"+TokenSingleBean.getInstance().getWebParams()+"&gs_id="+mList.get(position).getGs_id());
+            //bundle.putString("url", Constants.WEB_ADDRESS+"/apply_reserve/？gs_id="+mList.get(position).getGs_id()+"&m_id="+TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile()+"&islogin="+ TokenSingleBean.getInstance().getIslogin());
+            bundle.putString("url", Constants.WEB_ADDRESS+"/apply_reserve?gs_id="+mList.get(position).getGs_id()+"&m_id="+TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
             bundle.putString("title","报名预约");
             mActivity.startActivity(WebViewActivity.class,bundle);
         });
@@ -385,7 +389,7 @@ public class V4HomeRecyclerItemView extends LinearLayout {
 
         adapter.setOnItemChildClickListener((adapter1, view, position) -> {
             Bundle bundle = new Bundle();
-            bundle.putString("url", Constants.WEB_ADDRESS+"/train_detail?ct_id="+mList.get(position).getCt_id()+"&"+ TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
+            bundle.putString("url", Constants.WEB_ADDRESS+"/train_detail"+TokenSingleBean.getInstance().getWebParams()+"&ct_id="+mList.get(position).getCt_id());
             bundle.putString("title","培训课详情");
             mActivity.startActivity(WebViewActivity.class,bundle);
         });
