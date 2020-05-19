@@ -281,7 +281,7 @@ public class CheckInShopViewModel extends CustomViewModel {
                 return;
             }
             clearParams().setParams("admin_name",binding.adminNum.getUseValues());
-            Controller.myRequest(Constants.CHECK_ADMIN_NAME,Controller.TYPE_POST,getParams(), AdminNumUse.class,this);
+            Controller.myRequest(ConstantsCode.CHECK_ADMIN_NAME,Constants.CHECK_ADMIN_NAME,Controller.TYPE_POST,getParams(), AdminNumUse.class,this);
         }
 
     }
@@ -471,14 +471,14 @@ public class CheckInShopViewModel extends CustomViewModel {
             }
         }
 
-        if(data instanceof AdminNumUse){
+        /*if(data instanceof AdminNumUse){
             AdminNumUse.DataBean numUse = ((AdminNumUse)data).getData();
             if(numUse.getState() == 1){
-                uploadData();
+
             }else{
                 CustomDialog.showMessage(mActivity,numUse.getMsg());
             }
-        }
+        }*/
 
         if(data instanceof CheckinDetailsBean){
             mActivity.closeLoading();
@@ -546,6 +546,10 @@ public class CheckInShopViewModel extends CustomViewModel {
         }
         if(code == ConstantsCode.EDIT_APPLY){
             mActivity.showSuccess("修改成功！");
+        }
+
+        if(code == ConstantsCode.CHECK_ADMIN_NAME){
+            uploadData();
         }
     }
 }

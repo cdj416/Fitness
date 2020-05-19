@@ -51,7 +51,7 @@ public class SnewOrderViwPageAdapter extends FragmentPagerAdapter {
         beans.add(new TitleBean("待付款",1));
         beans.add(new TitleBean("待发货",2));
         beans.add(new TitleBean("待收货",3));
-        beans.add(new TitleBean("评价",4));
+        beans.add(new TitleBean("待评价",4));
         beans.add(new TitleBean("退换/售后",5));
         fragments.add(new SnewOrdersFragment().setArguments(""));
         fragments.add(new SnewOrdersFragment().setArguments("1"));

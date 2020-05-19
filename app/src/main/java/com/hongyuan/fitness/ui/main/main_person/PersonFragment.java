@@ -23,7 +23,6 @@ import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchActivity;
 import com.hongyuan.fitness.ui.person.exercise_data.ExeriseDataActivity;
 import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
 import com.hongyuan.fitness.ui.person.my_collection.MyCollectionActivity;
-import com.hongyuan.fitness.ui.person.my_coupon.MyCouponActivity;
 import com.hongyuan.fitness.ui.person.my_coupon.newcoupon.NewCouponActivity;
 import com.hongyuan.fitness.ui.person.my_promote.PromotionCodeActivity;
 import com.hongyuan.fitness.ui.person.physical_data.PhysicalDataActivity;

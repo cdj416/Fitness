@@ -280,7 +280,7 @@ public class SkutemView extends RelativeLayout implements View.OnClickListener, 
             submit.setBackgroundResource(R.drawable.shape_gradient_v_radiu5_login);
             submit.setClickable(true);
         }else{
-            submit.setBackgroundResource(R.drawable.shape_radius5_cccccc);
+            submit.setBackgroundResource(R.drawable.shape_radius6_cccccc);
             submit.setClickable(false);
         }
     }

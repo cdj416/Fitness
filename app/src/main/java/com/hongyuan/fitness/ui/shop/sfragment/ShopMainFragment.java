@@ -24,6 +24,7 @@ import com.hongyuan.fitness.ui.shop.sactivity.IntegralGoodsActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.PromoteGoodsActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SportsLifeActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.SstoreActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SMGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.ShopMainGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.HabitGoddsBeans;
@@ -224,6 +225,11 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
             }
         };
         storeRec.setAdapter(stroeAdapter);
+        stroeAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("store_id",String.valueOf(dataBean.getStore_selected().get(position).getStore_id()));
+            startActivity(SstoreActivity.class,bundle);
+        });
 
 
 
@@ -264,7 +270,7 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
         for(int i = 0 ; i < bannerList.size() ; i++){
             bList.add(bannerList.get(i).getImg_src());
         }
-        sBanner.setImages(bannerList)
+        sBanner.setImages(bList)
                 .setImageLoader(new UseGlideImageLoader())
                 .setDelayTime(3000)
                 .isAutoPlay(true)

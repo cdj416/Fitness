@@ -13,6 +13,7 @@ import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.ui.encyclopedia.EncyclopediaActivity;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.membership_card.MembershipCardActivity;
 import com.hongyuan.fitness.ui.only_equipment.indicator_details.IndicatorDetailsActivity;
@@ -124,7 +125,11 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
                 Bundle bundle = new Bundle();
                 bundle.putString("url", Constants.WEB_ADDRESS+TokenSingleBean.getInstance().getWebParams());
                 bundle.putString("title","场馆首页");
-                mActivity.startActivity(WebViewActivity.class,bundle);
+                if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                    mActivity.startActivity(WebViewActivity.class,bundle);
+                }else{
+                    mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+                }
                 break;
 
            /* case R.id.trainingPlanBox:

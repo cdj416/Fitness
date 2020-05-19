@@ -99,7 +99,7 @@ public class SgoodsDetailBeans extends BaseBean {
             private String g_address;
             private int have_zt;
             private int gp_count;
-            private int deliver_fee;
+            private double deliver_fee;
             private String city_name;
             private int is_collection;
             private List<SkuBean> sku;
@@ -322,11 +322,11 @@ public class SgoodsDetailBeans extends BaseBean {
                 this.gp_count = gp_count;
             }
 
-            public int getDeliver_fee() {
+            public double getDeliver_fee() {
                 return deliver_fee;
             }
 
-            public void setDeliver_fee(int deliver_fee) {
+            public void setDeliver_fee(double deliver_fee) {
                 this.deliver_fee = deliver_fee;
             }
 

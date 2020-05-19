@@ -1,5 +1,4 @@
 package com.hongyuan.fitness.ui.person.daily_punch;
-import android.os.Bundle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,7 +11,6 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.custom_view.StickyScrollView;
 import com.hongyuan.fitness.databinding.ActivityDailyPunchBinding;
-import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomePageViewModel;
 import com.hongyuan.fitness.ui.find.circle.edit_post.EditPostActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.out_door.RunActivity;
@@ -194,7 +192,7 @@ public class DailyPunchViewModel extends CustomViewModel implements StickyScroll
         if("1".equals(type)){
             binding.qdText.setText("今日已打卡");
             binding.punchBox.setClickable(false);
-            binding.punchBox.setBackgroundResource(R.drawable.shape_radius5_cccccc);
+            binding.punchBox.setBackgroundResource(R.drawable.shape_radius6_cccccc);
         }else{
             binding.punchBox.setClickable(true);
             binding.punchBox.setBackgroundResource(R.drawable.shape_gradient_v_radiu5_login);

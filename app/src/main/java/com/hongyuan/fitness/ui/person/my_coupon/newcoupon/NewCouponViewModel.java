@@ -8,19 +8,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivityNewMycouponBinding;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
+import com.hongyuan.fitness.ui.main.MainActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
+import com.hongyuan.fitness.ui.mall.GoodActivity;
+import com.hongyuan.fitness.ui.membership_card.MembershipCardActivity;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponAdapter;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.newcoupon.adapter.CouponDropMenuAdapter;
+import com.hongyuan.fitness.ui.shop.sactivity.CollectCouponsActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.SstoreActivity;
+import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -33,8 +45,8 @@ public class NewCouponViewModel extends CustomViewModel implements CouponDropMen
 
     //优惠价类型默认商城优惠劵
     private String coupon_way = "1";
-    //是否使用默认表示未使用，1表示已使用
-    private String is_use = "0";
+    //是否使用默认表示未使用，1表示已使用,2表示未使用
+    private String is_use = "2";
     //是否过期表示未过期，1表示已过期
     private String is_exp = "0";
 
@@ -50,7 +62,7 @@ public class NewCouponViewModel extends CustomViewModel implements CouponDropMen
     protected void initView() {
         setOnRefresh();
 
-        String[] titleList = new String[] { "商城优惠劵", "平台优惠价" };
+        String[] titleList = new String[] { "商城优惠劵", "未使用" };
         binding.dropDownMenu.setMenuAdapter(new CouponDropMenuAdapter(mActivity, titleList, this,this));
 
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);
@@ -58,13 +70,49 @@ public class NewCouponViewModel extends CustomViewModel implements CouponDropMen
         binding.mRecycler.setLayoutManager(manager);
         adapter = new CouponAdapter();
         binding.mRecycler.setAdapter(adapter);
+        adapter.setFooterView(mActivity.getFooterHeight(binding.mRecycler));
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @SingleClick
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+                goOther(mList.get(position).getCoupon_for(),String.valueOf(mList.get(position).getStore_id()));
             }
         });
+
+        binding.goRecCoupon.setOnClickListener(v -> {
+            startActivity(CollectCouponsActivity.class,null);
+        });
+    }
+
+    /*
+     * 跳转约定
+     * */
+    private void goOther(String couponFor,String store_id){
+        Bundle bundle = new Bundle();
+        if(couponFor.contains(",")){
+            mActivity.startActivity(StoreActivity.class,null);
+        }else{
+            switch (couponFor){
+                case "2":
+                    mActivity.startActivity(MembershipCardActivity.class);
+                    break;
+                case "3":
+                    //通过EventBus去通知MainActivity显示第三页
+                    EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
+                    mActivity.startActivity(MainActivity.class);
+                    break;
+                case "4":
+                    bundle.putString("store_id",store_id);
+                    startActivity(SstoreActivity.class,bundle);
+                    break;
+                case "5":
+                case "6":
+                    bundle.putString("url", Constants.WEB_ADDRESS+ TokenSingleBean.getInstance().getWebParams());
+                    bundle.putString("title","场馆首页");
+                    mActivity.startActivity(WebViewActivity.class,bundle);
+                    break;
+            }
+        }
     }
 
     /*
@@ -126,7 +174,13 @@ public class NewCouponViewModel extends CustomViewModel implements CouponDropMen
     @Override
     protected void lazyLoad() {
         mActivity.showLoading();
-        clearParams().setParams("coupon_way",coupon_way).setParams("is_use",is_use).setParams("is_exp",is_exp);
+        clearParams().setParams("coupon_way",coupon_way);
+        if(!"1".equals(is_exp)){
+            setParams("is_use",is_use);
+        }else{
+            setParams("is_exp",is_exp);
+        }
+
         Controller.myRequest(Constants.MY_COUPON_LIST,Controller.TYPE_POST,getParams(), CouponListBeans.class,this);
     }
 
@@ -147,9 +201,11 @@ public class NewCouponViewModel extends CustomViewModel implements CouponDropMen
 
             if (mList != null && mList.size() > 0) {
                 adapter.setNewData(mList);
-                mActivity.setPromtView(mActivity.SHOW_DATA);
+                binding.mRecycler.setVisibility(View.VISIBLE);
+                binding.loadBox.setVisibility(View.GONE);
             } else {
-                mActivity.setPromtView(mActivity.SHOW_EMPTY);
+                binding.mRecycler.setVisibility(View.GONE);
+                binding.loadBox.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -163,6 +219,7 @@ public class NewCouponViewModel extends CustomViewModel implements CouponDropMen
 
     @Override
     public void onFilterContent(int position, String changeText) {
+        binding.dropDownMenu.close();
         binding.dropDownMenu.setPositionIndicatorText(position,changeText);
     }
 
@@ -172,6 +229,14 @@ public class NewCouponViewModel extends CustomViewModel implements CouponDropMen
         this.is_use = is_use;
         this.is_exp = is_exp;
 
+        if(coupon_way.equals("1")){
+            binding.goRecCoupon.setVisibility(View.VISIBLE);
+        }else{
+            binding.goRecCoupon.setVisibility(View.GONE);
+        }
+
+        //重置为第一页
+        curPage = FIRST_PAGE;
         lazyLoad();
     }
 }

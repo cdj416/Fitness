@@ -8,18 +8,23 @@ import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.ui.shop.sbeans.ShopNextCetegoryBeans;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-public class SNMenuAdapter extends BaseQuickAdapter<ShopNextCetegoryBeans.DataBean, BaseViewHolder> {
+public class SNMenuAdapter extends BaseQuickAdapter<ShopNextCetegoryBeans.DataBean.ListBean, BaseViewHolder> {
 
     public SNMenuAdapter(){
         super(R.layout.item_shop_next_menu);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, ShopNextCetegoryBeans.DataBean item) {
+    protected void convert(BaseViewHolder helper, ShopNextCetegoryBeans.DataBean.ListBean item) {
         RoundedImageView imgView = helper.getView(R.id.menuImg);
 
         RequestOptions options = new RequestOptions().placeholder(R.color.color_f2).error(R.color.color_f2);
-        Glide.with(mContext).load(item.getCategory_img()).apply(options).into(imgView);
+        if(helper.getAdapterPosition() != (getData().size() - 1)){
+            Glide.with(mContext).load(item.getCategory_img()).apply(options).into(imgView);
+        }else{
+            Glide.with(mContext).load(R.mipmap.gray_more_img).apply(options).into(imgView);
+        }
+
 
         helper.setText(R.id.menuText,item.getCategory_name());
 

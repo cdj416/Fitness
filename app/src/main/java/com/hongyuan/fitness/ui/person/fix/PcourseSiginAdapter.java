@@ -74,8 +74,11 @@ public class PcourseSiginAdapter extends BaseQuickAdapter<PriviteCourseCheckBean
 
         }else{
             helper.getView(R.id.qdBox).setVisibility(View.GONE);
-            helper.getView(R.id.signSuccess).setVisibility(View.VISIBLE);
-            helper.setText(R.id.succeTV,"已自动签到");
+            helper.getView(R.id.signSuccess).setVisibility(View.GONE);
+
+            helper.getView(R.id.qdText).setVisibility(View.VISIBLE);
+            helper.getView(R.id.cancelSign).setVisibility(View.VISIBLE);
+            helper.addOnClickListener(R.id.cancelSign).addOnClickListener(R.id.qdText);
         }
     }
 

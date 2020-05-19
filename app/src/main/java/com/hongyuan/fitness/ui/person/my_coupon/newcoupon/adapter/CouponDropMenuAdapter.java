@@ -94,7 +94,7 @@ public class CouponDropMenuAdapter implements MenuAdapter{
 
                     @Override
                     public boolean isSelect(CouponTypesBeans t) {
-                       return false;
+                       return t.isSelect();
                     }
                 }).setItemClickListener((position,adapter) -> {
                     for(CouponTypesBeans beans : mList){
@@ -125,13 +125,12 @@ public class CouponDropMenuAdapter implements MenuAdapter{
                 .setMyAdapter(new SingleReclerAdapter<CouponStatusBeans>() {
                     @Override
                     public String provideText(CouponStatusBeans t) {
-
                         return t.getStatusName();
                     }
 
                     @Override
                     public boolean isSelect(CouponStatusBeans t) {
-                       return false;
+                       return t.isSelect();
                     }
                 }).setItemClickListener((position,adapter) -> {
                     for(CouponStatusBeans beans : mList){
@@ -140,7 +139,7 @@ public class CouponDropMenuAdapter implements MenuAdapter{
                     mList.get(position).setSelect(true);
                     adapter.setNewData(mList);
 
-                    is_use = mList.get(position).getStatusName().equals("已使用") ? "1" : "0";
+                    is_use = mList.get(position).getStatusName().equals("已使用") ? "1" : "2";
                     is_exp = mList.get(position).getStatusName().equals("已过期") ? "1" : "0";
 
                     //去更新数据
@@ -172,9 +171,9 @@ public class CouponDropMenuAdapter implements MenuAdapter{
     private List<CouponStatusBeans> getCouponStatus(){
         List<CouponStatusBeans> list = new ArrayList<>();
 
-        list.add(new CouponStatusBeans("0","未使用",true));
+        list.add(new CouponStatusBeans("2","未使用",true));
         list.add(new CouponStatusBeans("1","已使用",false));
-        list.add(new CouponStatusBeans("2","已过期",false));
+        list.add(new CouponStatusBeans("0","已过期",false));
 
         return list;
     }

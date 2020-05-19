@@ -21,6 +21,7 @@ import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.ui.about_class.privite_class.course_details.CourseDetailsActivity;
 import com.hongyuan.fitness.ui.about_class.privite_class.my_privite_course.MyPriviteCourseBeans;
 import com.hongyuan.fitness.ui.about_class.privite_class.preservation_course.ReservationDetailsActivity;
+import com.hongyuan.fitness.ui.person.waiting_evaluation.editorial_evaluation.EditorialEvaluationActivity;
 import com.hongyuan.fitness.ui.person.waiting_for_class.about_privite_class.PriviteCourseCheckBeans;
 import com.hongyuan.fitness.ui.person.waiting_for_class.about_privite_class.privite_checkin_details.PriviteCourseCheckDetails;
 import com.hongyuan.fitness.util.CustomDialog;
@@ -72,7 +73,20 @@ public class SixpCourseAllFragment extends CustomFragment {
 
 
         qdText.setOnClickListener(v -> {
-            courseQD(String.valueOf(infoBean.getCpa_id()));
+            if("评价".equals(qdText.getText().toString())){
+                PriviteCourseCheckBeans.DataBean.ListBean listBean = new PriviteCourseCheckBeans.DataBean.ListBean();
+                listBean.setCp_img(infoBean.getCp_img());
+                listBean.setCp_id(infoBean.getCp_id());
+                listBean.setCpa_id(infoBean.getCpa_id());
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("courseBeans",listBean);
+                startActivity(EditorialEvaluationActivity.class,bundle);
+            }
+            if("签到".equals(qdText.getText().toString())){
+                courseQD(String.valueOf(infoBean.getCpa_id()));
+            }
+
         });
 
         cancelSign.setOnClickListener(v -> {

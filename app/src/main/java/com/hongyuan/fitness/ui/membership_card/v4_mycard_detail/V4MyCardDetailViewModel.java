@@ -2,7 +2,6 @@ package com.hongyuan.fitness.ui.membership_card.v4_mycard_detail;
 
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -93,7 +92,7 @@ public class V4MyCardDetailViewModel extends CustomViewModel {
             binding.cardPriceBox.setVisibility(View.GONE);
             binding.cardOldPriceBox.setVisibility(View.GONE);
             binding.cardButton.setText("暂未开通停卡退卡功能\n如有需要请联系线下客服人员");
-            binding.cardButton.setBackgroundResource(R.drawable.shape_radius5_cccccc);
+            binding.cardButton.setBackgroundResource(R.drawable.shape_radius6_cccccc);
             binding.cardButton.setClickable(false);
         }else{
             RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img);

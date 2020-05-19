@@ -21,6 +21,7 @@ public class ShopAddressAdapter extends BaseQuickAdapter<ShopAddressBeans.DataBe
             helper.getView(R.id.defaultMark).setVisibility(View.GONE);
         }
         helper.setText(R.id.telNum,item.getTel())
+                .setText(R.id.name,item.getName())
                 .setText(R.id.address,item.getProvince()+" "+item.getCity()+" "+item.getDistrict()+" "+item.getAddress());
 
         helper.addOnClickListener(R.id.goModify).addOnClickListener(R.id.box);

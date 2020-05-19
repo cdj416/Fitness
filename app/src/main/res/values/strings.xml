@@ -21,7 +21,6 @@
     <string name="tmall_app_goods">tmall://tmallclient/?{"action":"item:id=%1$s"}</string>
 
     <!--开始把文字写入这里了-->
-    <string name="tuiguang">推广</string>
     <string name="_1000_300">店铺券满1000减300</string>
     <string name="lingjuan">领券</string>
     <string name="shoucang">收藏</string>

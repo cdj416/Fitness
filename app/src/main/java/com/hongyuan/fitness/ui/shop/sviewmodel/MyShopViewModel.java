@@ -15,7 +15,6 @@ import com.hongyuan.fitness.databinding.AcitivityMyShopBinding;
 import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.main.main_person.PersonBean;
-import com.hongyuan.fitness.ui.person.my_coupon.MyCouponActivity;
 import com.hongyuan.fitness.ui.person.my_coupon.newcoupon.NewCouponActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopAddressActivity;
@@ -94,6 +93,11 @@ public class MyShopViewModel extends CustomViewModel {
             bundle.putInt("position",4);
             mActivity.startActivity(ShopNewOrderAcitivity.class,bundle);
         });
+        binding.goSh.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("position",5);
+            mActivity.startActivity(ShopNewOrderAcitivity.class,bundle);
+        });
 
         binding.goAddress.setOnClickListener(v -> {
             startActivityForResult(ShopAddressActivity.class,null);
@@ -151,7 +155,7 @@ public class MyShopViewModel extends CustomViewModel {
             RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img).centerCrop();
             Glide.with(mActivity).load(personBean.getMi_head()).apply(options).into(binding.headImg);
 
-            binding.userName.setText(personBean.getMi_realname());
+            binding.userName.setText(personBean.getM_name());
             binding.notes.setText(personBean.getMi_sign());
         }
     }

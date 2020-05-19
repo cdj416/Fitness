@@ -16,7 +16,9 @@ import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.person.fix.SixPriviteCourseActivity;
-import com.hongyuan.fitness.ui.shop.sactivity.NewOrderActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.GroupCourseOrdersActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.MemberCardOrdersActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.PriviteCourseOrdersActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopNewOrderAcitivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
 
@@ -100,17 +102,11 @@ public class PersonContentView extends LinearLayout {
             iv5.setImageResource(R.mipmap.shop_mark);
             box6.setVisibility(INVISIBLE);
             box1.setOnClickListener(v -> {
-                Bundle bundle = new Bundle();
-                bundle.putString("title","会员卡订单");
-                bundle.putString("type","o_card");
-                mActivity.startActivity(NewOrderActivity.class,bundle);
+                mActivity.startActivity(MemberCardOrdersActivity.class,null);
             });
             box2.setOnClickListener(v -> {
                 //mActivity.startActivity(MineOrderActivity.class,null);
-                Bundle bundle = new Bundle();
-                bundle.putString("title","私教课订单");
-                bundle.putString("type","o_pric");
-                mActivity.startActivity(NewOrderActivity.class,bundle);
+                mActivity.startActivity(PriviteCourseOrdersActivity.class,null);
             });
             box3.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
@@ -145,10 +141,7 @@ public class PersonContentView extends LinearLayout {
             });
             box2.setOnClickListener(v -> {
                 //mActivity.startActivity(WaitingForClassActivity.class,null);
-                Bundle bundle = new Bundle();
-                bundle.putString("title","我报名的团课");
-                bundle.putString("type","group");
-                mActivity.startActivity(NewOrderActivity.class,bundle);
+                mActivity.startActivity(GroupCourseOrdersActivity.class,null);
             });
             box3.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();

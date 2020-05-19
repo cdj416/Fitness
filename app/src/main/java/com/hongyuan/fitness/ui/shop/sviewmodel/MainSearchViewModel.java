@@ -29,9 +29,9 @@ public class MainSearchViewModel extends CustomViewModel {
     private MhsRecAdapter tAdapter;
 
     //我搜索的历史数据
-    private MainSearchBeans searchBeans;
+    private MainSearchBeans.DataBean searchBeans;
     //大家搜索的历史数据
-    private AtherSearchBeans otherBeans;
+    private AtherSearchBeans.DataBean otherBeans;
 
     public MainSearchViewModel(CustomActivity mActivity, ActivityMainSearchBinding binding) {
         super(mActivity);
@@ -47,11 +47,16 @@ public class MainSearchViewModel extends CustomViewModel {
 
         FlowLayoutManager oManager = new FlowLayoutManager();
         binding.hsRec.setLayoutManager(oManager);
-        oAdapter = new MhsRecAdapter();
+        oAdapter = new MhsRecAdapter<MainSearchBeans.DataBean.ListBean>() {
+            @Override
+            public String getName(MainSearchBeans.DataBean.ListBean item) {
+                return item.getHabit_name();
+            }
+        };
         binding.hsRec.setAdapter(oAdapter);
         oAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             Bundle bundle = new Bundle();
-            bundle.putString("showText",searchBeans.getData().get(position));
+            bundle.putString("showText",searchBeans.getList().get(position).getHabit_name());
             startActivity(ShopSearchActivity.class,bundle);
             //通知关闭多余的页面
             EventBus.getDefault().post(ConstantsCode.EB_CLOSE_SERARCH,"");
@@ -60,11 +65,16 @@ public class MainSearchViewModel extends CustomViewModel {
 
         FlowLayoutManager tManager = new FlowLayoutManager();
         binding.dsRec.setLayoutManager(tManager);
-        tAdapter = new MhsRecAdapter();
+        tAdapter = new MhsRecAdapter<AtherSearchBeans.DataBean.ListBean>() {
+            @Override
+            public String getName(AtherSearchBeans.DataBean.ListBean item) {
+                return item.getWord_name();
+            }
+        };
         binding.dsRec.setAdapter(tAdapter);
         tAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             Bundle bundle = new Bundle();
-            bundle.putString("showText",otherBeans.getData().get(position));
+            bundle.putString("showText",otherBeans.getList().get(position).getWord_name());
             startActivity(ShopSearchActivity.class,bundle);
             //通知关闭多余的页面
             EventBus.getDefault().post(ConstantsCode.EB_CLOSE_SERARCH,"");
@@ -130,23 +140,23 @@ public class MainSearchViewModel extends CustomViewModel {
     public void onSuccess(Object data) {
         mActivity.closeLoading();
         if(data instanceof MainSearchBeans){
-            searchBeans =  (MainSearchBeans)data;
-            if(searchBeans.getData() == null || searchBeans.getData().size() <= 0){
+            searchBeans =  ((MainSearchBeans)data).getData();
+            if(searchBeans.getList() == null || searchBeans.getList().size() <= 0){
                 binding.historyBox.setVisibility(View.GONE);
             }else{
                 binding.historyBox.setVisibility(View.VISIBLE);
-                oAdapter.setNewData(searchBeans.getData());
+                oAdapter.setNewData(searchBeans.getList());
             }
 
         }
 
         if(data instanceof AtherSearchBeans){
-            otherBeans = (AtherSearchBeans)data;
-            if(otherBeans.getData() == null || otherBeans.getData().size() <= 0){
+            otherBeans = ((AtherSearchBeans)data).getData();
+            if(otherBeans.getList() == null || otherBeans.getList().size() <= 0){
                 binding.otherHistoryBox.setVisibility(View.GONE);
             }else{
                 binding.otherHistoryBox.setVisibility(View.VISIBLE);
-                tAdapter.setNewData(otherBeans.getData());
+                tAdapter.setNewData(otherBeans.getList());
             }
         }
     }

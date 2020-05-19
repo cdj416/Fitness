@@ -10,10 +10,11 @@ import com.hongyuan.fitness.custom_view.share_view.ShareUtil;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
-import com.hongyuan.fitness.ui.shop.sactivity.NewOrderActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.MemberCardOrdersActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.GsonUtil;
+import com.hongyuan.fitness.util.LocationBean;
 import com.hongyuan.fitness.util.huanxin.CreateGroupBeans;
 import com.hongyuan.fitness.util.huanxin.GotoChatBeans;
 import com.hongyuan.fitness.util.huanxin.GotoGroupChatBeans;
@@ -46,6 +47,8 @@ public class AndroidInterfaceWeb {
     * */
     @JavascriptInterface
     public String androidGetUserInfo(){
+        viewModel.setParams("lat", LocationBean.getInstance().getLat())
+                .setParams("lng",LocationBean.getInstance().getLng());
         return GsonUtil.toJsonStr(viewModel.getParams());
     }
 
@@ -78,10 +81,7 @@ public class AndroidInterfaceWeb {
     * */
     @JavascriptInterface
     public void androidGoMemberCardList(){
-        Bundle bundle = new Bundle();
-        bundle.putString("title","会员卡订单");
-        bundle.putString("type","o_card");
-        mActivity.startActivity(NewOrderActivity.class,bundle);
+        mActivity.startActivity(MemberCardOrdersActivity.class,null);
     }
 
     /*
@@ -99,7 +99,6 @@ public class AndroidInterfaceWeb {
                     EMGroup emGroup = HuanXinUtils.getInstance().createGroup(baseBean.getSubject(),baseBean.getDesc(),"呦，很不错哦");
                     viewModel.updateGroup(baseBean.getSubject(),baseBean.getSportId(),emGroup.getGroupId());
                 }catch (Exception e){
-                    Log.e("cdj","=======创建失败========"+e.getMessage());
                     e.printStackTrace();
                 }
             }

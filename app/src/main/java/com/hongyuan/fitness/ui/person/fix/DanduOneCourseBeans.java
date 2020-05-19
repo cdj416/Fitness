@@ -2,7 +2,9 @@ package com.hongyuan.fitness.ui.person.fix;
 
 import com.hongyuan.fitness.base.BaseBean;
 
-public class DanduOneCourseBeans extends BaseBean {
+import java.io.Serializable;
+
+public class DanduOneCourseBeans extends BaseBean implements Serializable{
 
     /**
      * data : {"info":{"cpa_id":11,"m_id":3,"jl_mid":52,"cp_id":3,"os_id":21,"ocp_id":42,"num":1,"state":5,"add_time":1589509240,"start_time":"2020-05-15 10:30:00","end_time":"2020-05-15 11:30:00","xy_qd_time":0,"xy_qt_time":0,"jl_qd_time":0,"jl_qt_time":0,"xy_qd_state":0,"xy_qt_state":0,"jl_qd_state":0,"jl_qt_state":0,"teacher_m_id":0,"admin_id":0,"update_time":0,"bohui_note":"","cancel_note":"","cancel_reason_id":0,"is_evaluation":0,"cp_img":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190814/752a64aed66dc895d0ac2b9d148216cc85a86de6_975x2436.jpg","cp_name":"减脂","cp_price":"320.00","mi_realname":"周佳城","coach_nickname":"Jack","coach_head":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190810/07556b1685e33b04fcd4ffd50cd1727c014512db_200x218.jpg","os_name":"湖州首玺健身爱山店","add_date":"2020-05-15 10:20:40"}}
@@ -18,7 +20,7 @@ public class DanduOneCourseBeans extends BaseBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * info : {"cpa_id":11,"m_id":3,"jl_mid":52,"cp_id":3,"os_id":21,"ocp_id":42,"num":1,"state":5,"add_time":1589509240,"start_time":"2020-05-15 10:30:00","end_time":"2020-05-15 11:30:00","xy_qd_time":0,"xy_qt_time":0,"jl_qd_time":0,"jl_qt_time":0,"xy_qd_state":0,"xy_qt_state":0,"jl_qd_state":0,"jl_qt_state":0,"teacher_m_id":0,"admin_id":0,"update_time":0,"bohui_note":"","cancel_note":"","cancel_reason_id":0,"is_evaluation":0,"cp_img":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190814/752a64aed66dc895d0ac2b9d148216cc85a86de6_975x2436.jpg","cp_name":"减脂","cp_price":"320.00","mi_realname":"周佳城","coach_nickname":"Jack","coach_head":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20190810/07556b1685e33b04fcd4ffd50cd1727c014512db_200x218.jpg","os_name":"湖州首玺健身爱山店","add_date":"2020-05-15 10:20:40"}
          */
@@ -33,7 +35,7 @@ public class DanduOneCourseBeans extends BaseBean {
             this.info = info;
         }
 
-        public static class InfoBean {
+        public static class InfoBean implements Serializable {
             /**
              * cpa_id : 11
              * m_id : 3

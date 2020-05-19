@@ -7,6 +7,7 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.AcitivityIncomeMangeBinding;
+import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
 import com.hongyuan.fitness.ui.person.my_promote.PromotionCodeActivity;
 import com.hongyuan.fitness.ui.person.my_promote.promote_record.PromotionRecordActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.IncomeFormActivity;
@@ -31,7 +32,7 @@ public class IncomeMangeViewModel extends CustomViewModel {
     @Override
     protected void initView() {
         mActivity.getMainTitle().setRightImage(R.mipmap.person_message_mark)
-                .setOnClickListener(v -> startActivity(ShopMessageActivity.class,null));
+                .setOnClickListener(v -> startActivity(MineMessageActivity.class,null));
 
         binding.goIncomeForm.setOnClickListener(v -> startActivity(IncomeFormActivity.class,null));
         //binding.goMyUsers.setOnClickListener(v -> startActivity(MyUsersActivity.class,null));

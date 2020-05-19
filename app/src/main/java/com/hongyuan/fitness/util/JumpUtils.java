@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomePageActivity;
@@ -31,6 +32,8 @@ import com.hongyuan.fitness.ui.store.StoreDetailActivity;
 import com.hongyuan.fitness.ui.store.punch.PunchActivity;
 import com.hongyuan.fitness.ui.video.MyPlayActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class JumpUtils {
 
@@ -131,8 +134,10 @@ public class JumpUtils {
                     mContext.startActivity(MissionDetailActivity.class,bundle);
                     break;
                 case "cs_qd"://团课扫码签到
-                    //bundle.putString("cs_id",jumpBeans.getHref_id());
-                    //mContext.startActivity(MissionDetailActivity.class,bundle);
+                    Log.e("cdj","==========扫码签到，扫码成功过=========");
+                    //通知扫码签到
+                    EventBus.getDefault().post(ConstantsCode.EB_SUPER_COURSE_XY_QD,"");
+                    mContext.finish();
                     break;
                 case "cp_info"://私教课详情
                     bundle.putString("cp_id",jumpBeans.getHref_id());

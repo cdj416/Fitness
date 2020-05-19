@@ -291,7 +291,7 @@
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textColor="@color/white"
-                android:background="@drawable/shape_radius5_cccccc"
+                android:background="@drawable/shape_radius6_cccccc"
                 binding:onClickCommand="@{ViewModel.cancelOrder}"
                 android:text="取消订单"/>
             <TextView

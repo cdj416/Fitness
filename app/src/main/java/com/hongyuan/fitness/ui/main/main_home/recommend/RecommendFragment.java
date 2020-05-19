@@ -86,8 +86,6 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
 
         homeColum.setClickReturn(this);
 
-
-        Log.e("phm","========用户信息json数据======="+GsonUtil.toJsonStr(getParams()));
     }
 
     @Override

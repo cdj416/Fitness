@@ -17,7 +17,9 @@ import com.hongyuan.fitness.ui.shop.sactivity.ShopSearchActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SMenuLeftAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SMenuRightAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.FirstCategoryBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.ShopMenuBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.ShopNextCetegoryBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.TuiJianCetegoryBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
 import com.youth.banner.Banner;
@@ -41,19 +43,27 @@ public class ShopMenuViewModel extends CustomViewModel {
     private FirstCategoryBeans.DataBean dataBean;
     //当前选择的一级分类下标
     private int firtPostion = 0;
-    //二级分类数据
-    private List<ShopNextCetegoryBeans.DataBean> menuList;
 
     public ShopMenuViewModel(CustomActivity mActivity,ActivityShopMenuBinding binding) {
         super(mActivity);
         this.binding = binding;
 
         initView();
+
     }
 
     @Override
     protected void initView() {
         dataBean = (FirstCategoryBeans.DataBean) getBundle().getSerializable("menu");
+        //组装推荐分类
+        FirstCategoryBeans.DataBean.ListBean tuiJian = new FirstCategoryBeans.DataBean.ListBean();
+        tuiJian.setCategory_id(-1);
+        tuiJian.setIs_tj(1);
+        tuiJian.setCategory_name("推荐分类");
+        if(dataBean != null && dataBean.getList() != null){
+            dataBean.getList().add(0,tuiJian);
+        }
+
 
         LinearLayoutManager leftManager = new LinearLayoutManager(mActivity);
         leftManager.setOrientation(RecyclerView.VERTICAL);
@@ -69,31 +79,44 @@ public class ShopMenuViewModel extends CustomViewModel {
             }
             dataBean.getList().get(position).setSelect(true);
             adapter.notifyDataSetChanged();
-            getSecond(String.valueOf(dataBean.getList().get(position).getCategory_id()));
-            //设置头部的banner
-            setSBanner(dataBean.getList().get(position).getBanner_img());
+            if(position == 0){
+                rightAdapter.setNewData(null);
+                getTuiJian();
+            }else{
+                getSecond(String.valueOf(dataBean.getList().get(position).getCategory_id()));
+                //设置头部的banner
+                setSBanner(dataBean.getList().get(position).getBanner_img());
+            }
+
         });
 
-        GridLayoutManager rihtManager = new GridLayoutManager(mActivity, 3);
+        LinearLayoutManager rihtManager = new LinearLayoutManager(mActivity);
         rihtManager.setOrientation(RecyclerView.VERTICAL);
         binding.rightRec.setLayoutManager(rihtManager);
         rightAdapter = new SMenuRightAdapter();
         binding.rightRec.setAdapter(rightAdapter);
         rightAdapter.setHeaderView(getBannerHead());
         rightAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("first_category_id",String.valueOf(dataBean.getList().get(firtPostion).getCategory_id()));
-            bundle.putString("third_category_id",String.valueOf(menuList.get(position).getCategory_id()));
-            bundle.putString("showText",menuList.get(position).getCategory_name());
-            startActivity(ShopSearchActivity.class,bundle);
+
         });
 
         if(dataBean != null && dataBean.getList() != null && dataBean.getList().size() > 0){
-            dataBean.getList().get(0).setSelect(true);
-            //获取第一个分类的子分类
-            getSecond(String.valueOf(dataBean.getList().get(0).getCategory_id()));
-            //设置头部的banner
-            setSBanner(dataBean.getList().get(0).getBanner_img());
+
+            if(getBundle().getInt("mPosition",0) == -1){
+                //设置头部的banner
+                setSBanner(dataBean.getList().get(1).getBanner_img());
+                dataBean.getList().get(0).setSelect(true);
+                getTuiJian();
+            }else{
+                int selecPosition = getBundle().getInt("mPosition",0) + 1;
+
+                dataBean.getList().get(selecPosition).setSelect(true);
+                //获取第一个分类的子分类
+                getSecond(String.valueOf(dataBean.getList().get(selecPosition).getCategory_id()));
+                //设置头部的banner
+                setSBanner(dataBean.getList().get(selecPosition).getBanner_img());
+            }
+
         }
     }
 
@@ -138,16 +161,30 @@ public class ShopMenuViewModel extends CustomViewModel {
     private void getSecond(String first_id){
         mActivity.showLoading();
         clearParams().setParams("first_id",first_id);
-        Controller.myRequest(Constants.GET_THIRD_CATEGORY_BY_FIRST_ID,Controller.TYPE_POST,getParams(), ShopNextCetegoryBeans.class,this);
+        Controller.myRequest(Constants.GET_CATEGORY_BY_FIRST_ID,Controller.TYPE_POST,getParams(), ShopMenuBeans.class,this);
+    }
 
+    /*
+    * 获取推荐分类
+    * */
+    private void getTuiJian(){
+        mActivity.showLoading();
+        clearParams();
+        Controller.myRequest(Constants.GET_TJ_CATEGORY,Controller.TYPE_POST,getParams(), TuiJianCetegoryBeans.class,this);
     }
 
     @Override
     public void onSuccess(Object data) {
         mActivity.closeLoading();
-        if(data instanceof ShopNextCetegoryBeans){
-            menuList = ((ShopNextCetegoryBeans)data).getData();
+        if(data instanceof ShopMenuBeans){
+            List<ShopMenuBeans.DataBean> menuList = ((ShopMenuBeans)data).getData();
             rightAdapter.setNewData(menuList);
+        }
+        if(data instanceof TuiJianCetegoryBeans){
+            TuiJianCetegoryBeans.DataBean tuiJianCetegoryBeans = ((TuiJianCetegoryBeans)data).getData();
+
+            //装置下数据
+            rightAdapter.setNewData(tuiJianCetegoryBeans.getTuiList());
         }
     }
 

@@ -29,12 +29,12 @@ public abstract class ShopMainGoodsAdapter<T> extends BaseQuickAdapter<T, BaseVi
             helper.getView(R.id.right1).setVisibility(View.GONE);
         }else if(helper.getAdapterPosition() == (getData().size() - 1)){
             helper.getView(R.id.left1).setVisibility(View.GONE);
-            helper.getView(R.id.left2).setVisibility(View.GONE);
+            helper.getView(R.id.left2).setVisibility(View.VISIBLE);
             helper.getView(R.id.right1).setVisibility(View.VISIBLE);
         }else{
             helper.getView(R.id.left1).setVisibility(View.GONE);
-            helper.getView(R.id.left2).setVisibility(View.GONE);
-            helper.getView(R.id.right1).setVisibility(View.VISIBLE);
+            helper.getView(R.id.left2).setVisibility(View.VISIBLE);
+            helper.getView(R.id.right1).setVisibility(View.GONE);
         }
 
         if(isStore()){

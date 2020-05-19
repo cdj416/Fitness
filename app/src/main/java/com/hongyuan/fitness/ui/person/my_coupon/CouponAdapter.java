@@ -34,34 +34,22 @@ public class CouponAdapter extends BaseQuickAdapter<CouponListBeans.DataBean.Lis
 
         }
 
-        if(item.getEnd_time() < System.currentTimeMillis()/1000){
-            helper.setBackgroundRes(R.id.box,R.mipmap.coupon_expired_bg);
-            helper.setText(R.id.goUse,"已过期")
-                    .setTextColor(R.id.goUse,mContext.getResources().getColor(R.color.color_FFFFFF))
-                    .setBackgroundColor(R.id.goUse,mContext.getResources().getColor(R.color.transparent));
+        if(item.getIs_exp() == 1){
+            helper.setBackgroundRes(R.id.box,R.drawable.shape_radius6_cccccc);
+            helper.setVisible(R.id.goUse,false);
+            helper.getView(R.id.goUse).setClickable(false);
         }else{
 
             if(item.getIs_use() == 1){
-                if(item.getCoupon_type() == 1){
-                    helper.setBackgroundRes(R.id.box,R.mipmap.blue_coupon_bg);
-                }else{
-                    helper.setBackgroundRes(R.id.box,R.mipmap.orange_coupon_bg);
-                }
-                helper.setText(R.id.goUse,"已使用")
-                        .setTextColor(R.id.goUse,mContext.getResources().getColor(R.color.color_FFFFFF))
-                        .setBackgroundColor(R.id.goUse,mContext.getResources().getColor(R.color.transparent));
-                helper.setAlpha(R.id.box,0.5f);
+                helper.setBackgroundRes(R.id.box,R.drawable.shape_radius6_cccccc);
+                helper.setVisible(R.id.goUse,false);
+                helper.getView(R.id.goUse).setClickable(false);
             }else{
-                if(item.getCoupon_type() == 1){
-                    helper.setBackgroundRes(R.id.box,R.mipmap.blue_coupon_bg);
-                }else{
-                    helper.setBackgroundRes(R.id.box,R.mipmap.orange_coupon_bg);
-                }
-                helper.setText(R.id.goUse,"去使用")
-                        .setTextColor(R.id.goUse,mContext.getResources().getColor(R.color.color_EF5B48))
-                        .setBackgroundRes(R.id.goUse,R.drawable.shape_radius14_ffffffff);
+                helper.setBackgroundRes(R.id.box,R.drawable.shape_gradient_v_ffef5b48_ffff8041);
+                helper.setText(R.id.goUse,"去使用");
                 helper.addOnClickListener(R.id.goUse);
-                helper.setAlpha(R.id.box,1);
+                helper.setVisible(R.id.goUse,true);
+                helper.getView(R.id.goUse).setClickable(true);
             }
 
         }

@@ -29,6 +29,7 @@ import com.hongyuan.fitness.ui.about_class.group_class.group_details.MissionDeta
 import com.hongyuan.fitness.ui.about_class.privite_class.course_details.CourseDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.circle_detail.CircleDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsActivity;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vthird_home.V3HomeFindContentAdapter;
@@ -39,6 +40,7 @@ import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.store.StoreDetailActivity;
 import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.tencent.connect.UserInfo;
 
 import org.greenrobot.eventbus.EventBus;
@@ -127,7 +129,11 @@ public class V4HomeRecyclerItemView extends LinearLayout {
                 Bundle bundle = new Bundle();
                 bundle.putString("url", Constants.WEB_ADDRESS+"/Asportslist"+TokenSingleBean.getInstance().getWebParams());
                 bundle.putString("title","约运动");
-                mActivity.startActivity(WebViewActivity.class,bundle);
+                if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                    mActivity.startActivity(WebViewActivity.class,bundle);
+                }else{
+                    mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+                }
             });
         }
         //减脂塑形
@@ -192,7 +198,11 @@ public class V4HomeRecyclerItemView extends LinearLayout {
                 Bundle bundle = new Bundle();
                 bundle.putString("url", Constants.WEB_ADDRESS+"/train"+TokenSingleBean.getInstance().getWebParams());
                 bundle.putString("title","培训课");
-                mActivity.startActivity(WebViewActivity.class,bundle);
+                if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                    mActivity.startActivity(WebViewActivity.class,bundle);
+                }else{
+                    mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+                }
             });
         }
         //随动商城
@@ -260,13 +270,15 @@ public class V4HomeRecyclerItemView extends LinearLayout {
         adapter.setNewData(mList);
 
         adapter.setOnItemChildClickListener((adapter1, view, position) -> {
-            Log.e("cdj","======"+Constants.WEB_ADDRESS+"/apply_reserve?gs_id="+mList.get(position).getGs_id()+"&m_id="+TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
             Bundle bundle = new Bundle();
-            //bundle.putString("url", Constants.WEB_ADDRESS+"/apply_reserve"+TokenSingleBean.getInstance().getWebParams()+"&gs_id="+mList.get(position).getGs_id());
-            //bundle.putString("url", Constants.WEB_ADDRESS+"/apply_reserve/？gs_id="+mList.get(position).getGs_id()+"&m_id="+TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile()+"&islogin="+ TokenSingleBean.getInstance().getIslogin());
-            bundle.putString("url", Constants.WEB_ADDRESS+"/apply_reserve?gs_id="+mList.get(position).getGs_id()+"&m_id="+TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
+            bundle.putString("url", Constants.WEB_ADDRESS+"/apply_reserve"+TokenSingleBean.getInstance().getWebParams()+"&gs_id="+mList.get(position).getGs_id());
             bundle.putString("title","报名预约");
-            mActivity.startActivity(WebViewActivity.class,bundle);
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+
         });
     }
 
@@ -391,7 +403,11 @@ public class V4HomeRecyclerItemView extends LinearLayout {
             Bundle bundle = new Bundle();
             bundle.putString("url", Constants.WEB_ADDRESS+"/train_detail"+TokenSingleBean.getInstance().getWebParams()+"&ct_id="+mList.get(position).getCt_id());
             bundle.putString("title","培训课详情");
-            mActivity.startActivity(WebViewActivity.class,bundle);
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
         });
     }
 

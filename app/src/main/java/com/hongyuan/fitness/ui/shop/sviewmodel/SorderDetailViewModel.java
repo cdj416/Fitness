@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
@@ -48,6 +49,9 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
     private ShopAddressBeans.DataBean addressBeans;
     //详情数据
     private AddressInfoBeans.DataBean infoData;
+
+    //当前使用的地址id
+    private String address_id;
 
     public SorderDetailViewModel(CustomActivity mActivity, ActivitySOrderDetailsBinding binding) {
         super(mActivity);
@@ -89,8 +93,16 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
     @Override
     public void forResult(Bundle bundle) {
         addressBeans = (ShopAddressBeans.DataBean) bundle.getSerializable("select");
+        binding.addressName.setText(addressBeans.getName());
         binding.telNum.setText(addressBeans.getTel());
-        binding.address.setText(addressBeans.getProvince()+" "+addressBeans.getCity()+" "+addressBeans.getDistrict());
+        binding.address.setText(addressBeans.getProvince()+" "+addressBeans.getCity()+" "+addressBeans.getDistrict()+" "+addressBeans.getAddress());
+
+        address_id = String.valueOf(addressBeans.getAddress_id());
+    }
+
+    @Override
+    public void refreshData() {
+        getRefreshAddress();
     }
 
     @Override
@@ -103,6 +115,16 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
         Controller.myRequest(Constants.GET_COMFIRM_ORDER_INFO,Controller.TYPE_POST,getParams(), SorderDetailBeans.class,this);
 
 
+    }
+
+    /*
+    * 刷新地址
+    * */
+    private void getRefreshAddress(){
+        if(BaseUtil.isValue(address_id)){
+            clearParams().setParams("address_id",address_id);
+            Controller.myRequest(Constants.GET_RECEIVING_ADDRESS_INFO,Controller.TYPE_POST,getParams(), AddressInfoBeans.class,this);
+        }
     }
 
     /*
@@ -179,9 +201,11 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
         mActivity.closeLoading();
         if(data instanceof AddressInfoBeans){
             infoData = ((AddressInfoBeans)data).getData();
+            binding.addressName.setText(infoData.getName());
             binding.telNum.setText(infoData.getTel());
-            binding.address.setText(infoData.getProvince()+" "+infoData.getCity()+" "+infoData.getDistrict());
+            binding.address.setText(infoData.getProvince()+" "+infoData.getCity()+" "+infoData.getDistrict()+" "+infoData.getAddress());
 
+            address_id = String.valueOf(infoData.getAddress_id());
         }
 
         if(data instanceof SorderDetailBeans){

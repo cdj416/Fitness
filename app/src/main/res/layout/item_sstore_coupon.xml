@@ -6,7 +6,6 @@
     android:layout_marginTop="12dp"
     android:layout_marginBottom="12dp">
     <View
-        android:id="@+id/lWith"
         android:layout_width="16dp"
         android:layout_height="match_parent"/>
     <RelativeLayout

@@ -61,7 +61,13 @@ public class SccouponsAdapter extends BaseQuickAdapter<SccouponBeans.DataBean.Li
 
         }
 
-        helper.addOnClickListener(R.id.recCoupon);
+        if(item.getIs_lq() == 1){
+            helper.setText(R.id.recCoupon,"已领取").setBackgroundRes(R.id.recCoupon,R.drawable.shape_radius24_cccccc);
+            helper.getView(R.id.recCoupon).setClickable(false);
+        }else{
+            helper.setText(R.id.recCoupon,"立即领取").setBackgroundRes(R.id.recCoupon,R.drawable.shape_radius16_ef5b48);
+            helper.getView(R.id.recCoupon).setClickable(true);
+        }
 
     }
 }

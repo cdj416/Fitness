@@ -9,7 +9,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.hongyuan.fitness.R;
-import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
@@ -18,13 +17,8 @@ import com.hongyuan.fitness.ui.shop.sactivity.MainSearchActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.MyShopActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SCartActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopMenuActivity;
-import com.hongyuan.fitness.ui.shop.sactivity.ShopMessageActivity;
-import com.hongyuan.fitness.ui.shop.sactivity.ShopSearchActivity;
 import com.hongyuan.fitness.ui.shop.sbeans.FirstCategoryBeans;
 import com.hongyuan.fitness.ui.shop.sviewpage.ShopViewPagerAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShopFragment extends CustomFragment {
 
@@ -56,6 +50,7 @@ public class ShopFragment extends CustomFragment {
         sortMark.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putSerializable("menu",dataBean);
+            bundle.putInt("mPosition",-1);
             startActivity(ShopMenuActivity.class,bundle);
         });
         mMessage.setOnClickListener(v -> {
@@ -93,7 +88,7 @@ public class ShopFragment extends CustomFragment {
             dataBean = ((FirstCategoryBeans)data).getData();
 
             mViewPager.setOffscreenPageLimit(dataBean.getList().size());
-            meunAdapter.setData(dataBean.getList());
+            meunAdapter.setData(dataBean.getList(),dataBean);
 
         }
     }

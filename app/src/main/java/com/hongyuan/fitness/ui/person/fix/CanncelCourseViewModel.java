@@ -1,7 +1,5 @@
 package com.hongyuan.fitness.ui.person.fix;
 
-import android.view.View;
-
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;

@@ -1,6 +1,5 @@
 package com.hongyuan.fitness.ui.mall.mine.mine_order.mine_order_list;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -298,8 +297,6 @@ public class MineOrderFragment extends CustomFragment {
     * 请求数据
     * */
     private void getData(){
-
-        Log.e("cdj","============过来的是啥======="+getFragType());
         clearParams().setParams("o_pay_state",o_pay_state).setParams("o_type_code",getFragType());
         if("5".equals(o_pay_state)){
             setParams("o_state",o_pay_state);

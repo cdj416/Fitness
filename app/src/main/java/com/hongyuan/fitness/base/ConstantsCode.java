@@ -145,6 +145,8 @@ public class ConstantsCode {
     public final static int CANCEL_COURSE_PRIVITE_APPOINTMENT_NEW = 0x063;
     //运动群聊组id添加
     public final static int GYM_SPORT_GROUP_CHAT_ADD = 0x064;
+    //检查超级管理员
+    public final static int CHECK_ADMIN_NAME = 0x064;
 
     /*================================已下EventBus使用的=======================================*/
     //食物搜索
@@ -169,5 +171,7 @@ public class ConstantsCode {
     public final static int GET_GOODS_LIST_SIX = 10;
     //关闭搜索列表商品页面
     public final static int EB_CLOSE_SERARCH = 11;
+    //tuan可扫码签到
+    public final static int EB_SUPER_COURSE_XY_QD = 12;
 
 }

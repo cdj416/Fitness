@@ -44,6 +44,7 @@ import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsAdapter;
 import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.main_receive_coupon.DialogReceiveCouponAdapter;
+import com.hongyuan.fitness.ui.shop.sactivity.CheckInMeActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.DialogUseCouponAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.PickUpAddressAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SgoodsGouponAdapter;
@@ -1070,7 +1071,10 @@ public class CustomDialog {
 
         view.findViewById(R.id.openAllCity).setOnClickListener(v ->{mContext.startActivity(AllCitysActivity.class,null);
         dialog.dismiss();});
-        view.findViewById(R.id.goRuZhu).setOnClickListener(v -> dialog.dismiss());
+        view.findViewById(R.id.goRuZhu).setOnClickListener(v -> {
+            mContext.startActivity(CheckInMeActivity.class,null);
+            dialog.dismiss();
+        });
         view.findViewById(R.id.close).setOnClickListener(v -> dialog.dismiss());
     }
 

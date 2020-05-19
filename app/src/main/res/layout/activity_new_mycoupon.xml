@@ -28,10 +28,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/mRecycler"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingLeft="13dp"
-                        android:paddingRight="13dp"
-                        android:paddingTop="16dp"/>
+                        android:layout_height="match_parent"/>
                     <RelativeLayout
                         android:id="@+id/loadBox"
                         android:layout_width="match_parent"
@@ -70,6 +67,7 @@
             </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
             <RelativeLayout
+                android:id="@+id/goRecCoupon"
                 android:layout_width="match_parent"
                 android:layout_height="84dp"
                 android:layout_gravity="bottom"

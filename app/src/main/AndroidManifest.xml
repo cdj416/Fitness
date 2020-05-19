@@ -193,7 +193,6 @@
         <activity android:name=".ui.membership_card.MembershipCardActivity"/>
         <activity android:name=".ui.out_door.gaodei_map.SportActivity" />
         <activity android:name=".ui.encyclopedia.encyclopedia_comment_detail.EncyclopediaCommentDetailsActivity" android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".ui.person.waiting_for_class.WaitingForClassActivity"/>
         <activity android:name=".ui.heat.HeatActivity"/>
         <activity android:name=".ui.heat.add_food.AddFoodActivity"/>
         <activity android:name=".ui.heat.heat_detail.HeatDetailActivity"/>
@@ -267,7 +266,6 @@
         <activity android:name=".ui.person.my_collection.MyCollectionActivity"/>
 
         <!--*******************************************第四版添加的activity***********************************************-->
-        <activity android:name=".ui.person.my_coupon.MyCouponActivity"/>
         <activity android:name=".ui.person.my_coupon.receive_coupon_list.ReceiveCouponListActivity"/>
         <activity android:name=".ui.membership_card.v4_mycard_detail.V4MyCardDetail"/>
         <activity android:name=".ui.person.my_coupon.select_coupon.SelectCouponActivity"/>
@@ -341,11 +339,13 @@
         <activity android:name=".ui.shop.sactivity.PromoteGoodsActivity"/>
         <activity android:name=".ui.shop.sactivity.CustomServerActivity"/>
         <activity android:name=".ui.shop.sactivity.IncomeDetailsActivity"/>
-        <activity android:name=".ui.shop.sactivity.NewOrderActivity"/>
         <activity android:name=".ui.shop.sactivity.GroupChatUserActivity"/>
         <activity android:name=".ui.person.fix.CancelCourseActivity"/>
         <activity android:name=".ui.main.AllCitysActivity"/>
         <activity android:name=".ui.person.my_coupon.newcoupon.NewCouponActivity"/>
+        <activity android:name=".ui.person.newedition.activity.MemberCardOrdersActivity"/>
+        <activity android:name=".ui.person.newedition.activity.PriviteCourseOrdersActivity"/>
+        <activity android:name=".ui.person.newedition.activity.GroupCourseOrdersActivity"/>
 
 
     </application>

@@ -40,4 +40,10 @@ public class SorderDetailsActivity extends CustomActivity {
     protected void forResult(Bundle bundle) {
         viewModel.forResult(bundle);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.refreshData();
+    }
 }

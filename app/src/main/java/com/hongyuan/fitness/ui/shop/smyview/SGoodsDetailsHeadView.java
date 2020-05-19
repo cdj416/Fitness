@@ -41,7 +41,7 @@ public class SGoodsDetailsHeadView extends LinearLayout implements RetrofitListe
     private RoundedImageView normImg;
 
     private TextView tvPrice,tvIncome,saleNum,couponName,goodsName,tvCollection,tvGaddress,deliverFee
-            ,cityName,normNum;
+            ,cityName,zhiMark,normNum,secondName,ziTiTv;
 
     //商品详情数据
     private SgoodsDetailBeans.DataBean.InfoBean infoBean;
@@ -73,10 +73,13 @@ public class SGoodsDetailsHeadView extends LinearLayout implements RetrofitListe
         tvGaddress = view.findViewById(R.id.tvGaddress);
         deliverFee = view.findViewById(R.id.deliverFee);
         cityName = view.findViewById(R.id.cityName);
+        ziTiTv = view.findViewById(R.id.ziTiTv);
+        zhiMark = view.findViewById(R.id.zhiMark);
         collectionImg = view.findViewById(R.id.collectionImg);
         collectionBox = view.findViewById(R.id.collectionBox);
         normImg = view.findViewById(R.id.normImg);
         normNum = view.findViewById(R.id.normNum);
+        secondName = view.findViewById(R.id.secondName);
 
 
         //优惠卷弹框
@@ -113,12 +116,32 @@ public class SGoodsDetailsHeadView extends LinearLayout implements RetrofitListe
         this.infoBean = infoBean;
 
         tvPrice.setText(BaseUtil.getNoZoon(infoBean.getG_price()));
-        tvIncome.setText("收益"+BaseUtil.getNoZoon(infoBean.getG_income()));
         saleNum.setText("销量"+infoBean.getG_sale_num());
         goodsName.setText(infoBean.getG_name());
         tvGaddress.setText(infoBean.getG_address());
-        deliverFee.setText(BaseUtil.getNoZoon(infoBean.getDeliver_fee()));
         cityName.setText(infoBean.getCity_name());
+        secondName.setText(infoBean.getG_second_name());
+
+        if(infoBean.getDeliver_fee() > 0){
+            deliverFee.setText(BaseUtil.getNoZoon(infoBean.getDeliver_fee()));
+        }
+        if(Double.parseDouble(infoBean.getG_income()) > 0){
+            tvIncome.setText("收益"+BaseUtil.getNoZoon(infoBean.getG_income()));
+        }
+
+        if(BaseUtil.isValue(infoBean.getCity_name())){
+            zhiMark.setVisibility(VISIBLE);
+            cityName.setText(infoBean.getCity_name());
+        }else{
+            cityName.setVisibility(GONE);
+            zhiMark.setVisibility(GONE);
+        }
+
+        if(infoBean.getHave_zt() == 1){
+            ziTiTv.setVisibility(VISIBLE);
+        }else{
+            ziTiTv.setVisibility(GONE);
+        }
 
         if(infoBean.getIs_collection() == 1){
             collectionImg.setImageResource(R.mipmap.orange_collection_mark);

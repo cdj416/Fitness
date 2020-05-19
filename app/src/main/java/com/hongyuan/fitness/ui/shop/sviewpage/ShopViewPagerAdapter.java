@@ -46,7 +46,7 @@ public class ShopViewPagerAdapter extends FragmentPagerAdapter {
     /*
      * 初始化数据
      * */
-    public void setData(List<FirstCategoryBeans.DataBean.ListBean> mList) {
+    public void setData(List<FirstCategoryBeans.DataBean.ListBean> mList,FirstCategoryBeans.DataBean itemAll) {
         if (fragments == null) {
             fragments = new ArrayList<>();
         }
@@ -59,7 +59,7 @@ public class ShopViewPagerAdapter extends FragmentPagerAdapter {
         if(mList != null && mList.size() > 0){
             for(int i = 0 ; i < mList.size() ; i++){
                 beans.add(new TitleBean(mList.get(i).getCategory_name(),i));
-                fragments.add(new ShopNextFragment().setMyArguments(getBundle(mList.get(i))));
+                fragments.add(new ShopNextFragment().setMyArguments(getBundle(mList.get(i),itemAll,i)));
             }
             beans.add(0,new TitleBean("推荐",0));
             fragments.add(0,new ShopMainFragment().setArguments(""));
@@ -68,9 +68,11 @@ public class ShopViewPagerAdapter extends FragmentPagerAdapter {
         notifyDataSetChanged();
     }
 
-    private Bundle getBundle(FirstCategoryBeans.DataBean.ListBean item){
+    private Bundle getBundle(FirstCategoryBeans.DataBean.ListBean item,FirstCategoryBeans.DataBean itemAll,int mPosition){
         Bundle bundle = new Bundle();
         bundle.putSerializable("item",item);
+        bundle.putSerializable("menu",itemAll);
+        bundle.putInt("mPosition",mPosition);
         return bundle;
     }
 }

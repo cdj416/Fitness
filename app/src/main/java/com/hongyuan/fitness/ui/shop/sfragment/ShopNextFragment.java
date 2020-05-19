@@ -12,6 +12,7 @@ import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.ShopMenuActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopSearchActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SMGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SNMenuAdapter;
@@ -29,6 +30,9 @@ import java.util.List;
 
 public class ShopNextFragment extends CustomFragment {
 
+    //总分类
+    private FirstCategoryBeans.DataBean itemAll;
+    //单个分类
     private FirstCategoryBeans.DataBean.ListBean item;
 
     private RecyclerView menuRec,mRec;
@@ -39,7 +43,7 @@ public class ShopNextFragment extends CustomFragment {
     private SMGoodsAdapter gAdapter;
 
     //子分类数据
-    private List<ShopNextCetegoryBeans.DataBean> menuList;
+    private List<ShopNextCetegoryBeans.DataBean.ListBean> menuList;
 
     //商品数据
     private List<GoodsBeans.DataBean.ListBean> mList;
@@ -58,6 +62,7 @@ public class ShopNextFragment extends CustomFragment {
         setEnableRefresh(true);
 
         item = (FirstCategoryBeans.DataBean.ListBean) getSerializableBeans("item");
+        itemAll = (FirstCategoryBeans.DataBean) getSerializableBeans("menu");
 
         menuRec = mView.findViewById(R.id.menuRec);
         mRec = mView.findViewById(R.id.mRec);
@@ -70,17 +75,25 @@ public class ShopNextFragment extends CustomFragment {
         menuAdapter = new SNMenuAdapter();
         menuRec.setAdapter(menuAdapter);
         menuAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            for(ShopNextCetegoryBeans.DataBean menu : menuList){
-                menu.setSelect(false);
-            }
-            menuList.get(position).setSelect(true);
-            menuAdapter.notifyDataSetChanged();
+            if(position == (adapter.getData().size() - 1)){
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("menu",itemAll);
+                bundle.putInt("mPosition",getArguments().getInt("mPosition"));
+                startActivity(ShopMenuActivity.class,bundle);
+            }else{
+                for(ShopNextCetegoryBeans.DataBean.ListBean menu : menuList){
+                    menu.setSelect(false);
+                }
+                menuList.get(position).setSelect(true);
+                menuAdapter.notifyDataSetChanged();
 
-            Bundle bundle = new Bundle();
-            bundle.putString("first_category_id",String.valueOf(item.getCategory_id()));
-            bundle.putString("third_category_id",String.valueOf(menuList.get(position).getCategory_id()));
-            bundle.putString("showText",menuList.get(position).getCategory_name());
-            startActivity(ShopSearchActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("first_category_id",String.valueOf(item.getCategory_id()));
+                bundle.putString("third_category_id",String.valueOf(menuList.get(position).getCategory_id()));
+                bundle.putString("showText",menuList.get(position).getCategory_name());
+                startActivity(ShopSearchActivity.class,bundle);
+            }
+
         });
 
         GridLayoutManager layoutManager =
@@ -175,7 +188,11 @@ public class ShopNextFragment extends CustomFragment {
     public void onSuccess(Object data) {
         mActivity.closeLoading();
         if(data instanceof ShopNextCetegoryBeans){
-            menuList = ((ShopNextCetegoryBeans)data).getData();
+            menuList = ((ShopNextCetegoryBeans)data).getData().getList();
+            ShopNextCetegoryBeans.DataBean.ListBean lastBean = new ShopNextCetegoryBeans.DataBean.ListBean();
+            lastBean.setCategory_id(-1);
+            lastBean.setCategory_name("更多");
+            menuList.add(lastBean);
             menuAdapter.setNewData(menuList);
         }
         if(data instanceof GoodsBeans){

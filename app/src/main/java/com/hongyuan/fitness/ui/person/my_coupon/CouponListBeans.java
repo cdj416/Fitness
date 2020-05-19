@@ -122,6 +122,24 @@ public class CouponListBeans extends BaseBean implements Serializable {
             private boolean isReceive;
             private boolean select;
             private int is_use;
+            private String store_name;
+            private int store_id;
+
+            public int getStore_id() {
+                return store_id;
+            }
+
+            public void setStore_id(int store_id) {
+                this.store_id = store_id;
+            }
+
+            public String getStore_name() {
+                return store_name;
+            }
+
+            public void setStore_name(String store_name) {
+                this.store_name = store_name;
+            }
 
             public int getIs_use() {
                 return is_use;
