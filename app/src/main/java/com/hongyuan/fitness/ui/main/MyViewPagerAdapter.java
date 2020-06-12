@@ -7,7 +7,6 @@ import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.main.main_about_class.AboutClassFragment;
 import com.hongyuan.fitness.ui.main.main_find.FindFragment;
 import com.hongyuan.fitness.ui.main.main_home.recommend.RecommendFragment;
-import com.hongyuan.fitness.ui.main.main_mall.MallFragment;
 import com.hongyuan.fitness.ui.main.main_person.PersonFragment;
 import com.hongyuan.fitness.ui.shop.sfragment.ShopFragment;
 

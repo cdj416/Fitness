@@ -1,9 +1,12 @@
 package com.hongyuan.fitness.ui.main.main_home.recommend;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.google.gson.reflect.TypeToken;
 import com.hongyuan.fitness.R;
@@ -16,6 +19,8 @@ import com.hongyuan.fitness.custom_view.HomeColumItemView;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsLikeBean;
 import com.hongyuan.fitness.ui.heat.HeatActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
+import com.hongyuan.fitness.ui.main.AllCitysActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vthour.HomeIndexBeans;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeBeans;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeRecyclerItemView;
@@ -28,9 +33,14 @@ import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.GsonUtil;
 import com.hongyuan.fitness.util.JumpUtils;
+import com.hongyuan.fitness.util.LocationBean;
+import com.hongyuan.fitness.util.SharedPreferencesUtil;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -65,7 +75,11 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         getmTitle().addLeftContentView(getLocation());
         HomeRightView rightView = new HomeRightView(mActivity,this);
         getmTitle().addRightContentView(rightView);
-        addressName.setOnClickListener(v -> CustomDialog.selectLocation(mActivity));
+        addressName.setOnClickListener(v -> {
+            startActivity(AllCitysActivity.class,null);
+            //老路径弹框选择
+            //CustomDialog.selectLocation(mActivity);
+        });
         //getmTitle().getRightView().setOnClickListener(v -> startActivity(ScanActivity.class,null));
 
         //addressName.setText(LocationBean.getInstance().getCityName());
@@ -116,12 +130,20 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         clearParams().setParams("img_code","index_hd").setParams("img_num","8");
         Controller.myRequest(Constants.GET_IMG_LIST,Controller.TYPE_POST,getParams(), HomeBannerBean.class,this);
 
+        //获取首页约运动和精品培训课数据
+        clearParams().setParams("ct_code",BaseUtil.isValue(TokenSingleBean.getInstance().getRegion_code()) ? TokenSingleBean.getInstance().getRegion_code() : "3505");
+        Controller.myRequest(Constants.INDEX,Controller.TYPE_POST,getParams(), HomeIndexBeans.class,this);
+
+        getData();
+    }
+
+    /*
+    * 获取首页数据
+    * */
+    private void getData(){
         //获取首页数据
         clearParams();
         Controller.myRequest(Constants.GET_INDEX_OS_PC_BUSINESS_CIRCLE,Controller.TYPE_POST,getParams(), V4HomeBeans.class,this);
-        //获取首页约运动和精品培训课数据
-        clearParams();
-        Controller.myRequest(Constants.INDEX,Controller.TYPE_POST,getParams(), HomeIndexBeans.class,this);
     }
 
 
@@ -161,20 +183,71 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
 
             infoData = ((V4HomeBeans)data).getData();
 
-            storeItem.setStore(infoData.getOffline_store());
-            //yueYunDong.setYueYundong(infoData.get);
-            jianZhi.setJianzhi(infoData.getCp1());
-            LiLiang.setLiLiang(infoData.getCp2());
-            groupCours.setGroup(infoData.getSuper_course());
-            goods.setGoods(infoData.getGoods());
-            topic.setTopic(infoData.getCircle_category());
-            finds.setFind(infoData.getCircle(),this);
+            if(infoData.getOffline_store() != null && infoData.getOffline_store().size() > 0){
+                storeItem.setVisibility(View.VISIBLE);
+                storeItem.setStore(infoData.getOffline_store());
+            }else{
+                storeItem.setVisibility(View.GONE);
+            }
+
+            if(infoData.getCp1() != null && infoData.getCp1().size() > 0){
+                jianZhi.setVisibility(View.VISIBLE);
+                jianZhi.setJianzhi(infoData.getCp1());
+            }else{
+                jianZhi.setVisibility(View.GONE);
+            }
+
+            if(infoData.getCp2() != null && infoData.getCp2().size() > 0){
+                LiLiang.setVisibility(View.VISIBLE);
+                LiLiang.setLiLiang(infoData.getCp2());
+            }else{
+                LiLiang.setVisibility(View.GONE);
+            }
+
+            if(infoData.getSuper_course() != null && infoData.getSuper_course().size() > 0){
+                groupCours.setVisibility(View.VISIBLE);
+                groupCours.setGroup(infoData.getSuper_course());
+            }else{
+                groupCours.setVisibility(View.GONE);
+            }
+
+            if(infoData.getGoods() != null && infoData.getGoods().size() > 0){
+                goods.setVisibility(View.VISIBLE);
+                goods.setGoods(infoData.getGoods());
+            }else{
+                goods.setVisibility(View.GONE);
+            }
+
+            if(infoData.getCircle_category() != null && infoData.getCircle_category().size() > 0){
+                topic.setVisibility(View.VISIBLE);
+                topic.setTopic(infoData.getCircle_category());
+            }else{
+                topic.setVisibility(View.GONE);
+            }
+
+            if(infoData.getCircle() != null && infoData.getCircle().size() > 0){
+                finds.setVisibility(View.VISIBLE);
+                finds.setFind(infoData.getCircle(),this);
+            }else{
+                finds.setVisibility(View.GONE);
+            }
+
         }
 
         if(data instanceof HomeIndexBeans){
             HomeIndexBeans.DataBean indexBeans = ((HomeIndexBeans)data).getData();
-            yueYunDong.setYueYundong(indexBeans.getSport());
-            PeiXun.setPeiXun(indexBeans.getCourse_train());
+
+            if(indexBeans.getSport() != null && indexBeans.getSport().size() > 0){
+                yueYunDong.setVisibility(View.VISIBLE);
+                yueYunDong.setYueYundong(indexBeans.getSport());
+            }
+
+            if(indexBeans.getCourse_train() != null && indexBeans.getCourse_train().size() > 0){
+                PeiXun.setVisibility(View.VISIBLE);
+                PeiXun.setPeiXun(indexBeans.getCourse_train());
+            }
+
+
         }
 
         if(data instanceof PlanInfoBeans){
@@ -220,14 +293,18 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
 
         if(code == ConstantsCode.ADD_CIRCLE_PRAISE){
             infoData.getCircle().get(mPosition).setIs_praise(1);
-            //infoData.getCircle().get(mPosition).setPraise_num(featureBean.getData().getList().get(mPosition).getPraise_num()+1);
+            infoData.getCircle().get(mPosition).setPraise_num(infoData.getCircle().get(mPosition).getPraise_num()+1);
             finds.setFind(infoData.getCircle(),this);
+            //通知刷新数据，让数据同步
+            EventBus.getDefault().post(ConstantsCode.EB_ADD_CIRCLE,"同步数据");
             showSuccess("点赞成功！");
         }
         if(code == ConstantsCode.CANCEL_CIRCLE_PRAISE){
             infoData.getCircle().get(mPosition).setIs_praise(0);
-            //featureBean.getData().getList().get(mPosition).setPraise_num(infoData.getCircle().get(mPosition).getPraise_num()-1);
+            infoData.getCircle().get(mPosition).setPraise_num(infoData.getCircle().get(mPosition).getPraise_num()-1);
             finds.setFind(infoData.getCircle(),this);
+            //通知刷新数据，让数据同步
+            EventBus.getDefault().post(ConstantsCode.EB_ADD_CIRCLE,"同步数据");
             showSuccess("已取消点赞！");
         }
 
@@ -258,5 +335,41 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         }else{
             Controller.myRequest(ConstantsCode.CANCEL_CIRCLE_PRAISE,Constants.CANCEL_CIRCLE_PRAISE,Controller.TYPE_POST,getParams(), PostDetailsLikeBean.class,this);
         }
+    }
+
+    /*
+     * 刷新定位城市
+     * */
+    @Subscribe(id = ConstantsCode.EB_HOME_LOCATION)
+    public void changeLocation(String message) {
+        addressName.setText(TokenSingleBean.getInstance().getRegion_name());
+
+        //去存储一下当前使用的开通城市
+        SharedPreferencesUtil.putString(mActivity,"region_name",TokenSingleBean.getInstance().getRegion_name());
+        SharedPreferencesUtil.putString(mActivity,"region_code",TokenSingleBean.getInstance().getRegion_code());
+
+        //城市切换了去刷新下数据
+        lazyLoad();
+    }
+
+    /*
+     * 刷新下数据
+     * */
+    @Subscribe(id = ConstantsCode.EB_HOME_REFRESH)
+    public void result(String message) {
+        getData();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
     }
 }

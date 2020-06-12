@@ -59,6 +59,16 @@ public class SportsLifeFragment extends CustomFragment {
             public String getPrice(GoodsBeans.DataBean.ListBean item) {
                 return item.getG_price();
             }
+
+            @Override
+            public String getPoint(GoodsBeans.DataBean.ListBean item) {
+                return String.valueOf(item.getG_point());
+            }
+
+            @Override
+            public int getShowType(GoodsBeans.DataBean.ListBean item) {
+                return item.getShowType();
+            }
         };
         mRec.setAdapter(gAdapter);
 

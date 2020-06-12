@@ -30,6 +30,35 @@
                 android:text="2000"
                 android:textStyle="bold"/>
 
+            <LinearLayout
+                android:id="@+id/pointBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/addMark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="+"/>
+                <TextView
+                    android:id="@+id/goodPoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_EF5B48"
+                    android:textSize="24sp"
+                    android:text="0"/>
+                <TextView
+                    android:id="@+id/pointText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:text="积分"/>
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/tvIncome"
                 android:layout_width="wrap_content"
@@ -38,7 +67,7 @@
                 android:textSize="@dimen/sp_12"
                 android:layout_marginStart="16dp"
                 android:visibility="gone"
-                android:text="收益10"/>
+                android:text="收益0.00"/>
         </LinearLayout>
 
         <TextView

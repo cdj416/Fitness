@@ -385,7 +385,7 @@ public class CoachDropMenuAdapter implements MenuAdapter, RetrofitListener {
     * */
     private void getArea(){
         //根据城市名称获取下面的区县列表
-        clearParams().setParams("city_name","湖州市");
+        clearParams().setParams("city_name",userToken.getRegion_name());
         Controller.myRequest(Constants.GET_OS_ADDRESS_LIST,Controller.TYPE_POST,getParams(), FilterAreaBeans.class,this);
     }
 

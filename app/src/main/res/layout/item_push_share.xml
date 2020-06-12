@@ -12,6 +12,7 @@
         android:id="@+id/shareImg"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        app:riv_corner_radius="6dp"/>
+        app:riv_corner_radius="6dp"
+        android:scaleType="center"/>
 
 </LinearLayout>

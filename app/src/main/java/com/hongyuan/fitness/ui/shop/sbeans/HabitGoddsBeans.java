@@ -1,6 +1,8 @@
 package com.hongyuan.fitness.ui.shop.sbeans;
 
 import com.hongyuan.fitness.base.BaseBean;
+import com.hongyuan.fitness.ui.shop.sadapter.SMGoodsAdapter;
+import com.hongyuan.fitness.util.BaseUtil;
 
 import java.util.List;
 
@@ -75,6 +77,19 @@ public class HabitGoddsBeans extends BaseBean {
             private String g_img;
             private String g_price;
             private int g_point;
+
+            //获取显示类型
+            public int getShowType() {
+                if(BaseUtil.isValue(this.g_price) && Double.parseDouble(this.g_price) > 0 && this.g_point > 0){
+                    return SMGoodsAdapter.SHOW_MONEY_POINT;
+                }else if(BaseUtil.isValue(this.g_price) && Double.parseDouble(this.g_price) > 0 && this.g_point <= 0 ){
+                    return SMGoodsAdapter.SHOW_MONEY;
+                }else if((!BaseUtil.isValue(this.g_price) || Double.parseDouble(this.g_price) <= 0 ) && this.g_point > 0){
+                    return SMGoodsAdapter.SHOW_POINT;
+                }else{
+                    return SMGoodsAdapter.SHOW_MONEY_POINT;
+                }
+            }
 
             public int getG_id() {
                 return g_id;

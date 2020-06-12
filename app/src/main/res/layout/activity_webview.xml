@@ -54,6 +54,7 @@
                 android:textSize="@dimen/sp_14"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:visibility="gone"
                 android:layout_marginRight="16dp"
                 android:text="检查Url"/>
 

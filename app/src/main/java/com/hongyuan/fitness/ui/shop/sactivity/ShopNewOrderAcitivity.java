@@ -1,9 +1,15 @@
 package com.hongyuan.fitness.ui.shop.sactivity;
 
+import android.view.KeyEvent;
+
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityShopNewordersBinding;
+import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.shop.sviewmodel.ShopNewOrderViewModel;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class ShopNewOrderAcitivity extends CustomActivity {
 
@@ -19,5 +25,13 @@ public class ShopNewOrderAcitivity extends CustomActivity {
         ActivityShopNewordersBinding binding = ActivityShopNewordersBinding.bind(mView);
         ShopNewOrderViewModel viewModel = new ShopNewOrderViewModel(this,binding);
         binding.setViewModel(viewModel);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            startActivity(MainActivity.class);
+        }
+        return true;
     }
 }

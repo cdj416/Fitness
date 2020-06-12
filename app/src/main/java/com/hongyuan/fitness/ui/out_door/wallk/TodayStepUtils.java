@@ -8,12 +8,17 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
+import android.util.Log;
+
 import com.hongyuan.fitness.base.MyApplication;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.BigDecimalUtils;
 import com.today.step.lib.ISportStepInterface;
 import com.today.step.lib.SportStepJsonUtils;
 import com.today.step.lib.TodayStepService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TodayStepUtils {
 
@@ -59,6 +64,9 @@ public class TodayStepUtils {
     private ISportStepInterface iSportStepInterface;
     private int mStepSum;
 
+
+    //记录跑步每分钟移动的步数数据
+    private Map<Integer,Integer> runStep = new HashMap<>();
 
     /*
      * 计步功能
@@ -140,6 +148,9 @@ public class TodayStepUtils {
         runStartStepNum = mStepSum;
         runEndStepNum = mStepSum;
         runStepNum = runEndStepNum - runStartStepNum;
+
+        runStep.clear();
+        runStep.put(0,runStartStepNum);
     }
 
     /*
@@ -151,10 +162,32 @@ public class TodayStepUtils {
     }
 
     /*
+    * 跑步过程中每隔30秒来记录一次
+    * */
+    public void RunningIn(int passedTime){
+        runStep.put(passedTime,mStepSum);
+    }
+
+    /*
+    * 判断是否停止运动
+    * */
+    public boolean isRunning(int passedTime){
+        if(passedTime == 0) return true;
+        if((runStep.get(passedTime) - runStep.get((passedTime - 30))) > 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    /*
     * 获取当前的数据
     * */
     public String getSpeeds(int secends){
-        String miaoSpeeds = BigDecimalUtils.div(SportStepJsonUtils.getDistanceByStep(getNowRunStep()),String.valueOf(secends),2);
-        return BaseUtil.getNoZoon(BigDecimalUtils.mul(SportStepJsonUtils.getDistanceByStep(getNowRunStep()),"60",2));
+        if(secends != 0){
+            return BigDecimalUtils.mul(BigDecimalUtils.div(SportStepJsonUtils.getDistanceByStep(getNowRunStep()),String.valueOf(secends),10),"60",2);
+        }else{
+            return "0.00";
+        }
     }
 }

@@ -48,7 +48,7 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
 
     private RoundedImageView goodImg;
     private TextView goodPrice,goodStock,changeNorm,addMark,goodPoint,pointText,numText,goBuy;
-    private LinearLayout addCart,buyBox,exchangeBox;
+    private LinearLayout addCart,buyBox,exchangeBox,pointBox;
 
     //数据源
     private SgoodsDetailBeans.DataBean.InfoBean infoBean;
@@ -84,6 +84,7 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
         pointText = view.findViewById(R.id.pointText);
         buyBox = view.findViewById(R.id.buyBox);
         exchangeBox = view.findViewById(R.id.exchangeBox);
+        pointBox = view.findViewById(R.id.pointBox);
 
 
         LinearLayoutManager comManager = new LinearLayoutManager(getContext());
@@ -228,6 +229,13 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
             noSelectStr += " "+infoBean.getSku().get(i).getSku_type_name();
         }
         changeNorm.setText(noSelectStr);
+
+        if(infoBean.getG_point() > 0){
+            pointBox.setVisibility(VISIBLE);
+            goodPoint.setText(String.valueOf(infoBean.getG_point()));
+        }else{
+            pointBox.setVisibility(GONE);
+        }
     }
 
     /*
@@ -343,24 +351,18 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
                 goodStock.setText("库存"+itemBean.getGp_stock());
                 goodPrice.setText(BaseUtil.getNoZoon(itemBean.getGp_price()));
 
-                if(itemBean.getGp_point() > 0){
-                    addMark.setVisibility(VISIBLE);
-                    pointText.setVisibility(VISIBLE);
-                    goodPoint.setVisibility(VISIBLE);
+                if(infoBean.getG_point() > 0){
+                    pointBox.setVisibility(VISIBLE);
 
-                    goodPoint.setText(String.valueOf(itemBean.getGp_point()));
+                    goodPoint.setText(String.valueOf(infoBean.getG_point()));
                 }else{
-                    addMark.setVisibility(GONE);
-                    pointText.setVisibility(GONE);
-                    goodPoint.setVisibility(GONE);
+                    pointBox.setVisibility(GONE);
                 }
             }else{
                 maxNum = 0;
                 goodStock.setText("库存"+0);
 
-                addMark.setVisibility(GONE);
-                pointText.setVisibility(GONE);
-                goodPoint.setVisibility(GONE);
+                pointBox.setVisibility(GONE);
             }
         }
     }

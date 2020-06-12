@@ -7,7 +7,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hongyuan.fitness.R;
-import com.hongyuan.fitness.ui.mall.mine.mine_order.mine_order_list.MineOrderBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.MineOrderBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.BigDecimalUtils;
 import com.makeramen.roundedimageview.RoundedImageView;

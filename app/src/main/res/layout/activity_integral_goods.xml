@@ -54,7 +54,7 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/color_FFFFFF"
                             android:textSize="24sp"
-                            android:text="6000"/>
+                            android:text="0"/>
                     </LinearLayout>
                 </RelativeLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>

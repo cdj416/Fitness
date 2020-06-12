@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.webview;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 
 import com.google.gson.reflect.TypeToken;
@@ -58,6 +59,18 @@ public class AndroidInterfaceWeb {
     @JavascriptInterface
     public void androidLogin() {
         mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+    }
+
+    /*
+    * 抽奖掉用登录
+    * */
+    @JavascriptInterface
+    public void androidLotteryToLogin(String url) {
+        Bundle bundle = new Bundle();
+        bundle.putString("toType","Lottery");
+        bundle.putString("url",url);
+        mActivity.startActivity(VtwoVerificationLoginActivity.class,bundle);
+        mActivity.finish();
     }
 
     /*

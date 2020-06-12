@@ -26,4 +26,9 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="16dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color_EEEEEE"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

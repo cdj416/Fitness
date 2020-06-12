@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.CustomViewModel;
@@ -38,6 +39,7 @@ import com.hongyuan.fitness.ui.heat.heat_detail.HeatDetailBean;
 import com.hongyuan.fitness.ui.main.AllCitysActivity;
 import com.hongyuan.fitness.ui.main.OpenCitysBeans;
 import com.hongyuan.fitness.ui.main.ScanCardsListAdapter;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.main.main_home.CheckCitysAdapter;
 import com.hongyuan.fitness.ui.main.main_home.recommend.HomeRightBeans;
 import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsAdapter;
@@ -54,6 +56,8 @@ import com.hongyuan.fitness.ui.shop.sbeans.ScouponsBean;
 import com.hongyuan.fitness.ui.shop.sbeans.SgoodsDetailBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.SorderCouponBeans;
 import com.hongyuan.fitness.ui.shop.smyview.SGDspecificationView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -1064,7 +1068,9 @@ public class CustomDialog {
             @SingleClick
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                LocationBean.getInstance().setCityName(mList.get(position).getRegion_name());
+                TokenSingleBean.getInstance().setRegion_name(mList.get(position).getRegion_name());
+                TokenSingleBean.getInstance().setRegion_code(mList.get(position).getRegion_code());
+                EventBus.getDefault().post(ConstantsCode.EB_HOME_LOCATION,"");
                 dialog.dismiss();
             }
         });
@@ -1075,7 +1081,9 @@ public class CustomDialog {
             mContext.startActivity(CheckInMeActivity.class,null);
             dialog.dismiss();
         });
-        view.findViewById(R.id.close).setOnClickListener(v -> dialog.dismiss());
+        view.findViewById(R.id.close).setOnClickListener(v ->{
+            dialog.dismiss();
+        });
     }
 
     /*
@@ -1150,5 +1158,39 @@ public class CustomDialog {
 
         TextView tv = view.findViewById(R.id.urlTv);
         tv.setText(url);
+    }
+    /*
+     * 分享弹框
+     * */
+    public static void showShare(Context mContext,DialogClick click){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_share,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.main_menu_animStyle);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        view.findViewById(R.id.sd_find).setOnClickListener(v -> {
+            click.dialogClick(v);
+            dialog.dismiss();
+        });
+        view.findViewById(R.id.weiXin).setOnClickListener(v -> {
+            click.dialogClick(v);
+            dialog.dismiss();
+        });
+        view.findViewById(R.id.wxCircle).setOnClickListener(v -> {
+            click.dialogClick(v);
+            dialog.dismiss();
+        });
+        view.findViewById(R.id.qq).setOnClickListener(v -> {
+            click.dialogClick(v);
+            dialog.dismiss();
+        });
+        view.findViewById(R.id.qqZone).setOnClickListener(v -> {
+            click.dialogClick(v);
+            dialog.dismiss();
+        });
     }
 }

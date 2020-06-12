@@ -1,8 +1,10 @@
 package com.hongyuan.fitness.custom_view.share_view;
 
+import android.graphics.Bitmap;
 import android.widget.Toast;
 
 import com.hongyuan.fitness.base.CustomActivity;
+import com.hongyuan.fitness.ui.person.daily_punch.ShareSuccessLinstener;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
@@ -72,6 +74,36 @@ public class ShareUtil {
                 Toast.makeText(mActivity,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
             }
         };
+    }
+
+    public static void shareImg(CustomActivity mActivity, Bitmap shareImg, SHARE_MEDIA type, ShareSuccessLinstener successLinstener){
+        umShareListener = new UMShareListener() {
+            @Override
+            public void onStart(SHARE_MEDIA platform) {
+                // 分享开始的回调
+            }
+
+            @Override
+            public void onResult(SHARE_MEDIA platform) {
+                //Toast.makeText(mActivity, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+                successLinstener.shareLinstener();
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA platform, Throwable t) {
+                Toast.makeText(mActivity,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA platform) {
+                Toast.makeText(mActivity,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        new ShareAction(mActivity).setPlatform(type)
+                .withMedia(new UMImage(mActivity, shareImg))
+                .setCallback(umShareListener)
+                .share();
     }
 
 

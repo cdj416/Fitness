@@ -3,6 +3,8 @@ package com.hongyuan.fitness.ui.shop.sbeans;
 import com.chad.library.adapter.base.entity.AbstractExpandableItem;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.hongyuan.fitness.base.BaseBean;
+import com.hongyuan.fitness.ui.shop.sadapter.SnewOrdersAdapter;
+import com.hongyuan.fitness.ui.shop.sadapter.SorderDetailsAdapter;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.BigDecimalUtils;
 
@@ -64,6 +66,7 @@ public class SorderDetailBeans extends BaseBean {
                     bottomBean.setAllNum(String.valueOf(allNum));
                     bottomBean.setAllPrice(BaseUtil.getNoZoon(allPrice));
                     bottomBean.setUseAllprice(BaseUtil.getNoZoon(useAllPrice));
+                    bottomBean.setAllPoint(dataBean.getAll_point());
                     bottomBean.setDeliverWay(1);
                     bottomBean.setCmId(dataBean.getBest_coupon().getCm_id());
 
@@ -73,6 +76,33 @@ public class SorderDetailBeans extends BaseBean {
             }
 
             return mList;
+        }
+
+        /*
+         * 获取商品的总积分
+         * */
+        public String getAllPoint(){
+            String allPoint = "0";
+            for(SorderDetailBeans.DataBean.ListBean dataBean : list){
+                allPoint = BigDecimalUtils.add(allPoint,String.valueOf(dataBean.getAll_point()),2);
+            }
+
+            return BaseUtil.getNoZoon(allPoint);
+        }
+
+        /*
+        * 是否有无效商品
+        * */
+        public boolean isInvalid(){
+            for(SorderDetailBeans.DataBean.ListBean dataBean : list){
+                for(SorderDetailBeans.DataBean.ListBean.GoodsListBean listBean : dataBean.getGoods_list()){
+                    if(listBean.getIs_valid() == 0){
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         public static class BottomBean implements MultiItemEntity{
@@ -87,7 +117,16 @@ public class SorderDetailBeans extends BaseBean {
             private String allPrice;//总价(加上快递费之后的价格)
             private String storeId;
             private String useAllprice;//计算后显示的价格
+            private int allPoint;//总积分
             private int cmId;//优惠券id
+
+            public int getAllPoint() {
+                return allPoint;
+            }
+
+            public void setAllPoint(int allPoint) {
+                this.allPoint = allPoint;
+            }
 
             public int getCmId() {
                 return cmId;
@@ -190,6 +229,8 @@ public class SorderDetailBeans extends BaseBean {
                 return 2;
             }
         }
+
+
 
         /*******************************************************************************************/
 
@@ -358,8 +399,30 @@ public class SorderDetailBeans extends BaseBean {
                 private String g_name;
                 private int gp_id;
                 private String gp_price;
-                private int gp_ponit;
+                private int gp_point;
                 private String sku_names;
+
+
+                //获取显示类型
+                public int getShowType() {
+                    if(BaseUtil.isValue(this.gp_price) && Double.parseDouble(this.gp_price) > 0 && this.gp_point > 0){
+                        return SorderDetailsAdapter.SHOW_MONEY_POINT;
+                    }else if(BaseUtil.isValue(this.gp_price) && Double.parseDouble(this.gp_price) > 0 && this.gp_point <= 0 ){
+                        return SorderDetailsAdapter.SHOW_MONEY;
+                    }else if((!BaseUtil.isValue(this.gp_price) || Double.parseDouble(this.gp_price) <= 0 ) && this.gp_point > 0){
+                        return SorderDetailsAdapter.SHOW_POINT;
+                    }else{
+                        return SorderDetailsAdapter.SHOW_MONEY_POINT;
+                    }
+                }
+
+                public int getGp_point() {
+                    return gp_point;
+                }
+
+                public void setGp_point(int gp_point) {
+                    this.gp_point = gp_point;
+                }
 
                 public int getIs_valid() {
                     return is_valid;
@@ -423,14 +486,6 @@ public class SorderDetailBeans extends BaseBean {
 
                 public void setGp_price(String gp_price) {
                     this.gp_price = gp_price;
-                }
-
-                public int getGp_ponit() {
-                    return gp_ponit;
-                }
-
-                public void setGp_ponit(int gp_ponit) {
-                    this.gp_ponit = gp_ponit;
                 }
 
                 public String getSku_names() {

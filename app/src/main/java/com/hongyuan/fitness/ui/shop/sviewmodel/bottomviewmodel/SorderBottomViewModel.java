@@ -4,18 +4,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityBottomSorderDetailsBinding;
-import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
 import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayActivity;
 import com.hongyuan.fitness.ui.mall.good_pay.PayDataBean;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.AddressInfoBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.CreateOrderBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.PointBean;
 import com.hongyuan.fitness.ui.shop.sviewmodel.SorderDetailViewModel;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
@@ -55,18 +56,33 @@ public class SorderBottomViewModel extends CustomViewModel {
     /*
     * 显示总价
     * */
-    public void changeAllPrice(String allPrice){
+    public void changeAllPrice(String allPrice,String allPoint){
+        mPoint = Integer.parseInt(allPoint);
+        binding.allPrice.setText(allPrice);
 
-        if(Integer.parseInt(allPrice) > 0){
-            binding.allPrice.setText(allPrice);
-        }else{
-            mPoint = viewModel.getInfoData().getList().get(0).getAll_point();
+        if(Integer.parseInt(allPoint) > 0 && Double.parseDouble(allPrice) <= 0){
             binding.pointNum.setVisibility(View.VISIBLE);
             binding.pointNum.setText("+积分："+mPoint);
             binding.submit.setText("立即兑换");
+        }else if(Integer.parseInt(allPoint) <= 0 && Double.parseDouble(allPrice) > 0){
+            binding.pointNum.setVisibility(View.GONE);
+        }else if(Integer.parseInt(allPoint) > 0 && Double.parseDouble(allPrice) > 0){
+            binding.pointNum.setVisibility(View.VISIBLE);
+            binding.pointNum.setText("+积分："+mPoint);
+            binding.submit.setText("去支付");
         }
 
+    }
 
+    /*
+    * 设置是否可操作
+    * */
+    public void invalid(boolean flag){
+        if(flag){
+            binding.submit.setBackgroundResource(R.drawable.shape_radius6_cccccc);
+            binding.submit.setText("商品已失效");
+            binding.submit.setClickable(false);
+        }
     }
 
     /*
@@ -79,6 +95,11 @@ public class SorderBottomViewModel extends CustomViewModel {
     @Override
     protected void lazyLoad() {
         AddressInfoBeans.DataBean addressBeans = viewModel.getAddressBeans();
+
+        if(addressBeans == null){
+            CustomDialog.showMessage(mActivity,"请添加地址！");
+            return;
+        }
 
         mActivity.showLoading();
         clearParams().setParams("order_json",viewModel.getJsonData())

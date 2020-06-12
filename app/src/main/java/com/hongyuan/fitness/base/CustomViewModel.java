@@ -21,6 +21,7 @@ import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.video.MyPlayActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.EncryptionUtil;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -315,6 +316,10 @@ public abstract class CustomViewModel implements RetrofitListener {
             //int randomNum = 100;
             //long timeSpan = 1561619095;
 
+            //防止数据被清楚。
+            if(mActivity.userToken.getToken() == null){
+                mActivity.getNewUserToken();
+            }
 
             StringBuilder ntoken = new StringBuilder();
             ntoken.append(EncryptionUtil.md5Decode(userToken.getToken()));
@@ -328,6 +333,7 @@ public abstract class CustomViewModel implements RetrofitListener {
             baseParams.put("randomnum",String.valueOf(randomNum));
             baseParams.put("timespan",String.valueOf(timeSpan));
             baseParams.put("ntoken",ntoken.toString());
+            baseParams.put("city_code", BaseUtil.isValue(mActivity.userToken.getRegion_code()) ? mActivity.userToken.getRegion_code() : "3505");
 
             //是否开启分页
             if(isLoadMore){
@@ -424,7 +430,9 @@ public abstract class CustomViewModel implements RetrofitListener {
         if(err_code == ISLOGIN && description.contains("先登录")){
             startActivity(VtwoVerificationLoginActivity.class,null);
         }else{
-            LemonBubble.showError(mActivity, description, 2000);
+            if(!mActivity.isFinishing()){
+                LemonBubble.showError(mActivity, description, 2000);
+            }
         }
 
     }
@@ -433,14 +441,18 @@ public abstract class CustomViewModel implements RetrofitListener {
     * 请求成功提示
     * */
     public void showSuccess(String message){
-        LemonBubble.showRight(mActivity, message, 2000);
+        if(!mActivity.isFinishing()){
+            LemonBubble.showRight(mActivity, message, 2000);
+        }
     }
 
     /*
     * 加载中动画
     * */
     public void onLoading(String message){
-        LemonBubble.showRoundProgress(mActivity, message);
+        if(!mActivity.isFinishing()){
+            LemonBubble.showRoundProgress(mActivity, message);
+        }
     }
 
     /*
@@ -454,7 +466,9 @@ public abstract class CustomViewModel implements RetrofitListener {
            }else if(baseBean.getStatus().getError_code() == ISLOGIN){
                startActivity(VtwoVerificationLoginActivity.class,null);
            }else{
-               LemonBubble.showError(mActivity, baseBean.getStatus().getError_desc(), 2000);
+               if(!mActivity.isFinishing()){
+                   LemonBubble.showError(mActivity, baseBean.getStatus().getError_desc(), 2000);
+               }
            }
         }
         return false;

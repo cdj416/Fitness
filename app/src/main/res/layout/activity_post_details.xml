@@ -58,19 +58,6 @@
                             android:text=""/>
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/attention"
-                        android:layout_width="55dp"
-                        android:layout_height="25dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:textColor="@color/color_FFFFFF"
-                        android:textSize="12sp"
-                        android:gravity="center"
-                        binding:onClickCommand="@{ViewModel.sendAttention}"
-                        android:background="@drawable/shape_radius16_ef5b48"
-                        android:visibility="gone"
-                        android:text="关注"/>
 
                     <ImageView
                         android:id="@+id/moreOperate"
@@ -80,6 +67,21 @@
                         android:layout_centerVertical="true"
                         android:padding="5dp"
                         android:src="@mipmap/shuzhe_sandian_img"/>
+
+                    <TextView
+                        android:id="@+id/attention"
+                        android:layout_width="65dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/color_FFFFFF"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        binding:onClickCommand="@{ViewModel.sendAttention}"
+                        android:background="@drawable/shape_radius16_ef5b48"
+                        android:visibility="visible"
+                        android:layout_marginEnd="30dp"
+                        android:text="关注"/>
                 </RelativeLayout>
 
                 <TextView

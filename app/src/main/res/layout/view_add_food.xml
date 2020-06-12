@@ -177,7 +177,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/color_FF999999"
             android:textSize="@dimen/sp_12"
-            android:drawableLeft="@mipmap/delet_huise_img"
+            android:drawableLeft="@mipmap/del_black_mark"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:padding="10dp"

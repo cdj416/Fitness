@@ -157,7 +157,7 @@ public class CircleDetailsViewModel extends CustomViewModel {
     private void getCircleList(){
         mActivity.showLoading();
         //获取帖子
-        clearParams().setParams("circle_state","1").setParams("city_name","湖州市")
+        clearParams().setParams("circle_state","1").setParams("city_name",userToken.getRegion_name())
                 .setParams("circle_categoryid",getBundle().getString("circle_categoryid"));
         Controller.myRequest(Constants.GET_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
 

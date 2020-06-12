@@ -11,6 +11,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class SharedPreferencesUtil {
 	private static final String FILENAME = "CDJ";
 
@@ -65,5 +67,32 @@ public class SharedPreferencesUtil {
 			e.printStackTrace();
 		}
 		return obj;
+	}
+
+	/*
+	* 存储字符串
+	* */
+	public static void putString(Context context, String key,String text){
+		try {
+			SharedPreferences.Editor editor = getSharedPreferences(context).edit();
+			editor.putString(key,text);
+			editor.commit();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
+	}
+
+	/*
+	* 获取字符串
+	* */
+	public static String getString(Context context,String key){
+		try {
+			SharedPreferences preferences = getSharedPreferences(context);
+			return preferences.getString(key,"");
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return "";
 	}
 }

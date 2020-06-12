@@ -16,13 +16,13 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.AcitivityPriviteCourseOrdersBinding;
-import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
 import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayActivity;
 import com.hongyuan.fitness.ui.mall.good_pay.PayDataBean;
-import com.hongyuan.fitness.ui.mall.mine.mine_order.mine_order_list.MineOrderBeans;
 import com.hongyuan.fitness.ui.mall.mine.mine_order.order_details.MineOrderDetailsActivity;
 import com.hongyuan.fitness.ui.person.newedition.adapter.MemberCardOrdersAdapter;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.MineOrderBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.PointBean;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 

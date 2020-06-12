@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.main.main_about_class.group_class.vtwo_group_class;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -135,7 +136,7 @@ public class FilterGoupClassAdapter implements MenuAdapter, RetrofitListener {
                     if(position != 0){
                         showStoreText = item.getRegion_name();
                     }else{
-                        showStoreText = "湖州全城";
+                        showStoreText = userToken.getRegion_name()+"全城";
                     }
                     //去更新显示类容
                     onFilterText(POSITION_STORE,showStoreText);
@@ -313,6 +314,19 @@ public class FilterGoupClassAdapter implements MenuAdapter, RetrofitListener {
         }
     }
 
+    /*
+     * 改变标题数据显示
+     * */
+    public void changTitles(String[] titles){
+        this.titles = titles;
+        //从新获取左边区县数据
+        getArea();
+        //从新获取私教类型
+        getCourseType();
+
+        onFilterText(0,userToken.getRegion_name()+"全城");
+    }
+
 
     /***********************************************已下去请求获取数据*********************************/
 
@@ -388,6 +402,7 @@ public class FilterGoupClassAdapter implements MenuAdapter, RetrofitListener {
             baseParams.put("randomnum",String.valueOf(randomNum));
             baseParams.put("timespan",String.valueOf(timeSpan));
             baseParams.put("ntoken",ntoken.toString());
+            baseParams.put("city_code", BaseUtil.isValue(userToken.getRegion_code()) ? userToken.getRegion_code() : "3505");
 
             //是否开启分页
             if(isLoadMore){
@@ -410,7 +425,7 @@ public class FilterGoupClassAdapter implements MenuAdapter, RetrofitListener {
      * */
     private void getArea(){
         //根据城市名称获取下面的区县列表
-        clearParams().setParams("city_name","湖州市");
+        clearParams().setParams("city_name",userToken.getRegion_name());
         Controller.myRequest(Constants.GET_OS_ADDRESS_LIST,Controller.TYPE_POST,getParams(), FilterAreaBeans.class,this);
     }
 
@@ -431,9 +446,11 @@ public class FilterGoupClassAdapter implements MenuAdapter, RetrofitListener {
         Controller.myRequest(Constants.GET_SI_LIST,Controller.TYPE_POST,getParams(), FilterGoupClassTypeBeans.class,this);
     }
 
+
     @Override
     public void onSuccess(Object data) {
         if(data instanceof FilterAreaBeans){
+
             FilterAreaBeans filterAreaBeans = (FilterAreaBeans)data;
             region_code = filterAreaBeans.getData().getList().getFather_region_code();
 
@@ -444,6 +461,7 @@ public class FilterGoupClassAdapter implements MenuAdapter, RetrofitListener {
             filterAreaBeans.getData().getList().getSon_list().add(0,sonListBean);
 
             doubleFilter.setLeftList(filterAreaBeans.getData().getList().getSon_list(), 0);
+
             getFilterStore();
         }
 

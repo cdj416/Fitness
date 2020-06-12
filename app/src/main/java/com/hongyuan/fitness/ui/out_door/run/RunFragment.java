@@ -11,12 +11,14 @@ import androidx.viewpager.widget.ViewPager;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.custom_view.CountdownView;
 import com.hongyuan.fitness.ui.out_door.run.run_plan.RunBeans;
 import com.hongyuan.fitness.ui.out_door.wallk.TodayStepUtils;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.BigDecimalUtils;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.hongyuan.fitness.util.HourMeterUtil;
@@ -45,6 +47,12 @@ public class RunFragment extends CustomFragment implements View.OnClickListener,
     private String startTime;
     //跑步的结束时间
     private String endTime;
+    //跑步开始的位置信息
+    private String start_lng = "";
+    private String start_lat = "";
+    //跑步结束的位置信息
+    private String end_lng = "";
+    private String end_lat = "";
 
     public interface Operate{
         void operate(View v);
@@ -97,6 +105,21 @@ public class RunFragment extends CustomFragment implements View.OnClickListener,
 
         hourMeterUtil = new HourMeterUtil();
         hourMeterUtil.setTimeCallBack(this);
+    }
+
+    /*
+    * 设置初始定位信息
+    * */
+    public void setSartRunLocation(String start_lng,String start_lat){
+        this.start_lng = start_lng;
+        this.start_lat = start_lat;
+    }
+    /*
+    * 设置结束定位信息
+    * */
+    public void setEndRunLocation(String end_lng,String end_lat){
+        this.end_lng = end_lng;
+        this.end_lat = end_lat;
     }
 
 
@@ -302,6 +325,7 @@ public class RunFragment extends CustomFragment implements View.OnClickListener,
             //回调结束跑步，停止定位
             if(oper != null){
                 oper.operate(v);
+                updataRunData();
             }
         }
     }
@@ -312,14 +336,18 @@ public class RunFragment extends CustomFragment implements View.OnClickListener,
     @Override
     public void onTime(int passedTime) {
         this.nowSencdsTime = passedTime;
-        //过五秒就去判断下速度是否为0，若为0就停止计时
-        if(passedTime%60 == 0){
+        //每过30秒去记录一次步数数据
+        if(passedTime%30 == 0){
+            TodayStepUtils.getInstance().RunningIn(passedTime);
+        }
+        if(passedTime != 0 && passedTime%60 == 0 && TodayStepUtils.getInstance().isRunning(passedTime)){
             //执行暂停状态
             pauseRun();
             //回调暂定定位
             if(oper != null){
                 oper.operate(runningImg);
             }
+            tvSpeedNum.setText("--");
         }
         showTimeText.setText(TimeUtil.getTime(passedTime));
     }
@@ -328,11 +356,16 @@ public class RunFragment extends CustomFragment implements View.OnClickListener,
     * 添加跑步数据
     * */
     private void updataRunData(){
+        String runData = BigDecimalUtils.mul(tvAllDisant.getText().toString().substring(0,(tvAllDisant.getText().toString().length() - 2)),"1000",2);
+
         clearParams().setParams("start_date",startTime).setParams("end_date",endTime)
-                .setParams("run_data",tvAllDisant.getText().toString().substring(0,(tvAllDisant.getText().toString().length() - 2)))
+                .setParams("run_data",runData)
                 .setParams("walk_data","0").setParams("et_type","1")
-                .setParams("start_lng","").setParams("start_lat","")
-                .setParams("end_lng","").setParams("end_lat","");
+                .setParams("start_lng",start_lng).setParams("start_lat",start_lat)
+                .setParams("end_lng",end_lng).setParams("end_lat",end_lat);
+
+        Controller.myRequest(ConstantsCode.ME_ADD_EXERCISE_TIME,Constants.ME_ADD_EXERCISE_TIME,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+
     }
 
     /*
@@ -359,9 +392,15 @@ public class RunFragment extends CustomFragment implements View.OnClickListener,
     public void onSuccess(Object data) {
         if(data instanceof RunBeans){
             RunBeans runBeans = (RunBeans)data;
-            allRunData.setText(BaseUtil.getNoZoon(runBeans.getData().getRun_data())+"km");
+            allRunData.setText(BigDecimalUtils.div(String.valueOf(runBeans.getData().getRun_data()),"1000",2)+"km");
         }
     }
 
-
+    @Override
+    public void onSuccess(int code, Object data) {
+        if(code == ConstantsCode.ME_ADD_EXERCISE_TIME){
+            showSuccess("记录成功！");
+            lazyLoad();
+        }
+    }
 }

@@ -13,10 +13,10 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityMineOrderDetailBinding;
-import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
 import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayActivity;
 import com.hongyuan.fitness.ui.mall.good_pay.PayDataBean;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.PointBean;
 import com.hongyuan.fitness.util.BaseUtil;
 
 import java.util.ArrayList;

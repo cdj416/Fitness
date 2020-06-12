@@ -17,7 +17,7 @@ public class V3HomeStoreAdapter extends BaseQuickAdapter<V4HomeBeans.DataBean.Of
     }
     @Override
     protected void convert(BaseViewHolder helper, V4HomeBeans.DataBean.OfflineStoreBean item) {
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
+        RequestOptions options = new RequestOptions().placeholder(R.color.color_f2).error(R.color.color_f2);
         Glide.with(mContext).load(item.getOs_img()).apply(options).into((RoundedImageView)helper.getView(R.id.storeImg));
 
         helper.setText(R.id.distanceText,item.getJuli()).setText(R.id.storeName,item.getOs_name());

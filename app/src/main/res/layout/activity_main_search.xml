@@ -89,7 +89,7 @@
                                 android:id="@+id/clearImg"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@mipmap/delet_huise_img"
+                                android:src="@mipmap/del_black_mark"
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"/>
                         </RelativeLayout>

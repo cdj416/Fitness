@@ -1,16 +1,26 @@
 package com.hongyuan.fitness.ui.shop.sadapter;
 
+import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.hongyuan.fitness.R;
 
+import java.io.File;
 import java.util.HashMap;
 
 public class SDMimgAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
@@ -44,19 +54,23 @@ public class SDMimgAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
         }
 
         //获取比例并设置视图高度并加载图片
-        setImgViewHeight(helper.getView(R.id.img),(int) (useWidth/hashMap.get(helper.getAdapterPosition())), item);
+        setImgViewHeight(helper.getView(R.id.longImg),(int) (useWidth/hashMap.get(helper.getAdapterPosition())), item);
     }
 
     /*
      * 设置图片控件高度
      * */
-    private void setImgViewHeight(ImageView coverImg,int height,String imgUrl){
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) coverImg.getLayoutParams();
+    private void setImgViewHeight(SubsamplingScaleImageView longImg, int height, String imgUrl){
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) longImg.getLayoutParams();
         layoutParams.height = height;
-        coverImg.setLayoutParams(layoutParams);
+        longImg.setLayoutParams(layoutParams);
 
-        //显示图片
-        RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
-        Glide.with(mContext).load(imgUrl).transition(DrawableTransitionOptions.withCrossFade()).apply(options).into(coverImg);
+        //下载图片保存到本地
+        Glide.with(mContext).load(imgUrl).downloadOnly(new SimpleTarget<File>() {
+            @Override
+            public void onResourceReady(@NonNull File resource, @Nullable Transition<? super File> transition) {
+                longImg.setImage(ImageSource.uri(resource.getAbsolutePath()));
+            }
+        });
     }
 }

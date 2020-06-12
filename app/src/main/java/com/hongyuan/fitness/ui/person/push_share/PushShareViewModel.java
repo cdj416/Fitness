@@ -1,11 +1,10 @@
 package com.hongyuan.fitness.ui.person.push_share;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
-import android.widget.Toast;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,27 +13,30 @@ import com.bumptech.glide.request.RequestOptions;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
+import com.hongyuan.fitness.custom_view.share_view.ShareUtil;
 import com.hongyuan.fitness.databinding.ActivityPushShareBinding;
+import com.hongyuan.fitness.ui.find.circle.edit_post.EditPostActivity;
 import com.hongyuan.fitness.ui.main.main_person.PersonBean;
 import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchCheckBean;
+import com.hongyuan.fitness.ui.person.daily_punch.ShareSuccessLinstener;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.GlideEngine;
+import com.hongyuan.fitness.util.ImageFactory;
 import com.hongyuan.fitness.util.ScreenshotUtil;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
-
+import java.io.File;
 import java.util.List;
 
-public class PushShareViewModel extends CustomViewModel {
+public class PushShareViewModel extends CustomViewModel implements ShareSuccessLinstener {
 
     private ActivityPushShareBinding binding;
     private PushShareBeans shareBeans;
@@ -54,7 +56,7 @@ public class PushShareViewModel extends CustomViewModel {
     @Override
     protected void initView() {
 
-        mActivity.getMainTitle().setLeftImage(R.mipmap.close_heise_img);
+        mActivity.getMainTitle().setLeftImage(R.mipmap.close_heise_img).setCentreText("打卡分享");
         mActivity.getMainTitle().setRightTextColor("分享",mActivity.getResources().getColor(R.color.color_FF333333));
         mActivity.getMainTitle().getRightView().setOnClickListener(v -> startShare());
 
@@ -82,6 +84,7 @@ public class PushShareViewModel extends CustomViewModel {
             adapter.notifyDataSetChanged();
             chooseMyImg();
         });
+
     }
 
     /*
@@ -96,6 +99,7 @@ public class PushShareViewModel extends CustomViewModel {
                     Animation.RELATIVE_TO_SELF,0.5f, Animation.RELATIVE_TO_SELF,0.5f);
             //设置动画持续
             scaleAnimation.setDuration(300);
+            scaleAnimation.setFillAfter(true);
             //动画插入器
             scaleAnimation.setInterpolator(mActivity,android.R.anim.decelerate_interpolator);
             //添加到AnimationSet
@@ -111,30 +115,30 @@ public class PushShareViewModel extends CustomViewModel {
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
-                            .withMedia(new UMImage(mActivity, ScreenshotUtil.getViewBp(binding.shareContent)))
-                            .setCallback(new UMShareListener() {
-                                @Override
-                                public void onStart(SHARE_MEDIA platform) {
-                                    // 分享开始的回调
-                                }
+                    CustomDialog.showShare(mActivity, v -> {
+                        //scaleAnimation.cancel();
 
-                                @Override
-                                public void onResult(SHARE_MEDIA platform) {
-                                    goShare();
-                                }
-
-                                @Override
-                                public void onError(SHARE_MEDIA platform, Throwable t) {
-                                    Toast.makeText(mActivity,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onCancel(SHARE_MEDIA platform) {
-                                    Toast.makeText(mActivity,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .share();
+                        if(v.getId() == R.id.sd_find){
+                            //写入手机中
+                            File file = ImageFactory.saveImageToGallery(mActivity,ScreenshotUtil.getViewBp(binding.shareContent));
+                            Bundle bundle = new Bundle();
+                            bundle.putString("shareFile",file.getPath());
+                            startActivity(EditPostActivity.class,bundle);
+                            goShare();
+                        }
+                        if(v.getId() == R.id.weiXin){
+                            ShareUtil.shareImg(mActivity,ScreenshotUtil.getViewBp(binding.shareContent),SHARE_MEDIA.WEIXIN,PushShareViewModel.this);
+                        }
+                        if(v.getId() == R.id.wxCircle){
+                            ShareUtil.shareImg(mActivity,ScreenshotUtil.getViewBp(binding.shareContent),SHARE_MEDIA.WEIXIN_CIRCLE,PushShareViewModel.this);
+                        }
+                        if(v.getId() == R.id.qq){
+                            ShareUtil.shareImg(mActivity,ScreenshotUtil.getViewBp(binding.shareContent),SHARE_MEDIA.QQ,PushShareViewModel.this);
+                        }
+                        if(v.getId() == R.id.qqZone){
+                            ShareUtil.shareImg(mActivity,ScreenshotUtil.getViewBp(binding.shareContent),SHARE_MEDIA.QZONE,PushShareViewModel.this);
+                        }
+                    });
                 }
 
                 @Override
@@ -146,15 +150,6 @@ public class PushShareViewModel extends CustomViewModel {
 
 
         binding.shareContent.startAnimation(animationSet);
-    }
-
-    /*
-    * 动画还原
-    * */
-    public void cancelAnit(){
-        if(scaleAnimation != null){
-            scaleAnimation.cancel();
-        }
     }
 
     @Override
@@ -175,7 +170,7 @@ public class PushShareViewModel extends CustomViewModel {
     private void goShare(){
         clearParams();
         //获取个人信息
-        Controller.myRequest(Constants.KA_SHARE,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+        Controller.myRequest(ConstantsCode.KA_SHARE,Constants.KA_SHARE,Controller.TYPE_POST,getParams(), BaseBean.class,this);
     }
 
     /*
@@ -250,7 +245,19 @@ public class PushShareViewModel extends CustomViewModel {
 
         if(data instanceof DailyPunchCheckBean){
             DailyPunchCheckBean.DataBean dailyPunchCheckBean = ((DailyPunchCheckBean)data).getData();
-            binding.grandTotal.setText("本月已累计打卡"+dailyPunchCheckBean.getItem().getLeiji_days()+"天");
+            binding.grandTotal.setText(String.valueOf(dailyPunchCheckBean.getItem().getLeiji_days()));
         }
+    }
+
+    @Override
+    public void onSuccess(int code, Object data) {
+        if(code == ConstantsCode.KA_SHARE){
+
+        }
+    }
+
+    @Override
+    public void shareLinstener() {
+        goShare();
     }
 }

@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.shop.sfragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -126,8 +127,7 @@ public class SccouponsFragment extends CustomFragment {
         mActivity.closeLoading();
 
         if(code == ConstantsCode.GET_COUPON){
-            mList.remove(couponPosition);
-            adapter.setNewData(mList);
+            lazyLoad();
             showSuccess("领取成功！");
         }
     }

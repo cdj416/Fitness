@@ -21,6 +21,7 @@ import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_modify.VtwoModifyPasswordActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_registerd.VtwoRegisterdActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.out_door.about_you.AboutYouActivity;
 import com.hongyuan.fitness.ui.person.setting.agreement.AgreementActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
@@ -41,6 +42,9 @@ public class VtwoVerificationLoginViewModel extends CustomViewModel implements I
     private PhoneMessageBean messageBean;
 
     private boolean isSelect = true;
+    //抽奖登录入口
+    private String toType = "";
+    private String url = "";
 
     public VtwoVerificationLoginViewModel(CustomActivity mActivity, ActivityVtwoVerificationCodeLoginBinding binding) {
         super(mActivity);
@@ -50,9 +54,21 @@ public class VtwoVerificationLoginViewModel extends CustomViewModel implements I
 
     @Override
     protected void initView() {
+        if(getBundle() != null && getBundle().getString("toType") != null){
+            toType = getBundle().getString("toType");
+            url = getBundle().getString("url");
+        }
+
         binding.phoneCode.setCodeClick(this);
         //密码登录
         binding.goPasswordLogin.setOnClickListener(v -> {
+            if(BaseUtil.isValue(toType) && "toType".equals(toType)){
+                Bundle bundle = new Bundle();
+                bundle.putString("url",url);
+                bundle.putString("toType","Lottery");
+                startActivity(VtwoLoginActivity.class,bundle);
+                return;
+            }
             startActivity(VtwoLoginActivity.class,null);
         });
         //修改密码
@@ -183,23 +199,33 @@ public class VtwoVerificationLoginViewModel extends CustomViewModel implements I
     public void onSuccess(int code, Object data) {
         mActivity.closeLoading();
         if(code == ConstantsCode.CHECK_MEMBER_BOBY_INDEX){
-            if(code == ConstantsCode.CHECK_MEMBER_BOBY_INDEX){
-                try {
-                    JSONObject object = new JSONObject(data.toString());
-                    JSONObject jsonObject = (JSONObject) object.get("data");
-                    if(BaseUtil.isJsonValue(jsonObject.get("info"))){
-                        //去注册登录环信账号。
-                        HuanXinUtils.getInstance().registerdHuanXin(userToken.getM_mobile());
-                        mActivity.showSuccess("登录成功", MainActivity.class,null);
-                    }else{
+
+            try {
+                JSONObject object = new JSONObject(data.toString());
+                JSONObject jsonObject = (JSONObject) object.get("data");
+                if(BaseUtil.isJsonValue(jsonObject.get("info"))){
+                    //去注册登录环信账号。
+                    HuanXinUtils.getInstance().registerdHuanXin(userToken.getM_mobile());
+
+                    if(BaseUtil.isValue(toType) && "Lottery".equals(toType)){
                         Bundle bundle = new Bundle();
-                        bundle.putString("pagType","main");
-                        startActivity(AboutYouActivity.class,bundle);
+                        bundle.putString("url", url+userToken.getWebAllParams(url));
+                        bundle.putString("title","抽奖活动");
+                        mActivity.startActivity(WebViewActivity.class,bundle);
+                        mActivity.finish();
+                        return;
                     }
-                }catch (Exception e){
-                    e.printStackTrace();
+
+                    mActivity.showSuccess("登录成功", MainActivity.class,null);
+                }else{
+                    Bundle bundle = new Bundle();
+                    bundle.putString("pagType","main");
+                    startActivity(AboutYouActivity.class,bundle);
                 }
+            }catch (Exception e){
+                e.printStackTrace();
             }
+
         }
     }
 }

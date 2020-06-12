@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginRight="@dimen/dp_16"
+        android:layout_marginStart="80dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true">
         <EditText
@@ -36,6 +37,7 @@
             android:textSize="@dimen/sp_14"
             android:textColor="@color/color_FF333333"
             android:inputType="phone"
+            android:visibility="gone"
             android:hint="请输入客户姓名"/>
 
         <TextView
@@ -47,6 +49,8 @@
             android:gravity="center"
             android:visibility="gone"
             android:drawableRight="@mipmap/right_huise_img"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="请选择"/>
 
         <Switch

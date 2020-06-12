@@ -37,10 +37,4 @@ public class PushShareActivity extends CustomActivity {
         super.onActivityResult(requestCode, resultCode, data);
         viewModel.onActivityResult(requestCode,resultCode,data);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        viewModel.cancelAnit();
-    }
 }

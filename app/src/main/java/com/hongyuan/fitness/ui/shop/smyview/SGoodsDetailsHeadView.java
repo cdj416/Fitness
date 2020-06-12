@@ -36,12 +36,12 @@ public class SGoodsDetailsHeadView extends LinearLayout implements RetrofitListe
     private CustomFragment mFragment;
 
     private RelativeLayout parameterBox,couponBox;
-    private LinearLayout specificationBox,collectionBox;
+    private LinearLayout specificationBox,collectionBox,pointBox;
     private ImageView collectionImg;
     private RoundedImageView normImg;
 
     private TextView tvPrice,tvIncome,saleNum,couponName,goodsName,tvCollection,tvGaddress,deliverFee
-            ,cityName,zhiMark,normNum,secondName,ziTiTv;
+            ,cityName,zhiMark,normNum,secondName,ziTiTv,goodPoint;
 
     //商品详情数据
     private SgoodsDetailBeans.DataBean.InfoBean infoBean;
@@ -80,6 +80,8 @@ public class SGoodsDetailsHeadView extends LinearLayout implements RetrofitListe
         normImg = view.findViewById(R.id.normImg);
         normNum = view.findViewById(R.id.normNum);
         secondName = view.findViewById(R.id.secondName);
+        pointBox = view.findViewById(R.id.pointBox);
+        goodPoint = view.findViewById(R.id.goodPoint);
 
 
         //优惠卷弹框
@@ -126,6 +128,7 @@ public class SGoodsDetailsHeadView extends LinearLayout implements RetrofitListe
             deliverFee.setText(BaseUtil.getNoZoon(infoBean.getDeliver_fee()));
         }
         if(Double.parseDouble(infoBean.getG_income()) > 0){
+            tvIncome.setVisibility(VISIBLE);
             tvIncome.setText("收益"+BaseUtil.getNoZoon(infoBean.getG_income()));
         }
 
@@ -152,6 +155,13 @@ public class SGoodsDetailsHeadView extends LinearLayout implements RetrofitListe
         if(infoBean.getSku() != null && infoBean.getSku().size() > 0){
             Glide.with(getContext()).load(infoBean.getG_img()).transition(DrawableTransitionOptions.withCrossFade()).into(normImg);
             normNum.setText("共"+infoBean.getSku().size()+"种规格可选");
+        }
+
+        if(infoBean.getG_point() > 0){
+            pointBox.setVisibility(VISIBLE);
+            goodPoint.setText(String.valueOf(infoBean.getG_point()));
+        }else{
+            pointBox.setVisibility(GONE);
         }
     }
 

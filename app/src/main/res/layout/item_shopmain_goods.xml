@@ -27,7 +27,7 @@
                 android:layout_width="77dp"
                 android:layout_height="77dp"
                 app:riv_corner_radius="6dp"
-                android:src="@drawable/banner_test1"
+                android:src="@color/color_f2"
                 android:scaleType="center"/>
             <TextView
                 android:id="@+id/storeName"

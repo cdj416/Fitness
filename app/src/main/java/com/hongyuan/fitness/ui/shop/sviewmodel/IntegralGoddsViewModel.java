@@ -5,17 +5,16 @@ import android.view.View;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityIntegralGoodsBinding;
-import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
 import com.hongyuan.fitness.ui.shop.sactivity.IntegralGoodsDetailsActivity;
-import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SMGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.GoodsBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.PointBean;
+
 import java.util.List;
 
 public class IntegralGoddsViewModel extends CustomViewModel {
@@ -53,6 +52,16 @@ public class IntegralGoddsViewModel extends CustomViewModel {
             @Override
             public String getPrice(GoodsBeans.DataBean.ListBean item) {
                 return item.getG_price();
+            }
+
+            @Override
+            public String getPoint(GoodsBeans.DataBean.ListBean item) {
+                return String.valueOf(item.getG_point());
+            }
+
+            @Override
+            public int getShowType(GoodsBeans.DataBean.ListBean item) {
+                return item.getShowType();
             }
         };
         binding.mRec.setAdapter(gAdapter);

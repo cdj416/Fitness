@@ -129,7 +129,7 @@ public class FilterPriviteLessonsAdapter implements MenuAdapter, RetrofitListene
                     if(position != 0){
                         showStoreText = item.getRegion_name();
                     }else{
-                        showStoreText = "湖州全城";
+                        showStoreText = userToken.getRegion_name()+"全城";
                     }
                     //去更新显示类容
                     onFilterText(POSITION_STORE,showStoreText);
@@ -240,6 +240,18 @@ public class FilterPriviteLessonsAdapter implements MenuAdapter, RetrofitListene
         }
     }
 
+    /*
+    * 改变标题数据显示
+    * */
+    public void changTitles(String[] titles){
+        this.titles = titles;
+        onFilterText(0,userToken.getRegion_name()+"全城");
+        //从新获取左边区县数据
+        getArea();
+        //从新获取私教类型
+        getCourseType();
+    }
+
     /***********************************************已下去请求获取数据*********************************/
 
     private Map<String,String> params;
@@ -312,6 +324,7 @@ public class FilterPriviteLessonsAdapter implements MenuAdapter, RetrofitListene
             baseParams.put("randomnum",String.valueOf(randomNum));
             baseParams.put("timespan",String.valueOf(timeSpan));
             baseParams.put("ntoken",ntoken.toString());
+            baseParams.put("city_code", BaseUtil.isValue(userToken.getRegion_code()) ? userToken.getRegion_code() : "3505");
 
             //是否开启分页
             if(isLoadMore){
@@ -334,7 +347,7 @@ public class FilterPriviteLessonsAdapter implements MenuAdapter, RetrofitListene
      * */
     private void getArea(){
         //根据城市名称获取下面的区县列表
-        clearParams().setParams("city_name","湖州市");
+        clearParams().setParams("city_name",userToken.getRegion_name());
         Controller.myRequest(Constants.GET_OS_ADDRESS_LIST,Controller.TYPE_POST,getParams(), FilterAreaBeans.class,this);
     }
 

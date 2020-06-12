@@ -74,6 +74,8 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
 
         if(getBundle().getBoolean("isMe",false)){
             binding.myTitle.setRightTextColor("个人资料",mActivity.getResources().getColor(R.color.color_FFFFFF));
+            binding.bottomBox.setVisibility(View.GONE);
+            binding.viewLine.setVisibility(View.GONE);
             binding.myTitle.getRightView().setOnClickListener(new View.OnClickListener() {
                 @SingleClick
                 @Override
@@ -142,14 +144,16 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
             @SingleClick
             @Override
             public void onClick(View v) {
-                    if(attentionBeans.getIs_friend() == 1){
-                        CustomDialog.promptDialog(mActivity, "确定要取消关注吗？", "暂不取消", "取消关注", false, v1 -> {
-                            if(v1.getId() == R.id.isCannel){
-                                sendAttention();
-                            }
-                        });
-                    }else{
-                        sendAttention();
+                    if(attentionBeans != null) {
+                        if (attentionBeans.getIs_friend() == 1) {
+                            CustomDialog.promptDialog(mActivity, "确定要取消关注吗？", "暂不取消", "取消关注", false, v1 -> {
+                                if (v1.getId() == R.id.isCannel) {
+                                    sendAttention();
+                                }
+                            });
+                        } else {
+                            sendAttention();
+                        }
                     }
             }
         });

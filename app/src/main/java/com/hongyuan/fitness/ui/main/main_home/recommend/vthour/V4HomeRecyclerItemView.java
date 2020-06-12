@@ -35,14 +35,11 @@ import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vthird_home.V3HomeFindContentAdapter;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vthird_home.V3HomeGoodsAdapter;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vthird_home.V3HomeStoreAdapter;
-import com.hongyuan.fitness.ui.mall.good_details.GoodDetailsActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.store.StoreDetailActivity;
 import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.BaseUtil;
-import com.tencent.connect.UserInfo;
-
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
@@ -127,7 +124,7 @@ public class V4HomeRecyclerItemView extends LinearLayout {
 
             typeRight.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/Asportslist"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("url", Constants.WEB_ADDRESS+"/Asportslist"+TokenSingleBean.getInstance().getWebAllParams(""));
                 bundle.putString("title","约运动");
                 if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
                     mActivity.startActivity(WebViewActivity.class,bundle);
@@ -196,7 +193,7 @@ public class V4HomeRecyclerItemView extends LinearLayout {
 
             typeRight.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/train"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("url", Constants.WEB_ADDRESS+"/train"+TokenSingleBean.getInstance().getWebAllParams(""));
                 bundle.putString("title","培训课");
                 if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
                     mActivity.startActivity(WebViewActivity.class,bundle);
@@ -271,7 +268,7 @@ public class V4HomeRecyclerItemView extends LinearLayout {
 
         adapter.setOnItemChildClickListener((adapter1, view, position) -> {
             Bundle bundle = new Bundle();
-            bundle.putString("url", Constants.WEB_ADDRESS+"/apply_reserve"+TokenSingleBean.getInstance().getWebParams()+"&gs_id="+mList.get(position).getGs_id());
+            bundle.putString("url", Constants.WEB_ADDRESS+"/apply_reserve"+TokenSingleBean.getInstance().getWebAllParams("")+"&gs_id="+mList.get(position).getGs_id());
             bundle.putString("title","报名预约");
             if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
                 mActivity.startActivity(WebViewActivity.class,bundle);
@@ -401,7 +398,7 @@ public class V4HomeRecyclerItemView extends LinearLayout {
 
         adapter.setOnItemChildClickListener((adapter1, view, position) -> {
             Bundle bundle = new Bundle();
-            bundle.putString("url", Constants.WEB_ADDRESS+"/train_detail"+TokenSingleBean.getInstance().getWebParams()+"&ct_id="+mList.get(position).getCt_id());
+            bundle.putString("url", Constants.WEB_ADDRESS+"/train_detail"+TokenSingleBean.getInstance().getWebAllParams("")+"&ct_id="+mList.get(position).getCt_id());
             bundle.putString("title","培训课详情");
             if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
                 mActivity.startActivity(WebViewActivity.class,bundle);
@@ -444,6 +441,11 @@ public class V4HomeRecyclerItemView extends LinearLayout {
             @Override
             public String getDes(V4HomeBeans.DataBean.CircleCategoryBean item) {
                 return item.getCategory_note();
+            }
+
+            @Override
+            public int getNums(V4HomeBeans.DataBean.CircleCategoryBean item) {
+                return item.getCount();
             }
         };
         mTRecycler.setAdapter(adapter);

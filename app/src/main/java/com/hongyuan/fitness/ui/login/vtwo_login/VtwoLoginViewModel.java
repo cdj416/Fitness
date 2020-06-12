@@ -17,6 +17,7 @@ import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_modify.VtwoModifyPasswordAc
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_registerd.VtwoRegisterdActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.out_door.about_you.AboutYouActivity;
 import com.hongyuan.fitness.ui.person.setting.agreement.AgreementActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
@@ -30,12 +31,16 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 import cn.jpush.android.api.JPushInterface;
+import me.goldze.mvvmhabit.base.AppManager;
 
 public class VtwoLoginViewModel extends CustomViewModel {
 
     private ActivityVtwoLoginBinding binding;
 
     private boolean isSelect = true;
+
+    //抽奖登录入口
+    private String toType = "";
 
     public VtwoLoginViewModel(CustomActivity mActivity, ActivityVtwoLoginBinding binding) {
         super(mActivity);
@@ -45,6 +50,10 @@ public class VtwoLoginViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
+
+        if(getBundle() != null && getBundle().getString("toType") != null){
+            toType = getBundle().getString("toType");
+        }
 
         //验证码登录
         binding.goVerificationLogin.setOnClickListener(v -> {
@@ -127,6 +136,7 @@ public class VtwoLoginViewModel extends CustomViewModel {
     public void onSuccess(Object data) {
         if(data instanceof LoginBean){
             LoginBean.DataBean login = ((LoginBean) data).getData();
+
             //存储用户登录信息
             SharedPreferencesUtil.putBean(mActivity,LOGIN_SESSION,login);
             //登录之后去添加登录账户信息
@@ -150,22 +160,33 @@ public class VtwoLoginViewModel extends CustomViewModel {
     public void onSuccess(int code, Object data) {
         mActivity.closeLoading();
         if(code == ConstantsCode.CHECK_MEMBER_BOBY_INDEX){
-            if(code == ConstantsCode.CHECK_MEMBER_BOBY_INDEX){
-                try {
-                    JSONObject object = new JSONObject(data.toString());
-                    JSONObject jsonObject = (JSONObject) object.get("data");
-                    if(BaseUtil.isJsonValue(jsonObject.get("info"))){
-                        //去注册登录环信账号。
-                        HuanXinUtils.getInstance().registerdHuanXin(userToken.getM_mobile());
-                        mActivity.showSuccess("登录成功", MainActivity.class,null);
-                    }else{
+
+            try {
+                JSONObject object = new JSONObject(data.toString());
+                JSONObject jsonObject = (JSONObject) object.get("data");
+                if(BaseUtil.isJsonValue(jsonObject.get("info"))){
+                    //去注册登录环信账号。
+                    HuanXinUtils.getInstance().registerdHuanXin(userToken.getM_mobile());
+
+                    if(BaseUtil.isValue(toType) && "Lottery".equals(toType)){
+                        String url = getBundle().getString("url");
                         Bundle bundle = new Bundle();
-                        bundle.putString("pagType","main");
-                        startActivity(AboutYouActivity.class,bundle);
+                        bundle.putString("url", url+userToken.getWebAllParams(url));
+                        bundle.putString("title","抽奖活动");
+                        mActivity.startActivity(WebViewActivity.class,bundle);
+                        mActivity.finish();
+                        AppManager.getAppManager().finishActivity(VtwoVerificationLoginActivity.class);
+                        return;
                     }
-                }catch (Exception e){
-                    e.printStackTrace();
+
+                    mActivity.showSuccess("登录成功", MainActivity.class,null);
+                }else{
+                    Bundle bundle = new Bundle();
+                    bundle.putString("pagType","main");
+                    startActivity(AboutYouActivity.class,bundle);
                 }
+            }catch (Exception e){
+                e.printStackTrace();
             }
         }
     }

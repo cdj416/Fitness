@@ -53,7 +53,7 @@ public class FindFragment extends CustomFragment {
 
     @Override
     public void initView(View mView) {
-        getmTitle().showLine().setCentreText("发现").setRightImage(R.mipmap.release_heise_img).getRightImgView().setOnClickListener(v -> {
+        getmTitle().showLine().setCentreText("发现").setRightImage(R.mipmap.black_carme_mark).getRightImgView().setOnClickListener(v -> {
             startActivity(EditPostActivity.class,null);
         });
 
@@ -80,7 +80,7 @@ public class FindFragment extends CustomFragment {
         goYue.setOnClickListener(v -> {
             if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+ "/Asportslist"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("url", Constants.WEB_ADDRESS+ "/Asportslist"+TokenSingleBean.getInstance().getWebAllParams(""));
                 bundle.putString("title","约运动列表");
                 mActivity.startActivity(WebViewActivity.class,bundle);
             }else{
@@ -91,7 +91,7 @@ public class FindFragment extends CustomFragment {
         goPei.setOnClickListener(v -> {
             if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/train"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("url", Constants.WEB_ADDRESS+"/train"+TokenSingleBean.getInstance().getWebAllParams(""));
                 bundle.putString("title","培训课");
                 mActivity.startActivity(WebViewActivity.class,bundle);
             }else{
@@ -102,7 +102,7 @@ public class FindFragment extends CustomFragment {
         goSai.setOnClickListener(v -> {
             if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/event"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("url", Constants.WEB_ADDRESS+"/event"+TokenSingleBean.getInstance().getWebAllParams(""));
                 bundle.putString("title","赛事");
                 mActivity.startActivity(WebViewActivity.class,bundle);
             }else{
@@ -171,6 +171,15 @@ public class FindFragment extends CustomFragment {
     @Subscribe(id = ConstantsCode.EB_START_MAIN)
     public void result(String message) {
         mViewPager.setCurrentItem(0);
+    }
+
+    /*
+     * 刷新定位城市
+     * */
+    @Subscribe(id = ConstantsCode.EB_HOME_LOCATION)
+    public void changeLocation(String message) {
+        //城市切换了去刷新下数据
+        lazyLoad();
     }
 
     @Nullable

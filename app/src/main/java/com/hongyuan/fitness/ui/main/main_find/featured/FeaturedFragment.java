@@ -8,7 +8,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -24,17 +23,14 @@ import com.hongyuan.fitness.ui.find.circle.circle_detail.CircleDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsLikeBean;
 import com.hongyuan.fitness.ui.find.friends.FriendsActivity;
-import com.hongyuan.fitness.ui.find.more_topic.MoreTopicActivity;
 import com.hongyuan.fitness.ui.find.topic.SlectTopicLeftBeans;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.DensityUtil;
-import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.MMStaggeredGridLayoutManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
-import java.util.List;
 
 
 public class FeaturedFragment extends CustomFragment {
@@ -157,15 +153,19 @@ public class FeaturedFragment extends CustomFragment {
      * */
     private void getCircleList(){
         mActivity.showLoading();
-        clearParams().setParams("circle_state","1").setParams("city_name","湖州市");
-        //获取帖子
-        if("tj".equals(getFragType())){
-            setParams("is_tj","1");
+        try {
+            clearParams().setParams("circle_state","1").setParams("city_name",mActivity.userToken.getRegion_name());
+            //获取帖子
+            if("tj".equals(getFragType())){
+                setParams("is_tj","1");
+            }
+            if(BaseUtil.isValue(getFragType())){
+                setParams("circle_type",getFragType());
+            }
+            Controller.myRequest(Constants.GET_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
+        }catch (Exception e){
+            CustomDialog.showMessage(mActivity,"请下拉刷新");
         }
-        if(BaseUtil.isValue(getFragType())){
-            setParams("circle_type",getFragType());
-        }
-        Controller.myRequest(Constants.GET_CIRCLE_LIST,Controller.TYPE_POST,getParams(), FeatureBean.class,this);
 
     }
 
@@ -223,22 +223,15 @@ public class FeaturedFragment extends CustomFragment {
             featureBean.getData().getList().get(mPosition).setIs_praise(1);
             featureBean.getData().getList().get(mPosition).setPraise_num(featureBean.getData().getList().get(mPosition).getPraise_num()+1);
             adapter.setNewData(featureBean.getData().getList());
+            EventBus.getDefault().post(ConstantsCode.EB_HOME_REFRESH,"同步数据");
             showSuccess("点赞成功！");
         }
         if(code == ConstantsCode.CANCEL_CIRCLE_PRAISE){
             featureBean.getData().getList().get(mPosition).setIs_praise(0);
             featureBean.getData().getList().get(mPosition).setPraise_num(featureBean.getData().getList().get(mPosition).getPraise_num()-1);
             adapter.setNewData(featureBean.getData().getList());
+            EventBus.getDefault().post(ConstantsCode.EB_HOME_REFRESH,"同步数据");
             showSuccess("已取消点赞！");
-        }
-        if(code == ConstantsCode.ADD_FRIEND){
-            if("add".equals(attentionType)){
-                showSuccess("关注成功！");
-            }
-            if("reduce".equals(attentionType)){
-                showSuccess("取关成功！");
-            }
-            EventBus.getDefault().post(ConstantsCode.EB_ADD_CIRCLE,"操作成功");
         }
     }
 
@@ -248,7 +241,17 @@ public class FeaturedFragment extends CustomFragment {
     @Subscribe(id = ConstantsCode.EB_ADD_CIRCLE)
     public void result(String message) {
         featureBean = null;
-        refreshData();
+        lazyLoad();
+    }
+
+    /*
+     * 刷新定位城市
+     * */
+    @Subscribe(id = ConstantsCode.EB_HOME_LOCATION)
+    public void changeLocation(String message) {
+        //城市切换了去刷新下数据
+        featureBean = null;
+        lazyLoad();
     }
 
     @Nullable

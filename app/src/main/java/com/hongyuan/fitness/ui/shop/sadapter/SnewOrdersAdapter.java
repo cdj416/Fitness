@@ -20,6 +20,13 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
     public static final int TYPE_TWO = 1;
     public static final int TYPE_THIRD = 2;
 
+    //纯金额显示类型
+    public static final int SHOW_MONEY = 0;
+    //纯积分显示类型
+    public static final int SHOW_POINT = 1;
+    //金额加积分显示类型
+    public static final int SHOW_MONEY_POINT = 2;
+
     public SnewOrdersAdapter(List<MultiItemEntity> data){
         super(data);
         addItemType(TYPE_ONE, R.layout.item_neworders_title);
@@ -53,12 +60,27 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
 
                 helper.setText(R.id.goodName,twoBean.getG_name())
                         .setText(R.id.goodPrice, BaseUtil.getNoZoon(twoBean.getGp_price()))
-                        .setText(R.id.goodNum,"x"+twoBean.getBuy_num());
+                        .setText(R.id.goodNum,"x"+twoBean.getBuy_num())
+                        .setText(R.id.goodsPoint,String.valueOf(twoBean.getGp_point()));
 
                 if(BaseUtil.isValue(twoBean.getSku_names())){
                     helper.setVisible(R.id.goodType,true).setText(R.id.goodType,twoBean.getSku_names());
                 }else{
                     helper.setVisible(R.id.goodType,false);
+                }
+
+                if(twoBean.getShowType() == SHOW_MONEY){
+                    helper.getView(R.id.pointBox).setVisibility(View.GONE);
+                    helper.getView(R.id.addMark).setVisibility(View.GONE);
+                    helper.getView(R.id.priceBox).setVisibility(View.VISIBLE);
+                }else if(twoBean.getShowType() == SHOW_POINT){
+                    helper.getView(R.id.pointBox).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.addMark).setVisibility(View.GONE);
+                    helper.getView(R.id.priceBox).setVisibility(View.GONE);
+                }else if (twoBean.getShowType() == SHOW_MONEY_POINT){
+                    helper.getView(R.id.pointBox).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.addMark).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.priceBox).setVisibility(View.VISIBLE);
                 }
 
                 helper.addOnClickListener(R.id.goodsBox);
@@ -68,46 +90,80 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
 
                 helper.setText(R.id.goodNum,String.valueOf(bottomBean.getBuyNum()));
                 helper.setText(R.id.goodAllPrice,BaseUtil.getNoZoon(bottomBean.getAllPrice()));
+                helper.setText(R.id.goodsPoint,String.valueOf(bottomBean.getAllPoint()));
 
-                if(bottomBean.getStatus() == BottomBean.STATU_PAY){
-                    helper.getView(R.id.sPayBox).setVisibility(View.VISIBLE);
+                if(bottomBean.getAllPoint() > 0){
+                    helper.getView(R.id.addMark).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.pointBox).setVisibility(View.VISIBLE);
+                }else{
+                    helper.getView(R.id.addMark).setVisibility(View.GONE);
+                    helper.getView(R.id.pointBox).setVisibility(View.GONE);
+                }
+
+                //自提
+                if(bottomBean.getO_deliver_way() == 2){
                     helper.getView(R.id.dDelivery).setVisibility(View.GONE);
                     helper.getView(R.id.collectionBox).setVisibility(View.GONE);
                     helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
 
-                    helper.addOnClickListener(R.id.cancelOrder);
-                    helper.addOnClickListener(R.id.goPay);
+                    if(bottomBean.getStatus() == BottomBean.STATU_PAY){
+                        helper.getView(R.id.sPayBox).setVisibility(View.VISIBLE);
+                        helper.getView(R.id.selfMentionBox).setVisibility(View.GONE);
+                        helper.addOnClickListener(R.id.cancelOrder);
+                        helper.addOnClickListener(R.id.goPay);
+                    }else{
+                        helper.getView(R.id.sPayBox).setVisibility(View.GONE);
+                        helper.getView(R.id.selfMentionBox).setVisibility(View.VISIBLE);
+                        helper.addOnClickListener(R.id.lookSelfAddress);
+                        helper.addOnClickListener(R.id.selfReceipt);
+                    }
+
+                }else{
+                    helper.getView(R.id.selfMentionBox).setVisibility(View.GONE);
+                    if(bottomBean.getStatus() == BottomBean.STATU_PAY){
+                        helper.getView(R.id.sPayBox).setVisibility(View.VISIBLE);
+                        helper.getView(R.id.dDelivery).setVisibility(View.GONE);
+                        helper.getView(R.id.collectionBox).setVisibility(View.GONE);
+                        helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
+
+                        helper.addOnClickListener(R.id.cancelOrder);
+                        helper.addOnClickListener(R.id.goPay);
+                    }
+
+                    if(bottomBean.getStatus() == BottomBean.STATU_DELIVERY){
+                        helper.getView(R.id.sPayBox).setVisibility(View.GONE);
+                        helper.getView(R.id.dDelivery).setVisibility(View.VISIBLE);
+                        helper.getView(R.id.collectionBox).setVisibility(View.GONE);
+                        helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
+
+                        helper.addOnClickListener(R.id.dDelivery);
+                        helper.addOnClickListener(R.id.submitGoods);
+                    }
+
+                    if(bottomBean.getStatus() == BottomBean.STATU_SHIPPED){
+                        helper.getView(R.id.sPayBox).setVisibility(View.GONE);
+                        helper.getView(R.id.dDelivery).setVisibility(View.GONE);
+                        helper.getView(R.id.collectionBox).setVisibility(View.VISIBLE);
+                        helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
+
+                        helper.addOnClickListener(R.id.lookCollection);
+                        helper.addOnClickListener(R.id.submitGoods);
+                    }
+
+                    if(bottomBean.getStatus() == BottomBean.STATU_BE_EVALUATED){
+                        helper.getView(R.id.sPayBox).setVisibility(View.GONE);
+                        helper.getView(R.id.dDelivery).setVisibility(View.GONE);
+                        helper.getView(R.id.collectionBox).setVisibility(View.GONE);
+                        helper.getView(R.id.beEvaluatedBox).setVisibility(View.VISIBLE);
+
+                        helper.addOnClickListener(R.id.goAginBugy);
+                        helper.addOnClickListener(R.id.goEvaluate);
+                    }
+
                 }
 
-                if(bottomBean.getStatus() == BottomBean.STATU_DELIVERY){
-                    helper.getView(R.id.sPayBox).setVisibility(View.GONE);
-                    helper.getView(R.id.dDelivery).setVisibility(View.VISIBLE);
-                    helper.getView(R.id.collectionBox).setVisibility(View.GONE);
-                    helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
 
-                    helper.addOnClickListener(R.id.dDelivery);
-                    helper.addOnClickListener(R.id.submitGoods);
-                }
 
-                if(bottomBean.getStatus() == BottomBean.STATU_SHIPPED){
-                    helper.getView(R.id.sPayBox).setVisibility(View.GONE);
-                    helper.getView(R.id.dDelivery).setVisibility(View.GONE);
-                    helper.getView(R.id.collectionBox).setVisibility(View.VISIBLE);
-                    helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
-
-                    helper.addOnClickListener(R.id.lookCollection);
-                    helper.addOnClickListener(R.id.submitGoods);
-                }
-
-                if(bottomBean.getStatus() == BottomBean.STATU_BE_EVALUATED){
-                    helper.getView(R.id.sPayBox).setVisibility(View.GONE);
-                    helper.getView(R.id.dDelivery).setVisibility(View.GONE);
-                    helper.getView(R.id.collectionBox).setVisibility(View.GONE);
-                    helper.getView(R.id.beEvaluatedBox).setVisibility(View.VISIBLE);
-
-                    helper.addOnClickListener(R.id.goAginBugy);
-                    helper.addOnClickListener(R.id.goEvaluate);
-                }
                 break;
         }
     }

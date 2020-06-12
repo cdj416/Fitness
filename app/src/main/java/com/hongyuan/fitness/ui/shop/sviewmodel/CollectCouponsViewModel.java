@@ -33,7 +33,6 @@ public class CollectCouponsViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
-        setTopBanner(getBannerList());
 
         pageAdapter = new SccouponsPagerAdapter(mActivity.getSupportFragmentManager());
         binding.mViewPager.setAdapter(pageAdapter);
@@ -61,17 +60,6 @@ public class CollectCouponsViewModel extends CustomViewModel {
         }).start();
     }
 
-    /*
-     * 获取banner本地数据
-     * */
-    private List<Integer> getBannerList(){
-        List<Integer> bList = new ArrayList<>();
-        bList.add(R.drawable.banner_test1);
-        bList.add(R.drawable.banner_test2);
-        bList.add(R.drawable.banner_test3);
-        bList.add(R.drawable.banner_test4);
-        return bList;
-    }
 
     @Override
     protected void lazyLoad() {

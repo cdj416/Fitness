@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
@@ -147,9 +148,12 @@ public class StartupPageVeiwModel extends CustomViewModel implements CustomDialo
             userToken.setAt_name(tokenBean.getAt_name());
             userToken.setAt_pwd(tokenBean.getAt_pwd());
             userToken.setToken(tokenBean.getToken());
+            userToken.setRandomnum(getParams().get("randomnum"));
+            userToken.setNtoken(getParams().get("ntoken"));
+            userToken.setTimespan(getParams().get("timespan"));
 
             //如果之前有登录过，就设置登录信息
-            if(loginBean != null){
+            if(loginBean != null && BaseUtil.isValue(loginBean.getM_id()) && BaseUtil.isValue(loginBean.getM_mobile())){
                 userToken.setM_id(loginBean.getM_id());
                 userToken.setM_mobile(loginBean.getM_mobile());
 

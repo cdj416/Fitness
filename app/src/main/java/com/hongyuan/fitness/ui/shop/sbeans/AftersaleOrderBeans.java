@@ -67,6 +67,7 @@ public class AftersaleOrderBeans extends BaseBean {
             private String order_sn;
             private String add_date;
             private String pay_date;
+            private String quhuo_code;
             private int deliver_way;
             private int state;
             private String pay_way;
@@ -79,6 +80,14 @@ public class AftersaleOrderBeans extends BaseBean {
 
             public void setDeliver_info(deliverInfoBeans deliver_info) {
                 this.deliver_info = deliver_info;
+            }
+
+            public String getQuhuo_code() {
+                return quhuo_code;
+            }
+
+            public void setQuhuo_code(String quhuo_code) {
+                this.quhuo_code = quhuo_code;
             }
 
             public String getPay_way() {

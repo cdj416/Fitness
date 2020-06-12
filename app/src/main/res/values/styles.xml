@@ -130,4 +130,8 @@
         <attr name="isGoBack" format="boolean"/>
     </declare-styleable>
 
+    <style name="TabText" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
 </resources>

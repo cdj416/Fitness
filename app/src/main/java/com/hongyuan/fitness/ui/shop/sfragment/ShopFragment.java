@@ -6,12 +6,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.tabs.TabLayout;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
+import com.hongyuan.fitness.custom_view.tablayout.MyPageTransformer;
+import com.hongyuan.fitness.custom_view.tablayout.TabLayout;
+import com.hongyuan.fitness.ui.main.TitleBean;
 import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.MainSearchActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.MyShopActivity;
@@ -19,6 +20,9 @@ import com.hongyuan.fitness.ui.shop.sactivity.SCartActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopMenuActivity;
 import com.hongyuan.fitness.ui.shop.sbeans.FirstCategoryBeans;
 import com.hongyuan.fitness.ui.shop.sviewpage.ShopViewPagerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShopFragment extends CustomFragment {
 
@@ -58,9 +62,8 @@ public class ShopFragment extends CustomFragment {
             startActivity(MineMessageActivity.class,null);
         });
 
-        meunAdapter = new ShopViewPagerAdapter(getChildFragmentManager());
-        mViewPager.setAdapter(meunAdapter);
-        layoutMenu.setupWithViewPager(mViewPager);
+
+
 
         searchBox.setOnClickListener(v -> {
             //startActivity(ShopSearchActivity.class,null);
@@ -72,6 +75,16 @@ public class ShopFragment extends CustomFragment {
         goMyShop.setOnClickListener(v -> {
             startActivity(MyShopActivity.class,null);
         });
+    }
+    /**
+     * 将 Tab[index] 放大为初始的 scale 倍
+     */
+    private void setScale(int index, float scale) {
+        LinearLayout ll = (LinearLayout) layoutMenu.getChildAt(0);
+        TabLayout.TabView tb = (TabLayout.TabView) ll.getChildAt(0);
+        View view  = tb.getTextView();
+        view.setScaleX(scale);
+        view.setScaleY(scale);
     }
 
     @Override
@@ -87,10 +100,42 @@ public class ShopFragment extends CustomFragment {
         if(data instanceof FirstCategoryBeans){
             dataBean = ((FirstCategoryBeans)data).getData();
 
-            mViewPager.setOffscreenPageLimit(dataBean.getList().size());
-            meunAdapter.setData(dataBean.getList(),dataBean);
-
+            setPageData(dataBean.getList(),dataBean);
         }
+    }
+
+    /*
+    * 组装viewPage数据
+    * */
+    private void setPageData(List<FirstCategoryBeans.DataBean.ListBean> mList,FirstCategoryBeans.DataBean itemAll){
+        List<CustomFragment> fragments = new ArrayList<>();
+        List<TitleBean> beans = new ArrayList<>();
+
+        if(mList != null && mList.size() > 0){
+            for(int i = 0 ; i < mList.size() ; i++){
+                beans.add(new TitleBean(mList.get(i).getCategory_name(),i));
+                fragments.add(new ShopNextFragment().setMyArguments(getBundle(mList.get(i),itemAll,i)));
+            }
+            beans.add(0,new TitleBean("推荐",0));
+            fragments.add(0,new ShopMainFragment().setArguments(""));
+        }
+
+
+        meunAdapter = new ShopViewPagerAdapter(getChildFragmentManager(),fragments,beans);
+        mViewPager.setAdapter(meunAdapter);
+        layoutMenu.setupWithViewPager(mViewPager);
+        mViewPager.setOffscreenPageLimit(dataBean.getList().size());
+        layoutMenu.post(() -> setScale(0, MyPageTransformer.MAX_SCALE));
+        mViewPager.setPageTransformer(false, new MyPageTransformer(layoutMenu));
+
+    }
+
+    private Bundle getBundle(FirstCategoryBeans.DataBean.ListBean item,FirstCategoryBeans.DataBean itemAll,int mPosition){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("item",item);
+        bundle.putSerializable("menu",itemAll);
+        bundle.putInt("mPosition",mPosition);
+        return bundle;
     }
 
 }

@@ -158,7 +158,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/advisory_black_img"
+                    android:drawableTop="@mipmap/person_message_mark"
                     android:gravity="center"
                     android:drawablePadding="3dp"
                     android:textColor="@color/color_FF333333"

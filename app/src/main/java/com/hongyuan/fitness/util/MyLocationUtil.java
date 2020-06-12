@@ -1,5 +1,4 @@
 package com.hongyuan.fitness.util;
-import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;

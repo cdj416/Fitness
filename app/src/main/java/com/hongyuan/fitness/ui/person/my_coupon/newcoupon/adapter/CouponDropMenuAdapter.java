@@ -26,8 +26,8 @@ public class CouponDropMenuAdapter implements MenuAdapter{
 
     //优惠价类型默认商城优惠劵
     private String coupon_way = "1";
-    //是否使用默认表示未使用，1表示已使用
-    private String is_use = "0";
+    //是否使用默认2表示未使用，1表示已使用
+    private String is_use = "2";
     //是否过期表示未过期，1表示已过期
     private String is_exp = "0";
 

@@ -39,6 +39,13 @@ public class SorderDetailsAdapter extends BaseMultiItemQuickAdapter<MultiItemEnt
     public static final int TYPE_TWO = 1;
     public static final int TYPE_THIRD = 2;
 
+    //纯金额显示类型
+    public static final int SHOW_MONEY = 0;
+    //纯积分显示类型
+    public static final int SHOW_POINT = 1;
+    //金额加积分显示类型
+    public static final int SHOW_MONEY_POINT = 2;
+
     //配送方式选择工具类
     private UnitBeanUtils dtypeUtils;
     private List<DtypeBeans> typeList;
@@ -98,12 +105,37 @@ public class SorderDetailsAdapter extends BaseMultiItemQuickAdapter<MultiItemEnt
 
                 helper.setText(R.id.goodName,twoBean.getG_name())
                         .setText(R.id.goodPrice, BaseUtil.getNoZoon(twoBean.getGp_price()))
+                        .setText(R.id.goodsPoint,String.valueOf(twoBean.getGp_point()))
                         .setText(R.id.goodNum,"x"+twoBean.getBuy_num());
 
                 if(BaseUtil.isValue(twoBean.getSku_names())){
                     helper.setVisible(R.id.goodType,true).setText(R.id.goodType,twoBean.getSku_names());
                 }else{
                     helper.setVisible(R.id.goodType,false);
+                }
+
+                if(twoBean.getShowType() == SHOW_MONEY){
+                    helper.getView(R.id.pointBox).setVisibility(View.GONE);
+                    helper.getView(R.id.addMark).setVisibility(View.GONE);
+                    helper.getView(R.id.priceBox).setVisibility(View.VISIBLE);
+                }else if(twoBean.getShowType() == SHOW_POINT){
+                    helper.getView(R.id.pointBox).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.addMark).setVisibility(View.GONE);
+                    helper.getView(R.id.priceBox).setVisibility(View.GONE);
+                }else if (twoBean.getShowType() == SHOW_MONEY_POINT){
+                    helper.getView(R.id.pointBox).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.addMark).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.priceBox).setVisibility(View.VISIBLE);
+                }
+
+                if(twoBean.getIs_valid() == 0){
+                    helper.getView(R.id.invalidBox).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.goDetail).setAlpha(0.3f);
+                    helper.getView(R.id.goodImg).setAlpha(0.3f);
+                }else{
+                    helper.getView(R.id.invalidBox).setVisibility(View.GONE);
+                    helper.getView(R.id.goDetail).setAlpha(1f);
+                    helper.getView(R.id.goodImg).setAlpha(1f);
                 }
 
                 break;
@@ -132,6 +164,13 @@ public class SorderDetailsAdapter extends BaseMultiItemQuickAdapter<MultiItemEnt
                     myCoupon.setOnClickListener(getCoupon(myCoupon,helper.getView(R.id.allPrice),thirdBean));
                 }else{
                     myCoupon.setVisibility(View.GONE);
+                }
+
+                if(thirdBean.getAllPoint() > 0){
+                    helper.setText(R.id.pointNum,"+ "+thirdBean.getAllPoint()+"积分");
+                    helper.getView(R.id.pointNum).setVisibility(View.VISIBLE);
+                }else{
+                    helper.getView(R.id.pointNum).setVisibility(View.GONE);
                 }
 
 
@@ -211,6 +250,10 @@ public class SorderDetailsAdapter extends BaseMultiItemQuickAdapter<MultiItemEnt
     //自提地点的点击事件
     public View.OnClickListener getAddressClick(Context mContext,InputOrSlectView selfMention,BottomBean item){
         return v -> {
+
+            if(addresMap == null || addresMap.size() <= 0){
+                return;
+            }
 
             CustomDialog.showPickUpAddress(mContext, addresMap.get(item.getStoreId()).getData().getList(), (v1, position, adapter) -> {
                 selfMention.setRightText(addresMap.get(item.getStoreId()).getData().getList().get(position).getPname()+" "

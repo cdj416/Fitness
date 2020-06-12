@@ -146,7 +146,7 @@ public class CoachListViewModel extends CustomViewModel implements CoachDropMenu
     private void getCoachList(){
         mActivity.showLoading();
         //首页--读取首页教练
-        clearParams().setParams("city_name","湖州市");
+        clearParams().setParams("city_name",userToken.getRegion_name());
         if(BaseUtil.isValue(sex)){
             setParams("sex",sex);
         }

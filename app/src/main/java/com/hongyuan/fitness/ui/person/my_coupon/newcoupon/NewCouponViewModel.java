@@ -14,10 +14,8 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivityNewMycouponBinding;
-import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
-import com.hongyuan.fitness.ui.mall.GoodActivity;
 import com.hongyuan.fitness.ui.membership_card.MembershipCardActivity;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponAdapter;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
@@ -107,7 +105,7 @@ public class NewCouponViewModel extends CustomViewModel implements CouponDropMen
                     break;
                 case "5":
                 case "6":
-                    bundle.putString("url", Constants.WEB_ADDRESS+ TokenSingleBean.getInstance().getWebParams());
+                    bundle.putString("url", Constants.WEB_ADDRESS+ TokenSingleBean.getInstance().getWebAllParams(""));
                     bundle.putString("title","场馆首页");
                     mActivity.startActivity(WebViewActivity.class,bundle);
                     break;

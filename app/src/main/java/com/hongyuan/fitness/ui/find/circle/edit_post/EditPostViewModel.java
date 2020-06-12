@@ -60,6 +60,11 @@ public class EditPostViewModel extends CustomViewModel {
             binding.topMark.setVisibility(View.VISIBLE);
             binding.topicName.setText(topicBean.getCategory_name());
         }
+
+        if(getBundle() != null && getBundle().getString("shareFile") != null){
+            String shareFile = getBundle().getString("shareFile");
+            binding.imgVideo.changeShow(shareFile);
+        }
     }
 
     //跳转到选择圈子页面

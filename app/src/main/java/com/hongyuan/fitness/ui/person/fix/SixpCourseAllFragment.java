@@ -24,6 +24,7 @@ import com.hongyuan.fitness.ui.about_class.privite_class.preservation_course.Res
 import com.hongyuan.fitness.ui.person.waiting_evaluation.editorial_evaluation.EditorialEvaluationActivity;
 import com.hongyuan.fitness.ui.person.waiting_for_class.about_privite_class.PriviteCourseCheckBeans;
 import com.hongyuan.fitness.ui.person.waiting_for_class.about_privite_class.privite_checkin_details.PriviteCourseCheckDetails;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -185,6 +186,11 @@ public class SixpCourseAllFragment extends CustomFragment {
 
         if(data instanceof DanduOneCourseBeans){
             infoBean = ((DanduOneCourseBeans)data).getData().getInfo();
+
+            if(infoBean == null || !BaseUtil.isValue(infoBean.getStart_time())){
+                return;
+            }
+
 
             RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img).centerCrop();
             Glide.with(mActivity).load(infoBean.getCoach_head()).apply(options).into(headImg);

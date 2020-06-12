@@ -19,7 +19,7 @@ public class V3HomeFindContentAdapter extends BaseQuickAdapter<V4HomeBeans.DataB
     @Override
     protected void convert(final BaseViewHolder helper, V4HomeBeans.DataBean.CircleBean item) {
 
-        RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
+        RequestOptions options = new RequestOptions().placeholder(R.color.color_f2).error(R.color.color_f2);
         Glide.with(mContext).load(item.getMi_head()).apply(new RequestOptions()
                 .placeholder(R.mipmap.default_head_img)
                 .error(R.mipmap.default_head_img))
@@ -31,7 +31,7 @@ public class V3HomeFindContentAdapter extends BaseQuickAdapter<V4HomeBeans.DataB
 
         helper.setText(R.id.styleImgNum,String.valueOf(item.getImg_num())).setText(R.id.fName,item.getM_name())
                 .setText(R.id.timeText,TimeUtil.friendly_time(item.getAdd_date()))
-                .setText(R.id.attention, "")
+                .setText(R.id.attention, String.valueOf(item.getPraise_num()))
                 .setText(R.id.content,item.getCircle_content());
 
         if(item.getIs_praise() == 0){

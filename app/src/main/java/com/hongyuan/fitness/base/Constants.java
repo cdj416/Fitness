@@ -3,18 +3,22 @@ package com.hongyuan.fitness.base;
 public class Constants {
 
     //测试地址
-    //public static final String ADRESS = "https://www.1667799.com";
+    //public static final String ADRESS = "https://api_test.1667799.com";
     //内网测试环境
     //public static final String ADRESS = "http://192.168.31.38:8080/#";
     //预发环境
-    //public static final String ADRESS = "http://test.1667799.com";
+    //public static final String ADRESS = "https://api_yufabu.1667799.com";
+    //预发环境
+    //public static final String ADRESS = "https://apiyufabu.1667799.com";
     //正式地址
     public static final String ADRESS = "http://www.hongyuangood.com";
 
     //webUrl正式服务器
     public static final String WEB_ADDRESS = "https://www.1667799.com/#";
     //webUrl内网需要的地址
-    //public static final String WEB_ADDRESS = " http://192.168.31.38:8080/#";
+    //public static final String WEB_ADDRESS = "http://192.168.31.38:8080/#";
+    //webUrl测试服务器
+    //public static final String WEB_ADDRESS = "https://test_gym.1667799.com/#";
 
     /*==================================================================================*/
     //微信支付需要的appId
@@ -246,6 +250,8 @@ public class Constants {
     public static final String GET_EXERCISE_DAY_LIST = ADRESS + "/api/exercise/get_exercise_day_list";
     // 户外--读取个人跑步里程
     public static final String GET_RUN_DATA = ADRESS + "/api/exercise/get_run_data";
+    // 添加每次跑步或步行记录
+    public static final String ME_ADD_EXERCISE_TIME = ADRESS + "/api/exercise/add_exercise_time";
 
     // APP--检查app版本
     public static final String CHECK_APP_VERSION = ADRESS + "/api/appsethome/check_app_version";
@@ -587,6 +593,8 @@ public class Constants {
     public static final String GET_ONLINE_KF = ADRESS + "/api/appindex/get_online_kf";
     //商品分类-推荐
     public static final String GET_TJ_CATEGORY = ADRESS + "/api/goodshome/get_tj_category";
+    //类似商品列表
+    public static final String GET_SIMLAR_GOODS_LIST = ADRESS + "/api/goodshome/get_similar_goods_list";
 
 
 

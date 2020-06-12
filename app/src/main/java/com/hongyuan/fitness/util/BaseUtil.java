@@ -2,8 +2,6 @@ package com.hongyuan.fitness.util;
 
 import android.text.TextUtils;
 
-import java.text.NumberFormat;
-
 public class BaseUtil {
 
     /*

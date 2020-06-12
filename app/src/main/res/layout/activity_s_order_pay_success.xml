@@ -43,7 +43,7 @@
                 <ImageView
                     android:layout_width="92dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/banner_test2"
+                    android:src="@color/color_f2"
                     android:scaleType="centerCrop"/>
                 <RelativeLayout
                     android:layout_width="match_parent"

@@ -1,14 +1,12 @@
 package com.hongyuan.fitness.ui.advertising;
 
-import android.os.Bundle;
-
 import com.bumptech.glide.Glide;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityAdvertisingPageBinding;
 import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.main.main_home.recommend.HomeBannerBean;
-import com.hongyuan.fitness.ui.webview.WebViewActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.HourMeterUtil;
 import com.hongyuan.fitness.util.JumpUtils;
 
@@ -42,24 +40,29 @@ public class AdvertisingPageViewModel extends CustomViewModel implements HourMet
         });
 
         binding.showImg.setOnClickListener(v ->{
-            JumpUtils.JumpBeans jumpBeans = new JumpUtils.JumpBeans();
-            jumpBeans.setImg_href(imgBean.getImg_href());
-            jumpBeans.setHref_id(imgBean.getImg_href_id());
-            jumpBeans.setHref_code(imgBean.getImg_href_code());
-            jumpBeans.setImg_href_type(imgBean.getImg_href_type());
-            if(imgBean.getImg_href_type() == 2){
-                hourMeterUtil.stopCount();
-                jumpBeans.setH5Title("广告");
-                jumpBeans.setH5Back("goMain");
+            if(imgBean != null && BaseUtil.isValue(imgBean.getImg_href())){
+                JumpUtils.JumpBeans jumpBeans = new JumpUtils.JumpBeans();
+                jumpBeans.setImg_href(imgBean.getImg_href());
+                jumpBeans.setHref_id(imgBean.getImg_href_id());
+                jumpBeans.setHref_code(imgBean.getImg_href_code());
+                jumpBeans.setImg_href_type(imgBean.getImg_href_type());
+                if(imgBean.getImg_href_type() == 2){
+                    hourMeterUtil.stopCount();
+                    jumpBeans.setH5Title("广告");
+                    jumpBeans.setH5Back("goMain");
 
+                }
+                JumpUtils.goAtherPage(mActivity,jumpBeans);
             }
-            JumpUtils.goAtherPage(mActivity,jumpBeans);
 
         });
 
         //设置广告页图片
-        Glide.with(mActivity).load(imgBean.getImg_src()).into(binding.showImg);
+        if(imgBean != null && BaseUtil.isValue(imgBean.getImg_src())){
+            Glide.with(mActivity).load(imgBean.getImg_src()).into(binding.showImg);
+        }
         hourMeterUtil.startCount();
+
     }
 
     @Override

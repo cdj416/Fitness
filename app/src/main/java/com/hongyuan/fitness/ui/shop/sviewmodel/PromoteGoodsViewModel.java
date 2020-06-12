@@ -129,6 +129,15 @@ public class PromoteGoodsViewModel extends CustomViewModel {
             public String getPrice(ShouYIGoodsBeans.DataBean.ListBean item) {
                 return item.getG_price();
             }
+            @Override
+            public String getPoint(ShouYIGoodsBeans.DataBean.ListBean item) {
+                return String.valueOf(item.getG_point());
+            }
+
+            @Override
+            public int getShowType(ShouYIGoodsBeans.DataBean.ListBean item) {
+                return item.getShowType();
+            }
         };
         binding.mRec.setAdapter(bAdapter);
 

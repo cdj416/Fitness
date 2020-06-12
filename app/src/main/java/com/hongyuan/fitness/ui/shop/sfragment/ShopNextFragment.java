@@ -58,6 +58,8 @@ public class ShopNextFragment extends CustomFragment {
 
     @Override
     public void initView(View mView) {
+        mView.setTag((getArguments().getInt("mPosition")+1));
+
         setEnableLoadMore(true);
         setEnableRefresh(true);
 
@@ -113,6 +115,16 @@ public class ShopNextFragment extends CustomFragment {
             @Override
             public String getPrice(GoodsBeans.DataBean.ListBean item) {
                 return item.getG_price();
+            }
+
+            @Override
+            public String getPoint(GoodsBeans.DataBean.ListBean item) {
+                return String.valueOf(item.getG_point());
+            }
+
+            @Override
+            public int getShowType(GoodsBeans.DataBean.ListBean item) {
+                return item.getShowType();
             }
         };
         mRec.setAdapter(gAdapter);

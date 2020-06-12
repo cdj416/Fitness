@@ -110,13 +110,13 @@ public class PersonContentView extends LinearLayout {
             });
             box3.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/practice_order"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("url", Constants.WEB_ADDRESS+"/practice_order"+TokenSingleBean.getInstance().getWebAllParams(""));
                 bundle.putString("title","场馆订单");
                 mActivity.startActivity(WebViewActivity.class,bundle);
             });
             box4.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/train_orderList"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("url", Constants.WEB_ADDRESS+"/train_orderList"+TokenSingleBean.getInstance().getWebAllParams(""));
                 bundle.putString("title","培训课订单");
                 mActivity.startActivity(WebViewActivity.class,bundle);
             });
@@ -145,7 +145,7 @@ public class PersonContentView extends LinearLayout {
             });
             box3.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/my_sportList"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("url", Constants.WEB_ADDRESS+"/my_sportList"+TokenSingleBean.getInstance().getWebAllParams(""));
                 bundle.putString("title","我的约运动");
                 mActivity.startActivity(WebViewActivity.class,bundle);
             });
@@ -164,20 +164,20 @@ public class PersonContentView extends LinearLayout {
             iv3.setImageResource(R.mipmap.my_saishi_mark);
             box1.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/sports_talent"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("url", Constants.WEB_ADDRESS+"/sports_talent"+TokenSingleBean.getInstance().getWebAllParams(""));
                 bundle.putString("title","我是运动达人");
                 mActivity.startActivity(WebViewActivity.class,bundle);
             });
             box2.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/mygroup"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("url", Constants.WEB_ADDRESS+"/mygroup"+TokenSingleBean.getInstance().getWebAllParams(""));
                 //bundle.putString("url", Constants.WEB_ADDRESS+"/mygroup?m_id="+ TokenSingleBean.getInstance().getM_id()+"&m_mobile="+TokenSingleBean.getInstance().getM_mobile());
                 bundle.putString("title","我的队伍");
                 mActivity.startActivity(WebViewActivity.class,bundle);
             });
             box3.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+"/myevent"+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("url", Constants.WEB_ADDRESS+"/myevent"+TokenSingleBean.getInstance().getWebAllParams(""));
                 bundle.putString("title","我的赛事");
                 mActivity.startActivity(WebViewActivity.class,bundle);
 

@@ -15,14 +15,18 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityMainBinding;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.main_person.PersonBean;
-import com.hongyuan.fitness.ui.mall.good_details.GoodDetailsActivity;
 import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
+import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.LocationBean;
 import com.hongyuan.fitness.util.PackageUtils;
+import com.hongyuan.fitness.util.SharedPreferencesUtil;
 import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import me.majiajie.pagerbottomtabstrip.NavigationController;
@@ -191,8 +195,36 @@ public class MainViewModel extends CustomViewModel {
         if(data instanceof CheckCityBeans){
             CheckCityBeans.DataBean  checkCityBeans = ((CheckCityBeans)data).getData();
             if(checkCityBeans.getIs_open() != 1){
-                getCitys();
+                LocationBean.getInstance().setOpen(false);
+                String defaultRegion_name = SharedPreferencesUtil.getString(mActivity,"region_name");
+                String defaultRegion_code = SharedPreferencesUtil.getString(mActivity,"region_code");
+                if(!BaseUtil.isValue(defaultRegion_name)){
+                    getCitys();
+                }else{
+                    //配置使用定位城市code
+                    TokenSingleBean.getInstance().setRegion_name(defaultRegion_name);
+                    TokenSingleBean.getInstance().setRegion_code(defaultRegion_code);
+
+                    //通知首页更改使用城市显示
+                    EventBus.getDefault().post(ConstantsCode.EB_HOME_LOCATION,"");
+
+                    //读取个人信息
+                    getMyInfo();
+                    //获取优惠券弹框
+                    getHomeCoupon();
+                    //获取首页商品弹框
+                    getHomeGoods();
+                }
+
             }else{
+                LocationBean.getInstance().setOpen(true);
+                //配置使用定位城市code
+                TokenSingleBean.getInstance().setRegion_name(LocationBean.getInstance().getCityName());
+                TokenSingleBean.getInstance().setRegion_code(checkCityBeans.getRegion_code());
+
+                //通知首页更改使用城市显示
+                EventBus.getDefault().post(ConstantsCode.EB_HOME_LOCATION,"");
+
                 //读取个人信息
                 getMyInfo();
                 //获取优惠券弹框
@@ -204,6 +236,13 @@ public class MainViewModel extends CustomViewModel {
 
         if(data instanceof OpenCitysBeans){
             OpenCitysBeans.DataBean dataBean = ((OpenCitysBeans)data).getData();
+            //配置使用默认城市code
+            TokenSingleBean.getInstance().setRegion_name(dataBean.getList().get(0).getRegion_name());
+            TokenSingleBean.getInstance().setRegion_code(dataBean.getList().get(0).getRegion_code());
+
+            //通知首页更改使用城市显示
+            EventBus.getDefault().post(ConstantsCode.EB_HOME_LOCATION,"");
+
             CustomDialog.showCtitys(mActivity,dataBean.getList());
         }
 
@@ -228,7 +267,7 @@ public class MainViewModel extends CustomViewModel {
                     goodsAdapter = adapter;
                     Bundle bundle = new Bundle();
                     bundle.putString("g_id",String.valueOf(goodsBeans.getList().get(position).getG_id()));
-                    mActivity.startActivity(GoodDetailsActivity.class,bundle);
+                    mActivity.startActivity(SgoodsDetailActivity.class,bundle);
                 });
             }
         }

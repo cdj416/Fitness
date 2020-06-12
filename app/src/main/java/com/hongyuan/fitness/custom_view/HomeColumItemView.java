@@ -123,7 +123,7 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
 
             case R.id.goVue:
                 Bundle bundle = new Bundle();
-                bundle.putString("url", Constants.WEB_ADDRESS+TokenSingleBean.getInstance().getWebParams());
+                bundle.putString("url", Constants.WEB_ADDRESS+TokenSingleBean.getInstance().getWebAllParams(""));
                 bundle.putString("title","场馆首页");
                 if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
                     mActivity.startActivity(WebViewActivity.class,bundle);

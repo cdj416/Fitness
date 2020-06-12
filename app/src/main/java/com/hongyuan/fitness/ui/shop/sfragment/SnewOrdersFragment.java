@@ -58,6 +58,7 @@ public class SnewOrdersFragment extends CustomFragment {
         mRec.setLayoutManager(manager);
         adapter = new SnewOrdersAdapter(new ArrayList<>());
         mRec.setAdapter(adapter);
+        adapter.addFooterView(getFooterHeight(mRec));
 
         adapter.setOnItemChildClickListener((adapter, view, position) -> {
             if(view.getId() == R.id.cancelOrder){
@@ -86,7 +87,7 @@ public class SnewOrdersFragment extends CustomFragment {
                 CustomDialog.showMessage(mActivity,"已催促商家发货！");
             }
 
-            if(view.getId() == R.id.submitGoods){
+            if(view.getId() == R.id.submitGoods || view.getId() == R.id.selfReceipt){
                 SnewOrderBeans.DataBean.BottomBean item = (SnewOrderBeans.DataBean.BottomBean)mList.get(position);
                 CustomDialog.promptDialog(mActivity, "是否确认收货？", "确定收货", "在想想", false, v -> {
                     if(v.getId() == R.id.isOk){
@@ -127,6 +128,7 @@ public class SnewOrdersFragment extends CustomFragment {
                 bundle.putString("o_id",String.valueOf(goodsListBean.getG_oid()));
                 startActivity(AftersaleOrderActivity.class,bundle);
             }
+
         });
     }
 
@@ -235,6 +237,8 @@ public class SnewOrdersFragment extends CustomFragment {
 
     @Override
     public void onSuccess(int code, Object data) {
+        mActivity.closeLoading();
+
         if(code == ConstantsCode.CANCLE_ORDER){
             //刷新数据
             lazyLoad();

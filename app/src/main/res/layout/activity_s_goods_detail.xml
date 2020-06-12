@@ -12,46 +12,94 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_FFFFFF">
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/layoutMenu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    app:tabIndicatorColor="@color/color_EF5B48"
-                    app:tabMode="auto"
-                    app:tabSelectedTextColor="@color/color_EF5B48"
-                    app:tabIndicatorFullWidth="false"/>
-
-                <ImageView
-                    android:id="@+id/message"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/person_message_mark"
-                    android:layout_marginEnd="16dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
-                <ImageView
-                    android:id="@+id/cart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/black_cart_mark"
-                    android:layout_toLeftOf="@id/message"
-                    android:layout_marginEnd="16dp"
-                    android:layout_centerVertical="true"/>
-            </RelativeLayout>
+            android:layout_height="match_parent">
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <com.hongyuan.fitness.custom_view.StatusBarHeightView
+                    android:id="@+id/barHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:background="@color/color_FFFFFF"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/layoutMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:layout_centerInParent="true"
+                        app:tabIndicatorColor="@color/color_EF5B48"
+                        app:tabMode="auto"
+                        app:tabSelectedTextColor="@color/color_EF5B48"
+                        app:tabIndicatorFullWidth="false"
+                        android:background="@color/color_FFFFFF"/>
+
+                    <ImageView
+                        android:id="@+id/tBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/translucent_back"
+                        android:layout_centerVertical="true"
+                        android:visibility="visible"
+                        android:layout_marginStart="16dp"/>
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/back_common"
+                        android:layout_centerVertical="true"
+                        android:visibility="invisible"
+                        android:layout_marginStart="16dp"/>
+
+                    <ImageView
+                        android:id="@+id/tMessage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/translucent_message_mark"
+                        android:layout_marginEnd="16dp"
+                        android:visibility="visible"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"/>
+                    <ImageView
+                        android:id="@+id/message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/person_message_mark"
+                        android:layout_marginEnd="16dp"
+                        android:visibility="invisible"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"/>
+                    <ImageView
+                        android:id="@+id/tCart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/translucent_cart_mark"
+                        android:layout_toLeftOf="@id/tMessage"
+                        android:layout_marginEnd="16dp"
+                        android:layout_centerVertical="true"/>
+                    <ImageView
+                        android:id="@+id/cart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/black_cart_mark"
+                        android:layout_toLeftOf="@id/message"
+                        android:layout_marginEnd="16dp"
+                        android:visibility="invisible"
+                        android:layout_centerVertical="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </FrameLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="84dp"

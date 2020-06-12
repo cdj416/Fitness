@@ -1,6 +1,11 @@
 package com.hongyuan.fitness.util;
 
+import android.util.Base64;
+import android.util.Log;
+
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -65,5 +70,18 @@ public class EncryptionUtil {
      */
     public String md5Decode16(String content) {
         return md5Decode(content).substring(8, 24);
+    }
+
+    /*
+    * base64加密encode
+    * */
+    public static String base64encode(String content){
+        String str = "";
+        try {
+            str = URLEncoder.encode(Base64.encodeToString(content.getBytes(), Base64.DEFAULT),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return str;
     }
 }

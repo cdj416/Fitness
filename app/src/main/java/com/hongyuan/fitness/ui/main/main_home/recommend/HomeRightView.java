@@ -14,6 +14,8 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.RetrofitListener;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.membership_card.v4_mycard_list.V4QRImgBean;
 import com.hongyuan.fitness.ui.membership_card.v4_mycard_list.V4ScanSuccess;
 import com.hongyuan.fitness.ui.scan.ScanActivity;
@@ -134,7 +136,11 @@ public class HomeRightView extends LinearLayout implements RetrofitListener,Hour
         scan = view.findViewById(R.id.scan);
 
         scan.setOnClickListener(v -> {
-            mActivity.startActivity(ScanActivity.class,null);
+            if(TokenSingleBean.getInstance().getIslogin() == 1){
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }else{
+                mActivity.startActivity(ScanActivity.class,null);
+            }
         });
 
         showQr.setOnClickListener(v -> {

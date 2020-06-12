@@ -1,17 +1,22 @@
 package com.hongyuan.fitness.ui.main.main_about_class.group_class.vtwo_group_class;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.SingleClick;
@@ -19,13 +24,19 @@ import com.hongyuan.fitness.custom_view.CustomRecyclerView;
 import com.hongyuan.fitness.custom_view.filter_view.DropDownMenu;
 import com.hongyuan.fitness.ui.about_class.group_class.group_details.MissionDetailActivity;
 import com.hongyuan.fitness.ui.about_class.privite_class.pay_order_detail.select_time.TabTimeBean;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
+import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons.FilterPriviteLessonsAdapter;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -39,6 +50,8 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
 
     private VtwoGroupClassTimeAdapter timeAdapter;
     private TabTimeBean tabTimeBean;
+
+    private FilterGoupClassAdapter filterAdapter;
 
     private VtwoGroupClassAdapter adapter;
     private VtwoGroupClassBeans classBeans;
@@ -68,8 +81,8 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
         refreshLayout = mView.findViewById(R.id.refreshLayout);
 
         //初始化筛选菜单
-        String[] titleList = new String[] { "湖州全城", "筛选课程","开始时间" };
-        dropDownMenu.setMenuAdapter(new FilterGoupClassAdapter(mActivity, titleList, this,this));
+        //String[] titleList = new String[] { "湖州全城", "筛选课程","开始时间" };
+        //dropDownMenu.setMenuAdapter(new FilterGoupClassAdapter(mActivity, titleList, this,this));
 
         //加载刷新控件
         setOnRefresh();
@@ -120,9 +133,14 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
             @SingleClick
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putString("cs_id",String.valueOf(classBeans.getData().getList().get(position).getCs_id()));
-                startActivity(MissionDetailActivity.class,bundle);
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("cs_id",String.valueOf(classBeans.getData().getList().get(position).getCs_id()));
+                    startActivity(MissionDetailActivity.class,bundle);
+                }catch (Exception e){
+                    CustomDialog.showMessage(mActivity,"请下拉刷新数据！");
+                }
+
             }
         });
     }
@@ -333,5 +351,39 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
     @Override
     public void onFilterContent(int position,String showText) {
         dropDownMenu.setPositionIndicatorText(position,showText);
+    }
+
+    /*
+     * 刷新定位城市
+     * */
+    @Subscribe(id = ConstantsCode.EB_HOME_LOCATION)
+    public void changeLocation(String message) {
+        //城市切换了去刷新下数据
+        classBeans = null;
+        getGroupClass();
+
+        //初始化筛选菜单
+        String[] titleList = new String[] { TokenSingleBean.getInstance().getRegion_name()+"全城", "筛选课程","开始时间" };
+        if(filterAdapter == null){
+            filterAdapter = new FilterGoupClassAdapter(mActivity, titleList, this,this);
+            dropDownMenu.setMenuAdapter(filterAdapter);
+        }else{
+            filterAdapter.changTitles(titleList);
+        }
+
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
     }
 }

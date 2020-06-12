@@ -46,6 +46,7 @@
                 android:layout_centerVertical="true"
                 android:text="温州"/>
             <TextView
+                android:id="@+id/openText"
                 android:layout_width="54dp"
                 android:layout_height="24dp"
                 android:textSize="@dimen/sp_12"

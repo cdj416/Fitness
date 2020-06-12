@@ -19,6 +19,7 @@ public class LocationBean {
     private String cityName;
     private String lat;
     private String lng;
+    private boolean isOpen;//定位城市是否开通业务
     private int os_id;//距离最近的门店id
 
     public String getLat() {
@@ -37,6 +38,22 @@ public class LocationBean {
             return lng;
         }
         return "120.099863";
+    }
+
+    public static LocationBean getLocationBean() {
+        return locationBean;
+    }
+
+    public static void setLocationBean(LocationBean locationBean) {
+        LocationBean.locationBean = locationBean;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
     }
 
     public void setLng(String lng) {

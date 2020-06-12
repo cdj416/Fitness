@@ -147,6 +147,10 @@ public class ConstantsCode {
     public final static int GYM_SPORT_GROUP_CHAT_ADD = 0x064;
     //检查超级管理员
     public final static int CHECK_ADMIN_NAME = 0x064;
+    //添加每次跑步或步行记录
+    public final static int ME_ADD_EXERCISE_TIME = 0x065;
+    //分享打卡
+    public final static int KA_SHARE = 0x066;
 
     /*================================已下EventBus使用的=======================================*/
     //食物搜索
@@ -173,5 +177,9 @@ public class ConstantsCode {
     public final static int EB_CLOSE_SERARCH = 11;
     //tuan可扫码签到
     public final static int EB_SUPER_COURSE_XY_QD = 12;
+    //首页数据刷新
+    public final static int EB_HOME_REFRESH = 1301;
+    //刷新定位城市
+    public final static int EB_HOME_LOCATION = 1302;
 
 }

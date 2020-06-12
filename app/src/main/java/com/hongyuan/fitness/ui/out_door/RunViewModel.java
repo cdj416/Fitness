@@ -36,6 +36,8 @@ public class RunViewModel extends CustomViewModel implements MyLocationUtil.GetL
     //地图展示状态
     public boolean mapIsOpen;
 
+    public int run_staus = 0;
+
     public RunViewModel(CustomActivity mActivity, ActivityRunBinding binding) {
         super(mActivity);
         this.binding = binding;
@@ -76,6 +78,15 @@ public class RunViewModel extends CustomViewModel implements MyLocationUtil.GetL
     public void changeData(AMapLocation location) {
         //去绘制路线
         binding.myMap.changeData(location);
+
+        if(run_staus == 0){
+            runFragment.setSartRunLocation(String.valueOf(location.getLongitude()),String.valueOf(location.getLatitude()));
+            run_staus = 1;
+        }
+        if(run_staus == 1){
+            runFragment.setEndRunLocation(String.valueOf(location.getLongitude()),String.valueOf(location.getLatitude()));
+            run_staus = 0;
+        }
     }
 
     /*

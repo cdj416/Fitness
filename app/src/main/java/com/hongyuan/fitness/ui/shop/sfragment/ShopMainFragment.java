@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,7 @@ import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SportsLifeActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SstoreActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SMGoodsAdapter;
+import com.hongyuan.fitness.ui.shop.sadapter.SMLikeGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.ShopMainGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.HabitGoddsBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.ShopMainBeans;
@@ -45,7 +47,7 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
     private TextView goIntegral,goCoupons,goSportsLife,goHot;
     private CustomRecyclerView daysRes,newsRec,hotRec,storeRec;
 
-    private SMGoodsAdapter gAdapter;
+    private SMLikeGoodsAdapter gAdapter;
     private ShopMainGoodsAdapter daysAdapter,newsAdapter,hotsAdapter,stroeAdapter;
 
     private ShopMainBeans.DataBean dataBean;
@@ -60,6 +62,8 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
 
     @Override
     public void initView(View mView) {
+        mView.setTag(0);
+
         setEnableLoadMore(true);
         setEnableRefresh(true);
 
@@ -79,7 +83,7 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
         GridLayoutManager layoutManager =
                 new GridLayoutManager(mActivity,2);
         mRec.setLayoutManager(layoutManager);
-        gAdapter = new SMGoodsAdapter<HabitGoddsBeans.DataBean.ListBean>() {
+        gAdapter = new SMLikeGoodsAdapter<HabitGoddsBeans.DataBean.ListBean>() {
             @Override
             public String getImg(HabitGoddsBeans.DataBean.ListBean item) {
                 return item.getG_img();
@@ -93,6 +97,11 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
             @Override
             public String getPrice(HabitGoddsBeans.DataBean.ListBean item) {
                 return item.getG_price();
+            }
+
+            @Override
+            public String getGid(HabitGoddsBeans.DataBean.ListBean item) {
+                return String.valueOf(item.getG_id());
             }
         };
         mRec.setAdapter(gAdapter);

@@ -61,14 +61,12 @@ public class ShopAddressViewModel extends CustomViewModel {
 
     @Override
     public void refreshData() {
-        mActivity.showLoading();
         clearParams();
         Controller.myRequest(Constants.GET_RECEIVING_ADDRESS_LIST,Controller.TYPE_POST,getParams(), ShopAddressBeans.class,this);
     }
 
     @Override
     public void onSuccess(Object data) {
-        mActivity.closeLoading();
         if(data instanceof ShopAddressBeans){
             List<ShopAddressBeans.DataBean> list = ((ShopAddressBeans)data).getData();
             if(curPage == FIRST_PAGE){

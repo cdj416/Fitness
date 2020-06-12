@@ -6,6 +6,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <com.hongyuan.fitness.custom_view.StatusBarHeightView
+            android:id="@+id/barHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="44dp"/>
         <com.hongyuan.fitness.custom_view.comm_title.CommentTitleView
             android:id="@+id/commentTitle"
             android:layout_width="match_parent"

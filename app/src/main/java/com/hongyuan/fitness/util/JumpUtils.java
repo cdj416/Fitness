@@ -15,19 +15,16 @@ import androidx.core.util.Pair;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomActivity;
-import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomePageActivity;
 import com.hongyuan.fitness.ui.about_class.group_class.group_details.MissionDetailActivity;
 import com.hongyuan.fitness.ui.about_class.privite_class.course_details.CourseDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
-import com.hongyuan.fitness.ui.main.main_home.recommend.HomeBannerBean;
-import com.hongyuan.fitness.ui.mall.GoodActivity;
-import com.hongyuan.fitness.ui.mall.good_details.GoodDetailsActivity;
-import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.mall.mine.mine_order.order_details.MineOrderDetailsActivity;
 import com.hongyuan.fitness.ui.only_equipment.smart_basic_information.SmartBasicInformationActivity;
 import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
+import com.hongyuan.fitness.ui.scan.ScanActivity;
 import com.hongyuan.fitness.ui.store.StoreDetailActivity;
 import com.hongyuan.fitness.ui.store.punch.PunchActivity;
 import com.hongyuan.fitness.ui.video.MyPlayActivity;
@@ -153,12 +150,12 @@ public class JumpUtils {
                     mContext.startActivity(StoreDetailActivity.class,bundle);
                     break;
                 case "goods_list"://商品列表
-                    bundle.putInt("position",0);
-                    mContext.startActivity(GoodActivity.class,bundle);
+                    //bundle.putInt("position",0);
+                    //mContext.startActivity(GoodActivity.class,bundle);
                     break;
                 case "goods_info"://商品详情
-                    bundle.putString("g_id",jumpBeans.getHref_id());
-                    mContext.startActivity(GoodDetailsActivity.class,bundle);
+                    //bundle.putString("g_id",jumpBeans.getHref_id());
+                    //mContext.startActivity(GoodDetailsActivity.class,bundle);
                     break;
                 case "os_list"://门店列表
                     break;
@@ -183,7 +180,7 @@ public class JumpUtils {
                 case "msg_info"://消息详情
                     break;
                 case "order_list"://订单列表
-                    mContext.startActivity(MineOrderActivity.class,null);
+                    //mContext.startActivity(MineOrderActivity.class,null);
                     break;
                 case "order_info"://订单详情
                     bundle.putString("o_id",jumpBeans.getHref_id());
@@ -217,7 +214,12 @@ public class JumpUtils {
 
             }
         }else if(jumpBeans.getImg_href_type() == TYPE_H5 && BaseUtil.isValue(jumpBeans.getImg_href())){
-            bundle.putString("url",jumpBeans.getImg_href());
+            if(TokenSingleBean.getInstance().getIslogin() == 2){
+                bundle.putString("url",jumpBeans.getImg_href()+ TokenSingleBean.getInstance().getWebAllParams(jumpBeans.getImg_href()));
+            }else{
+                bundle.putString("url",jumpBeans.getImg_href());
+            }
+
             if(BaseUtil.isValue(jumpBeans.getH5Title())){
                 bundle.putString("title",jumpBeans.getH5Title());
             }
@@ -225,6 +227,9 @@ public class JumpUtils {
                 bundle.putString("backType",jumpBeans.getH5Back());
             }
             mContext.startActivity(WebViewActivity.class,bundle);
+            if(mContext instanceof ScanActivity){
+                mContext.finish();
+            }
         }
 
     }

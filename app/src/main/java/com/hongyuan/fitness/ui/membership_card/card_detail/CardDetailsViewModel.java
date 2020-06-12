@@ -317,7 +317,7 @@ public class CardDetailsViewModel extends CustomViewModel {
      * 读取卡适用的门店列表
      * */
     private void getStoreList(String osl_id){
-        clearParams().setParams("osl_id",osl_id).setParams("city_name","湖州市");
+        clearParams().setParams("osl_id",osl_id).setParams("city_name",userToken.getRegion_name());
         Controller.myRequest(Constants.GET_SUIT_OS_LIST,Controller.TYPE_POST,getParams(), VtwoMycardStoreList.class,this);
     }
 

@@ -15,11 +15,10 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityGoodsPayBinding;
 import com.hongyuan.fitness.ui.about_class.class_success.SuccessClassActivity;
 import com.hongyuan.fitness.ui.about_class.privite_class.preservation_course.ReservationSuccessBeans;
-import com.hongyuan.fitness.ui.mall.good_order_details.PointBean;
-import com.hongyuan.fitness.ui.mall.mine.mine_order.MineOrderActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopNewOrderAcitivity;
+import com.hongyuan.fitness.ui.shop.sbeans.PointBean;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.PayUtil;
@@ -50,7 +49,7 @@ public class GoodsPayViewModel extends CustomViewModel {
                     goSuccess();
                     break;
                 case PAY_FAILURE:
-                    startActivity(MineOrderActivity.class,null);
+                    startActivity(ShopNewOrderAcitivity.class,null);
                     break;
             }
         }

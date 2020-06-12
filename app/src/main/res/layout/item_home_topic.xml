@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shape_radius6_black"
+            android:visibility="gone"
             android:alpha="0.1"/>
 
         <LinearLayout
@@ -34,16 +35,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FFFFFF"
+                android:textColor="@color/color_FF333333"
                 android:text="急速减脂训练"/>
             <TextView
                 android:id="@+id/secondName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FFFFFF"
+                android:textColor="@color/color_FF999999"
                 android:layout_marginTop="6dp"
                 android:text="教练：Kevin"/>
         </LinearLayout>
+        <TextView
+            android:id="@+id/nums"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_FF999999"
+            android:textSize="10sp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="12dp"
+            android:text="306人参与"/>
     </RelativeLayout>
 </LinearLayout>

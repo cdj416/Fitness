@@ -43,7 +43,7 @@ public class SccouponsAdapter extends BaseQuickAdapter<SccouponBeans.DataBean.Li
 
                 helper.addOnClickListener(R.id.goodBox1).addOnClickListener(R.id.goodBox2);
             }
-            if(item.getGoods_list().size() >= 2){
+            if(item.getGoods_list().size() >= 3){
                 Glide.with(mContext).load(item.getGoods_list().get(0).getG_img()).apply(options).into((RoundedImageView)helper.getView(R.id.img1));
                 helper.setText(R.id.goodName1,item.getGoods_list().get(0).getG_name()).setText(R.id.goodPrice1,BaseUtil.getNoZoon(item.getGoods_list().get(0).getG_price()));
 
@@ -67,6 +67,7 @@ public class SccouponsAdapter extends BaseQuickAdapter<SccouponBeans.DataBean.Li
         }else{
             helper.setText(R.id.recCoupon,"立即领取").setBackgroundRes(R.id.recCoupon,R.drawable.shape_radius16_ef5b48);
             helper.getView(R.id.recCoupon).setClickable(true);
+            helper.addOnClickListener(R.id.recCoupon);
         }
 
     }

@@ -98,6 +98,8 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
         binding.address.setText(addressBeans.getProvince()+" "+addressBeans.getCity()+" "+addressBeans.getDistrict()+" "+addressBeans.getAddress());
 
         address_id = String.valueOf(addressBeans.getAddress_id());
+        //获取订单详情数据
+        getOrderInfo(String.valueOf(addressBeans.getPid()));
     }
 
     @Override
@@ -111,10 +113,14 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
         clearParams();
         Controller.myRequest(Constants.GET_DEFAULT_RECEIVING_ADDRESS_INFO,Controller.TYPE_POST,getParams(), AddressInfoBeans.class,this);
 
-        clearParams().setParams("cart_json",getBundle().getString("cartJson"));
+    }
+
+    /*
+    * 订单结算详情信息
+    * */
+    private void getOrderInfo(String region_code){
+        clearParams().setParams("cart_json",getBundle().getString("cartJson")).setParams("region_code",region_code);
         Controller.myRequest(Constants.GET_COMFIRM_ORDER_INFO,Controller.TYPE_POST,getParams(), SorderDetailBeans.class,this);
-
-
     }
 
     /*
@@ -206,11 +212,16 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
             binding.address.setText(infoData.getProvince()+" "+infoData.getCity()+" "+infoData.getDistrict()+" "+infoData.getAddress());
 
             address_id = String.valueOf(infoData.getAddress_id());
+
+            //获取订单详情数据
+            getOrderInfo(String.valueOf(infoData.getPid()));
         }
 
         if(data instanceof SorderDetailBeans){
 
            sorderBeans = ((SorderDetailBeans)data).getData();
+
+            bottomViewModel.invalid(sorderBeans.isInvalid());
 
             if(sorderBeans.getList() != null && sorderBeans.getList().size() > 0){
                 if(sorderBeans.getmList() != null && sorderBeans.getmList().size() > 0){
@@ -218,7 +229,7 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
 
                     //回调总价格
                     if(bottomViewModel != null){
-                        bottomViewModel.changeAllPrice(adapter.getAllPrice());
+                        bottomViewModel.changeAllPrice(adapter.getAllPrice(),sorderBeans.getAllPoint());
                     }
 
                     //打开所有子项列表
@@ -284,7 +295,11 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
     @Override
     public void changeAllprice(String showAllPrice) {
         if(bottomViewModel != null){
-            bottomViewModel.changeAllPrice(showAllPrice);
+            bottomViewModel.changeAllPrice(showAllPrice,sorderBeans.getAllPoint());
         }
     }
+
+    /*
+    *
+    * */
 }

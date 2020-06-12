@@ -556,11 +556,16 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
      * 获取参数集合
      * */
     public Map<String,String> getParams(){
-        if(getBaseParams() != null){
+        Map<String,String> baseParams = getBaseParams();
+        if(baseParams != null){
             if(params == null){
                 params = new HashMap<>();
             }
-            params.putAll(getBaseParams());
+            //处理切换登录手机号覆盖问题
+            if(params.containsKey("m_mobile")){
+                baseParams.remove("m_mobile");
+            }
+            params.putAll(baseParams);
         }
         return this.params;
     }
@@ -572,6 +577,11 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         if(mActivity.userToken != null){
             int randomNum = (int)(Math.random()*100);
             long timeSpan = System.currentTimeMillis();
+
+            //防止数据被清楚。
+            if(mActivity.userToken.getToken() == null){
+                mActivity.getNewUserToken();
+            }
 
             StringBuilder ntoken = new StringBuilder();
             ntoken.append(EncryptionUtil.md5Decode(mActivity.userToken.getToken()));
@@ -585,6 +595,7 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
             baseParams.put("randomnum",String.valueOf(randomNum));
             baseParams.put("timespan",String.valueOf(timeSpan));
             baseParams.put("ntoken",ntoken.toString());
+            baseParams.put("city_code",BaseUtil.isValue(mActivity.userToken.getRegion_code()) ? mActivity.userToken.getRegion_code() : "3505");
             //是否开启分页
             if(isLoadMore){
                 baseParams.put("curpage",String.valueOf(curPage));
@@ -617,7 +628,6 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         if(refresh != null){
             refresh.finishRefresh();
             refresh.finishLoadMore();
-
         }
     }
 
@@ -629,7 +639,9 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         if(err_code == ISLOGIN && description.contains("登录")){
             startActivity(VtwoVerificationLoginActivity.class,null);
         }else{
-            LemonBubble.showError(getContext(), description, 2000);
+            if(!mActivity.isFinishing()){
+                LemonBubble.showError(mActivity, description, 2000);
+            }
         }
 
     }
@@ -645,7 +657,9 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
             }else if(baseBean.getStatus().getError_code() == ISLOGIN){
                 startActivity(VtwoVerificationLoginActivity.class,null);
             }else{
-                LemonBubble.showError(mActivity, baseBean.getStatus().getError_desc(), 2000);
+                if(!mActivity.isFinishing()){
+                    LemonBubble.showError(mActivity, baseBean.getStatus().getError_desc(), 2000);
+                }
                 return false;
             }
         }
@@ -667,14 +681,18 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
      * 成功提示
      * */
     public void showSuccess(String message){
-        LemonBubble.showRight(mActivity,message,2000);
+        if(!mActivity.isFinishing()){
+            LemonBubble.showRight(mActivity,message,2000);
+        }
     }
 
     /*
      * 提升加载中
      * */
     public void showLoading(String message){
-        LemonBubble.showRoundProgress(this,message);
+        if(!mActivity.isFinishing()){
+            LemonBubble.showRoundProgress(this,message);
+        }
     }
 
     /*

@@ -52,6 +52,11 @@ public class ScartBottomViewModel extends CustomViewModel {
         });
 
         binding.selectAll.setOnClickListener(v -> {
+            if(!manViewModel.isData()){
+                CustomDialog.showMessage(mActivity,"无商品，不可操作！");
+                return;
+            }
+
             boolean flag = Boolean.parseBoolean(binding.selectAll.getTag().toString());
             if(flag){
                 binding.selectAllImg.setImageResource(R.mipmap.yuanquanquan_no_select_img);

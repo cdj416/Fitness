@@ -116,14 +116,13 @@ public class DailyPunchViewModel extends CustomViewModel implements StickyScroll
         getMonthQd();
         //检查是否签到
         Controller.myRequest(Constants.CHECK_IS_QD,Controller.TYPE_POST,getParams(), DailyPunchCheckBean.class,this);
+        //积分--获取积分任务列表
+        Controller.myRequest(Constants.GETRWLIST,Controller.TYPE_POST,getParams(), TaskBeans.class,this);
     }
 
     @Override
     public void refreshData() {
-        clearParams();
-        mActivity.showLoading();
-        //积分--获取积分任务列表
-        Controller.myRequest(Constants.GETRWLIST,Controller.TYPE_POST,getParams(), TaskBeans.class,this);
+        lazyLoad();
     }
 
     /*
@@ -179,7 +178,6 @@ public class DailyPunchViewModel extends CustomViewModel implements StickyScroll
         if(code == ConstantsCode.ADD_QD){
             mActivity.closeLoading();
             refreshData();
-            getMonthQd();
             CustomDialog.dailyPunchSuccess(mActivity,"+"+pointNum,String.valueOf(lxDayx+1));
             changeQD("1");
         }

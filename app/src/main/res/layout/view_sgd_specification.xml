@@ -24,7 +24,7 @@
                     android:layout_height="72dp"
                     app:riv_border_width="1px"
                     app:riv_border_color="@color/color_EEEEEE"
-                    android:src="@drawable/banner_test2"
+                    android:src="@color/color_f2"
                     android:scaleType="centerCrop"
                     android:layout_centerVertical="true"/>
 
@@ -52,30 +52,35 @@
                             android:textSize="24sp"
                             android:textColor="@color/color_FF333333"
                             android:text="2000"/>
-                        <TextView
-                            android:id="@+id/addMark"
+
+                        <LinearLayout
+                            android:id="@+id/pointBox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_12"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
-                            android:visibility="gone"
-                            android:text="+"/>
-                        <TextView
-                            android:id="@+id/goodPoint"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
-                            android:visibility="gone"
-                            android:textSize="24sp"
-                            android:text="0"/>
-                        <TextView
-                            android:id="@+id/pointText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_12"
-                            android:visibility="gone"
-                            android:text="积分"/>
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/addMark"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_12"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:text="+"/>
+                            <TextView
+                                android:id="@+id/goodPoint"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_EF5B48"
+                                android:textSize="24sp"
+                                android:text="0"/>
+                            <TextView
+                                android:id="@+id/pointText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_12"
+                                android:text="积分"/>
+                        </LinearLayout>
+
                     </LinearLayout>
 
                     <TextView

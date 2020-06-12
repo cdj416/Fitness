@@ -46,6 +46,15 @@ public class RewardWithdrawalViewModel extends CustomViewModel {
             public String getPrice(HabitGoddsBeans.DataBean.ListBean item) {
                 return item.getG_price();
             }
+            @Override
+            public String getPoint(HabitGoddsBeans.DataBean.ListBean item) {
+                return String.valueOf(item.getG_point());
+            }
+
+            @Override
+            public int getShowType(HabitGoddsBeans.DataBean.ListBean item) {
+                return item.getShowType();
+            }
         };
         binding.mRec.setAdapter(adapter);
         //adapter.setNewData(getList());

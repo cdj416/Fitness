@@ -15,6 +15,7 @@ import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.custom_view.CustomRecyclerView;
 import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SMGoodsAdapter;
+import com.hongyuan.fitness.ui.shop.sbeans.GoodsBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.HabitGoddsBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.StoreAllGoodsBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.StoreCouponBeans;
@@ -58,6 +59,16 @@ public class SstoreGoodsFragment extends CustomFragment {
             @Override
             public String getPrice(StoreAllGoodsBeans.DataBean.ListBean item) {
                 return item.getG_price();
+            }
+
+            @Override
+            public String getPoint(StoreAllGoodsBeans.DataBean.ListBean item) {
+                return String.valueOf(item.getG_point());
+            }
+
+            @Override
+            public int getShowType(StoreAllGoodsBeans.DataBean.ListBean item) {
+                return item.getShowType();
             }
         };
         mRec.setAdapter(gAdapter);

@@ -202,6 +202,12 @@ public class AddImageOrVideoView extends LinearLayout {
                     // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true  注意：音视频除外
                     // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true  注意：音视频除外
                     // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+
+                    if(data == null || selectList == null || selectList.size() <= 0){
+                        CustomDialog.showMessage(getContext(),"内容无效，请从选！");
+                        return;
+                    }
+
                         for (LocalMedia bean:selectList){
                             FileBean imageBean = new FileBean();
                             imageBean.setFileType(bean.getMimeType());
@@ -271,5 +277,18 @@ public class AddImageOrVideoView extends LinearLayout {
                     break;
             }
         }
+    }
+
+    /*
+    * 显示传递过来的图片
+    * */
+    public void changeShow(String filePath){
+        FileBean imageBean = new FileBean();
+        imageBean.setFileType("image/jpeg");
+        imageBean.setmFile(new File(filePath));
+        imageBean.setFileKey("oss_file[]");
+        mList.add((mList.size()-1),imageBean);
+
+        adapter.setNewData(mList);
     }
 }

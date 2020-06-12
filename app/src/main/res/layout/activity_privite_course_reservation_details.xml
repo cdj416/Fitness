@@ -231,7 +231,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_14"
                     android:textColor="@color/color_FF333333"
-                    android:drawableTop="@mipmap/advisory_black_img"
+                    android:drawableTop="@mipmap/person_message_mark"
                     android:gravity="center"
                     android:drawablePadding="5dp"
                     android:text="教练咨询"/>

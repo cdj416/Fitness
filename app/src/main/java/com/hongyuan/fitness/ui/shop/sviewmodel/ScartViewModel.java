@@ -161,6 +161,7 @@ public class ScartViewModel extends CustomViewModel implements MyClickListener {
     * 获取订单详情页面需要的json参数
     * */
     public String getCartJson(){
+        if(mList == null) return "";
         List<CartJsonBeans> jsonList = new ArrayList<>();
         //遍历需要购买的商品
         for(MultiItemEntity partBean : mList){
@@ -217,6 +218,8 @@ public class ScartViewModel extends CustomViewModel implements MyClickListener {
     * 全选，取消切换
     * */
     public void changAllCheck(boolean flag){
+        if(mList == null) return;
+
         for(MultiItemEntity partBean : mList){
             if(partBean instanceof ScartBeans.DataBean.ListBean){
                 ScartBeans.DataBean.ListBean useBean = (ScartBeans.DataBean.ListBean) partBean;
@@ -230,6 +233,16 @@ public class ScartViewModel extends CustomViewModel implements MyClickListener {
 
         //设置需要显示总价格
         bModel.setAllPric(countPrice());
+    }
+
+    /*
+    * 判断是否有数据
+    * */
+    public boolean isData(){
+        if(mList != null && mList.size() > 0){
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -261,6 +274,10 @@ public class ScartViewModel extends CustomViewModel implements MyClickListener {
     * 获取要删除的商品ids
     * */
     private String getDeleteIds(){
+        if(!isData()){
+            return null;
+        }
+
         String ids = "";
         for(MultiItemEntity partBean : mList){
             if(partBean instanceof ScartBeans.DataBean.ListBean){
@@ -337,6 +354,7 @@ public class ScartViewModel extends CustomViewModel implements MyClickListener {
                     mActivity.setPromtView(mActivity.SHOW_EMPTY);
                 }
             }else{
+                mList = null;
                 mActivity.setPromtView(mActivity.SHOW_EMPTY);
             }
         }

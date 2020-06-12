@@ -96,6 +96,16 @@
                 android:textSize="@dimen/sp_12"
                 android:textColor="#FFF06C3A"
                 android:text="¥300.00"/>
+            <TextView
+                android:id="@+id/pointNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_EF5B48"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:visibility="visible"
+                android:text="+ 0积分"/>
         </LinearLayout>
     </RelativeLayout>
 

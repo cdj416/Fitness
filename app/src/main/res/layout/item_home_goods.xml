@@ -10,15 +10,15 @@
         android:layout_width="16dp"
         android:layout_height="match_parent"/>
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="88dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginBottom="20dp"
         android:id="@+id/jumpBox">
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/goodImg"
-            android:layout_width="match_parent"
-            android:layout_height="122dp"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
             app:riv_corner_radius="6dp"
             android:src="@color/color_f2"
             android:scaleType="centerCrop"/>

@@ -270,7 +270,7 @@
                 android:id="@+id/goChat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/chat_mark"
+                android:drawableTop="@mipmap/person_message_mark"
                 android:textSize="14sp"
                 android:textColor="@color/color_FF333333"
                 android:gravity="center"

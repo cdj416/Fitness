@@ -171,6 +171,12 @@ public class EncyclopediaDetailViewModel extends CustomViewModel implements View
     private void getBaikeLike(){
         mActivity.showLoading();
         clearParams().setParams("article_id",getBundle().getString("article_id"));
+
+        if(detailBean == null || detailBean.getData() == null){
+            CustomDialog.showMessage(mActivity,"数据缺失请从进！");
+            return;
+        }
+
         if(detailBean.getData().getIs_praise() == 0){
             Controller.myRequest(Constants.ADD_ARTICLE_PRAISE,Controller.TYPE_POST,getParams(), V3BaikeDetialLikeBean.class,this);
         }else{

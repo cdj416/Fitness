@@ -1,9 +1,12 @@
 package com.hongyuan.fitness.ui.webview;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import com.hongyuan.fitness.R;
@@ -16,10 +19,9 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityWebviewBinding;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
-import com.hongyuan.fitness.util.CustomDialog;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 import com.just.agentweb.AgentWeb;
-import com.just.agentweb.AgentWebConfig;
 import com.just.agentweb.DefaultWebClient;
 
 public class WebViewModelView extends CustomViewModel {
@@ -38,12 +40,17 @@ public class WebViewModelView extends CustomViewModel {
     @Override
     protected void initView() {
         //测试使用
-        binding.showUrl.setOnClickListener(v -> {
+        /*binding.showUrl.setOnClickListener(v -> {
             CustomDialog.showUrl(mActivity,mAgentWeb.getWebCreator().getWebView().getUrl());
-        });
+        });*/
+        //binding.title.setText(getBundle().getString("title",""));
+        String url = getBundle().getString("url");
 
+        if(!BaseUtil.isValue(url)){
+            mActivity.showSuccess("当前页面没有内容！");
+            return;
+        }
 
-        binding.title.setText(getBundle().getString("title",""));
         binding.goBack.setOnClickListener(v -> {
             if (mAgentWeb.getWebCreator().getWebView().canGoBack()) {
                 mAgentWeb.getWebCreator().getWebView().goBack();//返回上个页面
@@ -66,10 +73,23 @@ public class WebViewModelView extends CustomViewModel {
                 .interceptUnkownUrl() //拦截找不到相关页面的Url AgentWeb 3.0.0 加入。
                 .createAgentWeb()//创建AgentWeb。
                 .ready()//设置 WebSettings。
-                .go(getBundle().getString("url")); //WebView载入该url地址的页面并显示。
+                .go(url); //WebView载入该url地址的页面并显示。
 
+        //获取网页的标题
+        mAgentWeb.getWebCreator().getWebView().setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                String title = view.getTitle();
+                if (!TextUtils.isEmpty(title) && !title.contains("http")) {
+                    binding.title.setText(title);
+                }else{
+                    binding.title.setText(getBundle().getString("title",""));
+                }
+            }
+        });
 
-        AgentWebConfig.debug();
+        //AgentWebConfig.debug();
 
         // AgentWeb 4.0 开始，删除该类以及删除相关的API
         //DefaultMsgConfig.DownloadMsgConfig mDownloadMsgConfig = mAgentWeb.getDefaultMsgConfig().getDownloadMsgConfig();
@@ -118,6 +138,8 @@ public class WebViewModelView extends CustomViewModel {
             }
             return mActivity.onKeyDown(keyCode, event);//退出H5界面
         });
+
+
     }
 
     /*

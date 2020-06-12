@@ -28,6 +28,7 @@ import com.hongyuan.fitness.ui.find.circle.comment_details.CommentDetailsLikeBea
 import com.hongyuan.fitness.ui.find.circle.report.ReportActivity;
 import com.hongyuan.fitness.ui.person.person_message.PersonAttentionBeans;
 import com.hongyuan.fitness.ui.person.person_message.PersonMessageActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.JumpUtils;
 import com.hongyuan.fitness.util.DividerItemDecoration;
@@ -76,7 +77,7 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
         isMine = getBundle().getBoolean("mine",false);
 
         if(isMine){
-            mActivity.getMainTitle().setRightImage(R.mipmap.delet_huise_img);
+            mActivity.getMainTitle().setRightImage(R.mipmap.del_black_mark);
             mActivity.getMainTitle().getRightView().setOnClickListener(v -> {
                 CustomDialog.promptDialog(mActivity, "确定要删除当前帖子？", "在想想", "确定删除", false, v12 -> {
                     if(v12.getId() == R.id.isCannel){
@@ -113,6 +114,11 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
         binding.outBox.setOnkbdStateListener(this);
 
         binding.moreOperate.setOnClickListener(v -> {
+            if(topBean == null || topBean.getData() == null || !BaseUtil.isValue(topBean.getData().getM_id())){
+                CustomDialog.showMessage(mActivity,"请下拉刷新！");
+                return;
+            }
+
             CustomDialog.attentionMore(mActivity, topBean.getData().getIs_friend(), v1 -> {
                 if(v1.getId() == R.id.goDetails){
                     PersonAttentionBeans attentionBeans = new PersonAttentionBeans();
@@ -151,6 +157,7 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
 
     @Override
     protected void lazyLoad() {
+        mActivity.showLoading();
         getTopBean();
         getComment();
     }
@@ -255,6 +262,11 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
     * 关注/取消关注
     * */
     private void sendAttention(){
+        if(topBean == null || topBean.getData() == null || !BaseUtil.isValue(topBean.getData().getM_id())){
+            CustomDialog.showMessage(mActivity,"请下拉刷新！");
+            return;
+        }
+        mActivity.showLoading();
         clearParams().setParams("f_mid",String.valueOf(topBean.getData().getM_id()));
         if(topBean.getData().getIs_friend() == 0){
             setParams("f_type","add");
@@ -276,6 +288,8 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
 
     @Override
     public void onSuccess(Object data) {
+        mActivity.closeLoading();
+
         if(data instanceof PostDetailsTopBean && isSuccess(data)){
             topBean = (PostDetailsTopBean)data;
             setData(topBean);
@@ -340,11 +354,12 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
 
     @Override
     public void onSuccess(int code, Object data) {
+        mActivity.closeLoading();
         if(code == ConstantsCode.ADD_FRIEND){
             if(topBean.getData().getIs_friend() == 0){
                 topBean.getData().setIs_friend(1);
-                binding.attention.setText("已关注");
-                binding.attention.setBackgroundResource(R.drawable.shape_radius18_e8e8f4);
+                binding.attention.setText("取消关注");
+                binding.attention.setBackgroundResource(R.drawable.shape_radius16_ef5b48);
                 showSuccess("关注成功！");
             }else{
                 topBean.getData().setIs_friend(0);
@@ -391,8 +406,8 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
             binding.attention.setText("关注");
             binding.attention.setBackgroundResource(R.drawable.shape_radius16_ef5b48);
         }else{
-            binding.attention.setText("已关注");
-            binding.attention.setBackgroundResource(R.drawable.shape_radius18_e8e8f4);
+            binding.attention.setText("取消关注");
+            binding.attention.setBackgroundResource(R.drawable.shape_radius16_ef5b48);
         }
 
         if(data.getData().getIs_praise() == 0){

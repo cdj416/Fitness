@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -13,6 +14,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -64,6 +66,15 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="161cc9e676884967e57d14312db3e9f0"/>
+
+        <!--value的值填写你在友盟后台申请的应用Appkey-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5d722d1d570df3f6b90004f0" />
+        <!--value的值填写渠道名称，例如yingyongbao。这里设置动态渠道名称变量-->
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
 
         <!-- 设置环信应用的AppKey -->
         <meta-data android:name="EASEMOB_APPKEY"  android:value="1110190911181553#suidong-ios" />
@@ -152,7 +163,6 @@
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
 
@@ -204,12 +214,6 @@
         <activity android:name=".ui.about_class.class_success.SuccessClassActivity"/>
         <activity android:name=".ui.about_class.class_failure.FailureActivity"/>
         <activity android:name=".ui.about_class.group_class.group_list.MyGroupClassActivity"/>
-        <activity android:name=".ui.mall.GoodActivity"/>
-        <activity android:name=".ui.mall.good_details.GoodDetailsActivity"/>
-        <activity android:name=".ui.mall.good_order_details.GoodOrderDetailsActivity"/>
-        <activity android:name=".ui.mall.mine.MallMineActivity"/>
-        <activity android:name=".ui.mall.mine.point_bill.PointBillActivity"/>
-        <activity android:name=".ui.mall.mine.mine_order.MineOrderActivity"/>
         <activity android:name=".ui.mall.good_pay.GoodsPayActivity"/>
         <activity android:name=".ui.mall.mine.mine_order.order_details.MineOrderDetailsActivity"/>
         <activity android:name=".ui.person.waiting_evaluation.WaitingEvaluationActivity"/>
@@ -217,7 +221,6 @@
         <activity android:name=".ui.person.waiting_evaluation.editorial_evaluation.EditorialEvaluationActivity" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.person.setting.SettingActivity"/>
         <activity android:name=".ui.person.mine_message.MineMessageActivity"/>
-        <activity android:name=".ui.person.mine_point.MinePointActivity"/>
         <activity android:name=".ui.person.mine_point.point_rules.RulesActivity"/>
         <activity android:name=".ui.person.daily_punch.DailyPunchActivity"/>
         <activity android:name=".ui.carousel.CarouselActivity"/>
@@ -228,8 +231,6 @@
         <activity android:name=".ui.person.setting.agreement.AgreementActivity"/>
         <activity android:name=".ui.out_door.about_you.AboutYouActivity"/>
         <activity android:name=".ui.find.friends.FriendsActivity"/>
-        <activity android:name=".ui.out_door.gaodei_map.MyMapActivity"
-            android:screenOrientation="portrait"/>
         <activity android:name=".ui.about_class.coach.show_select_time.ShowSelectTimeActivity"/>
         <activity android:name=".ui.about_class.coach.cocah_img.CoachImgActivity"/>
         <activity android:name=".ui.about_class.privite_class.preservation_course.ReservationDetailsActivity"/>
@@ -340,6 +341,7 @@
         <activity android:name=".ui.shop.sactivity.CustomServerActivity"/>
         <activity android:name=".ui.shop.sactivity.IncomeDetailsActivity"/>
         <activity android:name=".ui.shop.sactivity.GroupChatUserActivity"/>
+        <activity android:name=".ui.shop.sactivity.ShopLikesActivity"/>
         <activity android:name=".ui.person.fix.CancelCourseActivity"/>
         <activity android:name=".ui.main.AllCitysActivity"/>
         <activity android:name=".ui.person.my_coupon.newcoupon.NewCouponActivity"/>

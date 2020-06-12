@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.shop.sfragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.appbar.AppBarLayout;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
@@ -29,6 +31,7 @@ import com.hongyuan.fitness.ui.shop.sbeans.SgoodsDetailBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.ShopCommentBeans;
 import com.hongyuan.fitness.ui.shop.sinterface.GoOtherPageListener;
 import com.hongyuan.fitness.ui.shop.sinterface.GoodsDetailIntener;
+import com.hongyuan.fitness.ui.shop.sinterface.ScollChangeLinstener;
 import com.hongyuan.fitness.ui.shop.smyview.SGoodsDetailsHeadView;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
@@ -37,8 +40,6 @@ import com.hongyuan.fitness.util.UseGlideImageLoader;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class SshopDetailMainFragment extends CustomFragment {
     private SGoodsDetailsHeadView goodHeads;
     private RoundedImageView shopImg,cheadImg;
     private RatingBar myRat;
+    private AppBarLayout topBar;
 
     private SGDcommentAdapter sgDcommentAdapter;
     private SGDgoodsAdapter sgDgoodsAdapter;
@@ -59,6 +61,7 @@ public class SshopDetailMainFragment extends CustomFragment {
 
     private GoOtherPageListener pageListener;
     private GoodsDetailIntener returnListener;
+    private ScollChangeLinstener changeLinstener;
 
     //商品详情数据
     private SgoodsDetailBeans.DataBean.InfoBean infoBean;
@@ -70,9 +73,10 @@ public class SshopDetailMainFragment extends CustomFragment {
     //商品id
     private String g_id;
 
-    public SshopDetailMainFragment(GoOtherPageListener pageListener,GoodsDetailIntener returnListener){
+    public SshopDetailMainFragment(GoOtherPageListener pageListener, GoodsDetailIntener returnListener, ScollChangeLinstener changeLinstener){
         this.pageListener = pageListener;
         this.returnListener = returnListener;
+        this.changeLinstener = changeLinstener;
     }
 
     @Override
@@ -100,6 +104,7 @@ public class SshopDetailMainFragment extends CustomFragment {
         cheadImg = mView.findViewById(R.id.cheadImg);
         userName = mView.findViewById(R.id.userName);
         cComtent = mView.findViewById(R.id.cComtent);
+        topBar = mView.findViewById(R.id.topBar);
 
         /*LinearLayoutManager comManager = new LinearLayoutManager(mActivity);
         comManager.setOrientation(RecyclerView.VERTICAL);
@@ -163,7 +168,10 @@ public class SshopDetailMainFragment extends CustomFragment {
             startActivity(SstoreActivity.class,bundle);
         });
 
-
+        //滑动监听
+        topBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            changeLinstener.onOffsetChanged(appBarLayout,verticalOffset);
+        });
 
     }
 

@@ -1,7 +1,5 @@
 package com.hongyuan.fitness.ui.shop.sbeans;
 
-import android.util.Log;
-
 import com.chad.library.adapter.base.entity.AbstractExpandableItem;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.hongyuan.fitness.base.BaseBean;
@@ -69,25 +67,23 @@ public class SnewOrderBeans extends BaseBean {
                 mList = new ArrayList<>();
 
                 for(ListBean listBean : list){
-                    int goodsNum = 0;
-                    String allPrice = "0";
                     int g_id = 0;
                     for(ListBean.GoodsListBean goodsListBean : listBean.getGoods_list()){
                         goodsListBean.setG_oid(listBean.getO_id());
                         listBean.addSubItem(goodsListBean);
-                        goodsNum += goodsListBean.getBuy_num();
-                        allPrice = BigDecimalUtils.add(allPrice,BigDecimalUtils.mul(goodsListBean.getGp_price(),String.valueOf(goodsListBean.getBuy_num()),2),2);
                         g_id = goodsListBean.g_id;
                     }
                     mList.add(listBean);
 
                     //添加第三种类型数据
                     BottomBean bottomBean = new BottomBean();
-                    bottomBean.setBuyNum(goodsNum);
-                    bottomBean.setAllPrice(BaseUtil.getNoZoon(allPrice));
+                    bottomBean.setBuyNum(listBean.getO_num());
+                    bottomBean.setAllPrice(BaseUtil.getNoZoon(listBean.getO_price()));
+                    bottomBean.setAllPoint(listBean.getOp_point());
                     bottomBean.setStatus(listBean.getO_state());
                     bottomBean.setO_id(listBean.getO_id());
                     bottomBean.setG_id(g_id);
+                    bottomBean.setO_deliver_way(listBean.getO_deliver_way());
                     mList.add(bottomBean);
                 }
             }
@@ -108,9 +104,27 @@ public class SnewOrderBeans extends BaseBean {
 
             private int buyNum;
             private String allPrice;
+            private int allPoint;
             private int status;
             private int o_id;
             private int g_id;
+            private int o_deliver_way;
+
+            public int getO_deliver_way() {
+                return o_deliver_way;
+            }
+
+            public void setO_deliver_way(int o_deliver_way) {
+                this.o_deliver_way = o_deliver_way;
+            }
+
+            public int getAllPoint() {
+                return allPoint;
+            }
+
+            public void setAllPoint(int allPoint) {
+                this.allPoint = allPoint;
+            }
 
             public int getG_id() {
                 return g_id;
@@ -453,6 +467,19 @@ public class SnewOrderBeans extends BaseBean {
                 private String sku_names;
                 private int buy_num;
                 private int g_oid;
+
+                //获取显示类型
+                public int getShowType() {
+                    if(BaseUtil.isValue(this.gp_price) && Double.parseDouble(this.gp_price) > 0 && this.gp_point > 0){
+                        return SnewOrdersAdapter.SHOW_MONEY_POINT;
+                    }else if(BaseUtil.isValue(this.gp_price) && Double.parseDouble(this.gp_price) > 0 && this.gp_point <= 0 ){
+                        return SnewOrdersAdapter.SHOW_MONEY;
+                    }else if((!BaseUtil.isValue(this.gp_price) || Double.parseDouble(this.gp_price) <= 0 ) && this.gp_point > 0){
+                        return SnewOrdersAdapter.SHOW_POINT;
+                    }else{
+                        return SnewOrdersAdapter.SHOW_MONEY_POINT;
+                    }
+                }
 
                 public int getG_oid() {
                     return g_oid;

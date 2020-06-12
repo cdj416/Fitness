@@ -24,17 +24,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.custom_view.StatusBarHeightView;
 import com.hongyuan.fitness.custom_view.TitleView;
+import com.hongyuan.fitness.ui.login.TokenBean;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.HourMeterUtil;
+import com.hongyuan.fitness.util.SharedPreferencesUtil;
 import com.hongyuan.fitness.util.StatusBarUtil;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.umeng.analytics.MobclickAgent;
 
 import net.lemonsoft.lemonbubble.LemonBubble;
 
 import io.reactivex.annotations.Nullable;
+import me.goldze.mvvmhabit.base.AppManager;
 
 /*
 * 所有activity需继承本activity（可以方便接下来的快速开发哦^_^）
@@ -88,6 +93,9 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 加入Activity到堆栈
+        AppManager.getAppManager().addActivity(this);
+
         //初始化token，全局使用
         userToken = TokenSingleBean.getInstance();
         //禁止使用横屏
@@ -128,6 +136,18 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
         //加载子布局视图
         initView();
         //setImmersive();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     /*
@@ -481,7 +501,9 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     * 成功提示弹框，并过三秒关掉当前activity
     * */
     public void showSuccess(String message){
-        LemonBubble.showRight(this,message,2000);
+        if(!isFinishing()) {
+            LemonBubble.showRight(this,message,2000);
+        }
         handler.postDelayed(runnableClose, 2000);
     }
     /*
@@ -490,7 +512,9 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     public void showSuccess(String message,Class<?> clz, Bundle bundle){
         this.clz = clz;
         this.bundle = bundle;
-        LemonBubble.showRight(this,message,2000);
+        if(!isFinishing()) {
+            LemonBubble.showRight(this,message,2000);
+        }
         handler.postDelayed(runnableClose, 2000);
     }
 
@@ -498,7 +522,9 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     * 错误提示框，并过三门关闭当前activity
     * */
     public void showErr(String message){
-        LemonBubble.showError(this,message,2000);
+        if(!isFinishing()) {
+            LemonBubble.showError(this, message, 2000);
+        }
         handler.postDelayed(runnableClose, 2500);
     }
 
@@ -520,21 +546,27 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
      * 提示加载中
      * */
     public void showLemonLoading(String message){
-        LemonBubble.showRoundProgress(this,message);
+        if(!isFinishing()){
+            LemonBubble.showRoundProgress(this,message);
+        }
     }
 
     /*
      * 成功提示
      * */
     public void showLemonSuccess(String message){
-        LemonBubble.showRight(this,message,2000);
+        if(!isFinishing()){
+            LemonBubble.showRight(this,message,2000);
+        }
     }
 
     /*
      * 错误提示
      * */
     public void showLemonErr(String message){
-        LemonBubble.showError(this, message, 2000);
+        if(!isFinishing()){
+            LemonBubble.showError(this, message, 2000);
+        }
     }
 
     /*
@@ -600,6 +632,29 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
             super.onDestroy();
         }catch (Exception e){
             e.printStackTrace();
+        }
+
+        // 结束Activity&从堆栈中移除
+        AppManager.getAppManager().finishActivity(this);
+    }
+
+
+    /*
+    * 当用户信息被清楚后从新获取
+    * */
+    public void getNewUserToken(){
+        //token信息
+        TokenBean.DataBean tokenBean = (TokenBean.DataBean) SharedPreferencesUtil.getBean(this,TOKEN_SESSION);
+        if(BaseUtil.isValue(tokenBean) && BaseUtil.isValue(tokenBean.getM_id())) {
+            userToken.setAt_id(tokenBean.getAt_id());
+            userToken.setAt_name(tokenBean.getAt_name());
+            userToken.setAt_pwd(tokenBean.getAt_pwd());
+            userToken.setToken(tokenBean.getToken());
+            userToken.setM_id(tokenBean.getM_id());
+            userToken.setM_mobile(tokenBean.getM_mobile());
+            userToken.setRandomnum("90");
+            userToken.setNtoken("79ce633ae10a10c2bba676a7fbf5db3b1a862df26f6943997cef90233877a4fe1f23a61d89941a31f62e6ddd6fad9025");
+            userToken.setTimespan("1591924480353");
         }
     }
 }

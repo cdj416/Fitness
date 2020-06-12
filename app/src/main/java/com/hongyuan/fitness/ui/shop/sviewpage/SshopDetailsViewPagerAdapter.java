@@ -10,6 +10,7 @@ import com.hongyuan.fitness.ui.shop.sfragment.SshopCommentsFragment;
 import com.hongyuan.fitness.ui.shop.sfragment.SshopDetailMainFragment;
 import com.hongyuan.fitness.ui.shop.sinterface.GoOtherPageListener;
 import com.hongyuan.fitness.ui.shop.sinterface.GoodsDetailIntener;
+import com.hongyuan.fitness.ui.shop.sinterface.ScollChangeLinstener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,9 @@ public class SshopDetailsViewPagerAdapter extends FragmentPagerAdapter {
     //评论详情
     private SshopDetailMainFragment mainFragment;
 
-    public SshopDetailsViewPagerAdapter(FragmentManager fm, GoOtherPageListener pageListener,GoodsDetailIntener returnListener) {
+    public SshopDetailsViewPagerAdapter(FragmentManager fm, GoOtherPageListener pageListener,GoodsDetailIntener returnListener,ScollChangeLinstener changeLinstener) {
         super(fm);
-        setData(pageListener,returnListener);
+        setData(pageListener,returnListener,changeLinstener);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class SshopDetailsViewPagerAdapter extends FragmentPagerAdapter {
     /*
      * 初始化数据
      * */
-    public void setData(GoOtherPageListener pageListener, GoodsDetailIntener returnListener) {
+    public void setData(GoOtherPageListener pageListener, GoodsDetailIntener returnListener,ScollChangeLinstener changeLinstener) {
         if (fragments == null) {
             fragments = new ArrayList<>();
         }
@@ -55,7 +56,7 @@ public class SshopDetailsViewPagerAdapter extends FragmentPagerAdapter {
         beans.clear();
         beans.add(new TitleBean("商品",0));
         beans.add(new TitleBean("评论",1));
-        mainFragment = new SshopDetailMainFragment(pageListener,returnListener);
+        mainFragment = new SshopDetailMainFragment(pageListener,returnListener,changeLinstener);
         fragments.add(mainFragment);
         fragments.add(new SshopCommentsFragment());
 

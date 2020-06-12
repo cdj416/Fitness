@@ -6,8 +6,8 @@ android {
         applicationId "com.hongyuan.fitness"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 18
-        versionName "1.4.8"
+        versionCode 23
+        versionName "1.6.2"
         flavorDimensions "versionCode"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -72,6 +72,32 @@ android {
         }
     }
 
+    flavorDimensions "a"
+    /*配置渠道*/
+    productFlavors {
+//        yingyongbao {
+//            dimension "a"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yingyongbao"]
+//        }
+        huawei {
+            dimension "a"
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "huawei"]
+        }
+//        xiaomi {
+//            dimension "a"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+//        }
+//        vivo {
+//            dimension "a"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "vivo"]
+//        }
+//        oppo {
+//            dimension "a"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "oppo"]
+//        }
+    }
+
+
 //    splits {
 //        abi {
 //            enable true
@@ -114,6 +140,7 @@ dependencies {
 
     //图片加载器
     implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.10.0'
     //图片选择
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.2'
 
@@ -175,8 +202,8 @@ dependencies {
     implementation files('libs/AMap3DMap_6.4.1_AMapNavi_6.3.0_AMapSearch_6.1.0_AMapLocation_4.2.0_20180906.jar')
 
     //友盟数据统计及其分享
-    implementation  'com.umeng.umsdk:analytics:8.0.0'
-    implementation  'com.umeng.sdk:common:1.5.1'
+    implementation 'com.umeng.sdk:common:1.5.1'
+    implementation 'com.umeng.sdk:analytics:7.5.0'
 
     implementation 'com.umeng.sdk:share-core:6.9.1'
     implementation 'com.umeng.sdk:share-qq:6.9.1.1'

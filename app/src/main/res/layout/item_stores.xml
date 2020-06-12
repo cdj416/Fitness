@@ -42,8 +42,7 @@
                 <ImageView
                     android:id="@+id/storeMark"
                     android:layout_width="67dp"
-                    android:layout_height="24dp"
-                    android:src="@mipmap/a_test_shengjidian"/>
+                    android:layout_height="24dp"/>
                 <TextView
                     android:id="@+id/storeName"
                     android:layout_width="match_parent"

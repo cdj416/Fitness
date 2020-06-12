@@ -14,10 +14,25 @@ public abstract class V4TopicAdapter<T> extends BaseQuickAdapter<T, BaseViewHold
     }
     @Override
     protected void convert(BaseViewHolder helper, T item) {
-        RequestOptions options = new RequestOptions().placeholder(R.color.color_f2).error(R.color.color_f2);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.home_topic_one).error(R.mipmap.home_topic_one);
         Glide.with(mContext).load(getImg(item)).apply(options).into((RoundedImageView)helper.getView(R.id.bgImg));
 
-        helper.setText(R.id.firstName,getName(item)).setText(R.id.secondName,getDes(item));
+        if(helper.getAdapterPosition() == 0){
+            Glide.with(mContext).load(R.mipmap.home_topic_one).apply(options).into((RoundedImageView)helper.getView(R.id.bgImg));
+        }
+        if(helper.getAdapterPosition() == 1){
+            Glide.with(mContext).load(R.mipmap.home_topic_two).apply(options).into((RoundedImageView)helper.getView(R.id.bgImg));
+        }
+        if(helper.getAdapterPosition() == 2){
+            Glide.with(mContext).load(R.mipmap.home_topic_third).apply(options).into((RoundedImageView)helper.getView(R.id.bgImg));
+        }
+        if(helper.getAdapterPosition() == 3){
+            Glide.with(mContext).load(R.mipmap.home_topic_thorh).apply(options).into((RoundedImageView)helper.getView(R.id.bgImg));
+        }
+
+
+        helper.setText(R.id.firstName,getName(item)).setText(R.id.secondName,getDes(item))
+                .setText(R.id.nums,getNums(item)+"人参与");
 
         helper.addOnClickListener(R.id.goDetail);
     }
@@ -34,4 +49,8 @@ public abstract class V4TopicAdapter<T> extends BaseQuickAdapter<T, BaseViewHold
      * 描述信息
      * */
     public abstract String getDes(T item);
+    /*
+     * 参与人数
+     * */
+    public abstract int getNums(T item);
 }

@@ -12,13 +12,9 @@ import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
-import com.hongyuan.fitness.custom_view.FlowLayoutManager;
 import com.hongyuan.fitness.custom_view.StickyScrollView;
 import com.hongyuan.fitness.databinding.ActivityCoachProfileBinding;
 import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomeBean;
-import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomePageViewModel;
-import com.hongyuan.fitness.ui.mall.good_details.skuitem_view.SkuChildAdapter;
-import com.hongyuan.fitness.ui.store.MarkTextAdapter;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.ViewChangeUtil;
 
@@ -40,6 +36,11 @@ public class CoachProfileViewModel extends CustomViewModel implements StickyScro
     @Override
     protected void initView() {
         coachBean = (CoachHomeBean.DataBean)mActivity.getIntentData("coach");
+
+        if(coachBean == null){
+            mActivity.finish();
+            return;
+        }
 
         String headUrl;
         if(coachBean.getInfo().getCoach_head().contains("http")){

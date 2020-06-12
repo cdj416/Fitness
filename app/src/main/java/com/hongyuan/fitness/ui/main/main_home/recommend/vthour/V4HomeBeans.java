@@ -399,6 +399,15 @@ public class V4HomeBeans extends BaseBean {
             private int img_num;
             private String add_date;
             private int is_praise;
+            private int praise_num;
+
+            public int getPraise_num() {
+                return praise_num;
+            }
+
+            public void setPraise_num(int praise_num) {
+                this.praise_num = praise_num;
+            }
 
             public int getCircle_id() {
                 return circle_id;

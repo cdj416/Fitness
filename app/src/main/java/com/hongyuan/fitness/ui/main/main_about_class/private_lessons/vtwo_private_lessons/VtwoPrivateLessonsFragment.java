@@ -1,21 +1,27 @@
 package com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.filter_view.DropDownMenu;
 import com.hongyuan.fitness.ui.about_class.privite_class.course_details.CourseDetailsActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -23,6 +29,9 @@ import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 public class VtwoPrivateLessonsFragment extends CustomFragment implements FilterPriviteLessonsAdapter.OnFilterDoneListener, FilterPriviteLessonsAdapter.OnFilterContentListener {
 
@@ -32,6 +41,10 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
 
     private VtwoPrivateLessonsAdapter adapter;
     private VtwoPrivateLessonsBeans bean;
+
+    //赛选条件的适配器
+    private FilterPriviteLessonsAdapter filterAdapter;
+
 
     //错误信息控件
     private RelativeLayout load_box;
@@ -55,10 +68,9 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
 
         //加载错误页面信息
         initPrompt(mView);
-
         //初始化筛选菜单
-        String[] titleList = new String[] { "湖州全城", "筛选课程" };
-        dropDownMenu.setMenuAdapter(new FilterPriviteLessonsAdapter(mActivity, titleList, this,this));
+        //String[] titleList = new String[] { TokenSingleBean.getInstance().getRegion_name()+"全城", "筛选课程" };
+        //dropDownMenu.setMenuAdapter(new FilterPriviteLessonsAdapter(mActivity, titleList, this,this));
 
         //加载刷新控件
         setOnRefresh();
@@ -114,7 +126,7 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
             //刷新，初始化页数为1
             curPage = FIRST_PAGE;
             bean = null;
-            lazyLoad();
+            getCourserData();
         };
     }
 
@@ -130,12 +142,12 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
 
     @Override
     public void loadMoreData() {
-        lazyLoad();
+        getCourserData();
     }
 
-    @Override
-    protected void lazyLoad() {
-        clearParams().setParams("city_name","湖州市");
+    public void getCourserData(){
+        mActivity.showLoading();
+        clearParams().setParams("city_name", TokenSingleBean.getInstance().getRegion_name());
         //课程--私教课列表
         if(BaseUtil.isValue(ft_ids)){
             setParams("ft_ids",ft_ids);
@@ -151,6 +163,7 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
 
     @Override
     public void onSuccess(Object data) {
+        mActivity.closeLoading();
 
         VtwoPrivateLessonsBeans pageData = (VtwoPrivateLessonsBeans)data;
         if(curPage == FIRST_PAGE){
@@ -224,7 +237,7 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
         this.region_code = region_code;
 
         bean = null;
-        lazyLoad();
+        getCourserData();
     }
 
     /*
@@ -233,5 +246,39 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
     @Override
     public void onFilterContent(int position, String changeText) {
         dropDownMenu.setPositionIndicatorText(position,changeText);
+    }
+
+    /*
+     * 刷新定位城市
+     * */
+    @Subscribe(id = ConstantsCode.EB_HOME_LOCATION)
+    public void changeLocation(String message) {
+        //城市切换了去刷新下数据
+        bean = null;
+        getCourserData();
+
+        //初始化筛选菜单
+        String[] titleList = new String[] { TokenSingleBean.getInstance().getRegion_name()+"全城", "筛选课程" };
+        if(filterAdapter == null){
+            filterAdapter = new FilterPriviteLessonsAdapter(mActivity, titleList, this,this);
+            dropDownMenu.setMenuAdapter(filterAdapter);
+        }else{
+            filterAdapter.changTitles(titleList);
+        }
+
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBus.getDefault().unregister(this);
     }
 }
