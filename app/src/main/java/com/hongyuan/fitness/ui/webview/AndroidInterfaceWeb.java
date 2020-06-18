@@ -12,6 +12,8 @@ import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVeri
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
 import com.hongyuan.fitness.ui.person.newedition.activity.MemberCardOrdersActivity;
+import com.hongyuan.fitness.ui.store.StoreDetailActivity;
+import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.GsonUtil;
@@ -168,5 +170,15 @@ public class AndroidInterfaceWeb {
     @JavascriptInterface
     public String androidIsLogin(){
         return String.valueOf(BaseUtil.isValue(viewModel.userToken.getM_id()));
+    }
+
+    /*
+    * 跳转到健身房详情页
+    * */
+    @JavascriptInterface
+    public void androidGoGym(String os_id){
+        Bundle bundle = new Bundle();
+        bundle.putString("os_id",os_id);
+        mActivity.startActivity(StoreDetailActivity.class,bundle);
     }
 }

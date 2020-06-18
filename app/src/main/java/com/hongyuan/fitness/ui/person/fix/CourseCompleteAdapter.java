@@ -23,7 +23,7 @@ public class CourseCompleteAdapter extends BaseQuickAdapter<MyPriviteCourseBeans
         helper.setText(R.id.courseName,item.getCp_name())
                 .setText(R.id.kTime,getShowTime(item.getLast_kong_date()))
                 .setText(R.id.coachName,"教练："+item.getCoach_nickname()+"/"+item.getOs_name())
-                .setText(R.id.allNum,item.getHave_num());
+                .setText(R.id.allNum,String.valueOf(item.getHave_num()));
 
 
         helper.addOnClickListener(R.id.reservation);

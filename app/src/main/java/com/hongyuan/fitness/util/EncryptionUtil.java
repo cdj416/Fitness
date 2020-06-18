@@ -18,6 +18,11 @@ public class EncryptionUtil {
      * @return
      */
     public static String md5Decode(String content) {
+
+        if(!BaseUtil.isValue(content)){
+            return "a1234567dff";
+        }
+
         byte[] hash;
         try {
             hash = MessageDigest.getInstance("MD5").digest(content.getBytes("UTF-8"));

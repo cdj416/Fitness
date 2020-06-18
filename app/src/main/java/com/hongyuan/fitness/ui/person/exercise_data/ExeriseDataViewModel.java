@@ -4,7 +4,6 @@ import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
-import com.hongyuan.fitness.custom_view.person_cloum.PersonItemCloumView;
 import com.hongyuan.fitness.databinding.ActivityExerciseDataBinding;
 import com.hongyuan.fitness.ui.only_equipment.indicator_details.WristbandRealTimeData;
 import com.hongyuan.fitness.ui.only_equipment.indicator_details.mp_chart_manger.WristbandExerciseDataBarManger;

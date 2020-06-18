@@ -112,6 +112,11 @@ public class FeaturedFragment extends CustomFragment {
      * 帖子点赞/取消
      * */
     private void getBaikeLike(int position){
+        if(featureBean == null || featureBean.getData() == null || featureBean.getData().getList() == null || featureBean.getData().getList().size() <=0){
+            CustomDialog.showMessage(mActivity,"数据获取失败，请下拉刷新！");
+            return;
+        }
+
         mActivity.showLoading();
         mPosition = position;
         clearParams().setParams("circle_id",String.valueOf(featureBean.getData().getList().get(position).getCircle_id()));
@@ -126,8 +131,12 @@ public class FeaturedFragment extends CustomFragment {
     protected void lazyLoad() {
         featureBean = null;
         if(mActivity.userToken.getM_id() != null && "gz".equals(getFragType())){
-            //获取好友列表
-            Controller.myRequest(Constants.GET_MY_FRIENDS,Controller.TYPE_POST,getParams(), FriendsBeans.class,this);
+            try {
+                //获取好友列表
+                Controller.myRequest(Constants.GET_MY_FRIENDS,Controller.TYPE_POST,getParams(), FriendsBeans.class,this);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         if("tj".equals(getFragType())){

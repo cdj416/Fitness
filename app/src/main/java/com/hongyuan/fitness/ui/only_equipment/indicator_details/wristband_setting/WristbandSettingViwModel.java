@@ -2,7 +2,6 @@ package com.hongyuan.fitness.ui.only_equipment.indicator_details.wristband_setti
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
@@ -10,22 +9,17 @@ import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
-import com.hongyuan.fitness.custom_view.person_cloum.PersonItemCloumView;
 import com.hongyuan.fitness.databinding.ActivityWristbandSettingBinding;
 import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.only_equipment.indicator_details.wristband_fragments.WristbandStautsUtils;
-import com.hongyuan.fitness.ui.only_equipment.indicator_details.wristband_setting.wristband_alarm_clock.AlarmClockBeans;
 import com.hongyuan.fitness.ui.only_equipment.indicator_details.wristband_setting.wristband_alarm_clock.WristbandAlarmClockActivity;
 import com.hongyuan.fitness.ui.only_equipment.indicator_details.wristband_setting.wristband_msg.WristbandMsgActivity;
 import com.hongyuan.fitness.ui.show_big_img.ShowBigImgActivity;
-import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
 import com.yolanda.health.qnblesdk.bean.QNSitRemind;
 import com.yolanda.health.qnblesdk.bean.QNWeek;
 import com.yolanda.health.qnblesdk.constant.CheckStatus;
-import com.yolanda.health.qnblesdk.listener.QNObjCallback;
-import com.yolanda.health.qnblesdk.listener.QNResultCallback;
 import com.yolanda.health.qnblesdk.out.QNBandManager;
 import com.yolanda.health.qnblesdk.out.QNBleApi;
 

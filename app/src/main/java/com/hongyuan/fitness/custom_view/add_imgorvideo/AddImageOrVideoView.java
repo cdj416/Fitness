@@ -8,13 +8,9 @@ import android.graphics.Rect;
 import android.media.MediaMetadataRetriever;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.ui.find.circle.edit_post.FileBean;
@@ -30,7 +26,6 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.previewlibrary.GPreviewBuilder;
 import com.previewlibrary.enitity.UserViewInfo;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -192,21 +187,22 @@ public class AddImageOrVideoView extends LinearLayout {
      * 图片选择回调
      * */
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if (resultCode == Activity.RESULT_OK) {
-            switch (requestCode) {
-                case PictureConfig.CHOOSE_REQUEST:
-                    // 图片、视频、音频选择结果回调
-                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
-                    // 例如 LocalMedia 里面返回三种path
-                    // 1.media.getPath(); 为原图path
-                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true  注意：音视频除外
-                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true  注意：音视频除外
-                    // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+        try {
+            if (resultCode == Activity.RESULT_OK) {
+                switch (requestCode) {
+                    case PictureConfig.CHOOSE_REQUEST:
+                        // 图片、视频、音频选择结果回调
+                        List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                        // 例如 LocalMedia 里面返回三种path
+                        // 1.media.getPath(); 为原图path
+                        // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true  注意：音视频除外
+                        // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true  注意：音视频除外
+                        // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
 
-                    if(data == null || selectList == null || selectList.size() <= 0){
-                        CustomDialog.showMessage(getContext(),"内容无效，请从选！");
-                        return;
-                    }
+                        if(data == null || selectList == null || selectList.size() <= 0){
+                            CustomDialog.showMessage(getContext(),"内容无效，请从选！");
+                            return;
+                        }
 
                         for (LocalMedia bean:selectList){
                             FileBean imageBean = new FileBean();
@@ -274,9 +270,13 @@ public class AddImageOrVideoView extends LinearLayout {
                         }
                         adapter.setNewData(mList);
 
-                    break;
+                        break;
+                }
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 
     /*
