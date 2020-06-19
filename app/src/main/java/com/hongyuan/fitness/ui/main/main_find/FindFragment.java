@@ -125,7 +125,11 @@ public class FindFragment extends CustomFragment {
     @Override
     protected void lazyLoad() {
         clearParams().setParams("page","4").setParams("curpage","");
-        Controller.myRequest(Constants.GET_CIRCLE_CATEGORY_LIST,Controller.TYPE_POST,getParams(), SlectTopicLeftBeans.class,this);
+        try {
+            Controller.myRequest(Constants.GET_CIRCLE_CATEGORY_LIST,Controller.TYPE_POST,getParams(), SlectTopicLeftBeans.class,this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /*
