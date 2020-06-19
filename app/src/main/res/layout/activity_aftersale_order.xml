@@ -179,7 +179,7 @@
                                 android:textColor="@color/color_EF5B48"
                                 android:textSize="@dimen/sp_14"
                                 android:textStyle="bold"
-                                android:text="SDE323232"/>
+                                android:text=""/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -265,7 +265,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
                     app:icLeftText="商品总价:"
-                    app:icRightText="¥2000"/>
+                    app:icRightText="¥0"/>
 
                 <com.hongyuan.fitness.custom_view.ItemCloumView
                     android:id="@+id/freight"
@@ -281,7 +281,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
                     app:icLeftText="店铺优惠:"
-                    app:icRightText="¥100"/>
+                    app:icRightText="¥0"/>
                 <com.hongyuan.fitness.custom_view.ItemCloumView
                     android:id="@+id/payType"
                     android:layout_width="match_parent"
@@ -289,14 +289,14 @@
                     android:background="@color/color_FFFFFF"
                     android:visibility="visible"
                     app:icLeftText="支付方式:"
-                    app:icRightText="微信支付"/>
+                    app:icRightText="--"/>
                 <com.hongyuan.fitness.custom_view.ItemCloumView
                     android:id="@+id/needPayPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
                     app:icLeftText="应付款:"
-                    app:icRightText="¥1900"
+                    app:icRightText="¥0"
                     app:icRightColor="@color/color_EF5B48"/>
 
                 <TextView
@@ -322,14 +322,14 @@
                     android:background="@color/color_FFFFFF"
                     android:visibility="gone"
                     app:icLeftText="积分:"
-                    app:icRightText="+90"/>
+                    app:icRightText="+0"/>
                 <com.hongyuan.fitness.custom_view.ItemCloumView
                     android:id="@+id/orderNum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
                     app:icLeftText="订单号:"
-                    app:icRightText="sdjs21982192"
+                    app:icRightText=""
                     app:icShowCopy="true"/>
                 <com.hongyuan.fitness.custom_view.ItemCloumView
                     android:id="@+id/createTime"
@@ -337,14 +337,14 @@
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
                     app:icLeftText="创建时间："
-                    app:icRightText="2020.3.24 14:23:12"/>
+                    app:icRightText=""/>
                 <com.hongyuan.fitness.custom_view.ItemCloumView
                     android:id="@+id/payTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_FFFFFF"
                     app:icLeftText="付款时间:"
-                    app:icRightText="2020.3.24 14:23:12"/>
+                    app:icRightText=""/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

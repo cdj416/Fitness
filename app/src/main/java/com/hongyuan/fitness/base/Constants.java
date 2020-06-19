@@ -9,9 +9,9 @@ public class Constants {
     //预发环境
     //public static final String ADRESS = "https://api_yufabu.1667799.com";
     //预发环境
-    //public static final String ADRESS = "https://apiyufabu.1667799.com";
+    public static final String ADRESS = "https://apiyufabu.1667799.com";
     //正式地址
-    public static final String ADRESS = "http://www.hongyuangood.com";
+    //public static final String ADRESS = "http://www.hongyuangood.com";
 
 
     //webUrl内网需要的地址
