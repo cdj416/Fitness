@@ -25,6 +25,7 @@ import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.EncryptionUtil;
+import com.hongyuan.fitness.util.LocationBean;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -596,6 +597,8 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
             baseParams.put("timespan",String.valueOf(timeSpan));
             baseParams.put("ntoken",ntoken.toString());
             baseParams.put("city_code",BaseUtil.isValue(mActivity.userToken.getRegion_code()) ? mActivity.userToken.getRegion_code() : "3505");
+            baseParams.put("lat", LocationBean.getInstance().getLat());
+            baseParams.put("lng",LocationBean.getInstance().getLng());
             //是否开启分页
             if(isLoadMore){
                 baseParams.put("curpage",String.valueOf(curPage));

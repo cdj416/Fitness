@@ -52,6 +52,7 @@
                         android:layout_marginTop="12dp"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
+                        android:visibility="gone"
                         android:background="@color/color_FFFFFF">
                         <ImageView
                             android:id="@+id/statusImg"
@@ -101,6 +102,7 @@
                         android:layout_height="80dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginTop="12dp"
+                        android:visibility="gone"
                         android:background="@color/color_FFFFFF">
                         <ImageView
                             android:layout_width="match_parent"
@@ -161,6 +163,7 @@
                         android:background="@color/color_FFFFFF"
                         android:paddingStart="@dimen/dp_16"
                         android:paddingEnd="@dimen/dp_16"
+                        android:visibility="gone"
                         android:gravity="center_vertical">
                         <LinearLayout
                             android:layout_width="wrap_content"

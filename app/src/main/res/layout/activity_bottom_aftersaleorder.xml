@@ -62,6 +62,7 @@
                         android:textSize="@dimen/sp_16"
                         android:textColor="@color/color_EF5B48"
                         android:background="@drawable/shape_radius6_border_ef5b48"
+                        binding:onClickCommand="@{ViewModel.goLookLogistics}"
                         android:text="查看物流"/>
                     <TextView
                         android:layout_width="0dp"
@@ -73,6 +74,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginEnd="12dp"
                         android:background="@drawable/shape_radius6_border_ef5b48"
+                        android:visibility="gone"
                         android:text="删除订单"/>
                     <TextView
                         android:layout_width="0dp"
@@ -82,6 +84,7 @@
                         android:textSize="@dimen/sp_16"
                         android:textColor="@color/color_FFFFFF"
                         android:background="@drawable/shape_gradient_v_radiu5_login"
+                        binding:onClickCommand="@{ViewModel.goBuy}"
                         android:text="再次购买"/>
                 </LinearLayout>
 
@@ -96,7 +99,6 @@
                     android:visibility="gone"
                     android:gravity="center_vertical">
                     <TextView
-                        android:id="@+id/cancelOrdel"
                         android:layout_width="0dp"
                         android:layout_height="44dp"
                         android:layout_weight="1"
@@ -104,9 +106,9 @@
                         android:textSize="@dimen/sp_16"
                         android:textColor="@color/color_EF5B48"
                         android:background="@drawable/shape_radius6_border_ef5b48"
+                        binding:onClickCommand="@{ViewModel.cancelOrdel}"
                         android:text="取消"/>
                     <TextView
-                        android:id="@+id/goPay"
                         android:layout_width="0dp"
                         android:layout_height="44dp"
                         android:layout_weight="3"
@@ -115,6 +117,7 @@
                         android:textColor="@color/color_FFFFFF"
                         android:layout_marginStart="12dp"
                         android:background="@drawable/shape_gradient_v_radiu5_login"
+                        binding:onClickCommand="@{ViewModel.goPay}"
                         android:text="付款"/>
                 </LinearLayout>
                 <!--代发货状态-->
@@ -128,7 +131,6 @@
                     android:visibility="gone"
                     android:gravity="center_vertical">
                     <TextView
-                        android:id="@+id/dDelivery"
                         android:layout_width="0dp"
                         android:layout_height="44dp"
                         android:layout_weight="1"
@@ -137,6 +139,7 @@
                         android:textColor="@color/color_FFFFFF"
                         android:layout_marginStart="12dp"
                         android:background="@drawable/shape_gradient_v_radiu5_login"
+                        binding:onClickCommand="@{ViewModel.dDelivery}"
                         android:text="提醒发货"/>
                 </LinearLayout>
 
@@ -151,7 +154,6 @@
                     android:visibility="gone"
                     android:gravity="center_vertical">
                     <TextView
-                        android:id="@+id/lateDelivery"
                         android:layout_width="0dp"
                         android:layout_height="44dp"
                         android:layout_weight="1"
@@ -159,9 +161,9 @@
                         android:textSize="@dimen/sp_16"
                         android:textColor="@color/color_EF5B48"
                         android:background="@drawable/shape_radius6_border_ef5b48"
+                        binding:onClickCommand="@{ViewModel.lateDelivery}"
                         android:text="延长收货"/>
                     <TextView
-                        android:id="@+id/goLookLogistics"
                         android:layout_width="0dp"
                         android:layout_height="44dp"
                         android:layout_weight="1"
@@ -171,9 +173,9 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginEnd="12dp"
                         android:background="@drawable/shape_radius6_border_ef5b48"
+                        binding:onClickCommand="@{ViewModel.goLookLogistics}"
                         android:text="查看物流"/>
                     <TextView
-                        android:id="@+id/confirmReceipt"
                         android:layout_width="0dp"
                         android:layout_height="44dp"
                         android:layout_weight="1"
@@ -181,6 +183,7 @@
                         android:textSize="@dimen/sp_16"
                         android:textColor="@color/color_FFFFFF"
                         android:background="@drawable/shape_gradient_v_radiu5_login"
+                        binding:onClickCommand="@{ViewModel.confirmReceipt}"
                         android:text="确认收货"/>
                 </LinearLayout>
 
@@ -195,7 +198,6 @@
                     android:visibility="gone"
                     android:gravity="center_vertical">
                     <TextView
-                        android:id="@+id/goLogistics"
                         android:layout_width="0dp"
                         android:layout_height="44dp"
                         android:layout_weight="1"
@@ -203,9 +205,9 @@
                         android:textSize="@dimen/sp_16"
                         android:textColor="@color/color_EF5B48"
                         android:background="@drawable/shape_radius6_border_ef5b48"
+                        binding:onClickCommand="@{ViewModel.goLookLogistics}"
                         android:text="查看物流"/>
                     <TextView
-                        android:id="@+id/goAfterSales"
                         android:layout_width="0dp"
                         android:layout_height="44dp"
                         android:layout_weight="1"
@@ -215,9 +217,9 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginEnd="12dp"
                         android:background="@drawable/shape_radius6_border_ef5b48"
+                        binding:onClickCommand="@{ViewModel.goBuy}"
                         android:text="再次购买"/>
                     <TextView
-                        android:id="@+id/goEvaluation"
                         android:layout_width="0dp"
                         android:layout_height="44dp"
                         android:layout_weight="1"
@@ -225,10 +227,12 @@
                         android:textSize="@dimen/sp_16"
                         android:textColor="@color/color_FFFFFF"
                         android:background="@drawable/shape_gradient_v_radiu5_login"
+                        binding:onClickCommand="@{ViewModel.goEvaluation}"
                         android:text="评价"/>
                 </LinearLayout>
                 <!--自提完成-->
                 <LinearLayout
+                    android:id="@+id/ziTiCompleteBox"
                     android:layout_width="match_parent"
                     android:layout_height="84dp"
                     android:background="@color/color_FFFFFF"
@@ -238,6 +242,7 @@
                     android:gravity="center_vertical|right">
 
                     <TextView
+                        android:id="@+id/ztDelete"
                         android:layout_width="0dp"
                         android:layout_height="44dp"
                         android:layout_weight="1"
@@ -246,6 +251,7 @@
                         android:textColor="@color/color_EF5B48"
                         android:layout_marginStart="12dp"
                         android:layout_marginEnd="12dp"
+                        android:visibility="gone"
                         android:background="@drawable/shape_radius6_border_ef5b48"
                         android:text="删除订单"/>
                     <TextView
@@ -256,10 +262,12 @@
                         android:textSize="@dimen/sp_16"
                         android:textColor="@color/color_FFFFFF"
                         android:background="@drawable/shape_gradient_v_radiu5_login"
+                        binding:onClickCommand="@{ViewModel.goBuy}"
                         android:text="再次购买"/>
                 </LinearLayout>
                 <!--自提评价-->
                 <LinearLayout
+                    android:id="@+id/ziTiEvaluatedBox"
                     android:layout_width="match_parent"
                     android:layout_height="84dp"
                     android:background="@color/color_FFFFFF"
@@ -277,6 +285,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_marginEnd="12dp"
                         android:background="@drawable/shape_radius6_border_ef5b48"
+                        binding:onClickCommand="@{ViewModel.goBuy}"
                         android:text="再次购买"/>
                     <TextView
                         android:layout_width="0dp"
@@ -286,6 +295,7 @@
                         android:textSize="@dimen/sp_16"
                         android:textColor="@color/color_FFFFFF"
                         android:background="@drawable/shape_gradient_v_radiu5_login"
+                        binding:onClickCommand="@{ViewModel.goEvaluation}"
                         android:text="评价"/>
                 </LinearLayout>
 
@@ -309,6 +319,7 @@
                         android:textSize="@dimen/sp_16"
                         android:textColor="@color/color_FFFFFF"
                         android:background="@drawable/shape_gradient_v_radiu5_login"
+                        binding:onClickCommand="@{ViewModel.confirmReceipt}"
                         android:text="确认收货"/>
                 </LinearLayout>
             </RelativeLayout>

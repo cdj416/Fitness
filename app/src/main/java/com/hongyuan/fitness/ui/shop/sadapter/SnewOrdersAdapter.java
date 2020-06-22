@@ -48,7 +48,9 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                 }else if(oneBean.getO_state() == BottomBean.STATU_SHIPPED){
                     helper.setText(R.id.status,"待收货").setTextColor(R.id.status,mContext.getResources().getColor(R.color.color_EF5B48));
                 }else if(oneBean.getO_state() == BottomBean.STATU_BE_EVALUATED){
-                    helper.setText(R.id.status,"待评价").setTextColor(R.id.status,mContext.getResources().getColor(R.color.green));
+                    helper.setText(R.id.status,"待评价").setTextColor(R.id.status,mContext.getResources().getColor(R.color.color_EF5B48));
+                }else if((oneBean.getO_state() == BottomBean.STATU_COMPLETED || oneBean.getO_state() == BottomBean.STATU_ALL_COMPLETED)){
+                    helper.setText(R.id.status,"已完成").setTextColor(R.id.status,mContext.getResources().getColor(R.color.green));
                 }
 
                 helper.addOnClickListener(R.id.titleBox);
@@ -100,47 +102,32 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                     helper.getView(R.id.pointBox).setVisibility(View.GONE);
                 }
 
-                //自提
-                if(bottomBean.getO_deliver_way() == 2){
+                if(bottomBean.getStatus() == BottomBean.STATU_PAY){
+                    helper.getView(R.id.sPayBox).setVisibility(View.VISIBLE);
                     helper.getView(R.id.dDelivery).setVisibility(View.GONE);
                     helper.getView(R.id.collectionBox).setVisibility(View.GONE);
                     helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
 
-                    if(bottomBean.getStatus() == BottomBean.STATU_PAY){
-                        helper.getView(R.id.sPayBox).setVisibility(View.VISIBLE);
-                        helper.getView(R.id.selfMentionBox).setVisibility(View.GONE);
-                        helper.addOnClickListener(R.id.cancelOrder);
-                        helper.addOnClickListener(R.id.goPay);
-                    }else{
-                        helper.getView(R.id.sPayBox).setVisibility(View.GONE);
-                        helper.getView(R.id.selfMentionBox).setVisibility(View.VISIBLE);
-                        helper.addOnClickListener(R.id.lookSelfAddress);
-                        helper.addOnClickListener(R.id.selfReceipt);
-                    }
+                    helper.addOnClickListener(R.id.cancelOrder);
+                    helper.addOnClickListener(R.id.goPay);
+                }else if(bottomBean.getStatus() == BottomBean.STATU_DELIVERY){
+                    helper.getView(R.id.sPayBox).setVisibility(View.GONE);
+                    helper.getView(R.id.dDelivery).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.collectionBox).setVisibility(View.GONE);
+                    helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
 
-                }else{
-                    helper.getView(R.id.selfMentionBox).setVisibility(View.GONE);
-                    if(bottomBean.getStatus() == BottomBean.STATU_PAY){
-                        helper.getView(R.id.sPayBox).setVisibility(View.VISIBLE);
+                    helper.addOnClickListener(R.id.dDelivery);
+                }else if(bottomBean.getStatus() == BottomBean.STATU_SHIPPED){
+                    if(bottomBean.getO_deliver_way() == 2){//自提
                         helper.getView(R.id.dDelivery).setVisibility(View.GONE);
                         helper.getView(R.id.collectionBox).setVisibility(View.GONE);
                         helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
 
-                        helper.addOnClickListener(R.id.cancelOrder);
-                        helper.addOnClickListener(R.id.goPay);
-                    }
-
-                    if(bottomBean.getStatus() == BottomBean.STATU_DELIVERY){
                         helper.getView(R.id.sPayBox).setVisibility(View.GONE);
-                        helper.getView(R.id.dDelivery).setVisibility(View.VISIBLE);
-                        helper.getView(R.id.collectionBox).setVisibility(View.GONE);
-                        helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
-
-                        helper.addOnClickListener(R.id.dDelivery);
-                        helper.addOnClickListener(R.id.submitGoods);
-                    }
-
-                    if(bottomBean.getStatus() == BottomBean.STATU_SHIPPED){
+                        helper.getView(R.id.selfMentionBox).setVisibility(View.VISIBLE);
+                        helper.addOnClickListener(R.id.lookSelfAddress);
+                        helper.addOnClickListener(R.id.selfReceipt);
+                    }else{
                         helper.getView(R.id.sPayBox).setVisibility(View.GONE);
                         helper.getView(R.id.dDelivery).setVisibility(View.GONE);
                         helper.getView(R.id.collectionBox).setVisibility(View.VISIBLE);
@@ -149,19 +136,23 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                         helper.addOnClickListener(R.id.lookCollection);
                         helper.addOnClickListener(R.id.submitGoods);
                     }
+                }else if(bottomBean.getStatus() == BottomBean.STATU_BE_EVALUATED){
+                    helper.getView(R.id.sPayBox).setVisibility(View.GONE);
+                    helper.getView(R.id.dDelivery).setVisibility(View.GONE);
+                    helper.getView(R.id.collectionBox).setVisibility(View.GONE);
+                    helper.getView(R.id.beEvaluatedBox).setVisibility(View.VISIBLE);
 
-                    if(bottomBean.getStatus() == BottomBean.STATU_BE_EVALUATED){
-                        helper.getView(R.id.sPayBox).setVisibility(View.GONE);
-                        helper.getView(R.id.dDelivery).setVisibility(View.GONE);
-                        helper.getView(R.id.collectionBox).setVisibility(View.GONE);
-                        helper.getView(R.id.beEvaluatedBox).setVisibility(View.VISIBLE);
+                    helper.addOnClickListener(R.id.goAginBugy);
+                    helper.addOnClickListener(R.id.goEvaluate);
+                }else if(bottomBean.getStatus() == BottomBean.STATU_COMPLETED || bottomBean.getStatus() == BottomBean.STATU_ALL_COMPLETED){
+                    helper.getView(R.id.sPayBox).setVisibility(View.GONE);
+                    helper.getView(R.id.dDelivery).setVisibility(View.GONE);
+                    helper.getView(R.id.collectionBox).setVisibility(View.GONE);
+                    helper.getView(R.id.beEvaluatedBox).setVisibility(View.VISIBLE);
 
-                        helper.addOnClickListener(R.id.goAginBugy);
-                        helper.addOnClickListener(R.id.goEvaluate);
-                    }
-
+                    helper.getView(R.id.goEvaluate).setVisibility(View.GONE);
+                    helper.addOnClickListener(R.id.goAginBugy);
                 }
-
 
 
                 break;

@@ -129,6 +129,13 @@ public class SnewOrdersFragment extends CustomFragment {
                 startActivity(AftersaleOrderActivity.class,bundle);
             }
 
+            if(view.getId() == R.id.lookSelfAddress){
+                SnewOrderBeans.DataBean.BottomBean item = (SnewOrderBeans.DataBean.BottomBean)mList.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("o_id",String.valueOf(item.getO_id()));
+                startActivity(AftersaleOrderActivity.class,bundle);
+            }
+
         });
     }
 

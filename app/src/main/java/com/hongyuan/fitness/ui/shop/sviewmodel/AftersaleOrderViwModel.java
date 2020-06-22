@@ -77,64 +77,131 @@ public class AftersaleOrderViwModel extends CustomViewModel {
 
             if(infoBean.getState() == STATU_PAY){
                 binding.statusName.setText("等待买家付款");
-                binding.logisticsBox.setVisibility(View.GONE);
                 binding.payTime.setVisibility(View.GONE);
                 binding.payType.setVisibility(View.GONE);
 
-                binding.logisticsBox.setVisibility(View.GONE);
+                if(infoBean.getDeliver_way() == 2){
+                    binding.sCode.setText("*****");
+                    binding.selfMentionBox.setVisibility(View.VISIBLE);
+
+                    binding.sCode.setText("*****");
+                    binding.sName.setText(infoBean.getDeliver_address().getConsignee());
+                    binding.sTel.setText(infoBean.getDeliver_address().getDeliver_mobile());
+                    binding.sAddress.setText(infoBean.getDeliver_address().getPname()+" "+infoBean.getDeliver_address().getCname()+" "+infoBean.getDeliver_address().getDname()+" "+infoBean.getDeliver_address().getAddress());
+
+                }else{
+                    binding.logisticsBox.setVisibility(View.GONE);
+                    binding.goAddress.setVisibility(View.VISIBLE);
+
+                    binding.receiptName.setText(infoBean.getDeliver_address().getConsignee());
+                    binding.telNum.setText(infoBean.getDeliver_address().getDeliver_mobile());
+                    binding.address.setText(infoBean.getDeliver_address().getPname()+" "+infoBean.getDeliver_address().getCname()+" "+infoBean.getDeliver_address().getDname()+" "+infoBean.getDeliver_address().getAddress());
+                }
 
             }
             if(infoBean.getState() == STATU_DELIVERY){
                 binding.statusName.setText("等待卖家发货");
-                binding.logisticsBox.setVisibility(View.GONE);
 
                 binding.payTime.setRightText(infoBean.getPay_date());
                 binding.payType.setRightText(infoBean.getPay_way());
 
-                binding.logisticsBox.setVisibility(View.GONE);
+                if(infoBean.getDeliver_way() == 2){
+                    binding.selfMentionBox.setVisibility(View.VISIBLE);
+
+                    binding.sCode.setText(infoBean.getQuhuo_code());
+                    binding.sName.setText(infoBean.getDeliver_address().getConsignee());
+                    binding.sTel.setText(infoBean.getDeliver_address().getDeliver_mobile());
+                    binding.sAddress.setText(infoBean.getDeliver_address().getPname()+" "+infoBean.getDeliver_address().getCname()+" "+infoBean.getDeliver_address().getDname()+" "+infoBean.getDeliver_address().getAddress());
+
+                }else{
+                    binding.logisticsBox.setVisibility(View.GONE);
+                    binding.goAddress.setVisibility(View.VISIBLE);
+
+                    binding.receiptName.setText(infoBean.getDeliver_address().getConsignee());
+                    binding.telNum.setText(infoBean.getDeliver_address().getDeliver_mobile());
+                    binding.address.setText(infoBean.getDeliver_address().getPname()+" "+infoBean.getDeliver_address().getCname()+" "+infoBean.getDeliver_address().getDname()+" "+infoBean.getDeliver_address().getAddress());
+                }
 
             }
-            if(infoBean.getState() == STATU_SHIPPED){
+            if(infoBean.getState() == STATU_SHIPPED || infoBean.getState() == STATU_PICKEDUP){
                 binding.statusName.setText("卖家已发货");
-                binding.logisticsBox.setVisibility(View.VISIBLE);
                 binding.payTime.setRightText(infoBean.getPay_date());
                 binding.payType.setRightText(infoBean.getPay_way());
 
-                binding.deliverCompany.setText(infoBean.getDeliver_info().getDeliver_company());
-                binding.content.setText(infoBean.getDeliver_info().getInfo() != null ? infoBean.getDeliver_info().getInfo().getContext() : infoBean.getDeliver_info().getDeliver_num());
-                binding.delTime.setText(infoBean.getDeliver_info().getInfo() != null ? infoBean.getDeliver_info().getInfo().getTime() : infoBean.getDeliver_info().getDeliver_date());
+                if(infoBean.getDeliver_way() == 2){
+                    binding.statusName.setText("等待确认收货");
+                    binding.selfMentionBox.setVisibility(View.VISIBLE);
 
+                    binding.sCode.setText(infoBean.getQuhuo_code());
+                    binding.sName.setText(infoBean.getDeliver_address().getConsignee());
+                    binding.sTel.setText(infoBean.getDeliver_address().getDeliver_mobile());
+                    binding.sAddress.setText(infoBean.getDeliver_address().getPname()+" "+infoBean.getDeliver_address().getCname()+" "+infoBean.getDeliver_address().getDname()+" "+infoBean.getDeliver_address().getAddress());
+
+                }else{
+                    binding.logisticsBox.setVisibility(View.VISIBLE);
+                    binding.goAddress.setVisibility(View.VISIBLE);
+
+                    binding.deliverCompany.setText(infoBean.getDeliver_info().getDeliver_company());
+                    binding.content.setText(infoBean.getDeliver_info().getInfo() != null ? infoBean.getDeliver_info().getInfo().getContext() : infoBean.getDeliver_info().getDeliver_num());
+                    binding.delTime.setText(infoBean.getDeliver_info().getInfo() != null ? infoBean.getDeliver_info().getInfo().getTime() : infoBean.getDeliver_info().getDeliver_date());
+
+                    binding.receiptName.setText(infoBean.getDeliver_address().getConsignee());
+                    binding.telNum.setText(infoBean.getDeliver_address().getDeliver_mobile());
+                    binding.address.setText(infoBean.getDeliver_address().getPname()+" "+infoBean.getDeliver_address().getCname()+" "+infoBean.getDeliver_address().getDname()+" "+infoBean.getDeliver_address().getAddress());
+                }
             }
             if(infoBean.getState() == STATU_BE_EVALUATED){
                 binding.statusName.setText("待评价");
-                binding.logisticsBox.setVisibility(View.VISIBLE);
                 binding.payTime.setRightText(infoBean.getPay_date());
                 binding.payType.setRightText(infoBean.getPay_way());
 
-                binding.deliverCompany.setText(infoBean.getDeliver_info().getDeliver_company());
-                binding.content.setText(infoBean.getDeliver_info().getInfo() != null ? infoBean.getDeliver_info().getInfo().getContext() : infoBean.getDeliver_info().getDeliver_num());
-                binding.delTime.setText(infoBean.getDeliver_info().getInfo() != null ? infoBean.getDeliver_info().getInfo().getTime() : infoBean.getDeliver_info().getDeliver_date());
+                if(infoBean.getDeliver_way() == 2){
+                    binding.selfMentionBox.setVisibility(View.VISIBLE);
+
+                    binding.sCode.setText(infoBean.getQuhuo_code());
+                    binding.sName.setText(infoBean.getDeliver_address().getConsignee());
+                    binding.sTel.setText(infoBean.getDeliver_address().getDeliver_mobile());
+                    binding.sAddress.setText(infoBean.getDeliver_address().getPname()+" "+infoBean.getDeliver_address().getCname()+" "+infoBean.getDeliver_address().getDname()+" "+infoBean.getDeliver_address().getAddress());
+
+                }else{
+                    binding.logisticsBox.setVisibility(View.VISIBLE);
+                    binding.goAddress.setVisibility(View.VISIBLE);
+
+                    binding.deliverCompany.setText(infoBean.getDeliver_info().getDeliver_company());
+                    binding.content.setText(infoBean.getDeliver_info().getInfo() != null ? infoBean.getDeliver_info().getInfo().getContext() : infoBean.getDeliver_info().getDeliver_num());
+                    binding.delTime.setText(infoBean.getDeliver_info().getInfo() != null ? infoBean.getDeliver_info().getInfo().getTime() : infoBean.getDeliver_info().getDeliver_date());
+
+                    binding.receiptName.setText(infoBean.getDeliver_address().getConsignee());
+                    binding.telNum.setText(infoBean.getDeliver_address().getDeliver_mobile());
+                    binding.address.setText(infoBean.getDeliver_address().getPname()+" "+infoBean.getDeliver_address().getCname()+" "+infoBean.getDeliver_address().getDname()+" "+infoBean.getDeliver_address().getAddress());
+                }
             }
 
-            if(infoBean.getDeliver_way() == 2){
-                binding.selfMentionBox.setVisibility(View.VISIBLE);
-                binding.goAddress.setVisibility(View.GONE);
+            if(infoBean.getState() == STATU_COMPLETED || infoBean.getState() == STATU_ALL_COMPLETED){
+                binding.statusName.setText("已完成");
+                binding.payTime.setRightText(infoBean.getPay_date());
+                binding.payType.setRightText(infoBean.getPay_way());
 
-                if(infoBean.getState() == STATU_PAY || infoBean.getState() == STATU_CANCEL){
-                    binding.sCode.setText("*****");
-                }else{
+                if(infoBean.getDeliver_way() == 2){
+                    binding.selfMentionBox.setVisibility(View.VISIBLE);
+
                     binding.sCode.setText(infoBean.getQuhuo_code());
-                }
-                binding.sName.setText(infoBean.getDeliver_address().getConsignee());
-                binding.sTel.setText(infoBean.getDeliver_address().getDeliver_mobile());
-                binding.sAddress.setText(infoBean.getDeliver_address().getPname()+" "+infoBean.getDeliver_address().getCname()+" "+infoBean.getDeliver_address().getDname()+" "+infoBean.getDeliver_address().getAddress());
-            }else{
-                binding.selfMentionBox.setVisibility(View.GONE);
-                binding.goAddress.setVisibility(View.VISIBLE);
+                    binding.sName.setText(infoBean.getDeliver_address().getConsignee());
+                    binding.sTel.setText(infoBean.getDeliver_address().getDeliver_mobile());
+                    binding.sAddress.setText(infoBean.getDeliver_address().getPname()+" "+infoBean.getDeliver_address().getCname()+" "+infoBean.getDeliver_address().getDname()+" "+infoBean.getDeliver_address().getAddress());
 
-                binding.receiptName.setText(infoBean.getDeliver_address().getConsignee());
-                binding.telNum.setText(infoBean.getDeliver_address().getDeliver_mobile());
-                binding.address.setText(infoBean.getDeliver_address().getPname()+" "+infoBean.getDeliver_address().getCname()+" "+infoBean.getDeliver_address().getDname()+" "+infoBean.getDeliver_address().getAddress());
+                }else{
+                    binding.logisticsBox.setVisibility(View.VISIBLE);
+                    binding.goAddress.setVisibility(View.VISIBLE);
+
+                    binding.deliverCompany.setText(infoBean.getDeliver_info().getDeliver_company());
+                    binding.content.setText(infoBean.getDeliver_info().getInfo() != null ? infoBean.getDeliver_info().getInfo().getContext() : infoBean.getDeliver_info().getDeliver_num());
+                    binding.delTime.setText(infoBean.getDeliver_info().getInfo() != null ? infoBean.getDeliver_info().getInfo().getTime() : infoBean.getDeliver_info().getDeliver_date());
+
+                    binding.receiptName.setText(infoBean.getDeliver_address().getConsignee());
+                    binding.telNum.setText(infoBean.getDeliver_address().getDeliver_mobile());
+                    binding.address.setText(infoBean.getDeliver_address().getPname()+" "+infoBean.getDeliver_address().getCname()+" "+infoBean.getDeliver_address().getDname()+" "+infoBean.getDeliver_address().getAddress());
+                }
             }
 
 

@@ -23,6 +23,7 @@ import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.video.MyPlayActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.EncryptionUtil;
+import com.hongyuan.fitness.util.LocationBean;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
@@ -334,6 +335,8 @@ public abstract class CustomViewModel implements RetrofitListener {
             baseParams.put("timespan",String.valueOf(timeSpan));
             baseParams.put("ntoken",ntoken.toString());
             baseParams.put("city_code", BaseUtil.isValue(mActivity.userToken.getRegion_code()) ? mActivity.userToken.getRegion_code() : "3505");
+            baseParams.put("lat", LocationBean.getInstance().getLat());
+            baseParams.put("lng",LocationBean.getInstance().getLng());
 
             //是否开启分页
             if(isLoadMore){
