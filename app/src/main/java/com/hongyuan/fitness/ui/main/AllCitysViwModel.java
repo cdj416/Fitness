@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.google.android.exoplayer2.metadata.id3.MlltFrame;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
@@ -17,6 +18,7 @@ import com.hongyuan.fitness.util.LocationBean;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AllCitysViwModel extends CustomViewModel {
@@ -27,6 +29,8 @@ public class AllCitysViwModel extends CustomViewModel {
 
     //热门城市数据
     private OpenCitysBeans.DataBean hotBean;
+    //各个标题的下标位置
+    private HashMap<String, Integer> letterIndexes = new HashMap<>();
 
     public AllCitysViwModel(CustomActivity mActivity, AcitivityAllCitysBinding binding) {
         super(mActivity);
@@ -69,7 +73,7 @@ public class AllCitysViwModel extends CustomViewModel {
         });
 
        binding.mSideBarView.setOnTouchLetterChangeListener(letter -> {
-           int pos = adapter.getLetterPosition(letter);
+           int pos = getLetterPosition(letter);
 
            if (pos != -1) {
                binding.mRec.scrollToPosition(pos);
@@ -78,6 +82,17 @@ public class AllCitysViwModel extends CustomViewModel {
                mLayoutManager.scrollToPositionWithOffset(pos, 0);
            }
        });
+    }
+
+    /**
+     * 获取字母索引的位置
+     *
+     * @param letter
+     * @return
+     */
+    public int getLetterPosition(String letter) {
+        Integer integer = letterIndexes.get(letter);
+        return integer == null ? -1 : integer;
     }
 
     @Override
@@ -131,6 +146,9 @@ public class AllCitysViwModel extends CustomViewModel {
             //刷新右边显示栏
             binding.mSideBarView.setLetters(getTitles(mList));
 
+            //去更新各个标题的位置
+            setIndexes(mList);
+
         }
     }
 
@@ -155,5 +173,23 @@ public class AllCitysViwModel extends CustomViewModel {
         }
 
         return titles;
+    }
+
+    /*
+    * 存储下标
+    * */
+    private void setIndexes(List<MultiItemEntity> mList){
+        for(int i = 0 ; i < mList.size() ; i++){
+            if(mList.get(i) instanceof AllCitysBeans.DataBean.HeardBeans){
+                AllCitysBeans.DataBean.HeardBeans heardBeans = (AllCitysBeans.DataBean.HeardBeans)mList.get(i);
+                if("当前定位".equals(heardBeans.getTitle())){
+                    letterIndexes.put("#",i);
+                }else if("热门城市".equals(heardBeans.getTitle())){
+                    letterIndexes.put("热",i);
+                }else{
+                    letterIndexes.put(heardBeans.getTitle(),i);
+                }
+            }
+        }
     }
 }

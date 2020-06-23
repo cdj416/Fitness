@@ -113,10 +113,19 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                     helper.addOnClickListener(R.id.goPay);
                 }else if(bottomBean.getStatus() == BottomBean.STATU_DELIVERY){
                     helper.getView(R.id.sPayBox).setVisibility(View.GONE);
-                    helper.getView(R.id.dDelivery).setVisibility(View.VISIBLE);
                     helper.getView(R.id.collectionBox).setVisibility(View.GONE);
                     helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
                     helper.getView(R.id.selfMentionBox).setVisibility(View.GONE);
+
+                    if(bottomBean.getO_deliver_way() == 2){
+                        helper.getView(R.id.dDelivery).setVisibility(View.GONE);
+                        helper.getView(R.id.selfMentionBox).setVisibility(View.VISIBLE);
+                        helper.getView(R.id.selfReceipt).setVisibility(View.GONE);
+
+                        helper.addOnClickListener(R.id.lookSelfAddress);
+                    }else{
+                        helper.getView(R.id.dDelivery).setVisibility(View.VISIBLE);
+                    }
 
                     helper.addOnClickListener(R.id.dDelivery);
                 }else if(bottomBean.getStatus() == BottomBean.STATU_SHIPPED){
@@ -128,6 +137,8 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                         helper.getView(R.id.sPayBox).setVisibility(View.GONE);
                         helper.getView(R.id.selfMentionBox).setVisibility(View.VISIBLE);
                         helper.getView(R.id.lookSelfAddress).setVisibility(View.VISIBLE);
+
+                        helper.getView(R.id.selfReceipt).setVisibility(View.VISIBLE);
                         helper.addOnClickListener(R.id.lookSelfAddress);
                         helper.addOnClickListener(R.id.selfReceipt);
                     }else{
@@ -150,6 +161,7 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                         helper.getView(R.id.selfMentionBox).setVisibility(View.VISIBLE);
 
                         helper.getView(R.id.lookSelfAddress).setVisibility(View.GONE);
+                        helper.getView(R.id.selfReceipt).setVisibility(View.VISIBLE);
                         helper.addOnClickListener(R.id.selfReceipt);
                     }else{
                         helper.getView(R.id.sPayBox).setVisibility(View.GONE);

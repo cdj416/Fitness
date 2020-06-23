@@ -15,8 +15,6 @@ public class AllCitysAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, 
     public static final int TYPE_ONE = 0;
     public static final int TYPE_TWO = 1;
 
-    private HashMap<String, Integer> letterIndexes = new HashMap<>();
-
     public AllCitysAdapter(){
         super(new ArrayList<>());
         addItemType(TYPE_ONE, R.layout.item_citys_title);
@@ -29,8 +27,6 @@ public class AllCitysAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, 
             case TYPE_ONE:
                 HeardBeans oneBean = (HeardBeans) item;
                 helper.setText(R.id.cityName,oneBean.getTitle());
-
-                letterIndexes.put(oneBean.getTitle(),helper.getAdapterPosition());
                 break;
             case TYPE_TWO:
                 ListBean twoBean = (ListBean) item;
@@ -39,16 +35,5 @@ public class AllCitysAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, 
                 helper.addOnClickListener(R.id.cityName);
                 break;
         }
-    }
-
-    /**
-     * 获取字母索引的位置
-     *
-     * @param letter
-     * @return
-     */
-    public int getLetterPosition(String letter) {
-        Integer integer = letterIndexes.get(letter);
-        return integer == null ? -1 : integer;
     }
 }

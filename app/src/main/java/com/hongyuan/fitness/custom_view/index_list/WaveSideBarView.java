@@ -187,6 +187,8 @@ public class WaveSideBarView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        mItemHeight = (mHeight - mPadding) / mLetters.size();
+
         //绘制字母列表
         drawLetters(canvas);
 

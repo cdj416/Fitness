@@ -14,6 +14,7 @@ import com.hongyuan.fitness.ui.find.circle.edit_post.MoreImgBean;
 import com.hongyuan.fitness.ui.shop.sadapter.ProductReviewAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.AddProductReviewBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.ProductReviewBeans;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.GsonUtil;
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class ProductReviewViewModel extends CustomViewModel {
      * 上传图片
      * */
     public void submitFiles(){
-        if(!isValue(binding.editContent.getText().toString())){
+        /*if(!isValue(binding.editContent.getText().toString())){
             CustomDialog.showMessage(mActivity,"请输入评论内容！");
             return;
         }
@@ -81,8 +82,14 @@ public class ProductReviewViewModel extends CustomViewModel {
         if(binding.imgVideo.getImgList() == null || binding.imgVideo.getImgList().size() <= 0){
             CustomDialog.showMessage(mActivity,"请选择图片！");
             return;
+        }*/
+
+        if(binding.imgVideo.getImgList() != null && binding.imgVideo.getImgList().size() > 0){
+            updataFile();
+        }else{
+            addReview("");
         }
-        updataFile();
+
     }
 
     /*
@@ -115,7 +122,7 @@ public class ProductReviewViewModel extends CustomViewModel {
             AddProductReviewBeans reviewBeans = new AddProductReviewBeans();
             reviewBeans.setGp_id(mList.get(i).getGp_id());
             reviewBeans.setEvaluation_score(String.valueOf(binding.myRat.getRating()));
-            reviewBeans.setEvaluation_content(binding.editContent.getText().toString());
+            reviewBeans.setEvaluation_content(BaseUtil.isValue(binding.editContent.getText().toString()) ? binding.editContent.getText().toString() : "");
             reviewBeans.setEvaluationfile(fileUrls);
             reviewBeans.setIs_anonymous(Integer.parseInt(binding.niMingBox.getTag().toString()));
 

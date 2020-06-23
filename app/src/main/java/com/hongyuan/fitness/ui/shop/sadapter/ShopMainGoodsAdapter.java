@@ -40,7 +40,7 @@ public abstract class ShopMainGoodsAdapter<T> extends BaseQuickAdapter<T, BaseVi
         if(isStore()){
             helper.getView(R.id.goodsName).setVisibility(View.GONE);
             helper.getView(R.id.priceBox).setVisibility(View.GONE);
-            helper.getView(R.id.storeName).setVisibility(View.VISIBLE);
+            helper.getView(R.id.storeName).setVisibility(View.GONE);
             helper.setText(R.id.storeName,getName(item));
         }
 

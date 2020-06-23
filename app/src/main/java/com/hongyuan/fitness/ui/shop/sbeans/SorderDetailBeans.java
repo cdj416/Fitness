@@ -264,7 +264,7 @@ public class SorderDetailBeans extends BaseBean {
             private int is_zt;
             private int deliver_fee;
             private int buy_all_num;
-            private int all_price;
+            private double all_price;
             private int all_point;
             private BestCouponBean best_coupon;
             private List<GoodsListBean> goods_list;
@@ -309,11 +309,11 @@ public class SorderDetailBeans extends BaseBean {
                 this.buy_all_num = buy_all_num;
             }
 
-            public int getAll_price() {
+            public double getAll_price() {
                 return all_price;
             }
 
-            public void setAll_price(int all_price) {
+            public void setAll_price(double all_price) {
                 this.all_price = all_price;
             }
 

@@ -26,13 +26,14 @@
                 android:textColor="@color/color_FF333333"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:layout_marginStart="12dp"
                 android:text="取消"/>
             <RelativeLayout
                 android:layout_toLeftOf="@id/cancelText"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:layout_marginTop="9dp"
-                android:layout_marginEnd="12dp"
                 android:layout_marginBottom="9dp"
                 android:background="@drawable/shape_radius6_fff5f5f5">
 

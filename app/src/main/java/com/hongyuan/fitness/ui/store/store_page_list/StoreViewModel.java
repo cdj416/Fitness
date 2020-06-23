@@ -56,6 +56,7 @@ public class StoreViewModel extends CustomViewModel {
 
         binding.cancelText.setOnClickListener(v -> {
             binding.searchText.setText("");
+            binding.cancelText.setVisibility(View.GONE);
         });
 
 
@@ -83,6 +84,7 @@ public class StoreViewModel extends CustomViewModel {
             @Override
             public void afterTextChanged(Editable s) {
                os_name = s.toString();
+               binding.cancelText.setVisibility(View.VISIBLE);
             }
         });
     }

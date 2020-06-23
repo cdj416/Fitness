@@ -154,7 +154,7 @@ public class AftersaleOrderBottomViewModel extends CustomViewModel {
         }
         if(infoBean.getState() == AftersaleOrderViwModel.STATU_DELIVERY){
 
-            binding.dDeliveryBox.setVisibility(View.VISIBLE);
+            binding.dDeliveryBox.setVisibility(View.INVISIBLE);
         }
         if(infoBean.getState() == AftersaleOrderViwModel.STATU_SHIPPED || infoBean.getState() == AftersaleOrderViwModel.STATU_PICKEDUP){
             if(infoBean.getDeliver_way() == 2){

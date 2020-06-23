@@ -21,6 +21,7 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.AcitivityMapBinding;
 import com.hongyuan.fitness.ui.shop.sviewmodel.MapViewModel;
 import com.hongyuan.fitness.util.CustomDialog;
+import com.hongyuan.fitness.util.GPSUtil;
 import com.hongyuan.fitness.util.MapUtil;
 
 public class MapActivity extends CustomActivity {
@@ -74,12 +75,15 @@ public class MapActivity extends CustomActivity {
         String latitude = getBundle().getString("latitude");
         String longitude = getBundle().getString("longitude");
 
-        CameraPosition cameraPosition = new CameraPosition(new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude)), 15, 0, 30);
+        //转换下坐标类型
+        double[] dd = GPSUtil.bd09_To_Gcj02(Double.parseDouble(latitude), Double.parseDouble(longitude));
+
+        CameraPosition cameraPosition = new CameraPosition(new LatLng(dd[0],dd[1]), 15, 0, 30);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         aMap.moveCamera(cameraUpdate);
 
         MarkerOptions markerOptions = new MarkerOptions()
-                .position(new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude)))
+                .position(new LatLng(dd[0], dd[1]))
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.blue_loacation))
                 .draggable(true);
         Marker marker = aMap.addMarker(markerOptions);

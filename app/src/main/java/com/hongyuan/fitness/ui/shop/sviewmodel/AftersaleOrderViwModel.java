@@ -106,6 +106,8 @@ public class AftersaleOrderViwModel extends CustomViewModel {
                 binding.payType.setRightText(infoBean.getPay_way());
 
                 if(infoBean.getDeliver_way() == 2){
+                    binding.statusName.setText("等待取货中");
+
                     binding.selfMentionBox.setVisibility(View.VISIBLE);
 
                     binding.sCode.setText(infoBean.getQuhuo_code());
