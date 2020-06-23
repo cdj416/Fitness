@@ -16,7 +16,7 @@ public class UseGlideImageLoader extends ImageLoader {
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
         //Glide 加载图片简单用法
-        RequestOptions options = new RequestOptions().placeholder(R.color.color_f2).error(R.color.color_f2).centerCrop();
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.long_default).error(R.mipmap.long_default).centerCrop();
         Glide.with(context).load(path).apply(options).into(imageView);
     }
 }

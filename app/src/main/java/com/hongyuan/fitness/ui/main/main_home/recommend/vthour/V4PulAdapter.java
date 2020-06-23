@@ -16,7 +16,7 @@ public abstract class V4PulAdapter<T> extends BaseQuickAdapter<T, BaseViewHolder
     }
     @Override
     protected void convert(BaseViewHolder helper, T item) {
-        RequestOptions options = new RequestOptions().placeholder(R.color.color_f2).error(R.color.color_f2);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.long_default).error(R.mipmap.long_default);
         Glide.with(mContext).load(getImg(item)).apply(options).into((RoundedImageView)helper.getView(R.id.bgImg));
 
         helper.setText(R.id.firstName,getName(item)).setText(R.id.secondName,getDes(item));

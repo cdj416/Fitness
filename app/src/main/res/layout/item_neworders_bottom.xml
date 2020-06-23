@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="visible">
+                android:visibility="gone">
                 <TextView
                     android:id="@+id/cancelOrder"
                     android:layout_width="wrap_content"
@@ -141,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="visible">
+                android:visibility="gone">
                 <TextView
                     android:id="@+id/lookCollection"
                     android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="visible">
                 <TextView
                     android:id="@+id/goAginBugy"
                     android:layout_width="wrap_content"

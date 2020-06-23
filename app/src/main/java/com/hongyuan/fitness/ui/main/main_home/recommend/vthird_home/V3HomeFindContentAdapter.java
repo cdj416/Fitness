@@ -19,7 +19,7 @@ public class V3HomeFindContentAdapter extends BaseQuickAdapter<V4HomeBeans.DataB
     @Override
     protected void convert(final BaseViewHolder helper, V4HomeBeans.DataBean.CircleBean item) {
 
-        RequestOptions options = new RequestOptions().placeholder(R.color.color_f2).error(R.color.color_f2);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.fang_default).error(R.mipmap.fang_default);
         Glide.with(mContext).load(item.getMi_head()).apply(new RequestOptions()
                 .placeholder(R.mipmap.default_head_img)
                 .error(R.mipmap.default_head_img))

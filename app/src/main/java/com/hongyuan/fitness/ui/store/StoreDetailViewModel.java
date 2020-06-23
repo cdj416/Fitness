@@ -23,6 +23,7 @@ import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.membership_card.v4_mycard_list.V4CardsListActivity;
 import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
+import com.hongyuan.fitness.ui.shop.sactivity.MapActivity;
 import com.hongyuan.fitness.ui.store.consultant.ConsultantBeans;
 import com.hongyuan.fitness.ui.store.store_list.StoreListActivity;
 import com.hongyuan.fitness.util.BaseUtil;
@@ -191,6 +192,15 @@ public class StoreDetailViewModel extends CustomViewModel implements HomeRecycle
                 });
 
             }
+        });
+
+        binding.storeAddress.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("latitude",detailBean.getData().getOs_lat());
+            bundle.putString("longitude",detailBean.getData().getOs_lng());
+            bundle.putString("address",detailBean.getData().getAddress());
+            bundle.putString("os_name",detailBean.getData().getOs_name());
+            mActivity.startActivity(MapActivity.class,bundle);
         });
     }
 

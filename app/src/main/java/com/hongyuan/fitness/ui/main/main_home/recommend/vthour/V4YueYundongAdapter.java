@@ -16,7 +16,7 @@ public class V4YueYundongAdapter extends BaseQuickAdapter<HomeIndexBeans.DataBea
     }
     @Override
     protected void convert(BaseViewHolder helper, HomeIndexBeans.DataBean.SportBean item) {
-        RequestOptions options = new RequestOptions().placeholder(R.color.color_f2).error(R.color.color_f2);
+        RequestOptions options = new RequestOptions().placeholder(R.mipmap.long_default).error(R.mipmap.long_default);
         Glide.with(mContext).load(item.getMi_head()).apply(options).into((RoundedImageView)helper.getView(R.id.headImg));
 
         helper.setText(R.id.title,item.getState_name()+":"+item.getGs_declareation())

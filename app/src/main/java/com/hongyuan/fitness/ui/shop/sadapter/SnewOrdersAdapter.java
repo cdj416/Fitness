@@ -45,7 +45,7 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                     helper.setText(R.id.status,"待付款").setTextColor(R.id.status,mContext.getResources().getColor(R.color.color_EF5B48));
                 }else if(oneBean.getO_state() == BottomBean.STATU_DELIVERY){
                     helper.setText(R.id.status,"待发货").setTextColor(R.id.status,mContext.getResources().getColor(R.color.color_EF5B48));
-                }else if(oneBean.getO_state() == BottomBean.STATU_SHIPPED){
+                }else if(oneBean.getO_state() == BottomBean.STATU_SHIPPED || oneBean.getO_state() == BottomBean.STATU_PICKEDUP){
                     helper.setText(R.id.status,"待收货").setTextColor(R.id.status,mContext.getResources().getColor(R.color.color_EF5B48));
                 }else if(oneBean.getO_state() == BottomBean.STATU_BE_EVALUATED){
                     helper.setText(R.id.status,"待评价").setTextColor(R.id.status,mContext.getResources().getColor(R.color.color_EF5B48));
@@ -107,6 +107,7 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                     helper.getView(R.id.dDelivery).setVisibility(View.GONE);
                     helper.getView(R.id.collectionBox).setVisibility(View.GONE);
                     helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
+                    helper.getView(R.id.selfMentionBox).setVisibility(View.GONE);
 
                     helper.addOnClickListener(R.id.cancelOrder);
                     helper.addOnClickListener(R.id.goPay);
@@ -115,6 +116,7 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                     helper.getView(R.id.dDelivery).setVisibility(View.VISIBLE);
                     helper.getView(R.id.collectionBox).setVisibility(View.GONE);
                     helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
+                    helper.getView(R.id.selfMentionBox).setVisibility(View.GONE);
 
                     helper.addOnClickListener(R.id.dDelivery);
                 }else if(bottomBean.getStatus() == BottomBean.STATU_SHIPPED){
@@ -125,6 +127,7 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
 
                         helper.getView(R.id.sPayBox).setVisibility(View.GONE);
                         helper.getView(R.id.selfMentionBox).setVisibility(View.VISIBLE);
+                        helper.getView(R.id.lookSelfAddress).setVisibility(View.VISIBLE);
                         helper.addOnClickListener(R.id.lookSelfAddress);
                         helper.addOnClickListener(R.id.selfReceipt);
                     }else{
@@ -132,6 +135,28 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                         helper.getView(R.id.dDelivery).setVisibility(View.GONE);
                         helper.getView(R.id.collectionBox).setVisibility(View.VISIBLE);
                         helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
+                        helper.getView(R.id.selfMentionBox).setVisibility(View.GONE);
+
+                        helper.addOnClickListener(R.id.lookCollection);
+                        helper.addOnClickListener(R.id.submitGoods);
+                    }
+                }else if(bottomBean.getStatus() == BottomBean.STATU_PICKEDUP){
+                    if(bottomBean.getO_deliver_way() == 2){//自提
+                        helper.getView(R.id.dDelivery).setVisibility(View.GONE);
+                        helper.getView(R.id.collectionBox).setVisibility(View.GONE);
+                        helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
+
+                        helper.getView(R.id.sPayBox).setVisibility(View.GONE);
+                        helper.getView(R.id.selfMentionBox).setVisibility(View.VISIBLE);
+
+                        helper.getView(R.id.lookSelfAddress).setVisibility(View.GONE);
+                        helper.addOnClickListener(R.id.selfReceipt);
+                    }else{
+                        helper.getView(R.id.sPayBox).setVisibility(View.GONE);
+                        helper.getView(R.id.dDelivery).setVisibility(View.GONE);
+                        helper.getView(R.id.collectionBox).setVisibility(View.VISIBLE);
+                        helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
+                        helper.getView(R.id.selfMentionBox).setVisibility(View.GONE);
 
                         helper.addOnClickListener(R.id.lookCollection);
                         helper.addOnClickListener(R.id.submitGoods);
@@ -141,7 +166,9 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                     helper.getView(R.id.dDelivery).setVisibility(View.GONE);
                     helper.getView(R.id.collectionBox).setVisibility(View.GONE);
                     helper.getView(R.id.beEvaluatedBox).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.selfMentionBox).setVisibility(View.GONE);
 
+                    helper.getView(R.id.goEvaluate).setVisibility(View.VISIBLE);
                     helper.addOnClickListener(R.id.goAginBugy);
                     helper.addOnClickListener(R.id.goEvaluate);
                 }else if(bottomBean.getStatus() == BottomBean.STATU_COMPLETED || bottomBean.getStatus() == BottomBean.STATU_ALL_COMPLETED){
@@ -149,9 +176,18 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                     helper.getView(R.id.dDelivery).setVisibility(View.GONE);
                     helper.getView(R.id.collectionBox).setVisibility(View.GONE);
                     helper.getView(R.id.beEvaluatedBox).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.selfMentionBox).setVisibility(View.GONE);
 
                     helper.getView(R.id.goEvaluate).setVisibility(View.GONE);
                     helper.addOnClickListener(R.id.goAginBugy);
+                }else{
+                    helper.getView(R.id.sPayBox).setVisibility(View.GONE);
+                    helper.getView(R.id.dDelivery).setVisibility(View.GONE);
+                    helper.getView(R.id.collectionBox).setVisibility(View.GONE);
+                    helper.getView(R.id.beEvaluatedBox).setVisibility(View.GONE);
+                    helper.getView(R.id.selfMentionBox).setVisibility(View.GONE);
+
+                    helper.getView(R.id.goEvaluate).setVisibility(View.GONE);
                 }
 
 

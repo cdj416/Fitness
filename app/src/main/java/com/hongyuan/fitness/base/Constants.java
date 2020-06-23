@@ -19,9 +19,9 @@ public class Constants {
     //webUrl测试服务器
     //public static final String WEB_ADDRESS = "https://test_gym.1667799.com/#";
     //webUrl预发服务器
-    //public static  final String WEB_ADDRESS = "https://yufabu_gym.1667799.com/#";
+    public static  final String WEB_ADDRESS = "https://yufabu_gym.1667799.com/#";
     //webUrl正式服务器
-    public static final String WEB_ADDRESS = "https://www.1667799.com/#";
+    //public static final String WEB_ADDRESS = "https://www.1667799.com/#";
 
     /*==================================================================================*/
     //微信支付需要的appId

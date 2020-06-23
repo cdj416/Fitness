@@ -1,18 +1,54 @@
 package com.hongyuan.fitness.ui.main;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.hongyuan.fitness.ui.main.AllCitysBeans.DataBean.HeardBeans;
+import com.hongyuan.fitness.ui.main.AllCitysBeans.DataBean.ListBean;
 import com.hongyuan.fitness.R;
 
-public class AllCitysAdapter extends BaseQuickAdapter<OpenCitysBeans.DataBean.ListBean, BaseViewHolder> {
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class AllCitysAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity, BaseViewHolder> {
+
+    public static final int TYPE_ONE = 0;
+    public static final int TYPE_TWO = 1;
+
+    private HashMap<String, Integer> letterIndexes = new HashMap<>();
 
     public AllCitysAdapter(){
-        super(R.layout.item_all_citys);
+        super(new ArrayList<>());
+        addItemType(TYPE_ONE, R.layout.item_citys_title);
+        addItemType(TYPE_TWO, R.layout.item_all_citys);
     }
-    @Override
-    protected void convert(BaseViewHolder helper, OpenCitysBeans.DataBean.ListBean item) {
-        helper.setText(R.id.cityName,item.getRegion_name());
 
-        helper.addOnClickListener(R.id.cityName);
+    @Override
+    protected void convert(BaseViewHolder helper, MultiItemEntity item) {
+        switch (helper.getItemViewType()) {
+            case TYPE_ONE:
+                HeardBeans oneBean = (HeardBeans) item;
+                helper.setText(R.id.cityName,oneBean.getTitle());
+
+                letterIndexes.put(oneBean.getTitle(),helper.getAdapterPosition());
+                break;
+            case TYPE_TWO:
+                ListBean twoBean = (ListBean) item;
+                helper.setText(R.id.cityName,twoBean.getRegion_name());
+
+                helper.addOnClickListener(R.id.cityName);
+                break;
+        }
+    }
+
+    /**
+     * 获取字母索引的位置
+     *
+     * @param letter
+     * @return
+     */
+    public int getLetterPosition(String letter) {
+        Integer integer = letterIndexes.get(letter);
+        return integer == null ? -1 : integer;
     }
 }

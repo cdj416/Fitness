@@ -234,4 +234,7 @@ dependencies {
     //implementation 'com.github.YolandaQingniu:qnscalesdk:0.6.4-beta2'
     //云康宝手环
     ///implementation 'com.github.YolandaQingniu:SDK-Band-Android:1.0.6'
+
+    //拼音
+    implementation 'com.belerweb:pinyin4j:2.5.0'
 }

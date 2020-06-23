@@ -1,6 +1,8 @@
 package com.hongyuan.fitness.ui.shop.sbeans;
 
 import com.hongyuan.fitness.base.BaseBean;
+import com.hongyuan.fitness.ui.shop.sadapter.SnewOrdersAdapter;
+import com.hongyuan.fitness.util.BaseUtil;
 
 import java.util.List;
 
@@ -429,6 +431,19 @@ public class AftersaleOrderBeans extends BaseBean {
                 private int buy_num;
                 private String gp_price;
                 private int gp_point;
+
+                //获取显示类型
+                public int getShowType() {
+                    if(BaseUtil.isValue(this.gp_price) && Double.parseDouble(this.gp_price) > 0 && this.gp_point > 0){
+                        return SnewOrdersAdapter.SHOW_MONEY_POINT;
+                    }else if(BaseUtil.isValue(this.gp_price) && Double.parseDouble(this.gp_price) > 0 && this.gp_point <= 0 ){
+                        return SnewOrdersAdapter.SHOW_MONEY;
+                    }else if((!BaseUtil.isValue(this.gp_price) || Double.parseDouble(this.gp_price) <= 0 ) && this.gp_point > 0){
+                        return SnewOrdersAdapter.SHOW_POINT;
+                    }else{
+                        return SnewOrdersAdapter.SHOW_MONEY_POINT;
+                    }
+                }
 
                 public int getG_id() {
                     return g_id;

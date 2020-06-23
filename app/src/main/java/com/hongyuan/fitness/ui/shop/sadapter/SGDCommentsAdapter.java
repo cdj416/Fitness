@@ -15,6 +15,7 @@ import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.custom_view.nine_gridimg.NineGridImageView;
 import com.hongyuan.fitness.custom_view.nine_gridimg.NineGridImageViewAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.ShopCommentBeans;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.previewlibrary.GPreviewBuilder;
@@ -34,6 +35,7 @@ public class SGDCommentsAdapter extends BaseQuickAdapter<ShopCommentBeans.DataBe
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img).centerCrop();
         Glide.with(mContext).load(item.getMi_head()).apply(options).into((RoundedImageView)helper.getView(R.id.headImg));
         helper.setText(R.id.userName,item.getM_name())
+                .setText(R.id.commentContent, BaseUtil.isValue(item.getEvaluation_content()) ? item.getEvaluation_content() : "此用户没有填写评论！")
                 .setText(R.id.commentTime, TimeUtil.friendly_time(item.getEvaluation_date()))
                 .setText(R.id.barText,getBarString(Float.valueOf(item.getEvaluation_score())));
         RatingBar ratingBar = helper.getView(R.id.myRat);

@@ -1,10 +1,7 @@
 package com.hongyuan.fitness.ui.shop.sviewmodel;
 
-import android.view.View;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
@@ -19,7 +16,6 @@ import com.hongyuan.fitness.ui.shop.sbeans.AddProductReviewBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.ProductReviewBeans;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.GsonUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,7 +144,7 @@ public class ProductReviewViewModel extends CustomViewModel {
                 imgUrls+=","+imgBean.getOss_url();
             }
 
-            addReview(imgUrls);
+            addReview(imgUrls.substring(1));
         }
     }
 

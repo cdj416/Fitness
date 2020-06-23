@@ -1,11 +1,12 @@
 package com.hongyuan.fitness.ui.store.store_page_list;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-
+import android.view.inputmethod.EditorInfo;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
@@ -15,6 +16,7 @@ import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivityStoreBinding;
 import com.hongyuan.fitness.ui.store.StoreDetailActivity;
 import com.hongyuan.fitness.ui.store.more_store.StoreBean;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.LocationBean;
 
 public class StoreViewModel extends CustomViewModel {
@@ -22,6 +24,8 @@ public class StoreViewModel extends CustomViewModel {
     private ActivityStoreBinding binding;
     private StoreAdapter adapter;
     private StoreBean bean;
+
+    private String os_name;
 
     public StoreViewModel(CustomActivity mActivity, ActivityStoreBinding binding) {
         super(mActivity);
@@ -49,6 +53,38 @@ public class StoreViewModel extends CustomViewModel {
                 startActivity(StoreDetailActivity.class,bundle);
             }
         });
+
+        binding.cancelText.setOnClickListener(v -> {
+            binding.searchText.setText("");
+        });
+
+
+        binding.searchText.setOnEditorActionListener((textView, i, keyEvent) -> {
+            switch (i) {
+                case EditorInfo.IME_ACTION_SEARCH:
+                    bean = null;
+                    lazyLoad();
+                    break;
+            }
+            return false;
+        });
+
+        binding.searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+               os_name = s.toString();
+            }
+        });
     }
 
     @Override
@@ -65,6 +101,10 @@ public class StoreViewModel extends CustomViewModel {
     protected void lazyLoad() {
         clearParams().setParams("lat", LocationBean.getInstance().getLat())
                 .setParams("lng",LocationBean.getInstance().getLng());
+
+        if(BaseUtil.isValue(os_name)){
+            setParams("os_name",os_name);
+        }
         Controller.myRequest(Constants.GET_OFFLINE_STORE_LIST_JULI,Controller.TYPE_POST,getParams(), StoreBean.class,this);
     }
 

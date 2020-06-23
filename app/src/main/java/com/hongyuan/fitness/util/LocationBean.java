@@ -17,6 +17,7 @@ public class LocationBean {
 
     private String proName;
     private String cityName;
+    private String cityCode;
     private String lat;
     private String lng;
     private boolean isOpen;//定位城市是否开通业务
@@ -38,6 +39,14 @@ public class LocationBean {
             return lng;
         }
         return "120.099863";
+    }
+
+    public String getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
     }
 
     public static LocationBean getLocationBean() {

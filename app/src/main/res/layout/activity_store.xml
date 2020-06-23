@@ -7,8 +7,62 @@
             type="com.hongyuan.fitness.ui.store.store_page_list.StoreViewModel"/>
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mRecycler"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@color/color_FFFFFF">
+            <TextView
+                android:id="@+id/cancelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_FF333333"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="取消"/>
+            <RelativeLayout
+                android:layout_toLeftOf="@id/cancelText"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="9dp"
+                android:background="@drawable/shape_radius6_fff5f5f5">
+
+                <EditText
+                    android:id="@+id/searchText"
+                    android:layout_width="match_parent"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="36dp"
+                    android:textColor="@color/color_FF333333"
+                    android:background="@color/transparent"
+                    android:hint="请输入搜索关键字"
+                    android:textSize="@dimen/sp_14"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:layout_height="match_parent"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/search_huise_mark"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="9dp"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
 </layout>

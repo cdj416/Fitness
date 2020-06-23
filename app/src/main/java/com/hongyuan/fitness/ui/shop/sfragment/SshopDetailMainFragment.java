@@ -3,6 +3,7 @@ package com.hongyuan.fitness.ui.shop.sfragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -53,6 +54,7 @@ public class SshopDetailMainFragment extends CustomFragment {
     private RoundedImageView shopImg,cheadImg;
     private RatingBar myRat;
     private AppBarLayout topBar;
+    private LinearLayout commentBox;
 
     private SGDcommentAdapter sgDcommentAdapter;
     private SGDgoodsAdapter sgDgoodsAdapter;
@@ -105,6 +107,7 @@ public class SshopDetailMainFragment extends CustomFragment {
         userName = mView.findViewById(R.id.userName);
         cComtent = mView.findViewById(R.id.cComtent);
         topBar = mView.findViewById(R.id.topBar);
+        commentBox = mView.findViewById(R.id.commentBox);
 
         /*LinearLayoutManager comManager = new LinearLayoutManager(mActivity);
         comManager.setOrientation(RecyclerView.VERTICAL);
@@ -277,11 +280,14 @@ public class SshopDetailMainFragment extends CustomFragment {
         if(data instanceof ShopCommentBeans){
             ShopCommentBeans.DataBean comentBeans = ((ShopCommentBeans)data).getData();
             if(comentBeans.getList() != null && comentBeans.getList().size() > 0){
+                commentBox.setVisibility(View.VISIBLE);
                 RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img);
-                Glide.with(mActivity).load(storeBean.getStore_logo()).apply(options).into(cheadImg);
+                Glide.with(mActivity).load(comentBeans.getList().get(0).getMi_head()).apply(options).into(cheadImg);
 
                 userName.setText(comentBeans.getList().get(0).getM_name());
                 cComtent.setText(comentBeans.getList().get(0).getEvaluation_content());
+            }else{
+                commentBox.setVisibility(View.GONE);
             }
         }
     }

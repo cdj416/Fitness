@@ -194,6 +194,9 @@ public class MainViewModel extends CustomViewModel {
 
         if(data instanceof CheckCityBeans){
             CheckCityBeans.DataBean  checkCityBeans = ((CheckCityBeans)data).getData();
+            //设置定位城市code码
+            LocationBean.getInstance().setCityCode(BaseUtil.isValue(checkCityBeans.getRegion_code()) ? checkCityBeans.getRegion_code() : "");
+
             if(checkCityBeans.getIs_open() != 1){
                 LocationBean.getInstance().setOpen(false);
                 String defaultRegion_name = SharedPreferencesUtil.getString(mActivity,"region_name");

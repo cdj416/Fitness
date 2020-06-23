@@ -348,6 +348,7 @@
         <activity android:name=".ui.person.newedition.activity.MemberCardOrdersActivity"/>
         <activity android:name=".ui.person.newedition.activity.PriviteCourseOrdersActivity"/>
         <activity android:name=".ui.person.newedition.activity.GroupCourseOrdersActivity"/>
+        <activity android:name=".ui.shop.sactivity.MapActivity"/>
 
 
     </application>
