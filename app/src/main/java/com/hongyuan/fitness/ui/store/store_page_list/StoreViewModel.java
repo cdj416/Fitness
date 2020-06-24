@@ -57,6 +57,7 @@ public class StoreViewModel extends CustomViewModel {
         binding.cancelText.setOnClickListener(v -> {
             binding.searchText.setText("");
             binding.cancelText.setVisibility(View.GONE);
+            lazyLoad();
         });
 
 
