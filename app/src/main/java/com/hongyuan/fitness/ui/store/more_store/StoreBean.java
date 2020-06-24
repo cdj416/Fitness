@@ -137,6 +137,15 @@ public class StoreBean extends BaseBean implements Serializable{
             private String juli;
             private String osl_name;
             private String osl_img;
+            private int os_type;
+
+            public int getOs_type() {
+                return os_type;
+            }
+
+            public void setOs_type(int os_type) {
+                this.os_type = os_type;
+            }
 
             public int getOs_id() {
                 return os_id;

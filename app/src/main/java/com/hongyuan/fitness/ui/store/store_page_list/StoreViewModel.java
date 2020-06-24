@@ -14,8 +14,11 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivityStoreBinding;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
+import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.store.StoreDetailActivity;
 import com.hongyuan.fitness.ui.store.more_store.StoreBean;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.LocationBean;
 
@@ -48,9 +51,21 @@ public class StoreViewModel extends CustomViewModel {
             @SingleClick(2000)
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putString("os_id",String.valueOf(bean.getData().getList().get(position).getOs_id()));
-                startActivity(StoreDetailActivity.class,bundle);
+                if(bean.getData().getList().get(position).getOs_type() == 1){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("os_id",String.valueOf(bean.getData().getList().get(position).getOs_id()));
+                    startActivity(StoreDetailActivity.class,bundle);
+                }else{
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url", Constants.WEB_ADDRESS+"/venues_details"+ TokenSingleBean.getInstance().getWebAllParams("")+"&os_id="+bean.getData().getList().get(position).getOs_id());
+                    bundle.putString("title","场馆详情");
+                    if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                        mActivity.startActivity(WebViewActivity.class,bundle);
+                    }else{
+                        mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+                    }
+                }
+
             }
         });
 

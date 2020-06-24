@@ -251,9 +251,20 @@ public class V4HomeRecyclerItemView extends LinearLayout {
         adapter.setNewData(mList);
 
         adapter.setOnItemChildClickListener((adapter1, view, position) -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("os_id",String.valueOf(mList.get(position).getOs_id()));
-            mActivity.startActivity(StoreDetailActivity.class,bundle);
+            if(mList.get(position).getOs_type() == 1){
+                Bundle bundle = new Bundle();
+                bundle.putString("os_id",String.valueOf(mList.get(position).getOs_id()));
+                mActivity.startActivity(StoreDetailActivity.class,bundle);
+            }else{
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+"/venues_details"+ TokenSingleBean.getInstance().getWebAllParams("")+"&os_id="+mList.get(position).getOs_id());
+                bundle.putString("title","场馆详情");
+                if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                    mActivity.startActivity(WebViewActivity.class,bundle);
+                }else{
+                    mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+                }
+            }
         });
     }
 

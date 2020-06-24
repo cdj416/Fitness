@@ -23,6 +23,7 @@
                 android:layout_height="100dp"
                 app:riv_corner_radius="6dp"
                 android:layout_centerVertical="true"
+                android:src="@mipmap/fang_default"
                 android:layout_marginLeft="8dp"
                 android:scaleType="centerCrop"/>
         </RelativeLayout>
