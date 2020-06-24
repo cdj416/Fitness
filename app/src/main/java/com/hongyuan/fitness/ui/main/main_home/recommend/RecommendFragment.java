@@ -238,11 +238,15 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
             if(indexBeans.getSport() != null && indexBeans.getSport().size() > 0){
                 yueYunDong.setVisibility(View.VISIBLE);
                 yueYunDong.setYueYundong(indexBeans.getSport());
+            }else{
+                yueYunDong.setVisibility(View.GONE);
             }
 
             if(indexBeans.getCourse_train() != null && indexBeans.getCourse_train().size() > 0){
                 PeiXun.setVisibility(View.VISIBLE);
                 PeiXun.setPeiXun(indexBeans.getCourse_train());
+            }else{
+                PeiXun.setVisibility(View.GONE);
             }
 
 
@@ -355,7 +359,7 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
      * */
     @Subscribe(id = ConstantsCode.EB_HOME_REFRESH)
     public void result(String message) {
-        getData();
+        lazyLoad();
     }
 
     @Nullable
