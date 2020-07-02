@@ -193,7 +193,7 @@ public class SixpCourseAllFragment extends CustomFragment {
                 return;
             }
 
-            oBox.setVisibility(View.VISIBLE);
+            oBox.setVisibility(View.GONE);
 
             RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img).centerCrop();
             Glide.with(mActivity).load(infoBean.getCoach_head()).apply(options).into(headImg);
