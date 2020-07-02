@@ -84,7 +84,8 @@ public class ReservationDetailsViewModel extends CustomViewModel {
                 .setParams("end_date",binding.selectTime.getEndTime())
                 .setParams("jl_mid",String.valueOf(detailsBean.getData().getM_id()))
                 .setParams("num","1")
-                .setParams("cp_id",String.valueOf(detailsBean.getData().getCp_id()));
+                .setParams("cp_id",String.valueOf(detailsBean.getData().getCp_id()))
+                .setParams("my_course_id",getBundle().getString("my_course_id"));
         Controller.myRequest(Constants.ADD_COURSE_PRIVITE_APPOINTMENT,Controller.TYPE_POST,getParams(), ReservationSuccessBeans.class,this);
     }
 

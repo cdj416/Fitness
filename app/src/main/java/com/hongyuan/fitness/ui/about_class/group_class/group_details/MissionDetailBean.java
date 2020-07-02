@@ -84,8 +84,17 @@ public class MissionDetailBean extends BaseBean implements Serializable{
         private String is_hy;
         private long bm_time;
         private String is_remind;
+        private int is_select_num;
         private List<String> cs_time;
         private List<MemberOcsBean> member_ocs;
+
+        public int getIs_select_num() {
+            return is_select_num;
+        }
+
+        public void setIs_select_num(int is_select_num) {
+            this.is_select_num = is_select_num;
+        }
 
         public String getIs_remind() {
             return is_remind;

@@ -313,6 +313,7 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
             binding.coursePeople.setText(detailsBean.getData().getCp_people());
             binding.courseTime.setText(detailsBean.getData().getCp_duration());
             binding.courseSuggest.setText(detailsBean.getData().getCp_suggest());
+            binding.selectType.setText(detailsBean.getData().getOs_n() == 1 ? "1对1" : "1对多");
 
             if(detailsBean.getData().getIs_collection() == 1){
                 binding.mainTitle.setRightImage(R.mipmap.orange_collection_mark);

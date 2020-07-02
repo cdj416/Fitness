@@ -100,8 +100,35 @@ public class MineOrderBeans extends BaseBean {
             private int o_num;
             private String o_price;
             private int op_point;
+            private String o_state_str;
+            private String o_pay_state_str;
+            private int os_n;
             private List<String> sku;
             private String o_coupon_money;
+
+            public int getOs_n() {
+                return os_n;
+            }
+
+            public void setOs_n(int os_n) {
+                this.os_n = os_n;
+            }
+
+            public String getO_pay_state_str() {
+                return o_pay_state_str;
+            }
+
+            public void setO_pay_state_str(String o_pay_state_str) {
+                this.o_pay_state_str = o_pay_state_str;
+            }
+
+            public String getO_state_str() {
+                return o_state_str;
+            }
+
+            public void setO_state_str(String o_state_str) {
+                this.o_state_str = o_state_str;
+            }
 
             public String getO_coupon_money() {
                 return o_coupon_money;

@@ -242,6 +242,25 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
+                    android:text="上课类型"/>
+                <TextView
+                    android:id="@+id/selectType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_777777"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:textSize="@dimen/sp_12"
+                    android:text="1对1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_FF333333"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="24dp"
+                    android:textSize="16sp"
                     android:text="课程时间"/>
                 <TextView
                     android:id="@+id/courseTime"

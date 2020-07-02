@@ -22,12 +22,23 @@ public class PcourseReservationAdapter extends BaseQuickAdapter<MyPriviteCourseB
 
         helper.setText(R.id.courseName,item.getCp_name())
                 .setText(R.id.kTime,getShowTime(item.getLast_kong_date()))
+                .setText(R.id.haveNum,String.valueOf(item.getHave_num()))
+                .setText(R.id.allNum,"/"+item.getOcp_num())
                 .setText(R.id.coachName,"教练："+item.getCoach_nickname()+"/"+item.getOs_name());
 
-        if(item.getHave_num() > 0){
-            helper.setText(R.id.reservation,"预约");
+        if(item.getOs_n() == 2){
+            helper.setBackgroundColor(R.id.reservation,mContext.getResources().getColor(R.color.color_FFFFFF))
+                    .setTextColor(R.id.reservation,mContext.getResources().getColor(R.color.color_FF333333))
+                    .setText(R.id.reservation,"教练暂未约课");
         }else{
-            helper.setText(R.id.reservation,"再次购买");
+            helper.setBackgroundRes(R.id.reservation,R.drawable.shape_radius16_ef5b48)
+                    .setTextColor(R.id.reservation,mContext.getResources().getColor(R.color.color_FFFFFF));
+
+            if(item.getHave_num() > 0){
+                helper.setText(R.id.reservation,"去预约");
+            }else{
+                helper.setText(R.id.reservation,"再次购买");
+            }
         }
 
         helper.addOnClickListener(R.id.reservation).addOnClickListener(R.id.goBuyBox);

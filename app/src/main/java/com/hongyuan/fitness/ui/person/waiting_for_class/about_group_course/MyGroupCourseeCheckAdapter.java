@@ -17,7 +17,7 @@ public class MyGroupCourseeCheckAdapter extends BaseQuickAdapter<MyGroupClassBea
     @Override
     protected void convert(BaseViewHolder helper, MyGroupClassBean.DataBean.ListBean item) {
 
-        helper.setText(R.id.courseName,item.getCs_name()).setText(R.id.courseStartTime, showTimeText(item.getCs_start_date(),item.getCs_end_date()))
+        helper.setText(R.id.courseName,item.getCs_name()).setText(R.id.courseStartTime, item.getOcs_number() > 0 ? showTimeText(item.getCs_start_date(),item.getCs_end_date()) +"\t#"+item.getOcs_number() : showTimeText(item.getCs_start_date(),item.getCs_end_date()))
             .setText(R.id.courseType,item.getOs_name()+"/"+item.getSi_name());
 
         if(item.getXy_qd_state() == 1){

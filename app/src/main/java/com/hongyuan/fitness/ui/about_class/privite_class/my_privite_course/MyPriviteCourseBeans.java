@@ -92,9 +92,27 @@ public class MyPriviteCourseBeans extends BaseBean {
             private String coach_nickname;
             private String coach_head;
             private String os_name;
+            private String ocp_num;
             private int bnum;
             private int cnum;
+            private int os_n;
             private String last_kong_date;
+
+            public int getOs_n() {
+                return os_n;
+            }
+
+            public void setOs_n(int os_n) {
+                this.os_n = os_n;
+            }
+
+            public String getOcp_num() {
+                return ocp_num;
+            }
+
+            public void setOcp_num(String ocp_num) {
+                this.ocp_num = ocp_num;
+            }
 
             public String getLast_kong_date() {
                 return last_kong_date;

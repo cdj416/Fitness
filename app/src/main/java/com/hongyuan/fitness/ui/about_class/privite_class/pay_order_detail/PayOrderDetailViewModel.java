@@ -138,7 +138,8 @@ public class PayOrderDetailViewModel extends CustomViewModel {
         binding.classNum.setText(String.valueOf(courseDetail.getCp_num()));
         binding.courseAddress.setText(courseDetail.getOs_name());
         binding.coachName.setText(courseDetail.getMi_realname());
-        binding.courseTypeTwo.setText(courseDetail.getFt_name()+" / 一对一私教课");
+        binding.courseTypeTwo.setText(courseDetail.getFt_name());
+        binding.selectType.setText(courseDetail.getOs_n() == 1 ? "一对一私教课" : "一对多私教课");
         binding.courseType.setText(courseDetail.getFt_name());
 
         showAllPrice = BigDecimalUtils.mul(courseDetail.getCp_price(),String.valueOf(courseDetail.getCp_num()),2);

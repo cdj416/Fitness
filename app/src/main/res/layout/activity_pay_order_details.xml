@@ -114,8 +114,39 @@
                         android:textColor="@color/color_FF333333"
                         android:textSize="@dimen/sp_14"
                         android:layout_alignParentRight="true"
-                        android:text="力量增肌 / 一对一私教课"/>
+                        android:text="力量增肌"/>
                 </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:visibility="visible"
+                    android:background="@color/color_FFD1D1D1"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_height="44dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/color_777777"
+                        android:textSize="12sp"
+                        android:text="上课类型:"/>
+                    <TextView
+                        android:id="@+id/selectType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/color_FF333333"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_alignParentRight="true"
+                        android:text="一对一私教课"/>
+                </RelativeLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
@@ -233,20 +264,15 @@
                     android:layout_height="1px"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="11dp"
                     android:background="@color/color_FFD1D1D1"/>
 
+                <!--占时不要了-->
                 <com.hongyuan.fitness.ui.about_class.privite_class.pay_order_detail.select_time.SelectFirstTimeView
                     android:id="@+id/selectTime"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="11dp"
-                    android:background="@color/color_FFD1D1D1"/>
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
                 <RelativeLayout
                     android:id="@+id/selectCouponBox"
                     android:layout_width="match_parent"

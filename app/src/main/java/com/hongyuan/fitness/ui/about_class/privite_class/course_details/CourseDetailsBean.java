@@ -73,7 +73,16 @@ public class CourseDetailsBean extends BaseBean implements Serializable {
         private int bnum;
         private String cp_anli_imgs;
         private int is_collection;
+        private int os_n;
         private List<PriceListBean> price_list;
+
+        public int getOs_n() {
+            return os_n;
+        }
+
+        public void setOs_n(int os_n) {
+            this.os_n = os_n;
+        }
 
         public int getIs_collection() {
             return is_collection;

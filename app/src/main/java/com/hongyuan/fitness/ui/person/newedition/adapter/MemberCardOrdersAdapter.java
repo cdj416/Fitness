@@ -24,11 +24,15 @@ public class MemberCardOrdersAdapter extends BaseQuickAdapter<MineOrderBeans.Dat
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img);
         Glide.with(mContext).load(item.getO_img()).apply(options).into((RoundedImageView)helper.getView(R.id.orderImg));
 
-        helper.setText(R.id.orderTime,item.getAdd_date()).setText(R.id.orderStatus,getText(item.getO_pay_state()))
+        helper.setText(R.id.orderTime,item.getAdd_date()).setText(R.id.orderStatus,item.getO_pay_state_str())
                 .setTextColor(R.id.orderStatus,getTextColor(item.getO_pay_state()))
                 .setText(R.id.orderName,item.getO_name()).setText(R.id.orderSku,getSkuStr(item.getSku()))
                 .setText(R.id.orderNum,"x"+item.getO_num())
                 .setText(R.id.orderNumText,"共"+item.getO_num()+"件商品");
+
+        if("o_pric".equals(item.getO_type_code())){
+            helper.setText(R.id.orderSku,item.getOs_n() == 1 ? "1v1":"1v多");
+        }
 
         if(BaseUtil.isValue(item.getO_price()) && Double.valueOf(item.getO_price()) > 0){
             helper.getView(R.id.orderPrice).setVisibility(View.VISIBLE);
@@ -48,7 +52,7 @@ public class MemberCardOrdersAdapter extends BaseQuickAdapter<MineOrderBeans.Dat
             helper.getView(R.id.orderPoint).setVisibility(View.GONE);
             helper.getView(R.id.orderAllPoint).setVisibility(View.GONE);
         }
-        if(item.getO_pay_state() == 2){
+        if(item.getO_pay_state() == 0){
             helper.getView(R.id.operatingBox).setVisibility(View.VISIBLE);
         }else{
             helper.getView(R.id.operatingBox).setVisibility(View.GONE);

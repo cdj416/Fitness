@@ -121,9 +121,10 @@ public class SixpCourseAllFragment extends CustomFragment {
                         bundle.putString("cp_id",String.valueOf(tList.get(position).getCp_id()));
                         startActivity(CourseDetailsActivity.class,bundle);
                     }
-                    if("预约".equals(textView.getText().toString())){
+                    if("去预约".equals(textView.getText().toString())){
                         Bundle bundle = new Bundle();
                         bundle.putString("cp_id",String.valueOf(tList.get(position).getCp_id()));
+                        bundle.putString("my_course_id",String.valueOf(tList.get(position).getMy_course_id()));
                         startActivity(ReservationDetailsActivity.class,bundle);
                     }
                 }
@@ -188,9 +189,11 @@ public class SixpCourseAllFragment extends CustomFragment {
             infoBean = ((DanduOneCourseBeans)data).getData().getInfo();
 
             if(infoBean == null || !BaseUtil.isValue(infoBean.getStart_time())){
+                oBox.setVisibility(View.GONE);
                 return;
             }
 
+            oBox.setVisibility(View.VISIBLE);
 
             RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img).centerCrop();
             Glide.with(mActivity).load(infoBean.getCoach_head()).apply(options).into(headImg);

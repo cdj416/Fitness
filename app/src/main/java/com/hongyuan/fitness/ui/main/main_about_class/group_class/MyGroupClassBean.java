@@ -113,6 +113,15 @@ public class MyGroupClassBean extends BaseBean {
             private String add_date;
             private String cs_start_date;
             private String cs_end_date;
+            private int ocs_number;
+
+            public int getOcs_number() {
+                return ocs_number;
+            }
+
+            public void setOcs_number(int ocs_number) {
+                this.ocs_number = ocs_number;
+            }
 
             public int getOcs_id() {
                 return ocs_id;
