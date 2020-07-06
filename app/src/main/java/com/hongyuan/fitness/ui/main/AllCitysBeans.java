@@ -1,17 +1,12 @@
 package com.hongyuan.fitness.ui.main;
 
-import android.widget.HorizontalScrollView;
-
 import com.chad.library.adapter.base.entity.AbstractExpandableItem;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.hongyuan.fitness.base.BaseBean;
-import com.hongyuan.fitness.custom_view.index_list.PinyinUtils;
-import com.hongyuan.fitness.ui.shop.sbeans.SnewOrderBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class AllCitysBeans extends BaseBean {
@@ -49,6 +44,7 @@ public class AllCitysBeans extends BaseBean {
 
             private String region_code;
             private String region_name;
+            private String letter;
 
             public ListBean() {
             }
@@ -56,6 +52,14 @@ public class AllCitysBeans extends BaseBean {
             public ListBean(String region_code, String region_name) {
                 this.region_code = region_code;
                 this.region_name = region_name;
+            }
+
+            public String getLetter() {
+                return letter;
+            }
+
+            public void setLetter(String letter) {
+                this.letter = letter;
             }
 
             public String getRegion_code() {
@@ -115,14 +119,14 @@ public class AllCitysBeans extends BaseBean {
 
             //插入头部数据
             for(ListBean bean : list){
-                String letter = PinyinUtils.getFirstLetter(PinyinUtils.getPinYinFirstLetter(bean.getRegion_name()));
+                //String letter = PinyinUtils.getFirstLetter(PinyinUtils.getPinYinFirstLetter(bean.getRegion_name()));
 
-                HeardBeans heardBeans = isHave(letter);
+                HeardBeans heardBeans = isHave(bean.getLetter());
                 if(BaseUtil.isValue(heardBeans)){
                     heardBeans.addSubItem(bean);
                 }else{
                     heardBeans = new HeardBeans();
-                    heardBeans.setTitle(letter);
+                    heardBeans.setTitle(bean.getLetter());
                     heardBeans.addSubItem(bean);
                     mList.add(heardBeans);
                 }
@@ -132,15 +136,15 @@ public class AllCitysBeans extends BaseBean {
             Collections.sort(mList, (o1, o2) -> {
                 if(o1 instanceof HeardBeans){
                     if(o2 instanceof ListBean){
-                        return ((HeardBeans) o1).getTitle().compareTo(PinyinUtils.getPinYinFirstLetter(((ListBean) o2).getRegion_name()));
+                        return ((HeardBeans) o1).getTitle().compareTo(((ListBean) o2).getLetter());
                     }else{
                         return ((HeardBeans) o1).getTitle().compareTo(((HeardBeans)o2).getTitle());
                     }
                 }else{
                     if(o2 instanceof ListBean){
-                        return PinyinUtils.getPinYinFirstLetter(((ListBean) o1).getRegion_name()).compareTo(PinyinUtils.getPinYinFirstLetter(((ListBean) o2).getRegion_name()));
+                        return ((ListBean) o1).getLetter().compareTo(((ListBean) o2).getLetter());
                     }else{
-                        return PinyinUtils.getPinYinFirstLetter(((ListBean) o1).getRegion_name()).compareTo(((HeardBeans)o2).getTitle());
+                        return ((ListBean) o1).getLetter().compareTo(((HeardBeans)o2).getTitle());
                     }
                 }
             });
