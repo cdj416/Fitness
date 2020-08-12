@@ -1,12 +1,14 @@
 package com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons;
 
-import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.RetrofitListener;
 import com.hongyuan.fitness.custom_view.filter_view.adapter.DoubleListAdapter;
 import com.hongyuan.fitness.custom_view.filter_view.adapter.MenuAdapter;
@@ -34,7 +36,9 @@ public class FilterPriviteLessonsAdapter implements MenuAdapter, RetrofitListene
     private final int POSITION_STORE = 0;
     private final int POSITION_TYPE = 1;
 
-    private final Context mContext;
+    private final CustomActivity mContext;
+    private String skin;
+
     private OnFilterDoneListener onFilterDoneListener;
     private OnFilterContentListener contentListener;
     private String[] titles;
@@ -44,7 +48,11 @@ public class FilterPriviteLessonsAdapter implements MenuAdapter, RetrofitListene
     //区县门店列表
     private DoubleListView<FilterAreaBeans.DataBean.ListBean.SonListBean, FilterStoreBeans.DataBean.ListBean> doubleFilter;
     //私教课类型
-    private SingleReclerView<MenuPrivateLessonsBean.DataBean> singleListView;
+    private SingleReclerView singleListView;
+
+    //单列适配器
+    private SingleReclerAdapter singleReclerAdapter;
+
 
     public interface OnFilterDoneListener {
         void onFilterDone(String ft_ids, String os_ids, String region_code);
@@ -54,13 +62,34 @@ public class FilterPriviteLessonsAdapter implements MenuAdapter, RetrofitListene
         void onFilterContent(int position, String changeText);
     }
 
-    public FilterPriviteLessonsAdapter(Context context, String[] titles, OnFilterDoneListener onFilterDoneListener,OnFilterContentListener contentListener){
+    public FilterPriviteLessonsAdapter(CustomActivity context, String[] titles, OnFilterDoneListener onFilterDoneListener, OnFilterContentListener contentListener){
         this.mContext = context;
         this.titles = titles;
         this.onFilterDoneListener = onFilterDoneListener;
         this.contentListener = contentListener;
 
         userToken = TokenSingleBean.getInstance();
+
+        skin = mContext.skin;
+
+        //初始化单例适配器
+        singleReclerAdapter = new SingleReclerAdapter<MenuPrivateLessonsBean.DataBean>(mContext.skin) {
+            @Override
+            public String provideText(MenuPrivateLessonsBean.DataBean t) {
+                return t.getFt_name();
+            }
+
+            @Override
+            public boolean isSelect(MenuPrivateLessonsBean.DataBean t) {
+                if(t.isSelect()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        };
+
+        //需要刷新的适配器
     }
 
     @Override
@@ -167,7 +196,7 @@ public class FilterPriviteLessonsAdapter implements MenuAdapter, RetrofitListene
                     }
                 });
 
-        doubleFilter.getLeftListView().setBackgroundColor(mContext.getResources().getColor(R.color.color_F5F6FB));
+        //doubleFilter.getLeftListView().setBackgroundColor(mContext.getResources().getColor(R.color.color_F5F6FB));
         //获取左边的区县数据
         getArea();
 
@@ -179,21 +208,7 @@ public class FilterPriviteLessonsAdapter implements MenuAdapter, RetrofitListene
     * */
     private View createSingleListView() {
         singleListView = new SingleReclerView<MenuPrivateLessonsBean.DataBean>(mContext)
-                .setMyAdapter(new SingleReclerAdapter<MenuPrivateLessonsBean.DataBean>() {
-                    @Override
-                    public String provideText(MenuPrivateLessonsBean.DataBean t) {
-                        return t.getFt_name();
-                    }
-
-                    @Override
-                    public boolean isSelect(MenuPrivateLessonsBean.DataBean t) {
-                        if(t.isSelect()){
-                            return true;
-                        }else{
-                            return false;
-                        }
-                    }
-                }).setItemClickListener((position,adapter) -> {
+                .setMyAdapter(singleReclerAdapter).setItemClickListener((position,adapter) -> {
                     String showTypeText;
                     if(!CommonUtil.isEmpty(privateLessonsBean.getData())){
                         for(MenuPrivateLessonsBean.DataBean beans : privateLessonsBean.getData()){
@@ -220,6 +235,32 @@ public class FilterPriviteLessonsAdapter implements MenuAdapter, RetrofitListene
         //获取课程类型
         getCourseType();
         return singleListView;
+    }
+
+    /*
+    * 刷新下主题模式
+    * */
+    public void changeSkin(){
+
+        if(!skin.equals(mContext.skin)){
+            this.skin = mContext.skin;
+
+            singleReclerAdapter.changeSkin(mContext.skin);
+            doubleFilter.leftAdapter(new SimpleTextAdapter<FilterAreaBeans.DataBean.ListBean.SonListBean>(null, mContext) {
+                @Override
+                public String provideText(FilterAreaBeans.DataBean.ListBean.SonListBean filterType) {
+                    return filterType.getRegion_name();
+                }
+
+                @Override
+                protected void initCheckedTextView(FilterCheckedTextView checkedTextView) {
+                    checkedTextView.setPadding(0, UIUtil.dp(mContext, 15), 0, UIUtil.dp(mContext, 15));
+                }
+            });
+
+            //更新下数据
+            getArea();
+        }
     }
 
     /*

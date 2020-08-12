@@ -1,13 +1,19 @@
 package com.hongyuan.fitness.ui.main.main_home.recommend;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.reflect.TypeToken;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
@@ -16,6 +22,11 @@ import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.custom_view.HomeColumItemView;
+import com.hongyuan.fitness.custom_view.StickyScrollView;
+import com.hongyuan.fitness.custom_view.TitleView;
+import com.hongyuan.fitness.ui.about_class.GroupClassActivity;
+import com.hongyuan.fitness.ui.about_class.PriviteClassActivity;
+import com.hongyuan.fitness.ui.about_class.coach.coach_list.CoachListActivity;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsLikeBean;
 import com.hongyuan.fitness.ui.heat.HeatActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
@@ -24,16 +35,21 @@ import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vthour.HomeIndexBeans;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeBeans;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vthour.V4HomeRecyclerItemView;
+import com.hongyuan.fitness.ui.main.main_home.recommend.vtwo_home.GymCategoryBeans;
 import com.hongyuan.fitness.ui.out_door.RunActivity;
 import com.hongyuan.fitness.ui.out_door.about_you.AboutYouActivity;
 import com.hongyuan.fitness.ui.training_plan.PlanInfoBeans;
 import com.hongyuan.fitness.ui.training_plan.TrainingPlanActivity;
 import com.hongyuan.fitness.ui.training_plan.plan_details.PlanDetailsActivity;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.GsonUtil;
 import com.hongyuan.fitness.util.JumpUtils;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
+import com.hongyuan.fitness.util.SkinConstants;
+import com.hongyuan.fitness.util.StatusBarUtil;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
+import com.hongyuan.fitness.util.ViewChangeUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
@@ -44,7 +60,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecommendFragment extends CustomFragment implements HomeColumItemView.ClickReturn, V4HomeRecyclerItemView.Commback {
+public class RecommendFragment extends CustomFragment implements HomeColumItemView.ClickReturn, V4HomeRecyclerItemView.Commback,StickyScrollView.ScrollViewListener {
+
+    private LinearLayout titleTopViw,gym1Box,gym2Box,gym3Box,gym4Box,faqiBox,canjiaBox,goClassBox1,goClassBox2,goClassBox3,goClassBox4;
+    private ImageView gymImg,gymImg1,gymImg2,gymImg3,gymImg4,aboutSportsImg,goClassPage;
+    private TextView gymText1,gymText2,gymText3,gymText4;
+    private TitleView myTitle;
+    private int height;
+    private StickyScrollView nScroll;
 
     private Banner banner;
     private HomeColumItemView homeColum;
@@ -59,6 +82,12 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
     //默认点击项（运动）
     private int clickType = HomeColumItemView.RUN_CLICK;
 
+    //头部标题栏右边试图
+    private HomeRightView rightView;
+
+    //场馆数据
+    private List<GymCategoryBeans.DataBean.ListBean> categorys;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_recommend;
@@ -68,11 +97,13 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
     public void initView(View mView) {
         //开启刷新功能
         setEnableRefresh(true);
+        nScroll = mView.findViewById(R.id.nScroll);
+        myTitle = mView.findViewById(R.id.myTitle);
+        titleTopViw = mView.findViewById(R.id.titleTopViw);
 
-        getmTitle().setRightImage(R.mipmap.scan_code_img);
-        getmTitle().addLeftContentView(getLocation());
-        HomeRightView rightView = new HomeRightView(mActivity,this);
-        getmTitle().addRightContentView(rightView);
+        myTitle.addLeftContentView(getLocation());
+        rightView = new HomeRightView(mActivity,this);
+        myTitle.addRightContentView(rightView);
         addressName.setOnClickListener(v -> {
             startActivity(AllCitysActivity.class,null);
             //老路径弹框选择
@@ -96,8 +127,213 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         topic = mView.findViewById(R.id.topic);
         finds = mView.findViewById(R.id.finds);
 
-        homeColum.setClickReturn(this);
+        gym1Box = mView.findViewById(R.id.gym1Box);
+        gym2Box = mView.findViewById(R.id.gym2Box);
+        gym3Box = mView.findViewById(R.id.gym3Box);
+        gym4Box = mView.findViewById(R.id.gym4Box);
+        gymImg1 = mView.findViewById(R.id.gymImg1);
+        gymImg2 = mView.findViewById(R.id.gymImg2);
+        gymImg3 = mView.findViewById(R.id.gymImg3);
+        gymImg4 = mView.findViewById(R.id.gymImg4);
+        gymText1 = mView.findViewById(R.id.gymText1);
+        gymText2 = mView.findViewById(R.id.gymText2);
+        gymText3 = mView.findViewById(R.id.gymText3);
+        gymText4 = mView.findViewById(R.id.gymText4);
 
+        gymImg = mView.findViewById(R.id.gymImg);
+        faqiBox = mView.findViewById(R.id.faqiBox);
+        canjiaBox = mView.findViewById(R.id.canjiaBox);
+        aboutSportsImg = mView.findViewById(R.id.aboutSportsImg);
+
+        goClassPage = mView.findViewById(R.id.goClassPage);
+        goClassBox1 = mView.findViewById(R.id.goClassBox1);
+        goClassBox2 = mView.findViewById(R.id.goClassBox2);
+        goClassBox3 = mView.findViewById(R.id.goClassBox3);
+        goClassBox4 = mView.findViewById(R.id.goClassBox4);
+
+        homeColum.setClickReturn(this);
+        //渐变
+        initListeners();
+
+        gymImg.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", Constants.WEB_ADDRESS+"/"+TokenSingleBean.getInstance().getWebAllParams(""));
+            bundle.putString("title","场馆");
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+        });
+
+        gym1Box.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", Constants.WEB_ADDRESS+"/?gc_id="+categorys.get(0).getGc_id()+"&gc_name="+categorys.get(0).getGc_name()+TokenSingleBean.getInstance().getWebAllParams("?"));
+            bundle.putString("title","场馆");
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+        });
+        gym2Box.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", Constants.WEB_ADDRESS+"/?gc_id="+categorys.get(1).getGc_id()+"&gc_name="+categorys.get(1).getGc_name()+TokenSingleBean.getInstance().getWebAllParams("?"));
+            bundle.putString("title","场馆");
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+        });
+        gym3Box.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", Constants.WEB_ADDRESS+"/?gc_id="+categorys.get(2).getGc_id()+"&gc_name="+categorys.get(2).getGc_name()+TokenSingleBean.getInstance().getWebAllParams("?"));
+            bundle.putString("title","场馆");
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+        });
+        gym4Box.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", Constants.WEB_ADDRESS+"/?gc_id="+categorys.get(3).getGc_id()+"&gc_name="+categorys.get(3).getGc_name()+TokenSingleBean.getInstance().getWebAllParams("?"));
+            bundle.putString("title","场馆");
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+        });
+
+        aboutSportsImg.setOnClickListener(v -> {
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+ "/Asportslist"+TokenSingleBean.getInstance().getWebAllParams(""));
+                bundle.putString("title","约运动列表");
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+        });
+        faqiBox.setOnClickListener(v -> {
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                Bundle bundle = new Bundle();
+                bundle.putString("url", Constants.WEB_ADDRESS+ "/Asportslist"+TokenSingleBean.getInstance().getWebAllParams(""));
+                bundle.putString("title","发起运动");
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+        });
+        canjiaBox.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", Constants.WEB_ADDRESS+ "/Asportslist"+TokenSingleBean.getInstance().getWebAllParams(""));
+            bundle.putString("title","参加运动");
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+        });
+
+        goClassPage.setOnClickListener(v -> {
+            //EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
+            //需要显示私教课
+            //EventBus.getDefault().post(ConstantsCode.EB_SHOW_PRIVITE,"0");
+            startActivity(PriviteClassActivity.class,null);
+        });
+        goClassBox1.setOnClickListener(v -> {
+            startActivity(PriviteClassActivity.class,null);
+        });
+        goClassBox3.setOnClickListener(v -> {
+            //通过EventBus去通知MainActivity显示第三页
+            //EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
+            //需要显示团课
+            //EventBus.getDefault().post(ConstantsCode.EB_SHOW_PRIVITE,"1");
+            startActivity(GroupClassActivity.class,null);
+        });
+        goClassBox2.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", Constants.WEB_ADDRESS+"/train"+TokenSingleBean.getInstance().getWebAllParams(""));
+            bundle.putString("title","培训课");
+            if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                mActivity.startActivity(WebViewActivity.class,bundle);
+            }else{
+                mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+            }
+        });
+
+        goClassBox4.setOnClickListener(v -> {
+            mActivity.startActivity(CoachListActivity.class,null);
+        });
+
+    }
+
+    /*
+     * 获取头部图片的高度
+     * */
+    private void initListeners() {
+        ViewTreeObserver vto = banner.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                banner.getViewTreeObserver().removeGlobalOnLayoutListener(
+                        this);
+                height = banner.getHeight();
+
+                nScroll.setScrollViewListener(RecommendFragment.this);
+            }
+        });
+    }
+
+    @Override
+    public void onScrollChanged(StickyScrollView scrollView, int x, int y, int oldx, int oldy) {
+        if (y <= 0) {   //设置标题的背景颜色
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                titleTopViw.setBackgroundColor(Color.argb((int) 0, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                titleTopViw.setBackgroundColor(Color.argb((int) 0, 255,255,255));
+
+                rightView.changeBlackImg(false);
+                addressName.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                ViewChangeUtil.changeLeftDrawable(getContext(),addressName,R.mipmap.location_baise_img);
+            }
+        } else if (y > 0 && y <= height) {
+            float scale = (float) y / height;
+            float alpha = (255 * scale);
+
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                titleTopViw.setBackgroundColor(Color.argb((int) alpha, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                titleTopViw.setBackgroundColor(Color.argb((int) alpha, 255,255,255));
+                if(y <= height/2){
+                    rightView.changeBlackImg(false);
+                    addressName.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                    ViewChangeUtil.changeLeftDrawable(getContext(),addressName,R.mipmap.location_baise_img);
+
+                    StatusBarUtil.setCommonUI(mActivity,false);
+                }else{
+                    rightView.changeBlackImg(true);
+                    addressName.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                    ViewChangeUtil.changeLeftDrawable(getContext(),addressName,R.mipmap.location_black_img);
+
+                    StatusBarUtil.setCommonUI(mActivity,true);
+                }
+            }
+        } else {
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                titleTopViw.setBackgroundColor(Color.argb((int) 255, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                titleTopViw.setBackgroundColor(Color.argb( 255, 255,255,255));
+
+                addressName.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                ViewChangeUtil.changeLeftDrawable(getContext(),addressName,R.mipmap.location_black_img);
+                rightView.changeBlackImg(true);
+            }
+
+        }
     }
 
     @Override
@@ -105,7 +341,7 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         super.onMyResume();
         //需要自动刷新
         if(isAutoRefresh("refreshTime")){
-            refresh.autoRefresh();
+            lazyLoad();
             //存储当前刷新时间
             inAutoRefreshTime("refreshTime");
         }
@@ -142,6 +378,10 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         //获取首页数据
         clearParams();
         Controller.myRequest(Constants.GET_INDEX_OS_PC_BUSINESS_CIRCLE,Controller.TYPE_POST,getParams(), V4HomeBeans.class,this);
+
+        //获取首页场馆类型列表
+        clearParams();
+        Controller.myRequest(Constants.INDEX_GYM_CATEGORY,Controller.TYPE_POST,getParams(), GymCategoryBeans.class,this);
     }
 
 
@@ -181,7 +421,7 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
 
             infoData = ((V4HomeBeans)data).getData();
 
-            if(infoData.getOffline_store() != null && infoData.getOffline_store().size() > 0){
+            /*if(infoData.getOffline_store() != null && infoData.getOffline_store().size() > 0){
                 storeItem.setVisibility(View.VISIBLE);
                 storeItem.setStore(infoData.getOffline_store());
             }else{
@@ -207,7 +447,7 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
                 groupCours.setGroup(infoData.getSuper_course());
             }else{
                 groupCours.setVisibility(View.GONE);
-            }
+            }*/
 
             if(infoData.getGoods() != null && infoData.getGoods().size() > 0){
                 goods.setVisibility(View.VISIBLE);
@@ -235,7 +475,7 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
         if(data instanceof HomeIndexBeans){
             HomeIndexBeans.DataBean indexBeans = ((HomeIndexBeans)data).getData();
 
-            if(indexBeans.getSport() != null && indexBeans.getSport().size() > 0){
+            /*if(indexBeans.getSport() != null && indexBeans.getSport().size() > 0){
                 yueYunDong.setVisibility(View.VISIBLE);
                 yueYunDong.setYueYundong(indexBeans.getSport());
             }else{
@@ -247,7 +487,7 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
                 PeiXun.setPeiXun(indexBeans.getCourse_train());
             }else{
                 PeiXun.setVisibility(View.GONE);
-            }
+            }*/
 
 
         }
@@ -258,6 +498,143 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
                 startActivity(PlanDetailsActivity.class,null);
             }else{
                 startActivity(TrainingPlanActivity.class,null);
+            }
+        }
+
+        if(data instanceof GymCategoryBeans){
+            categorys = ((GymCategoryBeans)data).getData().getList();
+
+            if(categorys != null && categorys.size() > 0){
+                if(categorys.size() >= 4){
+                    gym1Box.setVisibility(View.VISIBLE);
+                    gym2Box.setVisibility(View.VISIBLE);
+                    gym3Box.setVisibility(View.VISIBLE);
+                    gym4Box.setVisibility(View.VISIBLE);
+
+                    RequestOptions options = new RequestOptions().placeholder(R.mipmap.theme_jiansheng_mark).error(R.mipmap.theme_jiansheng_mark);
+                    if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin)){
+                        Glide.with(mActivity).load(categorys.get(0).getGc_img_day()).apply(options).into(gymImg1);
+                        Glide.with(mActivity).load(categorys.get(1).getGc_img_day()).apply(options).into(gymImg2);
+                        Glide.with(mActivity).load(categorys.get(2).getGc_img_day()).apply(options).into(gymImg3);
+                        Glide.with(mActivity).load(categorys.get(3).getGc_img_day()).apply(options).into(gymImg4);
+                        gymText1.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                        gymText1.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                        gymText2.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                        gymText3.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                    }
+                    if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)) {
+                        Glide.with(mActivity).load(categorys.get(0).getGc_img_night()).apply(options).into(gymImg1);
+                        Glide.with(mActivity).load(categorys.get(1).getGc_img_night()).apply(options).into(gymImg2);
+                        Glide.with(mActivity).load(categorys.get(2).getGc_img_night()).apply(options).into(gymImg3);
+                        Glide.with(mActivity).load(categorys.get(3).getGc_img_night()).apply(options).into(gymImg4);
+                        gymText1.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                        gymText2.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                        gymText3.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                        gymText4.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                    }
+                    gymText1.setText(categorys.get(0).getGc_name());
+                    gymText2.setText(categorys.get(1).getGc_name());
+                    gymText3.setText(categorys.get(2).getGc_name());
+                    gymText4.setText(categorys.get(3).getGc_name());
+                }else if(categorys.size() == 3){
+                    gym1Box.setVisibility(View.VISIBLE);
+                    gym2Box.setVisibility(View.VISIBLE);
+                    gym3Box.setVisibility(View.VISIBLE);
+                    gym4Box.setVisibility(View.INVISIBLE);
+
+                    RequestOptions options = new RequestOptions().placeholder(R.mipmap.theme_jiansheng_mark).error(R.mipmap.theme_jiansheng_mark);
+                    if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin)){
+                        Glide.with(mActivity).load(categorys.get(0).getGc_img_day()).apply(options).into(gymImg1);
+                        Glide.with(mActivity).load(categorys.get(1).getGc_img_day()).apply(options).into(gymImg2);
+                        Glide.with(mActivity).load(categorys.get(2).getGc_img_day()).apply(options).into(gymImg3);
+                        //Glide.with(mActivity).load(categorys.get(3).getGc_img_day()).apply(options).into(gymImg4);
+                        gymText1.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                        gymText1.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                        gymText2.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                        //gymText3.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                    }
+                    if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)) {
+                        Glide.with(mActivity).load(categorys.get(0).getGc_img_night()).apply(options).into(gymImg1);
+                        Glide.with(mActivity).load(categorys.get(1).getGc_img_night()).apply(options).into(gymImg2);
+                        Glide.with(mActivity).load(categorys.get(2).getGc_img_night()).apply(options).into(gymImg3);
+                        //Glide.with(mActivity).load(categorys.get(3).getGc_img_night()).apply(options).into(gymImg4);
+                        gymText1.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                        gymText2.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                        gymText3.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                        //gymText4.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                    }
+                    gymText1.setText(categorys.get(0).getGc_name());
+                    gymText2.setText(categorys.get(1).getGc_name());
+                    gymText3.setText(categorys.get(2).getGc_name());
+                    //gymText4.setText(categorys.get(3).getGc_name());
+                }else if(categorys.size() == 2){
+                    gym1Box.setVisibility(View.VISIBLE);
+                    gym2Box.setVisibility(View.VISIBLE);
+                    gym3Box.setVisibility(View.INVISIBLE);
+                    gym4Box.setVisibility(View.INVISIBLE);
+
+                    RequestOptions options = new RequestOptions().placeholder(R.mipmap.theme_jiansheng_mark).error(R.mipmap.theme_jiansheng_mark);
+                    if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin)){
+                        Glide.with(mActivity).load(categorys.get(0).getGc_img_day()).apply(options).into(gymImg1);
+                        Glide.with(mActivity).load(categorys.get(1).getGc_img_day()).apply(options).into(gymImg2);
+                        //Glide.with(mActivity).load(categorys.get(2).getGc_img_day()).apply(options).into(gymImg3);
+                        //Glide.with(mActivity).load(categorys.get(3).getGc_img_day()).apply(options).into(gymImg4);
+                        gymText1.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                        gymText1.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                        //gymText2.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                        //gymText3.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                    }
+                    if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)) {
+                        Glide.with(mActivity).load(categorys.get(0).getGc_img_night()).apply(options).into(gymImg1);
+                        Glide.with(mActivity).load(categorys.get(1).getGc_img_night()).apply(options).into(gymImg2);
+                        //Glide.with(mActivity).load(categorys.get(2).getGc_img_night()).apply(options).into(gymImg3);
+                        //Glide.with(mActivity).load(categorys.get(3).getGc_img_night()).apply(options).into(gymImg4);
+                        gymText1.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                        gymText2.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                        //gymText3.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                        //gymText4.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                    }
+                    gymText1.setText(categorys.get(0).getGc_name());
+                    gymText2.setText(categorys.get(1).getGc_name());
+                    //gymText3.setText(categorys.get(2).getGc_name());
+                    //gymText4.setText(categorys.get(3).getGc_name());
+                }else if(categorys.size() == 1){
+                    gym1Box.setVisibility(View.VISIBLE);
+                    gym2Box.setVisibility(View.INVISIBLE);
+                    gym3Box.setVisibility(View.INVISIBLE);
+                    gym4Box.setVisibility(View.INVISIBLE);
+
+                    RequestOptions options = new RequestOptions().placeholder(R.mipmap.theme_jiansheng_mark).error(R.mipmap.theme_jiansheng_mark);
+                    if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin)){
+                        Glide.with(mActivity).load(categorys.get(0).getGc_img_day()).apply(options).into(gymImg1);
+                        //Glide.with(mActivity).load(categorys.get(1).getGc_img_day()).apply(options).into(gymImg2);
+                        //Glide.with(mActivity).load(categorys.get(2).getGc_img_day()).apply(options).into(gymImg3);
+                        //Glide.with(mActivity).load(categorys.get(3).getGc_img_day()).apply(options).into(gymImg4);
+                        gymText1.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                        //gymText1.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                        //gymText2.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                        //gymText3.setTextColor(mActivity.getResources().getColor(R.color.color_FF333333));
+                    }
+                    if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)) {
+                        Glide.with(mActivity).load(categorys.get(0).getGc_img_night()).apply(options).into(gymImg1);
+                        //Glide.with(mActivity).load(categorys.get(1).getGc_img_night()).apply(options).into(gymImg2);
+                        //Glide.with(mActivity).load(categorys.get(2).getGc_img_night()).apply(options).into(gymImg3);
+                        //Glide.with(mActivity).load(categorys.get(3).getGc_img_night()).apply(options).into(gymImg4);
+                        //gymText1.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                        //gymText2.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                        //gymText3.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                        //gymText4.setTextColor(mActivity.getResources().getColor(R.color.color_FFFFFF));
+                    }
+                    gymText1.setText(categorys.get(0).getGc_name());
+                    //gymText2.setText(categorys.get(1).getGc_name());
+                    //gymText3.setText(categorys.get(2).getGc_name());
+                    //gymText4.setText(categorys.get(3).getGc_name());
+                }else{
+                    gym1Box.setVisibility(View.INVISIBLE);
+                    gym2Box.setVisibility(View.INVISIBLE);
+                    gym3Box.setVisibility(View.INVISIBLE);
+                    gym4Box.setVisibility(View.INVISIBLE);
+                }
             }
         }
     }
@@ -309,6 +686,7 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
             EventBus.getDefault().post(ConstantsCode.EB_ADD_CIRCLE,"同步数据");
             showSuccess("已取消点赞！");
         }
+
 
     }
 

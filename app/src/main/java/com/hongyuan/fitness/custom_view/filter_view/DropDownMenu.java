@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.custom_view.filter_view.adapter.MenuAdapter;
 import com.hongyuan.fitness.custom_view.filter_view.util.SimpleAnimationListener;
 import com.hongyuan.fitness.custom_view.filter_view.util.UIUtil;
@@ -21,6 +22,8 @@ import com.hongyuan.fitness.custom_view.filter_view.view.FixedTabIndicator;
  * 筛选器
  */
 public class DropDownMenu extends RelativeLayout implements View.OnClickListener, FixedTabIndicator.OnItemClickListener {
+
+    private CustomActivity mContext;
 
     private FixedTabIndicator fixedTabIndicator;
     private FrameLayout frameLayoutContainer;
@@ -36,16 +39,27 @@ public class DropDownMenu extends RelativeLayout implements View.OnClickListener
 
     public DropDownMenu(Context context) {
         this(context, null);
+        if(context instanceof CustomActivity){
+            this.mContext = (CustomActivity) context;
+        }
     }
 
     public DropDownMenu(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
+
+        if(context instanceof CustomActivity){
+            this.mContext = (CustomActivity) context;
+        }
     }
 
     public DropDownMenu(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
+
+        if(context instanceof CustomActivity){
+            this.mContext = (CustomActivity) context;
+        }
     }
 
     private void init(Context context) {
@@ -64,7 +78,7 @@ public class DropDownMenu extends RelativeLayout implements View.OnClickListener
         /*
          * 1.顶部筛选条
          */
-        fixedTabIndicator = new FixedTabIndicator(getContext());
+        fixedTabIndicator = new FixedTabIndicator(mContext);
         fixedTabIndicator.setId(R.id.fixedTabIndicator);
         addView(fixedTabIndicator, -1, UIUtil.dp(getContext(), 44));
 

@@ -14,15 +14,15 @@
         android:id="@+id/outBox">
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:background="@color/color_FFFFFF">
+            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="50dp"
-                android:orientation="vertical">
+                android:paddingBottom="80dp"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="@color/theme_background1">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
@@ -31,7 +31,7 @@
                         android:id="@+id/headImg"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@mipmap/about_class_select"
+                        android:src="@mipmap/default_man_head_img"
                         app:riv_corner_radius="100dp"
                         android:layout_centerVertical="true"
                         android:scaleType="fitXY"/>
@@ -47,14 +47,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_16"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:text="Valentina"/>
                         <TextView
                             android:id="@+id/label"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_12"
-                            android:textColor="@color/color_FF999999"
+                            android:textColor="@color/theme_color4"
                             android:text=""/>
                     </LinearLayout>
 
@@ -66,7 +66,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:padding="5dp"
-                        android:src="@mipmap/shuzhe_sandian_img"/>
+                        android:src="@mipmap/theme_shuzhe_sandian_img"/>
 
                     <TextView
                         android:id="@+id/attention"
@@ -88,7 +88,7 @@
                     android:id="@+id/postContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_14"
                     binding:onClickCommand="@{ViewModel.showEditext}"
                     android:text="你们有没有在好好健身呀～"/>
@@ -131,6 +131,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:textColor="@color/theme_color4"
                         android:textSize="12sp"
                         android:text="15分钟前"/>
 
@@ -146,7 +147,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_12"
-                            android:textColor="@color/color_FF999999"
+                            android:textColor="@color/theme_color4"
                             android:drawableLeft="@mipmap/like_huise_img"
                             android:gravity="center"
                             android:drawablePadding="5dp"
@@ -160,7 +161,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_12"
-                            android:textColor="@color/color_FF999999"
+                            android:textColor="@color/theme_color4"
                             android:layout_marginLeft="33dp"
                             android:text="33"
                             android:drawableLeft="@mipmap/comment_huise_img"
@@ -181,7 +182,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/color_EEEEEE"/>
+                    android:background="@color/theme_line"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -189,7 +190,7 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="12dp"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color7"
                     android:text="全部评论"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -212,8 +213,8 @@
             android:layout_gravity="bottom"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:layout_height="44dp"
-            android:background="@color/white"
+            android:layout_height="74dp"
+            android:background="@color/theme_color1"
             android:orientation="horizontal">
             <EditText
                 android:id="@+id/editText"
@@ -222,11 +223,12 @@
                 android:layout_weight="6"
                 android:layout_gravity="center_vertical"
                 android:hint="评论一下，说说你的看法"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
+                android:textColorHint="@color/theme_color4"
                 android:textSize="@dimen/sp_12"
                 binding:onClickCommand="@{ViewModel.showEditext}"
                 android:paddingLeft="5dp"
-                android:background="@drawable/shape_radius6_00000000_stroke_cccccc"/>
+                android:background="@drawable/theme_shape_radius6_00000000_stroke_cccccc"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -243,8 +245,8 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="44dp"
-            android:background="@color/color_EEEEEE"/>
+            android:layout_marginBottom="74dp"
+            android:background="@color/theme_line"/>
     </com.hongyuan.fitness.custom_view.KeyboardLayout>
 
 

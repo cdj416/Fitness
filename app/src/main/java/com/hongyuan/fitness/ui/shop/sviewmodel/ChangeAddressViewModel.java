@@ -17,6 +17,7 @@ import com.hongyuan.fitness.databinding.AcitivityChangeAddressBinding;
 import com.hongyuan.fitness.ui.shop.sbeans.AddressInfoBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class ChangeAddressViewModel extends CustomViewModel {
     public static final int ADD = 0X01;
@@ -50,16 +51,33 @@ public class ChangeAddressViewModel extends CustomViewModel {
 
         if(show_type == ADD){
             binding.deleteBox.setVisibility(View.GONE);
-            mActivity.getMainTitle().setCentreText("添加收获地址")
-                    .setRightTextColor("添加",mActivity.getResources().getColor(R.color.color_FF333333))
+
+            if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin)){
+                mActivity.setTitleBar(mActivity.TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"添加收货地址");
+                mActivity.getMainTitle().setRightTextColor("添加",mActivity.getResources().getColor(R.color.color_FF333333));
+            }
+            if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)){
+                mActivity.setTitleBar(mActivity.TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"添加收货地址");
+                mActivity.getMainTitle().setRightTextColor("添加",mActivity.getResources().getColor(R.color.color_FFFFFF));
+            }
+
+            mActivity.getMainTitle().getRightView()
                     .setOnClickListener(v -> {
                         addAddress();
             });
         }else{
             binding.deleteBox.setVisibility(View.VISIBLE);
-            mActivity.getMainTitle().setCentreText("修改收获地址")
-                    .setRightTextColor("修改",mActivity.getResources().getColor(R.color.color_FF333333))
-                    .setOnClickListener(v -> {
+
+            if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin)){
+                mActivity.setTitleBar(mActivity.TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"修改收货地址");
+                mActivity.getMainTitle().setRightTextColor("修改",mActivity.getResources().getColor(R.color.color_FF333333));
+            }
+            if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)){
+                mActivity.setTitleBar(mActivity.TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"修改收货地址");
+                mActivity.getMainTitle().setRightTextColor("修改",mActivity.getResources().getColor(R.color.color_FFFFFF));
+            }
+
+            mActivity.getMainTitle().getRightView().setOnClickListener(v -> {
                         addAddress();
             });
         }

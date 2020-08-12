@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="72dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/box">
+    android:id="@+id/box"
+    android:background="@color/theme_color1"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/topicImg"
         android:layout_width="56dp"
@@ -22,7 +25,7 @@
             android:id="@+id/topicName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:textSize="14sp"
             android:layout_marginLeft="8dp"
             android:drawableLeft="@mipmap/topic_mark"
@@ -51,6 +54,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"
+        android:background="@color/theme_line1"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

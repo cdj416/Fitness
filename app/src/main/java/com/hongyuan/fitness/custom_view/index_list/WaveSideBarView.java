@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.util.SkinConstants;
 
 import java.util.Arrays;
 import java.util.List;
@@ -86,6 +87,9 @@ public class WaveSideBarView extends View {
     // 圆形中心点X
     private float mBallCentreX;
 
+    //当前主题样式
+    private String skin = SkinConstants.SKIN_NAME.DEFAULT;
+
     public WaveSideBarView(Context context) {
         this(context, null);
     }
@@ -130,6 +134,18 @@ public class WaveSideBarView extends View {
         mTextPaint.setStyle(Paint.Style.FILL);
         mTextPaint.setTextSize(mLargeTextSize);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
+    }
+
+    /*
+    * 设置画笔颜色值
+    * */
+    public void setPaintColor(String skin){
+        this.skin = skin;
+
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin)){
+            mWavePaint.setColor(0xa6000000);
+        }
+
     }
 
     @Override
@@ -213,7 +229,11 @@ public class WaveSideBarView extends View {
 
         mLettersPaint.reset();
         mLettersPaint.setStyle(Paint.Style.FILL);
-        mLettersPaint.setColor(Color.parseColor("#F9F9F9"));
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin)){
+            mLettersPaint.setColor(Color.parseColor("#4d000000"));
+        }else{
+            mLettersPaint.setColor(Color.parseColor("#F9F9F9"));
+        }
         mLettersPaint.setAntiAlias(true);
         canvas.drawRoundRect(rectF, mTextSize, mTextSize, mLettersPaint);
 

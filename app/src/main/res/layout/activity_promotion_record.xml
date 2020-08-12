@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/color_F5F6FB">
+        android:background="@color/theme_background">
 
         <LinearLayout
             android:id="@+id/superiorBox"
@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="68dp"
                 android:orientation="horizontal"
-                android:background="@color/color_FFFFFF"
+                android:background="@color/theme_color1"
                 android:paddingStart="16dp">
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/superiorHead"
@@ -52,7 +52,7 @@
                         android:id="@+id/superiorName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:textSize="@dimen/sp_14"
                         android:text="Jessica"/>
                     <TextView
@@ -83,8 +83,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mRecycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/color_FFFFFF"/>
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
     </LinearLayout>

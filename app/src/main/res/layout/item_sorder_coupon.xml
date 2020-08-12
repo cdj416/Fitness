@@ -10,7 +10,7 @@
         android:layout_height="140dp"
         android:orientation="vertical"
         android:layout_marginTop="12dp"
-        android:background="@drawable/shape_radiu4_border_dddddd_soid_fffff">
+        android:background="@drawable/theme_shape_radiu6_border_dddddd_soid_fffff">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="86dp"
@@ -32,14 +32,14 @@
                     android:id="@+id/couponUseMoney"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_12"
                     android:text="满500可"/>
             </LinearLayout>
             <View
                 android:layout_width="1dp"
                 android:layout_height="56dp"
-                android:background="@color/color_EEEEEE"
+                android:background="@color/theme_line1"
                 android:layout_gravity="center_vertical"/>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:text="商城优惠券"/>
                 <TextView
                     android:id="@+id/couponUseData"
@@ -68,7 +68,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/color_EEEEEE"
+            android:background="@color/theme_line1"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"/>
         <LinearLayout
@@ -82,14 +82,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:text="仅限商城使用"/>
             <TextView
                 android:id="@+id/note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"/>
+                android:textColor="@color/theme_color3"/>
         </LinearLayout>
 
     </LinearLayout>

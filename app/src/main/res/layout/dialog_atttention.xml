@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="146dp"
         android:orientation="horizontal"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_background1">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -18,8 +18,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@color/color_FF333333"
-                android:drawableTop="@mipmap/look_person_main_mark"
+                android:textColor="@color/theme_color3"
+                android:drawableTop="@mipmap/theme_look_person_main_mark"
                 android:drawablePadding="13dp"
                 android:gravity="center"
                 android:text="查看主页"/>
@@ -34,8 +34,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@color/color_FF333333"
-                android:drawableTop="@mipmap/attention_img"
+                android:textColor="@color/theme_color3"
+                android:drawableTop="@mipmap/theme_attention_mark"
                 android:drawablePadding="13dp"
                 android:gravity="center"
                 android:text="关注ta"/>
@@ -50,8 +50,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="@color/color_FF333333"
-                android:drawableTop="@mipmap/report_mark_img"
+                android:textColor="@color/theme_color3"
+                android:drawableTop="@mipmap/theme_report_mark"
                 android:drawablePadding="13dp"
                 android:gravity="center"
                 android:text="举报"/>

@@ -28,7 +28,7 @@
             android:id="@+id/goodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:textSize="@dimen/sp_14"
             android:layout_marginStart="6dp"
             android:ellipsize="end"
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color4"
                 android:visibility="gone"
                 android:text="¥"/>
             <TextView
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:visibility="gone"
                 android:text=" + "/>
             <TextView
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:visibility="gone"
                 android:text="积分"/>
         </LinearLayout>

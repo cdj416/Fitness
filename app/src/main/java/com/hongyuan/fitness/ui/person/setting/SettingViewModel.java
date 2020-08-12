@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.person.setting;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.hongyuan.fitness.R;
@@ -19,8 +20,12 @@ import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CacheUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
+import com.hongyuan.fitness.util.SkinConstants;
+import com.hongyuan.fitness.util.StatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
+
+import skin.support.SkinCompatManager;
 
 public class SettingViewModel extends CustomViewModel {
 
@@ -80,6 +85,46 @@ public class SettingViewModel extends CustomViewModel {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        //初始化是否暗黑模式
+        if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)){
+            binding.blackThem.setTwSwitch(true);
+        }else{
+            binding.blackThem.setTwSwitch(false);
+        }
+
+        binding.blackThem.setSwitchLinstener(flag -> {
+            if(flag){
+                //开启换肤
+                SkinCompatManager.getInstance().loadSkin(SkinConstants.SKIN_NAME.BLACK, SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
+                SharedPreferencesUtil.putString(mActivity,SkinConstants.SKIN,SkinConstants.SKIN_NAME.BLACK);
+
+                mActivity.skin = SkinConstants.SKIN_NAME.BLACK;
+            }else{
+                // 恢复应用默认皮肤
+                SkinCompatManager.getInstance().restoreDefaultTheme();
+                SharedPreferencesUtil.putString(mActivity,SkinConstants.SKIN,SkinConstants.SKIN_NAME.DEFAULT);
+
+                mActivity.skin = SkinConstants.SKIN_NAME.DEFAULT;
+            }
+
+
+            if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin)){
+                mActivity.getMainTitle().getBgView().setBackgroundResource(R.drawable.theme_shape_soid_ffffff);
+                mActivity.getMainTitle().setCenterTextColor("设置",0xFF333333);
+                mActivity.getMainTitle().setLeftImage(R.mipmap.back_common);
+                mActivity.barHeight.setBackgroundColor(0xFFFFFFFF);
+                StatusBarUtil.setCommonUI(mActivity,true);
+            }
+
+            if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)){
+                mActivity.getMainTitle().getBgView().setBackgroundResource(R.drawable.theme_shape_soid_ffffff_black);
+                mActivity.getMainTitle().setCenterTextColor("设置",0xFFFFFFFF);
+                mActivity.getMainTitle().setLeftImage(R.mipmap.white_common);
+                mActivity.barHeight.setBackgroundColor(0xFF333333);
+                StatusBarUtil.setCommonUI(mActivity,false);
             }
         });
     }

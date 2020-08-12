@@ -6,6 +6,7 @@ import android.widget.Button;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityCircleDetailsBinding;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class CircleDetailsActivity extends CustomActivity {
 
@@ -32,8 +33,12 @@ public class CircleDetailsActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitle("话题详情");
-        setsetImmersive(0x55000000);
+
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"话题详情");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"话题详情");
+
         ActivityCircleDetailsBinding binding = ActivityCircleDetailsBinding.bind(mView);
         viewModel = new CircleDetailsViewModel(this,binding);
         binding.setViewModel(viewModel);

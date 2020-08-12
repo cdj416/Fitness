@@ -6,8 +6,8 @@ android {
         applicationId "com.hongyuan.fitness"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 25
-        versionName "1.6.4"
+        versionCode 30
+        versionName "1.6.9"
         flavorDimensions "versionCode"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -72,17 +72,17 @@ android {
         }
     }
 
-    flavorDimensions "a"
-    /*配置渠道*/
-    productFlavors {
+//    flavorDimensions "a"
+//    /*配置渠道*/
+//    productFlavors {
 //        yingyongbao {
 //            dimension "a"
 //            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yingyongbao"]
 //        }
-        huawei {
-            dimension "a"
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "huawei"]
-        }
+//        huawei {
+//            dimension "a"
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "huawei"]
+//        }
 //        xiaomi {
 //            dimension "a"
 //            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
@@ -95,7 +95,7 @@ android {
 //            dimension "a"
 //            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "oppo"]
 //        }
-    }
+//    }
 
 
 //    splits {
@@ -107,6 +107,13 @@ android {
 //        }
 //    }
 
+
+    //换肤使用的
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res', 'src/main/res-black','src/main/res-light']
+        }
+    }
 
 
 }
@@ -220,9 +227,9 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.12.1'
 
     //环信IM聊天
-    implementation 'com.google.android.gms:play-services-base:11.4.0'
-    implementation 'com.google.firebase:firebase-messaging:11.4.0'
-    api 'com.hyphenate:hyphenate-sdk:3.6.1'
+    implementation 'com.google.android.gms:play-services-base:17.3.0'
+    implementation 'com.google.firebase:firebase-messaging:20.2.3'
+    api 'com.hyphenate:hyphenate-sdk:3.6.8'
 
     //聊天ui库
     implementation 'cn.jiguang.imui:messagelist:0.8.0'
@@ -237,4 +244,11 @@ dependencies {
 
     //拼音
     implementation 'com.belerweb:pinyin4j:2.5.0'
+
+    //换肤库
+    implementation 'skin.support:skin-support:4.0.5'                   // skin-support
+    implementation 'skin.support:skin-support-appcompat:4.0.5'         // skin-support 基础控件支持
+    implementation 'skin.support:skin-support-design:4.0.5'            // skin-support-design material design 控件支持[可选]
+    implementation 'skin.support:skin-support-cardview:4.0.5'          // skin-support-cardview CardView 控件支持[可选]
+    implementation 'skin.support:skin-support-constraint-layout:4.0.5' // skin-support-constraint-layout ConstraintLayout 控件支持[可选]
 }

@@ -20,6 +20,7 @@ import com.hongyuan.fitness.ui.shop.sactivity.SCartActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopMenuActivity;
 import com.hongyuan.fitness.ui.shop.sbeans.FirstCategoryBeans;
 import com.hongyuan.fitness.ui.shop.sviewpage.ShopViewPagerAdapter;
+import com.hongyuan.fitness.util.SkinConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,8 @@ public class ShopFragment extends CustomFragment {
     //分类数据
     private FirstCategoryBeans.DataBean dataBean;
 
+    private String skin;
+
     @Override
     public int getLayoutId() {
         return R.layout.fragment_shop;
@@ -43,6 +46,8 @@ public class ShopFragment extends CustomFragment {
 
     @Override
     public void initView(View mView) {
+        skin = mActivity.skin;
+
         searchBox = mView.findViewById(R.id.searchBox);
         layoutMenu = mView.findViewById(R.id.layoutMenu);
         mViewPager = mView.findViewById(R.id.mViewPager);
@@ -75,7 +80,26 @@ public class ShopFragment extends CustomFragment {
         goMyShop.setOnClickListener(v -> {
             startActivity(MyShopActivity.class,null);
         });
+
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            layoutMenu.setTabTextColors(getResources().getColor(R.color.color_FF333333),getResources().getColor(R.color.color_EF5B48));
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            layoutMenu.setTabTextColors(getResources().getColor(R.color.color_FFFFFF),getResources().getColor(R.color.color_EF5B48));
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //每次来，去刷新下当前模式
+        if(!skin.equals(mActivity.skin)){
+            skin = mActivity.skin;
+            if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+                layoutMenu.setTabTextColors(getResources().getColor(R.color.color_FF333333),getResources().getColor(R.color.color_EF5B48));
+            if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+                layoutMenu.setTabTextColors(getResources().getColor(R.color.color_FFFFFF),getResources().getColor(R.color.color_EF5B48));
+        }
+    }
+
     /**
      * 将 Tab[index] 放大为初始的 scale 倍
      */

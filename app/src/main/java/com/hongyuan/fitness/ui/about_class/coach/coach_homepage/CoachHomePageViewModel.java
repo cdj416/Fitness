@@ -29,6 +29,8 @@ import com.hongyuan.fitness.ui.about_class.privite_class.course_list.CouseListBe
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.DividerItemDecoration;
+import com.hongyuan.fitness.util.SkinConstants;
+import com.hongyuan.fitness.util.StatusBarUtil;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.hongyuan.fitness.util.ViewChangeUtil;
 
@@ -85,8 +87,6 @@ public class CoachHomePageViewModel extends CustomViewModel implements CommentTi
         //评论的适配
         LinearLayoutManager manager1 = new LinearLayoutManager(mActivity);
         manager1.setOrientation(RecyclerView.VERTICAL);
-        binding.commentRecycler.addItemDecoration(new DividerItemDecoration(
-                mActivity, DividerItemDecoration.HORIZONTAL_LIST,1,0xffF1F1F1));
         binding.commentRecycler.setLayoutManager(manager1);
         commentAdapter = new CommentAdapter();
         binding.commentRecycler.setAdapter(commentAdapter);
@@ -149,7 +149,7 @@ public class CoachHomePageViewModel extends CustomViewModel implements CommentTi
 
     @Override
     public void onScrollChanged(StickyScrollView scrollView, int x, int y, int oldx, int oldy) {
-        if (y <= 0) {   //设置标题的背景颜色
+        /*if (y <= 0) {   //设置标题的背景颜色
             binding.titleBox.setBackgroundColor(Color.argb((int) 0, 99,130,236));
         } else if (y > 0 && y <= height) {
             float scale = (float) y / height;
@@ -158,6 +158,50 @@ public class CoachHomePageViewModel extends CustomViewModel implements CommentTi
             binding.titleBox.setBackgroundColor(Color.argb((int) alpha, 99,130,236));
         } else {
             binding.titleBox.setBackgroundColor(Color.argb( 255, 99,130,236));
+        }*/
+
+
+        if (y <= 0) {   //设置标题的背景颜色
+            binding.myTitle.setCenterTextColor("教练主页",mActivity.getResources().getColor(R.color.color_FFFFFF));
+            binding.myTitle.setRightImage(R.mipmap.white_collection_mark);
+            binding.myTitle.setLeftImage(R.mipmap.white_common);
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) 0, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) 0, 255,255,255));
+            }
+        } else if (y > 0 && y <= height) {
+            float scale = (float) y / height;
+            float alpha = (255 * scale);
+
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) alpha, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) alpha, 255,255,255));
+                if(y <= height/2){
+                    binding.myTitle.setRightImage(R.mipmap.white_collection_mark);
+                    binding.myTitle.setCenterTextColor("教练主页",mActivity.getResources().getColor(R.color.color_FFFFFF));
+                    binding.myTitle.setLeftImage(R.mipmap.white_common);
+                    StatusBarUtil.setCommonUI(mActivity,false);
+                    binding.myTitle.hideLine();
+                }else{
+                    binding.myTitle.setRightImage(R.mipmap.gray_collection_img);
+                    binding.myTitle.setCenterTextColor("教练主页",mActivity.getResources().getColor(R.color.color_FF333333));
+                    binding.myTitle.setLeftImage(R.mipmap.theme_left_img);
+                    StatusBarUtil.setCommonUI(mActivity,true);
+                    binding.myTitle.showLine();
+                }
+            }
+        } else {
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) 255, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                binding.titleBox.setBackgroundColor(Color.argb( 255, 255,255,255));
+                binding.myTitle.setRightImage(R.mipmap.gray_collection_img);
+                binding.myTitle.setCenterTextColor("教练主页",mActivity.getResources().getColor(R.color.color_FF333333));
+                binding.myTitle.setLeftImage(R.mipmap.theme_left_img);
+            }
+
         }
     }
 
@@ -294,7 +338,8 @@ public class CoachHomePageViewModel extends CustomViewModel implements CommentTi
         binding.coachGrade.setText("私教专业P"+coachHomeBean.getData().getInfo().getCoach_level());
         binding.upClassNum.setText(BaseUtil.getNoZoon(coachHomeBean.getData().getInfo().getCoach_review_count()));
         binding.evaluationNum.setText(BaseUtil.getNoZoon(coachHomeBean.getData().getInfo().getCoach_s()));
-        binding.myRat.setRating(Float.valueOf(coachHomeBean.getData().getInfo().getCoach_s()));
+        //binding.myRat.setNumStars(5);
+        //binding.myRat.setRating(5);
 
         if(coachHomeBean.getData().getInfo().getMi_sex() == 1){
             ViewChangeUtil.changeRightDrawable(mActivity,binding.coachName,R.mipmap.person_boby_mark_img);

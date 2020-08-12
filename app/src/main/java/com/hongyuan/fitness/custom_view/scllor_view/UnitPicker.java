@@ -5,6 +5,10 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
+import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.CustomActivity;
+import com.hongyuan.fitness.util.SkinConstants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,16 +18,54 @@ import java.util.List;
  */
 public class UnitPicker extends WheelPicker<String> {
 
+    private CustomActivity mContext;
+
     public UnitPicker(Context context) {
         this(context, null);
+        if(context instanceof CustomActivity){
+            mContext = (CustomActivity) context;
+
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                setTextColor(mContext.getResources().getColor(R.color.color_FF999999));
+            }
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                setTextColor(mContext.getResources().getColor(R.color.color_FFFFFF));
+                //设置幕布颜色
+                setCurtainColor(mContext.getResources().getColor(R.color.translucent_black_70));
+            }
+        }
     }
 
     public UnitPicker(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
+        if(context instanceof CustomActivity){
+            mContext = (CustomActivity) context;
+
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                setTextColor(mContext.getResources().getColor(R.color.color_FF999999));
+            }
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                setTextColor(mContext.getResources().getColor(R.color.color_FFFFFF));
+                //设置幕布颜色
+                setCurtainColor(mContext.getResources().getColor(R.color.translucent_black_70));
+            }
+        }
     }
 
     public UnitPicker(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        if(context instanceof CustomActivity){
+            mContext = (CustomActivity) context;
+
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                setTextColor(mContext.getResources().getColor(R.color.color_FF999999));
+            }
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                setTextColor(mContext.getResources().getColor(R.color.color_FFFFFF));
+                //设置幕布颜色
+                setCurtainColor(mContext.getResources().getColor(R.color.translucent_black_70));
+            }
+        }
 
         data = new ArrayList<>();
         setOnWheelChangeListener(new OnWheelChangeListener<String>() {

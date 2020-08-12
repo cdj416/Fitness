@@ -12,8 +12,9 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivityPriviteCourseReservationDetailsBinding;
-import com.hongyuan.fitness.ui.about_class.class_success.SuccessClassActivity;
 import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomePageActivity;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.util.CustomDialog;
 
 public class ReservationDetailsViewModel extends CustomViewModel {
@@ -106,11 +107,15 @@ public class ReservationDetailsViewModel extends CustomViewModel {
         }
 
         if(data instanceof ReservationSuccessBeans){
+            V3SuccessBeans beans = new V3SuccessBeans();
+            beans.setType(V3SuccessBeans.TYPE.PRIVITECLASS);
+            beans.setTitleText("预约私教课");
+            beans.setShowText("预约成功");
+            beans.setBtn2Text("返回");
+
             Bundle bundle = new Bundle();
-            bundle.putString("titleName","预约私教课");
-            bundle.putString("successText","预约成功！");
-            bundle.putString("buttonText","返回");
-            startActivity(SuccessClassActivity.class,bundle);
+            bundle.putSerializable("successBeans",beans);
+            startActivity(V3SuccessActivity.class,bundle);
             mActivity.finish();
         }
     }

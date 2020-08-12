@@ -89,8 +89,6 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
 
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);
         manager.setOrientation(RecyclerView.VERTICAL);
-        binding.mRecycler.addItemDecoration(new DividerItemDecoration(
-                getContext(), DividerItemDecoration.HORIZONTAL_LIST,1,0xFFEEEEEE));
         binding.mRecycler.setLayoutManager(manager);
         adapter = new PostDetailsAdapter(this);
         binding.mRecycler.setAdapter(adapter);

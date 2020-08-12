@@ -34,7 +34,7 @@
             android:id="@+id/specText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:textSize="@dimen/sp_12"
             android:visibility="visible"
             android:text="红色"/>

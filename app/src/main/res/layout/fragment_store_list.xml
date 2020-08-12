@@ -7,7 +7,5 @@
     <com.hongyuan.fitness.ui.store.store_list.StoreListRecyclerItemView
         android:id="@+id/recItem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="13dp"
-        android:paddingRight="13dp"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>

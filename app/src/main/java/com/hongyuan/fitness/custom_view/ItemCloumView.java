@@ -12,10 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class ItemCloumView extends LinearLayout {
+
+    private CustomActivity mContext;
 
     private String leftText,rightText;
     private boolean isShow,icShowCopy;
@@ -37,6 +41,10 @@ public class ItemCloumView extends LinearLayout {
         icShowCopy = a.getBoolean(R.styleable.ItemCloumView_icShowCopy,false);
         rightColor = a.getColor(R.styleable.ItemCloumView_icRightColor,getResources().getColor(R.color.color_FF333333));
         LeftColor = a.getColor(R.styleable.ItemCloumView_icLeftColor,getResources().getColor(R.color.color_FF999999));
+
+        if(context instanceof CustomActivity){
+            mContext = (CustomActivity) context;
+        }
 
         initView();
     }
@@ -79,6 +87,13 @@ public class ItemCloumView extends LinearLayout {
             cm.setPrimaryClip(mClipData);
             CustomDialog.showMessage(getContext(),"复制成功！");
         });
+
+        if(mContext.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+            content.setTextColor(mContext.getResources().getColor(R.color.theme_color3));
+        }
+        if(mContext.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+            content.setTextColor(mContext.getResources().getColor(R.color.theme_color1));
+        }
     }
 
     public void setRightText(String contentText){

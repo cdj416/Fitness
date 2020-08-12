@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_14"
-        android:textColor="@color/color_FF333333"
+        android:textColor="@color/theme_color3"
         android:padding="5dp"
         android:text="管理"/>
     <ImageView
@@ -18,5 +18,5 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:layout_marginStart="10dp"
-        android:src="@mipmap/person_message_mark"/>
+        android:src="@mipmap/theme_person_message_mark"/>
 </LinearLayout>

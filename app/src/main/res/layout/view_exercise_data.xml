@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="96dp"
-    android:background="@color/color_FFFFFF">
+    android:background="@color/theme_color1">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,14 +24,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:text="跑步"/>
             <TextView
                 android:id="@+id/value1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_marginTop="18dp"
                 android:text="0分钟"/>
             <TextView
@@ -52,13 +52,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"/>
+                android:textColor="@color/theme_color3"/>
             <TextView
                 android:id="@+id/value2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_marginTop="18dp"
                 android:text="0"/>
             <TextView
@@ -82,6 +82,6 @@
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"
+        android:background="@color/theme_line1"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

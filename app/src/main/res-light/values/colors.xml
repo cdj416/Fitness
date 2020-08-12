@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--白色主题颜色-->
+    <color name="theme_color1">#FFFFFF</color>
+    <color name="theme_color2">#EEEEEE</color>
+    <color name="theme_color3">#333333</color>
+    <color name="theme_color4">#FF999999</color>
+    <color name="theme_color5">#EEEEEE</color>
+    <color name="theme_color6">#FFD1D1D1</color>
+    <color name="theme_color7">#777777</color>
+    <color name="theme_color8">#6F71BA</color>
+    <color name="theme_color9">#F5F6FB</color>
+    <color name="theme_color10">#FFDDDDDD</color>
+    <color name="theme_color11">#FFF27863</color>
+    <color name="theme_color12">#FFFF8993</color>
+    <color name="theme_color13">#FFFFFF</color>
+
+
+    <color name="theme_line">#EEEEEE</color>
+    <color name="theme_line1">#EEEEEE</color>
+
+    <color name="theme_background">#F5F6FB</color>
+    <color name="theme_background1">#FFFFFF</color>
+    <color name="theme_background3">#F5F6FB</color>
+</resources>

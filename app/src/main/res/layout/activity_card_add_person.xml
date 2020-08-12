@@ -11,22 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_background1">
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:background="@color/color_FFFFFF"
+            android:background="@color/theme_color1"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:hint="请输入姓名"
+            android:textColor="@color/theme_color3"
+            android:textColorHint="@color/theme_color4"
             android:textSize="@dimen/sp_14"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
-            android:background="@color/color_EEEEEE"/>
+            android:background="@color/theme_line1"/>
 
         <LinearLayout
             android:id="@+id/daysBox"
@@ -38,7 +40,7 @@
                 android:id="@+id/tvDays"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@color/color_FFFFFF"
+                android:background="@color/theme_color1"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:hint="请选择生日"
@@ -50,7 +52,7 @@
                 android:layout_height="1px"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
         </LinearLayout>
 
 
@@ -64,7 +66,9 @@
                 android:id="@+id/etPhoneNum"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@color/color_FFFFFF"
+                android:background="@color/theme_color1"
+                android:textColor="@color/theme_color3"
+                android:textColorHint="@color/theme_color4"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:inputType="phone"
@@ -75,7 +79,7 @@
                 android:layout_height="1px"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
         </LinearLayout>
 
     </LinearLayout>

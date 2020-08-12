@@ -7,20 +7,35 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/layoutMenu"
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            app:tabIndicatorColor="@color/color_EF5B48"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/color_EF5B48"/>
+            android:orientation="vertical"
+            android:background="@color/theme_color1">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/layoutMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:tabIndicatorColor="@color/color_EF5B48"
+                app:tabTextColor="@color/theme_color3"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/color_EF5B48"/>
+            <ImageView
+                android:id="@+id/blackThem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:src="@mipmap/back_common"/>
+        </RelativeLayout>
+
         <ImageView
             android:id="@+id/searchMark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/search_back_mark"
+            android:src="@mipmap/theme_search_chengse_mark"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:visibility="visible"

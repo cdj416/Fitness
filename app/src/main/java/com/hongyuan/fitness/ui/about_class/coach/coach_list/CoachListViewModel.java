@@ -19,6 +19,7 @@ import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomePageAct
 import com.hongyuan.fitness.ui.about_class.coach.coach_search.CoachSearchActivity;
 import com.hongyuan.fitness.ui.main.main_home.recommend.vtwo_home.VtwoStarCoachBean;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.SkinConstants;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
@@ -50,7 +51,11 @@ public class CoachListViewModel extends CustomViewModel implements CoachDropMenu
     @Override
     protected void initView() {
         ImageView imageView = new ImageView(mActivity);
-        imageView.setImageResource(R.mipmap.search_back_mark);
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin))
+            imageView.setImageResource(R.mipmap.search_back_mark);
+        if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin))
+            imageView.setImageResource(R.mipmap.theme_search_chengse_mark_black);
+
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         imageView.setLayoutParams(params);

@@ -12,14 +12,15 @@
         android:layout_height="match_parent"
         android:id="@+id/outBox">
             <androidx.core.widget.NestedScrollView
+                android:id="@+id/scroll"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color_FFFFFF">
+                android:layout_height="match_parent">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingBottom="50dp"
-                    android:orientation="vertical">
+                    android:paddingBottom="85dp"
+                    android:orientation="vertical"
+                    android:background="@color/theme_background1">
                     <com.hongyuan.fitness.custom_view.MyVideoView
                         android:id="@+id/myVideo"
                         android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_16"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:layout_marginTop="16dp"
                         android:layout_marginLeft="16dp"
                         android:text="瑜伽动作注意事项"/>
@@ -55,7 +56,7 @@
                             android:id="@+id/baikeContent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF999999"
+                            android:textColor="@color/theme_color4"
                             android:textSize="@dimen/sp_12"/>
                     </LinearLayout>
 
@@ -88,7 +89,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_12"
-                                android:textColor="@color/color_FF999999"
+                                android:textColor="@color/theme_color4"
                                 android:layout_marginLeft="5dp"
                                 android:text="收藏"/>
                         </LinearLayout>
@@ -104,7 +105,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_12"
-                                android:textColor="@color/color_FF999999"
+                                android:textColor="@color/theme_color4"
                                 android:drawableLeft="@mipmap/like_huise_img"
                                 android:gravity="center"
                                 android:drawablePadding="5dp"
@@ -119,7 +120,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_12"
-                                android:textColor="@color/color_FF999999"
+                                android:textColor="@color/theme_color4"
                                 android:layout_marginLeft="33dp"
                                 android:text="33"
                                 android:drawableLeft="@mipmap/comment_huise_img"
@@ -143,13 +144,13 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:background="@color/color_CCCCCC"/>
+                        android:background="@color/theme_line1"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:textColor="#777777"
+                        android:textColor="@color/theme_color7"
                         android:textSize="@dimen/sp_12"
                         android:layout_marginTop="27dp"
                         android:text="相关推荐"/>
@@ -165,7 +166,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:textColor="#777777"
+                        android:textColor="@color/theme_color7"
                         android:textSize="@dimen/sp_12"
                         android:layout_marginTop="27dp"
                         android:text="全部评论"/>
@@ -191,8 +192,8 @@
             android:layout_gravity="bottom"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:layout_height="44dp"
-            android:background="@color/white"
+            android:layout_height="74dp"
+            android:background="@color/theme_color1"
             android:orientation="horizontal">
             <EditText
                 android:id="@+id/editText"
@@ -201,11 +202,12 @@
                 android:layout_weight="6"
                 android:layout_gravity="center_vertical"
                 android:hint="评论一下，说说你的看法"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
+                android:textColorHint="@color/theme_color4"
                 android:textSize="@dimen/sp_12"
                 binding:onClickCommand="@{ViewModel.showEditext}"
                 android:paddingLeft="5dp"
-                android:background="@drawable/shape_radius6_00000000_stroke_cccccc"/>
+                android:background="@drawable/theme_shape_radius6_00000000_stroke_cccccc"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -222,7 +224,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="44dp"
-            android:background="@color/color_EEEEEE"/>
+            android:layout_marginBottom="74dp"
+            android:background="@color/theme_line"/>
     </com.hongyuan.fitness.custom_view.KeyboardLayout>
 </layout>

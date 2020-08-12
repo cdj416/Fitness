@@ -23,12 +23,14 @@ import com.bumptech.glide.Glide;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.RetrofitListener;
 import com.hongyuan.fitness.ui.main.main_person.RetrunImgBean;
 import com.hongyuan.fitness.ui.shop.sinterface.SwitchLinstener;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.GlideEngine;
+import com.hongyuan.fitness.util.SkinConstants;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -44,6 +46,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class ScheckInView extends LinearLayout implements RetrofitListener {
 
+    private CustomActivity mContext;
     private CustomViewModel viewModel;
 
     private RelativeLayout etsBox,img1box,img2box,img3box;
@@ -80,6 +83,10 @@ public class ScheckInView extends LinearLayout implements RetrofitListener {
 
     public ScheckInView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        if(context instanceof CustomActivity){
+            mContext = (CustomActivity) context;
+        }
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ShopCheckInView);
         sciEtsTitleName = a.getString(R.styleable.ShopCheckInView_sciEtsTitleName);
@@ -220,19 +227,40 @@ public class ScheckInView extends LinearLayout implements RetrofitListener {
 
         //设置页面删除图片点击事件
         closeImg1.setOnClickListener(v -> {
-            showImg1.setImageResource(R.color.color_FFFFFF);
+
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                showImg1.setImageResource(R.color.color_FFFFFF);
+            }
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                showImg1.setImageResource(R.color.theme_color3);
+            }
+
             closeImg1.setVisibility(GONE);
             upTv1.setVisibility(VISIBLE);
             imgUrl1 = null;
         });
         closeImg2.setOnClickListener(v -> {
-            showImg2.setImageResource(R.color.color_FFFFFF);
+
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                showImg2.setImageResource(R.color.color_FFFFFF);
+            }
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                showImg2.setImageResource(R.color.theme_color3);
+            }
+
             closeImg2.setVisibility(GONE);
             upTv2.setVisibility(VISIBLE);
             imgUrl2 = null;
         });
         closeImg3.setOnClickListener(v -> {
-            showImg3.setImageResource(R.color.color_FFFFFF);
+
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                showImg3.setImageResource(R.color.color_FFFFFF);
+            }
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                showImg3.setImageResource(R.color.theme_color3);
+            }
+
             closeImg3.setVisibility(GONE);
             upTv3.setVisibility(VISIBLE);
             imgUrl3 = null;
@@ -450,13 +478,26 @@ public class ScheckInView extends LinearLayout implements RetrofitListener {
     private void pwdIsVisible(boolean isShow){
         if(!isShow){
             passwordShow = true;
-            passwordImg.setImageResource(R.mipmap.vtwo_login_eye_outline_img_);
+
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                passwordImg.setImageResource(R.mipmap.vtwo_login_eye_outline_img_);
+            }
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                passwordImg.setImageResource(R.mipmap.vtwo_login_eye_outline_img_black);
+            }
+
             edText.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
             Editable etext = edText.getText();
             Selection.setSelection(etext, etext.length());
         }else{
             passwordShow = false;
-            passwordImg.setImageResource(R.mipmap.vtwo_login_eye_off_img_);
+
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                passwordImg.setImageResource(R.mipmap.vtwo_login_eye_off_img_);
+            }
+            if(mContext.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                passwordImg.setImageResource(R.mipmap.vtwo_login_eye_off_img__black);
+            }
             edText.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD);
             Editable etext = edText.getText();
             Selection.setSelection(etext, etext.length());

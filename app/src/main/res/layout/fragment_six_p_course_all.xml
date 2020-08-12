@@ -2,13 +2,13 @@
 <com.hongyuan.fitness.custom_view.StickyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/color_F5F6FB">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingBottom="50dp">
+        android:paddingBottom="50dp"
+        android:background="@color/theme_background">
         <LinearLayout
             android:id="@+id/oBox"
             android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_16"
                 android:text="进行中"
                 android:layout_marginTop="24dp"
@@ -30,13 +30,13 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/shape_radius6_ffffff">
+                android:background="@drawable/theme_shape_radius6_ffffff">
 
                 <TextView
                     android:id="@+id/courseStartTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:textSize="@dimen/sp_12"/>
 
                 <RelativeLayout
@@ -61,7 +61,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_16"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:layout_marginEnd="140dp"/>
@@ -71,7 +71,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_12"
                             android:layout_marginTop="2dp"
-                            android:textColor="@color/color_FF999999"
+                            android:textColor="@color/theme_color4"
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:layout_marginEnd="140dp"/>
@@ -90,7 +90,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_12"
                             android:layout_marginTop="2dp"
-                            android:textColor="@color/color_FF999999"
+                            android:textColor="@color/theme_color4"
                             android:layout_gravity="right"
                             android:text="课程已开始"/>
                         <LinearLayout
@@ -139,7 +139,7 @@
                             android:id="@+id/tTvtext"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF999999"
+                            android:textColor="@color/theme_color4"
                             android:textSize="@dimen/sp_14"
                             android:text="等待教练确认"/>
                         <TextView
@@ -167,7 +167,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_16"
                 android:text="待预约"
                 android:layout_marginTop="24dp"

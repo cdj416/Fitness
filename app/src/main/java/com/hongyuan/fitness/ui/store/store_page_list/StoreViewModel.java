@@ -47,6 +47,7 @@ public class StoreViewModel extends CustomViewModel {
         binding.mRecycler.setLayoutManager(menuManager);
         adapter = new StoreAdapter();
         binding.mRecycler.setAdapter(adapter);
+        adapter.setFooterView(mActivity.getFooter16Height(binding.mRecycler));
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @SingleClick(2000)
             @Override

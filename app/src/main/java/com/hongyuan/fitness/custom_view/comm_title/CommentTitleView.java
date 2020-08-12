@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.FlowLayoutManager;
 import com.hongyuan.fitness.custom_view.NestedRecyclerView;
@@ -18,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentTitleView extends RelativeLayout {
+
+
+    private CustomActivity mContext;
 
     private TextView titleName;
     private NestedRecyclerView mRecycler;
@@ -55,6 +59,8 @@ public class CommentTitleView extends RelativeLayout {
     }
 
     public void initLayoutView(){
+        mContext = (CustomActivity) getContext();
+
         View view = View.inflate(getContext(), R.layout.view_comment_top, this);
         titleName = view.findViewById(R.id.titleName);
         mRecycler = view.findViewById(R.id.mRecycler);
@@ -64,7 +70,7 @@ public class CommentTitleView extends RelativeLayout {
         mRecycler.addItemDecoration(new DividerItemDecoration(
                 getContext(), DividerItemDecoration.VERTICAL_LIST,30,0x00000000));
         mRecycler.setLayoutManager(flowLayoutManager);
-        adapter = new CommentTitleAdapter();
+        adapter = new CommentTitleAdapter(mContext.skin);
         adapter.setNewData(getData());
         mRecycler.setAdapter(adapter);
 

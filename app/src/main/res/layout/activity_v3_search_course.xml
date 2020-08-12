@@ -11,17 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/color_F5F6FB">
+        android:background="@color/theme_background">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:background="@color/color_FFFFFF">
+            android:background="@color/theme_color1">
             <TextView
                 android:id="@+id/finishText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:padding="6dp"
@@ -32,12 +32,12 @@
                 android:layout_height="36dp"
                 android:layout_marginEnd="56dp"
                 android:layout_marginStart="16dp"
-                android:background="@drawable/shape_radius6_00000000_stroke_cccccc"
+                android:background="@drawable/theme_shape_radius6_00000000_stroke_cccccc"
                 android:layout_centerVertical="true">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/search_huise_mark"
+                    android:src="@mipmap/theme_search_chengse_mark"
                     android:layout_marginStart="11dp"
                     android:layout_centerVertical="true"/>
                 <EditText
@@ -47,7 +47,8 @@
                     android:background="@null"
                     android:layout_marginStart="40dp"
                     android:textSize="14sp"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
+                    android:textColorHint="@color/theme_color4"
                     android:hint="请输入"/>
                 <ImageView
                     android:id="@+id/clearText"
@@ -57,6 +58,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:padding="5dp"
+                    android:visibility="gone"
                     android:layout_marginEnd="6dp"/>
             </RelativeLayout>
         </RelativeLayout>
@@ -64,11 +66,11 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/color_EEEEEE"/>
+            android:background="@color/theme_line1"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:background="@color/color_FFFFFF"
+            android:background="@color/theme_color1"
             android:orientation="horizontal">
             <RelativeLayout
                 android:id="@+id/priviteBox"
@@ -101,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_14"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color4"
                     android:layout_centerInParent="true"
                     android:text="团体课"/>
                 <View
@@ -123,16 +125,12 @@
                 android:id="@+id/priviteCourse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
                 android:paddingBottom="10dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/groupCourse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
                 android:paddingBottom="10dp"/>
 
             <RelativeLayout

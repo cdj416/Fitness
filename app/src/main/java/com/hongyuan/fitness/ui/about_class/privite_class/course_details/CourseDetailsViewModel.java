@@ -30,6 +30,8 @@ import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.DividerItemDecoration;
+import com.hongyuan.fitness.util.SkinConstants;
+import com.hongyuan.fitness.util.StatusBarUtil;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.hongyuan.fitness.util.ViewChangeUtil;
 
@@ -96,8 +98,6 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
         //评论的适配
         LinearLayoutManager manager1 = new LinearLayoutManager(mActivity);
         manager1.setOrientation(RecyclerView.VERTICAL);
-        binding.commentRecycler.addItemDecoration(new DividerItemDecoration(
-                mActivity, DividerItemDecoration.HORIZONTAL_LIST,1,0xffF1F1F1));
         binding.commentRecycler.setLayoutManager(manager1);
         commentAdapter = new CommentAdapter();
         binding.commentRecycler.setAdapter(commentAdapter);
@@ -165,7 +165,7 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
 
     @Override
     public void onScrollChanged(StickyScrollView scrollView, int x, int y, int oldx, int oldy) {
-        if (y <= 0) {   //设置标题的背景颜色
+        /*if (y <= 0) {   //设置标题的背景颜色
             binding.titleBox.setBackgroundColor(Color.argb((int) 0, 239,91,72));
         } else if (y > 0 && y <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
             float scale = (float) y / height;
@@ -174,6 +174,49 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
             binding.titleBox.setBackgroundColor(Color.argb((int) alpha, 239,91,72));
         } else {    //滑动到banner下面设置普通颜色
             binding.titleBox.setBackgroundColor(Color.argb( 255, 239,91,72));
+        }*/
+
+        if (y <= 0) {   //设置标题的背景颜色
+            binding.mainTitle.setCenterTextColor("课程详情",mActivity.getResources().getColor(R.color.color_FFFFFF));
+            binding.mainTitle.setRightImage(R.mipmap.white_collection_mark);
+            binding.mainTitle.setLeftImage(R.mipmap.white_common);
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) 0, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) 0, 255,255,255));
+            }
+        } else if (y > 0 && y <= height) {
+            float scale = (float) y / height;
+            float alpha = (255 * scale);
+
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) alpha, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) alpha, 255,255,255));
+                if(y <= height/2){
+                    binding.mainTitle.setRightImage(R.mipmap.white_collection_mark);
+                    binding.mainTitle.setCenterTextColor("课程详情",mActivity.getResources().getColor(R.color.color_FFFFFF));
+                    binding.mainTitle.setLeftImage(R.mipmap.white_common);
+                    StatusBarUtil.setCommonUI(mActivity,false);
+                    binding.mainTitle.hideLine();
+                }else{
+                    binding.mainTitle.setRightImage(R.mipmap.gray_collection_img);
+                    binding.mainTitle.setCenterTextColor("课程详情",mActivity.getResources().getColor(R.color.color_FF333333));
+                    binding.mainTitle.setLeftImage(R.mipmap.theme_left_img);
+                    StatusBarUtil.setCommonUI(mActivity,true);
+                    binding.mainTitle.showLine();
+                }
+            }
+        } else {
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) 255, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                binding.titleBox.setBackgroundColor(Color.argb( 255, 255,255,255));
+                binding.mainTitle.setRightImage(R.mipmap.gray_collection_img);
+                binding.mainTitle.setCenterTextColor("课程详情",mActivity.getResources().getColor(R.color.color_FF333333));
+                binding.mainTitle.setLeftImage(R.mipmap.theme_left_img);
+            }
+
         }
     }
 

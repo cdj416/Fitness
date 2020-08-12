@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/white">
+        android:background="@color/theme_background1">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:text="随动健康生活平台"/>
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_14"
                 android:text="用户协议"/>
             <ImageView
@@ -73,7 +73,7 @@
             android:layout_height="1px"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="@color/color_FFD1D1D1"/>
+            android:background="@color/theme_line1"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_marginLeft="16dp"
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_14"
                 android:text="隐私政策"/>
             <ImageView
@@ -99,7 +99,7 @@
             android:layout_height="1px"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="@color/color_FFD1D1D1"/>
+            android:background="@color/theme_line1"/>
         <RelativeLayout
             android:id="@+id/callTel"
             android:layout_width="match_parent"
@@ -110,14 +110,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_14"
                 android:text="客服电话"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_14"
                 android:layout_alignParentRight="true"
                 android:text="0572-2075532"/>
@@ -127,6 +127,6 @@
             android:layout_height="1px"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="@color/color_FFD1D1D1"/>
+            android:background="@color/theme_line1"/>
     </LinearLayout>
 </layout>

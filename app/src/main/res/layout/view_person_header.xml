@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/color_FFFFFF"
+        android:background="@color/theme_background1"
         android:paddingBottom="30dp">
 
         <RelativeLayout
@@ -36,14 +36,14 @@
                     android:id="@+id/userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_16"
                     android:text="GrayF"/>
                 <TextView
                     android:id="@+id/miSign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:textSize="@dimen/sp_12"
                     android:layout_marginTop="8dp"
                     android:ellipsize="end"
@@ -82,13 +82,13 @@
                     android:id="@+id/balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_12"
                     android:text="0"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:textSize="@dimen/sp_12"
                     android:layout_marginTop="6dp"
                     android:text="余额"/>
@@ -104,13 +104,13 @@
                     android:id="@+id/attentionNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_12"
                     android:text="0"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:textSize="@dimen/sp_12"
                     android:layout_marginTop="6dp"
                     android:text="关注"/>
@@ -126,13 +126,13 @@
                     android:id="@+id/fansNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_12"
                     android:text="0"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:textSize="@dimen/sp_12"
                     android:layout_marginTop="6dp"
                     android:text="粉丝"/>
@@ -148,7 +148,7 @@
                     android:id="@+id/pointNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_12"
                     android:drawableLeft="@mipmap/person_integral_mark"
                     android:drawablePadding="3dp"
@@ -157,7 +157,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:textSize="@dimen/sp_12"
                     android:layout_marginTop="6dp"
                     android:text="积分"/>

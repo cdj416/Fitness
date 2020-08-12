@@ -21,6 +21,7 @@ import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.RetrofitListener;
 import com.hongyuan.fitness.base.SingleClick;
@@ -29,6 +30,8 @@ import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 
 public class SelectAddressView extends LinearLayout implements RetrofitListener {
+
+    private CustomActivity myContext;
 
     private Dialog dialog;
     private RelativeLayout addressBox;
@@ -55,16 +58,26 @@ public class SelectAddressView extends LinearLayout implements RetrofitListener 
 
     public SelectAddressView(Context context) {
         super(context);
+        if(context instanceof CustomActivity){
+            myContext = (CustomActivity) context;
+        }
+
         initLayoutView();
     }
 
     public SelectAddressView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        if(context instanceof CustomActivity){
+            myContext = (CustomActivity) context;
+        }
         initLayoutView();
     }
 
     public SelectAddressView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        if(context instanceof CustomActivity){
+            myContext = (CustomActivity) context;
+        }
         initLayoutView();
     }
 
@@ -105,10 +118,8 @@ public class SelectAddressView extends LinearLayout implements RetrofitListener 
 
             LinearLayoutManager LeftManager = new LinearLayoutManager(getContext());
             LeftManager.setOrientation(RecyclerView.VERTICAL);
-            province.addItemDecoration(new DividerItemDecoration(
-                    getContext(), DividerItemDecoration.HORIZONTAL_LIST,1,getContext().getResources().getColor(R.color.color_EEEEEE)));
             province.setLayoutManager(LeftManager);
-            leftAdapter = new SelectAddressLeftAdapter();
+            leftAdapter = new SelectAddressLeftAdapter(myContext.skin);
             province.setAdapter(leftAdapter);
             leftAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
                 @SingleClick
@@ -128,8 +139,6 @@ public class SelectAddressView extends LinearLayout implements RetrofitListener 
 
             LinearLayoutManager rightManager = new LinearLayoutManager(getContext());
             rightManager.setOrientation(RecyclerView.VERTICAL);
-            city.addItemDecoration(new DividerItemDecoration(
-                    getContext(), DividerItemDecoration.HORIZONTAL_LIST,1,getContext().getResources().getColor(R.color.color_EEEEEE)));
             city.setLayoutManager(rightManager);
             rightAdapter = new SelectAddressRightAdapter();
             city.setAdapter(rightAdapter);

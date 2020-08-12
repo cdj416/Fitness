@@ -3,6 +3,7 @@ package com.hongyuan.fitness.ui.shop.sadapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.custom_view.FlowLayoutManager;
 import com.hongyuan.fitness.custom_view.NestedRecyclerView;
 import com.hongyuan.fitness.ui.shop.sbeans.SgoodsDetailBeans;
@@ -16,9 +17,12 @@ public class SGDspecificationAdapter extends BaseQuickAdapter<SgoodsDetailBeans.
     }
     private ChangeData changeData;
 
-    public SGDspecificationAdapter(ChangeData changeData){
+    private CustomActivity mContext;
+
+    public SGDspecificationAdapter(ChangeData changeData, CustomActivity mContext){
         super(R.layout.item_sgdetails_specification);
         this.changeData = changeData;
+        this.mContext = mContext;
     }
 
     @Override
@@ -30,7 +34,7 @@ public class SGDspecificationAdapter extends BaseQuickAdapter<SgoodsDetailBeans.
         NestedRecyclerView childRec = helper.getView(R.id.childRec);
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
         childRec.setLayoutManager(flowLayoutManager);
-        SGDspecificationChildAdapter childAdapter = new SGDspecificationChildAdapter();
+        SGDspecificationChildAdapter childAdapter = new SGDspecificationChildAdapter(mContext);
         childRec.setAdapter(childAdapter);
         childAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             for(SgoodsDetailBeans.DataBean.InfoBean.SkuBean.ItemBean itemBean : item.getItem()){

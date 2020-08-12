@@ -9,13 +9,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/leftRec"
+        android:orientation="horizontal"
+        android:background="@color/theme_background1">
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:background="@color/color_F5F6FB"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@color/theme_color9">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/leftRec"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refresh"
             android:layout_width="0dp"
@@ -23,12 +30,12 @@
             android:layout_height="match_parent">
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color_FFFFFF">
+                android:layout_height="match_parent">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rightRec"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="wrap_content"
+                    android:background="@color/theme_color1"/>
                 <TextView
                     android:id="@+id/promptTxt"
                     android:layout_width="wrap_content"

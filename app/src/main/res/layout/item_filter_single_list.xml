@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/selector_filter_left"
     android:enabled="true"
     android:paddingBottom="15dp"
     android:gravity="center"
     android:paddingTop="15dp"
     android:textSize="@dimen/sp_14"
-    android:textColor="@drawable/selector_tv_filter"
+    android:textColor="@drawable/selector_tv_filter_black"
     tools:text="选择" />

@@ -104,7 +104,7 @@ public class PriviteCourseOrdersViewModel extends CustomViewModel {
      * */
     private V3SuccessBeans getSuccessBeans(int mPosition){
         V3SuccessBeans beans = new V3SuccessBeans();
-
+        beans.setType(V3SuccessBeans.TYPE.PRIVITECLASS);
         beans.setTitleText("订单");
         beans.setShowText("购买成功");
         beans.setBtn2Text("完成");

@@ -13,8 +13,11 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityGoodsPayBinding;
-import com.hongyuan.fitness.ui.about_class.class_success.SuccessClassActivity;
 import com.hongyuan.fitness.ui.about_class.privite_class.preservation_course.ReservationSuccessBeans;
+import com.hongyuan.fitness.ui.main.MainActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.GroupCourseOrdersActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.MemberCardOrdersActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.PriviteCourseOrdersActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopNewOrderAcitivity;
@@ -23,7 +26,6 @@ import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.PayUtil;
 import com.hongyuan.fitness.wxapi.WXPayEntryActivity;
-
 import java.util.Map;
 
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
@@ -49,7 +51,7 @@ public class GoodsPayViewModel extends CustomViewModel {
                     goSuccess();
                     break;
                 case PAY_FAILURE:
-                    startActivity(ShopNewOrderAcitivity.class,null);
+                    goNext();
                     break;
             }
         }
@@ -65,10 +67,6 @@ public class GoodsPayViewModel extends CustomViewModel {
     @SuppressLint("SetTextI18n")
     @Override
     protected void initView() {
-        if(getBundle().getBoolean("isShop")){
-            WXPayEntryActivity.isShop = true;
-        }
-
         payDataBean = (PayDataBean)getBundle().getSerializable("payDataBean");
         successBeans = (V3SuccessBeans)getBundle().getSerializable("successBeans");
 
@@ -88,12 +86,14 @@ public class GoodsPayViewModel extends CustomViewModel {
 
         binding.cancelPay.setOnClickListener(v -> CustomDialog.promptDialog(mActivity, "确定要取消支付吗？", "再想想", "确定", false, v1 -> {
             if(v1.getId() == R.id.isCannel){
-                if(getBundle().getBoolean("isShop")){
+                /*if(getBundle().getBoolean("isShop")){
                     mActivity.startActivity(ShopNewOrderAcitivity.class,null);
                     mActivity.finish();
                 }else{
                     mActivity.finish();
-                }
+                }*/
+
+                goNext();
             }
         }));
         binding.pay.setOnClickListener(v -> call());
@@ -179,16 +179,24 @@ public class GoodsPayViewModel extends CustomViewModel {
         if(data instanceof WecathPayBean){
             WecathPayBean wecathPayBean = (WecathPayBean)data;
             mActivity.showLoading();
+            //微信跳转要设置下
+            WXPayEntryActivity.successBeans = successBeans;
+
             //去掉起微信支付
             PayUtil.WechatPay(mActivity,wecathPayBean.getData());
+            mActivity.closeLoading();
         }
 
         if(data instanceof ReservationSuccessBeans){
+            V3SuccessBeans beans = new V3SuccessBeans();
+            beans.setType(V3SuccessBeans.TYPE.PRIVITECLASS);
+            beans.setTitleText("预约私教课");
+            beans.setShowText("预约成功");
+            beans.setBtn2Text("返回");
+
             Bundle bundle = new Bundle();
-            bundle.putString("titleName","预约私教课");
-            bundle.putString("successText","预约成功！");
-            bundle.putString("buttonText","返回");
-            startActivity(SuccessClassActivity.class,bundle);
+            bundle.putSerializable("successBeans",beans);
+            startActivity(V3SuccessActivity.class,bundle);
         }
     }
 
@@ -196,11 +204,20 @@ public class GoodsPayViewModel extends CustomViewModel {
     public void onSuccess(int code, Object data) {
         //金币支付成功
         if(code == 1){
+
+            V3SuccessBeans beans = new V3SuccessBeans();
+            beans.setType(V3SuccessBeans.TYPE.BUYGOODS);
+            beans.setTitleText("商品购买");
+            beans.setShowText("支付成功");
+            beans.setBtn2Text("完成");
+
             Bundle bundle = new Bundle();
-            bundle.putString("titleName","商品购买");
-            bundle.putString("successText","支付成功！");
-            bundle.putString("buttonText","完成");
-            startActivity(SuccessClassActivity.class,bundle);
+            bundle.putSerializable("successBeans",beans);
+            startActivity(V3SuccessActivity.class,bundle);
+
+        }else{
+            //支付失败跳转
+            goNext();
         }
     }
 
@@ -246,12 +263,39 @@ public class GoodsPayViewModel extends CustomViewModel {
             startActivity(V3SuccessActivity.class,bundle);
             mActivity.finish();
         }else{
+            V3SuccessBeans beans = new V3SuccessBeans();
+            beans.setType(V3SuccessBeans.TYPE.BUYGOODS);
+            beans.setTitleText("支付结果");
+            beans.setShowText("支付成功");
+            beans.setBtn2Text("完成");
+
             Bundle bundle = new Bundle();
-            bundle.putString("titleName","支付结果");
-            bundle.putString("successText","支付成功！");
-            bundle.putString("buttonText","完成");
-            startActivity(SuccessClassActivity.class,bundle);
+            bundle.putSerializable("successBeans",beans);
+            startActivity(V3SuccessActivity.class,bundle);
         }
 
+    }
+
+    /*
+     * 跳转处理
+     * */
+    private void goNext(){
+        switch (successBeans.getType()){
+            case BUYCARD:
+                mActivity.startActivity(MemberCardOrdersActivity.class,null);
+                break;
+            case BUYGOODS:
+                mActivity.startActivity(ShopNewOrderAcitivity.class,null);
+                break;
+            case GROUPCLASS:
+                mActivity.startActivity(GroupCourseOrdersActivity.class,null);
+                break;
+            case PRIVITECLASS:
+                mActivity.startActivity(PriviteCourseOrdersActivity.class,null);
+                break;
+            default:
+                startActivity(MainActivity.class,null);
+                break;
+        }
     }
 }

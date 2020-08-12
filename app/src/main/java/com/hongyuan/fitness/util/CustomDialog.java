@@ -190,6 +190,45 @@ public class CustomDialog {
     }
 
     /*
+    * 1.普通对话弹框
+    * 2.单个按钮
+    * */
+    public static void promptDialog(Context mContext,String messagesText,String isOkText,boolean outSide,DialogClick dialogClick){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_have_yes_no_prompt,null);
+        dialog.setContentView(view);
+        dialog.setCanceledOnTouchOutside(outSide);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setWindowAnimations(R.style.main_menu_animStyle);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        TextView messages = view.findViewById(R.id.messages);
+        TextView isOk = view.findViewById(R.id.isOk);
+        TextView isCannel = view.findViewById(R.id.isCannel);
+        View line = view.findViewById(R.id.line);
+        line.setVisibility(View.GONE);
+        isCannel.setVisibility(View.GONE);
+
+        isOk.setText(isOkText);
+        messages.setText(messagesText);
+
+        isOk.setOnClickListener(v -> {
+            if(dialogClick != null){
+                dialogClick.dialogClick(v);
+            }
+            dialog.dismiss();
+        });
+        isCannel.setOnClickListener(v -> {
+            if(dialogClick != null){
+                dialogClick.dialogClick(v);
+            }
+            dialog.dismiss();
+        });
+    }
+
+    /*
     * 添加餐里面的滚动标尺弹框
     * */
     public static void addFood(Context mContext, AddFoodBean.DataBean.ListBean data, AddFoodView.SelectData selectData){
@@ -267,7 +306,7 @@ public class CustomDialog {
     /*
     * 关注/取关
     * */
-    public static void attentionMore(Context mContext,int type,DialogClick dialogClick){
+    public static void attentionMore(CustomActivity mContext,int type,DialogClick dialogClick){
         final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
         View view = View.inflate(mContext, R.layout.dialog_atttention,null);
         dialog.setContentView(view);
@@ -280,10 +319,18 @@ public class CustomDialog {
         TextView attention = view.findViewById(R.id.attention);
 
         if(type == 0){
-            ViewChangeUtil.changeTopDrawable(mContext,attention,R.mipmap.attention_img);
+            if(SkinConstants.SKIN_NAME.DEFAULT.equals(mContext.skin))
+            ViewChangeUtil.changeTopDrawable(mContext,attention,R.mipmap.theme_attention_mark);
+            if(SkinConstants.SKIN_NAME.BLACK.equals(mContext.skin))
+                ViewChangeUtil.changeTopDrawable(mContext,attention,R.mipmap.theme_attention_mark_black);
+
             attention.setText("关注ta");
         }else{
-            ViewChangeUtil.changeTopDrawable(mContext,attention,R.mipmap.unsubscribe_img);
+            if(SkinConstants.SKIN_NAME.DEFAULT.equals(mContext.skin))
+                ViewChangeUtil.changeTopDrawable(mContext,attention,R.mipmap.theme_cancel_attention_mark);
+            if(SkinConstants.SKIN_NAME.BLACK.equals(mContext.skin))
+                ViewChangeUtil.changeTopDrawable(mContext,attention,R.mipmap.theme_cancel_attention_mark_black);
+
             attention.setText("取消关注ta");
         }
         view.findViewById(R.id.goDetails).setOnClickListener(v -> {
@@ -1128,17 +1175,16 @@ public class CustomDialog {
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.show();
 
-        //支付宝支付
         view.findViewById(R.id.telNum).setOnClickListener(v -> {
             dialogClick.dialogClick(v,"电话联系");
             dialog.dismiss();
         });
-        //微信支付
+
         view.findViewById(R.id.goChat).setOnClickListener(v -> {
             dialogClick.dialogClick(v,"发送消息");
             dialog.dismiss();
         });
-        //取消支付
+
         view.findViewById(R.id.cancel).setOnClickListener(v -> {
             dialog.dismiss();
         });

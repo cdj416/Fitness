@@ -3,17 +3,25 @@ package com.hongyuan.fitness.ui.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityMainBinding;
+import com.hongyuan.fitness.ui.webview.WebViewActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
+import com.hongyuan.fitness.util.SharedPreferencesUtil;
+import com.hongyuan.fitness.util.SkinConstants;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import me.goldze.mvvmhabit.base.AppManager;
 
 public class MainActivity extends CustomActivity {
     public ActivityMainBinding binding;
@@ -30,7 +38,9 @@ public class MainActivity extends CustomActivity {
     protected void initView() {
         this.useActivity = this;
 
-        setTitleBar(TYPE_BAR1,R.drawable.shape_soid_ffffff,"");
+        setTitleBar(TYPE_BAR8,R.drawable.shape_soid_ffffff,"");
+        barHeight.setVisibility(View.GONE);
+
         binding = ActivityMainBinding.bind(mView);
         viewModel = new MainViewModel(this,binding);
         binding.setViewModel(viewModel);
@@ -75,6 +85,24 @@ public class MainActivity extends CustomActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        //从新拿一次，首页有需要
+        skin = SharedPreferencesUtil.getString(this, SkinConstants.SKIN);
+        viewModel.changeBarHeightBg();
+
+        if(BaseUtil.isValue(Constants.isOpenWeb)){
+            Bundle bundle = new Bundle();
+            bundle.putString("url", Constants.WEB_ADDRESS+Constants.isOpenWeb);
+            bundle.putString("title"," ");
+            startActivity(WebViewActivity.class,bundle);
+
+            Constants.isOpenWeb = "";
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
@@ -86,7 +114,7 @@ public class MainActivity extends CustomActivity {
         if(keyCode==KeyEvent.KEYCODE_BACK){
             CustomDialog.promptDialog(this, "确定要退出程序？", "确定", "取消", false, v -> {
                 if(v.getId() == R.id.isOk){
-                    System.exit(0);
+                    AppManager.getAppManager().finishAllActivity();
                 }
             });
             return false;

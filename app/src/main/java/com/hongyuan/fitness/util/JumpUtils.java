@@ -131,7 +131,6 @@ public class JumpUtils {
                     mContext.startActivity(MissionDetailActivity.class,bundle);
                     break;
                 case "cs_qd"://团课扫码签到
-                    Log.e("cdj","==========扫码签到，扫码成功过=========");
                     //通知扫码签到
                     EventBus.getDefault().post(ConstantsCode.EB_SUPER_COURSE_XY_QD,"");
                     mContext.finish();

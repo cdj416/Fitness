@@ -5,7 +5,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@drawable/shape_radius_top12_ffffff">
+        android:background="@drawable/theme_shape_radius_top12_ffffff">
         <EditText
             android:id="@+id/content"
             android:layout_width="match_parent"
@@ -15,6 +15,8 @@
             android:textSize="14sp"
             android:padding="10dp"
             android:gravity="top"
+            android:textColor="@color/theme_color3"
+            android:textColorHint="@color/theme_color4"
             android:hint="请输入个性签名"/>
 
         <Button

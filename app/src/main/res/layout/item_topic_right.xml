@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="64dp"
-    android:background="@color/color_FFFFFF"
+    android:background="@color/theme_color1"
     android:id="@+id/box">
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textSize="@dimen/sp_14"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:drawableLeft="@mipmap/topic_mark"
             android:drawablePadding="6dp"
             android:paddingStart="12dp"
@@ -26,7 +26,7 @@
             android:id="@+id/rightTopicDes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_FF999999"
+            android:textColor="@color/theme_color4"
             android:textSize="@dimen/sp_12"
             android:layout_marginStart="38dp"
             android:text="1.4万人参与讨论"/>
@@ -35,6 +35,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"
+        android:background="@color/theme_line1"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

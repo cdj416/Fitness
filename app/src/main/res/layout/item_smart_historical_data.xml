@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="92dp"
-    android:background="@color/color_F5F6FB">
+    android:background="@color/theme_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
                 android:layout_width="1dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/color_FFDDDDF3"/>
+                android:background="@color/theme_line1"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
                 android:layout_width="1dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/color_FFDDDDF3"/>
+                android:background="@color/theme_line1"/>
         </LinearLayout>
 
         <RelativeLayout
@@ -39,7 +39,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="16dp"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/shape_radius6_ffffff">
+            android:background="@drawable/theme_shape_radius6_ffffff">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                         android:id="@+id/weightNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:textSize="@dimen/sp_16"
                         android:layout_marginStart="8dp"
                         android:text="73.8"/>
@@ -76,7 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_12"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:text="kg"/>
 
                     <TextView
@@ -90,7 +90,7 @@
                         android:id="@+id/bodyFatRate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:textSize="@dimen/sp_16"
                         android:layout_marginStart="8dp"
                         android:text="15.7"/>
@@ -98,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_12"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:text="%"/>
                 </LinearLayout>
             </LinearLayout>

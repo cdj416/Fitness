@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="64dp"
-    android:background="@color/color_FFFFFF"
+    android:background="@color/theme_color1"
     android:id="@+id/jumpBox">
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:text="meimeim"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -52,6 +52,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"
+        android:background="@color/theme_line1"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

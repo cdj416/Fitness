@@ -51,7 +51,16 @@ public class MyGroupClassBean extends BaseBean {
     }
 
     public static class DataBean {
+        private long now_time;
         private List<ListBean> list;
+
+        public long getNow_time() {
+            return now_time;
+        }
+
+        public void setNow_time(long now_time) {
+            this.now_time = now_time;
+        }
 
         public List<ListBean> getList() {
             return list;
@@ -100,8 +109,8 @@ public class MyGroupClassBean extends BaseBean {
             private int xy_qt_time;
             private int xy_qt_state;
             private String os_name;
-            private int cs_start_time;
-            private int cs_end_time;
+            private long cs_start_time;
+            private long cs_end_time;
             private String cs_name;
             private String si_name;
             private int cs_state;
@@ -114,6 +123,15 @@ public class MyGroupClassBean extends BaseBean {
             private String cs_start_date;
             private String cs_end_date;
             private int ocs_number;
+            private long now_time;
+
+            public long getNow_time() {
+                return now_time;
+            }
+
+            public void setNow_time(long now_time) {
+                this.now_time = now_time;
+            }
 
             public int getOcs_number() {
                 return ocs_number;
@@ -211,19 +229,19 @@ public class MyGroupClassBean extends BaseBean {
                 this.os_name = os_name;
             }
 
-            public int getCs_start_time() {
+            public long getCs_start_time() {
                 return cs_start_time;
             }
 
-            public void setCs_start_time(int cs_start_time) {
+            public void setCs_start_time(long cs_start_time) {
                 this.cs_start_time = cs_start_time;
             }
 
-            public int getCs_end_time() {
+            public long getCs_end_time() {
                 return cs_end_time;
             }
 
-            public void setCs_end_time(int cs_end_time) {
+            public void setCs_end_time(long cs_end_time) {
                 this.cs_end_time = cs_end_time;
             }
 

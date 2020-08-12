@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
-    android:id="@+id/itemBox">
+    android:id="@+id/itemBox"
+    android:background="@color/theme_color1">
     <ImageView
         android:id="@+id/statusImg"
         android:layout_width="wrap_content"
@@ -14,8 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_14"
-        android:textColor="@color/color_FF333333"
+        android:textColor="@color/theme_color3"
         android:layout_marginLeft="6dp"
-        android:textStyle="bold"
         android:text="首玺健身南街店"/>
 </LinearLayout>

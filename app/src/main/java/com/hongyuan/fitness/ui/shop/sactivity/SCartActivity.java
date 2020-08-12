@@ -6,6 +6,7 @@ import com.hongyuan.fitness.databinding.ActivityBottomScartBinding;
 import com.hongyuan.fitness.databinding.ActivityScartBinding;
 import com.hongyuan.fitness.ui.shop.sviewmodel.ScartViewModel;
 import com.hongyuan.fitness.ui.shop.sviewmodel.bottomviewmodel.ScartBottomViewModel;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class SCartActivity extends CustomActivity {
 
@@ -23,7 +24,11 @@ public class SCartActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitleBar(TYPE_BAR5,R.drawable.shape_soid_ffffff,"购物车");
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"购物车");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"购物车");
+
         ActivityBottomScartBinding bottomScartBinding = ActivityBottomScartBinding.bind(bottomChildView);
         ScartBottomViewModel bottomViewModel = new ScartBottomViewModel(this,bottomScartBinding);
         bottomScartBinding.setViewModel(bottomViewModel);

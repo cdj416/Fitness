@@ -1,24 +1,18 @@
 package com.hongyuan.fitness.ui.shop.sviewmodel;
 
-import android.os.Bundle;
 import android.view.View;
-
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
-import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityShopMenuBinding;
-import com.hongyuan.fitness.ui.shop.sactivity.ShopSearchActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SMenuLeftAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SMenuRightAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.FirstCategoryBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.ShopMenuBeans;
-import com.hongyuan.fitness.ui.shop.sbeans.ShopNextCetegoryBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.TuiJianCetegoryBeans;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
@@ -68,7 +62,7 @@ public class ShopMenuViewModel extends CustomViewModel {
         LinearLayoutManager leftManager = new LinearLayoutManager(mActivity);
         leftManager.setOrientation(RecyclerView.VERTICAL);
         binding.leftRec.setLayoutManager(leftManager);
-        leftAdapter = new SMenuLeftAdapter();
+        leftAdapter = new SMenuLeftAdapter(mActivity.skin);
         binding.leftRec.setAdapter(leftAdapter);
         leftAdapter.setNewData(dataBean.getList());
         leftAdapter.setOnItemChildClickListener((adapter, view, position) -> {

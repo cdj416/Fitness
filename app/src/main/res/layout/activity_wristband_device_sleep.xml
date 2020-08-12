@@ -10,7 +10,7 @@
     <com.hongyuan.fitness.custom_view.StickyScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_F5F6FB">
+        android:background="@color/theme_background">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,7 +35,7 @@
                 android:layout_height="162dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:background="@color/color_FFFFFF">
+                android:background="@color/theme_color1">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                         android:id="@+id/allHour"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:text="00"/>
@@ -59,7 +59,7 @@
                         android:id="@+id/allMinet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:textSize="24sp"
                         android:layout_marginStart="5dp"
                         android:textStyle="bold"
@@ -136,13 +136,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/color_FFFFFF"
+                android:background="@color/theme_color1"
                 android:layout_marginTop="12dp"
                 android:paddingBottom="16dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_12"
                     android:layout_margin="16dp"
                     android:text="睡眠阶段"/>
@@ -168,7 +168,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_14"
                             android:layout_marginStart="7dp"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:text="深睡"/>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -181,7 +181,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_12"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:text="0小时030分钟"/>
                             <com.hongyuan.fitness.custom_view.BarPercentView
                                 android:id="@+id/barDeepSleep"
@@ -208,7 +208,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_14"
                             android:layout_marginStart="7dp"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:text="浅睡"/>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -221,7 +221,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_12"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:text="0小时00分钟"/>
                             <com.hongyuan.fitness.custom_view.BarPercentView
                                 android:id="@+id/barLightSleep"
@@ -248,7 +248,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_14"
                             android:layout_marginStart="7dp"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:text="清醒"/>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -261,7 +261,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_12"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:text="0分钟"/>
                             <com.hongyuan.fitness.custom_view.BarPercentView
                                 android:id="@+id/barSober"

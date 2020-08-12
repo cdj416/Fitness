@@ -26,10 +26,13 @@ import com.hongyuan.fitness.util.EncryptionUtil;
 import com.hongyuan.fitness.util.HourMeterUtil;
 import com.hongyuan.fitness.util.MyLocationUtil;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
+import com.hongyuan.fitness.util.SkinConstants;
 import com.hongyuan.fitness.util.SystemUtil;
 import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.today.step.lib.TodayStepManager;
+
+import skin.support.SkinCompatManager;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class StartupPageVeiwModel extends CustomViewModel implements CustomDialog.DialogClick, HourMeterUtil.TimeCallBack {
@@ -64,6 +67,16 @@ public class StartupPageVeiwModel extends CustomViewModel implements CustomDialo
     @SuppressLint("CheckResult")
     @Override
     protected void initView() {
+        //如果主题样式为空去存储下默认样式
+        if(!BaseUtil.isValue(mActivity.skin)){
+            SharedPreferencesUtil.putString(mActivity,SkinConstants.SKIN,SkinConstants.SKIN_NAME.DEFAULT);
+            //初始化为默认样式
+            mActivity.skin = SkinConstants.SKIN_NAME.DEFAULT;
+        }
+
+        //初始化主题样式
+        SkinCompatManager.getInstance().loadSkin(mActivity.skin, SkinCompatManager.SKIN_LOADER_STRATEGY_BUILD_IN);
+
         hourMeterUtil = new HourMeterUtil();
         hourMeterUtil.setTimeCallBack(this);
 

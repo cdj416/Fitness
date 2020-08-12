@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_radius6_ffffff"
-    android:layout_margin="3dp">
+    android:background="@drawable/theme_shape_radius6_ffffff"
+    android:layout_marginTop="12dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="90dp"
@@ -18,7 +20,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:textSize="@dimen/sp_12"
                 android:text="门店：首玺健身爱山店 可约时间：最近 今天16:00"
                 android:maxLines="1"
@@ -30,7 +32,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:textSize="@dimen/sp_12"
                 android:text="可约时间：最近 今天16:00"
                 android:maxLines="1"
@@ -63,14 +65,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:text="李梦雪"/>
                 <TextView
                     android:id="@+id/coachType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:layout_marginEnd="80dp"
                     android:ellipsize="end"
                     android:maxLines="1"
@@ -91,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:text="最低"/>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -101,21 +103,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:text="¥ "/>
                 <TextView
                     android:id="@+id/coursePrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textStyle="bold"
                     android:text="400 "/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:text="/节"/>
             </LinearLayout>
         </LinearLayout>

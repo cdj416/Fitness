@@ -13,14 +13,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/color_F5F6FB">
+    android:background="@color/theme_background">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="118dp"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_color1">
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/goodsImg"
             android:layout_width="92dp"
@@ -35,22 +35,30 @@
             android:layout_centerVertical="true"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/goodName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="商品名称商品名称商品名称商品名称商品名称商品名称"/>
 
             <TextView
+                android:id="@+id/goodSku"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF999999"
-                android:text="1234人收藏"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="14dp"/>
+                android:textColor="@color/theme_color4"
+                android:text="42码 红色"
+                android:background="@drawable/theme_shape_radius6_f1f1f8"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:layout_marginTop="6dp"
+                android:drawablePadding="4dp"/>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,16 +70,18 @@
                     android:textSize="@dimen/sp_12"
                     android:text="¥"/>
                 <TextView
+                    android:id="@+id/goodPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
                     android:textColor="@color/color_EF5B48"
                     android:text="5000"/>
                 <TextView
+                    android:id="@+id/goodNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:layout_marginStart="10dp"
                     android:text="x1"/>
             </LinearLayout>
@@ -80,11 +90,12 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"/>
+        android:background="@color/theme_line1"/>
     <RelativeLayout
+        android:id="@+id/returnPrice"
         android:layout_width="match_parent"
-        android:background="@color/color_FFFFFF"
-        android:layout_height="56dp">
+        android:background="@color/theme_color1"
+        android:layout_height="66dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,13 +106,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_12"
                 android:text="我要退款（仅退款）"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_12"
                 android:layout_marginTop="6dp"
                 android:text="没收到货，或与商家协商同意不退货只退款"/>
@@ -110,7 +121,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/right_huise_img"
+            android:src="@mipmap/theme_right_mark"
             android:layout_marginEnd="@dimen/dp_16"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"/>
@@ -118,11 +129,12 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"/>
+        android:background="@color/theme_line1"/>
     <RelativeLayout
+        android:id="@+id/refundGoods"
         android:layout_width="match_parent"
-        android:background="@color/color_FFFFFF"
-        android:layout_height="56dp">
+        android:background="@color/theme_color1"
+        android:layout_height="66dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,13 +145,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_12"
                 android:text="我要退货退款"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_12"
                 android:layout_marginTop="6dp"
                 android:text="已收到货，需退还收到的商品"/>
@@ -148,7 +160,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/right_huise_img"
+            android:src="@mipmap/theme_right_mark"
             android:layout_marginEnd="@dimen/dp_16"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"/>
@@ -156,6 +168,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"/>
+        android:background="@color/theme_line1"/>
 </LinearLayout>
 </layout>

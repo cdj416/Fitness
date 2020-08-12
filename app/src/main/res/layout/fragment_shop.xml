@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_color1">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -19,7 +19,7 @@
                 android:id="@+id/mMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/person_message_mark"
+                android:src="@mipmap/theme_person_message_mark"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
 
@@ -31,12 +31,12 @@
                 android:layout_marginEnd="10dp"
                 android:layout_toLeftOf="@id/mMessage"
                 android:gravity="center_vertical"
-                android:background="@drawable/shape_radius6_fff5f5f5">
+                android:background="@drawable/theme_shape_radius6_fff5f5f5">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="9dp"
-                    android:src="@mipmap/search_huise_mark"/>
+                    android:src="@mipmap/theme_search_chengse_mark"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"/>
+        android:background="@color/theme_line1"/>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

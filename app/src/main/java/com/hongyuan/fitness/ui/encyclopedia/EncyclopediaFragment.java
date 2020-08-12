@@ -38,8 +38,6 @@ public class EncyclopediaFragment extends CustomFragment {
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycler.setLayoutManager(manager);
-        mRecycler.addItemDecoration(new DividerItemDecoration(
-                getContext(), DividerItemDecoration.HORIZONTAL_LIST,1,mActivity.getResources().getColor(R.color.color_EEEEEE)));
         adapter = new EncyclopediaAdapter();
         mRecycler.setAdapter(adapter);
 

@@ -76,6 +76,62 @@ public class ShareUtil {
         };
     }
 
+    /*
+     * 自定义分享内容
+     * */
+    public static void showShare(CustomActivity mActivity,ShareBeans shareBeans){
+        new ShareAction(mActivity)
+                .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE)
+                .setShareboardclickCallback((snsPlatform, share_media) -> {
+                    if (share_media == SHARE_MEDIA.QQ) {
+                        KLog.e("点击QQ");
+                        new ShareAction(mActivity).setPlatform(SHARE_MEDIA.QQ)
+                                .withMedia(setDataWeb(mActivity,shareBeans))
+                                .setCallback(umShareListener)
+                                .share();
+                    } else if (share_media == SHARE_MEDIA.WEIXIN) {
+                        KLog.e("点击微信");
+                        new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN)
+                                .withMedia(setDataWeb(mActivity,shareBeans))
+                                .setCallback(umShareListener)
+                                .share();
+                    } else if (share_media == SHARE_MEDIA.QZONE) {
+                        new ShareAction(mActivity).setPlatform(SHARE_MEDIA.QZONE)
+                                .withMedia(setDataWeb(mActivity,shareBeans))
+                                .setCallback(umShareListener)
+                                .share();
+                    } else if (share_media == SHARE_MEDIA.WEIXIN_CIRCLE) {
+                        new ShareAction(mActivity).setPlatform(SHARE_MEDIA.WEIXIN_CIRCLE)
+                                .withMedia(setDataWeb(mActivity,shareBeans))
+                                .setCallback(umShareListener)
+                                .share();
+                    }
+                }).open();
+
+
+        umShareListener = new UMShareListener() {
+            @Override
+            public void onStart(SHARE_MEDIA platform) {
+                // 分享开始的回调
+            }
+
+            @Override
+            public void onResult(SHARE_MEDIA platform) {
+                Toast.makeText(mActivity, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA platform, Throwable t) {
+                Toast.makeText(mActivity,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA platform) {
+                Toast.makeText(mActivity,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
+
     public static void shareImg(CustomActivity mActivity, Bitmap shareImg, SHARE_MEDIA type, ShareSuccessLinstener successLinstener){
         umShareListener = new UMShareListener() {
             @Override

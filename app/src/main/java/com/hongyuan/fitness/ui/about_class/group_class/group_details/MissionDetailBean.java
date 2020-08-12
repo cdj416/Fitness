@@ -58,11 +58,11 @@ public class MissionDetailBean extends BaseBean implements Serializable{
         private String os_tel;
         private int cs_id;
         private int os_id;
-        private int cs_start_time;
+        private long cs_start_time;
         private int cs_state;
         private String cs_brief;
-        private int add_time;
-        private int cs_end_time;
+        private long add_time;
+        private long cs_end_time;
         private String cs_name;
         private String si_name;
         private int cs_max_num;
@@ -85,8 +85,26 @@ public class MissionDetailBean extends BaseBean implements Serializable{
         private long bm_time;
         private String is_remind;
         private int is_select_num;
+        private long now_time;
+        private String is_qd;
         private List<String> cs_time;
         private List<MemberOcsBean> member_ocs;
+
+        public String getIs_qd() {
+            return is_qd;
+        }
+
+        public void setIs_qd(String is_qd) {
+            this.is_qd = is_qd;
+        }
+
+        public long getNow_time() {
+            return now_time;
+        }
+
+        public void setNow_time(long now_time) {
+            this.now_time = now_time;
+        }
 
         public int getIs_select_num() {
             return is_select_num;
@@ -160,11 +178,11 @@ public class MissionDetailBean extends BaseBean implements Serializable{
             this.os_id = os_id;
         }
 
-        public int getCs_start_time() {
+        public long getCs_start_time() {
             return cs_start_time;
         }
 
-        public void setCs_start_time(int cs_start_time) {
+        public void setCs_start_time(long cs_start_time) {
             this.cs_start_time = cs_start_time;
         }
 
@@ -184,19 +202,19 @@ public class MissionDetailBean extends BaseBean implements Serializable{
             this.cs_brief = cs_brief;
         }
 
-        public int getAdd_time() {
+        public long getAdd_time() {
             return add_time;
         }
 
-        public void setAdd_time(int add_time) {
+        public void setAdd_time(long add_time) {
             this.add_time = add_time;
         }
 
-        public int getCs_end_time() {
+        public long getCs_end_time() {
             return cs_end_time;
         }
 
-        public void setCs_end_time(int cs_end_time) {
+        public void setCs_end_time(long cs_end_time) {
             this.cs_end_time = cs_end_time;
         }
 

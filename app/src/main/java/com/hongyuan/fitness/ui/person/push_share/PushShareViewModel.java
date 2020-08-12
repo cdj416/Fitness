@@ -56,8 +56,9 @@ public class PushShareViewModel extends CustomViewModel implements ShareSuccessL
     @Override
     protected void initView() {
 
-        mActivity.getMainTitle().setLeftImage(R.mipmap.close_heise_img).setCentreText("打卡分享");
-        mActivity.getMainTitle().setRightTextColor("分享",mActivity.getResources().getColor(R.color.color_FF333333));
+        //mActivity.getMainTitle().setLeftImage(R.mipmap.close_heise_img).setCentreText("打卡分享");
+
+
         mActivity.getMainTitle().getRightView().setOnClickListener(v -> startShare());
 
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);

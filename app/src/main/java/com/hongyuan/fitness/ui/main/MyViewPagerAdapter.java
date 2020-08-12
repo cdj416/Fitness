@@ -45,7 +45,7 @@ public class MyViewPagerAdapter extends FragmentPagerAdapter {
         fragments.clear();
         fragments.add(new RecommendFragment());
         fragments.add(new FindFragment());
-        fragments.add(new AboutClassFragment());
+        //fragments.add(new AboutClassFragment());
         //fragments.add(new MallFragment());
         fragments.add(new ShopFragment());
         fragments.add(lastFragment);

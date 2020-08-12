@@ -79,7 +79,7 @@ public class SstoreViewModel extends CustomViewModel {
             binding.shopName.setText(storeBeans.getStore_name());
             binding.collectionNum.setText(storeBeans.getCollection_num()+"人收藏");
             binding.collectStore.setText(storeBeans.getIs_collection() == 1 ? "取消" : "收藏");
-            binding.myRat.setRating(Float.valueOf(storeBeans.getG_score()));
+            //binding.myRat.setRating(Float.valueOf(storeBeans.getG_score()));
 
             pageApter.setImgs(storeBeans.getStore_content());
         }

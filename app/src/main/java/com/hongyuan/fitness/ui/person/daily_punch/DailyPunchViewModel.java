@@ -19,6 +19,7 @@ import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.BigDecimalUtils;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.HiddenAnimUtils;
+import com.hongyuan.fitness.util.SkinConstants;
 import com.hongyuan.fitness.util.TimeUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -75,6 +76,8 @@ public class DailyPunchViewModel extends CustomViewModel implements StickyScroll
         binding.taskRec.setLayoutManager(taskManager);
         taskAdapter = new TaskAdapter();
         binding.taskRec.setAdapter(taskAdapter);
+        taskAdapter.setFooterView(mActivity.getFooter16Height(binding.taskRec));
+
         taskAdapter.setOnItemChildClickListener((adapter, view, position) -> itemClickDealWith(position));
 
 
@@ -191,6 +194,9 @@ public class DailyPunchViewModel extends CustomViewModel implements StickyScroll
             binding.qdText.setText("今日已打卡");
             binding.punchBox.setClickable(false);
             binding.punchBox.setBackgroundResource(R.drawable.shape_radius6_cccccc);
+            if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)){
+                binding.punchBox.setBackgroundResource(R.drawable.shape_radius6_00000000_stroke_cccccc);
+            }
         }else{
             binding.punchBox.setClickable(true);
             binding.punchBox.setBackgroundResource(R.drawable.shape_gradient_v_radiu5_login);

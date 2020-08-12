@@ -11,15 +11,11 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/theme_background1">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,7 +40,7 @@
                         android:id="@+id/goodName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:textSize="@dimen/sp_14"
                         android:text=""/>
                     <TextView
@@ -52,7 +48,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_12"
-                        android:textColor="@color/color_FF999999"
+                        android:textColor="@color/theme_color4"
                         android:text=""/>
                 </LinearLayout>
                 <LinearLayout
@@ -66,7 +62,7 @@
                         android:id="@+id/goodPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:textSize="@dimen/sp_14"
                         android:text="¥0"/>
                     <TextView
@@ -74,14 +70,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_12"
-                        android:textColor="@color/color_FF999999"
+                        android:textColor="@color/theme_color4"
                         android:text="0积分"/>
                     <TextView
                         android:id="@+id/goodNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_12"
-                        android:textColor="@color/color_FF999999"
+                        android:textColor="@color/theme_color4"
                         android:text="x0"/>
                 </LinearLayout>
             </RelativeLayout>
@@ -95,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="商品单价"
-                    android:textColor="#ff999999"
+                    android:textColor="@color/theme_color4"
                     android:layout_centerVertical="true"
                     android:textSize="12sp"/>
                 <TextView
@@ -103,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¥0"
-                    android:textColor="#ff999999"
+                    android:textColor="@color/theme_color4"
                     android:textSize="12sp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"/>
@@ -117,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="数量"
-                    android:textColor="#ff999999"
+                    android:textColor="@color/theme_color4"
                     android:layout_centerVertical="true"
                     android:textSize="12sp"/>
                 <TextView
@@ -125,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textColor="#ff999999"
+                    android:textColor="@color/theme_color4"
                     android:textSize="12sp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"/>
@@ -140,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="需要积分"
-                    android:textColor="#ff999999"
+                    android:textColor="@color/theme_color4"
                     android:layout_centerVertical="true"
                     android:textSize="12sp"/>
                 <TextView
@@ -148,7 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textColor="#ff999999"
+                    android:textColor="@color/theme_color4"
                     android:textSize="12sp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"/>
@@ -162,7 +158,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="剩余积分"
-                    android:textColor="#ff999999"
+                    android:textColor="@color/theme_color4"
                     android:layout_centerVertical="true"
                     android:textSize="12sp"/>
                 <TextView
@@ -201,7 +197,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/color_EEEEEE"
+                android:background="@color/theme_line1"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"/>
             <LinearLayout
@@ -212,14 +208,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_14"
                     android:text="订单信息"/>
                 <TextView
                     android:id="@+id/pickUpAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:visibility="gone"
                     android:textSize="@dimen/sp_12"
                     android:layout_marginTop="12dp"/>
@@ -227,7 +223,7 @@
                     android:id="@+id/pickupCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:visibility="gone"
                     android:textSize="@dimen/sp_12"
                     android:layout_marginTop="12dp"/>
@@ -235,7 +231,7 @@
                     android:id="@+id/orderNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:visibility="gone"
                     android:textSize="@dimen/sp_12"
                     android:layout_marginTop="12dp"/>
@@ -243,7 +239,7 @@
                     android:id="@+id/orderAddTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:visibility="gone"
                     android:textSize="@dimen/sp_12"
                     android:layout_marginTop="12dp"/>
@@ -251,7 +247,7 @@
                     android:id="@+id/orderPayTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:visibility="gone"
                     android:textSize="@dimen/sp_12"
                     android:layout_marginTop="12dp"/>
@@ -264,8 +260,9 @@
             android:layout_height="84dp"
             android:orientation="horizontal"
             android:layout_gravity="bottom"
-            android:background="@color/white">
+            android:background="@color/theme_background1">
             <LinearLayout
+                android:id="@+id/goCustomServer"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -274,10 +271,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/person_message_mark"
+                    android:drawableTop="@mipmap/theme_person_message_mark"
                     android:gravity="center"
                     android:drawablePadding="3dp"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_14"
                     android:text="咨询客服"/>
             </LinearLayout>
@@ -290,8 +287,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textSize="16sp"
-                android:textColor="@color/white"
-                android:background="@drawable/shape_radius6_cccccc"
+                android:textColor="@color/theme_color4"
+                android:background="@drawable/theme_shape_radius6_00000000_stroke_cccccc"
                 binding:onClickCommand="@{ViewModel.cancelOrder}"
                 android:text="取消订单"/>
             <TextView
@@ -314,6 +311,6 @@
             android:layout_height="1px"
             android:layout_gravity="bottom"
             android:layout_marginBottom="84dp"
-            android:background="@color/color_FFD1D1D1"/>
+            android:background="@color/theme_line1"/>
     </FrameLayout>
 </layout>

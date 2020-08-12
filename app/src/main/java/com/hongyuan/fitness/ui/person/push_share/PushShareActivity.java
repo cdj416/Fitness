@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityPushShareBinding;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class PushShareActivity extends CustomActivity {
 
@@ -20,7 +21,18 @@ public class PushShareActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitleBar(TYPE_BAR3,R.drawable.shape_soid_ffffff,"");
+
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin)){
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"打卡分享");
+            getMainTitle().setRightTextColor("分享",getResources().getColor(R.color.color_FF333333));
+        }
+
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin)){
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"打卡分享");
+            getMainTitle().setRightTextColor("分享",getResources().getColor(R.color.color_FFFFFF));
+        }
+
+
         ActivityPushShareBinding binding = ActivityPushShareBinding.bind(mView);
         viewModel = new PushShareViewModel(this,binding);
         binding.setViewModel(viewModel);

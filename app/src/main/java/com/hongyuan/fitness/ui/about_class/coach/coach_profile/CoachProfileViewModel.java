@@ -16,6 +16,8 @@ import com.hongyuan.fitness.custom_view.StickyScrollView;
 import com.hongyuan.fitness.databinding.ActivityCoachProfileBinding;
 import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomeBean;
 import com.hongyuan.fitness.util.DividerItemDecoration;
+import com.hongyuan.fitness.util.SkinConstants;
+import com.hongyuan.fitness.util.StatusBarUtil;
 import com.hongyuan.fitness.util.ViewChangeUtil;
 
 public class CoachProfileViewModel extends CustomViewModel implements StickyScrollView.ScrollViewListener {
@@ -94,7 +96,7 @@ public class CoachProfileViewModel extends CustomViewModel implements StickyScro
 
     @Override
     public void onScrollChanged(StickyScrollView scrollView, int x, int y, int oldx, int oldy) {
-        if (y <= 0) {   //设置标题的背景颜色
+        /*if (y <= 0) {   //设置标题的背景颜色
             binding.titleBox.setBackgroundColor(Color.argb((int) 0, 99,130,236));
         } else if (y > 0 && y <= height) {
             float scale = (float) y / height;
@@ -103,6 +105,49 @@ public class CoachProfileViewModel extends CustomViewModel implements StickyScro
             binding.titleBox.setBackgroundColor(Color.argb((int) alpha, 99,130,236));
         } else {
             binding.titleBox.setBackgroundColor(Color.argb( 255, 99,130,236));
+        }*/
+
+        if (y <= 0) {   //设置标题的背景颜色
+            binding.myTitle.setCenterTextColor("教练简介",mActivity.getResources().getColor(R.color.color_FFFFFF));
+            binding.myTitle.setRightImage(R.mipmap.white_collection_mark);
+            binding.myTitle.setLeftImage(R.mipmap.white_common);
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) 0, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) 0, 255,255,255));
+            }
+        } else if (y > 0 && y <= height) {
+            float scale = (float) y / height;
+            float alpha = (255 * scale);
+
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) alpha, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) alpha, 255,255,255));
+                if(y <= height/2){
+                    binding.myTitle.setRightImage(R.mipmap.white_collection_mark);
+                    binding.myTitle.setCenterTextColor("教练简介",mActivity.getResources().getColor(R.color.color_FFFFFF));
+                    binding.myTitle.setLeftImage(R.mipmap.white_common);
+                    StatusBarUtil.setCommonUI(mActivity,false);
+                    binding.myTitle.hideLine();
+                }else{
+                    binding.myTitle.setRightImage(R.mipmap.gray_collection_img);
+                    binding.myTitle.setCenterTextColor("教练简介",mActivity.getResources().getColor(R.color.color_FF333333));
+                    binding.myTitle.setLeftImage(R.mipmap.theme_left_img);
+                    StatusBarUtil.setCommonUI(mActivity,true);
+                    binding.myTitle.showLine();
+                }
+            }
+        } else {
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) 255, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                binding.titleBox.setBackgroundColor(Color.argb( 255, 255,255,255));
+                binding.myTitle.setRightImage(R.mipmap.gray_collection_img);
+                binding.myTitle.setCenterTextColor("教练简介",mActivity.getResources().getColor(R.color.color_FF333333));
+                binding.myTitle.setLeftImage(R.mipmap.theme_left_img);
+            }
+
         }
     }
 

@@ -14,13 +14,13 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:textSize="@dimen/sp_16"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:text="精品团课"/>
         <TextView
             android:id="@+id/more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_FF999999"
+            android:textColor="@color/theme_color4"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:textSize="@dimen/sp_14"

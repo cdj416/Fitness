@@ -7,14 +7,14 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_FFFFFF"
+        android:background="@color/theme_background1"
         android:gravity="center"
         android:textSize="@dimen/sp_14"
-        android:textColor="@color/color_FF333333"
+        android:textColor="@color/theme_color3"
         tools:text="选择" />
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"
+        android:background="@color/theme_line"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

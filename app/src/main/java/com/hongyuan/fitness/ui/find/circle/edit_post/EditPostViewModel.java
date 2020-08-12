@@ -1,7 +1,6 @@
 package com.hongyuan.fitness.ui.find.circle.edit_post;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.hongyuan.fitness.base.Constants;

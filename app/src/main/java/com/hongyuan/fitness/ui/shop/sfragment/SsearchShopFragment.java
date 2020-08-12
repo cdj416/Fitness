@@ -18,6 +18,7 @@ import com.hongyuan.fitness.ui.shop.sadapter.SsearchShopAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.GoodsFilterBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.ShopsBeans;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.SkinConstants;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -80,7 +81,10 @@ public class SsearchShopFragment extends CustomFragment {
                 salesText.setTag("true");
                 order = "sale";
             }else{
-                salesText.setTextColor(getResources().getColor(R.color.color_FF333333));
+                if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin))
+                    salesText.setTextColor(getResources().getColor(R.color.color_FF999999));
+                if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin))
+                    salesText.setTextColor(getResources().getColor(R.color.color_FF999999));
                 salesText.setTag("false");
                 order = null;
             }

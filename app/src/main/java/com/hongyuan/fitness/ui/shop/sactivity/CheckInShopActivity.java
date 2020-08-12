@@ -16,6 +16,7 @@ import com.hongyuan.fitness.databinding.AcitivityCheckInShopBinding;
 import com.hongyuan.fitness.databinding.ActivityBottomCheckinBinding;
 import com.hongyuan.fitness.ui.shop.sviewmodel.CheckInShopViewModel;
 import com.hongyuan.fitness.ui.shop.sviewmodel.bottomviewmodel.CheckInBottomViewModel;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class CheckInShopActivity extends CustomActivity {
 
@@ -45,8 +46,10 @@ public class CheckInShopActivity extends CustomActivity {
         intentFilter.addAction(ACTION_TYPE_THREAD);
         mLocalBroadcastManager.registerReceiver(mBroadcastReceiver, intentFilter);
 
-
-        setTitleBar(TYPE_BAR5,R.drawable.shape_soid_ffffff,"商城入驻");
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"商城入驻");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"商城入驻");
 
         binding = AcitivityCheckInShopBinding.bind(mView);
         viewModel = new CheckInShopViewModel(this,binding);

@@ -84,7 +84,7 @@
             android:id="@+id/tvAllDisant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:layout_gravity="center_horizontal"
             android:textSize="38sp"
             android:textStyle="bold|italic"
@@ -94,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_marginTop="24dp"
-            android:background="@color/color_EEEEEE"/>
+            android:background="@color/theme_line1"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="73dp"
@@ -109,14 +109,14 @@
                     android:id="@+id/tvSpeedNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="24sp"
                     android:textStyle="bold|italic"
                     android:text="--"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_CCCCCC"
+                    android:textColor="@color/theme_color4"
                     android:textSize="14sp"
                     android:textStyle="italic"
                     android:text="min/km"/>
@@ -125,7 +125,7 @@
                 android:layout_width="1px"
                 android:layout_height="32dp"
                 android:layout_gravity="center_vertical"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -136,14 +136,14 @@
                     android:id="@+id/showTimeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="30sp"
                     android:textStyle="bold|italic"
                     android:text="00:00:00"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_CCCCCC"
+                    android:textColor="@color/theme_color4"
                     android:textSize="14sp"
                     android:textStyle="italic"
                     android:text="Time"/>
@@ -152,7 +152,7 @@
                 android:layout_width="1px"
                 android:layout_height="32dp"
                 android:layout_gravity="center_vertical"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -163,14 +163,14 @@
                     android:id="@+id/tvKcalNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="24sp"
                     android:textStyle="bold|italic"
                     android:text="0"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_CCCCCC"
+                    android:textColor="@color/theme_color4"
                     android:textSize="14sp"
                     android:textStyle="italic"
                     android:text="Kcal"/>
@@ -179,7 +179,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/color_EEEEEE"/>
+            android:background="@color/theme_line1"/>
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/startRunBox"
@@ -207,7 +207,7 @@
                 android:layout_width="68dp"
                 android:layout_height="68dp"
                 android:layout_centerInParent="true"
-                android:background="@color/color_FFFFFF"
+                android:background="@color/theme_background1"
                 android:visibility="invisible"
                 android:src="@mipmap/running_img"/>
             <ImageView

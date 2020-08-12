@@ -4,8 +4,9 @@ import com.hongyuan.fitness.base.BaseBean;
 
 public class KeFuBeans extends BaseBean {
 
+
     /**
-     * data : {"info":{"m_name":"m88888","m_mobile":"18621854159","mi_head":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20200103/ae5e6dcc6581dc12efe73b6e6d7c757112e7dc9f_2436x2436.jpg"}}
+     * data : {"info":{"m_name":"m91632","m_mobile":"13567291632","mi_head":"","tel":"0572-2075532"}}
      */
 
     private DataBean data;
@@ -20,7 +21,7 @@ public class KeFuBeans extends BaseBean {
 
     public static class DataBean {
         /**
-         * info : {"m_name":"m88888","m_mobile":"18621854159","mi_head":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20200103/ae5e6dcc6581dc12efe73b6e6d7c757112e7dc9f_2436x2436.jpg"}
+         * info : {"m_name":"m91632","m_mobile":"13567291632","mi_head":"","tel":"0572-2075532"}
          */
 
         private InfoBean info;
@@ -35,14 +36,16 @@ public class KeFuBeans extends BaseBean {
 
         public static class InfoBean {
             /**
-             * m_name : m88888
-             * m_mobile : 18621854159
-             * mi_head : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20200103/ae5e6dcc6581dc12efe73b6e6d7c757112e7dc9f_2436x2436.jpg
+             * m_name : m91632
+             * m_mobile : 13567291632
+             * mi_head :
+             * tel : 0572-2075532
              */
 
             private String m_name;
             private String m_mobile;
             private String mi_head;
+            private String tel;
 
             public String getM_name() {
                 return m_name;
@@ -66,6 +69,14 @@ public class KeFuBeans extends BaseBean {
 
             public void setMi_head(String mi_head) {
                 this.mi_head = mi_head;
+            }
+
+            public String getTel() {
+                return tel;
+            }
+
+            public void setTel(String tel) {
+                this.tel = tel;
             }
         }
     }

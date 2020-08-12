@@ -34,6 +34,11 @@ import cn.jpush.android.api.JPushInterface;
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.crash.CaocConfig;
 import me.goldze.mvvmhabit.utils.KLog;
+import skin.support.SkinCompatManager;
+import skin.support.app.SkinAppCompatViewInflater;
+import skin.support.app.SkinCardViewInflater;
+import skin.support.constraint.app.SkinConstraintViewInflater;
+import skin.support.design.app.SkinMaterialViewInflater;
 
 public class MyApplication extends BaseApplication {
     private int appCount = 0;
@@ -152,6 +157,16 @@ public class MyApplication extends BaseApplication {
         String encryptPath = "file:///android_asset/hywl20191120.qn";
         //体脂称sdk初始化
         QNBleApi.getInstance(this).initSdk("hywl20191120", encryptPath, (code, msg) -> Log.e("phm", "初始化文件" + msg));
+
+        //换肤
+        SkinCompatManager.withoutActivity(this)
+                .addInflater(new SkinAppCompatViewInflater())           // 基础控件换肤初始化
+                .addInflater(new SkinMaterialViewInflater())            // material design 控件换肤初始化[可选]
+                .addInflater(new SkinConstraintViewInflater())          // ConstraintLayout 控件换肤初始化[可选]
+                .addInflater(new SkinCardViewInflater())                // CardView v7 控件换肤初始化[可选]
+                .setSkinStatusBarColorEnable(false)                     // 关闭状态栏换肤，默认打开[可选]
+                .setSkinWindowBackgroundEnable(false)                   // 关闭windowBackground换肤，默认打开[可选]
+                .loadSkin();
     }
 
     /**

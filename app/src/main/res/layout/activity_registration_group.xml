@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_background1">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -41,7 +41,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:text="哈达瑜伽"/>
                     <TextView
                         android:id="@+id/courseTime"
@@ -62,7 +62,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_16"
                 android:layout_marginTop="24dp"
                 android:text="约课信息"/>
@@ -73,14 +73,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color4"
                     android:layout_centerVertical="true"
                     android:text="课程类型:"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textColor="@color/color_CCCCCC"
+                    android:textColor="@color/theme_color4"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:text="团体课"/>
@@ -88,7 +88,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp">
@@ -96,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color4"
                     android:layout_centerVertical="true"
                     android:text="上课场地:"/>
                 <TextView
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textColor="@color/color_CCCCCC"
+                    android:textColor="@color/theme_color4"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="80dp"
@@ -115,7 +115,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp">
@@ -123,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color4"
                     android:layout_centerVertical="true"
                     android:text="上课开始时间:"/>
                 <TextView
@@ -131,7 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textColor="@color/color_CCCCCC"
+                    android:textColor="@color/theme_color4"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:text="2019.6.12 17:30"/>
@@ -139,7 +139,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
             <RelativeLayout
                 android:id="@+id/selectLocationBox"
                 android:layout_width="match_parent"
@@ -148,7 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color4"
                     android:layout_centerVertical="true"
                     android:text="选择位置:"/>
                 <TextView
@@ -156,7 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:gravity="center_vertical"
@@ -165,7 +165,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/color_EEEEEE"
+                    android:background="@color/theme_line1"
                     android:layout_alignParentBottom="true"/>
             </RelativeLayout>
         </LinearLayout>
@@ -176,7 +176,7 @@
             android:layout_height="84dp"
             android:orientation="horizontal"
             android:layout_alignParentBottom="true"
-            android:background="@color/white">
+            android:background="@color/theme_color1">
             <LinearLayout
                 android:id="@+id/callTel"
                 android:layout_width="0dp"
@@ -187,10 +187,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/person_message_mark"
+                    android:drawableTop="@mipmap/theme_person_message_mark"
                     android:gravity="center"
                     android:drawablePadding="3dp"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_14"
                     android:text="咨询客服"/>
             </LinearLayout>
@@ -212,7 +212,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_above="@id/bottomBox"
-            android:background="@color/color_FFD1D1D1"/>
+            android:background="@color/theme_line1"/>
     </RelativeLayout>
 
 </layout>

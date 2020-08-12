@@ -11,13 +11,13 @@
 
     <com.hongyuan.fitness.custom_view.StickyScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color_F5F6FB">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="130dp">
+            android:paddingBottom="130dp"
+            android:background="@color/theme_background">
 
             <LinearLayout
                 android:id="@+id/failureBox"
@@ -70,7 +70,7 @@
                 android:paddingTop="17dp"
                 android:paddingBottom="8dp"
                 android:paddingStart="16dp"
-                android:background="@color/color_F5F6FB"
+                android:background="@color/theme_background"
                 android:textColor="@color/color_FF999999"
                 android:textSize="@dimen/sp_12"
                 android:text="企业信息"/>
@@ -197,16 +197,18 @@
                 android:id="@+id/specificAddress"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
-                android:background="@color/color_FFFFFF"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:gravity="center_vertical"
+                android:textColor="@color/theme_color3"
+                android:textColorHint="@color/theme_color4"
+                android:background="@color/theme_color1"
                 android:textSize="@dimen/sp_12"
                 android:hint="请输入您营业执照的具体地址"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
 
             <TextView
                 android:layout_width="match_parent"

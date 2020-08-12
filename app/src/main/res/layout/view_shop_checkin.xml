@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/color_FFFFFF">
+    android:background="@color/theme_color1">
 
     <RelativeLayout
         android:id="@+id/etsBox"
@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_14"
-            android:textColor="@color/color_000000"
+            android:textColor="@color/theme_color3"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_16"/>
 
@@ -38,16 +38,17 @@
                 android:id="@+id/edText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/color_FFFFFF"
+                android:textColor="@color/theme_color3"
+                android:textColorHint="@color/theme_color4"
+                android:background="@color/theme_color1"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
                 android:visibility="visible"/>
 
             <TextView
                 android:id="@+id/selText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_12"
                 android:gravity="center_vertical"
                 android:visibility="gone"
@@ -86,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:textSize="@dimen/sp_14"
-            android:textColor="@color/color_000000"
+            android:textColor="@color/theme_color3"
             android:gravity="center_vertical"
             android:paddingStart="16dp"/>
         <LinearLayout
@@ -113,7 +114,7 @@
                     android:layout_centerInParent="true"
                     android:textColor="@color/color_FF999999"
                     android:textSize="@dimen/sp_12"
-                    android:drawableTop="@mipmap/black_carme_mark"
+                    android:drawableTop="@mipmap/theme_carme_mark"
                     android:drawablePadding="3dp"
                     android:text="点击上传"/>
                 <ImageView
@@ -146,7 +147,7 @@
                     android:layout_centerInParent="true"
                     android:textColor="@color/color_FF999999"
                     android:textSize="@dimen/sp_12"
-                    android:drawableTop="@mipmap/black_carme_mark"
+                    android:drawableTop="@mipmap/theme_carme_mark"
                     android:drawablePadding="3dp"
                     android:text="点击上传"/>
                 <ImageView
@@ -177,7 +178,7 @@
                     android:layout_centerInParent="true"
                     android:textColor="@color/color_FF999999"
                     android:textSize="@dimen/sp_12"
-                    android:drawableTop="@mipmap/black_carme_mark"
+                    android:drawableTop="@mipmap/theme_carme_mark"
                     android:drawablePadding="3dp"
                     android:text="点击上传"/>
                 <ImageView
@@ -195,6 +196,6 @@
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"
+        android:background="@color/theme_line1"
         android:layout_alignParentBottom="true"/>
 </LinearLayout>

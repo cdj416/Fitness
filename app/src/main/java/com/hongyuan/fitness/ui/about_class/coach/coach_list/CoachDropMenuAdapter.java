@@ -165,7 +165,7 @@ public class CoachDropMenuAdapter implements MenuAdapter, RetrofitListener {
                     }
                 });
 
-        doubleFilter.getLeftListView().setBackgroundColor(mContext.getResources().getColor(R.color.color_F5F6FB));
+        //doubleFilter.getLeftListView().setBackgroundColor(mContext.getResources().getColor(R.color.color_F5F6FB));
         //获取左边的区县数据
         getArea();
 
@@ -263,7 +263,7 @@ public class CoachDropMenuAdapter implements MenuAdapter, RetrofitListener {
 
         //设置左边固定数据
         typeFilter.setLeftList(filterBGbeans, 0);
-        typeFilter.getLeftListView().setBackgroundColor(mContext.getResources().getColor(R.color.color_F5F6FB));
+        //typeFilter.getLeftListView().setBackgroundColor(mContext.getResources().getColor(R.color.color_F5F6FB));
         //设置右边请求数据
         getCourseType();
 

@@ -3,6 +3,7 @@ package com.hongyuan.fitness.ui.person.mine_message;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityMineMessageBinding;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class MineMessageActivity extends CustomActivity {
     @Override
@@ -12,8 +13,11 @@ public class MineMessageActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitle("我的消息");
-        setsetImmersive(0x55000000);
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"我的消息");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"我的消息");
+
         ActivityMineMessageBinding binding = ActivityMineMessageBinding.bind(mView);
         MineMessageViewModel viewModel = new MineMessageViewModel(this,binding);
         binding.setViewModel(viewModel);

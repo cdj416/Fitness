@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.RetrofitListener;
 import com.hongyuan.fitness.custom_view.filter_view.adapter.MenuAdapter;
 import com.hongyuan.fitness.custom_view.filter_view.adapter.SingleReclerAdapter;
@@ -23,7 +24,7 @@ public class V4FilterCardsListAdapter implements MenuAdapter, RetrofitListener {
     private final int POSITION_CARD_YEAR = 0;
     private final int POSITION_CARD_TYPE = 1;
 
-    private final Context mContext;
+    private final CustomActivity mContext;
     private OnFilterDoneListener onFilterDoneListener;
     private OnFilterContentListener contentListener;
     private String[] titles;
@@ -47,7 +48,7 @@ public class V4FilterCardsListAdapter implements MenuAdapter, RetrofitListener {
     }
 
 
-    public V4FilterCardsListAdapter(Context context, String[] titles, OnFilterDoneListener onFilterDoneListener, OnFilterContentListener contentListener){
+    public V4FilterCardsListAdapter(CustomActivity context, String[] titles, OnFilterDoneListener onFilterDoneListener, OnFilterContentListener contentListener){
         this.mContext = context;
         this.titles = titles;
         this.onFilterDoneListener = onFilterDoneListener;
@@ -94,7 +95,7 @@ public class V4FilterCardsListAdapter implements MenuAdapter, RetrofitListener {
     * */
     private View createValidityPeriodView() {
         validityPeriodListView = new SingleReclerView<V4CardsListValidityPeriodBeans.DataBean>(mContext)
-                .setMyAdapter(new SingleReclerAdapter<V4CardsListValidityPeriodBeans.DataBean>() {
+                .setMyAdapter(new SingleReclerAdapter<V4CardsListValidityPeriodBeans.DataBean>(mContext.skin) {
                     @Override
                     public String provideText(V4CardsListValidityPeriodBeans.DataBean t) {
                         return t.getCt_name();
@@ -135,7 +136,7 @@ public class V4FilterCardsListAdapter implements MenuAdapter, RetrofitListener {
     * */
     private View createCardsTypeListView(){
         typeListView  = new SingleReclerView<V4CardsListTypeBeans.DataBean>(mContext)
-                .setMyAdapter(new SingleReclerAdapter<V4CardsListTypeBeans.DataBean>() {
+                .setMyAdapter(new SingleReclerAdapter<V4CardsListTypeBeans.DataBean>(mContext.skin) {
                     @Override
                     public String provideText(V4CardsListTypeBeans.DataBean t) {
                         return t.getCc_name();

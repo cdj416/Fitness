@@ -8,14 +8,12 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
-import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.SingleClick;
@@ -30,9 +28,6 @@ import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
 public class VtwoPrivateLessonsFragment extends CustomFragment implements FilterPriviteLessonsAdapter.OnFilterDoneListener, FilterPriviteLessonsAdapter.OnFilterContentListener {
 
     private DropDownMenu dropDownMenu;
@@ -41,9 +36,6 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
 
     private VtwoPrivateLessonsAdapter adapter;
     private VtwoPrivateLessonsBeans bean;
-
-    //赛选条件的适配器
-    private FilterPriviteLessonsAdapter filterAdapter;
 
 
     //错误信息控件
@@ -62,12 +54,19 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
 
     @Override
     public void initView(View mView) {
+        //skin = mActivity.skin;
+
         dropDownMenu = mView.findViewById(R.id.dropDownMenu);
         mFilterContentView = mView.findViewById(R.id.mFilterContentView);
         mRecycler = mView.findViewById(R.id.mRecycler);
 
         //加载错误页面信息
         initPrompt(mView);
+
+        //初始化筛选菜单
+        String[] titleList = new String[] { TokenSingleBean.getInstance().getRegion_name(), "筛选课程" };
+        dropDownMenu.setMenuAdapter(new FilterPriviteLessonsAdapter(mActivity, titleList, this,this));
+
         //初始化筛选菜单
         //String[] titleList = new String[] { TokenSingleBean.getInstance().getRegion_name()+"全城", "筛选课程" };
         //dropDownMenu.setMenuAdapter(new FilterPriviteLessonsAdapter(mActivity, titleList, this,this));
@@ -138,6 +137,11 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
             curPage++;
             loadMoreData();
         };
+    }
+
+    @Override
+    protected void lazyLoad() {
+        getCourserData();
     }
 
     @Override
@@ -251,7 +255,7 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
     /*
      * 刷新定位城市
      * */
-    @Subscribe(id = ConstantsCode.EB_HOME_LOCATION)
+    /*@Subscribe(id = ConstantsCode.EB_HOME_LOCATION)
     public void changeLocation(String message) {
         //城市切换了去刷新下数据
         bean = null;
@@ -267,9 +271,9 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
         }
 
 
-    }
+    }*/
 
-    @Nullable
+    /*@Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
@@ -280,5 +284,5 @@ public class VtwoPrivateLessonsFragment extends CustomFragment implements Filter
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
-    }
+    }*/
 }

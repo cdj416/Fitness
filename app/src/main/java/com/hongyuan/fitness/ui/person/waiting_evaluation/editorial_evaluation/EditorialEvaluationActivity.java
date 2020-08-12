@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityEditorialEvaluationBinding;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class EditorialEvaluationActivity extends CustomActivity {
 
@@ -19,8 +20,11 @@ public class EditorialEvaluationActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitle("发表评论");
-        setsetImmersive(0x55000000);
+
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"发表评论");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"发表评论");
         binding = ActivityEditorialEvaluationBinding.bind(mView);
         EditorialEvaluationViewModel viewModel = new EditorialEvaluationViewModel(this,binding);
         binding.setViewModel(viewModel);

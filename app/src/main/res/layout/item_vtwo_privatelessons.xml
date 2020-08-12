@@ -1,128 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardElevation="3dp"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="6dp">
-    <RelativeLayout
+    android:layout_height="90dp"
+    android:background="@drawable/theme_shape_radius6_ffffff"
+    android:layout_marginTop="12dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:id="@+id/jumpBox">
+    <!-- <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:orientation="horizontal">
+         <View
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="2"/>
+         <com.makeramen.roundedimageview.RoundedImageView
+             android:id="@+id/courseBgImg"
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="3"
+             android:src="@mipmap/defaul_no_img"
+             app:riv_corner_radius_top_right="6dp"
+             app:riv_corner_radius_bottom_right="6dp"
+             android:scaleType="centerCrop"/>
+     </LinearLayout>-->
+    <!--<com.makeramen.roundedimageview.RoundedImageView
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:id="@+id/jumpBox">
-       <!-- <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"/>
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/courseBgImg"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:src="@mipmap/defaul_no_img"
-                app:riv_corner_radius_top_right="6dp"
-                app:riv_corner_radius_bottom_right="6dp"
-                android:scaleType="centerCrop"/>
-        </LinearLayout>-->
-        <!--<com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:riv_corner_radius="6dp"
+        android:layout_height="match_parent"
+        app:riv_corner_radius="6dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/home_meng_ban"/>-->
+    <TextView
+        android:id="@+id/courseTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/theme_color4"
+        android:textSize="@dimen/sp_12"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/coachHeadImg"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:riv_corner_radius="44dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/home_meng_ban"/>-->
-        <TextView
-            android:id="@+id/courseTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_FF999999"
-            android:textSize="@dimen/sp_12"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="12dp"/>
+            android:src="@mipmap/default_man_head_img"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginBottom="12dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/coachHeadImg"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                app:riv_corner_radius="44dp"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/default_man_head_img"/>
-            <LinearLayout
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/courseName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/courseName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_FF333333"
-                    android:layout_marginEnd="100dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"/>
-                <TextView
-                    android:id="@+id/coachNameAddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FF999999"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:layout_marginEnd="100dp"/>
-            </LinearLayout>
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/theme_color3"
+                android:layout_marginEnd="100dp"
+                android:ellipsize="end"
+                android:maxLines="1"/>
+            <TextView
+                android:id="@+id/coachNameAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/theme_color4"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginEnd="100dp"/>
         </LinearLayout>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="17dp"
+        android:layout_marginRight="16dp"
+        android:gravity="right"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/theme_color4"
+            android:text="最低"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="17dp"
-            android:layout_marginRight="16dp"
-            android:gravity="right"
-            android:orientation="vertical">
+            android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF999999"
-                android:text="最低"/>
-            <LinearLayout
+                android:textColor="@color/color_EF5B48"
+                android:text="¥ "/>
+            <TextView
+                android:id="@+id/coursePrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_EF5B48"
-                    android:text="¥ "/>
-                <TextView
-                    android:id="@+id/coursePrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_EF5B48"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_EF5B48"
-                    android:text="/节"/>
-            </LinearLayout>
+                android:textSize="@dimen/sp_16"
+                android:textColor="@color/color_EF5B48"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/color_EF5B48"
+                android:text="/节"/>
         </LinearLayout>
-    </RelativeLayout>
-
-</androidx.cardview.widget.CardView>
+    </LinearLayout>
+</RelativeLayout>

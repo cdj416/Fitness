@@ -64,7 +64,7 @@ public class FeaturedFragment extends CustomFragment {
         topTitle = mView.findViewById(R.id.topTitle);
         moreFriends = mView.findViewById(R.id.moreFriends);
         topBox = mView.findViewById(R.id.topBox);
-        topicBox = mView.findViewById(R.id.topicBox);
+        //topicBox = mView.findViewById(R.id.topicBox);
 
         topRecycler = mView.findViewById(R.id.topRecycler);
 

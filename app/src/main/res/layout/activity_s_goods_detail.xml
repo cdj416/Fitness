@@ -11,7 +11,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_background1">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -25,25 +25,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <com.hongyuan.fitness.custom_view.StatusBarHeightView
-                    android:id="@+id/barHeight"
+                <LinearLayout
+                    android:id="@+id/barHbox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:background="@color/color_FFFFFF"/>
+                    android:orientation="vertical"
+                    android:background="@color/theme_color1">
+                    <com.hongyuan.fitness.custom_view.StatusBarHeightView
+                        android:id="@+id/barHeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"/>
+                </LinearLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/layoutMenu"
+
+                    <LinearLayout
+                        android:id="@+id/tabBox"
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:layout_centerInParent="true"
-                        app:tabIndicatorColor="@color/color_EF5B48"
-                        app:tabMode="auto"
-                        app:tabSelectedTextColor="@color/color_EF5B48"
-                        app:tabIndicatorFullWidth="false"
-                        android:background="@color/color_FFFFFF"/>
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/theme_color1">
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/layoutMenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:layout_centerInParent="true"
+                            app:tabIndicatorColor="@color/color_EF5B48"
+                            app:tabMode="auto"
+                            app:tabSelectedTextColor="@color/color_EF5B48"
+                            app:tabTextColor="@color/theme_color3"
+                            app:tabIndicatorFullWidth="false"/>
+                    </LinearLayout>
+
 
                     <ImageView
                         android:id="@+id/tBack"
@@ -57,7 +73,7 @@
                         android:id="@+id/back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/back_common"
+                        android:src="@mipmap/theme_left_img"
                         android:layout_centerVertical="true"
                         android:visibility="invisible"
                         android:layout_marginStart="16dp"/>
@@ -75,7 +91,7 @@
                         android:id="@+id/message"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/person_message_mark"
+                        android:src="@mipmap/theme_person_message_mark"
                         android:layout_marginEnd="16dp"
                         android:visibility="invisible"
                         android:layout_alignParentEnd="true"
@@ -92,7 +108,7 @@
                         android:id="@+id/cart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/black_cart_mark"
+                        android:src="@mipmap/theme_cart_mark"
                         android:layout_toLeftOf="@id/message"
                         android:layout_marginEnd="16dp"
                         android:visibility="invisible"
@@ -104,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="84dp"
             android:orientation="horizontal"
-            android:background="@color/color_FFFFFF"
+            android:background="@color/theme_color1"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:layout_gravity="bottom">
@@ -113,10 +129,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="30dp"
-                android:drawableTop="@mipmap/black_store_mark"
+                android:drawableTop="@mipmap/theme_store_mark"
                 android:gravity="center"
                 android:drawablePadding="4dp"
                 android:text="店铺"/>
@@ -125,10 +141,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="30dp"
-                android:drawableTop="@mipmap/black_fitness_service_mark"
+                android:drawableTop="@mipmap/theme_suidongkefu_marik"
                 android:gravity="center"
                 android:drawablePadding="4dp"
                 android:text="客服"/>
@@ -164,7 +180,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/color_EEEEEE"
+            android:background="@color/theme_line1"
             android:layout_gravity="bottom"
             android:layout_marginBottom="84dp"/>
     </FrameLayout>

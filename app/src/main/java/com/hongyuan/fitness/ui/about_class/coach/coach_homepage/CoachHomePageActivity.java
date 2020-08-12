@@ -14,6 +14,8 @@ public class CoachHomePageActivity extends CustomActivity {
     @Override
     protected void initView() {
         setTitleBar(TYPE_BAR2,R.drawable.shape_soid_ffffff,"");
+
+
         ActivityCoachHomepageBinding binding = ActivityCoachHomepageBinding.bind(mView);
         CoachHomePageViewModel viewModel = new CoachHomePageViewModel(this,binding);
         binding.setViewModel(viewModel);

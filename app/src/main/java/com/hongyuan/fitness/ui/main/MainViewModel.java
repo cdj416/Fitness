@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.main;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -23,6 +24,7 @@ import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.LocationBean;
 import com.hongyuan.fitness.util.PackageUtils;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
+import com.hongyuan.fitness.util.SkinConstants;
 import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -38,7 +40,7 @@ public class MainViewModel extends CustomViewModel {
     private BaseQuickAdapter couponAdapter;
     private BaseQuickAdapter goodsAdapter;
     private List<CouponListBeans.DataBean.ListBean> mList;
-    private int mPosition;
+    private int mPosition,pagePosition;
     //免费领取商品的数据
     private HomeGoodsBeans.DataBean goodsBeans;
 
@@ -54,11 +56,12 @@ public class MainViewModel extends CustomViewModel {
     protected void initView(){
 
         NavigationController navigationController = binding.tab.material()
-                .addItem(R.mipmap.home_default, R.mipmap.home_select,"首页")
+                .addItem(R.mipmap.home_default, R.mipmap.home_select,"首页",0xFFEF5B48)
                 .addItem(R.mipmap.find_default,R.mipmap.find_select, "发现",0xFFEF5B48)
-                .addItem(R.mipmap.course_default_icon_img,R.mipmap.course_default_icon_img, "课程",0xFFEF5B48)
-                .addItem(R.mipmap.mall_default,R.mipmap.mall_select,"商城")
+                //.addItem(R.mipmap.course_default_icon_img,R.mipmap.course_default_icon_img, "课程",0xFFEF5B48)
+                .addItem(R.mipmap.mall_default,R.mipmap.mall_select,"商城",0xFFEF5B48)
                 .addItem(R.mipmap.person_default, R.mipmap.person_select,"我的",0xFFEF5B48)
+                .setDefaultColor(0xFFBBBBBB)
                 .build();
 
         myViewPagerAdapter = new MyViewPagerAdapter(mActivity.getSupportFragmentManager());
@@ -66,7 +69,9 @@ public class MainViewModel extends CustomViewModel {
         //自动适配ViewPager页面切换
         navigationController.setupWithViewPager(binding.viewPager);
         binding.viewPager.addOnPageChangeListener(getOnPageChangeListener());
-        binding.viewPager.setOffscreenPageLimit(5);
+        binding.viewPager.setOffscreenPageLimit(4);
+
+        binding.viewPager.setCurrentItem(1);
 
         //启动各个平台的推送服务
         HuanXinUtils.getInstance().setPush();
@@ -93,14 +98,11 @@ public class MainViewModel extends CustomViewModel {
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 4 && userToken.getM_mobile() == null){
+
+                if(position == 3 && userToken.getM_mobile() == null){
                     startActivity(VtwoVerificationLoginActivity.class,null);
                 }
-                /*if(position == 3){
-                    mActivity.setTitleBar(mActivity.TYPE_BAR8,R.drawable.shape_soid_ffef5b48,"");
-                }else{
-                    mActivity.setTitleBar(mActivity.TYPE_BAR1,R.drawable.shape_soid_ffffff,"");
-                }*/
+                changeBarHeightBg();
             }
 
             @Override
@@ -108,6 +110,33 @@ public class MainViewModel extends CustomViewModel {
 
             }
         };
+    }
+
+    /*
+    * 改变个人中心的顶高背景
+    * */
+    public void changeBarHeightBg(){
+
+        if(binding.viewPager.getCurrentItem() == 0){
+            mActivity.setTitleBar(mActivity.TYPE_BAR8,R.drawable.shape_soid_ffef5b48,"");
+            mActivity.barHeight.setVisibility(View.GONE);
+        }else{
+
+            if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin))
+                mActivity.setTitleBar(mActivity.TYPE_BAR1,R.drawable.shape_soid_ffffff,"");
+            if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)){
+                if(binding.viewPager.getCurrentItem() == 3){
+                    mActivity.setTitleBar(mActivity.TYPE_BAR8,R.drawable.theme_shape_soid_222222_black,"");
+                }else{
+                    mActivity.setTitleBar(mActivity.TYPE_BAR8,R.drawable.theme_shape_soid_ffffff_black,"");
+                }
+            }
+
+            mActivity.barHeight.setVisibility(View.VISIBLE);
+
+        }
+
+
     }
 
     @Override
@@ -187,7 +216,6 @@ public class MainViewModel extends CustomViewModel {
             }else{
                 //检查城市是否开通服务
                 getCheckCity();
-
             }
 
         }

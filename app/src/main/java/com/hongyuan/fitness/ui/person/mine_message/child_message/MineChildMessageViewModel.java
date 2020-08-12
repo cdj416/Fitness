@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
@@ -15,6 +16,7 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivityMineChildMessageBinding;
 import com.hongyuan.fitness.util.JumpUtils;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class MineChildMessageViewModel extends CustomViewModel {
 
@@ -38,7 +40,10 @@ public class MineChildMessageViewModel extends CustomViewModel {
         setEnableRefresh(true);
         setEnableLoadMore(true);
 
-        mActivity.setTitleBar(mActivity.TYPE_BAR3,0,getBundle().getString("titleName"));
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin))
+            mActivity.setTitleBar(mActivity.TYPE_BAR5, R.drawable.theme_shape_soid_ffffff,getBundle().getString("titleName"));
+        if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin))
+            mActivity.setTitleBar(mActivity.TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,getBundle().getString("titleName"));
 
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);
         manager.setOrientation(RecyclerView.VERTICAL);

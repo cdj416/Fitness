@@ -47,10 +47,8 @@ public class SelectTopicViewModel extends CustomViewModel {
     protected void initView() {
         LinearLayoutManager LeftManager = new LinearLayoutManager(mActivity);
         LeftManager.setOrientation(RecyclerView.VERTICAL);
-        binding.leftRec.addItemDecoration(new DividerItemDecoration(
-                mActivity, DividerItemDecoration.HORIZONTAL_LIST,1,mActivity.getResources().getColor(R.color.color_EEEEEE)));
         binding.leftRec.setLayoutManager(LeftManager);
-        leftAdapter = new SelectTopicLeftAdapter();
+        leftAdapter = new SelectTopicLeftAdapter(mActivity.skin);
         binding.leftRec.setAdapter(leftAdapter);
         leftAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @SingleClick

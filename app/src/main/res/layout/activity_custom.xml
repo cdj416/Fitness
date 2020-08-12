@@ -16,19 +16,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#FFF2F2F2">
+        android:background="@color/theme_background">
         <com.hongyuan.fitness.custom_view.StatusBarHeightView
             android:id="@+id/barHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:background="@drawable/shape_gradient_v_ef_f0"/>
+            android:visibility="gone"/>
         <com.hongyuan.fitness.custom_view.TitleView
             android:id="@+id/mainTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            app:left_image="@mipmap/back_common"
+            app:left_image="@mipmap/theme_left_img"
             app:line_show="true"/>
 
         <FrameLayout

@@ -16,6 +16,7 @@ import com.hongyuan.fitness.databinding.ActivityMineOrderDetailBinding;
 import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayActivity;
 import com.hongyuan.fitness.ui.mall.good_pay.PayDataBean;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
+import com.hongyuan.fitness.ui.shop.sactivity.CustomServerActivity;
 import com.hongyuan.fitness.ui.shop.sbeans.PointBean;
 import com.hongyuan.fitness.util.BaseUtil;
 
@@ -39,7 +40,9 @@ public class MineOrderDetailsViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
-
+        binding.goCustomServer.setOnClickListener(v -> {
+            startActivity(CustomServerActivity.class,null);
+        });
     }
 
     //取消订单
@@ -131,6 +134,7 @@ public class MineOrderDetailsViewModel extends CustomViewModel {
         V3SuccessBeans beans = new V3SuccessBeans();
 
         if("o_card".equals(detailsBeans.getO_type_code())){
+            beans.setType(V3SuccessBeans.TYPE.BUYCARD);
             beans.setTitleText("订单完成");
             beans.setShowText("购买成功");
             beans.setBtn1Text("跳过");
@@ -157,6 +161,7 @@ public class MineOrderDetailsViewModel extends CustomViewModel {
         }
 
         if("o_pric".equals(detailsBeans.getO_type_code())){
+            beans.setType(V3SuccessBeans.TYPE.PRIVITECLASS);
             beans.setTitleText("订单");
             beans.setShowText("购买成功");
             beans.setBtn2Text("完成");
@@ -193,6 +198,7 @@ public class MineOrderDetailsViewModel extends CustomViewModel {
         }
 
         if("o_goods".equals(detailsBeans.getO_type_code())){
+            beans.setType(V3SuccessBeans.TYPE.BUYGOODS);
             beans.setTitleText("订单");
             beans.setShowText("购买成功");
             beans.setBtn2Text("完成");
@@ -257,7 +263,7 @@ public class MineOrderDetailsViewModel extends CustomViewModel {
     @Override
     public void onSuccess(int code, Object data) {
         if(code == ConstantsCode.CANCLE_ORDER){
-            showSuccess("成功取消订单！");
+            mActivity.showSuccess("成功取消订单！");
         }
     }
 

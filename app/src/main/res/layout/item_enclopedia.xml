@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="212dp"
+    android:layout_height="230dp"
     android:orientation="vertical"
     android:id="@+id/box">
 
@@ -36,7 +36,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="55dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
         <ImageView
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="教你8个健身小常识"/>
@@ -61,10 +61,14 @@
                 android:id="@+id/tvSign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:textSize="@dimen/sp_12"
                 android:layout_alignParentBottom="true"
                 android:text="260万次浏览"/>
         </LinearLayout>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/theme_line"/>
 </LinearLayout>

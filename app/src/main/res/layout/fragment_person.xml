@@ -7,7 +7,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@color/color_FFFFFF"/>
+        android:background="@color/theme_background1"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,8 +28,8 @@
                     android:id="@+id/myTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:text_color="@color/color_FF333333"
-                    app:center_text="我的"/>
+                    app:center_text="我的"
+                    app:line_show="true"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -43,19 +43,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
-                        android:src="@mipmap/person_message_mark"/>
+                        android:src="@mipmap/theme_person_message_mark"/>
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color_F5F6FB">
+            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/theme_background">
                 <com.hongyuan.fitness.ui.main.main_person.PersonHeaderView
                     android:id="@+id/pHeadView"
                     android:layout_width="match_parent"
@@ -64,7 +64,6 @@
                 <com.hongyuan.fitness.ui.main.main_person.PersonContentView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_radius6_ffffff"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="16dp"
@@ -73,7 +72,6 @@
                 <com.hongyuan.fitness.ui.main.main_person.PersonContentView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_radius6_ffffff"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="16dp"
@@ -92,7 +90,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:background="@drawable/shape_radius6_ffffff"
+                        android:background="@drawable/theme_shape_radius6_ffffff"
                         android:paddingStart="12dp"
                         android:paddingEnd="12dp">
                         <RelativeLayout
@@ -102,7 +100,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_14"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
                                 android:drawableLeft="@mipmap/physical_data_mark"
@@ -119,13 +117,13 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
-                            android:background="@color/color_EEEEEE"
+                            android:background="@color/theme_line1"
                             android:layout_marginStart="12dp"
                             android:layout_marginEnd="12dp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF999999"
+                            android:textColor="@color/theme_color4"
                             android:textSize="@dimen/sp_12"
                             android:layout_marginTop="15dp"
                             android:text="体重"/>
@@ -140,13 +138,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="18sp"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textStyle="bold"
                                 android:text="0"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_000000"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
                                 android:layout_marginStart="5dp"
                                 android:text="kg"/>
@@ -156,7 +154,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_12"
-                            android:textColor="@color/color_FF999999"
+                            android:textColor="@color/theme_color4"
                             android:layout_marginTop="10dp"
                             android:text="上次记录0天前"/>
                     </LinearLayout>
@@ -166,7 +164,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical"
-                        android:background="@drawable/shape_radius6_ffffff"
+                        android:background="@drawable/theme_shape_radius6_ffffff"
                         android:paddingStart="12dp"
                         android:layout_marginStart="11dp"
                         android:paddingEnd="12dp">
@@ -177,7 +175,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_14"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:layout_centerVertical="true"
                                 android:gravity="center"
                                 android:drawableLeft="@mipmap/physical_data_mark"
@@ -194,13 +192,13 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1px"
-                            android:background="@color/color_EEEEEE"
+                            android:background="@color/theme_line1"
                             android:layout_marginStart="12dp"
                             android:layout_marginEnd="12dp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF999999"
+                            android:textColor="@color/theme_color4"
                             android:textSize="@dimen/sp_12"
                             android:layout_marginTop="15dp"
                             android:text="总消耗"/>
@@ -215,13 +213,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="18sp"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textStyle="bold"
                                 android:text="0"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_000000"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
                                 android:layout_marginStart="5dp"
                                 android:text="kcal"/>
@@ -231,7 +229,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_12"
-                            android:textColor="@color/color_FF999999"
+                            android:textColor="@color/theme_color4"
                             android:layout_marginTop="10dp"
                             android:text="总训练天数0天"/>
                     </LinearLayout>
@@ -240,7 +238,6 @@
                 <com.hongyuan.fitness.ui.main.main_person.PersonContentView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_radius6_ffffff"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="16dp"
@@ -250,7 +247,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="216dp"
                     android:orientation="vertical"
-                    android:background="@drawable/shape_radius6_ffffff"
+                    android:background="@drawable/theme_shape_radius6_ffffff"
                     android:layout_marginTop="12dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp">
@@ -269,9 +266,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/promotion_code_mark"
+                                android:drawableTop="@mipmap/theme_promotion_code_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
                                 android:text="推广码"/>
@@ -286,9 +283,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/person_coupon_mark"
+                                android:drawableTop="@mipmap/theme_person_coupon_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
                                 android:text="优惠券"/>
@@ -303,9 +300,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/person_collect_mark"
+                                android:drawableTop="@mipmap/theme_person_collect_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
                                 android:text="运动收藏"/>
@@ -320,9 +317,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/person_collect_mark"
+                                android:drawableTop="@mipmap/theme_person_collect_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
                                 android:text="商城收藏"/>
@@ -343,9 +340,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/shouyi_mark"
+                                android:drawableTop="@mipmap/theme_shouyi_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
                                 android:text="收益管理"/>
@@ -360,9 +357,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/person_share_mark"
+                                android:drawableTop="@mipmap/theme_person_share_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
                                 android:text="邀请分享"/>
@@ -378,9 +375,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/ruzhu_marik"
+                                android:drawableTop="@mipmap/theme_ruzhu_marik"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
                                 android:text="入驻随动"/>
@@ -396,9 +393,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/zhinengshebei_mark"
+                                android:drawableTop="@mipmap/theme_zhinengshebei_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
                                 android:text="智能设备"/>
@@ -419,9 +416,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/person_aboutus_mark"
+                                android:drawableTop="@mipmap/theme_person_aboutus_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
                                 android:text="关于我们"/>
@@ -436,9 +433,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/suidongkefu_marik"
+                                android:drawableTop="@mipmap/theme_suidongkefu_marik"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
                                 android:text="随动客服"/>
@@ -454,9 +451,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="@dimen/sp_12"
-                                android:drawableTop="@mipmap/person_share_mark"
+                                android:drawableTop="@mipmap/theme_person_setting_mark"
                                 android:gravity="center"
                                 android:drawablePadding="8dp"
                                 android:text="设置"/>

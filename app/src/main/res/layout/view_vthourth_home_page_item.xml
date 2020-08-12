@@ -24,7 +24,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textStyle="bold"
                     android:text="附近门店"/>
                 <TextView
@@ -32,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:visibility="gone"
                     android:layout_marginTop="3dp"
                     android:text="加入健身房会员可免费预约课程"/>
@@ -42,7 +42,7 @@
                 android:id="@+id/typeRight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:textSize="@dimen/sp_14"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"

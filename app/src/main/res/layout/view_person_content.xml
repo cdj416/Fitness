@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/theme_shape_radius6_ffffff">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="38dp">
@@ -11,7 +12,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_16"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:layout_centerVertical="true"
             android:layout_marginLeft="12dp"
             android:text="我的课程"/>
@@ -20,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_14"
-            android:textColor="@color/color_FF999999"
+            android:textColor="@color/theme_color4"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/sp_12"/>
@@ -28,7 +29,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"
+        android:background="@color/theme_line1"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"/>
     <LinearLayout
@@ -51,7 +52,7 @@
                 android:id="@+id/tv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_14"
                 android:layout_marginTop="5dp"
                 android:text="待约课"/>
@@ -72,7 +73,7 @@
                 android:id="@+id/tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_14"
                 android:layout_marginTop="5dp"
                 android:text="待上课"/>
@@ -93,7 +94,7 @@
                 android:id="@+id/tv3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_14"
                 android:layout_marginTop="5dp"
                 android:text="待评价"/>
@@ -121,7 +122,7 @@
                 android:id="@+id/tv4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_14"
                 android:layout_marginTop="5dp"
                 android:text="我参加的运动"/>
@@ -142,7 +143,7 @@
                 android:id="@+id/tv5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_14"
                 android:layout_marginTop="5dp"
                 android:text="我是陪练"/>
@@ -163,7 +164,7 @@
                 android:id="@+id/tv6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_14"
                 android:layout_marginTop="5dp"
                 android:text="我的接单"/>

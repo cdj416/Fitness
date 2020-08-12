@@ -29,7 +29,7 @@ public class SNMenuAdapter extends BaseQuickAdapter<ShopNextCetegoryBeans.DataBe
         helper.setText(R.id.menuText,item.getCategory_name());
 
 
-        if(item.isSelect()){
+        /*if(item.isSelect()){
             helper.setTextColor(R.id.menuText,mContext.getResources().getColor(R.color.color_EF5B48));
             imgView.setBorderColor(mContext.getResources().getColor(R.color.color_EF5B48));
             imgView.setBorderWidth(1f);
@@ -37,7 +37,7 @@ public class SNMenuAdapter extends BaseQuickAdapter<ShopNextCetegoryBeans.DataBe
             helper.setTextColor(R.id.menuText,mContext.getResources().getColor(R.color.color_FF333333));
             imgView.setBorderColor(mContext.getResources().getColor(R.color.color_f2));
             imgView.setBorderWidth(1f);
-        }
+        }*/
 
         helper.addOnClickListener(R.id.menuBox);
     }

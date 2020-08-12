@@ -19,6 +19,7 @@ import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.RetrofitListener;
@@ -39,6 +40,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SGDspecificationView extends LinearLayout implements RetrofitListener,SGDspecificationAdapter.ChangeData {
+
+    private CustomActivity mContext;
 
     private CustomFragment mFragment;
     private CustomViewModel model;
@@ -66,6 +69,10 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
 
     public SGDspecificationView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        if(context instanceof CustomActivity){
+            mContext = (CustomActivity) context;
+        }
+
         initLayoutView();
     }
 
@@ -90,7 +97,7 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
         LinearLayoutManager comManager = new LinearLayoutManager(getContext());
         comManager.setOrientation(RecyclerView.VERTICAL);
         mRec.setLayoutManager(comManager);
-        adapter = new SGDspecificationAdapter(this);
+        adapter = new SGDspecificationAdapter(this,mContext);
         mRec.setAdapter(adapter);
 
         adapter.setFooterView(getFooter());

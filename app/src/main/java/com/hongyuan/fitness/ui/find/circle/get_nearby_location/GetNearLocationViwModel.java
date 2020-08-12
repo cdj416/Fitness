@@ -26,6 +26,7 @@ import com.hongyuan.fitness.ui.find.circle.edit_post.EditPostViewModel;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.LocationBean;
 import com.hongyuan.fitness.util.MyLocationUtil;
+import com.hongyuan.fitness.util.SkinConstants;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
@@ -55,9 +56,12 @@ public class GetNearLocationViwModel extends CustomViewModel implements PoiSearc
 
     @Override
     protected void initView() {
-        //初始化标题栏
-        mActivity.setsetImmersive(0x55000000);
-        mActivity.getMainTitle().setLeftImage(R.mipmap.close_heise_img);
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin)){
+            mActivity.getMainTitle().setLeftImage(R.mipmap.theme_close_x_mark);
+        }
+        if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)){
+            mActivity.getMainTitle().setLeftImage(R.mipmap.theme_close_x_mark_black);
+        }
 
         binding.noAddress.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -68,8 +72,6 @@ public class GetNearLocationViwModel extends CustomViewModel implements PoiSearc
 
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);
         manager.setOrientation(RecyclerView.VERTICAL);
-        binding.mRecycler.addItemDecoration(new DividerItemDecoration(
-                getContext(), DividerItemDecoration.HORIZONTAL_LIST,1,0xFFEEEEEE));
         binding.mRecycler.setLayoutManager(manager);
         adapter = new GetNearyLocationAdapter();
         binding.mRecycler.setAdapter(adapter);
@@ -193,7 +195,7 @@ public class GetNearLocationViwModel extends CustomViewModel implements PoiSearc
         LatLonPoint latLonPoint = new LatLonPoint(Double.valueOf(LocationBean.getInstance().getLat()),Double.valueOf(LocationBean.getInstance().getLng()));
         //第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
         PoiSearch.Query query = new PoiSearch.Query(searchContent,"",LocationBean.getInstance().getCityName());
-        query.setPageSize(10);// 设置每页最多返回多少条poiitem
+        query.setPageSize(15);// 设置每页最多返回多少条poiitem
         query.setPageNum(curPage);// 设置查第一页
         PoiSearch poiSearch = new PoiSearch(MyApplication.getInstance(),query);
         poiSearch.setOnPoiSearchListener(this);//设置回调数据的监听器

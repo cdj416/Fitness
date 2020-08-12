@@ -14,6 +14,8 @@
             android:background="@drawable/shape_radius6_00000000_stroke_ef5b48"
             android:textSize="14sp"
             android:paddingLeft="10dp"
+            android:textColorHint="@color/theme_color4"
+            android:textColor="@color/theme_color3"
             android:hint="请输入昵称"/>
 
         <Button

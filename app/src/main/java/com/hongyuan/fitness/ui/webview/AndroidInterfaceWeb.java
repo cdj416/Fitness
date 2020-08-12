@@ -1,12 +1,25 @@
 package com.hongyuan.fitness.ui.webview;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.reflect.TypeToken;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
+import com.hongyuan.fitness.custom_view.share_view.ShareBeans;
+import com.hongyuan.fitness.custom_view.share_view.ShareContentBean;
 import com.hongyuan.fitness.custom_view.share_view.ShareUtil;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
@@ -19,6 +32,7 @@ import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.GsonUtil;
+import com.hongyuan.fitness.util.ImageFactory;
 import com.hongyuan.fitness.util.LocationBean;
 import com.hongyuan.fitness.util.huanxin.CreateGroupBeans;
 import com.hongyuan.fitness.util.huanxin.GotoChatBeans;
@@ -39,11 +53,18 @@ public class AndroidInterfaceWeb {
     }
 
     /*
-    * 分享params：{'shareTitle':'分享的标题','shareUrl':'图片地址','shareContent':'分享的内容'}
+    * 分享params：{"shareTitle":"分享的标题","shareUrl":"网页地址","shareImg":"图片地址","shareContent":"分享的内容"}
     * */
     @JavascriptInterface
     public void androidShare(String params) {
-        ShareUtil.showShare(mActivity);
+        ShareContentBean shareBean = GsonUtil.getGson().fromJson(params, new TypeToken<ShareContentBean>(){}.getType());
+        ShareBeans contents = new ShareBeans();
+        contents.setShareImgUrl(shareBean.getShareImg());
+        contents.setShareInfo(shareBean.getShareContent());
+        contents.setShareTitle(shareBean.getShareTitle());
+        contents.setShareWebsite(shareBean.getShareUrl());
+
+        //viewModel.showShare(contents);
     }
 
 
@@ -197,6 +218,23 @@ public class AndroidInterfaceWeb {
         bundle.putString("address",chatBeans.getAddress());
         bundle.putString("os_name",chatBeans.getOs_name());
         mActivity.startActivity(MapActivity.class,bundle);
+    }
+
+    /*
+    * 保存图片:imgUrl:图片地址
+    * */
+    @JavascriptInterface
+    public void androidSaveImg(String imgUrl){
+        Glide.with(mActivity).asBitmap().load(imgUrl).into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                //开始保存图片
+                ImageFactory.saveImageToGallery(mActivity,resource);
+
+                CustomDialog.showMessage(mActivity,"保存成功！");
+            }
+        });
+
     }
 
 }

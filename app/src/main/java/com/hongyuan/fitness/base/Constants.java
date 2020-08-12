@@ -4,8 +4,6 @@ public class Constants {
 
     //测试地址
     //public static final String ADRESS = "https://api_test.1667799.com";
-    //内网测试环境
-    //public static final String ADRESS = "http://192.168.31.38:8080/#";
     //预发环境
     //public static final String ADRESS = "https://api_yufabu.1667799.com";
     //预发环境
@@ -14,18 +12,25 @@ public class Constants {
     public static final String ADRESS = "http://www.hongyuangood.com";
 
 
-    //webUrl内网需要的地址
-    //public static final String WEB_ADDRESS = "http://192.168.31.38:8080/#";
     //webUrl测试服务器
     //public static final String WEB_ADDRESS = "https://test_gym.1667799.com/#";
     //webUrl预发服务器
     //public static  final String WEB_ADDRESS = "https://yufabu_gym.1667799.com/#";
     //webUrl正式服务器
     public static final String WEB_ADDRESS = "https://www.1667799.com/#";
+    //本地
+    //public static final String WEB_ADDRESS = "http://192.168.31.38:8080/#";
 
     /*==================================================================================*/
     //微信支付需要的appId
     public static final String APP_ID = "wx96322a2480850d96";
+
+    /*==================================================================================*/
+    //黑白主题切换1.黑色主题，2.白色主题。
+    public static final int BLACK_THEM = 0X1;
+
+    //是否需要跳转到主页面？
+    public static String isOpenWeb = "";
 
 
     /*==================================================================================*/
@@ -603,4 +608,28 @@ public class Constants {
     /**************************************六期版本********************************************************/
     //团课号码列表
     public static final String GET_CS_NUMBER = ADRESS + "/api/coursemember/get_cs_number";
+
+    /**************************************七期版本********************************************************/
+    //退款理由
+    public static final String GET_REFUND_REASON = ADRESS + "/api/refundmember/get_refund_reason";
+    //获取退款金额
+    public static final String GET_MAX_REFUND = ADRESS + "/api/refundmember/get_max_refund";
+    //申请退款
+    public static final String APPLY_REFUND = ADRESS + "/api/refundmember/apply_refund";
+    //退款/售后列表
+    public static final String GET_REFUND_ORDER_LIST = ADRESS + "/api/refundmember/get_refund_order_list";
+    //取消申请退款
+    public static final String CANCEL_APPLY_REFUND = ADRESS + "/api/refundmember/cancel_apply_refund";
+    //退款详情
+    public static final String GET_REFUND_INFO = ADRESS + "/api/refundmember/get_refund_info";
+    //重新申请退款
+    public static final String NEW_APPLY_REFUND = ADRESS + "/api/refundmember/new_apply_refund";
+    //编辑退款
+    public static final String EDIT_REFUND = ADRESS + "/api/refundmember/edit_refund";
+    //快递公司列表
+    public static final String GET_DELIVER_COMPANY = ADRESS + "/api/goodsbusiness/get_deliver_company";
+    //买家退回商品
+    public static final String DELIVER_REFUND = ADRESS + "/api/refundmember/deliver_refund";
+    //首页场馆类型列表
+    public static final String INDEX_GYM_CATEGORY = ADRESS + "/api/gymhome/index_gym_category";
 }

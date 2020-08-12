@@ -71,7 +71,7 @@ public class EditorialEvaluationViewModel extends CustomViewModel {
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.zhengfangxing_default_img).error(R.mipmap.zhengfangxing_default_img).centerCrop();
         Glide.with(mActivity).load(courseBeans.getCp_img()).apply(options).into(binding.courseImg);
 
-        binding.myRat.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+       /* binding.myRat.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
             if(rating <= 1){
                 binding.showText.setText("不满意");
             }
@@ -87,7 +87,7 @@ public class EditorialEvaluationViewModel extends CustomViewModel {
             if(rating >= 5){
                 binding.showText.setText("超出预期");
             }
-        });
+        });*/
     }
 
     /*
@@ -112,7 +112,7 @@ public class EditorialEvaluationViewModel extends CustomViewModel {
     private void submitData(){
         clearParams().setParams("cp_id",String.valueOf(courseBeans.getCp_id()))
                 .setParams("cr_content",binding.etContent.getText().toString())
-                .setParams("coach_s", String.valueOf((int)binding.myRat.getRating()))
+                .setParams("coach_s", String.valueOf(5))
                 .setParams("cpa_id",String.valueOf(courseBeans.getCpa_id()));
         if(isValue(crfile)){
             setParams("crfile",crfile);

@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/white">
+            android:background="@color/theme_background1">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
@@ -34,13 +34,41 @@
                     android:id="@+id/startTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_14"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/courseImg"
                     android:layout_marginLeft="8dp"
                     android:text="描述相符"/>
-                <RatingBar
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/startTitle"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/start_select"/>
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/start_select"/>
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/start_select"/>
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/start_select"/>
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/start_select"/>
+                </LinearLayout>
+                <!--<RatingBar
                     android:id="@+id/myRat"
                     android:layout_width="wrap_content"
                     android:layout_height="18dp"
@@ -50,13 +78,13 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:numStars="5"
-                    android:rating="5"/>
+                    android:rating="5"/>-->
                 <TextView
                     android:id="@+id/showText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:text="超出预期"/>
@@ -64,7 +92,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
             <EditText
                 android:id="@+id/etContent"
                 android:layout_width="match_parent"
@@ -75,16 +103,20 @@
                 android:gravity="top"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:background="@color/color_FFFFFF"/>
+                android:textColorHint="@color/theme_color4"
+                android:textColor="@color/theme_color3"
+                android:background="@color/theme_color1"/>
             <com.hongyuan.fitness.ui.find.circle.edit_post.ChooseImgOrVideoView
                 android:id="@+id/imgOrVideo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginLeft="16dp"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
@@ -101,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_14"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color4"
                     android:layout_toEndOf="@id/selectImg"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
@@ -109,7 +141,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_CCCCCC"
+                    android:textColor="@color/theme_color4"
                     android:textSize="@dimen/sp_12"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
@@ -118,7 +150,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
         </LinearLayout>
 
         <LinearLayout
@@ -127,7 +159,7 @@
             android:layout_height="44dp"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
-            android:background="@color/white">
+            android:background="@color/theme_color1">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -138,7 +170,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_14"
                     android:gravity="center"
                     android:drawableLeft="@mipmap/photo_heise_img"
@@ -151,7 +183,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_above="@id/bottomBox"
-            android:background="#EEEEEE"/>
+            android:background="@color/theme_line1"/>
     </RelativeLayout>
 
 </layout>

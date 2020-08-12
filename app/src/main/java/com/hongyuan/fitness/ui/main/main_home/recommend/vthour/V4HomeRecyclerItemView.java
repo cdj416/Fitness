@@ -29,6 +29,7 @@ import com.hongyuan.fitness.ui.about_class.group_class.group_details.MissionDeta
 import com.hongyuan.fitness.ui.about_class.privite_class.course_details.CourseDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.circle_detail.CircleDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsActivity;
+import com.hongyuan.fitness.ui.find.more_topic.MoreTopicActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
@@ -226,7 +227,9 @@ public class V4HomeRecyclerItemView extends LinearLayout {
             typeRight.setText("更多");
             typeRight.setOnClickListener(v -> {
                 //通过EventBus去通知MainActivity显示第二页
-                EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"1");
+                mActivity.startActivity(MoreTopicActivity.class,null);
+
+                //EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"1");
             });
         }
 

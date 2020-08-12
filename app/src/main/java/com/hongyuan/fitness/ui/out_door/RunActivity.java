@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityRunBinding;
+import com.hongyuan.fitness.util.SkinConstants;
 
 
 public class RunActivity extends CustomActivity {
@@ -21,7 +22,11 @@ public class RunActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitleBar(TYPE_BAR4,R.drawable.shape_gradient_v_ef_f0,"户外");
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR4,R.drawable.shape_gradient_v_ef_f0,"户外");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"户外");
+
         binding = ActivityRunBinding.bind(mView);
         viewModel = new RunViewModel(this,binding);
         binding.setViewModel(viewModel);

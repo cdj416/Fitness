@@ -17,8 +17,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.app.SkinAppCompatDelegateImpl;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hongyuan.fitness.R;
@@ -29,6 +32,7 @@ import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.HourMeterUtil;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
+import com.hongyuan.fitness.util.SkinConstants;
 import com.hongyuan.fitness.util.StatusBarUtil;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -57,7 +61,7 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     //全局使用的信息
     public TokenSingleBean userToken;
     //状态栏高度
-    private StatusBarHeightView barHeight;
+    public StatusBarHeightView barHeight;
 
     //存储token需要的key值常亮
     protected final String TOKEN_SESSION = "token_session";
@@ -77,6 +81,7 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     public final int TYPE_BAR6 = 0X6;
     public final int TYPE_BAR7 = 0X7;
     public final int TYPE_BAR8 = 0X8;
+    public final int TYPE_BAR9 = 0X9;
 
     //跳转处理需要的对象
     private Class<?> clz;
@@ -90,11 +95,24 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     //需要下一个activity回传值的跳转码
     private final static int ORDINARY_ACTIVITY_RESULT_CODE = 0x1;
 
+    //主题样式
+    public String skin;
+
+    //换肤需要重载的方法
+    @NonNull
+    @Override
+    public AppCompatDelegate getDelegate() {
+        return SkinAppCompatDelegateImpl.get(this, this);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 加入Activity到堆栈
         AppManager.getAppManager().addActivity(this);
+
+        //查询主题样式
+        skin = SharedPreferencesUtil.getString(this, SkinConstants.SKIN);
 
         //初始化token，全局使用
         userToken = TokenSingleBean.getInstance();
@@ -204,7 +222,7 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
         barHeight.setBackgroundResource(gradientId);
         mainTitle.setCenterTextColor(titleName,0xFFFFFFFF);
         mainTitle.hideLine();
-        mainTitle.setLeftImage(R.mipmap.white_left_img);
+        mainTitle.setLeftImage(R.mipmap.white_common);
         setImmersive();
     }
 
@@ -223,6 +241,7 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     * TYPE_BAR6:没标题，沉浸式，无顶高，状态栏字体灰色
     * TYPE_BAR7:没标题，沉浸式，无顶高，状态栏字体白色色
     * TYPE_BAR8:没标题，沉浸式，有顶高，状态栏字体白色色，自定义顶高背景颜色
+    * TYPE_BAR9：有标题，沉浸式，有顶高，白色字体，自定义背景,有标题底线
     * */
     public void setTitleBar(int barType,int drawableId,String titleName){
         if(barType == TYPE_BAR1){
@@ -252,7 +271,7 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
             //沉浸式
             setImmersive();
             mainTitle.setCenterTextColor(titleName,0xFFFFFFFF);
-            mainTitle.setLeftImage(R.mipmap.white_left_img);
+            mainTitle.setLeftImage(R.mipmap.theme_left_img_black);
             mainTitle.getBgView().setBackgroundResource(drawableId);
             mainTitle.hideLine();
             barHeight.setVisibility(View.VISIBLE);
@@ -282,6 +301,17 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
             //沉浸式
             setImmersive();
             //显示顶高
+            barHeight.setVisibility(View.VISIBLE);
+            barHeight.setBackgroundResource(drawableId);
+        }
+
+        if(barType == TYPE_BAR9){
+            //沉浸式
+            setImmersive();
+            mainTitle.setCenterTextColor(titleName,0xFFFFFFFF);
+            mainTitle.setLeftImage(R.mipmap.theme_left_img_black);
+            mainTitle.getBgView().setBackgroundResource(drawableId);
+            mainTitle.showLine();
             barHeight.setVisibility(View.VISIBLE);
             barHeight.setBackgroundResource(drawableId);
         }
@@ -408,6 +438,15 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
         View convertView = LayoutInflater
                 .from(this)
                 .inflate(R.layout.view_bottom_90height, (ViewGroup) v.getParent(), false);
+        return convertView;
+    }
+    /*
+     * 获取固定底部顶高
+     * */
+    public View getFooter16Height(RecyclerView v){
+        View convertView = LayoutInflater
+                .from(this)
+                .inflate(R.layout.view_bottom_12height, (ViewGroup) v.getParent(), false);
         return convertView;
     }
 
@@ -581,7 +620,9 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     * */
     public void showLoading(){
         //开始计时
-        hourUtil.startCount();
+        if(hourUtil != null){
+            hourUtil.startCount();
+        }
 
         if(loadingDialog == null){
             loadingDialog = new Dialog(this, R.style.MessageTheme);

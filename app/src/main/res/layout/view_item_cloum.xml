@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="44dp"
     android:paddingStart="@dimen/dp_16"
-    android:paddingEnd="16dp">
+    android:paddingEnd="16dp"
+    android:background="@color/theme_color1">
     <TextView
         android:id="@+id/titleName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_12"
-        android:textColor="@color/color_FF999999"
+        android:textColor="@color/theme_color4"
         android:layout_centerVertical="true"
         android:text="商品总价:"/>
     
@@ -24,18 +25,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_14"
-            android:textColor="@color/color_FF333333"
             android:layout_marginStart="60dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
             android:ellipsize="end"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:text="111"/>
         <TextView
             android:id="@+id/copyTv"
             android:layout_width="55dp"
             android:layout_height="24dp"
             android:layout_marginStart="5dp"
-            android:background="@drawable/shape_radius6_border_ef5b48"
+            android:background="@drawable/shape_radius6_00000000_stroke_ef5b48"
             android:textColor="@color/color_EF5B48"
             android:textSize="@dimen/sp_12"
             android:gravity="center"
@@ -49,5 +48,5 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_alignParentBottom="true"
-        android:background="@color/color_EEEEEE"/>
+        android:background="@color/theme_line1"/>
 </RelativeLayout>

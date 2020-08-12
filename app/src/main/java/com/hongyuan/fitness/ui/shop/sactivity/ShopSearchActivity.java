@@ -17,6 +17,7 @@ import com.hongyuan.fitness.custom_view.time_selecter.get_address.JsonDataBean;
 import com.hongyuan.fitness.databinding.ActivityShopSearchBinding;
 import com.hongyuan.fitness.ui.shop.sfragment.SearchDrawerFragment;
 import com.hongyuan.fitness.ui.shop.sviewmodel.ShopSearchViewModel;
+import com.hongyuan.fitness.util.SkinConstants;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -38,7 +39,10 @@ public class ShopSearchActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitleBar(TYPE_BAR1,R.drawable.shape_soid_ffffff,"");
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR1,R.drawable.theme_shape_soid_ffffff,"");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR8,R.drawable.theme_shape_soid_ffffff_black,"");
 
         binding = ActivityShopSearchBinding.bind(mView);
         ShopSearchViewModel viewModel = new ShopSearchViewModel(this,binding);

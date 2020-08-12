@@ -6,6 +6,7 @@ import com.hongyuan.fitness.databinding.ActivityBottomIntegralDetailsBinding;
 import com.hongyuan.fitness.databinding.ActivityIntegralGoodsDetailsBinding;
 import com.hongyuan.fitness.ui.shop.sviewmodel.IgdViewModel;
 import com.hongyuan.fitness.ui.shop.sviewmodel.bottomviewmodel.IgdBottomViewModel;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class IntegralGoodsDetailsActivity extends CustomActivity {
 
@@ -21,7 +22,11 @@ public class IntegralGoodsDetailsActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitleBar(TYPE_BAR7,R.drawable.shape_soid_ffffff,"");
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"积分商品");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"积分商品");
+
         ActivityIntegralGoodsDetailsBinding binding = ActivityIntegralGoodsDetailsBinding.bind(mView);
         IgdViewModel viewModel = new IgdViewModel(this,binding);
         binding.setViewModel(viewModel);

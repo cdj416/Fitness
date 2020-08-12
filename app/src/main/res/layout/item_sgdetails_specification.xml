@@ -9,7 +9,7 @@
         android:layout_height="34dp"
         android:gravity="center_vertical"
         android:textSize="@dimen/sp_12"
-        android:textColor="@color/color_FF999999"
+        android:textColor="@color/theme_color4"
         android:text="尺码"/>
     <com.hongyuan.fitness.custom_view.NestedRecyclerView
         android:id="@+id/childRec"

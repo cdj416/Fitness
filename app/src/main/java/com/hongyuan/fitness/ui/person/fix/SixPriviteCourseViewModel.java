@@ -5,6 +5,7 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivitySixPriviteCourseBinding;
 import com.hongyuan.fitness.ui.person.fix.coures_record.PriviteCourseRecordActivity;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class SixPriviteCourseViewModel extends CustomViewModel {
 
@@ -18,7 +19,11 @@ public class SixPriviteCourseViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
-        mActivity.getMainTitle().setRightImage(R.mipmap.clipboard_mark).setOnClickListener(v -> startActivity(PriviteCourseRecordActivity.class,null));
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin))
+            mActivity.getMainTitle().setRightImage(R.mipmap.clipboard_mark);
+        if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin))
+            mActivity.getMainTitle().setRightImage(R.mipmap.theme_order_black);
+        mActivity.getMainTitle().getRightView().setOnClickListener(v -> startActivity(PriviteCourseRecordActivity.class,null));
 
         FixpCourseViwPageAdapter viewAdapter = new FixpCourseViwPageAdapter(mActivity.getSupportFragmentManager());
         binding.viewPager.setAdapter(viewAdapter);

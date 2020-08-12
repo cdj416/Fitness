@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/shape_radius6_ffffff">
+            android:background="@drawable/theme_shape_radius6_ffffff">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="36dp"

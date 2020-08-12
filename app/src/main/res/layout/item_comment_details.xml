@@ -12,10 +12,10 @@
             android:id="@+id/headImg"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@mipmap/about_class_select"
+            android:src="@mipmap/default_man_head_img"
             app:riv_corner_radius="100dp"
             android:layout_centerVertical="true"
-            android:scaleType="fitXY"/>
+            android:scaleType="centerCrop"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,14 +28,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_16"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:text="Valentina"/>
             <TextView
                 android:id="@+id/timeAfter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:text="15分钟前"/>
         </LinearLayout>
 
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:textColor="@color/color_FF999999"
+            android:textColor="@color/theme_color4"
             android:textSize="12sp"
             android:gravity="center"
             android:padding="10dp"
@@ -59,9 +59,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:textColor="@color/color_FF333333"
+        android:textColor="@color/theme_color3"
         android:textSize="@dimen/sp_14"
         android:text="好羡慕你这个身材，棒棒哒！"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginTop="12dp"
+        android:background="@color/theme_line"/>
 
 </LinearLayout>

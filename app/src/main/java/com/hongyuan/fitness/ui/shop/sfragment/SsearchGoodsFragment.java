@@ -23,6 +23,7 @@ import com.hongyuan.fitness.ui.shop.sinterface.SearchOCDrawerListener;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.HiddenAnimUtils;
+import com.hongyuan.fitness.util.SkinConstants;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -122,7 +123,10 @@ public class SsearchGoodsFragment extends CustomFragment {
                 salesText.setTag("true");
                 filterBeans.setOrder1("sale");
             }else{
+                if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin))
                 salesText.setTextColor(getResources().getColor(R.color.color_FF333333));
+                if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin))
+                salesText.setTextColor(getResources().getColor(R.color.color_FF999999));
                 salesText.setTag("false");
                 filterBeans.setOrder1("");
             }
@@ -145,7 +149,10 @@ public class SsearchGoodsFragment extends CustomFragment {
                 priceText.setTag("");
                 filterBeans.setOrder2("");
                 priceImg.setImageResource(R.mipmap.price_default);
-                priceText.setTextColor(getResources().getColor(R.color.color_FF333333));
+                if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin))
+                    priceText.setTextColor(getResources().getColor(R.color.color_FF333333));
+                if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin))
+                    priceText.setTextColor(getResources().getColor(R.color.color_FF999999));
             }
             lazyLoad();
         });
@@ -181,8 +188,6 @@ public class SsearchGoodsFragment extends CustomFragment {
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRec.setLayoutManager(manager);
-        mRec.addItemDecoration(new DividerItemDecoration(
-                getContext(), DividerItemDecoration.HORIZONTAL_LIST,2,getResources().getColor(R.color.color_EEEEEE)));
         adapter = new SsearchGoodsAdapter();
         mRec.setAdapter(adapter);
         adapter.setOnItemChildClickListener((adapter, view, position) -> {

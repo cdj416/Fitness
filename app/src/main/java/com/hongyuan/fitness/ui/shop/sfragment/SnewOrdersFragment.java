@@ -31,6 +31,8 @@ import java.util.List;
 
 public class SnewOrdersFragment extends CustomFragment {
 
+    //订单状态 1 待付款 2已取消 3已付款 4已发货5已提货 8已确定 9最终完成
+
     private RecyclerView mRec;
     private SnewOrdersAdapter adapter;
 
@@ -149,7 +151,7 @@ public class SnewOrdersFragment extends CustomFragment {
      * */
     private V3SuccessBeans getSuccessBeans(){
         V3SuccessBeans beans = new V3SuccessBeans();
-
+        beans.setType(V3SuccessBeans.TYPE.BUYGOODS);
         beans.setTitleText("订单");
         beans.setShowText("购买成功");
         beans.setBtn2Text("完成");
@@ -175,9 +177,18 @@ public class SnewOrdersFragment extends CustomFragment {
     protected void lazyLoad() {
         mActivity.showLoading();
         clearParams().setParams("o_type_code","o_goods");
-        if(BaseUtil.isValue(getFragType())){
+        if(BaseUtil.isValue(getFragType()) && !"is_evaluation".equals(getFragType()) && !"is_refund".equals(getFragType())){
             setParams("o_state",getFragType());
         }
+
+        if("is_evaluation".equals(getFragType())){
+           setParams("wait_pj","1");
+        }
+
+        if("is_refund".equals(getFragType())){
+            setParams("is_refund","1");
+        }
+
         Controller.myRequest(Constants.GET_ORDER_LIST,Controller.TYPE_POST,getParams(), SnewOrderBeans.class,this);
 
         if(!BaseUtil.isValue(getFragType()) || "1".equals(getFragType())){

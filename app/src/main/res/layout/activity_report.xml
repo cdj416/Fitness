@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_background1">
         <RadioGroup
             android:id="@+id/rg_Orientation"
             android:layout_width="match_parent"
@@ -22,6 +22,7 @@
                 android:id="@+id/rbOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/theme_color3"
                 android:checked="true"
                 android:text="色情低俗" />
 
@@ -30,12 +31,14 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/theme_color3"
                 android:text="广告" />
             <RadioButton
                 android:id="@+id/rbThird"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/theme_color3"
                 android:text="政治宗教" />
 
             <RadioButton
@@ -43,12 +46,14 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/theme_color3"
                 android:text="虚假欺骗" />
             <RadioButton
                 android:id="@+id/rbFive"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/theme_color3"
                 android:text="侵权" />
 
             <RadioButton
@@ -56,25 +61,28 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/theme_color3"
                 android:text="违禁内容" />
             <RadioButton
                 android:id="@+id/rbSeven"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/theme_color3"
                 android:text="其他" />
         </RadioGroup>
         
         <EditText
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:background="@drawable/shape_radius6_00000000_stroke_ef5b48"
+            android:background="@drawable/theme_shape_radius6_00000000_stroke_cccccc"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:hint="请输入类容......"
             android:textSize="@dimen/sp_14"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
+            android:textColorHint="@color/theme_color4"
             android:padding="10dp"
             android:gravity="top"/>
         <Button

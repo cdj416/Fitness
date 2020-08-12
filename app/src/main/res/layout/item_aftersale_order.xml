@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="112dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/color_FFFFFF"
+    android:background="@color/theme_color1"
     android:orientation="horizontal"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
@@ -27,27 +27,11 @@
             android:id="@+id/goodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:textSize="@dimen/sp_14"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="商品名称商品名称商品名称商品名称商品名称商品名称"/>
-
-        <TextView
-            android:id="@+id/goodType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_12"
-            android:textColor="@color/color_FF999999"
-            android:text="42码 红色"
-            android:background="@drawable/shape_radius16_f1f1f8"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:drawableRight="@mipmap/down_huise_img"
-            android:layout_marginTop="6dp"
-            android:drawablePadding="4dp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -55,79 +39,115 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                android:gravity="center_vertical">
-
-                <LinearLayout
-                    android:id="@+id/pointBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/goodsPoint"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/color_EF5B48"
-                        android:textSize="@dimen/sp_16"
-                        android:textStyle="bold"
-                        android:layout_marginStart="1dp"
-                        android:text="0"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/color_FF333333"
-                        android:textSize="@dimen/sp_12"
-                        android:layout_marginStart="1dp"
-                        android:text="积分"/>
-                </LinearLayout>
-
+                android:orientation="vertical">
                 <TextView
-                    android:id="@+id/addMark"
+                    android:id="@+id/goodType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FF333333"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginStart="5dp"
-                    android:text="+"/>
+                    android:textColor="@color/theme_color4"
+                    android:text="42码 红色"
+                    android:background="@drawable/theme_shape_radius6_f1f1f8"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:layout_marginTop="6dp"
+                    android:drawablePadding="4dp"/>
 
                 <LinearLayout
-                    android:id="@+id/priceBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:id="@+id/pointBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/goodsPoint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_EF5B48"
+                            android:textSize="@dimen/sp_16"
+                            android:textStyle="bold"
+                            android:layout_marginStart="1dp"
+                            android:text="0"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/theme_color3"
+                            android:textSize="@dimen/sp_12"
+                            android:layout_marginStart="1dp"
+                            android:text="积分"/>
+                    </LinearLayout>
+
                     <TextView
+                        android:id="@+id/addMark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_12"
-                        android:textColor="@color/color_FF333333"
-                        android:text="¥"/>
-                    <TextView
-                        android:id="@+id/goodPrice"
+                        android:textColor="@color/theme_color3"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="5dp"
+                        android:text="+"/>
+
+                    <LinearLayout
+                        android:id="@+id/priceBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_EF5B48"
-                        android:textSize="@dimen/sp_16"
-                        android:textStyle="bold"
-                        android:layout_marginStart="1dp"
-                        android:text="0"/>
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_12"
+                            android:textColor="@color/theme_color3"
+                            android:text="¥"/>
+                        <TextView
+                            android:id="@+id/goodPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_EF5B48"
+                            android:textSize="@dimen/sp_16"
+                            android:textStyle="bold"
+                            android:layout_marginStart="1dp"
+                            android:text="0"/>
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/goodNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="@color/theme_color3"
+                        android:layout_marginStart="12dp"
+                        android:text="x1"/>
                 </LinearLayout>
+
             </LinearLayout>
 
             <TextView
-                android:id="@+id/goodNum"
+                android:id="@+id/goRefund"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:text="x1"/>
-
+                android:textColor="#F06A3C"
+                android:textSize="@dimen/sp_12"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:background="@drawable/shape_radius6_00000000_stroke_ef5b48"
+                android:text="退款"/>
         </RelativeLayout>
+
+
     </LinearLayout>
 </LinearLayout>
 

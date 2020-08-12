@@ -52,7 +52,7 @@
             android:id="@+id/tv_center_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:textSize="@dimen/sp_16"
             android:visibility="gone"/>
         <LinearLayout
@@ -81,6 +81,7 @@
             android:id="@+id/tv_right_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/theme_color3"
             android:visibility="gone"/>
         <LinearLayout
             android:id="@+id/ll_right_content"
@@ -95,5 +96,5 @@
         android:layout_height="1px"
         android:layout_alignParentBottom="true"
         android:visibility="invisible"
-        android:background="@color/color_FFD1D1D1"/>
+        android:background="@color/theme_line1"/>
 </RelativeLayout>

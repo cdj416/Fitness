@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_margin="6dp"
-    android:background="@drawable/shape_radius6_ffffff">
+    android:background="@drawable/theme_shape_radius6_ffffff">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/goodImg"
@@ -20,7 +20,7 @@
         android:id="@+id/goodsName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/color_FF333333"
+        android:textColor="@color/theme_color3"
         android:textSize="@dimen/sp_12"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="4dp"
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_12"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:text="¥"/>
         <TextView
             android:id="@+id/goodsPrice"

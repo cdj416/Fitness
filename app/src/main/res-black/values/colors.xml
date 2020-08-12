@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--黑色主题颜色-->
+    <color name="theme_color1_black">#333333</color>
+    <color name="theme_color2_black">#111111</color>
+    <color name="theme_color3_black">#FFFFFF</color>
+    <color name="theme_color4_black">#FF999999</color>
+    <color name="theme_color5_black">#222222</color>
+    <color name="theme_color6_black">#111111</color>
+    <color name="theme_color7_black">#FFFFFF</color>
+    <color name="theme_color8_black">#C4C5F0</color>
+    <color name="theme_color9_black">#444444</color>
+    <color name="theme_color10_black">#222222</color>
+    <color name="theme_color11_black">#333333</color>
+    <color name="theme_color12_black">#333333</color>
+    <color name="theme_color13_black">#575457</color>
+
+    <color name="color_f2_black">#555555</color>
+
+    <color name="theme_line_black">#333333</color>
+    <color name="theme_line1_black">#111111</color>
+
+    <color name="theme_background_black">#222222</color>
+    <color name="theme_background1_black">#222222</color>
+    <color name="theme_background3_black">#3C3C3C</color>
+
+    <color name="color_FF8F8BFF_black">#333333</color>
+</resources>

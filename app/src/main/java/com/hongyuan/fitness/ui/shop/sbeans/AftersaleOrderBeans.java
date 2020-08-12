@@ -4,9 +4,10 @@ import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.ui.shop.sadapter.SnewOrdersAdapter;
 import com.hongyuan.fitness.util.BaseUtil;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class AftersaleOrderBeans extends BaseBean {
+public class AftersaleOrderBeans extends BaseBean implements Serializable{
 
     /**
      * data : {"info":{"confirm_date":0,"state_str":"等待付款","deliver_address":{"consignee":"她婆婆无事献殷勤","deliver_mobile":"54649949","pname":"黑龙江省","cname":"哈尔滨市","dname":"道里区","address":"行行"},"store":{"store_id":42,"store_name":"湖州志裕","store_person_tel":""},"goods_list":[{"g_id":43,"g_img":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20200301/d6e8d9eed2598af883e92b1f6516a023c539d652_800x467.jpg","g_name":"乐拉泰国青柚金柚进口西施蜜柚2个4.5斤新鲜当季孕妇水果顺丰包邮","sku_names":"蓝色;M码","buy_num":2,"gp_price":"100.00","gp_point":0},{"g_id":43,"g_img":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20200301/d6e8d9eed2598af883e92b1f6516a023c539d652_800x467.jpg","g_name":"乐拉泰国青柚金柚进口西施蜜柚2个4.5斤新鲜当季孕妇水果顺丰包邮","sku_names":"白色;L码","buy_num":1,"gp_price":"105.00","gp_point":0}],"all_product_price":"305.00","deliver_fee":"0.00","coupon_money":"10.00","need_money":"295.00","o_point":0,"note":"嘻嘻嘻庸人自扰之","order_sn":"GOODS2020051215892665125eba48503a219","add_date":"2020-05-12 14:55:12","deliver_way":1,"state":1}}
@@ -22,7 +23,7 @@ public class AftersaleOrderBeans extends BaseBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * info : {"confirm_date":0,"state_str":"等待付款","deliver_address":{"consignee":"她婆婆无事献殷勤","deliver_mobile":"54649949","pname":"黑龙江省","cname":"哈尔滨市","dname":"道里区","address":"行行"},"store":{"store_id":42,"store_name":"湖州志裕","store_person_tel":""},"goods_list":[{"g_id":43,"g_img":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20200301/d6e8d9eed2598af883e92b1f6516a023c539d652_800x467.jpg","g_name":"乐拉泰国青柚金柚进口西施蜜柚2个4.5斤新鲜当季孕妇水果顺丰包邮","sku_names":"蓝色;M码","buy_num":2,"gp_price":"100.00","gp_point":0},{"g_id":43,"g_img":"http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20200301/d6e8d9eed2598af883e92b1f6516a023c539d652_800x467.jpg","g_name":"乐拉泰国青柚金柚进口西施蜜柚2个4.5斤新鲜当季孕妇水果顺丰包邮","sku_names":"白色;L码","buy_num":1,"gp_price":"105.00","gp_point":0}],"all_product_price":"305.00","deliver_fee":"0.00","coupon_money":"10.00","need_money":"295.00","o_point":0,"note":"嘻嘻嘻庸人自扰之","order_sn":"GOODS2020051215892665125eba48503a219","add_date":"2020-05-12 14:55:12","deliver_way":1,"state":1}
          */
@@ -37,7 +38,7 @@ public class AftersaleOrderBeans extends BaseBean {
             this.info = info;
         }
 
-        public static class InfoBean {
+        public static class InfoBean implements Serializable{
             /**
              * confirm_date : 0
              * state_str : 等待付款
@@ -72,6 +73,7 @@ public class AftersaleOrderBeans extends BaseBean {
             private String quhuo_code;
             private int deliver_way;
             private int state;
+            private int is_refund;
             private String pay_way;
             private List<GoodsListBean> goods_list;
             private deliverInfoBeans deliver_info;
@@ -82,6 +84,14 @@ public class AftersaleOrderBeans extends BaseBean {
 
             public void setDeliver_info(deliverInfoBeans deliver_info) {
                 this.deliver_info = deliver_info;
+            }
+
+            public int getIs_refund() {
+                return is_refund;
+            }
+
+            public void setIs_refund(int is_refund) {
+                this.is_refund = is_refund;
             }
 
             public String getQuhuo_code() {
@@ -413,7 +423,7 @@ public class AftersaleOrderBeans extends BaseBean {
                 }
             }
 
-            public static class GoodsListBean {
+            public static class GoodsListBean implements Serializable {
                 /**
                  * g_id : 43
                  * g_img : http://hongyuangood.oss-cn-hangzhou.aliyuncs.com/uplaod/image/20200301/d6e8d9eed2598af883e92b1f6516a023c539d652_800x467.jpg
@@ -424,6 +434,7 @@ public class AftersaleOrderBeans extends BaseBean {
                  * gp_point : 0
                  */
 
+                private int opg_id;
                 private int g_id;
                 private String g_img;
                 private String g_name;
@@ -431,6 +442,15 @@ public class AftersaleOrderBeans extends BaseBean {
                 private int buy_num;
                 private String gp_price;
                 private int gp_point;
+                private int refund_state;
+
+                public int getRefund_state() {
+                    return refund_state;
+                }
+
+                public void setRefund_state(int refund_state) {
+                    this.refund_state = refund_state;
+                }
 
                 //获取显示类型
                 public int getShowType() {
@@ -443,6 +463,14 @@ public class AftersaleOrderBeans extends BaseBean {
                     }else{
                         return SnewOrdersAdapter.SHOW_MONEY_POINT;
                     }
+                }
+
+                public int getOpg_id() {
+                    return opg_id;
+                }
+
+                public void setOpg_id(int opg_id) {
+                    this.opg_id = opg_id;
                 }
 
                 public int getG_id() {

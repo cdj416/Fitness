@@ -3,6 +3,7 @@ package com.hongyuan.fitness.ui.person.person_message;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityPersonMessageBinding;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class PersonMessageActivity extends CustomActivity {
 
@@ -16,6 +17,7 @@ public class PersonMessageActivity extends CustomActivity {
     @Override
     protected void initView() {
         setTitleBar(TYPE_BAR2,R.drawable.shape_soid_ffffff,"");
+
         ActivityPersonMessageBinding binding = ActivityPersonMessageBinding.bind(mView);
         viewModel = new PersonMessageViewModel(this,binding);
         binding.setViewModel(viewModel);

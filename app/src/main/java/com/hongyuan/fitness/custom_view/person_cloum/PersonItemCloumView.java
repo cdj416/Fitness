@@ -4,6 +4,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ public class PersonItemCloumView extends LinearLayout {
     private CustomActivity mActivity;
 
     private View line;
+    private ImageView leftImg;
     private TextView leftView,rightView;
     private Drawable leftImageDrawble;
     private Drawable rightImageDrawble;
@@ -56,6 +58,8 @@ public class PersonItemCloumView extends LinearLayout {
         View view = View.inflate(getContext(), R.layout.view_v3_person_cloum, this);
         leftView = view.findViewById(R.id.leftView);
         rightView = view.findViewById(R.id.rightView);
+        leftImg = view.findViewById(R.id.leftImg);
+
         box = view.findViewById(R.id.box);
         line = view.findViewById(R.id.line);
 
@@ -102,5 +106,12 @@ public class PersonItemCloumView extends LinearLayout {
     * */
     public String getRightText(){
         return rightView.getText().toString();
+    }
+
+    /*
+    * 设置左边图片样式
+    * */
+    public void setImg(int imgId){
+        leftImg.setImageResource(imgId);
     }
 }

@@ -23,6 +23,8 @@ import com.hongyuan.fitness.ui.shop.sinterface.ScollChangeLinstener;
 import com.hongyuan.fitness.ui.shop.sviewpage.SshopDetailsViewPagerAdapter;
 import com.hongyuan.fitness.util.BigDecimalUtils;
 import com.hongyuan.fitness.util.CustomDialog;
+import com.hongyuan.fitness.util.SkinConstants;
+import com.hongyuan.fitness.util.StatusBarUtil;
 import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 
 public class SgoodsDetailViewModel extends CustomViewModel implements GoOtherPageListener, GoodsDetailIntener, ScollChangeLinstener, View.OnClickListener {
@@ -78,10 +80,10 @@ public class SgoodsDetailViewModel extends CustomViewModel implements GoOtherPag
             if(keFuBeans != null){
                 CustomDialog.keFuWay(mActivity, (v1, message) -> {
                     if(v1.getId() == R.id.telNum){
-                        CustomDialog.callTel(mActivity, keFuBeans.getInfo().getM_mobile(), new CustomDialog.DialogClick() {
+                        CustomDialog.callTel(mActivity, keFuBeans.getInfo().getTel(), new CustomDialog.DialogClick() {
                             @Override
                             public void dialogClick(View v) {
-                                callTel(keFuBeans.getInfo().getM_mobile());
+                                callTel(keFuBeans.getInfo().getTel());
                             }
                         });
                     }
@@ -189,8 +191,8 @@ public class SgoodsDetailViewModel extends CustomViewModel implements GoOtherPag
     * */
     private void changeShow(int indexType,String scale){
         if(indexType == INDEX_TOP){
-            binding.barHeight.setAlpha(0);
-            binding.layoutMenu.setAlpha(0);
+            binding.barHbox.setAlpha(0);
+            binding.tabBox.setAlpha(0);
 
             binding.tBack.setAlpha(1f);
             binding.tBack.setVisibility(View.VISIBLE);
@@ -206,9 +208,14 @@ public class SgoodsDetailViewModel extends CustomViewModel implements GoOtherPag
             binding.tCart.setVisibility(View.VISIBLE);
             binding.cart.setAlpha(0f);
             binding.cart.setVisibility(View.INVISIBLE);
+
+            if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin))
+                StatusBarUtil.setCommonUI(mActivity,true);
+            if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin))
+                StatusBarUtil.setCommonUI(mActivity,true);
         }else if(indexType == INDEX_BOTTOM){
-            binding.barHeight.setAlpha(1);
-            binding.layoutMenu.setAlpha(1);
+            binding.barHbox.setAlpha(1);
+            binding.tabBox.setAlpha(1);
             binding.tBack.setAlpha(0f);
             binding.tBack.setVisibility(View.INVISIBLE);
             binding.back.setAlpha(1f);
@@ -224,8 +231,8 @@ public class SgoodsDetailViewModel extends CustomViewModel implements GoOtherPag
             binding.cart.setAlpha(1f);
             binding.cart.setVisibility(View.VISIBLE);
         }else{
-            binding.barHeight.setAlpha(Float.parseFloat(scale));
-            binding.layoutMenu.setAlpha(Float.parseFloat(scale));
+            binding.barHbox.setAlpha(Float.parseFloat(scale));
+            binding.tabBox.setAlpha(Float.parseFloat(scale));
 
             binding.tBack.setAlpha(1-Float.parseFloat(scale));
             binding.back.setAlpha(Float.parseFloat(scale));
@@ -235,6 +242,11 @@ public class SgoodsDetailViewModel extends CustomViewModel implements GoOtherPag
 
             binding.tCart.setAlpha(1-Float.parseFloat(scale));
             binding.cart.setAlpha(Float.parseFloat(scale));
+
+            if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin))
+                StatusBarUtil.setCommonUI(mActivity,true);
+            if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin))
+                StatusBarUtil.setCommonUI(mActivity,false);
         }
     }
 

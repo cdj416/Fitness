@@ -11,10 +11,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class InputOrSlectView extends LinearLayout {
-
+    private CustomActivity mContext;
     //左边标题
     private TextView titleName;
     //右边选择内容
@@ -51,6 +53,9 @@ public class InputOrSlectView extends LinearLayout {
 
     public InputOrSlectView(Context context) {
         super(context);
+        if(context instanceof CustomActivity){
+            mContext = (CustomActivity) context;
+        }
         initLayoutView();
     }
 
@@ -66,11 +71,18 @@ public class InputOrSlectView extends LinearLayout {
         isvInputType = a.getInt(R.styleable.InputOrSlectView_isvInputType,0);
         isvLeftColor = a.getInt(R.styleable.InputOrSlectView_isvLeftColor,getResources().getColor(R.color.color_FF999999));
         isvRightColor = a.getInt(R.styleable.InputOrSlectView_isvRightColor,getResources().getColor(R.color.color_FF333333));
+        if(context instanceof CustomActivity){
+            mContext = (CustomActivity) context;
+        }
+
         initLayoutView();
     }
 
     public InputOrSlectView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        if(context instanceof CustomActivity){
+            mContext = (CustomActivity) context;
+        }
         initLayoutView();
     }
 
@@ -98,6 +110,15 @@ public class InputOrSlectView extends LinearLayout {
         titleName.setTextColor(isvLeftColor);
         selText.setTextColor(isvRightColor);
         edText.setTextColor(isvRightColor);
+
+        if(mContext.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+            edText.setTextColor(mContext.getResources().getColor(R.color.theme_color3));
+            selText.setTextColor(mContext.getResources().getColor(R.color.theme_color3));
+        }
+        if(mContext.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+            edText.setTextColor(mContext.getResources().getColor(R.color.theme_color1));
+            selText.setTextColor(mContext.getResources().getColor(R.color.theme_color1));
+        }
     }
 
     /*
@@ -110,7 +131,7 @@ public class InputOrSlectView extends LinearLayout {
     /*
     * 设置输入框提示内容
     * */
-    private void setHintText(String isvHintText){
+    public void setHintText(String isvHintText){
         if(BaseUtil.isValue(isvHintText)) edText.setHint(isvHintText);
     }
 
@@ -187,6 +208,10 @@ public class InputOrSlectView extends LinearLayout {
         edText.setText(content);
         edText.setEnabled(flag);
         setShowType(0);
+    }
+
+    public void setLeftText(String content){
+        titleName.setText(content);
     }
 
     /*

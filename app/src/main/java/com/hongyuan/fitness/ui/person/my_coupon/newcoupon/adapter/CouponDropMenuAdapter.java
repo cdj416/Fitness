@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.custom_view.filter_view.adapter.MenuAdapter;
 import com.hongyuan.fitness.custom_view.filter_view.adapter.SingleReclerAdapter;
 import com.hongyuan.fitness.custom_view.filter_view.typeview.SingleReclerView;
@@ -19,7 +20,7 @@ public class CouponDropMenuAdapter implements MenuAdapter{
     private final int POSITION_ONE = 0;
     private final int POSITION_TWO = 1;
 
-    private Context mContext;
+    private CustomActivity mContext;
     private OnFilterDoneListener onFilterDoneListener;
     private OnFilterContentListener contentListener;
     private String[] titles;
@@ -39,7 +40,7 @@ public class CouponDropMenuAdapter implements MenuAdapter{
         void onFilterContent(int position, String changeText);
     }
 
-    public CouponDropMenuAdapter(Context context, String[] titles, OnFilterDoneListener onFilterDoneListener,OnFilterContentListener contentListener){
+    public CouponDropMenuAdapter(CustomActivity context, String[] titles, OnFilterDoneListener onFilterDoneListener,OnFilterContentListener contentListener){
         this.mContext = context;
         this.titles = titles;
         this.onFilterDoneListener = onFilterDoneListener;
@@ -85,7 +86,7 @@ public class CouponDropMenuAdapter implements MenuAdapter{
     private View createCouponTpeView() {
         List<CouponTypesBeans> mList = getCouponType();
         SingleReclerView<CouponTypesBeans> singleTimeListView = new SingleReclerView<CouponTypesBeans>(mContext)
-                .setMyAdapter(new SingleReclerAdapter<CouponTypesBeans>() {
+                .setMyAdapter(new SingleReclerAdapter<CouponTypesBeans>(mContext.skin) {
                     @Override
                     public String provideText(CouponTypesBeans t) {
 
@@ -122,7 +123,7 @@ public class CouponDropMenuAdapter implements MenuAdapter{
     private View createStatusView() {
         List<CouponStatusBeans> mList = getCouponStatus();
         SingleReclerView<CouponStatusBeans> singleTimeListView = new SingleReclerView<CouponStatusBeans>(mContext)
-                .setMyAdapter(new SingleReclerAdapter<CouponStatusBeans>() {
+                .setMyAdapter(new SingleReclerAdapter<CouponStatusBeans>(mContext.skin) {
                     @Override
                     public String provideText(CouponStatusBeans t) {
                         return t.getStatusName();

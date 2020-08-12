@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_background1">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mRec"
@@ -22,7 +22,8 @@
         <com.hongyuan.fitness.custom_view.index_list.WaveSideBarView
             android:id="@+id/mSideBarView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"/>
 
     </RelativeLayout>
 </layout>

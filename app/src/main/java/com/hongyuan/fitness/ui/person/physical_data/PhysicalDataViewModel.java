@@ -2,8 +2,11 @@ package com.hongyuan.fitness.ui.person.physical_data;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import androidx.recyclerview.widget.GridLayoutManager;
+
+import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
@@ -17,6 +20,7 @@ import com.hongyuan.fitness.ui.person.physical_data.silhouette.SihouetteActivity
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.SelectImgUtils;
+import com.hongyuan.fitness.util.SkinConstants;
 
 import java.util.List;
 
@@ -56,6 +60,32 @@ public class PhysicalDataViewModel extends CustomViewModel implements SelectImgU
                 startActivity(SihouetteActivity.class,null);
             }
         });
+
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin)){
+            binding.bodyWeight.setImg(R.mipmap.body_weight_mark);
+            binding.height.setImg(R.mipmap.height_black_mark);
+            binding.bmi.setImg(R.mipmap.bmi_mark);
+            binding.bust.setImg(R.mipmap.bust_mark);
+            binding.waistline.setImg(R.mipmap.waistline_mark);
+            binding.hipCircumference.setImg(R.mipmap.hip_circumference_mark);
+            binding.thighCircumference.setImg(R.mipmap.thigh_circumference_mark);
+            binding.calfCircumference.setImg(R.mipmap.calf_circumference_mark);
+            binding.armCircumference.setImg(R.mipmap.arm_circumference_mark);
+            binding.bodyFatRate.setImg(R.mipmap.body_fat_rate_mark);
+        }
+
+        if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)){
+            binding.bodyWeight.setImg(R.mipmap.body_weight_mark_black);
+            binding.height.setImg(R.mipmap.height_black_mark_black);
+            binding.bmi.setImg(R.mipmap.bmi_mark_black);
+            binding.bust.setImg(R.mipmap.bust_mark_black);
+            binding.waistline.setImg(R.mipmap.waistline_mark_black);
+            binding.hipCircumference.setImg(R.mipmap.hip_circumference_mark_black);
+            binding.thighCircumference.setImg(R.mipmap.thigh_circumference_mark_black);
+            binding.calfCircumference.setImg(R.mipmap.calf_circumference_mark_black);
+            binding.armCircumference.setImg(R.mipmap.arm_circumference_mark_black);
+            binding.bodyFatRate.setImg(R.mipmap.body_fat_rate_mark_black);
+        }
 
 
 

@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/color_F5F6FB">
+        android:background="@color/theme_background">
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/color_EEEEEE"/>
+            android:background="@color/theme_line1"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mRecycler"
             android:layout_width="match_parent"

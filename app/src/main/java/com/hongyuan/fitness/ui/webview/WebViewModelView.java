@@ -2,7 +2,9 @@ package com.hongyuan.fitness.ui.webview;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -16,10 +18,13 @@ import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
+import com.hongyuan.fitness.custom_view.share_view.ShareBeans;
+import com.hongyuan.fitness.custom_view.share_view.ShareUtil;
 import com.hongyuan.fitness.databinding.ActivityWebviewBinding;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.DefaultWebClient;
@@ -40,9 +45,10 @@ public class WebViewModelView extends CustomViewModel {
     @Override
     protected void initView() {
         //测试使用
-        /*binding.showUrl.setOnClickListener(v -> {
+        binding.showUrl.setOnClickListener(v -> {
             CustomDialog.showUrl(mActivity,mAgentWeb.getWebCreator().getWebView().getUrl());
-        });*/
+            Log.e("cnn",""+mAgentWeb.getWebCreator().getWebView().getUrl());
+        });
         //binding.title.setText(getBundle().getString("title",""));
         String url = getBundle().getString("url");
 
@@ -81,6 +87,16 @@ public class WebViewModelView extends CustomViewModel {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 String title = view.getTitle();
+
+                if(url.contains("show_share=1")){
+                    ShareBeans contents = new ShareBeans();
+                    contents.setShareImgUrl("");
+                    contents.setShareInfo(title);
+                    contents.setShareTitle(title);
+                    contents.setShareWebsite(url);
+                    showShare(contents);
+                }
+
                 if (!TextUtils.isEmpty(title) && !title.contains("http")) {
                     binding.title.setText(title);
                 }else{
@@ -175,5 +191,13 @@ public class WebViewModelView extends CustomViewModel {
             bundle.putString("lastMsgId","");
             startActivity(ChatPageActivity.class,bundle);
         }
+    }
+
+    //显示分享
+    public void showShare(ShareBeans contents){
+        binding.shareWeb.setVisibility(View.VISIBLE);
+        binding.shareWeb.setOnClickListener(v -> {
+            ShareUtil.showShare(mActivity,contents);
+        });
     }
 }

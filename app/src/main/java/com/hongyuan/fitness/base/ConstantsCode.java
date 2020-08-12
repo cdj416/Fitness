@@ -111,7 +111,6 @@ public class ConstantsCode {
     //会员-修改会员基本信息
     public final static int UPDATE_M_INFO = 0x048;
 
-
     /*================================六版需要的=======================================*/
     //申请入驻
     public final static int APPLY_IN = 0x049;
@@ -152,6 +151,18 @@ public class ConstantsCode {
     //分享打卡
     public final static int KA_SHARE = 0x066;
 
+    /*================================七版需要的=======================================*/
+    //申请退款
+    public final static int APPLY_REFUND = 0x067;
+    //取消申请退款
+    public final static int CANCEL_APPLY_REFUND = 0x068;
+    //重新申请退款
+    public final static int NEW_APPLY_REFUND = 0x069;
+    //从新编辑退款
+    public final static int EDIT_REFUND = 0x070;
+    //买家退回商品
+    public final static int DELIVER_REFUND = 0x071;
+
     /*================================已下EventBus使用的=======================================*/
     //食物搜索
     public final static int EB_FOOD_SEARCH = 1;
@@ -181,5 +192,7 @@ public class ConstantsCode {
     public final static int EB_HOME_REFRESH = 1301;
     //刷新定位城市
     public final static int EB_HOME_LOCATION = 1302;
+    //进入首页时候直接跳转到web页面
+    public final static int EB_HOME_GOWEB = 1302;
 
 }

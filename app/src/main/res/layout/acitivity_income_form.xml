@@ -11,13 +11,13 @@
 
     <com.hongyuan.fitness.custom_view.StickyScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color_F5F6FB">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/theme_background">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
@@ -71,7 +71,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/shape_radius6_ffffff">
+                android:background="@drawable/theme_shape_radius6_ffffff">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -92,7 +92,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="12sp"
                             android:visibility="gone"
                             android:text="¥"/>
@@ -100,7 +100,7 @@
                             android:id="@+id/allPayNum"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="18sp"
                             android:text="0"/>
                     </LinearLayout>
@@ -109,7 +109,7 @@
                 <View
                     android:layout_width="1px"
                     android:layout_height="30dp"
-                    android:background="@color/color_EEEEEE"
+                    android:background="@color/theme_line1"
                     android:layout_gravity="center_vertical"/>
                 <LinearLayout
                     android:layout_width="0dp"
@@ -131,14 +131,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="12sp"
                             android:text="¥"/>
                         <TextView
                             android:id="@+id/allIncome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="18sp"
                             android:text="0"/>
                     </LinearLayout>
@@ -158,7 +158,7 @@
                 android:orientation="horizontal"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/shape_radius6_ffffff">
+                android:background="@drawable/theme_shape_radius6_ffffff">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -179,7 +179,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="12sp"
                             android:visibility="gone"
                             android:text="¥"/>
@@ -187,7 +187,7 @@
                             android:id="@+id/todayNum"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="18sp"
                             android:text="0"/>
                     </LinearLayout>
@@ -196,7 +196,7 @@
                 <View
                     android:layout_width="1px"
                     android:layout_height="30dp"
-                    android:background="@color/color_EEEEEE"
+                    android:background="@color/theme_line1"
                     android:layout_gravity="center_vertical"/>
                 <LinearLayout
                     android:layout_width="0dp"
@@ -218,14 +218,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="12sp"
                             android:text="¥"/>
                         <TextView
                             android:id="@+id/todayIncome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="18sp"
                             android:text="0"/>
                     </LinearLayout>
@@ -246,7 +246,7 @@
                 android:orientation="horizontal"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/shape_radius6_ffffff">
+                android:background="@drawable/theme_shape_radius6_ffffff">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -267,7 +267,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="12sp"
                             android:visibility="gone"
                             android:text="¥"/>
@@ -275,7 +275,7 @@
                             android:id="@+id/yestodayNUm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="18sp"
                             android:text="0"/>
                     </LinearLayout>
@@ -284,7 +284,7 @@
                 <View
                     android:layout_width="1px"
                     android:layout_height="30dp"
-                    android:background="@color/color_EEEEEE"
+                    android:background="@color/theme_line1"
                     android:layout_gravity="center_vertical"/>
                 <LinearLayout
                     android:layout_width="0dp"
@@ -307,14 +307,14 @@
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="12sp"
                             android:text="¥"/>
                         <TextView
                             android:id="@+id/yestodayIncome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="18sp"
                             android:text="0"/>
                     </LinearLayout>
@@ -330,12 +330,12 @@
                 android:layout_marginStart="16dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:background="@drawable/shape_radius6_ffffff">
+                android:background="@drawable/theme_shape_radius6_ffffff">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_14"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:layout_centerVertical="true"
                     android:text="结算订单明细"/>
                 <ImageView

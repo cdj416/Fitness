@@ -30,7 +30,9 @@ public class ShopAddressViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
-        mActivity.getMainTitle().setRightText("添加").setOnClickListener(v -> {
+
+
+        mActivity.getMainTitle().getRightView().setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putInt("type",ChangeAddressViewModel.ADD);
             startActivity(ChangeAddressActivity.class,bundle);

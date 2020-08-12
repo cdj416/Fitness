@@ -10,20 +10,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/theme_background">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:background="@color/color_FFFFFF">
+            android:background="@color/theme_color1">
             <TextView
                 android:id="@+id/cancelText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:visibility="gone"
@@ -35,7 +36,7 @@
                 android:layout_height="36dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="9dp"
-                android:background="@drawable/shape_radius6_fff5f5f5">
+                android:background="@drawable/theme_shape_radius6_fff5f5f5">
 
                 <EditText
                     android:id="@+id/searchText"
@@ -43,7 +44,8 @@
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
                     android:layout_marginStart="36dp"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
+                    android:textColorHint="@color/theme_color4"
                     android:background="@color/transparent"
                     android:hint="请输入搜索关键字"
                     android:textSize="@dimen/sp_14"
@@ -54,7 +56,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/search_huise_mark"
+                    android:src="@mipmap/theme_search_chengse_mark"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="9dp"/>
             </RelativeLayout>

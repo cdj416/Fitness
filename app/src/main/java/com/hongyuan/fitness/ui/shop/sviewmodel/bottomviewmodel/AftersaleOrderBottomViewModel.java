@@ -39,7 +39,6 @@ public class AftersaleOrderBottomViewModel extends CustomViewModel {
     //数据源
     private AftersaleOrderBeans.DataBean.InfoBean infoBean;
     private UnitBeanUtils utils;
-    private KeFuBeans.DataBean keFuBeans;
     //原因集
     private List<CancelOrderReasonBeans.DataBean.ListBean> rList;
 
@@ -54,30 +53,6 @@ public class AftersaleOrderBottomViewModel extends CustomViewModel {
     @Override
     protected void initView() {
 
-        binding.keFu.setOnClickListener(v -> {
-            if(keFuBeans != null){
-                CustomDialog.keFuWay(mActivity, (v1, message) -> {
-                    if(v1.getId() == R.id.telNum){
-                        CustomDialog.callTel(mActivity, keFuBeans.getInfo().getM_mobile(), new CustomDialog.DialogClick() {
-                            @Override
-                            public void dialogClick(View v) {
-                                callTel(keFuBeans.getInfo().getM_mobile());
-                            }
-                        });
-                    }
-
-                    if(v1.getId() == R.id.goChat){
-                        HuanXinUtils.getInstance().setBaseData(TokenSingleBean.getInstance().getM_mobile(),TokenSingleBean.getInstance().getHeadUrl()
-                                ,keFuBeans.getInfo().getM_name(),keFuBeans.getInfo().getMi_head());
-                        Bundle bundle = new Bundle();
-                        bundle.putString("title",keFuBeans.getInfo().getM_name());
-                        bundle.putString("username",keFuBeans.getInfo().getM_mobile());
-                        bundle.putString("lastMsgId",null);
-                        startActivity(ChatPageActivity.class,bundle);
-                    }
-                });
-            }
-        });
     }
 
     //去评价
@@ -152,9 +127,10 @@ public class AftersaleOrderBottomViewModel extends CustomViewModel {
         if(infoBean.getState() == AftersaleOrderViwModel.STATU_PAY){
             binding.waitPayBox.setVisibility(View.VISIBLE);
         }
+
         if(infoBean.getState() == AftersaleOrderViwModel.STATU_DELIVERY){
 
-            binding.dDeliveryBox.setVisibility(View.INVISIBLE);
+            binding.dDeliveryBox.setVisibility(View.VISIBLE);
         }
         if(infoBean.getState() == AftersaleOrderViwModel.STATU_SHIPPED || infoBean.getState() == AftersaleOrderViwModel.STATU_PICKEDUP){
             if(infoBean.getDeliver_way() == 2){
@@ -177,22 +153,16 @@ public class AftersaleOrderBottomViewModel extends CustomViewModel {
                 binding.beEvaluatedBox.setVisibility(View.VISIBLE);
             }
         }
-
-        //获取商家客服
-        getKeFu(String.valueOf(infoBean.getStore().getStore_id()));
     }
 
-    private void getKeFu(String store_id){
-        clearParams().setParams("type","store").setParams("store_id",store_id);
-        Controller.myRequest(Constants.GET_ONLINE_KF,Controller.TYPE_POST,getParams(), KeFuBeans.class,this);
-    }
+
 
     /*
      * 组装订单显示信息
      * */
     private V3SuccessBeans getSuccessBeans(){
         V3SuccessBeans beans = new V3SuccessBeans();
-
+        beans.setType(V3SuccessBeans.TYPE.BUYGOODS);
         beans.setTitleText("订单");
         beans.setShowText("购买成功");
         beans.setBtn2Text("完成");
@@ -240,9 +210,7 @@ public class AftersaleOrderBottomViewModel extends CustomViewModel {
             };
         }
 
-        if(data instanceof KeFuBeans){
-            keFuBeans = ((KeFuBeans)data).getData();
-        }
+
     }
 
     @Override

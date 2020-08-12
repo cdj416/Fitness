@@ -12,14 +12,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mRecycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color_F5F6FB"/>
+            android:layout_height="match_parent"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="84dp"
             android:orientation="vertical"
             android:layout_gravity="bottom"
-            android:background="@color/color_FFFFFF"
+            android:background="@color/theme_color1"
             android:gravity="center">
             <Button
                 android:id="@+id/noUse"

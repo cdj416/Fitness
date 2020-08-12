@@ -121,7 +121,7 @@ public class ProductReviewViewModel extends CustomViewModel {
         for(int i = 0 ; i < mList.size() ; i++){
             AddProductReviewBeans reviewBeans = new AddProductReviewBeans();
             reviewBeans.setGp_id(mList.get(i).getGp_id());
-            reviewBeans.setEvaluation_score(String.valueOf(binding.myRat.getRating()));
+            reviewBeans.setEvaluation_score(String.valueOf(5));
             reviewBeans.setEvaluation_content(BaseUtil.isValue(binding.editContent.getText().toString()) ? binding.editContent.getText().toString() : "");
             reviewBeans.setEvaluationfile(fileUrls);
             reviewBeans.setIs_anonymous(Integer.parseInt(binding.niMingBox.getTag().toString()));

@@ -467,6 +467,7 @@ public class SnewOrderBeans extends BaseBean {
                 private String sku_names;
                 private int buy_num;
                 private int g_oid;
+                private int refund_state;
 
                 //获取显示类型
                 public int getShowType() {
@@ -479,6 +480,14 @@ public class SnewOrderBeans extends BaseBean {
                     }else{
                         return SnewOrdersAdapter.SHOW_MONEY_POINT;
                     }
+                }
+
+                public int getRefund_state() {
+                    return refund_state;
+                }
+
+                public void setRefund_state(int refund_state) {
+                    this.refund_state = refund_state;
                 }
 
                 public int getG_oid() {

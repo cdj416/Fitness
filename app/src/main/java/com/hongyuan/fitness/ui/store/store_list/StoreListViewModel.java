@@ -9,6 +9,7 @@ import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityStoreListBinding;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class StoreListViewModel extends CustomViewModel {
 
@@ -79,8 +80,14 @@ public class StoreListViewModel extends CustomViewModel {
                 View view=tab.getCustomView();
                 TextView textView= view.findViewById(R.id.name);
                 LinearLayout linearLayout = view.findViewById(R.id.box);
-                textView.setTextColor(0xff5F5F5F);
-                linearLayout.setBackgroundResource(R.drawable.shape_radius16_ffffff_stroke_979797);
+                if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin)){
+                    textView.setTextColor(0xff5F5F5F);
+                    linearLayout.setBackgroundResource(R.drawable.shape_radius16_ffffff_stroke_979797);
+                }else{
+                    textView.setTextColor(0xffffffff);
+                    linearLayout.setBackgroundResource(R.drawable.theme_shape_radius24_00000000_stroke_cccccc_black);
+                }
+
             }
 
             @Override

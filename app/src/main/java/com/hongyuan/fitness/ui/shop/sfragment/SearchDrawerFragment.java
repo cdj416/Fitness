@@ -50,7 +50,7 @@ public class SearchDrawerFragment extends CustomFragment {
         GridLayoutManager layoutManager =
                 new GridLayoutManager(mActivity,4);
         mRec.setLayoutManager(layoutManager);
-        adapter = new SearchProvinceAdapter();
+        adapter = new SearchProvinceAdapter(mActivity.skin);
         mRec.setAdapter(adapter);
         adapter.setOnItemChildClickListener((adapter, view, position) -> {
             mPosition = position;

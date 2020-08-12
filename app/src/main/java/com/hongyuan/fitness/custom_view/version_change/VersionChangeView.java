@@ -14,6 +14,7 @@ import com.azhon.appupdate.config.UpdateConfiguration;
 import com.azhon.appupdate.listener.OnDownloadListener;
 import com.azhon.appupdate.manager.DownloadManager;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.MyApplication;
 import com.hongyuan.fitness.custom_view.my_progress.WaveProgress;
 import com.hongyuan.fitness.ui.main.CheckVersionBeans;
 import com.hongyuan.fitness.util.CacheUtil;
@@ -23,6 +24,8 @@ import com.hongyuan.fitness.util.PackageUtils;
 
 import java.io.File;
 
+import me.goldze.mvvmhabit.base.AppManager;
+
 public class VersionChangeView extends FrameLayout implements HourMeterUtil.TimeCallBack {
 
     private FrameLayout bgBox;
@@ -30,6 +33,10 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
 
     //开始下载
     private final int START_DOWN = 0x1;
+    //下载停止
+    private final int DOWN_STOP = 0x2;
+    //下载停止
+    private final int DOWN_SUCCESS = 0x3;
     //下载的最大值
     private int maxValue = 0;
     //当前进度的值
@@ -126,9 +133,11 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
                 .setOnDownloadListener(new OnDownloadListener() {
                     @Override
                     public void start() {
-                        //Message msg = new Message();
-                        //msg.what = START_DOWN;
-                        //handler.sendMessage(msg);
+                        if(force){
+                            Message msg = new Message();
+                            msg.what = START_DOWN;
+                            handler.sendMessage(msg);
+                        }
                     }
 
                     @Override
@@ -139,17 +148,29 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
 
                     @Override
                     public void done(File apk) {
-                        Log.e("phm","=====下载完成======");
+                        if(force){
+                            Message msg = new Message();
+                            msg.what = DOWN_SUCCESS;
+                            handler.sendMessage(msg);
+                        }
                     }
 
                     @Override
                     public void cancel() {
-                        Log.e("phm","=====下载取消======");
+                        if(force){
+                            Message msg = new Message();
+                            msg.what = DOWN_STOP;
+                            handler.sendMessage(msg);
+                        }
                     }
 
                     @Override
                     public void error(Exception e) {
-                        Log.e("phm","=====下载出错了======");
+                        if(force){
+                            Message msg = new Message();
+                            msg.what = DOWN_STOP;
+                            handler.sendMessage(msg);
+                        }
                         e.printStackTrace();
                     }
                 });
@@ -178,6 +199,16 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
                     bgBox.setVisibility(View.VISIBLE);
                     //开始计时
                     hourUtil.startCount();
+                    break;
+                case DOWN_STOP:
+                    //bgBox.setVisibility(GONE);
+                    CustomDialog.promptDialog(getContext(),"下载出错，请从新进入app！", "确定",false,v -> {
+                        AppManager.getAppManager().finishAllActivity();
+                    });
+                    break;
+
+                case DOWN_SUCCESS:
+                    bgBox.setVisibility(GONE);
                     break;
             }
         }

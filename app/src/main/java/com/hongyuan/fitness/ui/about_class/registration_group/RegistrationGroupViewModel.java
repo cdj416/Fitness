@@ -120,6 +120,7 @@ public class RegistrationGroupViewModel extends CustomViewModel {
     public void onSuccess(Object data) {
         if(isSuccess(data) && !(data instanceof GroupLocationBeans)){
             V3SuccessBeans beans = new V3SuccessBeans();
+            beans.setType(V3SuccessBeans.TYPE.GROUPCLASS);
             beans.setTitleText("团课报名");
             beans.setShowText("预约成功");
             beans.setBtn1Text("取消报名");

@@ -9,17 +9,17 @@
 
     <com.hongyuan.fitness.custom_view.StickyScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color_F5F6FB">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/theme_background">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="132dp"
-                android:background="@color/color_FFFFFF">
+                android:background="@color/theme_color1">
                 <LinearLayout
                     android:id="@+id/noImgBox"
                     android:layout_width="match_parent"
@@ -31,8 +31,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_14"
-                        android:textColor="@color/color_FF333333"
-                        android:drawableLeft="@mipmap/black_carme_mark"
+                        android:textColor="@color/theme_color3"
+                        android:drawableLeft="@mipmap/theme_carme_mark"
                         android:gravity="center"
                         android:drawablePadding="5dp"
                         android:text="添加剪影"/>
@@ -62,7 +62,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_12"
                             android:layout_centerVertical="true"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:text="身体剪影"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:src="@mipmap/black_carme_mark"/>
+                            android:src="@mipmap/theme_carme_mark"/>
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -104,8 +104,6 @@
                 android:id="@+id/bodyWeight"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@color/color_FFFFFF"
-                app:leftDrawable="@mipmap/body_weight_mark"
                 app:showItemLine="true"
                 app:leftText="体重"
                 app:rightText="——"/>
@@ -114,8 +112,6 @@
                 android:id="@+id/height"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@color/color_FFFFFF"
-                app:leftDrawable="@mipmap/height_black_mark"
                 app:showItemLine="true"
                 app:leftText="身高"
                 app:rightText="——"/>
@@ -124,8 +120,6 @@
                 android:id="@+id/bmi"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@color/color_FFFFFF"
-                app:leftDrawable="@mipmap/bmi_mark"
                 app:showItemLine="true"
                 app:leftText="BMI"
                 app:rightText="——"/>
@@ -134,8 +128,6 @@
                 android:id="@+id/bust"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@color/color_FFFFFF"
-                app:leftDrawable="@mipmap/bust_mark"
                 app:showItemLine="true"
                 app:leftText="胸围"
                 app:rightText="——"/>
@@ -144,8 +136,6 @@
                 android:id="@+id/waistline"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@color/color_FFFFFF"
-                app:leftDrawable="@mipmap/waistline_mark"
                 app:showItemLine="true"
                 app:leftText="腰围"
                 app:rightText="——"/>
@@ -154,8 +144,6 @@
                 android:id="@+id/hipCircumference"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@color/color_FFFFFF"
-                app:leftDrawable="@mipmap/hip_circumference_mark"
                 app:showItemLine="true"
                 app:leftText="臀围"
                 app:rightText="——"/>
@@ -164,8 +152,6 @@
                 android:id="@+id/thighCircumference"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@color/color_FFFFFF"
-                app:leftDrawable="@mipmap/thigh_circumference_mark"
                 app:showItemLine="true"
                 app:leftText="大腿围"
                 app:rightText="——"/>
@@ -174,8 +160,6 @@
                 android:id="@+id/calfCircumference"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@color/color_FFFFFF"
-                app:leftDrawable="@mipmap/calf_circumference_mark"
                 app:showItemLine="true"
                 app:leftText="小腿围"
                 app:rightText="——"/>
@@ -184,8 +168,6 @@
                 android:id="@+id/armCircumference"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@color/color_FFFFFF"
-                app:leftDrawable="@mipmap/arm_circumference_mark"
                 app:showItemLine="true"
                 app:leftText="手臂围"
                 app:rightText="——"/>
@@ -194,8 +176,6 @@
                 android:id="@+id/bodyFatRate"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@color/color_FFFFFF"
-                app:leftDrawable="@mipmap/body_fat_rate_mark"
                 app:showItemLine="true"
                 app:leftText="体脂率"
                 app:rightText="——"/>

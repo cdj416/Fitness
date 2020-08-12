@@ -2,7 +2,6 @@ package com.hongyuan.fitness.ui.membership_card.card_detail;
 
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,7 +19,6 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.custom_view.time_selecter.use_time.GetTimeData;
 import com.hongyuan.fitness.databinding.ActivityCardDetailsBinding;
 import com.hongyuan.fitness.ui.about_class.check_payment_method.OrderBean;
-import com.hongyuan.fitness.ui.about_class.class_success.SuccessClassActivity;
 import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayActivity;
 import com.hongyuan.fitness.ui.mall.good_pay.PayDataBean;
 import com.hongyuan.fitness.ui.membership_card.card_detail.add_person.CardAddPersonActivity;
@@ -32,7 +30,6 @@ import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.ui.store.consultant.ConsultantBeans;
 import com.hongyuan.fitness.util.BaseUtil;
-import com.hongyuan.fitness.util.BasisTimesUtils;
 import com.hongyuan.fitness.util.BigDecimalUtils;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.TimeUtil;
@@ -373,13 +370,18 @@ public class CardDetailsViewModel extends CustomViewModel {
         if(data instanceof OrderBean){
             OrderBean orderBean = (OrderBean)data;
             if(Double.valueOf(detailsBean.getCard_sale_price()) <= 0){
+                V3SuccessBeans beans = new V3SuccessBeans();
+                beans.setType(V3SuccessBeans.TYPE.BUYGOODS);
+                beans.setTitleText("领取结果");
+                beans.setShowText("领取成功");
+                beans.setBtn2Text("返回");
+
                 Bundle bundle = new Bundle();
-                bundle.putString("titleName","领取结果");
-                bundle.putString("successText","领取成功！");
-                bundle.putString("buttonText","返回");
-                startActivity(SuccessClassActivity.class,bundle);
+                bundle.putSerializable("successBeans",beans);
+                startActivity(V3SuccessActivity.class,bundle);
             }else{
                 V3SuccessBeans beans = new V3SuccessBeans();
+                beans.setType(V3SuccessBeans.TYPE.BUYCARD);
                 beans.setTitleText("订单完成");
                 beans.setShowText("购买成功");
                 beans.setBtn1Text("跳过");

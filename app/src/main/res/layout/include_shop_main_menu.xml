@@ -5,12 +5,11 @@
     android:orientation="vertical"
     android:paddingTop="12dp"
     android:paddingBottom="12dp"
-    android:background="@color/color_FFFFFF">
+    android:background="@color/theme_color1">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:orientation="horizontal"
-        android:background="@color/color_FFFFFF">
+        android:orientation="horizontal">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -21,7 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:drawableTop="@mipmap/redeem_mark"
                 android:drawablePadding="8dp"
                 android:text="积分兑换"/>
@@ -36,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:drawableTop="@mipmap/leadership_center_mark"
                 android:drawablePadding="8dp"
                 android:text="领券中心"/>
@@ -51,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:drawableTop="@mipmap/sports_life_mark"
                 android:drawablePadding="8dp"
                 android:text="运动生活"/>
@@ -66,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:drawableTop="@mipmap/promotion_area_mark"
                 android:drawablePadding="8dp"
                 android:text="推广专区"/>

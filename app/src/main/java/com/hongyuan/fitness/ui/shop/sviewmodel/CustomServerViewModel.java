@@ -40,8 +40,8 @@ public class CustomServerViewModel extends CustomViewModel {
         });
 
         binding.telKeFu.setOnClickListener(v -> {
-            CustomDialog.callTel(mActivity, keFuBeans.getInfo().getM_mobile(), v1 -> {
-                callTel(keFuBeans.getInfo().getM_mobile());
+            CustomDialog.callTel(mActivity, keFuBeans.getInfo().getTel(), v1 -> {
+                callTel(keFuBeans.getInfo().getTel());
             });
         });
     }

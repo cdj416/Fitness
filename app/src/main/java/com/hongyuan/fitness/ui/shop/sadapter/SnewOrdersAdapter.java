@@ -85,6 +85,12 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                     helper.getView(R.id.priceBox).setVisibility(View.VISIBLE);
                 }
 
+                if(twoBean.getRefund_state() == 1 || twoBean.getRefund_state() == 3 || twoBean.getRefund_state() == 4 || twoBean.getRefund_state() == 5 || twoBean.getRefund_state() == 6 || twoBean.getRefund_state() == 8){
+                   helper.getView(R.id.afterText).setVisibility(View.VISIBLE);
+                }else{
+                    helper.getView(R.id.afterText).setVisibility(View.GONE);
+                }
+
                 helper.addOnClickListener(R.id.goodsBox);
                 break;
             case TYPE_THIRD:
@@ -173,7 +179,7 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                         helper.addOnClickListener(R.id.lookCollection);
                         helper.addOnClickListener(R.id.submitGoods);
                     }
-                }else if(bottomBean.getStatus() == BottomBean.STATU_BE_EVALUATED){
+                }else if(bottomBean.getStatus() == BottomBean.STATU_COMPLETED){
                     helper.getView(R.id.sPayBox).setVisibility(View.GONE);
                     helper.getView(R.id.dDelivery).setVisibility(View.GONE);
                     helper.getView(R.id.collectionBox).setVisibility(View.GONE);
@@ -183,7 +189,7 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
                     helper.getView(R.id.goEvaluate).setVisibility(View.VISIBLE);
                     helper.addOnClickListener(R.id.goAginBugy);
                     helper.addOnClickListener(R.id.goEvaluate);
-                }else if(bottomBean.getStatus() == BottomBean.STATU_COMPLETED || bottomBean.getStatus() == BottomBean.STATU_ALL_COMPLETED){
+                }/*else if(bottomBean.getStatus() == BottomBean.STATU_COMPLETED || bottomBean.getStatus() == BottomBean.STATU_ALL_COMPLETED){
                     helper.getView(R.id.sPayBox).setVisibility(View.GONE);
                     helper.getView(R.id.dDelivery).setVisibility(View.GONE);
                     helper.getView(R.id.collectionBox).setVisibility(View.GONE);
@@ -192,7 +198,7 @@ public class SnewOrdersAdapter extends BaseMultiItemQuickAdapter<MultiItemEntity
 
                     helper.getView(R.id.goEvaluate).setVisibility(View.GONE);
                     helper.addOnClickListener(R.id.goAginBugy);
-                }else{
+                }*/else{
                     helper.getView(R.id.sPayBox).setVisibility(View.GONE);
                     helper.getView(R.id.dDelivery).setVisibility(View.GONE);
                     helper.getView(R.id.collectionBox).setVisibility(View.GONE);

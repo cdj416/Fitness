@@ -12,6 +12,8 @@ import java.util.List;
 
 public class SnewOrderViwPageAdapter extends FragmentPagerAdapter {
 
+    //订单状态 1 待付款 2已取消 3已付款 4已发货5已提货 8已确定 9最终完成.is_evaluation 1已评价 0未评价state=8 加is_evaluation
+
     private List<CustomFragment> fragments;
     private List<TitleBean> beans;
 
@@ -57,7 +59,7 @@ public class SnewOrderViwPageAdapter extends FragmentPagerAdapter {
         fragments.add(new SnewOrdersFragment().setArguments("1"));
         fragments.add(new SnewOrdersFragment().setArguments("3"));
         fragments.add(new SnewOrdersFragment().setArguments("4"));
-        fragments.add(new SnewOrdersFragment().setArguments("6"));
+        fragments.add(new SnewOrdersFragment().setArguments("is_evaluation"));
         fragments.add(new AfterSalesFragment());
 
         notifyDataSetChanged();

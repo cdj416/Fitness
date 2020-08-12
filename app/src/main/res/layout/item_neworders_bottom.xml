@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_FFFFFF"
+    android:background="@color/theme_color1"
     android:orientation="vertical"
     android:id="@+id/box">
     <RelativeLayout
@@ -18,27 +18,27 @@
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:textColor="@color/color_FF333333"
+               android:textColor="@color/theme_color3"
                android:textSize="@dimen/sp_12"
                android:text="共"/>
            <TextView
                android:id="@+id/goodNum"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:textColor="@color/color_FF333333"
+               android:textColor="@color/theme_color3"
                android:textSize="@dimen/sp_12"
                android:text="1"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:textColor="@color/color_FF333333"
+               android:textColor="@color/theme_color3"
                android:textSize="@dimen/sp_12"
                android:text="件商品 合计：¥"/>
            <TextView
                android:id="@+id/goodAllPrice"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:textColor="@color/color_FF333333"
+               android:textColor="@color/theme_color3"
                android:textStyle="bold"
                android:textSize="@dimen/sp_16"
                android:text="0"/>
@@ -48,7 +48,7 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:textSize="@dimen/sp_12"
-               android:textColor="@color/color_FF333333"
+               android:textColor="@color/theme_color3"
                android:layout_marginEnd="5dp"
                android:layout_marginStart="5dp"
                android:text="+"/>
@@ -62,7 +62,7 @@
                    android:id="@+id/goodsPoint"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:textColor="@color/color_FF333333"
+                   android:textColor="@color/theme_color3"
                    android:textSize="@dimen/sp_16"
                    android:textStyle="bold"
                    android:layout_marginStart="1dp"
@@ -70,7 +70,7 @@
                <TextView
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:textColor="@color/color_FF333333"
+                   android:textColor="@color/theme_color3"
                    android:textSize="@dimen/sp_12"
                    android:layout_marginStart="1dp"
                    android:text="积分"/>
@@ -147,13 +147,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color7"
                     android:paddingEnd="12dp"
                     android:paddingBottom="6dp"
                     android:paddingTop="6dp"
                     android:paddingStart="12dp"
                     android:visibility="gone"
-                    android:background="@drawable/shape_radius6_00000000_stroke_cccccc"
+                    android:background="@drawable/theme_shape_radius6_00000000_stroke_cccccc"
                     android:text="查看物流"/>
                 <TextView
                     android:id="@+id/submitGoods"
@@ -180,25 +180,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color7"
                     android:paddingEnd="12dp"
                     android:paddingBottom="6dp"
                     android:paddingTop="6dp"
                     android:paddingStart="12dp"
-                    android:background="@drawable/shape_radius6_00000000_stroke_cccccc"
+                    android:background="@drawable/theme_shape_radius6_00000000_stroke_cccccc"
                     android:text="再次购买"/>
                 <TextView
                     android:id="@+id/goEvaluate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color7"
                     android:paddingEnd="16dp"
                     android:paddingBottom="6dp"
                     android:paddingTop="6dp"
                     android:paddingStart="16dp"
                     android:layout_marginStart="10dp"
-                    android:background="@drawable/shape_radius6_00000000_stroke_cccccc"
+                    android:background="@drawable/theme_shape_radius6_00000000_stroke_cccccc"
                     android:text="评价"/>
             </LinearLayout>
             <!--自提时的状态-->
@@ -218,7 +218,7 @@
                     android:paddingBottom="6dp"
                     android:paddingTop="6dp"
                     android:paddingStart="12dp"
-                    android:background="@drawable/shape_radius6_00000000_stroke_cccccc"
+                    android:background="@drawable/theme_shape_radius6_00000000_stroke_cccccc"
                     android:text="查看自提点"/>
                 <TextView
                     android:id="@+id/selfReceipt"

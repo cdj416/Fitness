@@ -3,6 +3,7 @@ package com.hongyuan.fitness.ui.mall.mine.mine_order.order_details;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityMineOrderDetailBinding;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class MineOrderDetailsActivity extends CustomActivity {
     @Override
@@ -12,9 +13,12 @@ public class MineOrderDetailsActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitle("订单详情");
-        getMainTitle().showLine();
-        setsetImmersive(0x55000000);
+
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"订单详情");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"订单详情");
+
         ActivityMineOrderDetailBinding binding = ActivityMineOrderDetailBinding.bind(mView);
         MineOrderDetailsViewModel viewModel = new MineOrderDetailsViewModel(this,binding);
         binding.setViewModel(viewModel);

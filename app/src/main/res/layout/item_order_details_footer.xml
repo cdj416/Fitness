@@ -9,15 +9,13 @@
         android:layout_height="1px"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/color_EEEEEE"/>
+        android:background="@color/theme_line1"/>
     <com.hongyuan.fitness.custom_view.InputOrSlectView
         android:id="@+id/deliveryMethod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:isvName="配送方式"
         app:isvRightText="请选择"
-        app:isvLeftColor="@color/color_FF333333"
-        app:isvRightColor="@color/color_FF333333"
         app:isvType="select"/>
     <com.hongyuan.fitness.custom_view.InputOrSlectView
         android:id="@+id/myCoupon"
@@ -25,7 +23,6 @@
         android:layout_height="wrap_content"
         app:isvName="优惠券"
         app:isvRightText="请选择"
-        app:isvLeftColor="@color/color_FF333333"
         app:isvRightColor="@color/color_EF5B48"
         app:isvType="select"/>
     <com.hongyuan.fitness.custom_view.InputOrSlectView
@@ -35,21 +32,19 @@
         android:visibility="visible"
         app:isvName="自提点"
         app:isvRightText="请选择"
-        app:isvLeftColor="@color/color_FF333333"
-        app:isvRightColor="@color/color_FF333333"
         app:isvType="select"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:background="@color/color_FFFFFF"
+        android:background="@color/theme_color1"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_12"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:layout_gravity="center_vertical"
             android:text="订单备注"/>
         <EditText
@@ -58,23 +53,22 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:textSize="@dimen/sp_12"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:background="@color/transparent"
+            android:textColorHint="@color/theme_color4"
             android:paddingStart="16dp"
             android:hint="选填，请先与商家协商一致"/>
     </LinearLayout>
     <com.hongyuan.fitness.custom_view.ItemCloumView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_FFFFFF"
         android:visibility="gone"
-        app:icLeftColor="@color/color_FF333333"
         app:icLeftText="积分"
         app:icLine="false"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:background="@color/color_FFFFFF"
+        android:background="@color/theme_color1"
         android:paddingEnd="16dp">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -86,7 +80,7 @@
                 android:id="@+id/allNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_12"
                 android:text="共2件，小计："/>
             <TextView

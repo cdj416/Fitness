@@ -30,14 +30,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/color_F5F6FB"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="90dp">
+            android:paddingBottom="90dp"
+            android:background="@color/theme_background">
             <com.hongyuan.fitness.ui.shop.smyview.SGoodsDetailsHeadView
                 android:id="@+id/goodHeads"
                 android:layout_width="match_parent"
@@ -50,14 +50,14 @@
                 android:layout_marginTop="12dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:background="@color/color_FFFFFF">
+                android:background="@color/theme_color1">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="44dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:textSize="@dimen/sp_14"
                         android:layout_centerVertical="true"
                         android:text="商品评价(20)"/>
@@ -70,7 +70,7 @@
                         android:textSize="@dimen/sp_14"
                         android:textColor="@color/color_EF5B48"
                         android:gravity="center_vertical"
-                        android:drawableRight="@mipmap/right_huise_img"
+                        android:drawableRight="@mipmap/theme_right_mark"
                         android:text="查看全部"/>
                 </RelativeLayout>
                 <!--<androidx.recyclerview.widget.RecyclerView
@@ -88,7 +88,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         app:riv_corner_radius="20dp"
-                        android:src="@mipmap/default_head_img"
+                        android:src="@mipmap/default_man_head_img"
                         android:scaleType="centerCrop"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -99,14 +99,14 @@
                             android:id="@+id/userName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="@dimen/sp_16"
                             android:text="Valentina"/>
                         <TextView
                             android:id="@+id/cComtent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="@dimen/sp_14"
                             android:ellipsize="end"
                             android:maxLines="1"
@@ -119,7 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/color_FFFFFF"
+                android:background="@color/theme_color1"
                 android:layout_marginTop="12dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -149,7 +149,7 @@
                             android:textSize="@dimen/sp_14"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:text="店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称"/>
 
                         <LinearLayout
@@ -158,7 +158,7 @@
                             android:layout_marginTop="4dp"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
-                            <RatingBar
+                            <!--<RatingBar
                                 android:id="@+id/myRat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="12dp"
@@ -168,11 +168,38 @@
                                 android:layout_centerVertical="true"
                                 android:isIndicator="true"
                                 android:numStars="5"
-                                android:rating="5"/>
+                                android:rating="5"/>-->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/startTitle"
+                                android:layout_centerVertical="true"
+                                android:orientation="horizontal">
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:src="@drawable/start_select"/>
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:src="@drawable/start_select"/>
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:src="@drawable/start_select"/>
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:src="@drawable/start_select"/>
+                                <ImageView
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:src="@drawable/start_select"/>
+                            </LinearLayout>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF999999"
+                                android:textColor="@color/theme_color4"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginEnd="8dp"
                                 android:text="|"/>
@@ -180,7 +207,7 @@
                                 android:id="@+id/collectionNum"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF999999"
+                                android:textColor="@color/theme_color4"
                                 android:textSize="@dimen/sp_12"
                                 android:text="1.2万人收藏"/>
                         </LinearLayout>
@@ -207,14 +234,14 @@
                         android:layout_marginEnd="10dp"
                         android:layout_toLeftOf="@id/goStore"
                         android:text="收藏"
-                        android:background="@drawable/shape_radius6_border_ef5b48"/>
+                        android:background="@drawable/shape_radius6_00000000_stroke_ef5b48"/>
                 </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:background="@color/color_EEEEEE"/>
+                    android:background="@color/theme_line1"/>
 
                 <com.hongyuan.fitness.custom_view.CustomRecyclerView
                     android:id="@+id/sgRec1"
@@ -233,7 +260,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_14"
-                        android:textColor="@color/color_FF999999"
+                        android:textColor="@color/theme_color4"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:text="店铺推荐"/>
@@ -270,7 +297,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_14"
-                        android:textColor="@color/color_FF999999"
+                        android:textColor="@color/theme_color4"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:text="商品详情"/>

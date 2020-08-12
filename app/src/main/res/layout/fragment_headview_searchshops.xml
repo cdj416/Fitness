@@ -6,7 +6,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/theme_color1">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -37,7 +38,7 @@
                 android:id="@+id/salesText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color4"
                 android:textSize="@dimen/sp_14"
                 android:tag="false"
                 android:text="销量"/>
@@ -54,5 +55,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"/>
+        android:background="@color/theme_line1"/>
 </LinearLayout>

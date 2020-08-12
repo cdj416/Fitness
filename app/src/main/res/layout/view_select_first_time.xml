@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:textColor="@color/color_777777"
+        android:textColor="@color/theme_color7"
         android:textSize="12sp"
         android:text="预约首次上课时间:"/>
     <TextView
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:textColor="@color/color_FF333333"
+        android:textColor="@color/theme_color3"
         android:textSize="@dimen/sp_14"
         android:layout_alignParentRight="true"
         android:text="暂不选择"/>

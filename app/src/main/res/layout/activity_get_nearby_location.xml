@@ -11,15 +11,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         android:orientation="vertical"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_background1">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:orientation="horizontal">
             <EditText
                 android:id="@+id/searchEt"
@@ -28,13 +28,14 @@
                 android:hint="搜索附近的位置"
                 android:textSize="12sp"
                 android:paddingLeft="10dp"
-                android:textColor="@color/black"
-                android:layout_marginRight="48dp"
-                android:background="@drawable/shape_radius6_00000000_stroke_cccccc"/>
+                android:textColor="@color/theme_color3"
+                android:layout_marginEnd="38dp"
+                android:textColorHint="@color/theme_color4"
+                android:background="@drawable/theme_shape_radius6_00000000_stroke_cccccc"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@mipmap/search_chengse_img"
+                android:src="@mipmap/theme_search_chengse_mark"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
@@ -42,7 +43,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/color_CCCCCC"/>
+            android:background="@color/theme_line1"/>
 
         <TextView
             android:id="@+id/noAddress"
@@ -50,8 +51,13 @@
             android:layout_height="44dp"
             android:gravity="center_vertical"
             android:textColor="@color/color_EF5B48"
+            android:paddingStart="16dp"
             android:textSize="14sp"
             android:text="不显示位置"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/theme_line1"/>
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refresh"
             android:layout_width="match_parent"

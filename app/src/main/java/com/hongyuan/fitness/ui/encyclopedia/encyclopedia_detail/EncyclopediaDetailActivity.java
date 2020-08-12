@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityEncyclopediaTestDetailBinding;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class EncyclopediaDetailActivity extends CustomActivity {
 
@@ -19,8 +20,11 @@ public class EncyclopediaDetailActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitle("百科详情");
-        setsetImmersive(0x55000000);
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"百科详情");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"百科详情");
+
         binding = ActivityEncyclopediaTestDetailBinding.bind(mView);
         EncyclopediaDetailViewModel viewModel = new EncyclopediaDetailViewModel(this,binding);
         binding.setViewModel(viewModel);

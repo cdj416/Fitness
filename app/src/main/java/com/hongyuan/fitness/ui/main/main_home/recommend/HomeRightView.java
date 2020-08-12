@@ -22,6 +22,7 @@ import com.hongyuan.fitness.ui.scan.ScanActivity;
 import com.hongyuan.fitness.ui.store.punch.PunchBeans;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.HourMeterUtil;
+import com.hongyuan.fitness.util.ViewChangeUtil;
 
 public class HomeRightView extends LinearLayout implements RetrofitListener,HourMeterUtil.TimeCallBack {
 
@@ -150,6 +151,25 @@ public class HomeRightView extends LinearLayout implements RetrofitListener,Hour
         //初始化计时状态
         hourMeterUtil = new HourMeterUtil();
         hourMeterUtil.setTimeCallBack(this);
+    }
+
+    /*
+    * 是否更换黑色图片,黑色文字
+    * */
+    public void changeBlackImg(boolean flag){
+        if(flag){
+            showQr.setTextColor(getContext().getResources().getColor(R.color.color_FF333333));
+            scan.setTextColor(getContext().getResources().getColor(R.color.color_FF333333));
+
+            ViewChangeUtil.changeLeftDrawable(getContext(),showQr,R.mipmap.qr_mark);
+            ViewChangeUtil.changeLeftDrawable(getContext(),scan,R.mipmap.scan_code_img);
+        }else{
+            showQr.setTextColor(getContext().getResources().getColor(R.color.color_FFFFFF));
+            scan.setTextColor(getContext().getResources().getColor(R.color.color_FFFFFF));
+
+            ViewChangeUtil.changeLeftDrawable(getContext(),showQr,R.mipmap.baise_qr_mark);
+            ViewChangeUtil.changeLeftDrawable(getContext(),scan,R.mipmap.theme_black_scan_code_img);
+        }
     }
 
 

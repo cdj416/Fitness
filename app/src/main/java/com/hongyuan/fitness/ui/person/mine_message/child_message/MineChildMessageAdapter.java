@@ -14,9 +14,9 @@ public class MineChildMessageAdapter extends BaseQuickAdapter<MineChildMessageBe
         helper.setText(R.id.messages,item.getMsg_title()).setText(R.id.showTimeText,item.getMsg_date());
 
         if(item.getIs_read() != 1){
-            helper.setVisible(R.id.readStatus,true).setTextColor(R.id.messages,0xFF333333);
+            helper.setVisible(R.id.readStatus,true);
         }else{
-            helper.setVisible(R.id.readStatus,false).setTextColor(R.id.messages,0xFF999999);
+            helper.setVisible(R.id.readStatus,false);
         }
         helper.addOnClickListener(R.id.jumpBox);
     }

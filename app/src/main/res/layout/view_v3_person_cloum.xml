@@ -3,18 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/box">
-    <TextView
-        android:id="@+id/leftView"
+    android:id="@+id/box"
+    android:background="@color/theme_color1">
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/color_FF333333"
-        android:textSize="@dimen/sp_14"
+        android:orientation="horizontal"
         android:layout_centerVertical="true"
-        android:paddingStart="15dp"
-        android:gravity="center_vertical"
-        android:drawablePadding="8dp"
-        tools:ignore="RtlSymmetry" />
+        android:paddingStart="15dp">
+        <ImageView
+            android:id="@+id/leftImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"/>
+        <TextView
+            android:id="@+id/leftView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/theme_color3"
+            android:textSize="@dimen/sp_14"
+            android:gravity="center_vertical"
+            android:drawablePadding="8dp"
+            tools:ignore="RtlSymmetry" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/rightView"
         android:layout_width="wrap_content"
@@ -31,7 +44,7 @@
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"
+        android:background="@color/theme_line1"
         android:layout_alignParentBottom="true"
         android:visibility="gone"/>
 </RelativeLayout>

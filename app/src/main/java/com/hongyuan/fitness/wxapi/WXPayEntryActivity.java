@@ -16,8 +16,11 @@ import com.bumptech.glide.request.target.Target;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.ui.main.MainActivity;
-import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayViewModel;
+import com.hongyuan.fitness.ui.person.newedition.activity.GroupCourseOrdersActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.MemberCardOrdersActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.PriviteCourseOrdersActivity;
 import com.hongyuan.fitness.ui.promt_success.V3SuccessActivity;
+import com.hongyuan.fitness.ui.promt_success.V3SuccessBeans;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopNewOrderAcitivity;
 import com.hongyuan.fitness.ui.webview.WebPayModelUtils;
 import com.hongyuan.fitness.util.BaseUtil;
@@ -35,12 +38,12 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 	private ImageView successImg;
 	private TextView goHome;
 
-	public static boolean isShop = false;
+	public static V3SuccessBeans successBeans;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_class_success);
+		setContentView(R.layout.activity_wx_pay);
 		api = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
 		api.handleIntent(getIntent(), this);
 
@@ -101,39 +104,15 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 			}
 			switch (code) {
 				case 0:
-					msg = "支付成功！";
 					goSuccess();
 					break;
 				case -1:
-					msg = "支付失败！";
-					if(isShop){
-						Intent intent = new Intent(this, ShopNewOrderAcitivity.class);
-						startActivity(intent);
-					}else{
-						Intent intent = new Intent(this, MainActivity.class);
-						startActivity(intent);
-					}
-
-					break;
 				case -2:
-					msg = "您取消了支付！";
-					if(isShop){
-						Intent intent = new Intent(this, ShopNewOrderAcitivity.class);
-						startActivity(intent);
-					}else{
-						Intent intent = new Intent(this, MainActivity.class);
-						startActivity(intent);
-					}
+					goNext();
 					break;
 				default:
 					msg = "支付失败！";
-					if(isShop){
-						Intent intent = new Intent(this, ShopNewOrderAcitivity.class);
-						startActivity(intent);
-					}else{
-						Intent intent = new Intent(this, MainActivity.class);
-						startActivity(intent);
-					}
+					goNext();
 					break;
 			}
 		}
@@ -143,8 +122,13 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 	 * 三版跳转
 	 * */
 	private void goSuccess(){
-		if(BaseUtil.isValue(GoodsPayViewModel.successBeans)){
+
+		if(BaseUtil.isValue(successBeans)){
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("successBeans",successBeans);
+
 			Intent intent = new Intent(this,V3SuccessActivity.class);
+			intent.putExtra("bundle",bundle);
 			startActivity(intent);
 			finish();
 		}else{
@@ -160,5 +144,36 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
 	}
 
+	/*
+	 * 跳转处理
+	 * */
+	private void goNext(){
+		Intent intent = new Intent();
+		if(BaseUtil.isValue(successBeans)){
+			switch (successBeans.getType()){
+				case BUYCARD:
+					intent.setClass(this,MemberCardOrdersActivity.class);
+					break;
+				case BUYGOODS:
+					intent.setClass(this,ShopNewOrderAcitivity.class);
+					break;
+				case GROUPCLASS:
+					intent.setClass(this,GroupCourseOrdersActivity.class);
+					break;
+				case PRIVITECLASS:
+					intent.setClass(this,PriviteCourseOrdersActivity.class);
+					break;
+				default:
+					intent.setClass(this,MainActivity.class);
+					break;
+			}
+		}else{
+			intent.setClass(this,MainActivity.class);
+		}
+
+		startActivity(intent);
+
+		finish();
+	}
 
 }

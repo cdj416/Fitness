@@ -57,6 +57,7 @@ public class MemberCardOrdersViewModel extends CustomViewModel {
         binding.mRec.setLayoutManager(manager);
         adapter = new MemberCardOrdersAdapter();
         binding.mRec.setAdapter(adapter);
+        adapter.addFooterView(mActivity.getFooter16Height(binding.mRec));
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @SingleClick
             @Override
@@ -102,6 +103,7 @@ public class MemberCardOrdersViewModel extends CustomViewModel {
      * */
     private V3SuccessBeans getSuccessBeans(int mPosition){
         V3SuccessBeans beans = new V3SuccessBeans();
+        beans.setType(V3SuccessBeans.TYPE.BUYCARD);
         beans.setTitleText("订单完成");
         beans.setShowText("购买成功");
         beans.setBtn1Text("跳过");

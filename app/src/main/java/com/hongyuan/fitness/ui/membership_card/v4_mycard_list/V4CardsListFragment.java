@@ -75,8 +75,6 @@ public class V4CardsListFragment extends CustomFragment implements V4FilterCards
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(RecyclerView.VERTICAL);
-        mRecycler.addItemDecoration(new DividerItemDecoration(
-                mActivity, DividerItemDecoration.HORIZONTAL_LIST,1,mActivity.getResources().getColor(R.color.color_EEEEEE)));
         mRecycler.setLayoutManager(manager);
         adapter = new V4CardsListAdapter();
         mRecycler.setAdapter(adapter);

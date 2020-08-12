@@ -5,6 +5,12 @@ import java.util.List;
 
 public class V3SuccessBeans implements Serializable {
 
+    //跳转类型
+    public enum TYPE {
+        PRIVITECLASS,GROUPCLASS,BUYCARD,BUYGOODS
+    }
+
+    private TYPE type;
     private String titleText;
     private String showText;
     private String btn1Text;
@@ -45,6 +51,14 @@ public class V3SuccessBeans implements Serializable {
 
     public String getBtn2Text() {
         return btn2Text;
+    }
+
+    public TYPE getType() {
+        return type;
+    }
+
+    public void setType(TYPE type) {
+        this.type = type;
     }
 
     public void setBtn2Text(String btn2Text) {

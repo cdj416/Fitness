@@ -28,13 +28,13 @@
             android:layout_height="114dp"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="@color/color_FFFFFF">
+            android:background="@color/theme_color1">
             <TextView
                 android:id="@+id/allStepNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:text="8625"/>
             <TextView
                 android:id="@+id/dataText"
@@ -56,13 +56,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="114dp"
-            android:background="@color/color_FFFFFF"
+            android:background="@color/theme_color1"
             android:layout_marginTop="12dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_margin="16dp"
                 android:text="单日最高记录"/>
             <LinearLayout
@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="24sp"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:text="0"/>
                 <TextView
                     android:id="@+id/dataHighest"

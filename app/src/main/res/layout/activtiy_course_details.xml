@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/white">
+        android:background="@color/theme_background1">
 
         <com.hongyuan.fitness.custom_view.StickyScrollView
             android:id="@+id/mScroll"
@@ -162,14 +162,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_14"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:text="可约时间 近7天"/>
                             <TextView
                                 android:id="@+id/coachTime"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_12"
-                                android:textColor="@color/color_777777"
+                                android:textColor="@color/theme_color4"
                                 android:text="今日可约 16:00"/>
                         </LinearLayout>
                     </RelativeLayout>
@@ -177,7 +177,7 @@
                         android:layout_width="1px"
                         android:layout_height="50dp"
                         android:layout_gravity="center_vertical"
-                        android:background="@color/color_FFD1D1D1"/>
+                        android:background="@color/theme_line1"/>
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -200,14 +200,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_14"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:text="服务场地"/>
                             <TextView
                                 android:id="@+id/courseAddress"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_12"
-                                android:textColor="@color/color_777777"
+                                android:textColor="@color/theme_color4"
                                 android:text="首玺健身南街店"/>
                         </LinearLayout>
                     </RelativeLayout>
@@ -219,11 +219,11 @@
                     android:layout_height="1px"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:background="@color/color_FFD1D1D1"/>
+                    android:background="@color/theme_line1"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
@@ -238,7 +238,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
@@ -247,7 +247,7 @@
                     android:id="@+id/selectType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color4"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
@@ -257,7 +257,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
@@ -266,7 +266,7 @@
                     android:id="@+id/courseTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color4"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
@@ -276,7 +276,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
@@ -285,7 +285,7 @@
                     android:id="@+id/courseContent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color4"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
@@ -295,7 +295,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
@@ -311,7 +311,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
@@ -320,7 +320,7 @@
                     android:id="@+id/coursePeople"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color4"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
@@ -330,7 +330,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
                     android:textSize="16sp"
@@ -339,7 +339,7 @@
                     android:id="@+id/courseSuggest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_777777"
+                    android:textColor="@color/theme_color4"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
@@ -353,7 +353,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="23dp"
-                    android:background="@color/color_EEEEEE"/>
+                    android:background="@color/theme_line1"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -364,7 +364,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:layout_centerVertical="true"
                         android:textSize="16sp"
                         android:text="约课流程"/>
@@ -385,7 +385,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/privit_course_process_img"
+                    android:src="@mipmap/theme_privit_course_process_img"
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:scaleType="fitXY"/>
@@ -397,14 +397,13 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="23dp"
-                    android:background="@color/color_EEEEEE"/>
+                    android:background="@color/theme_line1"/>
 
                 <com.hongyuan.fitness.custom_view.comm_title.CommentTitleView
                     android:id="@+id/commentTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="16dp"
-                    android:background="@color/color_FFFFFF"/>
+                    android:paddingLeft="16dp"/>
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -433,7 +432,7 @@
                             android:gravity="center"
                             android:text="暂无评论数据！"
                             android:textSize="12sp"
-                            android:textColor="@color/color_FF999999" />
+                            android:textColor="@color/theme_color4" />
                     </RelativeLayout>
                 </FrameLayout>
             </LinearLayout>
@@ -470,7 +469,7 @@
             android:layout_height="84dp"
             android:orientation="horizontal"
             android:layout_alignParentBottom="true"
-            android:background="@color/white">
+            android:background="@color/theme_color1">
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -481,10 +480,10 @@
                     android:id="@+id/callTel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@mipmap/person_message_mark"
+                    android:drawableTop="@mipmap/theme_person_message_mark"
                     android:gravity="center"
                     android:drawablePadding="3dp"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_14"
                     android:text="咨询教练"/>
             </LinearLayout>
@@ -506,6 +505,6 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_above="@id/bottomBox"
-            android:background="@color/color_FFD1D1D1"/>
+            android:background="@color/theme_line1"/>
     </RelativeLayout>
 </layout>

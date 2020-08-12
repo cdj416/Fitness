@@ -11,13 +11,13 @@
     <com.hongyuan.fitness.custom_view.StickyScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/color_F5F6FB">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/theme_background">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mRec"
@@ -26,35 +26,61 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:background="@color/color_FFFFFF"
+                android:background="@color/theme_color1"
                 android:gravity="center_vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:text="评分"/>
-                <RatingBar
+                <!--<RatingBar
                     android:id="@+id/myRat"
                     android:layout_width="wrap_content"
                     android:layout_height="18dp"
                     style="@style/evaluationRatingBar"
                     android:layout_marginLeft="10dp"
                     android:numStars="5"
-                    android:rating="5"/>
+                    android:rating="5"/>-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/start_select"/>
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/start_select"/>
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/start_select"/>
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/start_select"/>
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/start_select"/>
+                </LinearLayout>
                 <TextView
                     android:id="@+id/showText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:layout_marginStart="10dp"
                     android:text="超出预期"/>
             </LinearLayout>
@@ -65,13 +91,15 @@
                 android:layout_marginTop="12dp"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:background="@color/color_FFFFFF">
+                android:background="@color/theme_color1">
                 <EditText
                     android:id="@+id/editContent"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:background="@color/color_FFFFFF"
-                    android:textColor="@color/color_FF333333"
+                    android:layout_height="120dp"
+                    android:background="@drawable/theme_shape_radius6_00000000_stroke_cccccc"
+                    android:textColor="@color/theme_color3"
+                    android:textColorHint="@color/theme_color4"
+                    android:padding="12dp"
                     android:textSize="@dimen/sp_14"
                     android:gravity="top"
                     android:hint="你对这个商品满意吗？你的评价会帮助我们选择更好的商品..."/>
@@ -84,7 +112,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/color_EEEEEE"
+                    android:background="@color/theme_line1"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"/>
                 <LinearLayout
@@ -103,7 +131,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_12"
-                        android:textColor="@color/color_FF999999"
+                        android:textColor="@color/theme_color4"
                         android:layout_marginStart="5dp"
                         android:text="公开评价"/>
                 </LinearLayout>

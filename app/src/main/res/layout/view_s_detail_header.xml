@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/color_FFFFFF">
+    android:background="@color/theme_color1">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
@@ -18,7 +18,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_12"
                 android:text="¥"/>
             <TextView
@@ -43,6 +43,7 @@
                     android:textSize="@dimen/sp_12"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:textColor="@color/theme_color4"
                     android:text="+"/>
                 <TextView
                     android:id="@+id/goodPoint"
@@ -55,6 +56,7 @@
                     android:id="@+id/pointText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/theme_color4"
                     android:textSize="@dimen/sp_12"
                     android:text="积分"/>
             </LinearLayout>
@@ -63,7 +65,7 @@
                 android:id="@+id/tvIncome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_12"
                 android:layout_marginStart="16dp"
                 android:visibility="gone"
@@ -75,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_12"
-            android:textColor="@color/color_FF999999"
+            android:textColor="@color/theme_color4"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:text="销量5000"/>
@@ -125,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_14"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:layout_marginEnd="30dp"
             android:layout_centerVertical="true"
             android:ellipsize="end"
@@ -148,7 +150,7 @@
                 android:id="@+id/tvCollection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:textSize="@dimen/sp_12"
                 android:gravity="center"
                 android:text="@string/shoucang"/>
@@ -159,7 +161,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_12"
-        android:textColor="@color/color_FF999999"
+        android:textColor="@color/theme_color4"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="商品二级标题商品二级标题商品"/>
@@ -178,20 +180,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:text="@string/fahuo"/>
             <TextView
                 android:id="@+id/tvGaddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:text="浙江湖州 "/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:layout_marginEnd="12dp"
                 android:layout_marginStart="12dp"
                 android:text="|"/>
@@ -199,21 +201,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:text="快递："/>
             <TextView
                 android:id="@+id/deliverFee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:text="0.00"/>
             <TextView
                 android:id="@+id/zhiMark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_marginStart="12dp"
                 android:visibility="gone"
                 android:text="至"/>
@@ -222,7 +224,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_marginStart="6dp"
                 android:visibility="gone"
                 android:text="杭州"/>
@@ -232,7 +234,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_marginStart="6dp"
                 android:text="(可自提)"/>
 
@@ -254,14 +256,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:layout_centerVertical="true"
                 android:text="选择："/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_toEndOf="@id/tv1"
                 android:layout_centerVertical="true"
                 android:text="规格名称"/>
@@ -321,7 +323,7 @@
                 android:textColor="@color/color_FF999999"
                 android:textSize="@dimen/sp_12"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/shape_radius6_fff5f5f5"
+                android:background="@drawable/theme_shape_radius6_fff5f5f5"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:paddingTop="7dp"
@@ -343,14 +345,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_12"
-            android:textColor="@color/color_FF999999"
+            android:textColor="@color/theme_color4"
             android:layout_centerVertical="true"
             android:text="参数："/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_12"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:layout_toEndOf="@id/tv2"
             android:layout_centerVertical="true"
             android:text="品牌型号"/>

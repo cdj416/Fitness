@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@color/white">
+                android:background="@color/theme_background1">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -31,112 +31,134 @@
                         android:layout_height="250dp"
                         android:src="@mipmap/coach_bg_img"
                         android:scaleType="centerCrop"/>
-                    <androidx.cardview.widget.CardView
+                    <!--<androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="122dp"
                         app:cardElevation="16dp"
                         app:cardUseCompatPadding="true"
                         app:cardCornerRadius="6dp">
+
+                    </androidx.cardview.widget.CardView>-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="198dp"
+                        android:visibility="visible"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="140dp"
+                        android:background="@drawable/theme_shape_radius6_ffffff">
+                        <TextView
+                            android:id="@+id/coachName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="@color/theme_color3"
+                            android:layout_marginTop="46dp"
+                            android:drawableRight="@mipmap/person_girl_mark_img"
+                            android:gravity="center"
+                            android:drawablePadding="5dp"
+                            android:text="爱撸铁的灰"/>
+                        <TextView
+                            android:id="@+id/coachGrade"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_FFFFFF"
+                            android:textSize="12sp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/shape_radius16_a9bbff"
+                            android:gravity="center"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:text="私教专业P3"/>
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="198dp"
-                            android:visibility="visible"
-                            android:gravity="center_horizontal"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/coachName"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_16"
-                                android:textColor="@color/color_FF333333"
-                                android:layout_marginTop="46dp"
-                                android:drawableRight="@mipmap/person_girl_mark_img"
-                                android:gravity="center"
-                                android:drawablePadding="5dp"
-                                android:text="爱撸铁的灰"/>
-                            <TextView
-                                android:id="@+id/coachGrade"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/color_FFFFFF"
-                                android:textSize="12sp"
-                                android:layout_marginTop="8dp"
-                                android:background="@drawable/shape_radius16_a9bbff"
-                                android:gravity="center"
-                                android:paddingLeft="10dp"
-                                android:paddingRight="10dp"
-                                android:paddingTop="3dp"
-                                android:paddingBottom="3dp"
-                                android:text="私教专业P3"/>
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:orientation="horizontal">
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_12"
+                                    android:textColor="@color/theme_color4"
+                                    android:text="累计上课"/>
+                                <TextView
+                                    android:id="@+id/upClassNum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_16"
+                                    android:textColor="@color/theme_color3"
+                                    android:textStyle="bold"
+                                    android:text="20"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_12"
+                                    android:textColor="@color/color_FF999999"
+                                    android:text="本月"/>
+                            </LinearLayout>
+                            <View
+                                android:layout_width="1px"
+                                android:layout_height="48dp"
+                                android:background="@color/theme_line1"
+                                android:layout_gravity="center_vertical"/>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_12"
+                                    android:textColor="@color/color_FF999999"
+                                    android:text="课程评价"/>
+                                <TextView
+                                    android:id="@+id/evaluationNum"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_16"
+                                    android:textColor="@color/theme_color3"
+                                    android:textStyle="bold"
+                                    android:text="12"/>
                                 <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="@dimen/sp_12"
-                                        android:textColor="@color/color_FF999999"
-                                        android:text="累计上课"/>
-                                    <TextView
-                                        android:id="@+id/upClassNum"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="@dimen/sp_16"
-                                        android:textColor="@color/color_FF333333"
-                                        android:textStyle="bold"
-                                        android:text="20"/>
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="@dimen/sp_12"
-                                        android:textColor="@color/color_FF999999"
-                                        android:text="本月"/>
-                                </LinearLayout>
-                                <View
-                                    android:layout_width="1px"
-                                    android:layout_height="48dp"
-                                    android:background="@color/color_EEEEEE"
-                                    android:layout_gravity="center_vertical"/>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="center"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="@dimen/sp_12"
-                                        android:textColor="@color/color_FF999999"
-                                        android:text="课程评价"/>
-                                    <TextView
-                                        android:id="@+id/evaluationNum"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="@dimen/sp_16"
-                                        android:textColor="@color/color_FF333333"
-                                        android:textStyle="bold"
-                                        android:text="12"/>
-                                    <RatingBar
-                                        android:id="@+id/myRat"
-                                        android:layout_width="wrap_content"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                    <ImageView
+                                        android:layout_width="12dp"
                                         android:layout_height="12dp"
-                                        style="@style/fiveRatingBar"
-                                        android:layout_gravity="center"
-                                        android:numStars="5"
-                                        android:rating="5"/>
+                                        android:src="@drawable/start_select"/>
+                                    <ImageView
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:src="@drawable/start_select"/>
+                                    <ImageView
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:src="@drawable/start_select"/>
+                                    <ImageView
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:src="@drawable/start_select"/>
+                                    <ImageView
+                                        android:layout_width="12dp"
+                                        android:layout_height="12dp"
+                                        android:src="@drawable/start_select"/>
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </LinearLayout>
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/headImg"
                         android:layout_width="72dp"
@@ -164,11 +186,12 @@
                     android:paddingRight="16dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="24dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_16"
-                        android:textColor="@color/color_FF333333"
+                        android:textColor="@color/theme_color3"
                         android:text="所有课程"/>
                     <TextView
                         android:id="@+id/moreClass"
@@ -192,7 +215,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/color_FFF5F5F5"
+                    android:background="@color/theme_line1"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="11dp"/>
@@ -215,13 +238,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="16sp"
                                 android:text="可约时间"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:textSize="12sp"
                                 android:layout_marginLeft="10dp"
                                 android:text="近七天"/>
@@ -247,7 +270,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/color_FFF5F5F5"
+                    android:background="@color/theme_line1"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="11dp"/>
@@ -264,14 +287,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="16sp"
                             android:text="所在门店"/>
                         <TextView
                             android:id="@+id/storeName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:textSize="@dimen/sp_14"/>
                     </LinearLayout>
                     <ImageView
@@ -284,14 +307,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/color_FFF5F5F5"
+                    android:background="@color/theme_line1"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="11dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:textSize="16sp"
                     android:paddingLeft="16dp"
                     android:text="相册"/>
@@ -450,19 +473,18 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1px"
-                        android:background="@color/color_FFF5F5F5"
+                        android:background="@color/theme_line1"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"/>
                     <com.hongyuan.fitness.custom_view.comm_title.CommentTitleView
                         android:id="@+id/commentTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="16dp"
-                        android:background="@color/color_FFFFFF"/>
+                        android:paddingLeft="16dp"/>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1px"
-                        android:background="@color/color_FFF5F5F5"
+                        android:background="@color/theme_line1"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"/>
                 </LinearLayout>
@@ -514,16 +536,16 @@
                 android:id="@+id/myTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:left_image="@mipmap/white_common"
-                app:center_text="教练主页"
                 app:text_color="@color/color_FFFFFF"
+                app:center_text="教练主页"
+                app:left_image="@mipmap/white_common"
                 app:right_image="@mipmap/white_collection_mark"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="84dp"
             android:orientation="horizontal"
-            android:background="@color/color_FFFFFF"
+            android:background="@color/theme_color1"
             android:gravity="center"
             android:layout_gravity="bottom">
             <Button
@@ -540,7 +562,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/color_EEEEEE"
+            android:background="@color/theme_line1"
             android:layout_gravity="bottom"
             android:layout_marginBottom="84dp"/>
     </FrameLayout>

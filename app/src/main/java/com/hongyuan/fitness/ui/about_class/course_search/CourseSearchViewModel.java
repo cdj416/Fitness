@@ -69,7 +69,7 @@ public class CourseSearchViewModel extends CustomViewModel {
             check_type = PRIVITE_TYPE;
             binding.priviteText.setTextColor(mActivity.getResources().getColor(R.color.color_EF5B48));
             binding.oBottomLine.setVisibility(View.VISIBLE);
-            binding.groupText.setTextColor(mActivity.getResources().getColor(R.color.color_777777));
+            binding.groupText.setTextColor(mActivity.getResources().getColor(R.color.color_FF999999));
             binding.tBottomLine.setVisibility(View.GONE);
 
             binding.priviteCourse.setVisibility(View.VISIBLE);
@@ -83,7 +83,7 @@ public class CourseSearchViewModel extends CustomViewModel {
         });
         binding.groupBox.setOnClickListener(v -> {
             check_type = GROUP_TYPE;
-            binding.priviteText.setTextColor(mActivity.getResources().getColor(R.color.color_777777));
+            binding.priviteText.setTextColor(mActivity.getResources().getColor(R.color.color_FF999999));
             binding.oBottomLine.setVisibility(View.GONE);
             binding.groupText.setTextColor(mActivity.getResources().getColor(R.color.color_EF5B48));
             binding.tBottomLine.setVisibility(View.VISIBLE);
@@ -198,6 +198,7 @@ public class CourseSearchViewModel extends CustomViewModel {
                 binding.loadBox.setVisibility(View.GONE);
             }else{
                 binding.loadBox.setVisibility(View.VISIBLE);
+                binding.priviteCourse.setVisibility(View.GONE);
             }
         }
 
@@ -219,6 +220,7 @@ public class CourseSearchViewModel extends CustomViewModel {
                 binding.loadBox.setVisibility(View.GONE);
             }else{
                 binding.loadBox.setVisibility(View.VISIBLE);
+                binding.groupCourse.setVisibility(View.GONE);
             }
         }
     }

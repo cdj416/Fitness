@@ -8,7 +8,7 @@
         android:layout_height="118dp"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
-        android:background="@color/color_FFFFFF"
+        android:background="@color/theme_color1"
         android:id="@+id/box">
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/goodsImg"
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="商品名称商品名称商品名称商品名称商品名称商品名称"/>
@@ -83,5 +83,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"/>
+        android:background="@color/theme_line1"/>
 </LinearLayout>

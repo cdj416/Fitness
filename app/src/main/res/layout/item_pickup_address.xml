@@ -4,7 +4,7 @@
     android:layout_height="54dp"
     android:paddingEnd="16dp"
     android:paddingStart="16dp"
-    android:background="@color/color_FFFFFF"
+    android:background="@color/theme_color1"
     android:id="@+id/box">
     <ImageView
         android:id="@+id/img"
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_12"
-        android:textColor="@color/color_FF333333"
+        android:textColor="@color/theme_color3"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@id/img"
         android:text="自提点地址自提点地址自提点地址自提点地址 自提点地址自提点地址自提点地址"
@@ -37,6 +37,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"
+        android:background="@color/theme_line1"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

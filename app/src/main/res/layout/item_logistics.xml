@@ -20,7 +20,7 @@
                 android:id="@+id/month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:textSize="@dimen/sp_14"
                 android:text="02-22"/>
             <TextView
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_16"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:visibility="gone"
                 android:text="已签收"/>
 

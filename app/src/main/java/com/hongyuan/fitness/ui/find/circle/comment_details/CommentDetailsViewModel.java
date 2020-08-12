@@ -60,8 +60,6 @@ public class CommentDetailsViewModel extends CustomViewModel implements Keyboard
 
         LinearLayoutManager manager = new LinearLayoutManager(mActivity);
         manager.setOrientation(RecyclerView.VERTICAL);
-        binding.mRecycler.addItemDecoration(new DividerItemDecoration(
-                getContext(), DividerItemDecoration.HORIZONTAL_LIST,1,0xFFEEEEEE));
         binding.mRecycler.setLayoutManager(manager);
         adapter = new CommentDetailsAdapter();
         binding.mRecycler.setAdapter(adapter);

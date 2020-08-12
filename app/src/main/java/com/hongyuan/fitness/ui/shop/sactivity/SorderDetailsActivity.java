@@ -8,6 +8,7 @@ import com.hongyuan.fitness.databinding.ActivityBottomSorderDetailsBinding;
 import com.hongyuan.fitness.databinding.ActivitySOrderDetailsBinding;
 import com.hongyuan.fitness.ui.shop.sviewmodel.SorderDetailViewModel;
 import com.hongyuan.fitness.ui.shop.sviewmodel.bottomviewmodel.SorderBottomViewModel;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class SorderDetailsActivity extends CustomActivity {
 
@@ -25,7 +26,11 @@ public class SorderDetailsActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitleBar(TYPE_BAR5,R.drawable.shape_soid_ffffff,"订单详情");
+
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"订单详情");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"订单详情");
 
         ActivitySOrderDetailsBinding binding = ActivitySOrderDetailsBinding.bind(mView);
         viewModel = new SorderDetailViewModel(this,binding);

@@ -25,7 +25,6 @@ import com.hongyuan.fitness.custom_view.filter_view.DropDownMenu;
 import com.hongyuan.fitness.ui.about_class.group_class.group_details.MissionDetailActivity;
 import com.hongyuan.fitness.ui.about_class.privite_class.pay_order_detail.select_time.TabTimeBean;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
-import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.vtwo_private_lessons.FilterPriviteLessonsAdapter;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.scwang.smartrefresh.header.MaterialHeader;
@@ -74,6 +73,8 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
 
     @Override
     public void initView(View mView) {
+        skin = mActivity.skin;
+
         dropDownMenu = mView.findViewById(R.id.dropDownMenu);
         mFilterContentView = mView.findViewById(R.id.mFilterContentView);
         timeRec = mView.findViewById(R.id.timeRec);
@@ -81,8 +82,8 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
         refreshLayout = mView.findViewById(R.id.refreshLayout);
 
         //初始化筛选菜单
-        //String[] titleList = new String[] { "湖州全城", "筛选课程","开始时间" };
-        //dropDownMenu.setMenuAdapter(new FilterGoupClassAdapter(mActivity, titleList, this,this));
+        String[] titleList = new String[] { TokenSingleBean.getInstance().getRegion_name(), "筛选课程","开始时间" };
+        dropDownMenu.setMenuAdapter(new FilterGoupClassAdapter(mActivity, titleList, this,this));
 
         //加载刷新控件
         setOnRefresh();
@@ -359,19 +360,36 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
     @Subscribe(id = ConstantsCode.EB_HOME_LOCATION)
     public void changeLocation(String message) {
         //城市切换了去刷新下数据
-        classBeans = null;
-        getGroupClass();
+        //classBeans = null;
+        //getGroupClass();
 
-        //初始化筛选菜单
+        /*//初始化筛选菜单
         String[] titleList = new String[] { TokenSingleBean.getInstance().getRegion_name()+"全城", "筛选课程","开始时间" };
         if(filterAdapter == null){
             filterAdapter = new FilterGoupClassAdapter(mActivity, titleList, this,this);
             dropDownMenu.setMenuAdapter(filterAdapter);
         }else{
             filterAdapter.changTitles(titleList);
+        }*/
+
+
+    }
+
+    private String skin;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //每次来，去刷新下当前模式
+        if(!skin.equals(mActivity.skin) && filterAdapter != null){
+            skin = mActivity.skin;
+            //从新绘制头部视图
+            dropDownMenu.setContentView(mFilterContentView);
+            //从新添加数据源
+            dropDownMenu.setMenuAdapter(filterAdapter);
+            //刷新下显示样式
+            filterAdapter.changeSkin();
         }
-
-
     }
 
     @Nullable

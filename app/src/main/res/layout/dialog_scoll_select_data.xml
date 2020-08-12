@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:orientation="vertical"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_background1">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="46dp">
@@ -16,7 +16,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_centerInParent="true"
                 android:text="选择会籍顾问"/>
 
@@ -24,7 +24,7 @@
                 android:id="@+id/closeImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/close_heise_img"
+                android:src="@mipmap/theme_close_x_mark"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="11dp"
@@ -41,7 +41,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/color_EEEEEE"/>
+                android:background="@color/theme_line1"/>
             <Button
                 android:id="@+id/submit"
                 android:layout_width="match_parent"

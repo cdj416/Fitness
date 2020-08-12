@@ -10,13 +10,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/theme_color1"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:gravity="center"
                 android:text="预约首次上课时间"/>
             <androidx.recyclerview.widget.RecyclerView
@@ -41,7 +41,7 @@
             android:layout_height="84dp"
             android:layout_alignParentBottom="true"
             android:gravity="center_vertical"
-            android:background="@color/white"
+            android:background="@color/theme_color1"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:orientation="horizontal">
@@ -70,7 +70,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="#EEEEEE"
+            android:background="@color/theme_line1"
             android:layout_above="@id/bottomBox"/>
     </RelativeLayout>
 </LinearLayout>

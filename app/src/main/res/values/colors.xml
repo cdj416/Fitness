@@ -54,5 +54,7 @@
     <color name="color_f2">#F2F2F2</color>
     <color name="color_FFE8EAF5">#FFE8EAF5</color>
 
-
+    <!--半透明黑色颜色值-->
+    <color name="translucent_black_35">#a6000000</color>
+    <color name="translucent_black_70">#4d000000</color>
 </resources>

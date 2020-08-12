@@ -31,6 +31,7 @@ import com.hongyuan.fitness.ui.shop.sactivity.CheckInMeActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.CustomServerActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.IncomeMangeActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopCollectActivity;
+import com.hongyuan.fitness.util.SkinConstants;
 import com.hongyuan.fitness.util.TimeUtil;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -54,9 +55,16 @@ public class PersonFragment extends CustomFragment{
 
     @Override
     public void initView(View mView) {
+        setEnableOverScrollDrag(true);
+
+        myTitle = mView.findViewById(R.id.myTitle);
+
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin))
+            myTitle.setCenterTextColor("我的",getResources().getColor(R.color.theme_color3));
+        if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin))
+            myTitle.setCenterTextColor("我的",getResources().getColor(R.color.theme_color3_black));
 
         pHeadView = mView.findViewById(R.id.pHeadView);
-        myTitle = mView.findViewById(R.id.myTitle);
         messageMark = mView.findViewById(R.id.messageMark);
         myTitle.getRightView().setOnClickListener(v -> startActivity(DailyPunchActivity.class,null));
         messageMark.setOnClickListener(v -> mActivity.startActivity(MineMessageActivity.class,null));

@@ -8,6 +8,7 @@ import android.widget.FrameLayout;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.RetrofitListener;
 import com.hongyuan.fitness.custom_view.filter_view.adapter.DoubleListAdapter;
 import com.hongyuan.fitness.custom_view.filter_view.adapter.MenuAdapter;
@@ -37,12 +38,17 @@ public class FilterGoupClassAdapter implements MenuAdapter, RetrofitListener {
     private final int POSITION_TYPE = 1;
     private final int POSITION_TIME = 2;
 
-    private final Context mContext;
+    private final CustomActivity mContext;
     private OnFilterDoneListener onFilterDoneListener;
     private OnFilterContentListener contentListener;
     private String[] titles;
 
     private TokenSingleBean userToken;
+
+    private String skin;
+    //单列适配器
+    private SingleReclerAdapter singleReclerAdapter1;
+    private SingleReclerAdapter singleReclerAdapter2;
 
     //区县门店列表
     private DoubleListView<FilterAreaBeans.DataBean.ListBean.SonListBean, FilterStoreBeans.DataBean.ListBean> doubleFilter;
@@ -58,13 +64,50 @@ public class FilterGoupClassAdapter implements MenuAdapter, RetrofitListener {
     }
 
 
-    public FilterGoupClassAdapter(Context context, String[] titles, OnFilterDoneListener onFilterDoneListener,OnFilterContentListener contentListener){
+    public FilterGoupClassAdapter(CustomActivity context, String[] titles, OnFilterDoneListener onFilterDoneListener, OnFilterContentListener contentListener){
         this.mContext = context;
         this.titles = titles;
         this.onFilterDoneListener = onFilterDoneListener;
         this.contentListener = contentListener;
 
+        skin = mContext.skin;
+
         userToken = TokenSingleBean.getInstance();
+
+        singleReclerAdapter1 = new SingleReclerAdapter<FilterGoupClassTypeBeans.DataBean>(mContext.skin) {
+            @Override
+            public String provideText(FilterGoupClassTypeBeans.DataBean t) {
+                return t.getSi_name();
+            }
+
+            @Override
+            public boolean isSelect(FilterGoupClassTypeBeans.DataBean t) {
+                if(t.isSelect()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        };
+
+        singleReclerAdapter2 = new SingleReclerAdapter<FilterGoupClassTime>(mContext.skin) {
+            @Override
+            public String provideText(FilterGoupClassTime t) {
+                if(t.getStartTime().equals("全天")){
+                    return t.getStartTime();
+                }
+                return t.getStartTime()+" - "+t.getEndTime();
+            }
+
+            @Override
+            public boolean isSelect(FilterGoupClassTime t) {
+                if(t.isSelect()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        };
     }
 
     @Override
@@ -176,7 +219,7 @@ public class FilterGoupClassAdapter implements MenuAdapter, RetrofitListener {
                     }
                 });
 
-        doubleFilter.getLeftListView().setBackgroundColor(mContext.getResources().getColor(R.color.color_F5F6FB));
+        //doubleFilter.getLeftListView().setBackgroundColor(mContext.getResources().getColor(R.color.color_F5F6FB));
         //获取左边的区县数据
         getArea();
 
@@ -188,21 +231,7 @@ public class FilterGoupClassAdapter implements MenuAdapter, RetrofitListener {
     * */
     private View createSingleTypeListView() {
         singleListView = new SingleReclerView<FilterGoupClassTypeBeans.DataBean>(mContext)
-                .setMyAdapter(new SingleReclerAdapter<FilterGoupClassTypeBeans.DataBean>() {
-                    @Override
-                    public String provideText(FilterGoupClassTypeBeans.DataBean t) {
-                        return t.getSi_name();
-                    }
-
-                    @Override
-                    public boolean isSelect(FilterGoupClassTypeBeans.DataBean t) {
-                        if(t.isSelect()){
-                            return true;
-                        }else{
-                            return false;
-                        }
-                    }
-                }).setItemClickListener((position,adapter) -> {
+                .setMyAdapter(singleReclerAdapter1).setItemClickListener((position,adapter) -> {
                     String showTypeText;
                     if(!CommonUtil.isEmpty(goupClassTypeBeans.getData())){
                         for(FilterGoupClassTypeBeans.DataBean beans : goupClassTypeBeans.getData()){
@@ -236,24 +265,7 @@ public class FilterGoupClassAdapter implements MenuAdapter, RetrofitListener {
     private View createOpenTimeView() {
         List<FilterGoupClassTime> mList = getTimeData();
         SingleReclerView<FilterGoupClassTime> singleTimeListView = new SingleReclerView<FilterGoupClassTime>(mContext)
-                .setMyAdapter(new SingleReclerAdapter<FilterGoupClassTime>() {
-                    @Override
-                    public String provideText(FilterGoupClassTime t) {
-                        if(t.getStartTime().equals("全天")){
-                            return t.getStartTime();
-                        }
-                        return t.getStartTime()+" - "+t.getEndTime();
-                    }
-
-                    @Override
-                    public boolean isSelect(FilterGoupClassTime t) {
-                        if(t.isSelect()){
-                            return true;
-                        }else{
-                            return false;
-                        }
-                    }
-                }).setItemClickListener((position,adapter) -> {
+                .setMyAdapter(singleReclerAdapter2).setItemClickListener((position,adapter) -> {
                     String showTiemText;
                     for(FilterGoupClassTime beans : mList){
                         beans.setSelect(false);
@@ -325,6 +337,34 @@ public class FilterGoupClassAdapter implements MenuAdapter, RetrofitListener {
         getCourseType();
 
         onFilterText(0,userToken.getRegion_name()+"全城");
+    }
+
+    /*
+     * 刷新下主题模式
+     * */
+    public void changeSkin(){
+
+        if(!skin.equals(mContext.skin)){
+            this.skin = mContext.skin;
+
+            singleReclerAdapter1.changeSkin(mContext.skin);
+            singleReclerAdapter2.changeSkin(mContext.skin);
+
+            doubleFilter.leftAdapter(new SimpleTextAdapter<FilterAreaBeans.DataBean.ListBean.SonListBean>(null, mContext) {
+                @Override
+                public String provideText(FilterAreaBeans.DataBean.ListBean.SonListBean filterType) {
+                    return filterType.getRegion_name();
+                }
+
+                @Override
+                protected void initCheckedTextView(FilterCheckedTextView checkedTextView) {
+                    checkedTextView.setPadding(0, UIUtil.dp(mContext, 15), 0, UIUtil.dp(mContext, 15));
+                }
+            });
+
+            //更新下数据
+            getArea();
+        }
     }
 
 

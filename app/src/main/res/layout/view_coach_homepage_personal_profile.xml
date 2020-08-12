@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_16"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:text="个人介绍"/>
         <TextView
             android:id="@+id/goCoachProfile"
@@ -47,7 +47,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_FFF5F5F5"
+        android:background="@color/theme_line1"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="11dp"/>

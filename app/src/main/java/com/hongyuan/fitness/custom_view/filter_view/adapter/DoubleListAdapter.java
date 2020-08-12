@@ -73,7 +73,7 @@ public abstract class DoubleListAdapter<T> extends BaseBaseAdapter<T> {
 
     protected void initCheckedTextView(LinearLayout checkedTextView) {
         checkedTextView.setPadding(UIUtil.dp(context, 15), 0, 0, 0);
-        checkedTextView.setBackgroundResource(android.R.color.white);
+        checkedTextView.setBackgroundResource(android.R.color.transparent);
     }
 
 

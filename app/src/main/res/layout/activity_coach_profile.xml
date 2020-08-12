@@ -35,13 +35,14 @@
                         android:layout_height="wrap_content"
                         android:visibility="visible"
                         android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:background="@drawable/theme_shape_radius6_ffffff">
                         <TextView
                             android:id="@+id/coachName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_16"
-                            android:textColor="@color/color_FF333333"
+                            android:textColor="@color/theme_color3"
                             android:layout_marginTop="46dp"
                             android:drawableRight="@mipmap/person_girl_mark_img"
                             android:gravity="center"
@@ -66,8 +67,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:paddingBottom="50dp"
-                            android:background="@color/white">
+                            android:paddingBottom="50dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
                                 android:layout_marginTop="20dp"
                                 android:layout_marginLeft="16dp"
                                 android:textSize="@dimen/sp_16"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:text="经历"/>
                             <TextView
                                 android:id="@+id/experienceText"
@@ -94,7 +94,7 @@
                                 android:layout_marginTop="20dp"
                                 android:layout_marginLeft="16dp"
                                 android:textSize="@dimen/sp_16"
-                                android:textColor="@color/color_FF333333"
+                                android:textColor="@color/theme_color3"
                                 android:text="擅长"/>
                             <TextView
                                 android:id="@+id/goodAt"
@@ -118,7 +118,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textSize="@dimen/sp_16"
-                                    android:textColor="@color/color_FF333333"
+                                    android:textColor="@color/theme_color3"
                                     android:text="专业认证"/>
                                 <TextView
                                     android:id="@+id/certificationNUm"

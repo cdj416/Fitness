@@ -3,9 +3,11 @@ package com.hongyuan.fitness.ui.webview;
 import android.view.KeyEvent;
 
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityWebviewBinding;
 import com.hongyuan.fitness.ui.main.MainActivity;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class WebViewActivity extends CustomActivity {
 
@@ -19,6 +21,12 @@ public class WebViewActivity extends CustomActivity {
     @Override
     protected void initView() {
         setTitleBar(TYPE_BAR1,R.drawable.shape_soid_ffffff,"");
+
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR1,R.drawable.theme_shape_soid_ffffff,"");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR8,R.drawable.theme_shape_soid_ffffff_black,"");
+
         ActivityWebviewBinding binding = ActivityWebviewBinding.bind(mView);
         modelView = new WebViewModelView(this,binding);
         binding.setViewModel(modelView);

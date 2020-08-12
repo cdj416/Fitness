@@ -18,6 +18,7 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -233,7 +234,8 @@ public class ChatView extends RelativeLayout implements SensorEventListener {
                 message.setUserInfo(new DefaultUser("1", "", TokenSingleBean.getInstance().getHeadUrl()));
                 message.setMediaFilePath(convertedFile.getPath());
                 message.setDuration(duration);
-                message.setMessageStatus(IMessage.MessageStatus.SEND_GOING);
+                //消息状态有问题，先默认都发送成功
+                message.setMessageStatus(IMessage.MessageStatus.SEND_SUCCEED);
                 if(mUseData.size() == 0 || TimeUtil.getOffectMinutes(System.currentTimeMillis(),mUseData.get(mUseData.size() -1).getTimes()) > 1){
                     message.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date()));
                 }
@@ -383,12 +385,13 @@ public class ChatView extends RelativeLayout implements SensorEventListener {
                 if(mUseData.size() == 0 || TimeUtil.getOffectMinutes(System.currentTimeMillis(),mUseData.get(mUseData.size() -1).getTimes()) > 1){
                     message.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date()));
                 }
-                message.setMessageStatus(IMessage.MessageStatus.SEND_GOING);
+                //状态有问题，暂时不加状态
+                message.setMessageStatus(IMessage.MessageStatus.SEND_SUCCEED);
                 mAdapter.addToStart(message, true);
                 //发送消息
                 HuanXinUtils.getInstance().sendTxtMessage(input.toString(), username, code -> {
                     if(code == HuanXinUtils.SUCCESS_CODE){
-                        mAdapter.getMessageList().get(0).setMessageStatus(IMessage.MessageStatus.SEND_SUCCEED);
+                        //mAdapter.getMessageList().get(0).setMessageStatus(IMessage.MessageStatus.SEND_SUCCEED);
                         mAdapter.notifyItemChanged(0);
                     }
                 });

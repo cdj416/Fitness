@@ -13,18 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_background1">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp">
+            android:background="@color/theme_color1"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp">
             <TextView
                 android:id="@+id/cancelText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="取消"/>
@@ -35,7 +36,7 @@
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="9dp"
-                android:background="@drawable/shape_radius6_fff5f5f5">
+                android:background="@drawable/theme_shape_radius6_fff5f5f5">
                 <EditText
                     android:id="@+id/etSearch"
                     android:layout_width="match_parent"
@@ -46,11 +47,13 @@
                     android:singleLine="true"
                     android:hint="搜索"
                     android:textSize="@dimen/sp_14"
+                    android:textColor="@color/theme_color3"
+                    android:textColorHint="@color/theme_color4"
                     android:layout_height="36dp"/>
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/search_huise_mark"
+                    android:src="@mipmap/theme_search_chengse_mark"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="9dp"/>
             </RelativeLayout>
@@ -81,8 +84,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_14"
-                                android:textColor="@color/color_FF333333"
-                                android:textStyle="bold"
+                                android:textColor="@color/theme_color3"
                                 android:text="最近搜索"
                                 android:layout_centerVertical="true"/>
                             <ImageView
@@ -114,8 +116,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_14"
-                                android:textColor="@color/color_FF333333"
-                                android:textStyle="bold"
+                                android:textColor="@color/theme_color3"
                                 android:text="大家都在搜"
                                 android:layout_centerVertical="true"/>
                             <ImageView

@@ -20,6 +20,6 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_12"
         android:layout_marginTop="6dp"
-        android:textColor="@color/color_FF333333"
+        android:textColor="@color/theme_color3"
         android:text="棉衣"/>
 </LinearLayout>

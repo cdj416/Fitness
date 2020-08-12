@@ -16,14 +16,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.custom_view.filter_view.adapter.MenuAdapter;
 import com.hongyuan.fitness.custom_view.filter_view.util.UIUtil;
+import com.hongyuan.fitness.util.SkinConstants;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class FixedTabIndicator extends LinearLayout {
 
+    private CustomActivity mContext;
     private Context context;
     private int mTabVisibleCount = 4;// tab数量
 
@@ -58,15 +61,27 @@ public class FixedTabIndicator extends LinearLayout {
 
     public FixedTabIndicator(Context context) {
         this(context, null);
+
+        if(context instanceof CustomActivity){
+            this.mContext = (CustomActivity) context;
+        }
     }
 
     public FixedTabIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
+        if(context instanceof CustomActivity){
+            this.mContext = (CustomActivity) context;
+        }
+
         init(context);
     }
 
     public FixedTabIndicator(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        if(context instanceof CustomActivity){
+            this.mContext = (CustomActivity) context;
+        }
+
         init(context);
     }
 
@@ -92,7 +107,18 @@ public class FixedTabIndicator extends LinearLayout {
     private void init(Context context) {
         this.context = context;
         setOrientation(LinearLayout.HORIZONTAL);
-        setBackgroundColor(Color.WHITE);
+        //setBackgroundColor(Color.WHITE);
+
+        //初始化皮肤主题切换
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(mContext.skin)){
+            setBackgroundColor(Color.WHITE);
+        }else if(SkinConstants.SKIN_NAME.BLACK.equals(mContext.skin)){
+            setBackgroundColor(mContext.getResources().getColor(R.color.theme_color1_black));
+            mDividerColor = mContext.getResources().getColor(R.color.theme_color6_black);
+            mLineColor = mContext.getResources().getColor(R.color.theme_color6_black);
+            mTabDefaultColor = mContext.getResources().getColor(R.color.color_FFFFFF);
+        }
+
         setWillNotDraw(false);
 
         mDividerPaint = new Paint();

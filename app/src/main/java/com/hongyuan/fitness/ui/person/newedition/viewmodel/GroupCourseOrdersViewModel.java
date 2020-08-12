@@ -20,7 +20,6 @@ import com.hongyuan.fitness.databinding.AcitivityGroupCourseOrdersBinding;
 import com.hongyuan.fitness.ui.about_class.group_class.group_details.MissionDetailActivity;
 import com.hongyuan.fitness.ui.main.main_about_class.group_class.MyGroupClassBean;
 import com.hongyuan.fitness.ui.person.waiting_for_class.about_group_course.MyGroupCourseeCheckAdapter;
-import com.hongyuan.fitness.ui.person.waiting_for_class.about_group_course.group_checkin_details.GroupCourseCheckDetailsActivity;
 import com.hongyuan.fitness.ui.scan.ScanActivity;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.TimeUtil;
@@ -41,7 +40,6 @@ public class GroupCourseOrdersViewModel extends CustomViewModel {
         super(mActivity);
         this.binding = binding;
         initView();
-        lazyLoad();
     }
 
     @Override
@@ -68,7 +66,7 @@ public class GroupCourseOrdersViewModel extends CustomViewModel {
                 if(view.getId() == R.id.goBuyBox){
                     Bundle bundle = new Bundle();
                     bundle.putString("cs_id",String.valueOf(mList.get(position).getCs_id()));
-                    startActivity(GroupCourseCheckDetailsActivity.class,bundle);
+                    startActivity(MissionDetailActivity.class,bundle);
                 }
             }
         });
@@ -96,8 +94,11 @@ public class GroupCourseOrdersViewModel extends CustomViewModel {
      * 扫码回调签到
      * */
     public void courseQD(){
-        clearParams().setParams("ocs_id",String.valueOf(mList.get(mPosition).getOcs_id())).setParams("type","qd");
-        Controller.myRequest(ConstantsCode.SUPER_COURSE_XY_QD,Constants.SUPER_COURSE_XY_QD,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+
+        if(mList.get(mPosition).getXy_qd_state() != 1){
+            clearParams().setParams("ocs_id",String.valueOf(mList.get(mPosition).getOcs_id())).setParams("type","qd");
+            Controller.myRequest(ConstantsCode.SUPER_COURSE_XY_QD,Constants.SUPER_COURSE_XY_QD,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+        }
     }
 
 

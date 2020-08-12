@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityEditPostBinding;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class EditPostActivity extends CustomActivity {
     private ActivityEditPostBinding binding;
@@ -19,8 +20,11 @@ public class EditPostActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitle("我的");
-        setsetImmersive(0x55000000);
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"我的");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"我的");
+
         binding = ActivityEditPostBinding.bind(mView);
         viewModel = new EditPostViewModel(this,binding);
         binding.setViewModel(viewModel);

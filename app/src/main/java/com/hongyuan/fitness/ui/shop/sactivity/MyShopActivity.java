@@ -4,6 +4,7 @@ import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.AcitivityMyShopBinding;
 import com.hongyuan.fitness.ui.shop.sviewmodel.MyShopViewModel;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class MyShopActivity extends CustomActivity {
 
@@ -14,7 +15,10 @@ public class MyShopActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitleBar(TYPE_BAR5,R.drawable.shape_soid_ffffff,"我的商城");
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+        setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"我的商城");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"我的商城");
 
         AcitivityMyShopBinding binding = AcitivityMyShopBinding.bind(mView);
         MyShopViewModel viewModel = new MyShopViewModel(this,binding);

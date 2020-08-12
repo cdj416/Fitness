@@ -13,6 +13,7 @@ import com.hongyuan.fitness.custom_view.time_selecter.get_address.GetAddressData
 import com.hongyuan.fitness.custom_view.time_selecter.get_address.JsonDataBean;
 import com.hongyuan.fitness.databinding.AcitivityChangeAddressBinding;
 import com.hongyuan.fitness.ui.shop.sviewmodel.ChangeAddressViewModel;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class ChangeAddressActivity extends CustomActivity {
 
@@ -30,7 +31,6 @@ public class ChangeAddressActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitleBar(TYPE_BAR5,R.drawable.shape_soid_ffffff,"添加收货地址");
 
         //注册广播
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(this);

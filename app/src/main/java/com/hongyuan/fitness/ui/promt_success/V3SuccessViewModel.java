@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.promt_success;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -25,6 +26,10 @@ import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.main.main_person.PersonBean;
 import com.hongyuan.fitness.ui.mall.good_pay.GoodsPayViewModel;
 import com.hongyuan.fitness.ui.person.edit_information.take_photo.TakePhotoActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.GroupCourseOrdersActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.MemberCardOrdersActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.PriviteCourseOrdersActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.ShopNewOrderAcitivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 
@@ -98,8 +103,9 @@ public class V3SuccessViewModel extends CustomViewModel {
         adapter.setNewData(beans.getItemContens());
 
         if(!"人脸识别录入".equals(beans.getBtn2Text())){
-            binding.goCarryOn.setOnClickListener(v -> startActivity(MainActivity.class,null));
             binding.goCarryOn.setText(beans.getBtn2Text());
+
+            goNext();
         }else{
             getData();
         }
@@ -130,7 +136,8 @@ public class V3SuccessViewModel extends CustomViewModel {
                 }));
             }else{
                 binding.goCarryOn.setText("完成");
-                binding.goCarryOn.setOnClickListener(v -> startActivity(MainActivity.class,null));
+
+                goNext();
             }
         }
     }
@@ -139,6 +146,29 @@ public class V3SuccessViewModel extends CustomViewModel {
     public void onSuccess(int code, Object data) {
         if(code == ConstantsCode.CANCEL_COURSE_SUPER_ORDER){
             showSuccess("团课取消成功！");
+        }
+    }
+
+    /*
+    * 跳转处理
+    * */
+    private void goNext(){
+        switch (beans.getType()){
+            case BUYCARD:
+                binding.goCarryOn.setOnClickListener(v ->  mActivity.startActivity(MemberCardOrdersActivity.class,null));
+                break;
+            case BUYGOODS:
+                binding.goCarryOn.setOnClickListener(v ->  mActivity.startActivity(ShopNewOrderAcitivity.class,null));
+                break;
+            case GROUPCLASS:
+                binding.goCarryOn.setOnClickListener(v ->  mActivity.startActivity(GroupCourseOrdersActivity.class,null));
+                break;
+            case PRIVITECLASS:
+                binding.goCarryOn.setOnClickListener(v ->  mActivity.startActivity(PriviteCourseOrdersActivity.class,null));
+                break;
+            default:
+                binding.goCarryOn.setOnClickListener(v -> startActivity(MainActivity.class,null));
+                break;
         }
     }
 }

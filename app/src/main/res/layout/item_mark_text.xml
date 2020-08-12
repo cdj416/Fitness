@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@drawable/shape_radius16_ffffff_stroke_979797"
+    android:background="@drawable/shape_radius24_0000000_stroke_cccccc"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingTop="3dp"

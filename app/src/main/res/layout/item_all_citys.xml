@@ -10,13 +10,13 @@
         android:id="@+id/cityName"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/color_FF333333"
+        android:textColor="@color/theme_color3"
         android:textSize="@dimen/sp_14"
         android:text="湖州"
         android:gravity="center_vertical"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"
+        android:background="@color/theme_line"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

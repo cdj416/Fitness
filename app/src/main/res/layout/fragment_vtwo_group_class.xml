@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/color_F5F6FB">
+    android:background="@color/theme_background">
     <com.hongyuan.fitness.custom_view.filter_view.DropDownMenu
         android:id="@+id/dropDownMenu"
         android:layout_width="match_parent"
@@ -13,10 +13,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <com.hongyuan.fitness.custom_view.CustomRecyclerView
-                android:id="@+id/timeRec"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="68dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/theme_color1">
+                <com.hongyuan.fitness.custom_view.CustomRecyclerView
+                    android:id="@+id/timeRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="68dp"/>
+            </LinearLayout>
+
             <com.scwang.smartrefresh.layout.SmartRefreshLayout
                 android:id="@+id/refreshLayout"
                 android:layout_width="match_parent"
@@ -25,14 +32,12 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/color_FFF5F6FB">
+                    android:background="@color/theme_background">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/mRecycler"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingLeft="13dp"
-                        android:paddingRight="13dp"/>
+                        android:layout_height="match_parent"/>
 
                     <RelativeLayout
                         android:id="@+id/load_box"

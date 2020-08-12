@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_14"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="关于瑜伽你需要了解 这些知识"/>
@@ -60,7 +60,7 @@
             android:id="@+id/tvSign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_FF999999"
+            android:textColor="@color/theme_color4"
             android:textSize="@dimen/sp_12"
             android:layout_alignParentBottom="true"
             android:text="#健身小常识"/>

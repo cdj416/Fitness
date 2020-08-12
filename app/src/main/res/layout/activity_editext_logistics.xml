@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.hongyuan.fitness.ui.shop.sviewmodel.EdLogisticsViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/color_F5F6FB">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="118dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:background="@color/color_FFFFFF">
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/goodsImg"
+                android:layout_width="92dp"
+                android:layout_height="92dp"
+                android:layout_centerVertical="true"
+                android:src="@color/color_f2"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/goodsImg"
+                android:layout_marginStart="10dp"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/goodName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_14"
+                    android:textColor="@color/color_FF333333"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="商品名称商品名称商品名称商品名称商品名称商品名称"/>
+
+                <TextView
+                    android:id="@+id/goodSku"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/color_FF999999"
+                    android:text="42码 红色"
+                    android:background="@drawable/shape_radius16_f1f1f8"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:drawableRight="@mipmap/down_huise_img"
+                    android:layout_marginTop="6dp"
+                    android:drawablePadding="4dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_EF5B48"
+                        android:textSize="@dimen/sp_12"
+                        android:text="¥"/>
+                    <TextView
+                        android:id="@+id/goodPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_16"
+                        android:textColor="@color/color_EF5B48"
+                        android:text="5000"/>
+                    <TextView
+                        android:id="@+id/goodNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="@color/color_FF333333"
+                        android:layout_marginStart="10dp"
+                        android:text="x1"/>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <com.hongyuan.fitness.custom_view.InputOrSlectView
+            android:id="@+id/companyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:isvName="物流公司"
+            app:isvLeftColor="@color/color_FF333333"
+            app:isvRightText=""
+            app:isvType="select"
+            app:isvLineShow="true"/>
+
+        <com.hongyuan.fitness.custom_view.InputOrSlectView
+            android:id="@+id/delNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isvName="物流单号："
+            app:isvLeftColor="@color/color_FF333333"
+            app:isvRightText=""
+            app:isvType="input"
+            app:isvHintText="请输入物流单号"
+            app:isvLineShow="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/color_FF333333"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:text="上传凭证"/>
+
+        <com.hongyuan.fitness.custom_view.add_imgorvideo.AddImageOrVideoView
+            android:id="@+id/imgVideo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+</layout>

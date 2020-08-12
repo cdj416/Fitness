@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:id="@+id/jumpDetails"
         android:layout_margin="6dp"
-        android:background="@drawable/shape_radius6_ffffff">
+        android:background="@drawable/theme_shape_radius6_ffffff">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="156dp">
@@ -20,7 +20,6 @@
                 android:layout_height="156dp"
                 app:riv_corner_radius_top_right="6dp"
                 app:riv_corner_radius_top_left="6dp"
-                android:src="@mipmap/zhengfangxing_default_img"
                 android:scaleType="centerCrop"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -52,12 +51,14 @@
             android:paddingBottom="6dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:textSize="@dimen/sp_12"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/color_EEEEEE"/>
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@color/theme_color5"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp">
@@ -68,21 +69,21 @@
                 android:src="@mipmap/about_class_select"
                 app:riv_corner_radius="100dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:scaleType="centerCrop"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/headImg"
-                android:layout_marginLeft="12dp"
+                android:layout_toEndOf="@id/headImg"
+                android:layout_marginStart="12dp"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/fName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
-                    android:textColor="@color/color_FF333333"
+                    android:textColor="@color/theme_color3"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:layout_marginRight="20dp"
@@ -92,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/color_FF999999"
+                    android:textColor="@color/theme_color4"
                     android:text="湖州"/>
             </LinearLayout>
 
@@ -103,7 +104,8 @@
                 android:layout_centerVertical="true"
                 android:padding="5dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/theme_color4"
                 android:drawableBottom="@mipmap/like_huise_img"
                 android:gravity="center"/>
         </RelativeLayout>

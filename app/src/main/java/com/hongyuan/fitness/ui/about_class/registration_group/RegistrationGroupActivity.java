@@ -3,6 +3,7 @@ package com.hongyuan.fitness.ui.about_class.registration_group;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityRegistrationGroupBinding;
+import com.hongyuan.fitness.util.SkinConstants;
 
 public class RegistrationGroupActivity extends CustomActivity {
 
@@ -13,8 +14,11 @@ public class RegistrationGroupActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitle("团课报名");
-        setsetImmersive(0x55000000);
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"团课报名");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"团课报名");
+
         ActivityRegistrationGroupBinding binding = ActivityRegistrationGroupBinding.bind(mView);
         RegistrationGroupViewModel viewModel = new RegistrationGroupViewModel(this,binding);
         binding.setViewModel(viewModel);

@@ -12,21 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/color_F5F6FB">
+        android:background="@color/theme_background">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mRec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="@color/color_FFFFFF"/>
+            android:padding="16dp"/>
 
         <com.hongyuan.fitness.custom_view.InputOrSlectView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:isvType="tSwitch"
             app:isvName="消息免打扰"
-            app:isvLeftColor="@color/color_FF333333"
             android:layout_marginTop="12dp"/>
     </LinearLayout>
 </layout>

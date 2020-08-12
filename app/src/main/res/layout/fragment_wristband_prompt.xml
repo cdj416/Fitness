@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_FFF5F6FB"
+    android:background="@color/theme_background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_16"
-            android:textColor="@color/color_FF333333"
+            android:textColor="@color/theme_color3"
             android:layout_marginTop="8dp"
             android:text="随动手环"/>
 
@@ -77,7 +77,7 @@
                 android:layout_marginStart="36dp"
                 android:textColor="@color/color_EF5B48"
                 android:textSize="@dimen/sp_12"
-                android:background="@drawable/shape_radius16_ffffff_stroke_ef5b48"
+                android:background="@drawable/shape_radius16_00000000_stroke_ef5b48"
                 android:text="设备详情"/>
         </LinearLayout>
 

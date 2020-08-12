@@ -19,7 +19,6 @@ public class AddImgAdapter extends BaseQuickAdapter<FileBean, BaseViewHolder> {
     @Override
     protected void convert(final BaseViewHolder helper, FileBean item) {
         if(item.getmFile() != null || BaseUtil.isValue(item.getFilePath())){
-            helper.getView(R.id.tvBg).setVisibility(View.GONE);
             helper.getView(R.id.defaultImg).setVisibility(View.GONE);
 
             helper.getView(R.id.contentImg).setVisibility(View.VISIBLE);
@@ -31,7 +30,6 @@ public class AddImgAdapter extends BaseQuickAdapter<FileBean, BaseViewHolder> {
             }
 
         }else{
-            helper.getView(R.id.tvBg).setVisibility(View.VISIBLE);
             helper.getView(R.id.defaultImg).setVisibility(View.VISIBLE);
 
             helper.getView(R.id.contentImg).setVisibility(View.GONE);
@@ -45,7 +43,7 @@ public class AddImgAdapter extends BaseQuickAdapter<FileBean, BaseViewHolder> {
 
         helper.addOnClickListener(R.id.closeImg)
                 .addOnClickListener(R.id.contentImg)
-                .addOnClickListener(R.id.tvBg);
+                .addOnClickListener(R.id.defaultImg);
     }
 
 }

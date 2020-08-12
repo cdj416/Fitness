@@ -9,13 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:layout_margin="6dp">
-        <com.makeramen.roundedimageview.RoundedImageView
+        <ImageView
             android:id="@+id/bgImg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            app:riv_corner_radius="6dp"
-            android:src="@color/color_f2"/>
+            android:src="@mipmap/theme_home_topic_one"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,14 +34,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:text="急速减脂训练"/>
             <TextView
                 android:id="@+id/secondName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:layout_marginTop="6dp"
                 android:text="教练：Kevin"/>
         </LinearLayout>
@@ -50,7 +49,7 @@
             android:id="@+id/nums"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_FF999999"
+            android:textColor="@color/theme_color4"
             android:textSize="10sp"
             android:layout_alignParentEnd="true"
             android:layout_margin="12dp"

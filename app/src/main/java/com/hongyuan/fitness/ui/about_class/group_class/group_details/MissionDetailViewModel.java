@@ -4,7 +4,7 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
@@ -21,11 +21,14 @@ import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.custom_view.StickyScrollView;
 import com.hongyuan.fitness.databinding.ActivityMissionDetailsBinding;
 import com.hongyuan.fitness.ui.about_class.registration_group.RegistrationGroupActivity;
+import com.hongyuan.fitness.ui.scan.ScanActivity;
 import com.hongyuan.fitness.ui.store.StoreDetailActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.HourMeterUtil;
+import com.hongyuan.fitness.util.SkinConstants;
+import com.hongyuan.fitness.util.StatusBarUtil;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.hongyuan.fitness.util.ViewChangeUtil;
 import com.luck.picture.lib.tools.ScreenUtils;
@@ -57,6 +60,7 @@ public class MissionDetailViewModel extends CustomViewModel implements StickyScr
     private final int TANSION = 2;//紧张
     private final int FULL = 3;//满
     private final int REGISTERED = 4;//已预约
+    private final int NOT_OPPN = 5;//未开放
     private int toState;//状态
 
     public MissionDetailViewModel(CustomActivity mActivity, ActivityMissionDetailsBinding binding) {
@@ -113,7 +117,7 @@ public class MissionDetailViewModel extends CustomViewModel implements StickyScr
 
     @Override
     public void onScrollChanged(StickyScrollView scrollView, int x, int y, int oldx, int oldy) {
-        if (y <= 0) {   //设置标题的背景颜色
+        /*if (y <= 0) {   //设置标题的背景颜色
             binding.titleBox.setBackgroundColor(Color.argb((int) 0, 239,91,72));
         } else if (y > 0 && y <= height) {
             float scale = (float) y / height;
@@ -122,6 +126,49 @@ public class MissionDetailViewModel extends CustomViewModel implements StickyScr
             binding.titleBox.setBackgroundColor(Color.argb((int) alpha, 239,91,72));
         } else {
             binding.titleBox.setBackgroundColor(Color.argb( 255, 239,91,72));
+        }*/
+
+        if (y <= 0) {   //设置标题的背景颜色
+            binding.myTitle.setCenterTextColor("团课详情",mActivity.getResources().getColor(R.color.color_FFFFFF));
+            binding.myTitle.setRightImage(R.mipmap.white_collection_mark);
+            binding.myTitle.setLeftImage(R.mipmap.white_common);
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) 0, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) 0, 255,255,255));
+            }
+        } else if (y > 0 && y <= height) {
+            float scale = (float) y / height;
+            float alpha = (255 * scale);
+
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) alpha, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) alpha, 255,255,255));
+                if(y <= height/2){
+                    binding.myTitle.setRightImage(R.mipmap.white_collection_mark);
+                    binding.myTitle.setCenterTextColor("团课详情",mActivity.getResources().getColor(R.color.color_FFFFFF));
+                    binding.myTitle.setLeftImage(R.mipmap.white_common);
+                    StatusBarUtil.setCommonUI(mActivity,false);
+                    binding.myTitle.hideLine();
+                }else{
+                    binding.myTitle.setRightImage(R.mipmap.gray_collection_img);
+                    binding.myTitle.setCenterTextColor("团课详情",mActivity.getResources().getColor(R.color.color_FF333333));
+                    binding.myTitle.setLeftImage(R.mipmap.theme_left_img);
+                    StatusBarUtil.setCommonUI(mActivity,true);
+                    binding.myTitle.showLine();
+                }
+            }
+        } else {
+            if(mActivity.skin.equals(SkinConstants.SKIN_NAME.BLACK)){
+                binding.titleBox.setBackgroundColor(Color.argb((int) 255, 51,51,51));
+            }else if(mActivity.skin.equals(SkinConstants.SKIN_NAME.DEFAULT)){
+                binding.titleBox.setBackgroundColor(Color.argb( 255, 255,255,255));
+                binding.myTitle.setRightImage(R.mipmap.gray_collection_img);
+                binding.myTitle.setCenterTextColor("团课详情",mActivity.getResources().getColor(R.color.color_FF333333));
+                binding.myTitle.setLeftImage(R.mipmap.theme_left_img);
+            }
+
         }
     }
 
@@ -131,6 +178,9 @@ public class MissionDetailViewModel extends CustomViewModel implements StickyScr
         clearParams().setParams("cs_id",cs_id);
         Controller.myRequest(Constants.GET_COURSE_SUPER_INFO,Controller.TYPE_POST,getParams(), MissionDetailBean.class,this);
     }
+
+    //报名时间与当前时间差值
+    private long subTime;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -157,31 +207,139 @@ public class MissionDetailViewModel extends CustomViewModel implements StickyScr
         //设置webview显示样式
         binding.courseContent.loadDataWithBaseURL(null, getNewData(detailBean.getData().getCs_brief()),"text/html", "utf-8",null);
 
-
-        //报名状态
-        binding.goEnterName.setText(detailBean.getData().getState_name());
         toState = Integer.valueOf(detailBean.getData().getTo_state());
-        if(toState == NO_RESERVATION || toState == FULL || toState == REGISTERED){
-            binding.goEnterName.setBackgroundResource(R.drawable.shape_radius6_999999);
-            if(toState == REGISTERED){
-                binding.goEnterName.setText("取消报名");
-                binding.goEnterName.setOnClickListener(v -> {
-                    CustomDialog.promptDialog(mActivity, "确定取消报名该团课吗？", "确定取消", "暂不取消", false, v1 -> {
-                        if(v1.getId() == R.id.isOk){
-                            //调用取消预约接口
-                            getCancel();
-                        }
-                    });
-                });
+
+        if(toState == CAN_RESERVATION || toState == TANSION){
+            if(toState == CAN_RESERVATION){
+                //报名状态显示
+                binding.goEnterName.setText("报名中");
             }
-        }else{
+            if(toState == TANSION){
+                //报名状态显示
+                binding.goEnterName.setText("报名中(紧张)");
+            }
+            binding.goEnterName.setClickable(true);
             binding.goEnterName.setBackgroundResource(R.drawable.shape_gradient_v_radiu5_login);
             binding.goEnterName.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("MissionDetailBean",detailBean.getData());
                 startActivity(RegistrationGroupActivity.class,bundle);
             });
+        }else{
+            binding.goEnterName.setBackgroundResource(R.drawable.shape_radius6_999999);
+            if(toState == NO_RESERVATION){
+                binding.goEnterName.setClickable(false);
+                binding.goEnterName.setText("不可预约");
+            }else if(toState == FULL){
+                binding.goEnterName.setClickable(false);
+                binding.goEnterName.setText("已满");
+            }else if(toState == REGISTERED){
+
+                binding.goEnterName.setText("已预约");
+
+                //距离课程开始相差的分钟数
+                int differenceStart = TimeUtil.getOffectMinutes(detailBean.getData().getCs_start_time()*1000,detailBean.getData().getNow_time()*1000);
+                //距离课程结束相差的分钟数
+                int differenceEnd = TimeUtil.getOffectMinutes(detailBean.getData().getCs_end_time()*1000,detailBean.getData().getNow_time()*1000);
+                if(differenceStart > 30){
+                    binding.goEnterName.setClickable(true);
+
+                    binding.goEnterName.setText("取消报名");
+                    binding.goEnterName.setOnClickListener(v -> {
+                        CustomDialog.promptDialog(mActivity, "确定取消报名该团课吗？", "确定取消", "暂不取消", false, v1 -> {
+                            if(v1.getId() == R.id.isOk){
+                                //调用取消预约接口
+                                getCancel();
+                            }
+                        });
+                    });
+                }else if(differenceStart <= 30 && differenceEnd >= 0){
+
+                    if("0".equals(detailBean.getData().getIs_qd())){//未签到时
+                        //点击去签到
+                        binding.goEnterName.setText("扫码签到");
+                        binding.goEnterName.setClickable(true);
+                        binding.goEnterName.setBackgroundResource(R.drawable.shape_gradient_v_radiu5_login);
+                        binding.goEnterName.setOnClickListener(v -> {
+                            mActivity.startActivity(ScanActivity.class,null);
+                        });
+                    }else if("1".equals(detailBean.getData().getIs_qd())){//已签到
+                        //设置不可点击
+                        binding.goEnterName.setText("已签到");
+                        binding.goEnterName.setClickable(false);
+                    }else{
+                        //设置不可点击
+                        binding.goEnterName.setText("未知状态");
+                        binding.goEnterName.setClickable(false);
+                    }
+
+                }else{
+                    if("0".equals(detailBean.getData().getIs_qd())) {//未签到时
+                        binding.goEnterName.setText("未签到");
+                        binding.goEnterName.setClickable(false);
+                    }else if("1".equals(detailBean.getData().getIs_qd())){//已签到
+                        //设置不可点击
+                        binding.goEnterName.setText("已签到");
+                        binding.goEnterName.setClickable(false);
+                    }else{
+                        //设置不可点击
+                        binding.goEnterName.setText("未知状态");
+                        binding.goEnterName.setClickable(false);
+                    }
+                }
+
+            }else if(toState == NOT_OPPN){
+                binding.goEnterName.setText("未开放");
+                binding.goEnterName.setClickable(false);
+            }else{
+                binding.goEnterName.setText("不可预约");
+                binding.goEnterName.setClickable(false);
+            }
         }
+
+        //报名时间与当前时间差值
+        subTime = detailBean.getData().getBm_time() - detailBean.getData().getNow_time();
+        //是否显示报名倒计时提醒（）
+        if(detailBean.getData().getBm_time() != 0 && subTime > 0){
+            binding.goEnterName.setText("未到报名时间");
+            binding.goEnterName.setClickable(false);
+
+            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(binding.remindBox,"translationX",0f,120f,0f);
+            objectAnimator.setDuration(500);
+            objectAnimator.start();
+
+            binding.remindBox.setVisibility(View.VISIBLE);
+            hourMeterUtil = new HourMeterUtil();
+            //毫秒差
+            //long haoMiao = TimeUtil.getDifferenceNow(detailBean.getData().getAdd_date(),TimeUtil.dateFormatYMDHMS);
+            hourMeterUtil.setTimeCallBack(passedTime -> {
+                subTime--;
+
+                if(subTime > 0){
+                    binding.showCountdown.setText(TimeUtil.getDaysTime(subTime));
+                }else{
+                    binding.remindBox.setVisibility(View.GONE);
+                    //去刷新下页面，让其可以报名
+                    lazyLoad();
+                }
+
+            });
+            hourMeterUtil.startCount();
+
+            binding.setRemind.setOnClickListener(v -> {
+                if(isRend){
+                    ViewChangeUtil.changeLeftDrawable(mActivity,binding.setRemind,R.mipmap.baise_yuanxing_default_mark);
+                    isRend = false;
+                }else{
+                    ViewChangeUtil.changeLeftDrawable(mActivity,binding.setRemind,R.mipmap.baise_yuanxing_select_mark);
+                    isRend = true;
+                }
+                getRemind(isRend);
+            });
+        }else{
+            binding.remindBox.setVisibility(View.GONE);
+        }
+
         //是否是会员
         if("1".equals(detailBean.getData().getIs_hy())){
             binding.signUpBox.setVisibility(View.VISIBLE);
@@ -202,36 +360,17 @@ public class MissionDetailViewModel extends CustomViewModel implements StickyScr
             binding.setRemind.setText("设置提醒");
         }
 
-        //是否显示报名倒计时提醒
-        if(detailBean.getData().getBm_time() != 0 && detailBean.getData().getBm_time() > System.currentTimeMillis()/1000){
-            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(binding.remindBox,"translationX",0f,120f,0f);
-            objectAnimator.setDuration(500);
-            objectAnimator.start();
-
-            binding.remindBox.setVisibility(View.VISIBLE);
-            hourMeterUtil = new HourMeterUtil();
-            //毫秒差
-            //long haoMiao = TimeUtil.getDifferenceNow(detailBean.getData().getAdd_date(),TimeUtil.dateFormatYMDHMS);
-            hourMeterUtil.setTimeCallBack(passedTime -> {
-                binding.showCountdown.setText(TimeUtil.getDaysTime((detailBean.getData().getBm_time() -System.currentTimeMillis()/1000)  - passedTime));
-            });
-            hourMeterUtil.startCount();
-
-            binding.setRemind.setOnClickListener(v -> {
-                if(isRend){
-                    ViewChangeUtil.changeLeftDrawable(mActivity,binding.setRemind,R.mipmap.baise_yuanxing_default_mark);
-                    isRend = false;
-                }else{
-                    ViewChangeUtil.changeLeftDrawable(mActivity,binding.setRemind,R.mipmap.baise_yuanxing_select_mark);
-                    isRend = true;
-                }
-                getRemind(isRend);
-            });
-        }else{
-            binding.remindBox.setVisibility(View.GONE);
-        }
-
         mActivity.closeLoading();
+    }
+
+    /*
+     * 签到签退
+     * */
+    public void courseQD(){
+        if("0".equals(detailBean.getData().getIs_qd())){
+            clearParams().setParams("ocs_id",String.valueOf(detailBean.getData().getOcs_id())).setParams("type","qd");
+            Controller.myRequest(ConstantsCode.SUPER_COURSE_XY_QD,Constants.SUPER_COURSE_XY_QD,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+        }
     }
 
     /*
@@ -276,6 +415,15 @@ public class MissionDetailViewModel extends CustomViewModel implements StickyScr
         if(code == ConstantsCode.DEL_REMIND_CS){
             binding.setRemind.setText("设置提醒");
         }
+
+        if(code == ConstantsCode.SUPER_COURSE_XY_QD){
+
+            binding.goEnterName.setClickable(false);
+            binding.goEnterName.setBackgroundResource(R.drawable.shape_radius6_999999);
+            binding.goEnterName.setText("已签到");
+            CustomDialog.groupCoursePunchSuccess(mActivity, TimeUtil.formatDataMsec(TimeUtil.dateFormatDotMD,System.currentTimeMillis()),
+                    TimeUtil.getWeek());
+        }
     }
 
     /**
@@ -301,5 +449,14 @@ public class MissionDetailViewModel extends CustomViewModel implements StickyScr
             imgElement.attr("style", "max-width:100%;height:auto");
         }
         return document.toString();
+    }
+
+    /*
+    * 关闭计时
+    * */
+    public void closeDownTime(){
+        if(hourMeterUtil != null){
+            hourMeterUtil.onDestory();
+        }
     }
 }

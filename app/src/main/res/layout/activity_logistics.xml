@@ -11,12 +11,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_color1">
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginStart="80dp"
-            android:background="@color/color_EEEEEE"/>
+            android:background="@color/theme_line1"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mRec"
             android:layout_width="match_parent"

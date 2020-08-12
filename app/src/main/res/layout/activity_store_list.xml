@@ -12,22 +12,29 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/layoutMenu"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_centerHorizontal="true"
-            android:background="@color/color_FFFFFF"
-            app:tabIndicatorColor="@color/color_FFFFFF"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/color_FFFFFF"
-            app:tabPaddingStart="5dp"
-            app:tabPaddingEnd="5dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/theme_background1">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/layoutMenu"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                app:tabIndicatorColor="@color/color_FFFFFF"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/color_FFFFFF"
+                app:tabIndicatorHeight="0dp"
+                app:tabPaddingStart="5dp"
+                app:tabPaddingEnd="5dp"/>
+        </LinearLayout>
+
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/mViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_FFFFFF"/>
+            android:background="@color/theme_background"/>
     </LinearLayout>
 </layout>

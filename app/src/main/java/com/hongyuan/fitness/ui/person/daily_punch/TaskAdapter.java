@@ -19,12 +19,12 @@ public class TaskAdapter extends BaseQuickAdapter<TaskBeans.DataBean.ListBeanX.L
         if(item.getLevel() == Integer.valueOf(item.getLevel_all())){
             helper.setText(R.id.taskGo,"已完成")
                     .setTextColor(R.id.taskGo,mContext.getResources().getColor(R.color.color_FF1BC177))
-                    .setBackgroundColor(R.id.taskGo,mContext.getResources().getColor(R.color.color_FFFFFF));
+                    .setBackgroundColor(R.id.taskGo,mContext.getResources().getColor(R.color.transparent));
             helper.getView(R.id.taskGo).setClickable(false);
         }else{
             helper.setText(R.id.taskGo,"去完成")
                     .setTextColor(R.id.taskGo,mContext.getResources().getColor(R.color.color_EF5B48))
-                    .setBackgroundRes(R.id.taskGo,R.drawable.shape_radius16_ffffff_stroke_ef5b48);
+                    .setBackgroundRes(R.id.taskGo,R.drawable.shape_radius16_00000000_stroke_ef5b48);
             helper.getView(R.id.taskGo).setClickable(true);
             helper.addOnClickListener(R.id.taskGo);
         }

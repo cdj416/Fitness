@@ -8,6 +8,7 @@ import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityIndicatorDetailsBinding;
 import com.hongyuan.fitness.ui.only_equipment.indicator_details.wristband_setting.WristbandSettingActivity;
+import com.hongyuan.fitness.util.SkinConstants;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -21,7 +22,12 @@ public class IndicatorDetailsActivity extends CustomActivity {
 
     @Override
     protected void initView() {
-        setTitleBar(TYPE_BAR5,R.drawable.shape_soid_ffffff,"智能设备");
+
+        if(SkinConstants.SKIN_NAME.DEFAULT.equals(skin))
+            setTitleBar(TYPE_BAR5,R.drawable.theme_shape_soid_ffffff,"智能设备");
+        if(SkinConstants.SKIN_NAME.BLACK.equals(skin))
+            setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"智能设备");
+
         ActivityIndicatorDetailsBinding binding = ActivityIndicatorDetailsBinding.bind(mView);
         IndicatorDetailsViewModel viewModel = new IndicatorDetailsViewModel(this,binding);
         binding.setViewModel(viewModel);

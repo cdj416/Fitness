@@ -11,7 +11,7 @@
         android:gravity="center"
         android:text="重庆"
         android:textSize="@dimen/sp_12"
-        android:textColor="@color/color_FF333333"
+        android:textColor="@color/theme_color3"
         android:background="@color/color_f2"/>
 </LinearLayout>
 

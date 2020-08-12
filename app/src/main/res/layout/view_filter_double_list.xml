@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="343dp"
-        android:background="@android:color/white"
+        android:background="@color/theme_background1"
         android:baselineAligned="true"
         android:orientation="horizontal">
 
@@ -19,18 +19,26 @@
             android:dividerHeight="0px"
             android:scrollbars="none" />
 
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true">
-            <ListView
-                android:id="@+id/lv_right"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="@null"
-                android:dividerHeight="0px"
-                android:scrollbars="none"
-                android:layout_marginBottom="56dp"/>
+                android:orientation="vertical"
+                android:background="@color/theme_color1">
+                <ListView
+                    android:id="@+id/lv_right"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@null"
+                    android:dividerHeight="0px"
+                    android:scrollbars="none"
+                    android:layout_marginBottom="56dp"/>
+            </LinearLayout>
+
             <Button
                 android:id="@+id/submit"
                 android:layout_width="80dp"
@@ -58,7 +66,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/color_EEEEEE"
+                android:background="@color/theme_line1"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="56dp"/>
         </RelativeLayout>

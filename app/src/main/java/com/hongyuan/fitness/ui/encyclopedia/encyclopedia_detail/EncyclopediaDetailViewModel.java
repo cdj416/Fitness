@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,6 +53,7 @@ public class EncyclopediaDetailViewModel extends CustomViewModel implements View
     private V3TuiJianAdapter tuijianAdapter;
     private EncyclopediatDetailsCommentAdapter commentAdapter;
     private V3CommentBeans commentBean;
+    private BaikeTJBeans diaBean;
 
     private String br_id_father = "0";//当前帖子的id
     private String first_br_id = "0";//当前帖子的父类id
@@ -85,11 +87,9 @@ public class EncyclopediaDetailViewModel extends CustomViewModel implements View
             @SingleClick
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                if(commentBean != null && commentBean.getData() != null){
-                    Bundle bundle = new Bundle();
-                    bundle.putString("article_id",String.valueOf(commentBean.getData().getList().get(position).getArticle_id()));
-                    startActivity(EncyclopediaDetailActivity.class,bundle);
-                }
+                Bundle bundle = new Bundle();
+                bundle.putString("article_id",String.valueOf(diaBean.getData().getList().get(position).getArticle_id()));
+                startActivity(EncyclopediaDetailActivity.class,bundle);
             }
         });
 
@@ -97,8 +97,6 @@ public class EncyclopediaDetailViewModel extends CustomViewModel implements View
         //评论
         LinearLayoutManager commentManager = new LinearLayoutManager(mActivity);
         commentManager.setOrientation(RecyclerView.VERTICAL);
-        binding.mComment.addItemDecoration(new DividerItemDecoration(
-                getContext(), DividerItemDecoration.HORIZONTAL_LIST,1,0xFFEEEEEE));
         binding.mComment.setLayoutManager(commentManager);
         commentAdapter = new EncyclopediatDetailsCommentAdapter(this);
         binding.mComment.setAdapter(commentAdapter);
@@ -312,6 +310,7 @@ public class EncyclopediaDetailViewModel extends CustomViewModel implements View
 
     @Override
     public void onSuccess(Object data) {
+        mActivity.closeLoading();
         if (data instanceof V3EncyclopediaDetailBean){
             detailBean = (V3EncyclopediaDetailBean)data;
             //获取推荐数据
@@ -321,7 +320,7 @@ public class EncyclopediaDetailViewModel extends CustomViewModel implements View
         }
 
         if(data instanceof BaikeTJBeans){
-            BaikeTJBeans diaBean = (BaikeTJBeans)data;
+            diaBean = (BaikeTJBeans)data;
             tuijianAdapter.setNewData(diaBean.getData().getList());
         }
 
@@ -386,6 +385,7 @@ public class EncyclopediaDetailViewModel extends CustomViewModel implements View
 
     @Override
     public void onSuccess(int code, Object data) {
+        mActivity.closeLoading();
         if(code == ConstantsCode.DEL_COLLECTION){
             detailBean.getData().setIs_collection(0);
             binding.collectionImg.setImageResource(R.mipmap.gray_collection_img);

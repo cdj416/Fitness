@@ -5,7 +5,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="560dp"
-        android:background="@color/color_FFFFFF">
+        android:background="@color/theme_background">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -15,6 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="62dp"
                 android:textColor="@color/color_FF333333"
+                android:background="@color/theme_color1"
                 android:textSize="@dimen/sp_14"
                 android:gravity="center"
                 android:text="当前优惠"/>

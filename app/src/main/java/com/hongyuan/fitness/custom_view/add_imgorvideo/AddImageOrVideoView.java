@@ -94,7 +94,7 @@ public class AddImageOrVideoView extends LinearLayout {
                     }
                     adapter.setNewData(mList);
                 }
-            }else if(view1.getId() == R.id.tvBg){
+            }else if(view1.getId() == R.id.defaultImg){
                 if(mList.size() >= 10 ){
                     CustomDialog.showMessage(getContext(),"最多只能上传9张！");
                 }else{
