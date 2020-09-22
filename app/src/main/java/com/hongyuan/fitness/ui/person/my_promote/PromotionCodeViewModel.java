@@ -1,6 +1,6 @@
 package com.hongyuan.fitness.ui.person.my_promote;
 
-import android.view.View;
+import android.graphics.Bitmap;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -9,7 +9,6 @@ import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
-import com.hongyuan.fitness.custom_view.share_view.ShareUtil;
 import com.hongyuan.fitness.databinding.ActivityPromotionCodeBinding;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.ImageFactory;
@@ -48,6 +47,8 @@ public class PromotionCodeViewModel extends CustomViewModel {
     @Override
     protected void setData() {
         PromotionRecordTopRightView rightView = new PromotionRecordTopRightView(mActivity,infoBean);
+        //把需要截屏的view传递过去
+        rightView.setShareBitmp(binding.box);
         mActivity.getMainTitle().addRightContentView(rightView);
 
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img).centerCrop();
@@ -57,10 +58,13 @@ public class PromotionCodeViewModel extends CustomViewModel {
 
         binding.name.setText(infoBean.getM_name());
         binding.desText.setText(infoBean.getTxt());
+
     }
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof PromotionCodeBeans){
             infoBean = ((PromotionCodeBeans)data).getData().getInfo();
@@ -68,4 +72,6 @@ public class PromotionCodeViewModel extends CustomViewModel {
             setData();
         }
     }
+
+
 }

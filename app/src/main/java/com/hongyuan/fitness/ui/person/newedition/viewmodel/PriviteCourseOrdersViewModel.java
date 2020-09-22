@@ -172,6 +172,8 @@ public class PriviteCourseOrdersViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof MineOrderBeans){
             List<MineOrderBeans.DataBean.ListBean> list = ((MineOrderBeans)data).getData().getList();
@@ -200,6 +202,8 @@ public class PriviteCourseOrdersViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.CANCLE_ORDER){
             orderList.remove(mPosition);
             adapter.notifyDataSetChanged();

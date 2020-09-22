@@ -1,16 +1,10 @@
 package com.hongyuan.fitness.ui.shop.sactivity;
 
-import android.view.KeyEvent;
-
 import com.hongyuan.fitness.R;
-import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityShopNewordersBinding;
-import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.shop.sviewmodel.ShopNewOrderViewModel;
 import com.hongyuan.fitness.util.SkinConstants;
-
-import org.greenrobot.eventbus.EventBus;
 
 public class ShopNewOrderAcitivity extends CustomActivity {
 
@@ -31,15 +25,15 @@ public class ShopNewOrderAcitivity extends CustomActivity {
         binding.setViewModel(viewModel);
     }
 
-    @Override
+   /* @Override
     public void finish() {
         EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"3");
         startActivity(MainActivity.class);
         super.finish();
-    }
+    }*/
 
     //安卓重写返回键事件
-    @Override
+   /* @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==KeyEvent.KEYCODE_BACK){
             EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"3");
@@ -47,5 +41,5 @@ public class ShopNewOrderAcitivity extends CustomActivity {
             return false;
         }
         return true;
-    }
+    }*/
 }

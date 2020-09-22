@@ -35,7 +35,6 @@ public class EncyclopediaViewModel extends CustomViewModel {
 
     @Override
     protected void lazyLoad() {
-        //加载私教课类型
         Controller.myRequest(Constants.V3_GET_BAIKE_CATEGORY_LIST,Controller.TYPE_POST,getParams(), EncyclopediaMenuBeans.class,this);
 
     }
@@ -44,7 +43,8 @@ public class EncyclopediaViewModel extends CustomViewModel {
     public void onSuccess(Object data) {
         if(data instanceof EncyclopediaMenuBeans){
             menuBean = (EncyclopediaMenuBeans)data;
-            menuBean.getData().add(0,new EncyclopediaMenuBeans.DataBean(0,"推荐",true));
+            menuBean.getData().add(0,new EncyclopediaMenuBeans.DataBean(0,"最新",false));
+            menuBean.getData().add(0,new EncyclopediaMenuBeans.DataBean(0,"热门",true));
             meunAdapter.setData(menuBean.getData());
             binding.mViewPager.setOffscreenPageLimit(menuBean.getData().size());
 

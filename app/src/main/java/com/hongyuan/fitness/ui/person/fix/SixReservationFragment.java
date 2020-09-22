@@ -130,6 +130,8 @@ public class SixReservationFragment extends CustomFragment {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.CANCEL_COURSE_PRIVITE_APPOINTMENT){
             mList.remove(cPosition);
             adapter.setNewData(mList);

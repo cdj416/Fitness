@@ -169,6 +169,8 @@ public class WristbandAlarmClockViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.UPDATE_FLAG){
             showSuccess("设置成功！");
         }

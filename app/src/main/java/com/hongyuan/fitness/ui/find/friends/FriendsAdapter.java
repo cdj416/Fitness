@@ -24,6 +24,6 @@ public class FriendsAdapter extends BaseQuickAdapter<FriendsBeans.DataBean.ListB
             helper.setText(R.id.status,"已关注");
         }
 
-        helper.addOnClickListener(R.id.status);
+        helper.addOnClickListener(R.id.status).addOnClickListener(R.id.box);
     }
 }

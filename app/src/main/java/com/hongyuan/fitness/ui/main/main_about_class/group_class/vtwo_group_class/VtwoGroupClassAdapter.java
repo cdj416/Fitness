@@ -47,7 +47,7 @@ public class VtwoGroupClassAdapter extends BaseQuickAdapter<VtwoGroupClassBeans.
     * 获取显示时间
     * */
     private String showTimeText(String startTime,String endTime){
-        String showTime = getWeek(startTime);
+        String showTime = TimeUtil.formatDate(startTime,TimeUtil.dateFormat,TimeUtil.dateFormatMDofChinese);
         showTime+=" "+TimeUtil.formatDate(startTime,TimeUtil.dateFormat,TimeUtil.dateFormatHM);
         showTime+="-"+TimeUtil.formatDate(endTime,TimeUtil.dateFormat,TimeUtil.dateFormatHM);
         return showTime;

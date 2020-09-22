@@ -1,32 +1,31 @@
 package com.hongyuan.fitness.ui.person.my_fan;
 
-import android.view.View;
-
+import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
-import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.databinding.ActivityFansBinding;
-import com.hongyuan.fitness.databinding.ActivityFriendsBinding;
-import com.hongyuan.fitness.ui.find.circle.post_details.AttentionBean;
-import com.hongyuan.fitness.ui.find.friends.FriendsAdapter;
 import com.hongyuan.fitness.ui.main.main_find.featured.FriendsBeans;
+import com.hongyuan.fitness.ui.person.person_message.PersonAttentionBeans;
+import com.hongyuan.fitness.ui.person.person_message.PersonMessageActivity;
+import com.hongyuan.fitness.ui.shop.sbeans.IsFriendsBeans;
 import com.hongyuan.fitness.util.CustomDialog;
-
-import org.greenrobot.eventbus.EventBus;
 
 public class MyFansViewModel extends CustomViewModel {
 
     private ActivityFansBinding binding;
     private MyFansAdapter adapter;
     private FriendsBeans friendsBeans;
+
+    //当前点击的是第几的一个对象
+    private int mPosition;
+
 
     public MyFansViewModel(CustomActivity mActivity , ActivityFansBinding binding) {
         super(mActivity);
@@ -45,10 +44,13 @@ public class MyFansViewModel extends CustomViewModel {
         binding.mRecycler.setLayoutManager(manager);
         adapter = new MyFansAdapter();
         binding.mRecycler.setAdapter(adapter);
-        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @SingleClick(2000)
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        adapter.setOnItemChildClickListener((adapter, view, position) -> {
+
+            if(view.getId() == R.id.box){
+                this.mPosition = position;
+
+                getIsFriends(String.valueOf(friendsBeans.getData().getList().get(position).getM_id()));
+            }else{
                 if((Boolean) view.getTag()){
                     CustomDialog.promptDialog(mActivity, "确定要关注他吗？", "取消", "确定", false, v -> {
                         if(v.getId() == R.id.isCannel){
@@ -57,7 +59,18 @@ public class MyFansViewModel extends CustomViewModel {
                     });
                 }
             }
+
         });
+
+
+    }
+
+    //查询当前粉丝是否已关注
+    private void getIsFriends(String f_mid){
+        mActivity.showLoading();
+
+        clearParams().setParams("f_mid",f_mid);
+        Controller.myRequest(Constants.IS_MY_FRIEND,Controller.TYPE_POST,getParams(), IsFriendsBeans.class,this);
     }
 
     @Override
@@ -81,13 +94,15 @@ public class MyFansViewModel extends CustomViewModel {
      *关注
      * */
     private void sendAttention(int position){
-        clearParams().setParams("f_mid",String.valueOf(friendsBeans.getData().getList().get(position).getF_mid()))
+        clearParams().setParams("f_mid",String.valueOf(friendsBeans.getData().getList().get(position).getM_id()))
         .setParams("f_type","add");
-        Controller.myRequest(ConstantsCode.ADD_FRIEND,Constants.ADD_FRIEND,Controller.TYPE_POST,getParams(), AttentionBean.class,this);
+        Controller.myRequest(ConstantsCode.ADD_FRIEND,Constants.ADD_FRIEND,Controller.TYPE_POST,getParams(), BaseBean.class,this);
     }
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof FriendsBeans){
             FriendsBeans pageData = (FriendsBeans)data;
             if(curPage == FIRST_PAGE){
@@ -109,12 +124,29 @@ public class MyFansViewModel extends CustomViewModel {
                 mActivity.setPromtView( mActivity.SHOW_EMPTY);
             }
         }
+
+        if(data instanceof IsFriendsBeans){
+            IsFriendsBeans.DataBean isFriendsBeans = ((IsFriendsBeans)data).getData();
+
+            PersonAttentionBeans attentionBeans = new PersonAttentionBeans();
+            attentionBeans.setIs_friend(isFriendsBeans.getIs_friend());
+            attentionBeans.setM_id(friendsBeans.getData().getList().get(mPosition).getM_id());
+            attentionBeans.setM_mobile(friendsBeans.getData().getList().get(mPosition).getM_mobile());
+            attentionBeans.setM_name(friendsBeans.getData().getList().get(mPosition).getM_name());
+            attentionBeans.setMi_head(friendsBeans.getData().getList().get(mPosition).getMi_head());
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("otherPerson",attentionBeans);
+            startActivity(PersonMessageActivity.class,bundle);
+        }
     }
 
     @Override
     public void onSuccess(int code, Object data) {
-        if(code == ConstantsCode.ADD_FRIEND){
-            refreshData();
+        super.onSuccess(code,data);
+
+        if(code == ConstantsCode.ADD_FRIEND) {
+            lazyLoad();
             //EventBus.getDefault().post(ConstantsCode.EB_ADD_CIRCLE,"已取消关注");
             showSuccess("已关注！");
         }

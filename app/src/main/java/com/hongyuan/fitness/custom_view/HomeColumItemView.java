@@ -15,13 +15,9 @@ import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.ui.encyclopedia.EncyclopediaActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
-import com.hongyuan.fitness.ui.membership_card.MembershipCardActivity;
-import com.hongyuan.fitness.ui.only_equipment.indicator_details.IndicatorDetailsActivity;
-import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchActivity;
 import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchCheckBean;
-import com.hongyuan.fitness.ui.person.push_share.PushShareActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.NewPoitionActivity;
 import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
-import com.hongyuan.fitness.ui.training_plan.TrainingPlanActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 
@@ -118,7 +114,8 @@ public class HomeColumItemView extends LinearLayout implements View.OnClickListe
                 break;*/
 
             case R.id.pointsCenterBox:
-                mActivity.startActivity(DailyPunchActivity.class);
+                //mActivity.startActivity(DailyPunchActivity.class);
+                mActivity.startActivity(NewPoitionActivity.class);
                 break;
 
             case R.id.goVue:

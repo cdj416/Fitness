@@ -64,6 +64,8 @@ public class IncomeDetailsViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof IncomeDetailsBeans){
             List<IncomeDetailsBeans.DataBean.ListBean> list = ((IncomeDetailsBeans)data).getData().getList();

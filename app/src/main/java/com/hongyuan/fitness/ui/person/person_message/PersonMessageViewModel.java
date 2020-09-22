@@ -2,6 +2,7 @@ package com.hongyuan.fitness.ui.person.person_message;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,6 +35,7 @@ import com.hongyuan.fitness.ui.main.main_find.featured.V2FindContentAdapter;
 import com.hongyuan.fitness.ui.person.edit_information.EditInformationActivity;
 import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
 import com.hongyuan.fitness.ui.person.my_fan.MyFansActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.DensityUtil;
 import com.hongyuan.fitness.util.MMStaggeredGridLayoutManager;
@@ -61,6 +63,9 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
     //别人的主页数据
     private PersonAttentionBeans attentionBeans;
 
+    //是否为自己
+    private boolean isMe = true;
+
     public PersonMessageViewModel(CustomActivity mActivity, ActivityPersonMessageBinding binding) {
         super(mActivity);
         this.binding = binding;
@@ -72,7 +77,14 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
         setEnableRefresh(true);
         setEnableLoadMore(true);
 
-        if(getBundle().getBoolean("isMe",false)){
+        if(getBundle() != null && getBundle().getSerializable("otherPerson") != null){
+            attentionBeans = (PersonAttentionBeans) getBundle().getSerializable("otherPerson");
+            if(!TokenSingleBean.getInstance().getM_mobile().equals(attentionBeans.getM_mobile())){
+                isMe = false;
+            }
+        }
+
+        if(isMe){
             binding.myTitle.setRightTextColor("个人资料",mActivity.getResources().getColor(R.color.color_FFFFFF));
             binding.bottomBox.setVisibility(View.GONE);
             binding.viewLine.setVisibility(View.GONE);
@@ -84,10 +96,9 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
                 }
             });
         }else{
-            if(getBundle() != null && getBundle().getSerializable("otherPerson") != null){
+            if(BaseUtil.isValue(attentionBeans)){
                 binding.bottomBox.setVisibility(View.VISIBLE);
                 binding.viewLine.setVisibility(View.VISIBLE);
-                attentionBeans = (PersonAttentionBeans) getBundle().getSerializable("otherPerson");
                 binding.myTitle.setCentreText(attentionBeans.getM_name()+"的主页");
                 binding.myTitle.getRightView().setVisibility(View.GONE);
                 if(attentionBeans.getIs_friend() == 1){
@@ -120,6 +131,7 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
                 new MMStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         binding.mRecycler.setLayoutManager(layoutManager);
         adapter = new V2FindContentAdapter(DensityUtil.getColumnWhith(mActivity,38,2));
+        adapter.setIsMe(isMe);
         binding.mRecycler.setAdapter(adapter);
         if(attentionBeans != null){
             adapter.setFooterView(mActivity.getFooterHeight(binding.mRecycler));
@@ -237,7 +249,7 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
         }else{
             ViewChangeUtil.changeRightDrawable(mActivity,binding.userName,R.mipmap.person_girl_mark_img);
         }
-        if(!getBundle().getBoolean("isMe",false) && personMessageBeans.getRole_id() == 2 && attentionBeans != null){
+        if(!isMe && personMessageBeans.getRole_id() == 2){
             binding.myTitle.setRightTextColor("教练主页",mActivity.getResources().getColor(R.color.color_FFFFFF));
             binding.myTitle.getRightView().setVisibility(View.VISIBLE);
             binding.myTitle.getRightView().setOnClickListener(new View.OnClickListener() {
@@ -390,6 +402,8 @@ public class PersonMessageViewModel extends CustomViewModel implements StickyScr
      * */
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
 
         if(code == ConstantsCode.ADD_CIRCLE_PRAISE){

@@ -92,6 +92,18 @@ public class HiddenAnimUtils {
         }
     }
 
+    /*
+    * 直接控制打开关闭操作
+    * */
+    public void toggle(boolean flag){
+        startAnimation();
+        if (!flag) {
+            closeAnimate(hideView);//布局隐藏
+        } else {
+            openAnim(hideView);//布局铺开
+        }
+    }
+
     /**
      * 开关旋转动画
      */

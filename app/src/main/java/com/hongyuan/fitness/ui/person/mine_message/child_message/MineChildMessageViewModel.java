@@ -88,6 +88,8 @@ public class MineChildMessageViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof MineChildMessageBeans){
             MineChildMessageBeans pageData = (MineChildMessageBeans)data;
             if(curPage == FIRST_PAGE){
@@ -113,6 +115,8 @@ public class MineChildMessageViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.UPDATE_MSG_READ){
             mineChildMessageBeans.getData().getList().get(mPosition).setIs_read(1);
             adapter.setNewData(mineChildMessageBeans.getData().getList());

@@ -116,6 +116,8 @@ public class MineMessageViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof MineMessageBeans){
             messageBeans = (MineMessageBeans)data;
             adapter.setNewData(messageBeans.getData());

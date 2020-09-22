@@ -11,8 +11,8 @@
         android:background="@color/theme_color1">
         <RelativeLayout
             android:id="@+id/headBox"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
             android:layout_marginStart="16dp"
             android:layout_centerVertical="true">
             <com.makeramen.roundedimageview.RoundedImageView
@@ -25,11 +25,15 @@
                 android:src="@mipmap/default_head_img"/>
             <TextView
                 android:id="@+id/newMeassageMark"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:background="@drawable/orange_oval"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@drawable/shape_gradient_oval_ef8041_ef5b48"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:textSize="10sp"
+                android:text="10"
+                android:gravity="center"
+                android:textColor="@color/color_FFFFFF"
                 android:layout_alignParentEnd="true"/>
             <ImageView
                 android:layout_width="12dp"
@@ -59,6 +63,9 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_FF999999"
                 android:textSize="@dimen/sp_12"
+                android:layout_marginEnd="120dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="嗨喽"/>
         </LinearLayout>
         <TextView

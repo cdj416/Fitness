@@ -22,6 +22,7 @@ import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVeri
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.video.MyPlayActivity;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.EncryptionUtil;
 import com.hongyuan.fitness.util.LocationBean;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -312,7 +313,8 @@ public abstract class CustomViewModel implements RetrofitListener {
     * */
     private Map<String,String> getBaseParams(){
         if(userToken != null && userToken.getToken() != null){
-            int randomNum = (int)(Math.random()*100);
+            //int randomNum = (int)(Math.random()*100);
+            int randomNum = 50;
             long timeSpan = System.currentTimeMillis();
             //int randomNum = 100;
             //long timeSpan = 1561619095;
@@ -408,12 +410,36 @@ public abstract class CustomViewModel implements RetrofitListener {
         }
     }
 
+    @Override
+    public void onSuccess(Object data) {
+        mActivity.closeLoading();
+
+        if(data instanceof BaseBean){
+            BaseBean bean = (BaseBean)data;
+
+            if(BaseUtil.isValue(bean.getPoint()+"") && Integer.parseInt(BaseUtil.getNoZoon(bean.getPoint())) > 0){
+                //CustomDialog.showGainPoition(mActivity,"恭喜您获得" + BaseUtil.getNoZoon(bean.getPoint()) + "积分！");
+                mActivity.showPotion("恭喜您获得" + BaseUtil.getNoZoon(bean.getPoint()) + "积分！");
+            }
+
+        }
+
+    }
+
     /*
     * 需要做区分子类需要从写该方法
     * */
     @Override
     public void onSuccess(int code, Object data) {
+        mActivity.closeLoading();
 
+        if(data instanceof BaseBean){
+            BaseBean bean = (BaseBean)data;
+
+            if(BaseUtil.isValue(bean.getPoint()+"") && Integer.parseInt(BaseUtil.getNoZoon(bean.getPoint())) > 0){
+                mActivity.showPotion("恭喜您获得" + BaseUtil.getNoZoon(bean.getPoint()) + "积分！");
+            }
+        }
     }
 
     /*

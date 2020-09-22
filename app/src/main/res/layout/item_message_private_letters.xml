@@ -9,45 +9,78 @@
         android:layout_width="match_parent"
         android:layout_height="12dp"/>
     <RelativeLayout
+        android:id="@+id/goDetail"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/color_FFFFFF"
+        android:background="@color/theme_color1"
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/img"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            app:riv_corner_radius="22dp"
-            android:layout_centerVertical="true"
-            android:src="@color/color_f2"/>
+        <RelativeLayout
+            android:id="@+id/headBox"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_centerVertical="true">
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/messageImg"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                app:riv_corner_radius="22dp"
+                android:src="@color/color_f2"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:id="@+id/newMeassageMark"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@drawable/shape_gradient_oval_ef8041_ef5b48"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:textSize="10sp"
+                android:text="10"
+                android:gravity="center"
+                android:textColor="@color/color_FFFFFF"
+                android:layout_alignParentEnd="true"/>
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@mipmap/member_mark"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/img"
+            android:layout_toEndOf="@id/headBox"
             android:layout_marginStart="8dp"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/messageName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:text="随动课程"/>
             <TextView
+                android:id="@+id/messageDes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_FF999999"
+                android:textColor="@color/theme_color4"
                 android:textSize="@dimen/sp_12"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginEnd="100dp"
                 android:text="有一节私教课即将要开始上课了！"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/msgTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp_12"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:textColor="@color/color_FF999999"
+            android:textColor="@color/theme_color4"
             android:drawableRight="@mipmap/right_huise_img"
             android:gravity="center"
             android:text="07/02 12:50"/>
@@ -55,5 +88,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"/>
+        android:background="@color/theme_line1"/>
 </LinearLayout>

@@ -49,11 +49,11 @@ public class SstoreViewPagerAdapter extends FragmentPagerAdapter {
         }
         fragments.clear();
         beans.clear();
-        beans.add(new TitleBean("首页",0));
-        beans.add(new TitleBean("全部商品",1));
+        //beans.add(new TitleBean("首页",0));
+        beans.add(new TitleBean("全部商品",0));
 
-        mainFragment = new SstoreMainFragment();
-        fragments.add(mainFragment);
+        //mainFragment = new SstoreMainFragment();
+        //fragments.add(mainFragment);
         fragments.add(new SstoreGoodsFragment());
 
         notifyDataSetChanged();

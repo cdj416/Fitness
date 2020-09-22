@@ -124,6 +124,24 @@ public class CouponListBeans extends BaseBean implements Serializable {
             private int is_use;
             private String store_name;
             private int store_id;
+            private int is_verification;
+            private String verification_code;
+
+            public int getIs_verification() {
+                return is_verification;
+            }
+
+            public void setIs_verification(int is_verification) {
+                this.is_verification = is_verification;
+            }
+
+            public String getVerification_code() {
+                return verification_code;
+            }
+
+            public void setVerification_code(String verification_code) {
+                this.verification_code = verification_code;
+            }
 
             public int getStore_id() {
                 return store_id;

@@ -3,9 +3,11 @@ package com.hongyuan.fitness.custom_view.share_view;
 import android.graphics.Bitmap;
 import android.widget.Toast;
 
+import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.ui.person.daily_punch.ShareSuccessLinstener;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -80,6 +82,11 @@ public class ShareUtil {
      * 自定义分享内容
      * */
     public static void showShare(CustomActivity mActivity,ShareBeans shareBeans){
+        if(!BaseUtil.isValue(shareBeans)){
+            CustomDialog.showMessage(mActivity,"分享内容为空！");
+            return;
+        }
+
         new ShareAction(mActivity)
                 .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE)
                 .setShareboardclickCallback((snsPlatform, share_media) -> {
@@ -132,6 +139,48 @@ public class ShareUtil {
         };
     }
 
+    /*
+    * 图片分享弹框
+    * */
+    public static void shareImg(CustomActivity mActivity, Bitmap shareImg){
+        new ShareAction(mActivity)
+                .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE)
+                .setShareboardclickCallback((snsPlatform, share_media) -> {
+                    UMImage img =  new UMImage(mActivity, shareImg);
+                    img.setThumb(new UMImage(mActivity, shareImg));
+                    new ShareAction(mActivity).setPlatform(share_media)
+                            .withMedia(img)
+                            .setCallback(umShareListener)
+                            .share();
+
+                }).open();
+
+        umShareListener = new UMShareListener() {
+            @Override
+            public void onStart(SHARE_MEDIA platform) {
+                // 分享开始的回调
+            }
+
+            @Override
+            public void onResult(SHARE_MEDIA platform) {
+                Toast.makeText(mActivity, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA platform, Throwable t) {
+                Toast.makeText(mActivity,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA platform) {
+                Toast.makeText(mActivity,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
+
+    /*
+    * 直接分享图片（没有弹框选择）
+    * */
     public static void shareImg(CustomActivity mActivity, Bitmap shareImg, SHARE_MEDIA type, ShareSuccessLinstener successLinstener){
         umShareListener = new UMShareListener() {
             @Override
@@ -156,8 +205,11 @@ public class ShareUtil {
             }
         };
 
+        UMImage img =  new UMImage(mActivity, shareImg);
+        img.setThumb(new UMImage(mActivity, shareImg));
+
         new ShareAction(mActivity).setPlatform(type)
-                .withMedia(new UMImage(mActivity, shareImg))
+                .withMedia(img)
                 .setCallback(umShareListener)
                 .share();
     }
@@ -167,7 +219,13 @@ public class ShareUtil {
         if(!BaseUtil.isValue(shareBeans)){
             shareBeans = getShareBean();
         }
-        UMImage image = new UMImage(mActivity, shareBeans.getShareImgUrl());//分享图标
+
+        UMImage image;
+        if(BaseUtil.isValue(shareBeans.getShareImgUrl())){
+            image = new UMImage(mActivity, shareBeans.getShareImgUrl());//分享图标
+        }else{
+            image = new UMImage(mActivity, R.mipmap.ic_launcher);//分享图标
+        }
         final UMWeb web = new UMWeb(shareBeans.getShareWebsite()); //切记切记 这里分享的链接必须是http开头
         web.setTitle(shareBeans.getShareTitle());//标题
         web.setThumb(image);  //缩略图
@@ -180,7 +238,7 @@ public class ShareUtil {
     /*组装默认分享数据*/
     private static ShareBeans getShareBean(){
         ShareBeans beans = new ShareBeans();
-        beans.setShareImgUrl("https://www.baidu.com/img/bd_logo1.png");
+        beans.setShareImgId(R.mipmap.ic_launcher);
         beans.setShareInfo("发现同好 默契圈友趣分享 线上私教");
         beans.setShareTitle("身边的健康管理专家");
         beans.setShareWebsite("http://www.hongyuangood.com/app/suidong.html?from=singlemessage&isappinstalled=0");

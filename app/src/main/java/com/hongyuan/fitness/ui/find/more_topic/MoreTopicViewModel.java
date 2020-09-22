@@ -40,6 +40,8 @@ public class MoreTopicViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof SlectTopicLeftBeans){
             menuBean = ((SlectTopicLeftBeans) data).getData();
             meunAdapter.setData(menuBean.getList());

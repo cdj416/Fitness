@@ -166,6 +166,8 @@ public class SelectTopicViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof  SlectTopicLeftBeans){
             leftList = ((SlectTopicLeftBeans)data).getData().getList();

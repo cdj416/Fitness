@@ -3,9 +3,18 @@ package com.hongyuan.fitness.custom_view.share_view;
 public class ShareBeans {
 
     private String shareImgUrl;
+    private int shareImgId;
     private String shareWebsite;
     private String shareTitle;
     private String shareInfo;
+
+    public int getShareImgId() {
+        return shareImgId;
+    }
+
+    public void setShareImgId(int shareImgId) {
+        this.shareImgId = shareImgId;
+    }
 
     public String getShareImgUrl() {
         return shareImgUrl;

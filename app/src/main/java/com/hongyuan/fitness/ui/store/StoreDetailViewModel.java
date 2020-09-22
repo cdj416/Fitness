@@ -251,7 +251,7 @@ public class StoreDetailViewModel extends CustomViewModel implements HomeRecycle
         if(data instanceof CouponListBeans){
            couponList = ((CouponListBeans)data).getData().getList();
             if(couponList != null && couponList.size() > 0){
-                binding.storeCoupon.setStoreCoupon(couponList,this);
+                binding.storeCoupon.setStoreCoupon(os_id,couponList,this);
             }else{
                 binding.storeCoupon.setVisibility(View.GONE);
             }
@@ -269,9 +269,11 @@ public class StoreDetailViewModel extends CustomViewModel implements HomeRecycle
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.GET_COUPON){
             couponList.get(receivePosition).setReceive(true);
-            binding.storeCoupon.setStoreCoupon(couponList,this);
+            binding.storeCoupon.setStoreCoupon(os_id,couponList,this);
             showSuccess("领取成功！");
         }
     }

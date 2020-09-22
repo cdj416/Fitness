@@ -145,6 +145,8 @@ public class RefundGoodsViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof ReturnResionBeans){
             rList = ((ReturnResionBeans)data).getData().getList();
 
@@ -183,6 +185,8 @@ public class RefundGoodsViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.APPLY_REFUND){
             Bundle bundle = new Bundle();

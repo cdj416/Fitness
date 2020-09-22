@@ -150,6 +150,8 @@ public class EdLogisticsViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.DELIVER_REFUND){
             Bundle bundle = new Bundle();

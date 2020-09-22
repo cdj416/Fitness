@@ -342,7 +342,7 @@ public class WristbandStautsUtils implements HourMeterUtil.TimeMoreCallBack{
                     //hourUtil.stopCount();
                     //启动循环绑定计时操作（因为不知道什么原因，第一次绑定总是失败）
                     //hourUtil.startCount(TWO_CODE);
-                    Log.e("cdj","========绑定失败=========");
+                    mContext.showLemonErr("设备绑定失败！");
                 }
             }
         });

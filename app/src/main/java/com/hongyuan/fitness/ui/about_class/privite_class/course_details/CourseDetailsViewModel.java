@@ -323,6 +323,8 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof CommentsNumBeans){
             CommentsNumBeans commentsNumBeans = (CommentsNumBeans)data;
             binding.commentTitle.setNum(commentsNumBeans.getData());
@@ -414,6 +416,8 @@ public class CourseDetailsViewModel extends CustomViewModel implements CommentTi
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.DEL_COLLECTION){
             detailsBean.getData().setIs_collection(0);
             binding.mainTitle.setRightImage(R.mipmap.white_collection_mark);

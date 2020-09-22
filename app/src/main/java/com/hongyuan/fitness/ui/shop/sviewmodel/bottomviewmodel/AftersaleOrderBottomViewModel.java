@@ -215,6 +215,8 @@ public class AftersaleOrderBottomViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.CANCLE_ORDER){
             mActivity.showSuccess("订单已取消");

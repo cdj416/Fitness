@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="16dp">
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical"
+         android:id="@+id/box"
+         android:background="@drawable/theme_shape_radius6_ffffff_stroke_eeeeee"
+         android:layout_marginStart="16dp"
+         android:layout_marginEnd="16dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="96dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/priceBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/theme_color3"
+                            android:text="¥"/>
+                        <TextView
+                            android:id="@+id/cMoney"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/theme_color3"
+                            android:textSize="24sp"
+                            android:text="100"/>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/cUseText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="@color/theme_color3"
+                        android:text="满500可用"/>
+                </LinearLayout>
+                
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/shape_vertical_dotted_line"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="11dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="90dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/cTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_color3"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="bold"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="私教课优惠券"/>
+                    <TextView
+                        android:id="@+id/cData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_color3"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginTop="9dp"
+                        android:text="有效期：2019.9.19"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/goUse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_FFFFFF"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="6dp"
+                android:paddingTop="6dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/shape_radius16_ef5b48"
+                android:layout_centerVertical="true"
+                android:text="立即领取"/>
+
+        </RelativeLayout>
+
+         <View
+             android:layout_width="match_parent"
+             android:layout_height="1dp"
+             android:layout_marginStart="16dp"
+             android:layout_marginEnd="16dp"
+             android:background="@drawable/shape_h_dotted_line"/>
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="63dp"
+                 android:orientation="vertical"
+                 android:paddingStart="16dp"
+                 android:gravity="center_vertical"
+                 android:layout_marginEnd="50dp">
+
+                 <TextView
+                     android:id="@+id/cDes"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textSize="@dimen/sp_12"
+                     android:text="适用于购买私教课使用"
+                     android:textColor="@color/theme_color3"/>
+                 <TextView
+                     android:id="@+id/cName"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textSize="@dimen/sp_12"
+                     android:text="适用所有首玺门店"
+                     android:textColor="@color/theme_color3"/>
+             </LinearLayout>
+
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@mipmap/white_down_mark"
+                 android:padding="6dp"
+                 android:layout_marginEnd="10dp"
+                 android:layout_marginTop="8dp"
+                 android:visibility="gone"
+                 android:layout_alignParentEnd="true"/>
+         </RelativeLayout>
+
+     </LinearLayout>
+
+</LinearLayout>

@@ -16,7 +16,7 @@
             android:paddingLeft="10dp"
             android:textColorHint="@color/theme_color4"
             android:textColor="@color/theme_color3"
-            android:hint="请输入昵称"/>
+            android:hint="请输入"/>
 
         <Button
             android:id="@+id/userNameSubmit"

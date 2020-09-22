@@ -113,6 +113,8 @@ public class SshopCommentsFragment extends CustomFragment implements CommentTitl
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
 
         if(data instanceof ShopCommentBeans){

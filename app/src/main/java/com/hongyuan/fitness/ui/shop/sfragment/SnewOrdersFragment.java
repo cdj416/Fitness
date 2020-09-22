@@ -255,6 +255,8 @@ public class SnewOrdersFragment extends CustomFragment {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
 
         if(code == ConstantsCode.CANCLE_ORDER){

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="32dp"
+        android:background="@drawable/shape_radius6_ffffff">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/poition_dialog_bg"
+            app:riv_corner_radius_top_left="6dp"
+            app:riv_corner_radius_top_right="6dp"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+            
+            <View
+                android:layout_width="24dp"
+                android:layout_height="1dp"
+                android:background="#F6C298"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_14"
+                android:textColor="#B47A4A"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:text="更多好礼 畅享兑换"/>
+            <View
+                android:layout_width="24dp"
+                android:layout_height="1dp"
+                android:background="#F6C298"/>
+
+            
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#B47A4A"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:gravity="center"
+            android:layout_marginTop="12dp"
+            android:text="完成积分新手任务和日常积分任务即可获取随动积分，满足兑换门槛即可兑换相应商品"/>
+
+        <TextView
+            android:id="@+id/goPoint"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/color_FFFFFF"
+            android:gravity="center"
+            android:background="@drawable/shape_radius6_ffef9e48"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:text="立即体验"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/close_yuanquancha_img"/>
+</LinearLayout>

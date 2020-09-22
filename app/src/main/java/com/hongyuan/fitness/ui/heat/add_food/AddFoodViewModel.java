@@ -141,6 +141,8 @@ public class AddFoodViewModel extends CustomViewModel implements AddFoodView.Sel
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof AddFoodMenuBean && isSuccess(data)){
             AddFoodMenuBean menuBean = (AddFoodMenuBean)data;
             AddFoodMenuBean.DataBean firstData = new AddFoodMenuBean.DataBean();
@@ -159,6 +161,8 @@ public class AddFoodViewModel extends CustomViewModel implements AddFoodView.Sel
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.ADD_FOOD_EATING){
             mActivity.showSuccess("添加成功！");
             EventBus.getDefault().post(ConstantsCode.EB_ADD_FOOD_SUSSESS,"添加成功");

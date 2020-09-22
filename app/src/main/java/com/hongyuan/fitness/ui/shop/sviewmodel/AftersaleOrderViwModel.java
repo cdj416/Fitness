@@ -119,6 +119,8 @@ public class AftersaleOrderViwModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof AftersaleOrderBeans){
             infoBean = ((AftersaleOrderBeans)data).getData().getInfo();

@@ -35,6 +35,9 @@ public class IntegralGoddsViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
+        setEnableLoadMore(true);
+        setEnableRefresh(true);
+
         GridLayoutManager rihtManager = new GridLayoutManager(mActivity, 2);
         rihtManager.setOrientation(RecyclerView.VERTICAL);
         binding.mRec.setLayoutManager(rihtManager);
@@ -86,6 +89,11 @@ public class IntegralGoddsViewModel extends CustomViewModel {
     }
 
     @Override
+    public void refreshData() {
+        lazyLoad();
+    }
+
+    @Override
     protected void lazyLoad() {
         mActivity.closeLoading();
         clearParams().setParams("is_point","1");
@@ -94,6 +102,7 @@ public class IntegralGoddsViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
         mActivity.closeLoading();
         if(data instanceof GoodsBeans){
             List<GoodsBeans.DataBean.ListBean> list = ((GoodsBeans)data).getData().getList();

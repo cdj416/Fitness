@@ -53,7 +53,7 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
     private FilterGoupClassAdapter filterAdapter;
 
     private VtwoGroupClassAdapter adapter;
-    private VtwoGroupClassBeans classBeans;
+    private VtwoGroupClassBeans.DataBean classBeans;
 
     //条件筛选
     private String prefixData = "";
@@ -113,6 +113,9 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
                 //拼接时间
                 start_date = prefixData +" 00:00";
                 end_date = prefixData +" 23:59";
+
+                //刷新，初始化页数为1
+                curPage = FIRST_PAGE;
                 classBeans = null;
                 getGroupClass();
             }
@@ -136,7 +139,7 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 try {
                     Bundle bundle = new Bundle();
-                    bundle.putString("cs_id",String.valueOf(classBeans.getData().getList().get(position).getCs_id()));
+                    bundle.putString("cs_id",String.valueOf(classBeans.getList().get(position).getCs_id()));
                     startActivity(MissionDetailActivity.class,bundle);
                 }catch (Exception e){
                     CustomDialog.showMessage(mActivity,"请下拉刷新数据！");
@@ -159,7 +162,7 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
         //加载更多监听
         refreshLayout.setOnLoadMoreListener(onLoadMore());
         //设置主题颜色
-        refreshLayout.setPrimaryColors(getResources().getColor(R.color.color_F5F6FB));
+        refreshLayout.setPrimaryColors(getResources().getColor(R.color.transparent));
         //初始刷新动画
         refreshLayout.setRefreshHeader(new MaterialHeader(mActivity).setShowBezierWave(true));
         //初始化加载动画
@@ -238,21 +241,23 @@ public class VtwoGroupClassFragment extends CustomFragment implements FilterGoup
         }
 
         if(data instanceof VtwoGroupClassBeans){
-            VtwoGroupClassBeans pageData = (VtwoGroupClassBeans)data;
+            VtwoGroupClassBeans.DataBean pageData = ((VtwoGroupClassBeans)data).getData();
             if(curPage == FIRST_PAGE){
-                if(pageData.getData().getList() != null && pageData.getData().getList().size() > 0){
+                if(pageData.getList() != null && pageData.getList().size() > 0){
                     classBeans = pageData;
                 }
             }else{
-                if(pageData.getData().getList() != null && pageData.getData().getList().size() > 0){
-                    classBeans.getData().getList().addAll(pageData.getData().getList());
+                if(pageData.getList() != null && pageData.getList().size() > 0){
+                    classBeans.getList().addAll(pageData.getList());
+                }else{
+                    //refreshLayout.finishLoadMoreWithNoMoreData();
                 }
             }
 
-            if(classBeans != null && classBeans.getData() != null &&
-                    classBeans.getData().getList() != null &&
-                    classBeans.getData().getList().size() > 0){
-                adapter.setNewData(classBeans.getData().getList());
+            if(classBeans != null  &&
+                    classBeans.getList() != null &&
+                    classBeans.getList().size() > 0){
+                adapter.setNewData(classBeans.getList());
 
                 setPromtView(SHOW_DATA);
             }else{

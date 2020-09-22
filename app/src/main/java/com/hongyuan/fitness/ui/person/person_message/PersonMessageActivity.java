@@ -3,7 +3,6 @@ package com.hongyuan.fitness.ui.person.person_message;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityPersonMessageBinding;
-import com.hongyuan.fitness.util.SkinConstants;
 
 public class PersonMessageActivity extends CustomActivity {
 

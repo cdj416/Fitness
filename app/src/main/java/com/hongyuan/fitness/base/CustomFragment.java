@@ -24,6 +24,7 @@ import com.hongyuan.fitness.custom_view.TitleView;
 import com.hongyuan.fitness.ui.login.vtwo_login.VtwoLoginActivity;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.EncryptionUtil;
 import com.hongyuan.fitness.util.LocationBean;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
@@ -606,8 +607,11 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
             }
             //是否登录过
             if(mActivity.userToken.getM_id() != null){
+                Log.e("cdj","=-=======来了========"+mActivity.userToken.getM_mobile());
                 baseParams.put("m_id",mActivity.userToken.getM_id());
                 baseParams.put("m_mobile",mActivity.userToken.getM_mobile());
+            }else{
+                Log.e("cdj","=-=======没来========"+mActivity.userToken.getM_mobile());
             }
 
             return baseParams;
@@ -615,12 +619,34 @@ public abstract class CustomFragment<T> extends Fragment implements RetrofitList
         return null;
     }
 
+    @Override
+    public void onSuccess(Object data) {
+        mActivity.closeLoading();
+
+        if(data instanceof BaseBean){
+            BaseBean bean = (BaseBean)data;
+
+            if(BaseUtil.isValue(bean.getPoint()+"") && Integer.parseInt(BaseUtil.getNoZoon(bean.getPoint())) > 0){
+                mActivity.showPotion("恭喜您获得" + BaseUtil.getNoZoon(bean.getPoint()) + "积分！");
+            }
+        }
+
+    }
+
     /*
      * 需要做区分，子类需要实现该方法
      * */
     @Override
     public void onSuccess(int code, Object data) {
+        mActivity.closeLoading();
 
+        if(data instanceof BaseBean){
+            BaseBean bean = (BaseBean)data;
+
+            if(BaseUtil.isValue(bean.getPoint()+"") && Integer.parseInt(BaseUtil.getNoZoon(bean.getPoint())) > 0){
+                mActivity.showPotion("恭喜您获得" + BaseUtil.getNoZoon(bean.getPoint()) + "积分！");
+            }
+        }
     }
 
     /*

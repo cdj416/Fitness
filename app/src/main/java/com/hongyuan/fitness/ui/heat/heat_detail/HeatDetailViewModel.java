@@ -63,6 +63,8 @@ public class HeatDetailViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof HeatDetailBean && isSuccess(data)){
             detailBean = (HeatDetailBean)data;
             adapter.setBili(Double.valueOf(detailBean.getData().getF_cal()),detailBean.getData().getF_type());

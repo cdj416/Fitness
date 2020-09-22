@@ -1,16 +1,13 @@
 package com.hongyuan.fitness.ui.webview;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
-
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
@@ -28,12 +25,15 @@ import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.DefaultWebClient;
+import com.just.agentweb.WebChromeClient;
 
 public class WebViewModelView extends CustomViewModel {
 
     private ActivityWebviewBinding binding;
 
     public AgentWeb mAgentWeb;
+
+    private  ShareBeans contents;
 
     public WebViewModelView(CustomActivity mActivity, ActivityWebviewBinding binding) {
         super(mActivity);
@@ -47,7 +47,6 @@ public class WebViewModelView extends CustomViewModel {
         //测试使用
         binding.showUrl.setOnClickListener(v -> {
             CustomDialog.showUrl(mActivity,mAgentWeb.getWebCreator().getWebView().getUrl());
-            Log.e("cnn",""+mAgentWeb.getWebCreator().getWebView().getUrl());
         });
         //binding.title.setText(getBundle().getString("title",""));
         String url = getBundle().getString("url");
@@ -73,6 +72,7 @@ public class WebViewModelView extends CustomViewModel {
         mAgentWeb = AgentWeb.with(mActivity)
                 .setAgentWebParent(binding.mLinearLayout, new LinearLayout.LayoutParams(-1, -1))//传入AgentWeb的父控件。
                 .useDefaultIndicator(mActivity.getResources().getColor(R.color.color_EF5B48), 1)//设置进度条颜色与高度，-1为默认值，高度为2，单位为dp。
+                .setWebChromeClient(mWebChromeClient)
                 .setSecurityType(AgentWeb.SecurityType.STRICT_CHECK) //严格模式 Android 4.2.2 以下会放弃注入对象 ，使用AgentWebView没影响。
                 .setMainFrameErrorView(R.layout.agentweb_error_page, -1) //参数1是错误显示的布局，参数2点击刷新控件ID -1表示点击整个布局都刷新， AgentWeb 3.0.0 加入。
                 .setOpenOtherPageWays(DefaultWebClient.OpenOtherPageWays.DISALLOW)//打开其他页面时，弹窗质询用户前往其他应用 AgentWeb 3.0.0 加入。
@@ -81,29 +81,7 @@ public class WebViewModelView extends CustomViewModel {
                 .ready()//设置 WebSettings。
                 .go(url); //WebView载入该url地址的页面并显示。
 
-        //获取网页的标题
-        mAgentWeb.getWebCreator().getWebView().setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                String title = view.getTitle();
 
-                if(url.contains("show_share=1")){
-                    ShareBeans contents = new ShareBeans();
-                    contents.setShareImgUrl("");
-                    contents.setShareInfo(title);
-                    contents.setShareTitle(title);
-                    contents.setShareWebsite(url);
-                    showShare(contents);
-                }
-
-                if (!TextUtils.isEmpty(title) && !title.contains("http")) {
-                    binding.title.setText(title);
-                }else{
-                    binding.title.setText(getBundle().getString("title",""));
-                }
-            }
-        });
 
         //AgentWebConfig.debug();
 
@@ -155,7 +133,6 @@ public class WebViewModelView extends CustomViewModel {
             return mActivity.onKeyDown(keyCode, event);//退出H5界面
         });
 
-
     }
 
     /*
@@ -180,6 +157,8 @@ public class WebViewModelView extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.GYM_SPORT_GROUP_CHAT_ADD){
             HuanXinUtils.getInstance().setBaseData(TokenSingleBean.getInstance().getM_mobile(),TokenSingleBean.getInstance().getHeadUrl()
@@ -193,11 +172,39 @@ public class WebViewModelView extends CustomViewModel {
         }
     }
 
-    //显示分享
-    public void showShare(ShareBeans contents){
-        binding.shareWeb.setVisibility(View.VISIBLE);
-        binding.shareWeb.setOnClickListener(v -> {
-            ShareUtil.showShare(mActivity,contents);
-        });
+    /*
+    * H5传递过来的分享内容
+    * */
+    public void setContents(ShareBeans contents) {
+        this.contents = contents;
     }
+
+    private WebChromeClient mWebChromeClient=new WebChromeClient(){
+
+        @Override
+        public void onReceivedTitle(WebView view, String title) {
+            if (!TextUtils.isEmpty(title) && !title.contains("http")) {
+                binding.title.setText(title);
+            }else{
+                binding.title.setText(getBundle().getString("title",""));
+            }
+
+            super.onReceivedTitle(view, title);
+        }
+
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+
+            if(newProgress == 100 && view.getUrl().contains("show_share=1")){
+                binding.shareWeb.setVisibility(View.VISIBLE);
+                binding.shareWeb.setOnClickListener(v -> {
+                    ShareUtil.showShare(mActivity,contents);
+                });
+            }else{
+                binding.shareWeb.setVisibility(View.GONE);
+            }
+
+            super.onProgressChanged(view, newProgress);
+        }
+    };
 }

@@ -8,6 +8,7 @@ import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.custom_view.share_view.ShareUtil;
 import com.hongyuan.fitness.ui.person.my_promote.promote_record.PromotionRecordActivity;
+import com.hongyuan.fitness.util.ScreenshotUtil;
 
 public class PromotionRecordTopRightView extends LinearLayout {
 
@@ -15,6 +16,8 @@ public class PromotionRecordTopRightView extends LinearLayout {
     private PromotionCodeBeans.DataBean.InfoBean infoBean;
 
     private ImageView recordImg,shareImg;
+
+    private View sView;
 
     public PromotionRecordTopRightView(CustomActivity mActivity,PromotionCodeBeans.DataBean.InfoBean infoBean){
         super(mActivity);
@@ -32,9 +35,11 @@ public class PromotionRecordTopRightView extends LinearLayout {
 
         recordImg.setOnClickListener(v -> mActivity.startActivity(PromotionRecordActivity.class));
         shareImg.setOnClickListener(v -> {
-            ShareUtil.setQrShare(infoBean.getOss_url());
-            ShareUtil.showShare(mActivity);
+            ShareUtil.shareImg(mActivity, ScreenshotUtil.getViewBp(sView));
         });
     }
 
+    public void setShareBitmp(View sView){
+        this.sView = sView;
+    }
 }

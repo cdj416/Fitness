@@ -9,6 +9,8 @@ public class ShopMessageViewModel extends CustomViewModel {
 
     private ActivityShopMessageBinding binding;
 
+    int position;
+
     public ShopMessageViewModel(CustomActivity mActivity, ActivityShopMessageBinding binding) {
         super(mActivity);
         this.binding = binding;
@@ -17,11 +19,17 @@ public class ShopMessageViewModel extends CustomViewModel {
 
     @Override
     protected void initView() {
+        if(getBundle() != null){
+            position = getBundle().getInt("position");
+        }
+        
         SmessagePagerAdapter meunAdapter = new SmessagePagerAdapter(mActivity.getSupportFragmentManager());
         binding.viewPager.setAdapter(meunAdapter);
         binding.layoutMenu.setupWithViewPager(binding.viewPager);
 
         binding.viewPager.setOffscreenPageLimit(4);
+
+        binding.viewPager.setCurrentItem(position);
 
     }
 

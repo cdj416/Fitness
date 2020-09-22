@@ -46,7 +46,9 @@ public class SelectCouponViewModel extends CustomViewModel {
             @SingleClick
             @Override
             public void onClick(View v) {
-                startActivity(ReceiveCouponListActivity.class,null);
+                Bundle bundle = new Bundle();
+                bundle.putString("os_id",os_id);
+                startActivity(ReceiveCouponListActivity.class,bundle);
             }
         });
 
@@ -97,6 +99,8 @@ public class SelectCouponViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof CouponListBeans){
             List<CouponListBeans.DataBean.ListBean> list = ((CouponListBeans)data).getData().getList();

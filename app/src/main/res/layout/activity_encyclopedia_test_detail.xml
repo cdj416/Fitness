@@ -129,12 +129,13 @@
                                 android:padding="5dp"
                                 android:layout_gravity="center_vertical"/>
 
-                            <com.hongyuan.fitness.custom_view.share_view.ShareView
+                            <ImageView
+                                android:id="@+id/shareImg"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:layout_gravity="center_vertical"
-                                app:shareShowImg="@mipmap/share_baise_img"/>
+                                android:src="@mipmap/share_baise_img"
+                                android:layout_marginStart="16dp"
+                                android:layout_gravity="center_vertical"/>
 
                         </LinearLayout>
                     </RelativeLayout>

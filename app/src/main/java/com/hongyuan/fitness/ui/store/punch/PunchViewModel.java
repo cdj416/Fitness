@@ -90,6 +90,8 @@ public class PunchViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.MEMBER_COME_STORE_DO_CARD){
             punchBeans.setIs_in("1");
             showSuccess("进店打卡成功！");

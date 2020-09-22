@@ -163,6 +163,8 @@ public class MainSearchViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.DEL_VISIT_HABIT){
             binding.historyBox.setVisibility(View.GONE);

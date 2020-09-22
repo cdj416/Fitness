@@ -1,19 +1,12 @@
 package com.hongyuan.fitness.ui.shop.sfragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.fitness.R;
-import com.hongyuan.fitness.base.BaseBean;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
@@ -26,7 +19,6 @@ import com.hongyuan.fitness.ui.shop.sactivity.PromoteGoodsActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SportsLifeActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SstoreActivity;
-import com.hongyuan.fitness.ui.shop.sadapter.SMGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SMLikeGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.ShopMainGoodsAdapter;
 import com.hongyuan.fitness.ui.shop.sbeans.HabitGoddsBeans;
@@ -36,7 +28,6 @@ import com.hongyuan.fitness.util.JumpUtils;
 import com.hongyuan.fitness.util.UseGlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -351,6 +342,8 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof ShopMainBeans){
             dataBean = ((ShopMainBeans)data).getData();
@@ -384,6 +377,8 @@ public class ShopMainFragment extends CustomFragment implements View.OnClickList
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.FIRST_BANNER){
             List<HomeBannerBean.DataBean.ListBean> banners1 = ((HomeBannerBean)data).getData().getList();

@@ -194,5 +194,11 @@ public class ConstantsCode {
     public final static int EB_HOME_LOCATION = 1302;
     //进入首页时候直接跳转到web页面
     public final static int EB_HOME_GOWEB = 1302;
+    //刷新消息信息列表
+    public final static int EB_MESSAGE = 1303;
+    //发现搜索使用的
+    public final static int EB_FIND_SEARCH = 1304;
+    //刷新下个人中心的数据
+    public final static int EB_CHANGE_PERSON = 1305;
 
 }

@@ -278,7 +278,9 @@ public class SorderDetailViewModel extends CustomViewModel implements ViewReques
             couponView = (InputOrSlectView)v;
             this.allpriceView = (TextView) allpriceView;
 
-            clearParams().setParams("store_id",item.getStoreId()).setParams("all_price", item.getAllPrice());
+            clearParams().setParams("store_id",item.getStoreId())
+                    .setParams("all_price", item.getAllPrice())
+                    .setParams("g_ids",item.getGids());
             Controller.myRequest(Constants.GET_ORDER_CONFIRM_COUPON_LIST,Controller.TYPE_POST,getParams(), SorderCouponBeans.class,this);
         }else{
             this.view = v;

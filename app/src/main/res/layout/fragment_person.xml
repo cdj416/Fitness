@@ -30,21 +30,31 @@
                     android:layout_height="wrap_content"
                     app:center_text="我的"
                     app:line_show="true"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/messageMark"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="16dp"
-                    android:orientation="horizontal">
+                    android:layout_marginEnd="16dp">
 
                     <ImageView
-                        android:id="@+id/messageMark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
+                        android:layout_centerInParent="true"
                         android:src="@mipmap/theme_person_message_mark"/>
-                </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/newMeassageMark"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:background="@drawable/shape_gradient_oval_ef8041_ef5b48"
+                        android:textSize="10sp"
+                        android:text="0"
+                        android:gravity="center"
+                        android:textColor="@color/color_FFFFFF"
+                        android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
             </RelativeLayout>
         </LinearLayout>
 

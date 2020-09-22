@@ -180,6 +180,8 @@ public class CourseSearchViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof  VtwoPrivateLessonsBeans){
             List<VtwoPrivateLessonsBeans.DataBean.ListBean> list = ((VtwoPrivateLessonsBeans)data).getData().getList();
             if(curPage == FIRST_PAGE){

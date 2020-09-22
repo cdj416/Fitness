@@ -163,6 +163,8 @@ public class SsearchShopFragment extends CustomFragment {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof ShopsBeans){
             List<ShopsBeans.DataBean.ListBean> list = ((ShopsBeans)data).getData().getList();

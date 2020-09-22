@@ -117,6 +117,8 @@ public class SportsLifeViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof HomeBannerBean){
             banns = ((HomeBannerBean)data).getData().getList();

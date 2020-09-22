@@ -79,6 +79,8 @@ public class DaysWeekViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.ADD_PLAN){
             startActivity(PlanDetailsActivity.class,null);

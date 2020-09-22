@@ -16,7 +16,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
             android:orientation="vertical">
             <RelativeLayout
                 android:id="@+id/shareContent"
@@ -128,7 +127,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="本月已累计打卡"
+                        android:text="在随动已坚持锻炼第"
                         android:textSize="@dimen/sp_12"
                         android:textColor="@color/color_FFFFFF"/>
                     <LinearLayout

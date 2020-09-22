@@ -9,9 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="12dp"/>
     <RelativeLayout
+        android:id="@+id/goDetail"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/color_FFFFFF"
+        android:background="@color/theme_color1"
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
         <com.makeramen.roundedimageview.RoundedImageView
@@ -20,6 +21,7 @@
             android:layout_height="44dp"
             app:riv_corner_radius="22dp"
             android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
             android:src="@color/color_f2"/>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -29,17 +31,19 @@
             android:layout_marginStart="8dp"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/praiseName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
-                android:textColor="@color/color_FF333333"
+                android:textColor="@color/theme_color3"
                 android:text="小A等人赞了你的帖子"/>
             <TextView
+                android:id="@+id/praiseNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_FF999999"
                 android:textSize="@dimen/sp_12"
-                android:text="哈哈哈"/>
+                android:text="+12"/>
         </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
@@ -49,11 +53,10 @@
             android:layout_centerVertical="true"
             android:textColor="@color/color_FF999999"
             android:drawableRight="@mipmap/right_huise_img"
-            android:gravity="center"
-            android:text="07/02 12:50"/>
+            android:gravity="center"/>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/color_EEEEEE"/>
+        android:background="@color/theme_line1"/>
 </LinearLayout>

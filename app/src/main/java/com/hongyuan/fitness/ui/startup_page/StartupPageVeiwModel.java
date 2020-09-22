@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;

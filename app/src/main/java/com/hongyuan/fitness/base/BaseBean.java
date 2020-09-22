@@ -6,6 +6,15 @@ package com.hongyuan.fitness.base;
 public class BaseBean {
 
     private StatusBean status;
+    private Object point;
+
+    public Object getPoint() {
+        return point;
+    }
+
+    public void setPoint(Object point) {
+        this.point = point;
+    }
 
     public StatusBean getStatus() {
         return status;

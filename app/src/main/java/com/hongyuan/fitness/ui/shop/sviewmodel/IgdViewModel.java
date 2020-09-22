@@ -1,5 +1,6 @@
 package com.hongyuan.fitness.ui.shop.sviewmodel;
 
+import android.graphics.Paint;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,6 +46,8 @@ public class IgdViewModel extends CustomViewModel {
         imgAdapter = new SDMimgAdapter(DensityUtil.getScreensWith(mActivity));
         binding.detailsImg.setAdapter(imgAdapter);
 
+        binding.tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
+
         //规格弹框
         binding.specificationBox.setOnClickListener(v -> {
             showSpecification();
@@ -81,6 +84,8 @@ public class IgdViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
 
         if(data instanceof SgoodsDetailBeans){
@@ -88,9 +93,14 @@ public class IgdViewModel extends CustomViewModel {
 
             binding.pointNum.setText(String.valueOf(infoBean.getG_point()));
             binding.goodName.setText(infoBean.getG_name());
-            if(BaseUtil.isValue(infoBean.getG_price())){
+            binding.redeemedNum.setText("已兑换"+infoBean.getG_sale_num());
+            binding.tvOldPrice.setText("￥"+infoBean.getG_marcket_price());
+
+            if(BaseUtil.isValue(infoBean.getG_price()) && Double.parseDouble(infoBean.getG_price()) > 0){
                 binding.priceBox.setVisibility(View.VISIBLE);
                 binding.goodPrice.setText(BaseUtil.getNoZoon(infoBean.getG_price()));
+            }else{
+                binding.priceBox.setVisibility(View.GONE);
             }
             if(infoBean.getSku() != null && infoBean.getSku().size() > 0){
                 Glide.with(mActivity).load(infoBean.getG_img()).transition(DrawableTransitionOptions.withCrossFade()).into(binding.normImg);

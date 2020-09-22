@@ -304,7 +304,6 @@ public class ChatView extends RelativeLayout implements SensorEventListener {
             mUseData = new ArrayList<>();
         }
 
-
         MsgListAdapter.HoldersConfig holdersConfig = new MsgListAdapter.HoldersConfig();
         mAdapter = new MsgListAdapter<>("0", holdersConfig, getImageLoader());
         mAdapter.addToEndChronologically(mUseData);
@@ -509,6 +508,7 @@ public class ChatView extends RelativeLayout implements SensorEventListener {
             final float MAX_HEIGHT = 200 * density;
             @Override
             public void loadAvatarImage(ImageView avatarImageView, String string) {
+                avatarImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 // You can use other image load libraries.
                 if (string.contains("R.drawable")) {
                     Integer resId = getResources().getIdentifier(string.replace("R.drawable.", ""),
@@ -518,7 +518,7 @@ public class ChatView extends RelativeLayout implements SensorEventListener {
                 } else {
                     Glide.with(getContext())
                             .load(string)
-                            .apply(new RequestOptions().placeholder(R.drawable.aurora_headicon_default))
+                            .apply(new RequestOptions().placeholder(R.mipmap.default_head_img))
                             .into(avatarImageView);
                 }
             }

@@ -56,7 +56,7 @@ public class V3EncyclopediaDetailBean extends BaseBean {
         private int add_time;
         private int m_id;
         private String article_content;
-        private int baike_categoryid;
+        private String baike_categoryid;
         private int is_del;
         private String m_mobile;
         private String mi_head;
@@ -169,11 +169,11 @@ public class V3EncyclopediaDetailBean extends BaseBean {
             this.article_content = article_content;
         }
 
-        public int getBaike_categoryid() {
+        public String getBaike_categoryid() {
             return baike_categoryid;
         }
 
-        public void setBaike_categoryid(int baike_categoryid) {
+        public void setBaike_categoryid(String baike_categoryid) {
             this.baike_categoryid = baike_categoryid;
         }
 

@@ -7,7 +7,10 @@ import android.view.View;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.BaseBean;
+import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
+import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.service.BluetoothStateBroadcastReceive;
 import com.hongyuan.fitness.ui.only_equipment.indicator_details.wristband_fragments.WristbandStautsUtils;
@@ -174,7 +177,17 @@ public class WristbandFragment extends CustomFragment implements WristbandStatus
             //promptFragment.setConnect(true);
             //获取所有信息
             deviceDataFragment.getAllData();
+
+            isBand();
         }
+    }
+
+    /*
+    * 通知设备已绑定成功
+    * */
+    private void isBand(){
+        clearParams();
+        Controller.myRequest(Constants.DEVICE,Controller.TYPE_POST,getParams(), BaseBean.class,this);
     }
 
     @Override

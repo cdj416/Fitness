@@ -215,6 +215,8 @@ public class CommentDetailsViewModel extends CustomViewModel implements Keyboard
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof CommentDetailsBean && isSuccess(data)){
             CommentDetailsBean pageData = (CommentDetailsBean)data;
             if(curPage == FIRST_PAGE){

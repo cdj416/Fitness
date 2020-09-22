@@ -145,9 +145,9 @@ public class V4HomeRecyclerItemView extends LinearLayout {
 
             typeRight.setOnClickListener(v -> {
                 //通过EventBus去通知MainActivity显示第三页
-                EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
+                //EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
                 //需要显示私教课
-                EventBus.getDefault().post(ConstantsCode.EB_SHOW_PRIVITE,"0");
+                //EventBus.getDefault().post(ConstantsCode.EB_SHOW_PRIVITE,"0");
             });
         }
         //力量增肌
@@ -161,9 +161,9 @@ public class V4HomeRecyclerItemView extends LinearLayout {
 
             typeRight.setOnClickListener(v -> {
                 //通过EventBus去通知MainActivity显示第三页
-                EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
+                //EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
                 //需要显示私教课
-                EventBus.getDefault().post(ConstantsCode.EB_SHOW_PRIVITE,"0");
+                //EventBus.getDefault().post(ConstantsCode.EB_SHOW_PRIVITE,"0");
             });
         }
         //精品团课
@@ -178,9 +178,9 @@ public class V4HomeRecyclerItemView extends LinearLayout {
 
             typeRight.setOnClickListener(v -> {
                 //通过EventBus去通知MainActivity显示第三页
-                EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
+                //EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
                 //需要显示团课
-                EventBus.getDefault().post(ConstantsCode.EB_SHOW_PRIVITE,"1");
+                //EventBus.getDefault().post(ConstantsCode.EB_SHOW_PRIVITE,"1");
             });
         }
         //精品培训课
@@ -214,7 +214,7 @@ public class V4HomeRecyclerItemView extends LinearLayout {
 
             typeRight.setOnClickListener(v -> {
                 //通过EventBus去通知MainActivity显示第四页
-                EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"3");
+                EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
             });
         }
 

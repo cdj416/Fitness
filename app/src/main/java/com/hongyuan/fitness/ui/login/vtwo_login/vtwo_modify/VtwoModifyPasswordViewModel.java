@@ -104,6 +104,8 @@ public class VtwoModifyPasswordViewModel extends CustomViewModel implements Inpu
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.DO_FIND_PASSWORD){
             mActivity.showSuccess("修改成功！");
         }

@@ -62,6 +62,8 @@ public class SgCollectFragment extends CustomFragment {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
 
         if(data instanceof SgCollectGoodsBeans){

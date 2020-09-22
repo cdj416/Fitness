@@ -110,6 +110,8 @@ public class AddFoodFragment extends CustomFragment {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof AddFoodBean && isSuccess(data)){
             AddFoodBean pageData = (AddFoodBean)data;
             if(curPage == FIRST_PAGE){

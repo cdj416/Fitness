@@ -465,6 +465,8 @@ public class CardDetailsViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.UPDATE_M_INFO){
             addCardOrder();
         }

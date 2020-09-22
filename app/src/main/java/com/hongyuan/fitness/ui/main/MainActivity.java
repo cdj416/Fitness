@@ -2,6 +2,7 @@ package com.hongyuan.fitness.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -12,6 +13,7 @@ import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityMainBinding;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
@@ -59,7 +61,7 @@ public class MainActivity extends CustomActivity {
     public void refresh(String message) {
         //情况activity里面的userToken数据
         userToken.clearToken();
-        binding.viewPager.setCurrentItem(0);
+        binding.viewPager.setCurrentItem(1);
     }
 
     /*
@@ -92,13 +94,17 @@ public class MainActivity extends CustomActivity {
         skin = SharedPreferencesUtil.getString(this, SkinConstants.SKIN);
         viewModel.changeBarHeightBg();
 
-        if(BaseUtil.isValue(Constants.isOpenWeb)){
+        if(BaseUtil.isValue(Constants.isOpenWeb) && BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+            Log.e("cnn","========="+Constants.isOpenWeb+TokenSingleBean.getInstance().getWebAllParams(""));
+
             Bundle bundle = new Bundle();
-            bundle.putString("url", Constants.WEB_ADDRESS+Constants.isOpenWeb);
+            bundle.putString("url", Constants.isOpenWeb+TokenSingleBean.getInstance().getWebAllParams(Constants.isOpenWeb));
             bundle.putString("title"," ");
             startActivity(WebViewActivity.class,bundle);
 
             Constants.isOpenWeb = "";
+        }else if(BaseUtil.isValue(Constants.isOpenWeb) && !BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+            startActivity(VtwoVerificationLoginActivity.class,null);
         }
     }
 

@@ -263,6 +263,8 @@ public class SixpCourseAllFragment extends CustomFragment {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.CANCEL_COURSE_PRIVITE_APPOINTMENT){
 
             showSuccess("已取消预约！");

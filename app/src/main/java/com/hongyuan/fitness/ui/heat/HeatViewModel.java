@@ -336,6 +336,8 @@ public class HeatViewModel extends CustomViewModel implements CustomDialog.Dialo
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof HeatBean && isSuccess(data)){
             heatBean = (HeatBean)data;
             setRecData(heatBean);
@@ -349,6 +351,8 @@ public class HeatViewModel extends CustomViewModel implements CustomDialog.Dialo
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.EDIT_FOOD_EATING){
             //刷新数据
             lazyLoad();

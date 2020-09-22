@@ -641,6 +641,8 @@ public class RecommendFragment extends CustomFragment implements HomeColumItemVi
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.CHECK_MEMBER_BOBY_INDEX){
             try {
                 BaseBean baseBean = GsonUtil.getGson().fromJson(data.toString(), new TypeToken<BaseBean>(){}.getType());

@@ -69,6 +69,7 @@ public class ShopAddressViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
         if(data instanceof ShopAddressBeans){
             List<ShopAddressBeans.DataBean> list = ((ShopAddressBeans)data).getData();
             if(curPage == FIRST_PAGE){

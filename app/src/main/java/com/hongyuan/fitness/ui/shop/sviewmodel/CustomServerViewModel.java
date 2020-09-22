@@ -55,6 +55,8 @@ public class CustomServerViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof KeFuBeans){
             keFuBeans = ((KeFuBeans)data).getData();

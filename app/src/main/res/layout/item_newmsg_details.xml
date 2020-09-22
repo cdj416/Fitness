@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/theme_color4_black"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:textSize="@dimen/sp_12"
+        android:text="2019/07/02 17:31"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="60dp"
+        android:orientation="horizontal">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/msgImg"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@color/color_f2"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="22dp"/>
+        <View
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/layer_list_left_triangle"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:background="@drawable/theme_shape_radius6_fff5f5f5_2">
+            <TextView
+                android:id="@+id/msgContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/theme_color3"
+                android:text="商家已发货，您有一件商品待收货～"/>
+            <TextView
+                android:id="@+id/goNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_EF5B48"
+                android:textSize="@dimen/sp_14"
+                android:layout_gravity="right"
+                android:drawableRight="@mipmap/right_huise_img"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="去查看"
+                tools:ignore="RtlHardcoded" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

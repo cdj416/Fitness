@@ -43,6 +43,12 @@
     </style>
 
     <!-- 从底部弹出动画 -->
+    <style name="top_in_out">
+        <item name="android:windowEnterAnimation">@anim/top_in</item>
+        <item name="android:windowExitAnimation">@anim/top_out</item>
+    </style>
+
+    <!-- 从底部弹出动画 -->
     <style name="bottom_in_out">
         <item name="android:windowEnterAnimation">@anim/dialog_in_anim</item>
         <item name="android:windowExitAnimation">@anim/dialog_out_anim</item>

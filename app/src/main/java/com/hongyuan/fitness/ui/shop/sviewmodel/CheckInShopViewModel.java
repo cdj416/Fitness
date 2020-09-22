@@ -444,6 +444,8 @@ public class CheckInShopViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof MallMenuBeans){
             mallList = ((MallMenuBeans)data).getData().getList();
 
@@ -540,6 +542,8 @@ public class CheckInShopViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.APPLY_IN){
             mActivity.showSuccess("提交成功！");

@@ -36,6 +36,7 @@ public class ReceiveCouponListFragment extends CustomFragment {
         setEnableLoadMore(true);
         setEnableRefresh(true);
 
+
         mRecycler = mView.findViewById(R.id.mRecycler);
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -69,7 +70,8 @@ public class ReceiveCouponListFragment extends CustomFragment {
     * */
     private void getData(){
         mActivity.showLoading();
-        clearParams().setParams("coupon_type",getFragType());
+        clearParams().setParams("coupon_type",getFragType())
+                .setParams("os_id", mActivity.getBundle().getString("os_id"));
         Controller.myRequest(Constants.ALL_COUPON_LIST,Controller.TYPE_POST,getParams(), CouponListBeans.class,this);
     }
 
@@ -84,7 +86,10 @@ public class ReceiveCouponListFragment extends CustomFragment {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
+
         if(data instanceof CouponListBeans){
             List<CouponListBeans.DataBean.ListBean> list = ((CouponListBeans)data).getData().getList();
             if(curPage == FIRST_PAGE){
@@ -108,6 +113,8 @@ public class ReceiveCouponListFragment extends CustomFragment {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.GET_COUPON){
             mList.get(mPosition).setReceive(true);

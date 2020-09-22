@@ -68,6 +68,8 @@ public class CanncelCourseViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
 
         if(data instanceof CancelCourseResionBeans){
@@ -92,6 +94,8 @@ public class CanncelCourseViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.CANCEL_COURSE_PRIVITE_APPOINTMENT_NEW){
             mActivity.showSuccess("已发起申请！");
         }

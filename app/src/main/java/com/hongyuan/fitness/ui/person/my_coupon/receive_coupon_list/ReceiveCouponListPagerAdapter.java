@@ -49,7 +49,7 @@ public class ReceiveCouponListPagerAdapter extends FragmentPagerAdapter {
         }
         fragments.clear();
         beans.clear();
-        beans.add(new TitleBean("全站优惠券",0));
+        beans.add(new TitleBean("平台优惠券",0));
         beans.add(new TitleBean("门店优惠券",1));
 
         fragments.add(new ReceiveCouponListFragment().setArguments("1"));

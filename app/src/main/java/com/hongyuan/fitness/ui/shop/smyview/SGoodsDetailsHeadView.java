@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.ui.shop.smyview;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -41,7 +42,7 @@ public class SGoodsDetailsHeadView extends LinearLayout implements RetrofitListe
     private RoundedImageView normImg;
 
     private TextView tvPrice,tvIncome,saleNum,couponName,goodsName,tvCollection,tvGaddress,deliverFee
-            ,cityName,zhiMark,normNum,secondName,ziTiTv,goodPoint;
+            ,cityName,zhiMark,normNum,secondName,ziTiTv,goodPoint,tvOldPrice;
 
     //商品详情数据
     private SgoodsDetailBeans.DataBean.InfoBean infoBean;
@@ -65,6 +66,7 @@ public class SGoodsDetailsHeadView extends LinearLayout implements RetrofitListe
         specificationBox = view.findViewById(R.id.specificationBox);
 
         tvPrice = view.findViewById(R.id.tvPrice);
+        tvOldPrice = view.findViewById(R.id.tvOldPrice);
         tvIncome = view.findViewById(R.id.tvIncome);
         saleNum = view.findViewById(R.id.saleNum);
         couponName = view.findViewById(R.id.couponName);
@@ -82,6 +84,8 @@ public class SGoodsDetailsHeadView extends LinearLayout implements RetrofitListe
         secondName = view.findViewById(R.id.secondName);
         pointBox = view.findViewById(R.id.pointBox);
         goodPoint = view.findViewById(R.id.goodPoint);
+
+        tvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG); //中划线
 
 
         //优惠卷弹框
@@ -118,6 +122,7 @@ public class SGoodsDetailsHeadView extends LinearLayout implements RetrofitListe
         this.infoBean = infoBean;
 
         tvPrice.setText(BaseUtil.getNoZoon(infoBean.getG_price()));
+        tvOldPrice.setText("￥"+infoBean.getG_marcket_price());
         saleNum.setText("销量"+infoBean.getG_sale_num());
         goodsName.setText(infoBean.getG_name());
         tvGaddress.setText(infoBean.getG_address());

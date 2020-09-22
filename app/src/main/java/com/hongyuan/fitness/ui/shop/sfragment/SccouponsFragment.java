@@ -99,6 +99,8 @@ public class SccouponsFragment extends CustomFragment {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
 
         if(data instanceof SccouponBeans){
@@ -124,6 +126,8 @@ public class SccouponsFragment extends CustomFragment {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
 
         if(code == ConstantsCode.GET_COUPON){

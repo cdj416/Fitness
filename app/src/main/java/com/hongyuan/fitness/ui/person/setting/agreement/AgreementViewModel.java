@@ -27,6 +27,8 @@ public class AgreementViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof AgreementBeans){
             AgreementBeans beans = (AgreementBeans)data;
             RequestOptions options = new RequestOptions().placeholder(R.mipmap.agreement_img).error(R.mipmap.agreement_img);

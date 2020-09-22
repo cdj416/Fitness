@@ -21,11 +21,11 @@ public class MyFansAdapter extends BaseQuickAdapter<FriendsBeans.DataBean.ListBe
         if(item.getIs_xh() == 1){
             helper.setText(R.id.status,"互相关注").setBackgroundRes(R.id.status,R.drawable.shape_radius24_cccccc);
             helper.getView(R.id.status).setTag(false);
-        }else{
+        }else if(item.getIs_xh() == 2){
             helper.setText(R.id.status,"关注Ta").setBackgroundRes(R.id.status,R.drawable.shape_radius16_ef5b48);
             helper.getView(R.id.status).setTag(true);
         }
-        helper.addOnClickListener(R.id.status);
+        helper.addOnClickListener(R.id.status).addOnClickListener(R.id.box);
 
     }
 }

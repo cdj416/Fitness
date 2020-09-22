@@ -369,6 +369,14 @@
         <activity android:name=".ui.about_class.GroupClassActivity"/>
         <activity android:name=".ui.about_class.PriviteClassActivity"/>
 
+        <!--*******************************************第八版消息积分优化***********************************************-->
+        <activity android:name=".ui.shop.sactivity.MsgDetailsActivity"/>
+        <activity android:name=".ui.shop.sactivity.NewPoitionActivity"/>
+        <activity android:name=".ui.shop.sactivity.SmParaiseDetailsActivity"/>
+        <activity android:name=".ui.shop.sactivity.SearchFindActivity"/>
+        <activity android:name=".ui.shop.sactivity.NewPoitionTaskDetailsActivity"/>
+        <activity android:name=".ui.shop.sactivity.PlatformCouponsActivity"/>
+        <activity android:name=".ui.shop.sactivity.PoitionDetailsActivity"/>
 
     </application>
 

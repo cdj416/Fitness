@@ -149,6 +149,8 @@ public class TakePhotoViewModel extends CustomViewModel implements CameraStateLi
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof RetrunImgBean){
             RetrunImgBean imgBean = (RetrunImgBean)data;
             updataImg(imgBean.getData().getFile_url());
@@ -157,6 +159,8 @@ public class TakePhotoViewModel extends CustomViewModel implements CameraStateLi
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.UPDATE_MEMBER_FACE){
             Bundle bundle = new Bundle();
             bundle.putBoolean("isSuccess",true);

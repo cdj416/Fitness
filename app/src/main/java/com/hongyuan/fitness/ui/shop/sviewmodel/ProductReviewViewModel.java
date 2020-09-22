@@ -134,6 +134,8 @@ public class ProductReviewViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
 
         if(data instanceof ProductReviewBeans){
@@ -157,6 +159,8 @@ public class ProductReviewViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.ADD_GOODS_EVALUTION){
             mActivity.showSuccess("评论成功！");
         }

@@ -112,6 +112,8 @@ public class TopicParticipantViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof TopicParticpantBeans){
             TopicParticpantBeans pageData = (TopicParticpantBeans)data;
             if(curPage == FIRST_PAGE){
@@ -137,6 +139,8 @@ public class TopicParticipantViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.ADD_FRIEND){
             if(particpantBeans.getData().getList().get(mPosition).getIs_friend() == 1){

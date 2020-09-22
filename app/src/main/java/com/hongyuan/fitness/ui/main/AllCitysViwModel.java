@@ -111,6 +111,7 @@ public class AllCitysViwModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
 
         if(data instanceof OpenCitysBeans) {
             hotBean = ((OpenCitysBeans) data).getData();

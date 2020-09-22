@@ -6,6 +6,9 @@ import com.hongyuan.fitness.databinding.ActivityNewMycouponBinding;
 import com.hongyuan.fitness.util.SkinConstants;
 
 public class NewCouponActivity extends CustomActivity {
+
+    private NewCouponViewModel viewModel;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_new_mycoupon;
@@ -19,7 +22,14 @@ public class NewCouponActivity extends CustomActivity {
             setTitleBar(TYPE_BAR9,R.drawable.theme_shape_soid_ffffff_black,"我的优惠券");
 
         ActivityNewMycouponBinding binding = ActivityNewMycouponBinding.bind(mView);
-        NewCouponViewModel viewModel = new NewCouponViewModel(this,binding);
+        viewModel = new NewCouponViewModel(this,binding);
         binding.setViewModel(viewModel);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        viewModel.lazyLoad();
     }
 }

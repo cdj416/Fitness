@@ -86,6 +86,43 @@
                 android:layout_gravity="bottom"/>
         </FrameLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.hongyuan.fitness.custom_view.StatusBarHeightView
+            android:id="@+id/barHeightDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+        <FrameLayout
+            android:id="@+id/showHavePotionBox"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            android:visibility="gone"
+            android:layout_marginEnd="32dp">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_radius6_ef5b48"
+                android:alpha="0.8"/>
+            <TextView
+                android:id="@+id/showText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/color_FFFFFF"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textSize="@dimen/sp_12"
+                android:gravity="center"
+                android:text="获得15积分"/>
+        </FrameLayout>
+    </LinearLayout>
+
 </FrameLayout>
 
 <!--</layout>-->

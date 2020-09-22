@@ -6,7 +6,6 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.AcitivityIncomeFormBinding;
-import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.IncomeDetailsActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopMessageActivity;
 import com.hongyuan.fitness.ui.shop.sbeans.IncomeFormBeans;
@@ -27,7 +26,7 @@ public class IncomeFormViewModel extends CustomViewModel {
     @Override
     protected void initView() {
         mActivity.getMainTitle().setRightImage(R.mipmap.person_message_mark)
-                .setOnClickListener(v -> startActivity(MineMessageActivity.class,null));
+                .setOnClickListener(v -> startActivity(ShopMessageActivity.class,null));
 
         binding.goDetail.setOnClickListener(v -> {
             startActivity(IncomeDetailsActivity.class,null);
@@ -43,6 +42,8 @@ public class IncomeFormViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
 
         if(data instanceof IncomeFormBeans){

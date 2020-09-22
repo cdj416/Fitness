@@ -62,6 +62,15 @@
                     android:layout_centerVertical="true"
                     android:src="@mipmap/theme_tel_img_mark"/>
             </RelativeLayout>
+
+            <com.hongyuan.fitness.custom_view.HomeRecyclerItemView
+                android:id="@+id/storeCoupon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_marginTop="24dp"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -367,14 +376,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@color/theme_line"/>
-
-            <com.hongyuan.fitness.custom_view.HomeRecyclerItemView
-                android:id="@+id/storeCoupon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:layout_marginTop="24dp"/>
 
         </LinearLayout>
 

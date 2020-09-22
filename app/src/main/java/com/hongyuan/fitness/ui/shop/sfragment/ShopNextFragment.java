@@ -198,6 +198,8 @@ public class ShopNextFragment extends CustomFragment {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof ShopNextCetegoryBeans){
             menuList = ((ShopNextCetegoryBeans)data).getData().getList();

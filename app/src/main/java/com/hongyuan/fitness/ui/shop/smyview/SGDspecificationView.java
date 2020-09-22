@@ -376,6 +376,8 @@ public class SGDspecificationView extends LinearLayout implements RetrofitListen
 
     @Override
     public void onSuccess(int code, Object data) {
+
+
         if(code == ConstantsCode.ADD_SHOPPING_CART){
             if(isBuyNow){
                 if(mFragment != null){

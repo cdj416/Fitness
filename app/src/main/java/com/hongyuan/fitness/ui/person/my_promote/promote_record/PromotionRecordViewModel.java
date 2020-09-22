@@ -55,6 +55,8 @@ public class PromotionRecordViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof PromotionRecordBeans){
             dataBean = ((PromotionRecordBeans)data).getData();

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="32dp"
+        android:background="@drawable/shape_radius6_ffffff">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:textColor="@color/color_FFFFFF"
+            android:textSize="@dimen/sp_12"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:background="@drawable/shape_top_radius6_ef5b48"
+            android:text="优惠券核销码"/>
+
+        <TextView
+            android:id="@+id/codeText"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:textColor="@color/color_FF333333"
+            android:textSize="@dimen/sp_16"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="EKLWJKW32323212"/>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/close_yuanquancha_img"/>
+</LinearLayout>

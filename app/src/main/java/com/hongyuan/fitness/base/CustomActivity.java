@@ -6,7 +6,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +29,7 @@ import com.hongyuan.fitness.custom_view.TitleView;
 import com.hongyuan.fitness.ui.login.TokenBean;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.HiddenAnimUtils;
 import com.hongyuan.fitness.util.HourMeterUtil;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
 import com.hongyuan.fitness.util.SkinConstants;
@@ -61,7 +61,7 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     //全局使用的信息
     public TokenSingleBean userToken;
     //状态栏高度
-    public StatusBarHeightView barHeight;
+    public StatusBarHeightView barHeight,barHeightDialog;
 
     //存储token需要的key值常亮
     protected final String TOKEN_SESSION = "token_session";
@@ -98,6 +98,12 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
     //主题样式
     public String skin;
 
+    //积分提时框
+    public FrameLayout showHavePotionBox;
+    private TextView showText;
+    //顶部提示消息展开收缩动画工具类
+    private HiddenAnimUtils potionAnimUtils;
+
     //换肤需要重载的方法
     @NonNull
     @Override
@@ -126,6 +132,9 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
         mainView = findViewById(R.id.mainView);
         bottomView = findViewById(R.id.bottomView);
         refresh = findViewById(R.id.refresh);
+        showHavePotionBox = findViewById(R.id.showHavePotionBox);
+        showText = findViewById(R.id.showText);
+        barHeightDialog = findViewById(R.id.barHeightDialog);
 
         //加载主布局
         mView = LayoutInflater.from(this).inflate(getLayoutId(), null);
@@ -142,6 +151,9 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
         }else{
             bottomView.setVisibility(View.GONE);
         }
+
+        //初始化头部消息动画对象
+        potionAnimUtils = HiddenAnimUtils.newInstance(this,showHavePotionBox,null,32,0,false);
 
         //计时回调
         hourUtil = new HourMeterUtil();
@@ -697,5 +709,28 @@ public abstract class CustomActivity extends AppCompatActivity implements HourMe
             userToken.setNtoken("79ce633ae10a10c2bba676a7fbf5db3b1a862df26f6943997cef90233877a4fe1f23a61d89941a31f62e6ddd6fad9025");
             userToken.setTimespan("1591924480353");
         }
+    }
+
+    /*
+    * 显示获得的积分
+    * */
+    public void showPotion(String numPotion){
+        if(barHeight.getVisibility() == View.VISIBLE){
+            barHeightDialog.setVisibility(View.VISIBLE);
+        }else{
+            barHeightDialog.setVisibility(View.GONE);
+        }
+
+        potionAnimUtils.toggle(true);
+
+        HourMeterUtil hourMeterUtil = new HourMeterUtil();
+        showText.setText(numPotion);
+        hourMeterUtil.startCount();
+        hourMeterUtil.setTimeCallBack(passedTime -> {
+            if(passedTime >= 2){
+                potionAnimUtils.toggle(false);
+                hourMeterUtil.stopCount();
+            }
+        });
     }
 }

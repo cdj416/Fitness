@@ -260,6 +260,8 @@ public class PhysicalDataViewModel extends CustomViewModel implements SelectImgU
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.ADD_BODY_IMG){
             getNewImgs();
         }

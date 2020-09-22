@@ -13,7 +13,6 @@ import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.ui.encyclopedia.encyclopedia_detail.EncyclopediaDetailActivity;
-import com.hongyuan.fitness.util.DividerItemDecoration;
 
 public class EncyclopediaFragment extends CustomFragment {
     private RecyclerView mRecycler;
@@ -98,20 +97,6 @@ public class EncyclopediaFragment extends CustomFragment {
             if(listBean != null && listBean.getData() != null &&
                     listBean.getData().getList() != null &&
                     listBean.getData().getList().size() > 0){
-                if("0".equals(getFragType())){
-                    if(listBean.getData().getList().size() >= 3){
-                        listBean.getData().getList().get(0).setNumMark(R.mipmap.no1_mark);
-                        listBean.getData().getList().get(1).setNumMark(R.mipmap.no2_mark);
-                        listBean.getData().getList().get(2).setNumMark(R.mipmap.no3_mark);
-                    }
-                    if(listBean.getData().getList().size() == 2){
-                        listBean.getData().getList().get(0).setNumMark(R.mipmap.no1_mark);
-                        listBean.getData().getList().get(1).setNumMark(R.mipmap.no2_mark);
-                    }
-                    if(listBean.getData().getList().size() == 1){
-                        listBean.getData().getList().get(0).setNumMark(R.mipmap.no1_mark);
-                    }
-                }
 
                 adapter.setNewData(listBean.getData().getList());
                 setPromtView(SHOW_DATA);

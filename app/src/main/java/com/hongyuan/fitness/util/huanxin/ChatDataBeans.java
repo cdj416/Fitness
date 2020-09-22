@@ -16,6 +16,16 @@ public class ChatDataBeans {
     private String lastTime;
     //消息是否未读
     private boolean unread;
+    //消息未读数量
+    private int unreadNum;
+
+    public int getUnreadNum() {
+        return unreadNum;
+    }
+
+    public void setUnreadNum(int unreadNum) {
+        this.unreadNum = unreadNum;
+    }
 
     public String getUsername() {
         return username;

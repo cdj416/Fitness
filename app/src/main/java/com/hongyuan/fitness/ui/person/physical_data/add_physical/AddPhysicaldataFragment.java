@@ -128,6 +128,8 @@ public class AddPhysicaldataFragment extends CustomFragment {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.ADD_BODY_DATA){
             lazyLoad();

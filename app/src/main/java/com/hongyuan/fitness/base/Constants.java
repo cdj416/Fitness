@@ -2,24 +2,25 @@ package com.hongyuan.fitness.base;
 
 public class Constants {
 
+    //本地
+    //public static final String ADRESS = "http://192.168.0.113:80";
     //测试地址
-    //public static final String ADRESS = "https://api_test.1667799.com";
-    //预发环境
-    //public static final String ADRESS = "https://api_yufabu.1667799.com";
+    //public static final String ADRESS = "https://apitest.1667799.com";
     //预发环境
     //public static final String ADRESS = "https://apiyufabu.1667799.com";
     //正式地址
     public static final String ADRESS = "http://www.hongyuangood.com";
 
 
-    //webUrl测试服务器
-    //public static final String WEB_ADDRESS = "https://test_gym.1667799.com/#";
-    //webUrl预发服务器
-    //public static  final String WEB_ADDRESS = "https://yufabu_gym.1667799.com/#";
-    //webUrl正式服务器
-    public static final String WEB_ADDRESS = "https://www.1667799.com/#";
     //本地
-    //public static final String WEB_ADDRESS = "http://192.168.31.38:8080/#";
+    //public static final String WEB_ADDRESS = "http://192.168.31.38:8080";
+    //webUrl测试服务器
+    //public static final String WEB_ADDRESS = "https://test_gym.1667799.com";
+    //webUrl预发服务器
+    //public static  final String WEB_ADDRESS = "https://yufabu_gym.1667799.com";
+    //webUrl正式服务器
+    public static final String WEB_ADDRESS = "https://www.1667799.com";
+
 
     /*==================================================================================*/
     //微信支付需要的appId
@@ -632,4 +633,40 @@ public class Constants {
     public static final String DELIVER_REFUND = ADRESS + "/api/refundmember/deliver_refund";
     //首页场馆类型列表
     public static final String INDEX_GYM_CATEGORY = ADRESS + "/api/gymhome/index_gym_category";
+
+    /**************************************八期版本********************************************************/
+    //消息--读取帖子评论消息列表
+    public static final String GET_REVIEW_MSG_LIST = ADRESS + "/api/msgmember/get_review_msg_list";
+    //消息--读取帖子点赞消息列表
+    public static final String GET_PRAISE_MSG_LIST = ADRESS + "/api/msgmember/get_praise_msg_list";
+    //消息--读取粉丝关注消息列表
+    public static final String GET_FRIEND_MSG_LIST = ADRESS + "/api/msgmember/get_friend_msg_list";
+    //消息--读取我的消息私信列表
+    public static final String GET_MSG_CT_LIST = ADRESS + "/api/msgmember/get_msg_ct_list";
+    //消息--读取点赞人员列表
+    public static final String GET_PRAISE_LIST = ADRESS + "/api/circle/get_praise_list";
+    //圈子--检查是否已经关注
+    public static final String IS_MY_FRIEND = ADRESS + "/api/member/is_my_friend";
+    //消息--读取消息未读数量
+    public static final String GET_MSG_UNREAD_INFO = ADRESS + "/api/msgmember/get_msg_unread_info";
+    //我的积分
+    public static final String MY_POINT = ADRESS + "/api/pointmember/my_point";
+    //我的积分 -- 新手任务 日常任务
+    public static final String POINT_TASK = ADRESS + "/api/pointmember/point_task";
+    //我的积分 -- 我的任务列表
+    public static final String MY_TASK = ADRESS + "/api/pointmember/my_task";
+    //用户绑定设备
+    public static final String DEVICE = ADRESS + "/api/member/device";
+    //发现 --搜索用户
+    public static final String FIND_MEMBER_LIST = ADRESS + "/api/member/find_member_list";
+    //发现 --搜索帖子
+    public static final String FIND_CIRCLE_LIST = ADRESS + "/api/circle/find_circle_list";
+    //热门--读取百科列表
+    public static final String GET_ARTICLE_LIST_RM = ADRESS + "/api/articlehome/get_article_list_rm";
+    //最新--读取百科列表
+    public static final String GET_ARTICLE_LIST_NEWS = ADRESS + "/api/articlehome/get_article_list_news";
+    //领劵中心 --- 优惠券类型列表
+    public static final String COUPON_FOR_LIST = ADRESS + "/api/couponindex/coupon_for_list";
+    //领劵中心 --- 优惠券列表
+    public static final String OS_COUPON_LIST = ADRESS + "/api/couponindex/os_coupon_list";
 }

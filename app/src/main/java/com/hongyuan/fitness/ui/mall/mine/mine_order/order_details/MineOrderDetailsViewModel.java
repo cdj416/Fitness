@@ -249,6 +249,8 @@ public class MineOrderDetailsViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof MineOrderDetailsBeans){
             detailsBeans = ((MineOrderDetailsBeans)data).getData().getInfo();
             setData();
@@ -262,6 +264,8 @@ public class MineOrderDetailsViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.CANCLE_ORDER){
             mActivity.showSuccess("成功取消订单！");
         }

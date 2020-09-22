@@ -23,7 +23,7 @@ public class MineChatMessageAdapter extends BaseQuickAdapter<ChatDataBeans, Base
                 .setText(R.id.meassageTime,item.getLastTime());
 
         if(item.isUnread()){
-            helper.setVisible(R.id.newMeassageMark,true);
+            helper.setVisible(R.id.newMeassageMark,true).setText(R.id.newMeassageMark,String.valueOf(item.getUnreadNum()));
         }else{
             helper.setVisible(R.id.newMeassageMark,false);
         }

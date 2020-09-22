@@ -227,6 +227,8 @@ public class PushShareViewModel extends CustomViewModel implements ShareSuccessL
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof PushShareBeans){
             shareBeans = (PushShareBeans)data;
             Glide.with(mActivity).load(shareBeans.getData().getDownload()).apply(options).into(binding.qrCodeImg);
@@ -252,6 +254,8 @@ public class PushShareViewModel extends CustomViewModel implements ShareSuccessL
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.KA_SHARE){
 
         }

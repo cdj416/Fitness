@@ -66,8 +66,8 @@ public class SsearchShopAdapter extends BaseQuickAdapter<ShopsBeans.DataBean.Lis
             helper.addOnClickListener(R.id.img3).getView(R.id.img3).setClickable(false);
         }
 
-        RatingBar ratingBar = helper.getView(R.id.myRat);
-        ratingBar.setRating(Float.valueOf(item.getG_score()));
+        //RatingBar ratingBar = helper.getView(R.id.myRat);
+        //ratingBar.setRating(Float.valueOf(item.getG_score()));
         helper.setText(R.id.shopName,item.getStore_name())
                 .setText(R.id.collectionNum,item.getCollection_num()+"人收藏");
 

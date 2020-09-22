@@ -73,6 +73,8 @@ public class WaitingEvaluationViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof PriviteCourseCheckBeans){
             PriviteCourseCheckBeans pageData = (PriviteCourseCheckBeans)data;
             if(curPage == FIRST_PAGE){

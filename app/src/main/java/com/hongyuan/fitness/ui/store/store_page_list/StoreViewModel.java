@@ -145,9 +145,12 @@ public class StoreViewModel extends CustomViewModel {
                     bean.getData().getList() != null &&
                     bean.getData().getList().size() > 0){
                 adapter.setNewData(bean.getData().getList());
-                mActivity.setPromtView(mActivity.SHOW_DATA);
+
+                binding.isEmpty.setVisibility(View.GONE);
+                binding.mRecycler.setVisibility(View.VISIBLE);
             }else{
-                mActivity.setPromtView(mActivity.SHOW_EMPTY);
+                binding.mRecycler.setVisibility(View.GONE);
+                binding.isEmpty.setVisibility(View.VISIBLE);
             }
         }
     }

@@ -1,12 +1,14 @@
 package com.hongyuan.fitness.util;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -26,6 +28,7 @@ import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.base.CustomViewModel;
+import com.hongyuan.fitness.base.MyApplication;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.AddFoodView;
 import com.hongyuan.fitness.custom_view.CountdownView;
@@ -37,6 +40,7 @@ import com.hongyuan.fitness.ui.heat.UpdataFoodView;
 import com.hongyuan.fitness.ui.heat.add_food.AddFoodBean;
 import com.hongyuan.fitness.ui.heat.heat_detail.HeatDetailBean;
 import com.hongyuan.fitness.ui.main.AllCitysActivity;
+import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.main.OpenCitysBeans;
 import com.hongyuan.fitness.ui.main.ScanCardsListAdapter;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
@@ -46,7 +50,10 @@ import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsAdapter;
 import com.hongyuan.fitness.ui.mall.home_goods.HomeGoodsBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.main_receive_coupon.DialogReceiveCouponAdapter;
+import com.hongyuan.fitness.ui.person.my_coupon.newcoupon.NewCouponActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.CheckInMeActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.NewPoitionActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.PlatformCouponsActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.DialogUseCouponAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.PickUpAddressAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SgoodsGouponAdapter;
@@ -60,6 +67,8 @@ import com.hongyuan.fitness.ui.shop.smyview.SGDspecificationView;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
+
+import me.goldze.mvvmhabit.base.AppManager;
 
 public class CustomDialog {
     /*
@@ -451,7 +460,7 @@ public class CustomDialog {
 
         view.findViewById(R.id.userNameSubmit).setOnClickListener(v -> {
             if(!BaseUtil.isValue(content.getText().toString())){
-                showMessage(mContext,"请输入昵称！");
+                showMessage(mContext,"请输入!");
             }else{
                 dialog.dismiss();
                 dialogClick.dialogClick(v,content.getText().toString());
@@ -1238,5 +1247,101 @@ public class CustomDialog {
             click.dialogClick(v);
             dialog.dismiss();
         });
+    }
+
+    /*
+    * 积分弹框，只弹一次
+    * */
+    public static void showNewPotion(CustomActivity mContext){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_first_poition,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setWindowAnimations(R.style.main_menu_animStyle);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        TextView goPoint = view.findViewById(R.id.goPoint);
+        ImageView close = view.findViewById(R.id.close);
+        close.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        goPoint.setOnClickListener(v -> {
+            dialog.dismiss();
+            mContext.startActivity(NewPoitionActivity.class);
+        });
+    }
+
+    /*
+    * 积分弹框，只弹一次
+    * */
+    public static void showNewCoupon(CustomActivity mContext){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_first_coupons,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setWindowAnimations(R.style.main_menu_animStyle);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        TextView goCoupons = view.findViewById(R.id.goCoupons);
+        ImageView close = view.findViewById(R.id.close);
+        close.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        goCoupons.setOnClickListener(v -> {
+            dialog.dismiss();
+            mContext.startActivity(PlatformCouponsActivity.class);
+        });
+    }
+
+    /*
+     * 获得积分提示
+     * */
+    public static void showGainPoition(Context mContext,String message){
+
+        final Dialog dialog = new Dialog(mContext, R.style.MessageTheme);
+        View view = View.inflate(mContext, R.layout.dialog_gain_potion,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        window.setGravity(Gravity.TOP);
+        window.setWindowAnimations(R.style.top_in_out);
+        dialog.show();
+
+
+        HourMeterUtil hourMeterUtil = new HourMeterUtil();
+        TextView showText = view.findViewById(R.id.showText);
+        showText.setText(message);
+        hourMeterUtil.startCount();
+        hourMeterUtil.setTimeCallBack(passedTime -> {
+            if(passedTime >= 3){
+                dialog.dismiss();
+                hourMeterUtil.stopCount();
+            }
+        });
+    }
+
+    /*
+     * 优惠卷核销码弹框
+     * */
+    public static void showCouponCode(Context mContext,String message){
+        final Dialog dialog = new Dialog(mContext, R.style.MessageTheme);
+        View view = View.inflate(mContext, R.layout.dialog_show_coupon_code,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.TOP);
+        window.setWindowAnimations(R.style.top_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        TextView codeText = view.findViewById(R.id.codeText);
+        codeText.setText(message);
+
+        view.findViewById(R.id.close).setOnClickListener(v -> dialog.dismiss());
     }
 }

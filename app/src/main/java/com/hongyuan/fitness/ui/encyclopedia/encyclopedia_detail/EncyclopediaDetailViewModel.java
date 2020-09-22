@@ -3,8 +3,6 @@ package com.hongyuan.fitness.ui.encyclopedia.encyclopedia_detail;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
-
-import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +16,8 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.base.SingleClick;
 import com.hongyuan.fitness.custom_view.KeyboardLayout;
+import com.hongyuan.fitness.custom_view.share_view.ShareBeans;
+import com.hongyuan.fitness.custom_view.share_view.ShareUtil;
 import com.hongyuan.fitness.databinding.ActivityEncyclopediaTestDetailBinding;
 import com.hongyuan.fitness.ui.encyclopedia.encyclopedia_comment_detail.EncyclopediaCommentDetailsActivity;
 import com.hongyuan.fitness.ui.encyclopedia.vthird_change.BaikeTJBeans;
@@ -28,7 +28,6 @@ import com.hongyuan.fitness.ui.encyclopedia.vthird_change.V3EncyclopediaDetailBe
 import com.hongyuan.fitness.ui.encyclopedia.vthird_change.V3SendMeassage;
 import com.hongyuan.fitness.ui.encyclopedia.vthird_change.V3TuiJianAdapter;
 import com.hongyuan.fitness.util.CustomDialog;
-import com.hongyuan.fitness.util.DividerItemDecoration;
 import com.hongyuan.fitness.util.TimeUtil;
 import com.hongyuan.fitness.util.ViewChangeUtil;
 import com.luck.picture.lib.tools.ScreenUtils;
@@ -42,8 +41,6 @@ import java.util.Map;
 
 import me.goldze.mvvmhabit.binding.command.BindingAction;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
-
-import static me.goldze.mvvmhabit.utils.Utils.getContext;
 
 public class EncyclopediaDetailViewModel extends CustomViewModel implements View.OnClickListener, KeyboardLayout.onKeyboaddsChangeListener,
         EncyclopediatDetailsCommentAdapter.ReturnClick {
@@ -138,6 +135,16 @@ public class EncyclopediaDetailViewModel extends CustomViewModel implements View
         });
 
         binding.outBox.setOnkbdStateListener(this);
+
+        binding.shareImg.setOnClickListener(v -> {
+            ShareBeans beans = new ShareBeans();
+            beans.setShareWebsite("http://baike.hongyuangood.com/?article_id="+detailBean.getData().getArticle_id());
+            beans.setShareTitle(detailBean.getData().getArticle_title());
+            beans.setShareInfo(detailBean.getData().getArticle_brief());
+            beans.setShareImgUrl(detailBean.getData().getArticle_img());
+
+            ShareUtil.showShare(mActivity,beans);
+        });
     }
 
     //打开软键盘输入评论
@@ -310,6 +317,8 @@ public class EncyclopediaDetailViewModel extends CustomViewModel implements View
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if (data instanceof V3EncyclopediaDetailBean){
             detailBean = (V3EncyclopediaDetailBean)data;
@@ -385,6 +394,8 @@ public class EncyclopediaDetailViewModel extends CustomViewModel implements View
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.DEL_COLLECTION){
             detailBean.getData().setIs_collection(0);

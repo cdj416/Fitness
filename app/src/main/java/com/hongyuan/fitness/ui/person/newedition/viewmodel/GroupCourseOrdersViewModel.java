@@ -104,6 +104,8 @@ public class GroupCourseOrdersViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof MyGroupClassBean){
             List<MyGroupClassBean.DataBean.ListBean> list = ((MyGroupClassBean)data).getData().getList();
@@ -128,6 +130,8 @@ public class GroupCourseOrdersViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.SUPER_COURSE_XY_QD){
            mList.get(mPosition).setXy_qd_state(1);
             adapter.setNewData(mList);

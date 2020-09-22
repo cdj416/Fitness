@@ -52,6 +52,8 @@ public class GroupChatUserViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.showLoading();
 
         if(data instanceof GroupChatUserBeans){

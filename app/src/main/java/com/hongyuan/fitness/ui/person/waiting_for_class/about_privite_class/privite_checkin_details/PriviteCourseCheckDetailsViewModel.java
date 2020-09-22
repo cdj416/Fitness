@@ -118,6 +118,8 @@ public class PriviteCourseCheckDetailsViewModel extends CustomViewModel implemen
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof CourseDetailsBean && isSuccess(data)){
             detailsBean = (CourseDetailsBean)data;
             RequestOptions options = new RequestOptions().placeholder(R.mipmap.defaul_no_img).error(R.mipmap.defaul_no_img).centerCrop();
@@ -173,6 +175,8 @@ public class PriviteCourseCheckDetailsViewModel extends CustomViewModel implemen
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.CANCEL_COURSE_PRIVITE_APPOINTMENT){
             mActivity.showSuccess("取消预约成功！");
         }

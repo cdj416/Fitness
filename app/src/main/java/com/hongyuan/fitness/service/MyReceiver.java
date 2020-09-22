@@ -6,8 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.ui.main.MainActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.ShopMessageActivity;
+import com.hongyuan.fitness.ui.shop.sbeans.MapBeans;
+import com.hongyuan.fitness.ui.shop.sbeans.NotiyBeans;
+import com.hongyuan.fitness.util.BaseUtil;
+import com.hongyuan.fitness.util.GsonUtil;
+import com.hongyuan.fitness.util.JumpUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,20 +47,52 @@ public class MyReceiver extends BroadcastReceiver {
             Log.e(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
             processCustomMessage(context, bundle);
 
+            String content = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+
+
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
+            EventBus.getDefault().post(ConstantsCode.EB_CHANGE_PERSON,"");
+
             Log.e(TAG, "[MyReceiver] 接收到推送下来的通知");
             int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
             Log.e(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
 
+
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.e(TAG, "[MyReceiver] 用户点击打开了通知");
+
+            String extra = bundle.getString(JPushInterface.EXTRA_EXTRA);
+            try {
+                Log.e("cnn","==========通知来了，查看通知信息空的======="+extra);
+                NotiyBeans notiyBeans = GsonUtil.getGson().fromJson(extra, new TypeToken<NotiyBeans>(){}.getType());
+
+                //打开自定义的Activity
+                Intent i = new Intent(context, ShopMessageActivity.class);
+                //i.putExtras(bundle);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                if(BaseUtil.isValue(notiyBeans)){
+                    if("msg_review".equals(notiyBeans.getHref_code())){
+                        i.putExtra("position",1);
+                    }else if("msg_praise".equals(notiyBeans.getHref_code())){
+                        i.putExtra("position",2);
+                    }else if("msg_fans".equals(notiyBeans.getHref_code())){
+                        i.putExtra("position",3);
+                    }
+                }else{
+                    Log.e("cnn","==========通知来了，查看通知信息空的======="+extra);
+                }
+                context.startActivity(i);
+            }catch (Exception e){
+                e.printStackTrace();
+                Log.e("cnn","==========解析失败======="+e.getMessage());
+            }
+
+
 //
-//          //打开自定义的Activity
-          Intent i = new Intent(context, MainActivity.class);
-          i.putExtras(bundle);
-          //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-          i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-          context.startActivity(i);
+//
+
+
 
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
             Log.e(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));

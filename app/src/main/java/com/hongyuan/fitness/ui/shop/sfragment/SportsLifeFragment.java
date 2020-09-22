@@ -97,6 +97,8 @@ public class SportsLifeFragment extends CustomFragment {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof GoodsBeans) {
             List<GoodsBeans.DataBean.ListBean> list = ((GoodsBeans) data).getData().getList();

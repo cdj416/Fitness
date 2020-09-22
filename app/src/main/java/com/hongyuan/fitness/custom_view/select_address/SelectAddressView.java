@@ -214,6 +214,7 @@ public class SelectAddressView extends LinearLayout implements RetrofitListener 
 
     @Override
     public void onSuccess(int code, Object data) {
+
         if(code == ConstantsCode.GET_ADDRESS_LIST){
             righBeans = (SelectAddressLeftBeans)data;
             rightAdapter.setNewData(righBeans.getData());

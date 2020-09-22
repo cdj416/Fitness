@@ -405,6 +405,8 @@ public class MissionDetailViewModel extends CustomViewModel implements StickyScr
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.CANCEL_COURSE_SUPER_ORDER){
             showSuccess("团课取消成功！");
             lazyLoad();

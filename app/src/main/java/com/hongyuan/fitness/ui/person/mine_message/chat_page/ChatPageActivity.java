@@ -3,7 +3,6 @@ package com.hongyuan.fitness.ui.person.mine_message.chat_page;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.databinding.ActivityChatPageBinding;
-import com.hongyuan.fitness.util.SkinConstants;
 
 public class ChatPageActivity extends CustomActivity {
 

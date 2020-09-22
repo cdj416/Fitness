@@ -209,6 +209,8 @@ public class ChangeAddressViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof AddressInfoBeans){
             infoData = ((AddressInfoBeans)data).getData();
@@ -239,6 +241,8 @@ public class ChangeAddressViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.ADD_RECEIVING_ADDRESS){
             mActivity.showSuccess("添加成功！");

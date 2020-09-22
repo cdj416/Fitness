@@ -138,6 +138,8 @@ public class DailyPunchViewModel extends CustomViewModel implements StickyScroll
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof DailyPunchDataListBean){
             DailyPunchDataListBean dataBeans = (DailyPunchDataListBean)data;
             List<DailyPunchDataListBean.DataBean.ListBean> mList = setEmpty(dataBeans.getData().getList());
@@ -170,14 +172,16 @@ public class DailyPunchViewModel extends CustomViewModel implements StickyScroll
             TaskBeans taskBeans = (TaskBeans)data;
             taskList = taskBeans.getData().getList().getList();
             binding.pointNum.setText(BaseUtil.getNoZoon(taskBeans.getData().getList().getHave_point()));
-            binding.bubbleProgress.setProgressWithAnim(Float.valueOf(BigDecimalUtils.div(String.valueOf(taskBeans.getData().getList().getToday_num()),"100",2)));
-            taskAdapter.setNewData(taskList);
+            //binding.bubbleProgress.setProgressWithAnim(Float.valueOf(BigDecimalUtils.div(String.valueOf(taskBeans.getData().getList().getToday_num()),"100",2)));
+            //taskAdapter.setNewData(taskList);
             mActivity.closeLoading();
         }
     }
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.ADD_QD){
             mActivity.closeLoading();
             refreshData();

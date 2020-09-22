@@ -3,7 +3,6 @@ package com.hongyuan.fitness.ui.shop.sbeans;
 import com.chad.library.adapter.base.entity.AbstractExpandableItem;
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.hongyuan.fitness.base.BaseBean;
-import com.hongyuan.fitness.ui.shop.sadapter.SnewOrdersAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SorderDetailsAdapter;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.BigDecimalUtils;
@@ -42,10 +41,14 @@ public class SorderDetailBeans extends BaseBean {
                     String allPrice = "0";//加上快递费的价格
                     String useAllPrice = "0";//计算后显示的价格
 
+                    String gids = "";//所有商品id
+
                     for(SorderDetailBeans.DataBean.ListBean.GoodsListBean listBean : dataBean.getGoods_list()){
                         dataBean.addSubItem(listBean);
                         allNum += listBean.getBuy_num();
                         allPrice = BigDecimalUtils.add(allPrice,BigDecimalUtils.mul(listBean.getGp_price(),String.valueOf(listBean.getBuy_num()),2),2);
+
+                        gids += "," + listBean.getG_id();
                     }
                     mList.add(dataBean);
                     //加上快递费用
@@ -71,6 +74,7 @@ public class SorderDetailBeans extends BaseBean {
                     bottomBean.setCmId(dataBean.getBest_coupon().getCm_id());
 
                     bottomBean.setStoreId(String.valueOf(dataBean.getStore_id()));
+                    bottomBean.setGids(gids.substring(1));
                     mList.add(bottomBean);
                 }
             }
@@ -119,6 +123,15 @@ public class SorderDetailBeans extends BaseBean {
             private String useAllprice;//计算后显示的价格
             private int allPoint;//总积分
             private int cmId;//优惠券id
+            private String gids;//商品id
+
+            public String getGids() {
+                return gids;
+            }
+
+            public void setGids(String gids) {
+                this.gids = gids;
+            }
 
             public int getAllPoint() {
                 return allPoint;

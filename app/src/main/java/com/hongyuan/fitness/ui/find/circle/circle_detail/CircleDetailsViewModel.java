@@ -179,6 +179,8 @@ public class CircleDetailsViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof FeatureBean && isSuccess(data)){
             FeatureBean pageData = (FeatureBean)data;
@@ -213,6 +215,8 @@ public class CircleDetailsViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.ADD_CIRCLE_PRAISE){
             featureBean.getData().getList().get(mPosition).setIs_praise(1);

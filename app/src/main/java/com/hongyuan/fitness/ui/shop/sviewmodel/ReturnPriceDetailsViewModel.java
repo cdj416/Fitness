@@ -105,6 +105,8 @@ public class ReturnPriceDetailsViewModel extends CustomViewModel implements MyCl
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.CANCEL_APPLY_REFUND){
             lazyLoad();

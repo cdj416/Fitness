@@ -11,9 +11,9 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivitySGoodsDetailBinding;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
-import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
 import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SCartActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.ShopMessageActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SstoreActivity;
 import com.hongyuan.fitness.ui.shop.sbeans.KeFuBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.SgoodsDetailBeans;
@@ -261,7 +261,7 @@ public class SgoodsDetailViewModel extends CustomViewModel implements GoOtherPag
             case R.id.tMessage:
             case R.id.message:
                 //startActivity(ShopMessageActivity.class,null);
-                startActivity(MineMessageActivity.class,null);
+                startActivity(ShopMessageActivity.class,null);
                 break;
 
             case R.id.tCart:

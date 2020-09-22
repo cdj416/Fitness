@@ -2,16 +2,10 @@ package com.hongyuan.fitness.ui.encyclopedia;
 
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomFragment;
-import com.hongyuan.fitness.ui.main.main_about_class.private_lessons.MenuPrivateLessonsBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +50,16 @@ public class EncyclopediaViewPagerAdapter extends FragmentPagerAdapter {
         }
         this.beans.clear();
         this.beans = beans;
+
+
         for (int i = 0 ; i < beans.size() ; i++){
-            fragments.add(new EncyclopediaFragment().setArguments(String.valueOf(beans.get(i).getBaike_categoryid())));
+            if(i == 0){
+                fragments.add(new EncyclopediaPopularFragment());
+            }else if(i == 1){
+                fragments.add(new EncyclopediaNewestFragment());
+            }else{
+                fragments.add(new EncyclopediaFragment().setArguments(String.valueOf(beans.get(i).getBaike_categoryid())));
+            }
         }
 
         notifyDataSetChanged();

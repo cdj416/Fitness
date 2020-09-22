@@ -410,6 +410,8 @@ public class CoachHomePageViewModel extends CustomViewModel implements CommentTi
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.DEL_COLLECTION){
             coachHomeBean.getData().setIs_collection(0);
             binding.myTitle.setRightImage(R.mipmap.white_collection_mark);

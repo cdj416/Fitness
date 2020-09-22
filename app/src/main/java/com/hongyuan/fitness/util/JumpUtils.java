@@ -13,20 +13,38 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.CustomActivity;
+import com.hongyuan.fitness.ui.about_class.PriviteClassActivity;
 import com.hongyuan.fitness.ui.about_class.coach.coach_homepage.CoachHomePageActivity;
 import com.hongyuan.fitness.ui.about_class.group_class.group_details.MissionDetailActivity;
 import com.hongyuan.fitness.ui.about_class.privite_class.course_details.CourseDetailsActivity;
+import com.hongyuan.fitness.ui.encyclopedia.EncyclopediaActivity;
+import com.hongyuan.fitness.ui.find.circle.edit_post.EditPostActivity;
 import com.hongyuan.fitness.ui.find.circle.post_details.PostDetailsActivity;
+import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.MainActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.mall.mine.mine_order.order_details.MineOrderDetailsActivity;
+import com.hongyuan.fitness.ui.only_equipment.indicator_details.IndicatorDetailsActivity;
 import com.hongyuan.fitness.ui.only_equipment.smart_basic_information.SmartBasicInformationActivity;
-import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
+import com.hongyuan.fitness.ui.out_door.RunActivity;
+import com.hongyuan.fitness.ui.person.edit_information.EditInformationActivity;
+import com.hongyuan.fitness.ui.person.fix.SixPriviteCourseActivity;
+import com.hongyuan.fitness.ui.person.my_promote.PromotionCodeActivity;
+import com.hongyuan.fitness.ui.person.newedition.activity.GroupCourseOrdersActivity;
+import com.hongyuan.fitness.ui.person.person_message.PersonMessageActivity;
+import com.hongyuan.fitness.ui.person.physical_data.PhysicalDataActivity;
+import com.hongyuan.fitness.ui.person.push_share.PushShareActivity;
 import com.hongyuan.fitness.ui.scan.ScanActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.MsgDetailsActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.NewPoitionActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.ShopMessageActivity;
 import com.hongyuan.fitness.ui.store.StoreDetailActivity;
 import com.hongyuan.fitness.ui.store.punch.PunchActivity;
+import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
 import com.hongyuan.fitness.ui.video.MyPlayActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
 
@@ -151,10 +169,11 @@ public class JumpUtils {
                 case "goods_list"://商品列表
                     //bundle.putInt("position",0);
                     //mContext.startActivity(GoodActivity.class,bundle);
+                    EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"2");
                     break;
                 case "goods_info"://商品详情
-                    //bundle.putString("g_id",jumpBeans.getHref_id());
-                    //mContext.startActivity(GoodDetailsActivity.class,bundle);
+                    bundle.putString("g_id",jumpBeans.getHref_id());
+                    mContext.startActivity(SgoodsDetailActivity.class,bundle);
                     break;
                 case "os_list"://门店列表
                     break;
@@ -174,7 +193,7 @@ public class JumpUtils {
                     break;
                 case "msg_list"://消息列表
                     //bundle.putString("coach_mid",href_id);
-                    mContext.startActivity(MineMessageActivity.class,null);
+                    mContext.startActivity(ShopMessageActivity.class,null);
                     break;
                 case "msg_info"://消息详情
                     break;
@@ -188,6 +207,36 @@ public class JumpUtils {
                 case "smart_equipment"://体脂称扫描
                     bundle.putString("url",jumpBeans.getHref_id());
                     mContext.startActivity(SmartBasicInformationActivity.class,bundle);
+                    break;
+
+                case "msg_private"://私信详情
+                    bundle.putString("msg_category_id",jumpBeans.getHref_id());
+                    mContext.startActivity(MsgDetailsActivity.class,bundle);
+                    break;
+
+                case "msg_review"://消息评论
+                    bundle.putInt("position",1);
+                    mContext.startActivity(ShopMessageActivity.class,bundle);
+                    break;
+
+                case "msg_praise"://消息点赞
+                    bundle.putInt("position",2);
+                    mContext.startActivity(ShopMessageActivity.class,bundle);
+                    break;
+
+                case "msg_fans"://消息粉丝
+                    bundle.putInt("position",3);
+                    mContext.startActivity(ShopMessageActivity.class,bundle);
+                    break;
+
+                case "circle"://个人主页
+                    mContext.startActivity(PersonMessageActivity.class,null);
+                    break;
+                case "cpa"://去我的私教课程
+                    mContext.startActivity(SixPriviteCourseActivity.class,null);
+                    break;
+                case "super"://去我的团课中心
+                    mContext.startActivity(GroupCourseOrdersActivity.class,null);
                     break;
 
                 case "jd_product"://京东商品
@@ -229,6 +278,8 @@ public class JumpUtils {
             if(mContext instanceof ScanActivity){
                 mContext.finish();
             }
+        }else{
+            CustomDialog.showMessage(mContext,"未知去向！");
         }
 
     }
@@ -292,6 +343,98 @@ public class JumpUtils {
         }
     }
 
-
+    /*
+    * 积分跳转约定
+    * */
+    public static void goAtherPage(CustomActivity mActivity,int pt_code){
+        Bundle bundle = new Bundle();
+        switch (pt_code){
+            case 1://首次注册登录
+                break;
+            case 7://每日签到
+                mActivity.startActivity(NewPoitionActivity.class);
+                break;
+            case 8://每日分享到朋友圈
+                mActivity.startActivity(PushShareActivity.class);
+                break;
+            case 14://完善资料
+                mActivity.startActivity(EditInformationActivity.class);
+                break;
+            case 2://发动态
+                mActivity.startActivity(EditPostActivity.class);
+                break;
+            case 3://点赞别人
+            case 4://发表评论
+            case 6://关注别人
+            case 15://动态推荐
+                //通过EventBus去通知MainActivity显示第二页
+                EventBus.getDefault().post(ConstantsCode.EB_START_COURSE,"1");
+                mActivity.startActivity(MainActivity.class,null);
+                break;
+            case 5://户外步行/跑步
+                mActivity.startActivity(RunActivity.class,null);
+                break;
+            case 29://邀请好友下载APP
+                mActivity.startActivity(PromotionCodeActivity.class,null);
+                break;
+            case 17://线上购买健身卡
+                mActivity.startActivity(StoreActivity.class,null);
+                break;
+            case 16://线上预约课程
+            case 20://用户上课
+            case 21://课程评价
+                mActivity.startActivity(SixPriviteCourseActivity.class,null);
+                break;
+            case 22://线上买私教
+                mActivity.startActivity(PriviteClassActivity.class,null);
+                break;
+            case 18://线上预约场馆
+                bundle.putString("url", Constants.WEB_ADDRESS+"/"+TokenSingleBean.getInstance().getWebAllParams(""));
+                bundle.putString("title","场馆");
+                if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                    mActivity.startActivity(WebViewActivity.class,bundle);
+                }else{
+                    mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+                }
+                break;
+            case 19://线上发起运动
+                if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
+                    bundle.putString("url", Constants.WEB_ADDRESS+ "/Asportslist"+TokenSingleBean.getInstance().getWebAllParams(""));
+                    bundle.putString("title","发起运动");
+                    mActivity.startActivity(WebViewActivity.class,bundle);
+                }else{
+                    mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
+                }
+                break;
+            case 23://报名运动
+                bundle.putString("url", Constants.WEB_ADDRESS+ "/Asportslist"+TokenSingleBean.getInstance().getWebAllParams(""));
+                bundle.putString("title","参加运动");
+                mActivity.startActivity(WebViewActivity.class,bundle);
+                break;
+            case 30://报名赛事
+                bundle.putString("url", Constants.WEB_ADDRESS+"/event"+TokenSingleBean.getInstance().getWebAllParams(""));
+                bundle.putString("title","赛事");
+                mActivity.startActivity(WebViewActivity.class,bundle);
+                break;
+            case 24://阅读健康百科
+                mActivity.startActivity(EncyclopediaActivity.class,null);
+                break;
+            case 25://首次添加身体数据
+                mActivity.startActivity(PhysicalDataActivity.class,null);
+                break;
+            case 26://绑定智能设备
+                bundle.putInt("showPosition",0);
+                mActivity.startActivity(IndicatorDetailsActivity.class,bundle);
+                break;
+            case 28://发表的动态被评论
+                bundle.putInt("position",1);
+                mActivity.startActivity(ShopMessageActivity.class,bundle);
+                break;
+            case 27://发表的动态被点赞
+                bundle.putInt("position",2);
+                mActivity.startActivity(ShopMessageActivity.class,bundle);
+                break;
+        }
+    }
 
 }

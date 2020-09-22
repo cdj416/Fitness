@@ -2,6 +2,7 @@ package com.hongyuan.fitness.util.huanxin;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.MyApplication;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.person.mine_message.chat_page.DefaultUser;
@@ -26,6 +27,8 @@ import com.hyphenate.push.EMPushConfig;
 import com.hyphenate.push.EMPushHelper;
 import com.hyphenate.push.EMPushType;
 import com.hyphenate.push.PushListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -143,48 +146,66 @@ public class HuanXinUtils {
             String key = me.getKey();
             EMConversation value = me.getValue();
 
-            try {
-                ChatDataBeans dataBeans = new ChatDataBeans();
-                if(value.getLatestMessageFromOthers() != null && BaseUtil.isValue(value.getLatestMessageFromOthers().getStringAttribute("nickname"))){
-                    dataBeans.setUsername(value.getLatestMessageFromOthers().getUserName());
-                    dataBeans.setMsgId(value.getLatestMessageFromOthers().getMsgId());
+            ChatDataBeans dataBeans = new ChatDataBeans();
+            if(value.getLatestMessageFromOthers() != null){
+                dataBeans.setUsername(value.getLatestMessageFromOthers().getUserName());
+                dataBeans.setMsgId(value.getLatestMessageFromOthers().getMsgId());
+
+                try {
                     dataBeans.setNickname(value.getLatestMessageFromOthers().getStringAttribute("nickname"));
                     dataBeans.setAvatar(value.getLatestMessageFromOthers().getStringAttribute("avatar"));
-                    dataBeans.setLastTime(TimeUtil.getStringByFormat(value.getLatestMessageFromOthers().getMsgTime(),TimeUtil.dateFormatXieMDHM));
-                    if(value.getUnreadMsgCount() > 0){
-                        dataBeans.setUnread(true);
-                    }
-                    if(value.getLatestMessageFromOthers().getType() == EMMessage.Type.TXT){
-                        if(value.getLatestMessageFromOthers().getBody() instanceof EMTextMessageBody){
-                            EMTextMessageBody LatestTextMessage = (EMTextMessageBody) value.getLatestMessageFromOthers().getBody();
-                            dataBeans.setMessage(LatestTextMessage.getMessage());
-                        }
-                    }else if(value.getLatestMessageFromOthers().getType() == EMMessage.Type.VOICE){
-                        dataBeans.setMessage("[语音]");
-                    }
-                }else{
-                    dataBeans.setUsername(value.getLastMessage().getUserName());
-                    dataBeans.setMsgId(value.getLastMessage().getMsgId());
-                    dataBeans.setNickname(value.getLastMessage().getStringAttribute("receivernickname"));
-                    dataBeans.setAvatar(value.getLastMessage().getStringAttribute("receiveravatar"));
-                    dataBeans.setLastTime(TimeUtil.getStringByFormat(value.getLastMessage().getMsgTime(),TimeUtil.dateFormatXieMDHM));
-                    if(value.getUnreadMsgCount() > 0){
-                        dataBeans.setUnread(true);
-                    }
-
-                    if(value.getLastMessage().getType() == EMMessage.Type.TXT){
-                        if(value.getLastMessage().getBody() instanceof EMTextMessageBody){
-                            EMTextMessageBody LastTextMessage = (EMTextMessageBody) value.getLastMessage().getBody();
-                            dataBeans.setMessage(LastTextMessage.getMessage());
-                        }
-                    }else if(value.getLastMessage().getType() == EMMessage.Type.VOICE){
-                        dataBeans.setMessage("[语音]");
+                }catch (HyphenateException e){
+                    if(e.getErrorCode() == -1){
+                        dataBeans.setNickname("admin");
+                        dataBeans.setAvatar("");
                     }
                 }
-                chatList.add(dataBeans);
-            }catch (HyphenateException e){
-                e.printStackTrace();
+
+                dataBeans.setLastTime(TimeUtil.getStringByFormat(value.getLatestMessageFromOthers().getMsgTime(),TimeUtil.dateFormatXieMDHM));
+                if(value.getUnreadMsgCount() > 0){
+                    dataBeans.setUnread(true);
+                    //添加会话未读消息数量
+                    dataBeans.setUnreadNum(value.getUnreadMsgCount());
+                }
+                if(value.getLatestMessageFromOthers().getType() == EMMessage.Type.TXT){
+                    if(value.getLatestMessageFromOthers().getBody() instanceof EMTextMessageBody){
+                        EMTextMessageBody LatestTextMessage = (EMTextMessageBody) value.getLatestMessageFromOthers().getBody();
+                        dataBeans.setMessage(LatestTextMessage.getMessage());
+                    }
+                }else if(value.getLatestMessageFromOthers().getType() == EMMessage.Type.VOICE){
+                    dataBeans.setMessage("[语音]");
+                }
+            }else{
+                dataBeans.setUsername(value.getLastMessage().getUserName());
+                dataBeans.setMsgId(value.getLastMessage().getMsgId());
+
+                try {
+                    dataBeans.setNickname(value.getLastMessage().getStringAttribute("receivernickname"));
+                    dataBeans.setAvatar(value.getLastMessage().getStringAttribute("receiveravatar"));
+                }catch (HyphenateException e){
+                    if(e.getErrorCode() == -1){
+                        dataBeans.setNickname("admin");
+                        dataBeans.setAvatar("");
+                    }
+                }
+
+                dataBeans.setLastTime(TimeUtil.getStringByFormat(value.getLastMessage().getMsgTime(),TimeUtil.dateFormatXieMDHM));
+                if(value.getUnreadMsgCount() > 0){
+                    dataBeans.setUnread(true);
+                    //添加会话未读消息数量
+                    dataBeans.setUnreadNum(value.getUnreadMsgCount());
+                }
+
+                if(value.getLastMessage().getType() == EMMessage.Type.TXT){
+                    if(value.getLastMessage().getBody() instanceof EMTextMessageBody){
+                        EMTextMessageBody LastTextMessage = (EMTextMessageBody) value.getLastMessage().getBody();
+                        dataBeans.setMessage(LastTextMessage.getMessage());
+                    }
+                }else if(value.getLastMessage().getType() == EMMessage.Type.VOICE){
+                    dataBeans.setMessage("[语音]");
+                }
             }
+            chatList.add(dataBeans);
 
         }
 
@@ -217,101 +238,108 @@ public class HuanXinUtils {
     * 消息处理
     * */
     private MyMessage getProcessMsg(EMMessage bean,MyMessage previousBean){
-        try {
-            if(bean.getType() == EMMessage.Type.TXT){
-                EMTextMessageBody txtBody = (EMTextMessageBody) bean.getBody();
-                if(TokenSingleBean.getInstance().getM_mobile().equals(bean.getFrom())){
-                    MyMessage sendTxtMsg = new MyMessage(txtBody.getMessage(), IMessage.MessageType.SEND_TEXT.ordinal());
-                    sendTxtMsg.setUserInfo(new DefaultUser("1", "", TokenSingleBean.getInstance().getHeadUrl()));
-                    sendTxtMsg.setMessageStatus(IMessage.MessageStatus.SEND_SUCCEED);
+        if(bean.getType() == EMMessage.Type.TXT){
+            EMTextMessageBody txtBody = (EMTextMessageBody) bean.getBody();
 
-                    sendTxtMsg.setTimes(bean.getMsgTime());
-                    if(previousBean != null && TimeUtil.getOffectMinutes(bean.getMsgTime(),previousBean.getTimes()) > 1){
-                        if(TimeUtil.isToday(bean.getMsgTime())){
-                            sendTxtMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }else{
-                            sendTxtMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }
-                    }else if(previousBean == null){
-                        if(TimeUtil.isToday(bean.getMsgTime())){
-                            sendTxtMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }else{
-                            sendTxtMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }
+            if(TokenSingleBean.getInstance().getM_mobile().equals(bean.getFrom())){
+                MyMessage sendTxtMsg = new MyMessage(txtBody.getMessage(), IMessage.MessageType.SEND_TEXT.ordinal());
+                sendTxtMsg.setUserInfo(new DefaultUser("1", "", TokenSingleBean.getInstance().getHeadUrl()));
+                sendTxtMsg.setMessageStatus(IMessage.MessageStatus.SEND_SUCCEED);
+
+                sendTxtMsg.setTimes(bean.getMsgTime());
+                if(previousBean != null && TimeUtil.getOffectMinutes(bean.getMsgTime(),previousBean.getTimes()) > 1){
+                    if(TimeUtil.isToday(bean.getMsgTime())){
+                        sendTxtMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }else{
+                        sendTxtMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
                     }
-                    return sendTxtMsg;
-                }else{
-                    MyMessage receiveTxtMsg = new MyMessage(txtBody.getMessage(), IMessage.MessageType.RECEIVE_TEXT.ordinal());
+                }else if(previousBean == null){
+                    if(TimeUtil.isToday(bean.getMsgTime())){
+                        sendTxtMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }else{
+                        sendTxtMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }
+                }
+                return sendTxtMsg;
+            }else{
+                MyMessage receiveTxtMsg = new MyMessage(txtBody.getMessage(), IMessage.MessageType.RECEIVE_TEXT.ordinal());
+                try {
                     receiveTxtMsg.setUserInfo(new DefaultUser("0","", bean.getStringAttribute("avatar")));
-                    receiveTxtMsg.setMessageStatus(IMessage.MessageStatus.RECEIVE_SUCCEED);
-
-                    receiveTxtMsg.setTimes(bean.getMsgTime());
-                    if(previousBean != null && TimeUtil.getOffectMinutes(bean.getMsgTime(),previousBean.getTimes()) > 1){
-                        if(TimeUtil.isToday(bean.getMsgTime())){
-                            receiveTxtMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }else{
-                            receiveTxtMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }
-                    }else if(previousBean == null){
-                        if(TimeUtil.isToday(bean.getMsgTime())){
-                            receiveTxtMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }else{
-                            receiveTxtMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }
-                    }
-                    return receiveTxtMsg;
-                }
-            }else if(bean.getType() == EMMessage.Type.VOICE){
-                EMVoiceMessageBody voiceBody = (EMVoiceMessageBody)bean.getBody();
-                if(TokenSingleBean.getInstance().getM_mobile().equals(bean.getFrom())){
-                    MyMessage sendVoiceMsg = new MyMessage("", IMessage.MessageType.SEND_VOICE.ordinal());
-                    sendVoiceMsg.setUserInfo(new DefaultUser("1", "", TokenSingleBean.getInstance().getHeadUrl()));
-                    sendVoiceMsg.setMediaFilePath(voiceBody.getLocalUrl());
-                    sendVoiceMsg.setDuration(voiceBody.getLength());
-                    sendVoiceMsg.setMessageStatus(IMessage.MessageStatus.SEND_SUCCEED);
-
-                    sendVoiceMsg.setTimes(bean.getMsgTime());
-                    if(previousBean != null && TimeUtil.getOffectMinutes(bean.getMsgTime(),previousBean.getTimes()) > 1){
-                        if(TimeUtil.isToday(bean.getMsgTime())){
-                            sendVoiceMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }else{
-                            sendVoiceMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }
-                    }else if(previousBean == null){
-                        if(TimeUtil.isToday(bean.getMsgTime())){
-                            sendVoiceMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }else{
-                            sendVoiceMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }
-                    }
-                    return sendVoiceMsg;
-                }else{
-                    MyMessage receiveVoiceMsg = new MyMessage("", IMessage.MessageType.RECEIVE_VOICE.ordinal());
-                    receiveVoiceMsg.setUserInfo(new DefaultUser("0", "", bean.getStringAttribute("avatar")));
-                    receiveVoiceMsg.setMediaFilePath(voiceBody.getLocalUrl());
-                    receiveVoiceMsg.setDuration(voiceBody.getLength());
-                    receiveVoiceMsg.setMessageStatus(IMessage.MessageStatus.RECEIVE_SUCCEED);
-
-                    receiveVoiceMsg.setTimes(bean.getMsgTime());
-                    if(previousBean != null && TimeUtil.getOffectMinutes(bean.getMsgTime(),previousBean.getTimes()) > 1){
-                        if(TimeUtil.isToday(bean.getMsgTime())){
-                            receiveVoiceMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }else{
-                            receiveVoiceMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }
-                    }else if(previousBean == null){
-                        if(TimeUtil.isToday(bean.getMsgTime())){
-                            receiveVoiceMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }else{
-                            receiveVoiceMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
-                        }
-                    }
-                    return receiveVoiceMsg;
+                }catch (HyphenateException e){
+                    receiveTxtMsg.setUserInfo(new DefaultUser("0","", "R.mipmap.default_head_img"));
                 }
 
+                receiveTxtMsg.setMessageStatus(IMessage.MessageStatus.RECEIVE_SUCCEED);
+
+                receiveTxtMsg.setTimes(bean.getMsgTime());
+                if(previousBean != null && TimeUtil.getOffectMinutes(bean.getMsgTime(),previousBean.getTimes()) > 1){
+                    if(TimeUtil.isToday(bean.getMsgTime())){
+                        receiveTxtMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }else{
+                        receiveTxtMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }
+                }else if(previousBean == null){
+                    if(TimeUtil.isToday(bean.getMsgTime())){
+                        receiveTxtMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }else{
+                        receiveTxtMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }
+                }
+                return receiveTxtMsg;
             }
-        }catch (HyphenateException e){
-            e.printStackTrace();
+        }else if(bean.getType() == EMMessage.Type.VOICE){
+            EMVoiceMessageBody voiceBody = (EMVoiceMessageBody)bean.getBody();
+            if(TokenSingleBean.getInstance().getM_mobile().equals(bean.getFrom())){
+                MyMessage sendVoiceMsg = new MyMessage("", IMessage.MessageType.SEND_VOICE.ordinal());
+                sendVoiceMsg.setUserInfo(new DefaultUser("1", "", TokenSingleBean.getInstance().getHeadUrl()));
+                sendVoiceMsg.setMediaFilePath(voiceBody.getLocalUrl());
+                sendVoiceMsg.setDuration(voiceBody.getLength());
+                sendVoiceMsg.setMessageStatus(IMessage.MessageStatus.SEND_SUCCEED);
+
+                sendVoiceMsg.setTimes(bean.getMsgTime());
+                if(previousBean != null && TimeUtil.getOffectMinutes(bean.getMsgTime(),previousBean.getTimes()) > 1){
+                    if(TimeUtil.isToday(bean.getMsgTime())){
+                        sendVoiceMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }else{
+                        sendVoiceMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }
+                }else if(previousBean == null){
+                    if(TimeUtil.isToday(bean.getMsgTime())){
+                        sendVoiceMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }else{
+                        sendVoiceMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }
+                }
+                return sendVoiceMsg;
+            }else{
+                MyMessage receiveVoiceMsg = new MyMessage("", IMessage.MessageType.RECEIVE_VOICE.ordinal());
+
+                try {
+                    receiveVoiceMsg.setUserInfo(new DefaultUser("0", "", bean.getStringAttribute("avatar")));
+                }catch (HyphenateException e){
+                    receiveVoiceMsg.setUserInfo(new DefaultUser("0", "", "R.mipmap.default_head_img"));
+                }
+
+                receiveVoiceMsg.setMediaFilePath(voiceBody.getLocalUrl());
+                receiveVoiceMsg.setDuration(voiceBody.getLength());
+                receiveVoiceMsg.setMessageStatus(IMessage.MessageStatus.RECEIVE_SUCCEED);
+
+                receiveVoiceMsg.setTimes(bean.getMsgTime());
+                if(previousBean != null && TimeUtil.getOffectMinutes(bean.getMsgTime(),previousBean.getTimes()) > 1){
+                    if(TimeUtil.isToday(bean.getMsgTime())){
+                        receiveVoiceMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }else{
+                        receiveVoiceMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }
+                }else if(previousBean == null){
+                    if(TimeUtil.isToday(bean.getMsgTime())){
+                        receiveVoiceMsg.setTimeString(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }else{
+                        receiveVoiceMsg.setTimeString(new SimpleDateFormat(TimeUtil.dateFormatXieYMDHM, Locale.getDefault()).format(new Date(bean.getMsgTime())));
+                    }
+                }
+                return receiveVoiceMsg;
+            }
         }
         return null;
     }
@@ -320,7 +348,6 @@ public class HuanXinUtils {
     * 发送(单聊)文本消息
     * */
     public void sendTxtMessage(String content,String toChatUsername,CallBackStatus backStatus){
-        Log.e("phm","=======来发送消息了========");
         //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id
         EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
         // 增加自己特定的属性
@@ -355,19 +382,16 @@ public class HuanXinUtils {
         EMCallBack emCallBack = new EMCallBack() {
             @Override
             public void onSuccess() {
-                Log.e("phm","===============发送成功=====");
                 backStatus.sendStatus(SUCCESS_CODE);
             }
 
             @Override
             public void onError(int code, String error) {
-                Log.e("phm","===============code====="+code+"======error====="+error);
                 backStatus.sendStatus(ERROR_CODE);
             }
 
             @Override
             public void onProgress(int progress, String status) {
-                Log.e("phm","===============发送中=====");
             }
         };
         return emCallBack;
@@ -389,9 +413,14 @@ public class HuanXinUtils {
                         myMessages.add(getProcessMsg(bean,myMessages.get(myMessages.size() - 1)));
                     }else{
                         myMessages.add(getProcessMsg(bean,null));
+
                     }
                 }
+
                 msgListener.callBackMsg(myMessages);
+                //收到新消息去刷新下
+                EventBus.getDefault().post(ConstantsCode.EB_MESSAGE,messages);
+
             }
 
             @Override
@@ -449,13 +478,13 @@ public class HuanXinUtils {
         EMPushHelper.getInstance().setPushListener(new PushListener() {
             @Override
             public void onError(EMPushType pushType, long errorCode) {
-                Log.e("cdj", "=============Push client occur a error=====: " + pushType + " - " + errorCode);
+                Log.e("cnn", "=============Push client occur a error=====: " + pushType + " - " + errorCode);
                 // TODO: 开发者会在这个回调中收到使用推送的相关错误信息，各推送类型的error code开发者可以自己去各推送平台官网查询错误原因。
             }
 
             @Override
             public boolean isSupportPush(EMPushType pushType, EMPushConfig pushConfig) {
-                Log.e("cdj", "=============Push success=====: " + pushType);
+                Log.e("cnn", "=============Push success=====: " + pushType);
                 return super.isSupportPush(pushType, pushConfig);
                 // TODO：开发者可以复写该方法控制设备是否支持某推送的判断。
             }
@@ -472,7 +501,7 @@ public class HuanXinUtils {
      * @param desc 群组简介
      *  allMembers 群组初始成员，如果只有自己传空数组即可
      * @param reason 邀请成员加入的reason
-     *  option 群组类型选项，可以设置群组最大用户数(默认200)及群组类型@see {@link EMGroupStyle}
+     *  option 群组类型选项，可以设置群组最大用户数(默认200)及群组类型@see {@link}
      *               option.inviteNeedConfirm表示邀请对方进群是否需要对方同意，默认是需要用户同意才能加群的。
      *               option.extField创建群时可以为群组设定扩展字段，方便个性化订制。
      * @return 创建好的group
@@ -520,5 +549,45 @@ public class HuanXinUtils {
             memberList.addAll(result.getData());
         } while (!TextUtils.isEmpty(result.getCursor()) && result.getData().size() == pageSize);
     }
+
+    /*
+    * 获取会话未读消息数量
+    * */
+    public int getUserConversationCounts(String userName){
+        EMConversation conversation = EMClient.getInstance().chatManager().getConversation(userName);
+        return conversation.getUnreadMsgCount();
+    }
+
+    /*
+    * 获取所有未读消息数量
+    * */
+    public int getUserMessageCounts(){
+        return EMClient.getInstance().chatManager().getUnreadMessageCount();
+    }
+
+    /*
+    * 指定会话消息未读数清零
+    * */
+    public void clearAllMessageCounts(String userName,String messageId){
+        EMConversation conversation = EMClient.getInstance().chatManager().getConversation(userName);
+        //指定会话消息未读数清零
+        conversation.markAllMessagesAsRead();
+        //把一条消息置为已读
+        conversation.markMessageAsRead(messageId);
+        //所有未读消息数清零
+        //EMClient.getInstance().chatManager().markAllConversationsAsRead();
+    }
+
+    /*
+    *删除会话及聊天记录
+    * */
+    public void deleteConversation(String userName){
+        //删除和某个user会话，如果需要保留聊天记录，传false
+        EMClient.getInstance().chatManager().deleteConversation(userName, true);
+        //删除当前会话的某条聊天记录
+        //EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
+        //conversation.removeMessage(deleteMsg.msgId);
+    }
+
 }
 

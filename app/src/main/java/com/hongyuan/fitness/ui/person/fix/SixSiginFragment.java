@@ -80,7 +80,7 @@ public class SixSiginFragment extends CustomFragment {
 
     @Override
     public void onSuccess(Object data) {
-        mActivity.closeLoading();
+        super.onSuccess(data);
 
         mActivity.closeLoading();
 

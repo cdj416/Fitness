@@ -82,6 +82,15 @@ public class PersonBean extends BaseBean {
             private int calories;
             private String mi_realname;
             private String mi_money;
+            private int is_index_name;
+
+            public int getIs_index_name() {
+                return is_index_name;
+            }
+
+            public void setIs_index_name(int is_index_name) {
+                this.is_index_name = is_index_name;
+            }
 
             public String getMi_money() {
                 return mi_money;

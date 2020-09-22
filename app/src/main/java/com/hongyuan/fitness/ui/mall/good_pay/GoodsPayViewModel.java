@@ -167,6 +167,8 @@ public class GoodsPayViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof PointBean){
             PointBean pointBean = (PointBean)data;
             binding.lavePoint.setText("剩余积分："+pointBean.getData().getPoint());
@@ -202,6 +204,8 @@ public class GoodsPayViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         //金币支付成功
         if(code == 1){
 

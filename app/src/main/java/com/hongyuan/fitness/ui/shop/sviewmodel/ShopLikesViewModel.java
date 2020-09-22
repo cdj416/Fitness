@@ -95,6 +95,8 @@ public class ShopLikesViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof LikeGoodsBeans){
             List<LikeGoodsBeans.DataBean.ListBean> list = ((LikeGoodsBeans)data).getData().getList();

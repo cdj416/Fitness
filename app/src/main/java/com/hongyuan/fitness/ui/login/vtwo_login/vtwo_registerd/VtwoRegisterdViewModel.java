@@ -140,6 +140,8 @@ public class VtwoRegisterdViewModel extends CustomViewModel implements InputFiel
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.CHECK_REGI_MOBILE){
             getMessageToken();
         }

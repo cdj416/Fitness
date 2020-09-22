@@ -21,9 +21,11 @@ import com.hongyuan.fitness.ui.person.my_coupon.CouponAdapter;
 import com.hongyuan.fitness.ui.person.my_coupon.CouponListBeans;
 import com.hongyuan.fitness.ui.person.my_coupon.newcoupon.adapter.CouponDropMenuAdapter;
 import com.hongyuan.fitness.ui.shop.sactivity.CollectCouponsActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.PlatformCouponsActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SstoreActivity;
 import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
+import com.hongyuan.fitness.util.CustomDialog;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
@@ -53,7 +55,6 @@ public class NewCouponViewModel extends CustomViewModel implements CouponDropMen
         this.binding = binding;
 
         initView();
-        lazyLoad();
     }
 
     @Override
@@ -73,12 +74,21 @@ public class NewCouponViewModel extends CustomViewModel implements CouponDropMen
             @SingleClick
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                goOther(mList.get(position).getCoupon_for(),String.valueOf(mList.get(position).getStore_id()));
+
+                if(mList.get(position).getIs_verification() == 1){
+                    CustomDialog.showCouponCode(mActivity,mList.get(position).getVerification_code()+"");
+                }else{
+                    goOther(mList.get(position).getCoupon_for(),String.valueOf(mList.get(position).getStore_id()));
+                }
             }
         });
 
         binding.goRecCoupon.setOnClickListener(v -> {
-            startActivity(CollectCouponsActivity.class,null);
+            if(coupon_way.equals("1")){
+                startActivity(CollectCouponsActivity.class,null);
+            }else{
+                startActivity(PlatformCouponsActivity.class,null);
+            }
         });
     }
 
@@ -184,6 +194,8 @@ public class NewCouponViewModel extends CustomViewModel implements CouponDropMen
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof CouponListBeans) {
             List<CouponListBeans.DataBean.ListBean> list = ((CouponListBeans) data).getData().getList();
@@ -226,12 +238,6 @@ public class NewCouponViewModel extends CustomViewModel implements CouponDropMen
         this.coupon_way = coupon_way;
         this.is_use = is_use;
         this.is_exp = is_exp;
-
-        if(coupon_way.equals("1")){
-            binding.goRecCoupon.setVisibility(View.VISIBLE);
-        }else{
-            binding.goRecCoupon.setVisibility(View.GONE);
-        }
 
         //重置为第一页
         curPage = FIRST_PAGE;

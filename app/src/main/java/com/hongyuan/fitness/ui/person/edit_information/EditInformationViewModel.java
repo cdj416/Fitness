@@ -52,6 +52,8 @@ public class EditInformationViewModel extends CustomViewModel {
     private String userNameText;
     //个性签名的修改回调
     private String userSignText;
+    //真实姓名
+    private String actualName;
 
     public EditInformationViewModel(CustomActivity mActivity, ActivityEditInformationBinding binding) {
         super(mActivity);
@@ -122,6 +124,17 @@ public class EditInformationViewModel extends CustomViewModel {
             }
         });
 
+        binding.actualNameBox.setOnClickListener(v -> {
+            if(!BaseUtil.isValue(personMessageBeans.getMi_realname())){
+                CustomDialog.updateName(mActivity, (v1, message) -> {
+                    actualName = message;
+                    upNmae(message);
+                });
+            }else{
+                CustomDialog.showMessage(mActivity,"不可二次更改！");
+            }
+        });
+
     }
 
     /*
@@ -154,6 +167,16 @@ public class EditInformationViewModel extends CustomViewModel {
     private void sendBirth(String birth_date){
         clearParams().setParams("birth_date",birth_date);
         Controller.myRequest(ConstantsCode.UPDATE_MEMBER_BIRTH,Constants.UPDATE_MEMBER_BIRTH,Controller.TYPE_POST,getParams(), BaseBean.class,this);
+    }
+
+    /*
+    * 修改真实姓名，只能改一次
+    * */
+    private void upNmae(String mi_realname){
+        clearParams().setParams("mi_realname",mi_realname)
+                .setParams("mi_sex",String.valueOf(personMessageBeans.getMi_sex()))
+                .setParams("mi_birth",personMessageBeans.getBirth());
+        Controller.myRequest(ConstantsCode.UPDATE_M_INFO,Constants.UPDATE_M_INFO,Controller.TYPE_POST,getParams(), BaseBean.class,this);
     }
 
     /*
@@ -255,6 +278,7 @@ public class EditInformationViewModel extends CustomViewModel {
         binding.userSignature.setText(personMessageBeans.getMi_sign());
         binding.birthday.setText(personMessageBeans.getBirth());
         binding.addressView.setShowAddress(this,personMessageBeans.getArea());
+
         if(personMessageBeans.getMi_sex() == 1){
             binding.sex.setText("男");
         }else{
@@ -277,6 +301,28 @@ public class EditInformationViewModel extends CustomViewModel {
             birthDay = Integer.valueOf(personMessageBeans.getBirth().substring(8));
         }catch (Exception e){
             e.printStackTrace();
+        }
+
+        //判断是否显示红点
+        if(!BaseUtil.isValue(personMessageBeans.getMi_head())){
+            binding.noChange1.setVisibility(View.VISIBLE);
+        }else{
+            binding.noChange1.setVisibility(View.GONE);
+        }
+        if(personMessageBeans.getIs_index_name() == 1){
+            binding.noChange2.setVisibility(View.VISIBLE);
+        }else{
+            binding.noChange2.setVisibility(View.GONE);
+        }
+        if(!BaseUtil.isValue(personMessageBeans.getBirth())){
+            binding.noChange5.setVisibility(View.VISIBLE);
+        }else{
+            binding.noChange5.setVisibility(View.GONE);
+        }
+        if(personMessageBeans.getMi_sex() == 0){
+            binding.noChange4.setVisibility(View.VISIBLE);
+        }else{
+            binding.noChange4.setVisibility(View.GONE);
         }
 
     }
@@ -311,6 +357,8 @@ public class EditInformationViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.UPDATE_MEMBER_SEX){
             showSuccess("性别修改成功！");
             if(personMessageBeans.getMi_sex() == 1){
@@ -332,6 +380,11 @@ public class EditInformationViewModel extends CustomViewModel {
         if(code == ConstantsCode.UPDATE_MEMBER_SIGN){
             showSuccess("个性签名修改成功！");
             binding.userSignature.setText(userSignText);
+        }
+
+        if(code == ConstantsCode.UPDATE_M_INFO){
+            showSuccess("姓名修改成功！");
+            binding.actualName.setText(actualName);
         }
     }
 

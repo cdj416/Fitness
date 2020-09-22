@@ -160,6 +160,8 @@ public class SettingViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof PersonBean){
             personMessageBeans = ((PersonBean)data).getData().getInfo();
             setData();

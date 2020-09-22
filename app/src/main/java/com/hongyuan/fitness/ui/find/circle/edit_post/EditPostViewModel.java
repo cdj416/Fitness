@@ -123,6 +123,8 @@ public class EditPostViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof MoreImgBean && isSuccess(data)){
             MoreImgBean imgBeans = (MoreImgBean)data;
             //去区分

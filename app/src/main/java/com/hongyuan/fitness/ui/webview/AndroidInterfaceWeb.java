@@ -1,22 +1,17 @@
 package com.hongyuan.fitness.ui.webview;
+
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.webkit.JavascriptInterface;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.gson.reflect.TypeToken;
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.custom_view.share_view.ShareBeans;
 import com.hongyuan.fitness.custom_view.share_view.ShareContentBean;
@@ -26,9 +21,9 @@ import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.person.mine_message.chat_page.ChatPageActivity;
 import com.hongyuan.fitness.ui.person.newedition.activity.MemberCardOrdersActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.MapActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.NewPoitionActivity;
 import com.hongyuan.fitness.ui.shop.sbeans.MapBeans;
 import com.hongyuan.fitness.ui.store.StoreDetailActivity;
-import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.CustomDialog;
 import com.hongyuan.fitness.util.GsonUtil;
@@ -54,9 +49,11 @@ public class AndroidInterfaceWeb {
 
     /*
     * 分享params：{"shareTitle":"分享的标题","shareUrl":"网页地址","shareImg":"图片地址","shareContent":"分享的内容"}
+    * 当前方法传递分享内容并弹出分享框
     * */
     @JavascriptInterface
     public void androidShare(String params) {
+
         ShareContentBean shareBean = GsonUtil.getGson().fromJson(params, new TypeToken<ShareContentBean>(){}.getType());
         ShareBeans contents = new ShareBeans();
         contents.setShareImgUrl(shareBean.getShareImg());
@@ -64,7 +61,24 @@ public class AndroidInterfaceWeb {
         contents.setShareTitle(shareBean.getShareTitle());
         contents.setShareWebsite(shareBean.getShareUrl());
 
-        //viewModel.showShare(contents);
+        ShareUtil.showShare(mActivity,contents);
+    }
+
+    /*
+    * 分享params：{"shareTitle":"分享的标题","shareUrl":"网页地址","shareImg":"图片地址","shareContent":"分享的内容"}
+    * 当前方法只传递需要分享的内容，并不会弹出分享框。
+    * */
+    @JavascriptInterface
+    public void androidShareContent(String params) {
+
+        ShareContentBean shareBean = GsonUtil.getGson().fromJson(params, new TypeToken<ShareContentBean>(){}.getType());
+        ShareBeans contents = new ShareBeans();
+        contents.setShareImgUrl(shareBean.getShareImg());
+        contents.setShareInfo(shareBean.getShareContent());
+        contents.setShareTitle(shareBean.getShareTitle());
+        contents.setShareWebsite(shareBean.getShareUrl());
+
+        viewModel.setContents(contents);
     }
 
 
@@ -91,10 +105,9 @@ public class AndroidInterfaceWeb {
     * */
     @JavascriptInterface
     public void androidLotteryToLogin(String url) {
-        Bundle bundle = new Bundle();
-        bundle.putString("toType","Lottery");
-        bundle.putString("url",url);
-        mActivity.startActivity(VtwoVerificationLoginActivity.class,bundle);
+        //记录需要调整的H5页面
+        Constants.isOpenWeb = url;
+        mActivity.startActivity(VtwoVerificationLoginActivity.class,null);
         mActivity.finish();
     }
 
@@ -235,6 +248,22 @@ public class AndroidInterfaceWeb {
             }
         });
 
+    }
+
+    /*
+    * 跳转到积分
+    * */
+    @JavascriptInterface
+    public void androidToScoreCenter(){
+        mActivity.startActivity(NewPoitionActivity.class,null);
+    }
+
+    /*
+    * 显示获得多少积分
+    * */
+    @JavascriptInterface
+    public void androidShowEarnPoints(String points){
+        mActivity.showPotion("恭喜您获得"+points+"积分");
     }
 
 }

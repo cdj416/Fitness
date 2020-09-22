@@ -294,6 +294,8 @@ public class SshopDetailMainFragment extends CustomFragment {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.ADD_COLLECTION){
             showSuccess("收藏成功！");

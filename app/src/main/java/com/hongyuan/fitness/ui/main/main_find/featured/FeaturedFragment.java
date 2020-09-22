@@ -183,6 +183,8 @@ public class FeaturedFragment extends CustomFragment {
      * */
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof FeatureBean && isSuccess(data)){
             mActivity.closeLoading();
             FeatureBean pageData = (FeatureBean)data;
@@ -227,6 +229,8 @@ public class FeaturedFragment extends CustomFragment {
      * */
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.ADD_CIRCLE_PRAISE){
             featureBean.getData().getList().get(mPosition).setIs_praise(1);

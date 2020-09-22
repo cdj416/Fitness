@@ -3,25 +3,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
-
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
+import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
-import com.hongyuan.fitness.base.MessageEvent;
 import com.hongyuan.fitness.custom_view.TitleView;
 import com.hongyuan.fitness.custom_view.share_view.ShareUtil;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.only_equipment.indicator_details.IndicatorDetailsActivity;
 import com.hongyuan.fitness.ui.person.about_us.AboutUsActivity;
-import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchActivity;
 import com.hongyuan.fitness.ui.person.exercise_data.ExeriseDataActivity;
-import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
 import com.hongyuan.fitness.ui.person.my_collection.MyCollectionActivity;
 import com.hongyuan.fitness.ui.person.my_coupon.newcoupon.NewCouponActivity;
 import com.hongyuan.fitness.ui.person.my_promote.PromotionCodeActivity;
@@ -30,19 +26,27 @@ import com.hongyuan.fitness.ui.person.setting.SettingActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.CheckInMeActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.CustomServerActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.IncomeMangeActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.NewPoitionActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.ShopCollectActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.ShopMessageActivity;
+import com.hongyuan.fitness.ui.shop.sbeans.ReadNumBeans;
 import com.hongyuan.fitness.util.SkinConstants;
 import com.hongyuan.fitness.util.TimeUtil;
+import com.hongyuan.fitness.util.huanxin.ChatDataBeans;
+import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 public class PersonFragment extends CustomFragment{
 
     private PersonHeaderView pHeadView;
     private TitleView myTitle;
-    private TextView weightNum,weightDate,calories,exerciseDays;
-    private ImageView messageMark;
+    private TextView newMeassageMark,weightNum,weightDate,calories,exerciseDays;
+
+    private RelativeLayout messageMark;
 
     private LinearLayout personCouponBox,personCollectionBox,personShareBox,personSettingBox
             ,personAboutUsBox,physicalDataBox,exerciseDataBox,promotionCodeBox,shopCollectBox
@@ -66,8 +70,10 @@ public class PersonFragment extends CustomFragment{
 
         pHeadView = mView.findViewById(R.id.pHeadView);
         messageMark = mView.findViewById(R.id.messageMark);
-        myTitle.getRightView().setOnClickListener(v -> startActivity(DailyPunchActivity.class,null));
-        messageMark.setOnClickListener(v -> mActivity.startActivity(MineMessageActivity.class,null));
+        newMeassageMark = mView.findViewById(R.id.newMeassageMark);
+        myTitle.getRightView().setOnClickListener(v -> startActivity(NewPoitionActivity.class,null));
+        //messageMark.setOnClickListener(v -> mActivity.startActivity(MineMessageActivity.class,null));
+        messageMark.setOnClickListener(v -> mActivity.startActivity(ShopMessageActivity.class,null));
 
         personCouponBox = mView.findViewById(R.id.personCouponBox);
         personCollectionBox = mView.findViewById(R.id.personCollectionBox);
@@ -119,6 +125,10 @@ public class PersonFragment extends CustomFragment{
             //读取个人信息
             clearParams();
             Controller.myRequest(Constants.GET_MEMBER_INDEX_INFO,Controller.TYPE_POST,getParams(),PersonBean.class,this);
+
+            //读取消息未读数据量
+            clearParams();
+            Controller.myRequest(Constants.GET_MSG_UNREAD_INFO,Controller.TYPE_POST,getParams(), ReadNumBeans.class,this);
         }
     }
 
@@ -132,6 +142,10 @@ public class PersonFragment extends CustomFragment{
             //读取个人信息
             clearParams();
             Controller.myRequest(Constants.GET_MEMBER_INDEX_INFO,Controller.TYPE_POST,getParams(),PersonBean.class,this);
+
+            //读取消息未读数据量
+            clearParams();
+            Controller.myRequest(Constants.GET_MSG_UNREAD_INFO,Controller.TYPE_POST,getParams(), ReadNumBeans.class,this);
         }
     }
 
@@ -156,21 +170,37 @@ public class PersonFragment extends CustomFragment{
             calories.setText(String.valueOf(personBean.getData().getInfo().getCalories()));
             exerciseDays.setText("总训练天数"+personBean.getData().getInfo().getExercise_days()+"天");
         }
-    }
 
+        if(data instanceof ReadNumBeans){
+            ReadNumBeans.DataBean numBeans = ((ReadNumBeans)data).getData();
+
+            //当前数据每次都要刷新下
+            List<ChatDataBeans> chatDataBeansList = HuanXinUtils.getInstance().getMessageList();
+            int chatNum = numBeans.getAll();
+            for(ChatDataBeans chatBean : chatDataBeansList){
+                chatNum += chatBean.getUnreadNum();
+            }
+
+            if(chatNum > 0){
+                newMeassageMark.setVisibility(View.VISIBLE);
+                newMeassageMark.setText(String.valueOf(chatNum));
+            }else{
+                newMeassageMark.setVisibility(View.GONE);
+                newMeassageMark.setText(String.valueOf(0));
+            }
+
+        }
+    }
 
 
     /*
-     * 登录成功去刷新数据
+     * 刷新下数据
      * */
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onEvent(MessageEvent message) {
-        if(message.getDataBean() == null){//登录成功之后需要去改变的数据
-            //请求下数据
-            onFragmentFirstVisible();
-        }
+    @Subscribe(id = ConstantsCode.EB_CHANGE_PERSON)
+    public void result(String message) {
+        lazyLoad();
     }
-    //EventBus.getDefault().postSticky(new MessageEvent(null));
+
 
     @Nullable
     @Override

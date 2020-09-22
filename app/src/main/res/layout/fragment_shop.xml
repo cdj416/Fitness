@@ -15,13 +15,31 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <ImageView
+
+            <RelativeLayout
                 android:id="@+id/mMessage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/theme_person_message_mark"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/theme_person_message_mark"/>
+
+                <TextView
+                    android:id="@+id/newMeassageMark"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:background="@drawable/shape_gradient_oval_ef8041_ef5b48"
+                    android:textSize="10sp"
+                    android:text="0"
+                    android:gravity="center"
+                    android:textColor="@color/color_FFFFFF"
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/searchBox"

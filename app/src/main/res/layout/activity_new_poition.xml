@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="ViewModel"
+            type="com.hongyuan.fitness.ui.shop.sviewmodel.NewPoitionViwModel"/>
+    </data>
+
+    <com.hongyuan.fitness.custom_view.StickyScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/theme_background">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="154dp"
+                android:orientation="vertical"
+                android:background="@color/color_EF5B48">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/goDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/myPoint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="28sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/color_FFFFFF"
+                            android:text="1250"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_12"
+                            android:textStyle="bold"
+                            android:textColor="@color/color_FFFFFF"
+                            android:drawableRight="@mipmap/white_right"
+                            android:layout_marginTop="8dp"
+                            android:drawablePadding="6dp"
+                            android:text="积分明细"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/goActivity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="33dp"
+                            android:layout_height="33dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/lottery_img"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_FFFFFF"
+                            android:textSize="@dimen/sp_12"
+                            android:gravity="center"
+                            android:layout_marginTop="6dp"
+                            android:text="积分抽奖"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <com.hongyuan.fitness.custom_view.my_progress.BubbleProgressView
+                    android:id="@+id/gPoint"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginStart="6dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp">
+                    <TextView
+                        android:id="@+id/goShop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        android:textColor="@color/color_FFFFFF"
+                        android:text="当前积分可兑换商品"
+                        android:drawableRight="@mipmap/white_right"/>
+                    <TextView
+                        android:id="@+id/maxPro"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="@color/color_FFFFFF"
+                        android:layout_alignParentEnd="true"
+                        android:text="2000"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="188dp"
+                android:orientation="vertical"
+                android:background="@color/theme_color1">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center">
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="14dp"
+                        android:background="@color/color_EF5B48"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_color3"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_marginStart="4dp"
+                        android:text="七日签到"/>
+                </LinearLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/weekRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:visibility="visible"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp">
+                    <TextView
+                        android:id="@+id/goShare"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="36dp"
+                        android:textSize="@dimen/sp_14"
+                        android:textColor="@color/color_EF5B48"
+                        android:gravity="center"
+                        android:background="@drawable/shape_radius16_00000000_stroke_ef5b48"
+                        android:text="每日打卡分享"/>
+
+                    <TextView
+                        android:id="@+id/signIn"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="36dp"
+                        android:textSize="@dimen/sp_14"
+                        android:textColor="@color/color_FFFFFF"
+                        android:layout_marginStart="13dp"
+                        android:gravity="center"
+                        android:background="@drawable/shape_radius16_gradient_ef8041_ef5b48"
+                        android:text="签到"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp">
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/lxSignDays"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="36dp"
+                        android:textSize="@dimen/sp_14"
+                        android:textColor="@color/color_EF5B48"
+                        android:layout_marginStart="13dp"
+                        android:gravity="center"
+                        android:text="已连续签到1天"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/goodsRes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/layer_list_top_triangle"/>
+                <TextView
+                    android:id="@+id/goIntegralGoods"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_FFFFFF"
+                    android:textSize="@dimen/sp_12"
+                    android:background="@drawable/shape_radius16_ef5b48"
+                    android:drawableRight="@mipmap/white_right"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:text="更多积分兑换商品"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="14dp"
+                android:layout_marginStart="16dp"
+                android:gravity="center">
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="14dp"
+                    android:background="@color/color_EF5B48"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/theme_color3"
+                    android:textSize="@dimen/sp_14"
+                    android:layout_marginStart="4dp"
+                    android:text="新手任务"/>
+            </LinearLayout>
+
+            <com.hongyuan.fitness.custom_view.CustomRecyclerView
+                android:id="@+id/noviceTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@color/theme_color1"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"
+                android:layout_gravity="center_vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center">
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="14dp"
+                        android:background="@color/color_EF5B48"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_color3"
+                        android:textSize="@dimen/sp_14"
+                        android:layout_marginStart="4dp"
+                        android:text="日常任务领积分"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/goDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/theme_color4"
+                    android:textSize="@dimen/sp_12"
+                    android:drawableRight="@mipmap/right_huise_img"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:text="还有xxx积分待领"/>
+
+            </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/taskRec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </com.hongyuan.fitness.custom_view.StickyScrollView>
+</layout>

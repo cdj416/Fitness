@@ -151,6 +151,8 @@ public class AfterSalesFragment extends CustomFragment {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
 
         if(data instanceof AfterSalesOrderListBeans){
@@ -179,6 +181,8 @@ public class AfterSalesFragment extends CustomFragment {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.CANCEL_APPLY_REFUND){
             lazyLoad();
             showSuccess("撤销成功！");

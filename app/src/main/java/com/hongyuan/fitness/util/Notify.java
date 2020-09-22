@@ -1,5 +1,6 @@
 package com.hongyuan.fitness.util;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -14,7 +15,10 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.hongyuan.fitness.R;
-import com.hongyuan.fitness.ui.person.mine_message.MineMessageActivity;
+import com.hongyuan.fitness.base.ConstantsCode;
+import com.hongyuan.fitness.ui.shop.sactivity.ShopMessageActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class Notify {
 
@@ -28,6 +32,7 @@ public class Notify {
         this.context = context;
     }
 
+    @SuppressLint("WrongConstant")
     @TargetApi(26)
     public void setNotification(String title, String desc){
 
@@ -48,8 +53,11 @@ public class Notify {
             nm.createNotificationChannel(notificationChannel);
         }
 
-        Intent intent = new Intent(context, MineMessageActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        EventBus.getDefault().post(ConstantsCode.EB_CHANGE_PERSON,"");
+
+        //Intent intent = new Intent(context, MineMessageActivity.class);
+        Intent intent = new Intent(context, ShopMessageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
         builder = new Notification.Builder(context).setContentTitle(title)

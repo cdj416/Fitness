@@ -1,4 +1,5 @@
 package com.hongyuan.fitness.ui.main.main_find.featured;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
@@ -8,7 +9,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hongyuan.fitness.R;
-import com.hongyuan.fitness.util.TimeUtil;
+import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.ViewChangeUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -22,6 +23,9 @@ public class V2FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.
     private HashMap<Integer, Float> hashMap = new HashMap<>();
     //单列的宽度
     private int useWidth;
+
+    //是否为自己
+    private boolean isMe;
 
     public V2FindContentAdapter(int useWidth){
         super(R.layout.item_find_content_v2);
@@ -45,8 +49,15 @@ public class V2FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.
             //获取宽高并计算比例
             String whStr = item.getCircle_img().substring((item.getCircle_img().indexOf("_")+1),item.getCircle_img().lastIndexOf("."));
             String[] wh = whStr.split("x");
-            float ratio = Float.valueOf(wh[0])/Float.valueOf(wh[1]);
-            hashMap.put(helper.getAdapterPosition(),ratio);
+            try {
+                float ratio = Float.valueOf(wh[0])/Float.valueOf(wh[1]);
+                hashMap.put(helper.getAdapterPosition(),ratio);
+            }catch (Exception e){
+                e.printStackTrace();
+                hashMap.put(helper.getAdapterPosition(),1f);
+            }
+
+
         }
 
         //获取比例并设置视图高度并加载图片
@@ -67,15 +78,36 @@ public class V2FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.
         helper.setText(R.id.styleImgNum,imgUrl.contains("mp4") ? "视频" : imgNum+"张")
                 .setVisible(R.id.playMark,imgUrl.contains("mp4"))
                 .setText(R.id.fName,item.getM_name())
-                .setText(R.id.timeText,TimeUtil.friendly_time(item.getAdd_date()))
                 .setText(R.id.attention, String.valueOf(item.getPraise_num()))
                 .setText(R.id.content,item.getCircle_content());
+
+        if(BaseUtil.isValue(item.getCircle_name())){
+            helper.setText(R.id.circle_name,"#"+item.getCircle_name()+"#").getView(R.id.circle_name).setVisibility(View.VISIBLE);
+        }else{
+            helper.getView(R.id.circle_name).setVisibility(View.GONE);
+        }
 
         if(item.getIs_praise() == 0){
             ViewChangeUtil.changeBottomDrawable(mContext,helper.getView(R.id.attention),R.mipmap.like_huise_img);
         }else{
             ViewChangeUtil.changeBottomDrawable(mContext,helper.getView(R.id.attention),R.mipmap.like_chengse_img);
         }
+
+        //0审核中，1是审核通过，2是审核失败
+        if(isMe){
+            if(item.getCircle_state() == 0){
+                helper.setBackgroundRes(R.id.statusText,R.drawable.shape_semicircle_right_6484f0)
+                        .setText(R.id.statusText,"审核中").setVisible(R.id.statusText,true);
+            }else if(item.getCircle_state() == 2){
+                helper.setBackgroundRes(R.id.statusText,R.drawable.shape_semicircle_right_ef5e45)
+                        .setText(R.id.statusText,"审核未通过").setVisible(R.id.statusText,true);
+            }else{
+                helper.setVisible(R.id.statusText,false);
+            }
+        }else{
+            helper.setVisible(R.id.statusText,false);
+        }
+
 
         helper.addOnClickListener(R.id.jumpDetails).addOnClickListener(R.id.attention);
 
@@ -92,6 +124,10 @@ public class V2FindContentAdapter extends BaseQuickAdapter<FeatureBean.DataBean.
         //显示图片
         RequestOptions options = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(mContext).load(imgUrl).transition(DrawableTransitionOptions.withCrossFade()).apply(options).into(coverImg);
+    }
+
+    public void setIsMe(boolean isMe){
+        this.isMe = isMe;
     }
 
 }

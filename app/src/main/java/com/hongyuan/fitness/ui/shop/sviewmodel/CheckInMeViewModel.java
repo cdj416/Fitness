@@ -74,6 +74,8 @@ public class CheckInMeViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof CheckInMeBeans){
             dataBean = ((CheckInMeBeans)data).getData();

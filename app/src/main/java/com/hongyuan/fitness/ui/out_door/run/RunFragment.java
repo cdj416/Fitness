@@ -398,6 +398,8 @@ public class RunFragment extends CustomFragment implements View.OnClickListener,
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == ConstantsCode.ME_ADD_EXERCISE_TIME){
             showSuccess("记录成功！");
             lazyLoad();

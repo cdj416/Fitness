@@ -5,28 +5,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
+import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.tabs.TabLayout;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.Constants;
 import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
-import com.hongyuan.fitness.custom_view.CustomRecyclerView;
-import com.hongyuan.fitness.ui.find.circle.circle_detail.CircleDetailsActivity;
 import com.hongyuan.fitness.ui.find.circle.edit_post.EditPostActivity;
-import com.hongyuan.fitness.ui.find.more_topic.MoreTopicActivity;
 import com.hongyuan.fitness.ui.find.topic.SlectTopicLeftBeans;
 import com.hongyuan.fitness.ui.login.vtwo_login.vtwo_verification_login.VtwoVerificationLoginActivity;
 import com.hongyuan.fitness.ui.main.TokenSingleBean;
 import com.hongyuan.fitness.ui.main.main_find.featured.FindTopicAdapter;
 import com.hongyuan.fitness.ui.main.main_home.recommend.HomeBannerBean;
+import com.hongyuan.fitness.ui.shop.sactivity.SearchFindActivity;
 import com.hongyuan.fitness.ui.webview.WebViewActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.hongyuan.fitness.util.JumpUtils;
@@ -47,7 +41,8 @@ public class FindFragment extends CustomFragment {
     private ViewPager mViewPager;
     //private TextView moreTopic;
     //private CustomRecyclerView topRecycler;
-    private ImageView goYue,goPei,goSai;
+    private ImageView goYue,goPei,goSai,editPost;
+    private LinearLayout searchBox;
 
     private FindTopicAdapter topicAdapter;
     private List<SlectTopicLeftBeans.DataBean.ListBean> topicList;
@@ -64,10 +59,6 @@ public class FindFragment extends CustomFragment {
     @Override
     public void initView(View mView) {
 
-        getmTitle().getRightImgView().setOnClickListener(v -> {
-            startActivity(EditPostActivity.class,null);
-        });
-
         banner = mView.findViewById(R.id.banner);
 
         layoutMenu = mView.findViewById(R.id.layoutMenu);
@@ -76,6 +67,9 @@ public class FindFragment extends CustomFragment {
         goYue = mView.findViewById(R.id.goYue);
         goPei = mView.findViewById(R.id.goPei);
         goSai = mView.findViewById(R.id.goSai);
+
+        editPost = mView.findViewById(R.id.editPost);
+        searchBox = mView.findViewById(R.id.searchBox);
 
         /*topRecycler = mView.findViewById(R.id.topRecycler);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -89,6 +83,14 @@ public class FindFragment extends CustomFragment {
             startActivity(CircleDetailsActivity.class,bundle);
         });
         moreTopic.setOnClickListener(v -> startActivity(MoreTopicActivity.class,null));*/
+
+        searchBox.setOnClickListener(v -> {
+            startActivity(SearchFindActivity.class,null);
+        });
+
+        editPost.setOnClickListener(v -> {
+            startActivity(EditPostActivity.class,null);
+        });
 
         goYue.setOnClickListener(v -> {
             if(BaseUtil.isValue(TokenSingleBean.getInstance().getM_id())){
@@ -140,16 +142,18 @@ public class FindFragment extends CustomFragment {
         super.onResume();
 
         if(SkinConstants.SKIN_NAME.DEFAULT.equals(mActivity.skin)) {
-            getmTitle().getBgView().setBackgroundColor(mActivity.getResources().getColor(R.color.theme_color1));
+            /*getmTitle().getBgView().setBackgroundColor(mActivity.getResources().getColor(R.color.theme_color1));
             getmTitle().setRightImage(R.mipmap.theme_carme_mark)
                     .setCenterTextColor("发现",mActivity.getResources().getColor(R.color.theme_color3))
-                    .showLine();
+                    .showLine();*/
+
             layoutMenu.setTabTextColors(mActivity.getResources().getColor(R.color.color_FF333333),mActivity.getResources().getColor(R.color.color_EF5B48));
         }else if(SkinConstants.SKIN_NAME.BLACK.equals(mActivity.skin)){
-            getmTitle().getBgView().setBackgroundColor(mActivity.getResources().getColor(R.color.theme_color1_black));
+            /*getmTitle().getBgView().setBackgroundColor(mActivity.getResources().getColor(R.color.theme_color1_black));
             getmTitle().setRightImage(R.mipmap.theme_carme_mark_black)
                     .setCenterTextColor("发现",mActivity.getResources().getColor(R.color.theme_color3_black))
-                    .showLine();
+                    .showLine();*/
+
             layoutMenu.setTabTextColors(mActivity.getResources().getColor(R.color.color_FFFFFF),mActivity.getResources().getColor(R.color.color_EF5B48));
         }
     }
@@ -223,6 +227,8 @@ public class FindFragment extends CustomFragment {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         if(data instanceof HomeBannerBean){
             HomeBannerBean homeBannerBean = (HomeBannerBean)data;
             setBanner(homeBannerBean.getData().getList());

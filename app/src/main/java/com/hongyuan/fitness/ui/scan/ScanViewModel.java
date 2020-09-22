@@ -41,7 +41,7 @@ public class ScanViewModel extends CustomViewModel implements QRCodeView.Delegat
 
     @Override
     public void onSuccess(Object data) {
-
+        super.onSuccess(data);
     }
 
     @Override

@@ -10,9 +10,11 @@ import android.graphics.PathMeasure;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.hongyuan.fitness.R;
+import com.hongyuan.fitness.util.BigDecimalUtils;
 
 import io.reactivex.annotations.Nullable;
 
@@ -22,7 +24,7 @@ public class BubbleProgressView extends View {
     private Path mPathSrc,mPathDst,mPathBubble;
     private int mColorProgressBg;//进度条的背景颜色
     private int mColorProgress;//进度条的进度颜色
-    private int mColorProgressStr = Color.WHITE;//进度条的进度文字的颜色
+    private int mColorProgressStr = 0xFFEF5B48;//进度条的进度文字的颜色
     private float mProgressHeight = 12;
     private float mProgress=0;//进度条的进度
     private float mBubbleTriangleHeight = 5;//气泡底部小三角高度
@@ -67,9 +69,9 @@ public class BubbleProgressView extends View {
         mPathBubble = new Path();
         mPathMeasure = new PathMeasure();
 
-        mColorProgressBg = 0xFFDDDDDD;
-        mColorProgress = getResources().getColor(R.color.colorAccent);
-        mPaintBubble.setColor(getResources().getColor(R.color.colorAccent));//设置气泡的颜色
+        mColorProgressBg = 0xFFF7ADA3;
+        mColorProgress = getResources().getColor(R.color.color_FFFFFF);
+        mPaintBubble.setColor(getResources().getColor(R.color.color_FFFFFF));//设置气泡的颜色
 
         mFontMetricsInt = mPaintProgressStr.getFontMetricsInt();
     }
@@ -137,7 +139,7 @@ public class BubbleProgressView extends View {
      */
     public void setProgress(float progress){
         mProgress = progress;
-        mProgressStr = (int)(progress*100)+"";
+        mProgressStr = BigDecimalUtils.mul(String.valueOf(progress),String.valueOf(maxPropress),0);
         invalidate();//设置完进度进行重绘
     }
 
@@ -145,6 +147,17 @@ public class BubbleProgressView extends View {
      * 设置动画进度
      */
     public void setProgressWithAnim(float progress){
+        ObjectAnimator.ofFloat(this,"progress",0,progress).setDuration(2000).start();
+    }
+
+    private int maxPropress;
+
+    /*
+    * 设置需要绘制的值
+    * */
+    public void setProgressWithAnim(float progress,int maxPropress){
+        this.maxPropress = maxPropress;
+
         ObjectAnimator.ofFloat(this,"progress",0,progress).setDuration(2000).start();
     }
 }

@@ -98,6 +98,8 @@ public class AboutYouViewModel extends CustomViewModel implements MyRulerView.Se
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         if(code == 1 && data == null){
             if("run".equals(getBundle().getString("pagType"))){
                 startActivity(RunActivity.class,null);

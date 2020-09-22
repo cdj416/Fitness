@@ -62,7 +62,7 @@ public class HomeRecyclerItemView extends LinearLayout {
     /*
     * 优惠券领取---门店使用
     * */
-    public void setStoreCoupon(List<CouponListBeans.DataBean.ListBean> mList,IntReceiveCoupon receiveCoupon){
+    public void setStoreCoupon(String os_id,List<CouponListBeans.DataBean.ListBean> mList,IntReceiveCoupon receiveCoupon){
         name.setText("优惠券");
 
         StoreReceiveCouponAdapter adapter = new StoreReceiveCouponAdapter();
@@ -72,6 +72,7 @@ public class HomeRecyclerItemView extends LinearLayout {
 
         more.setOnClickListener(v ->{
             Bundle bundle = new Bundle();
+            bundle.putString("os_id",os_id);
             ((CustomActivity)getContext()).startActivity(ReceiveCouponListActivity.class,bundle);} );
 
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {

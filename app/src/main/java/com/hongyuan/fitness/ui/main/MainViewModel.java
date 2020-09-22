@@ -1,8 +1,7 @@
 package com.hongyuan.fitness.ui.main;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
+import android.os.Bundle;
+import android.view.View;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -26,9 +25,7 @@ import com.hongyuan.fitness.util.PackageUtils;
 import com.hongyuan.fitness.util.SharedPreferencesUtil;
 import com.hongyuan.fitness.util.SkinConstants;
 import com.hongyuan.fitness.util.huanxin.HuanXinUtils;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
 
 import me.majiajie.pagerbottomtabstrip.NavigationController;
@@ -206,6 +203,8 @@ public class MainViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof CheckVersionBeans){
             versionBeans = ((CheckVersionBeans)data).getData().getInfo();
@@ -301,6 +300,16 @@ public class MainViewModel extends CustomViewModel {
                     mActivity.startActivity(SgoodsDetailActivity.class,bundle);
                 });
             }
+
+            //弹一次积分更改弹框
+            String isShow = SharedPreferencesUtil.getString(mActivity,"isShow");
+            if(!BaseUtil.isValue(isShow)){
+                CustomDialog.showNewPotion(mActivity);
+                CustomDialog.showNewCoupon(mActivity);
+                //记录下，已经弹了就不要弹了
+                SharedPreferencesUtil.putString(mActivity,"isShow","isShow");
+            }
+
         }
 
         if(data instanceof PersonBean){
@@ -311,6 +320,8 @@ public class MainViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.GET_COUPON){
             mList.get(mPosition).setReceive(true);

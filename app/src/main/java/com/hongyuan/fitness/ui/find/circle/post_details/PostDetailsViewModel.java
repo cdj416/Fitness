@@ -286,6 +286,8 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
 
         if(data instanceof PostDetailsTopBean && isSuccess(data)){
@@ -352,6 +354,8 @@ public class PostDetailsViewModel extends CustomViewModel implements View.OnClic
 
     @Override
     public void onSuccess(int code, Object data) {
+        super.onSuccess(code,data);
+
         mActivity.closeLoading();
         if(code == ConstantsCode.ADD_FRIEND){
             if(topBean.getData().getIs_friend() == 0){

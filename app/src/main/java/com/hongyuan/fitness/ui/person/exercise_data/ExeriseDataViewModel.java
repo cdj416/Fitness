@@ -52,6 +52,8 @@ public class ExeriseDataViewModel extends CustomViewModel {
 
     @Override
     public void onSuccess(Object data) {
+        super.onSuccess(data);
+
         mActivity.closeLoading();
         if(data instanceof ExeriseDataTopBeans){
             topBeans = ((ExeriseDataTopBeans)data).getData();

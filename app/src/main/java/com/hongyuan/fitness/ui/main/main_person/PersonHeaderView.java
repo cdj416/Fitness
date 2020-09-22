@@ -1,24 +1,21 @@
 package com.hongyuan.fitness.ui.main.main_person;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.ui.find.friends.FriendsActivity;
 import com.hongyuan.fitness.ui.membership_card.MembershipCardActivity;
-import com.hongyuan.fitness.ui.person.daily_punch.DailyPunchActivity;
 import com.hongyuan.fitness.ui.person.my_fan.MyFansActivity;
 import com.hongyuan.fitness.ui.person.person_message.PersonMessageActivity;
+import com.hongyuan.fitness.ui.shop.sactivity.NewPoitionActivity;
 import com.hongyuan.fitness.ui.store.store_page_list.StoreActivity;
 import com.hongyuan.fitness.util.BaseUtil;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -82,12 +79,12 @@ public class PersonHeaderView extends LinearLayout {
             //upHeadimg();
         });
 
-        myPoint.setOnClickListener(v -> mActivity.startActivity(DailyPunchActivity.class,null));
+        myPoint.setOnClickListener(v -> mActivity.startActivity(NewPoitionActivity.class,null));
         myFans.setOnClickListener(v -> mActivity.startActivity(MyFansActivity.class,null));
         myAttention.setOnClickListener(v -> mActivity.startActivity(FriendsActivity.class,null));
         //myDynamic.setOnClickListener(v -> mActivity.startActivity(PersonMessageActivity.class,null));
 
-        goSignIn.setOnClickListener(v -> mActivity.startActivity(DailyPunchActivity.class,null));
+        goSignIn.setOnClickListener(v -> mActivity.startActivity(NewPoitionActivity.class,null));
     }
 
     public void setHeadImg(PersonBean.DataBean.InfoBean bean){

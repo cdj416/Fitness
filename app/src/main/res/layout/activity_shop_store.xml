@@ -85,6 +85,7 @@
                                     android:layout_marginStart="9dp"
                                     android:src="@mipmap/theme_search_chengse_mark"/>
                                 <EditText
+                                    android:id="@+id/searchText"
                                     android:layout_width="match_parent"
                                     android:layout_height="34dp"
                                     android:textColor="@color/color_FF999999"
@@ -201,28 +202,55 @@
                 </LinearLayout>
             </FrameLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/layoutMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="44dp"
-                android:layout_marginEnd="10dp"
-                app:tabTextColor="@color/theme_color3"
-                app:tabIndicatorColor="@color/color_EF5B48"
-                app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/color_EF5B48"
-                android:layout_marginBottom="10dp"
-                app:tabIndicatorFullWidth="false"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/theme_line1"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/mViewPager"
+        <com.hongyuan.fitness.custom_view.StickyScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/theme_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:tag="sticky"
+                    android:background="@color/theme_background">
+                    <com.hongyuan.fitness.ui.shop.smyview.ShopMainTitleView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_gravity="center_horizontal"
+                        app:layout_collapseMode="pin"
+                        app:smTitleName="全部商品"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/theme_line1"/>
+                </LinearLayout>
+
+
+                <com.hongyuan.fitness.custom_view.CustomRecyclerView
+                    android:id="@+id/couponRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </com.hongyuan.fitness.custom_view.StickyScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
