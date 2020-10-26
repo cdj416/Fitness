@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.hongyuan.fitness.R;
 import com.hongyuan.fitness.base.BaseBean;
@@ -21,6 +22,7 @@ import com.hongyuan.fitness.base.ConstantsCode;
 import com.hongyuan.fitness.base.Controller;
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.custom_view.CustomRecyclerView;
+import com.hongyuan.fitness.ui.shop.sactivity.SgoodsDetailActivity;
 import com.hongyuan.fitness.ui.shop.sactivity.SstoreActivity;
 import com.hongyuan.fitness.ui.shop.sadapter.SDMimgAdapter;
 import com.hongyuan.fitness.ui.shop.sadapter.SGDcommentAdapter;
@@ -122,6 +124,11 @@ public class SshopDetailMainFragment extends CustomFragment {
         goodsRec.setLayoutManager(layoutManager);
         sgDgoodsAdapter = new SGDgoodsAdapter();
         goodsRec.setAdapter(sgDgoodsAdapter);
+        sgDgoodsAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("g_id",String.valueOf(storeBean.getTj_goods_list().get(position).getG_id()));
+            mActivity.startActivity(SgoodsDetailActivity.class,bundle);
+        });
 
         LinearLayoutManager imgManager = new LinearLayoutManager(mActivity);
         imgManager.setOrientation(RecyclerView.VERTICAL);

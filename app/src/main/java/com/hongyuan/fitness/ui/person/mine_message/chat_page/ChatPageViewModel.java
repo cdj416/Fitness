@@ -14,6 +14,7 @@ import com.hongyuan.fitness.base.CustomActivity;
 import com.hongyuan.fitness.base.CustomViewModel;
 import com.hongyuan.fitness.databinding.ActivityChatPageBinding;
 import com.hongyuan.fitness.ui.shop.sactivity.GroupChatUserActivity;
+import com.hongyuan.fitness.util.BaseUtil;
 
 import cn.jiguang.imui.chatinput.ChatInputView;
 
@@ -36,7 +37,9 @@ public class ChatPageViewModel extends CustomViewModel implements View.OnTouchLi
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initView() {
-        mActivity.getMainTitle().setCentreText(getBundle().getString("title"));
+        String title = getBundle().getString("title");
+
+        mActivity.getMainTitle().setCentreText(BaseUtil.isValue(title) ? title : "匿名");
 
         this.mImm = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
         mWindow = mActivity.getWindow();

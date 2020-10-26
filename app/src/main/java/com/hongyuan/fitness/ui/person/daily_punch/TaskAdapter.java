@@ -13,9 +13,15 @@ public class TaskAdapter extends BaseQuickAdapter<PointTaskBeans.DataBean.DayLis
     @Override
     protected void convert(BaseViewHolder helper, PointTaskBeans.DataBean.DayListBean item) {
         helper.setText(R.id.taskName,item.getPt_name()).setText(R.id.taskDes,item.getPt_rule())
-                .setText(R.id.taskPoint,"+"+item.getPoint_num_up())
+                .setText(R.id.taskPoint,"+"+item.getPoint_num())
                 .setText(R.id.taskSuccessNum,""+item.getState_num())
                 .setText(R.id.taskLeverAll,"/"+item.getState_all_num());
+
+        if(item.getPoint_num_up() <= 0){
+            helper.setVisible(R.id.showNumsBox,false);
+        }else{
+            helper.setVisible(R.id.showNumsBox,true);
+        }
 
         if(item.getIs_state() == 1){
             helper.setText(R.id.taskGo,"已完成")

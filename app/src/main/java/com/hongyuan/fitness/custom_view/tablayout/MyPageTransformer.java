@@ -1,6 +1,7 @@
 package com.hongyuan.fitness.custom_view.tablayout;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -30,6 +31,7 @@ public class MyPageTransformer implements ViewPager.PageTransformer {
     public void transformPage(@NonNull View view, float v) {
         if (v > -1 && v < 1) {
             int currPosition = (int) view.getTag();
+            Log.e("cnn","===============这里有吗========="+view.getTag());
             final float currV = Math.abs(v);
             if (!mLastMap.containsKey(currPosition)) {
                 mLastMap.put(currPosition, currV);

@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/theme_color3"
                     android:textSize="@dimen/sp_14"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginEnd="10dp"
                     android:text="检查Url"/>
 

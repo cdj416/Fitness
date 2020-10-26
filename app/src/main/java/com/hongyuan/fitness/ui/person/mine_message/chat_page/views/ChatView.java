@@ -518,7 +518,7 @@ public class ChatView extends RelativeLayout implements SensorEventListener {
                 } else {
                     Glide.with(getContext())
                             .load(string)
-                            .apply(new RequestOptions().placeholder(R.mipmap.default_head_img))
+                            .apply(new RequestOptions().placeholder(R.mipmap.default_head_img).error(R.mipmap.default_head_img))
                             .into(avatarImageView);
                 }
             }

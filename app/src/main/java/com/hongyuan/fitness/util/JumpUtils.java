@@ -263,6 +263,7 @@ public class JumpUtils {
             }
         }else if(jumpBeans.getImg_href_type() == TYPE_H5 && BaseUtil.isValue(jumpBeans.getImg_href())){
             if(TokenSingleBean.getInstance().getIslogin() == 2){
+                Log.e("cdj","============ "+jumpBeans.getImg_href()+ TokenSingleBean.getInstance().getWebAllParams(jumpBeans.getImg_href()));
                 bundle.putString("url",jumpBeans.getImg_href()+ TokenSingleBean.getInstance().getWebAllParams(jumpBeans.getImg_href()));
             }else{
                 bundle.putString("url",jumpBeans.getImg_href());

@@ -20,5 +20,7 @@ public class SGDgoodsAdapter extends BaseQuickAdapter<SgoodsDeailStoreBeans.Data
         Glide.with(mContext).load(item.getG_img()).apply(options).into((RoundedImageView)helper.getView(R.id.goodImg));
 
         helper.setText(R.id.goodsName,item.getG_name()).setText(R.id.goodsPrice,item.getG_price());
+
+        helper.addOnClickListener(R.id.goDetail);
     }
 }

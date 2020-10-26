@@ -29,6 +29,7 @@
             android:background="@drawable/shape_radius16_right_ffffff"
             android:gravity="center"
             android:layout_marginTop="18dp"
+            android:visibility="visible"
             android:text="正在使用"/>
 
         <TextView

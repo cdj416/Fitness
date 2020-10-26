@@ -69,7 +69,6 @@ public class StoreDetailViewModel extends CustomViewModel implements HomeRecycle
         os_id = getBundle().getString("os_id");
         //门店设施标签
         FlowLayoutManager flowLayoutManager = new FlowLayoutManager();
-        binding.nestRec.setLayoutManager(flowLayoutManager);
         binding.nestRec.addItemDecoration(new DividerItemDecoration(
                 mActivity, DividerItemDecoration.VERTICAL_LIST,20,0x00000000));
         binding.nestRec.addItemDecoration(new DividerItemDecoration(
