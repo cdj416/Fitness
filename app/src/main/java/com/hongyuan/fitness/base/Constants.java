@@ -5,11 +5,11 @@ public class Constants {
     //本地
     //public static final String ADRESS = "http://192.168.0.113:80";
     //测试地址
-    //public static final String ADRESS = "https://apitest.1667799.com";
+    public static final String ADRESS = "https://apitest.1667799.com";
     //预发环境
     //public static final String ADRESS = "https://apiyufabu.1667799.com";
     //正式地址
-    public static final String ADRESS = "http://www.hongyuangood.com";
+    //public static final String ADRESS = "http://www.hongyuangood.com";
 
 
     //本地

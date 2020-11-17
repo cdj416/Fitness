@@ -8,11 +8,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.hongyuan.fitness.base.CustomFragment;
 import com.hongyuan.fitness.ui.main.TitleBean;
-import com.hongyuan.fitness.ui.shop.sbeans.FirstCategoryBeans;
 import com.hongyuan.fitness.ui.shop.sbeans.PlatformCouponsTitleBeans;
 import com.hongyuan.fitness.ui.shop.sfragment.PlatformCouponsFragment;
-import com.hongyuan.fitness.ui.shop.sfragment.SccouponsFragment;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -336,7 +336,7 @@ public class CoachHomePageViewModel extends CustomViewModel implements CommentTi
         binding.storeName.setText(coachHomeBean.getData().getInfo().getOs_name());
         binding.coachName.setText(coachHomeBean.getData().getInfo().getCoach_nickname());
         binding.coachGrade.setText("私教专业P"+coachHomeBean.getData().getInfo().getCoach_level());
-        binding.upClassNum.setText(BaseUtil.getNoZoon(coachHomeBean.getData().getInfo().getCoach_review_count()));
+        binding.upClassNum.setText(BaseUtil.getNoZoon(coachHomeBean.getData().getCount_c()));
         binding.evaluationNum.setText(BaseUtil.getNoZoon(coachHomeBean.getData().getInfo().getCoach_s()));
         //binding.myRat.setNumStars(5);
         //binding.myRat.setRating(5);

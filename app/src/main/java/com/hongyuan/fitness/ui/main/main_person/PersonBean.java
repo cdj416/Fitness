@@ -67,7 +67,7 @@ public class PersonBean extends BaseBean {
             private int pid;
             private int cid;
             private String mi_sign;
-            private int mi_birth;
+            private long mi_birth;
             private String mi_face;
             private int mi_point;
             private String birth;
@@ -172,11 +172,11 @@ public class PersonBean extends BaseBean {
                 this.mi_sign = mi_sign;
             }
 
-            public int getMi_birth() {
+            public long getMi_birth() {
                 return mi_birth;
             }
 
-            public void setMi_birth(int mi_birth) {
+            public void setMi_birth(long mi_birth) {
                 this.mi_birth = mi_birth;
             }
 

@@ -1,7 +1,6 @@
 package com.hongyuan.fitness.ui.person.fix;
 
 import android.view.View;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
